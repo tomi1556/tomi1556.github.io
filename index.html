@@ -4,19 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="自然で温かみのあるMinecraftサーバー『すてら』のウェブサイト">
-    <title>すてら - ほのぼのマイクラサーバー</title>
+    <title>すてら - 心地よいマイクラサーバー</title>
     <link rel="stylesheet" href="style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Nunito+Sans:wght@300;400;700&display=swap');
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #f9f9f9; /* 背景色 */
+            background-color: #f8f9fa; /* 背景を明るい色に */
             color: #333;
             line-height: 1.8;
         }
         header {
-            background-color: #8bc34a; /* ヘッダーの背景色 */
+            background-color: #a5d6a7; /* 明るい緑 */
             color: #fff;
             padding: 100px 0;
             text-align: center;
@@ -37,18 +37,22 @@
         }
         header h1 {
             margin: 0;
-            font-size: 4em;
+            font-size: 4.5em; /* 大きめのフォントサイズ */
             color: #fff;
             text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+            animation: bounceIn 1s ease forwards;
         }
         header p {
-            font-size: 1.5em;
+            font-size: 1.8em; /* 大きめの説明文 */
             margin-top: 20px;
             color: #fff;
+            animation: fadeIn 1.5s ease forwards;
+            animation-delay: 0.5s; /* 少し遅れてアニメーション */
         }
         nav {
             background-color: #fff;
             padding: 15px;
+            text-align: center;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
         }
@@ -64,54 +68,50 @@
         }
         nav ul li a {
             text-decoration: none;
-            color: #558b2f;
+            color: #388e3c; /* 濃い緑 */
             font-size: 1.2em;
             font-weight: bold;
             padding: 10px 20px;
             background-color: #fff;
-            border: 2px solid #558b2f;
+            border: 2px solid #388e3c;
             border-radius: 25px;
             transition: all 0.3s ease;
         }
         nav ul li a:hover {
-            background-color: #558b2f;
+            background-color: #388e3c;
             color: #fff;
         }
         main {
             padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            background-color: #ffffff;
+            background-color: #fff;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
-            text-align: left;
+            text-align: left; /* 左揃え */
         }
         main h2 {
             font-size: 2.8em;
             margin-bottom: 40px;
-            color: #558b2f;
+            color: #388e3c; /* 濃い緑 */
             font-family: 'Potta One', cursive;
-            text-align: center;
         }
         .content {
             margin-top: 30px;
         }
         .section {
             margin-bottom: 60px;
-            padding: 30px;
-            background-color: #f0f8ff; /* 明るい背景 */
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s ease; /* ホバー効果 */
-        }
-        .section:hover {
-            transform: translateY(-5px); /* ホバー時に少し浮く効果 */
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeUp 1.5s ease-out forwards;
+            animation-delay: 0.5s;
         }
         .section h3 {
             font-size: 2.2em;
-            color: #33691e;
+            color: #33691e; /* 深い緑 */
             font-family: 'Potta One', cursive;
             margin-bottom: 25px;
+            animation: fadeIn 1s ease forwards;
         }
         .section p {
             font-size: 1.5em;
@@ -121,7 +121,7 @@
             color: #555;
         }
         footer {
-            background-color: #8bc34a; /* フッターの背景色 */
+            background-color: #a5d6a7; /* 明るい緑 */
             color: #fff;
             text-align: center;
             padding: 35px 0;
@@ -131,6 +131,28 @@
         footer p {
             margin: 0;
         }
+
+        /* アニメーション */
+        @keyframes bounceIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
@@ -139,10 +161,7 @@
                 margin: 10px 0;
             }
             main h2 {
-                font-size: 2.4em; /* モバイル用のフォントサイズ調整 */
-            }
-            .section p {
-                font-size: 1.2em; /* モバイル用のフォントサイズ調整 */
+                font-size: 2.4em; /* モバイル用に調整 */
             }
         }
     </style>
@@ -150,39 +169,29 @@
 <body>
     <header>
         <h1>すてら</h1>
-        <p>居心地のいい居場所となるようなMinecraftサーバー</p>
+        <p>あなたの心を癒す、温かいMinecraftサーバー</p>
     </header>
     <nav>
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">はじめての方へ</a></li>
-            <li><a href="#">知っておきたいこと</a></li>
+            <li><a href="#">知っておきたい</a></li>
         </ul>
     </nav>
     <main>
-        <h2>すてらサーバーへようこそ！</h2>
+        <h2>ようこそ、すてらサーバーへ！</h2>
         <div class="content">
             <section class="section">
-                <h3>すてらサーバーってなぁに？</h3>
-                <p>すてらサーバーはMinecraftサーバーです。</p>
-                <p>現実でいろいろ疲れやストレスなどで大変だろうとは思いますが、</p>
-                <p>癒やしや楽しいを提供する心地の良い居場所を作ることを目標としたサーバーです。</p>
-            </section>
-            <section class="section">
-                <h3>参加方法</h3>
-                <p>私たちのサーバーに参加するのはとても簡単です！</p>
-                <p>まずはMinecraftを起動し、サーバーIPを入力してください。</p>
-            </section>
-            <section class="section">
-                <h3>推奨MOD</h3>
-                <p>楽しい体験をするために、以下のMODを推奨しています。</p>
-                <p>OptiFineやJourneyMapなど、ぜひお試しください。</p>
+                <h3>すてらサーバーについて</h3>
+                <p>すてらサーバーは、Minecraftで癒しと楽しさを提供することを目指しています。</p>
+                <p>現実での疲れを忘れ、心地よい空間でリラックスしながらプレイを楽しんでください。</p>
+                <p>あなたの参加を心よりお待ちしております！</p>
             </section>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 すてら</p>
+        <p>&copy; 2024 すてら - あなたの癒しの場</p>
     </footer>
 
 </body>
