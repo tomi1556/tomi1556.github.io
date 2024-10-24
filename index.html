@@ -89,19 +89,16 @@
             background-color: #fff;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
-            text-align: center;
             position: relative;
             overflow: hidden;
+            display: flex; /* フレックスボックスを利用 */
+            flex-direction: row; /* 水平方向に配置 */
+            justify-content: space-between; /* 間隔を空ける */
         }
-        main h2 {
-            font-size: 3.2em;
-            margin-bottom: 40px;
-            color: #558b2f;
-            font-family: 'Potta One', cursive;
-        }
-        .section {
-            margin: 40px 0;
+        .features, .method {
+            width: 48%; /* 各セクションの幅を48%に設定 */
             padding: 20px;
+            margin: 10px;
             border-radius: 15px;
             background: #e8f5e9;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
@@ -210,8 +207,11 @@
                 margin: 10px 0;
             }
             main {
-                flex-direction: column;
+                flex-direction: column; /* 縦に配置 */
                 height: auto; /* 自動調整 */
+            }
+            .features, .method {
+                width: 100%; /* 幅を100%に設定 */
             }
         }
     </style>
@@ -229,42 +229,32 @@
         </ul>
     </nav>
     <main>
-        <h2>サーバーの特徴と参加方法</h2>
-        
-        <div class="section features">
+        <div class="features" id="features">
             <h3>サーバーの特徴</h3>
+            <p>『すてら』のサーバーは、以下のような特徴を持っています：</p>
             <ul class="features-list">
-                <li>✨ 友達と一緒に楽しむカジュアルな雰囲気</li>
-                <li>🌍 定期的なイベントやアクティビティ：仲間と楽しもう！</li>
-                <li>🏰 多様なゲームモードとカスタムコンテンツ：あなたの冒険をサポート！</li>
-                <li>🔒 安全なプレイ環境：安心して遊べる！</li>
+                <li>初心者から上級者まで楽しめる環境</li>
+                <li>プレイヤー同士の助け合いを大切に</li>
+                <li>定期的なイベントやコンテスト</li>
+                <li>温かみのあるコミュニティ</li>
+                <li>安全で安心なプレイ環境</li>
             </ul>
         </div>
-        
-        <div class="section method">
+        <div class="method" id="join">
             <h3>参加方法</h3>
+            <p>『すてら』に参加するには、以下の手順を参考にしてください：</p>
             <div class="method-card">
-                <div class="method-title">Java版の参加方法</div>
-                <div class="method-step">Minecraftを起動し、「マルチプレイヤー」を選択します。</div>
-                <div class="method-step">「サーバーを追加」をクリックします。</div>
-                <div class="method-step">以下の情報を入力します：</div>
-                <div class="method-step"><strong>サーバー名:</strong> すてら</div>
-                <div class="method-step"><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</div>
-                <div class="method-step">サーバーを選択し、「参加」をクリック！</div>
-            </div>
-            <div class="method-card">
-                <div class="method-title">統合版の参加方法</div>
-                <div class="method-step">Minecraftを起動し、「サーバー」を選択します。</div>
-                <div class="method-step">「サーバーを追加」をクリックします。</div>
-                <div class="method-step">以下の情報を入力します：</div>
-                <div class="method-step"><strong>サーバー名:</strong> すてら</div>
-                <div class="method-step"><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</div>
-                <div class="method-step">サーバーを選択し、「参加」をクリック！</div>
+                <p class="method-title">ステップ1: サーバーに接続</p>
+                <p class="method-step">Minecraftを起動し、「マルチプレイヤー」からサーバーを追加。</p>
+                <p class="method-title">ステップ2: IPアドレスを入力</p>
+                <p class="method-step">『すてら』のIPアドレスを入力して、接続をクリック。</p>
+                <p class="method-title">ステップ3: ゲームを楽しむ</p>
+                <p class="method-step">サーバーに入ったら、思いっきり楽しもう！</p>
             </div>
         </div>
     </main>
     <footer>
-        <p>© 2024 すてらサーバー. All Rights Reserved.</p>
+        <p>© 2024 すてら - All Rights Reserved.</p>
     </footer>
 </body>
 </html>
