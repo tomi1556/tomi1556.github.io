@@ -81,6 +81,7 @@
             margin-bottom: 40px;
             color: #558b2f;
             font-family: 'Potta One', cursive;
+            animation: fadeIn 1s ease forwards; /* アニメーション追加 */
         }
         .content {
             margin-top: 30px;
@@ -92,6 +93,9 @@
             box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
             background-color: #ffffff; /* 背景色を白に設定 */
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* ホバー効果用 */
+            opacity: 0;
+            transform: translateY(30px);
+            animation: slideIn 0.5s forwards; /* スライドインアニメーション追加 */
         }
         .section:hover {
             transform: translateY(-5px); /* ホバー時のアニメーション */
@@ -120,6 +124,26 @@
         }
         footer p {
             margin: 0;
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         @media (max-width: 768px) {
             nav ul {
@@ -153,10 +177,17 @@
                 <p>癒やしや楽しいを提供する心地の良い居場所を作ることを目標としたサーバーです。</p>
             </section>
             <section class="section">
-                <h3>参加方法</h3>
+                <h3>参加方法 (Java版)</h3>
                 <p>1. Minecraftを起動します。</p>
                 <p>2. マルチプレイヤーを選択します。</p>
                 <p>3. サーバー追加を選択し、IPアドレス「123.45.67.89」を入力します。</p>
+                <p>4. サーバーに接続をクリックして、すてらの世界に飛び込みましょう！</p>
+            </section>
+            <section class="section">
+                <h3>参加方法 (統合版)</h3>
+                <p>1. Minecraftを起動します。</p>
+                <p>2. 友達と遊ぶを選択します。</p>
+                <p>3. サーバーに接続を選択し、IPアドレス「123.45.67.89」を入力します。</p>
                 <p>4. サーバーに接続をクリックして、すてらの世界に飛び込みましょう！</p>
             </section>
         </div>
