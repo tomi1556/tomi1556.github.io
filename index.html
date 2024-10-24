@@ -8,16 +8,13 @@
     <link rel="stylesheet" href="style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Nunito+Sans:wght@300;400;700&display=swap');
-
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #ffffff; /* 背景を白色に変更 */
+            background-color: #f0f8ff; /* 背景を柔らかい色に変更 */
             color: #333;
             line-height: 1.8;
         }
-
-        /* ヘッダー */
         header {
             background-color: #8bc34a;
             color: #fff;
@@ -27,7 +24,6 @@
             position: relative;
             overflow: hidden;
         }
-
         header::before {
             content: '';
             position: absolute;
@@ -39,21 +35,17 @@
             opacity: 0.3;
             z-index: -1;
         }
-
         header h1 {
             margin: 0;
             font-size: 4em;
             color: #fff;
             text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
         }
-
         header p {
             font-size: 1.5em;
             margin-top: 20px;
             color: #fff;
         }
-
-        /* ナビゲーション */
         nav {
             background-color: #fff;
             padding: 15px;
@@ -61,7 +53,6 @@
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
         }
-
         nav ul {
             list-style: none;
             padding: 0;
@@ -69,11 +60,9 @@
             display: flex;
             justify-content: center;
         }
-
         nav ul li {
             margin: 0 20px;
         }
-
         nav ul li a {
             text-decoration: none;
             color: #558b2f;
@@ -85,13 +74,10 @@
             border-radius: 25px;
             transition: all 0.3s ease;
         }
-
         nav ul li a:hover {
             background-color: #558b2f;
             color: #fff;
         }
-
-        /* メインコンテンツ */
         main {
             padding: 60px 20px;
             max-width: 1200px;
@@ -101,29 +87,24 @@
             border-radius: 20px;
             text-align: center;
         }
-
         main h2 {
             font-size: 2.8em;
             margin-bottom: 40px;
             color: #558b2f;
             font-family: 'Potta One', cursive;
         }
-
         .content {
             margin-top: 30px;
         }
-
         .section {
             margin-bottom: 60px;
         }
-
         .section h3 {
             font-size: 2.2em;
             color: #33691e;
             font-family: 'Potta One', cursive;
             margin-bottom: 25px;
         }
-
         .section p {
             font-size: 1.5em;
             line-height: 2.2;
@@ -131,23 +112,18 @@
             max-width: 850px;
             color: #555;
         }
-
-        /* はじめての方へセクション */
         .section:first-of-type {
             background-color: #fff;
             padding: 40px;
             border-radius: 15px;
             box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
         }
-
-        /* アニメーション */
         .section {
             opacity: 0;
             transform: translateY(50px);
             animation: fadeUp 1.5s ease-out forwards;
             animation-delay: 0.5s;
         }
-
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -158,8 +134,6 @@
                 transform: translateY(0);
             }
         }
-
-        /* フッタースタイル */
         footer {
             background-color: #8bc34a;
             color: #fff;
@@ -168,17 +142,13 @@
             font-size: 0.9em;
             border-top: 5px solid #7cb342;
         }
-
         footer p {
             margin: 0;
         }
-
-        /* レスポンシブ対応 */
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
             }
-
             nav ul li {
                 margin: 10px 0;
             }
@@ -186,12 +156,10 @@
     </style>
 </head>
 <body>
-
     <header>
         <h1>すてら</h1>
         <p>居心地のいい居場所となるようなMinecraftサーバー</p>
     </header>
-
     <nav>
         <ul>
             <li><a href="#">Home</a></li>
@@ -199,7 +167,6 @@
             <li><a href="#">知っておきたい</a></li>
         </ul>
     </nav>
-
     <main>
         <h2>すてらサーバーへようこそ！</h2>
         <div class="content">
@@ -208,10 +175,6 @@
                 <p>すてらサーバーはMinecraftサーバーです</p>
                 <p>現実でいろいろ疲れやストレスなどで大変だろうとは思いますが</p>
                 <p>癒やしや楽しいを提供する心地の良い居場所を作ることを目標としたサーバーです</p>
-            </section>
-            <section class="section">
-                <h3>知っておきたいこと</h3>
-                <p>私たちのサーバーは、バージョンXXで稼働しており、サバイバルやクリエイティブモードを自由に楽しむことができます。参加方法や推奨MODについての詳しい情報はこちらからご覧ください。</p>
             </section>
         </div>
     </main>
