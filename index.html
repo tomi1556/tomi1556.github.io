@@ -92,43 +92,23 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            animation: fadeInUp 1s forwards;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-between;
-            height: calc(100vh - 250px); /* ヘッダーとフッターを考慮 */
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         main h2 {
             font-size: 3.2em;
             margin-bottom: 40px;
             color: #558b2f;
             font-family: 'Potta One', cursive;
-            width: 100%;
         }
-        .content {
-            margin-top: 30px;
-            display: flex;
-            justify-content: space-between;
-            width: 100%;
-            padding: 20px; /* 内側のパディングを追加 */
-        }
-        .features, .method {
-            flex: 1;
-            margin: 10px; /* 各セクションの間にマージンを追加 */
-            padding: 20px; /* 内側のパディングを追加 */
-            background: #e8f5e9;
+        .section {
+            margin: 40px 0;
+            padding: 20px;
             border-radius: 15px;
+            background: #e8f5e9;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-            animation: fadeUp 1.5s ease-out forwards;
-            position: relative; /* 相対位置 */
-            overflow: hidden; /* はみ出し部分を隠す */
+            animation: fadeInUp 1s forwards;
         }
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(50px); }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
             to { opacity: 1; transform: translateY(0); }
         }
         .features h3, .method h3 {
@@ -250,36 +230,36 @@
     </nav>
     <main>
         <h2>サーバーの特徴と参加方法</h2>
-        <div class="content">
-            <div class="features">
-                <h3>サーバーの特徴</h3>
-                <ul class="features-list">
-                    <li>✨ 友達と一緒に楽しむカジュアルな雰囲気</li>
-                    <li>🌍 定期的なイベントやアクティビティ：仲間と楽しもう！</li>
-                    <li>🏰 多様なゲームモードとカスタムコンテンツ：あなたの冒険をサポート！</li>
-                    <li>🔒 安全なプレイ環境：安心して遊べる！</li>
-                </ul>
+        
+        <div class="section features">
+            <h3>サーバーの特徴</h3>
+            <ul class="features-list">
+                <li>✨ 友達と一緒に楽しむカジュアルな雰囲気</li>
+                <li>🌍 定期的なイベントやアクティビティ：仲間と楽しもう！</li>
+                <li>🏰 多様なゲームモードとカスタムコンテンツ：あなたの冒険をサポート！</li>
+                <li>🔒 安全なプレイ環境：安心して遊べる！</li>
+            </ul>
+        </div>
+        
+        <div class="section method">
+            <h3>参加方法</h3>
+            <div class="method-card">
+                <div class="method-title">Java版の参加方法</div>
+                <div class="method-step">Minecraftを起動し、「マルチプレイヤー」を選択します。</div>
+                <div class="method-step">「サーバーを追加」をクリックします。</div>
+                <div class="method-step">以下の情報を入力します：</div>
+                <div class="method-step"><strong>サーバー名:</strong> すてら</div>
+                <div class="method-step"><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</div>
+                <div class="method-step">サーバーを選択し、「参加」をクリック！</div>
             </div>
-            <div class="method">
-                <h3>参加方法</h3>
-                <div class="method-card">
-                    <div class="method-title">Java版の参加方法</div>
-                    <div class="method-step">Minecraftを起動し、「マルチプレイヤー」を選択します。</div>
-                    <div class="method-step">「サーバーを追加」をクリックします。</div>
-                    <div class="method-step">以下の情報を入力します：</div>
-                    <div class="method-step"><strong>サーバー名:</strong> すてら</div>
-                    <div class="method-step"><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</div>
-                    <div class="method-step">サーバーを選択し、「参加」をクリック！</div>
-                </div>
-                <div class="method-card">
-                    <div class="method-title">統合版の参加方法</div>
-                    <div class="method-step">Minecraftを起動し、「サーバー」を選択します。</div>
-                    <div class="method-step">「サーバーを追加」をクリックします。</div>
-                    <div class="method-step">以下の情報を入力します：</div>
-                    <div class="method-step"><strong>サーバー名:</strong> すてら</div>
-                    <div class="method-step"><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</div>
-                    <div class="method-step">サーバーを選択し、「参加」をクリック！</div>
-                </div>
+            <div class="method-card">
+                <div class="method-title">統合版の参加方法</div>
+                <div class="method-step">Minecraftを起動し、「サーバー」を選択します。</div>
+                <div class="method-step">「サーバーを追加」をクリックします。</div>
+                <div class="method-step">以下の情報を入力します：</div>
+                <div class="method-step"><strong>サーバー名:</strong> すてら</div>
+                <div class="method-step"><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</div>
+                <div class="method-step">サーバーを選択し、「参加」をクリック！</div>
             </div>
         </div>
     </main>
