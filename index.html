@@ -141,7 +141,7 @@
         }
         .copy-button {
             display: inline-block;
-            margin-top: 10px;
+            margin-left: 10px;
             padding: 10px 15px;
             background-color: #558b2f;
             color: #fff;
@@ -152,6 +152,12 @@
         }
         .copy-button:hover {
             background-color: #4e7d2f;
+        }
+        .copy-confirmation {
+            margin-left: 10px;
+            color: #4caf50;
+            font-weight: bold;
+            display: none; /* 初期状態では非表示 */
         }
         footer {
             background-color: #8bc34a;
@@ -214,7 +220,8 @@
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
                 <p>アドレス: <strong id="javaAddress">example.java.server:25565</strong></p>
-                <button class="copy-button" onclick="copyToClipboard('example.java.server:25565')">コピー</button>
+                <button class="copy-button" onclick="copyToClipboard('example.java.server:25565', this)">コピー</button>
+                <span class="copy-confirmation"></span>
             </div>
             <div class="method-card">
                 <p class="method-title">統合版の参加方法</p>
@@ -222,19 +229,25 @@
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
                 <p>アドレス: <strong id="bedrockAddress">example.bedrock.server:19132</strong></p>
-                <button class="copy-button" onclick="copyToClipboard('example.bedrock.server:19132')">コピー</button>
+                <button class="copy-button" onclick="copyToClipboard('example.bedrock.server:19132', this)">コピー</button>
+                <span class="copy-confirmation"></span>
             </div>
         </div>
     </main>
     <footer>
-        <p>© 2024 すてら - All Rights Reserved.</p>
+        <p>© 2024 すてら. All Rights Reserved.</p>
     </footer>
     <script>
-        function copyToClipboard(text) {
+        function copyToClipboard(text, button) {
             navigator.clipboard.writeText(text).then(() => {
-                alert('コピーしました: ' + text);
+                const confirmation = button.nextElementSibling;
+                confirmation.textContent = 'コピー✅️';
+                confirmation.style.display = 'inline'; // 表示する
+                setTimeout(() => {
+                    confirmation.style.display = 'none'; // 3秒後に非表示にする
+                }, 3000);
             }, (err) => {
-                alert('コピーに失敗しました: ' + err);
+                console.error('コピーに失敗しました:', err);
             });
         }
     </script>
