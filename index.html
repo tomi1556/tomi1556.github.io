@@ -93,19 +93,16 @@
             color: #558b2f;
             font-family: 'Potta One', cursive;
         }
-        .features, .method {
-            display: flex;
-            justify-content: space-around;
-            align-items: flex-start;
+        .features {
             margin-bottom: 60px;
         }
-        .features h3, .method h3 {
+        .features h3 {
             font-size: 2.2em;
             color: #33691e;
             font-family: 'Potta One', cursive;
             margin-bottom: 25px;
         }
-        .features p, .method p {
+        .features p {
             font-size: 1.5em;
             line-height: 2.2;
             color: #555;
@@ -117,9 +114,29 @@
             margin-left: 20px;
             text-align: left;
         }
+        .method {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
         .method-card {
-            margin-left: 20px;
-            text-align: left;
+            width: 45%;
+            margin: 10px;
+            background-color: #e8f5e9;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .method-card:hover {
+            transform: scale(1.05);
+        }
+        .method-title {
+            font-size: 1.8em;
+            color: #558b2f;
+            font-weight: bold;
+            margin-bottom: 10px;
         }
         footer {
             background-color: #8bc34a;
@@ -139,9 +156,12 @@
             nav ul li {
                 margin: 10px 0;
             }
-            .features, .method {
+            .method {
                 flex-direction: column;
                 align-items: center;
+            }
+            .method-card {
+                width: 90%;
             }
         }
     </style>
@@ -162,28 +182,28 @@
     <main>
         <h2>すてらサーバーへようこそ！</h2>
         <div class="features">
-            <div>
-                <h3>サーバーの特徴</h3>
-                <p>『すてら』のサーバーは、以下のような特徴を持っています：</p>
-                <ul class="features-list">
-                    <li>初心者から上級者まで楽しめる環境</li>
-                    <li>プレイヤー同士の助け合いを大切に</li>
-                    <li>定期的なイベントやコンテスト</li>
-                    <li>温かみのあるコミュニティ</li>
-                    <li>安全で安心なプレイ環境</li>
-                </ul>
-            </div>
+            <h3>サーバーの特徴</h3>
+            <p>『すてら』のサーバーは、以下のような特徴を持っています：</p>
+            <ul class="features-list">
+                <li>初心者から上級者まで楽しめる環境</li>
+                <li>プレイヤー同士の助け合いを大切に</li>
+                <li>定期的なイベントやコンテスト</li>
+                <li>温かみのあるコミュニティ</li>
+                <li>安全で安心なプレイ環境</li>
+            </ul>
         </div>
         <div class="method">
-            <h3>参加方法</h3>
-            <p>『すてら』に参加するには、以下の手順を参考にしてください：</p>
             <div class="method-card">
-                <p class="method-title">ステップ1: サーバーに接続</p>
-                <p class="method-step">Minecraftを起動し、「マルチプレイヤー」からサーバーを追加。</p>
-                <p class="method-title">ステップ2: IPアドレスを入力</p>
-                <p class="method-step">『すてら』のIPアドレスを入力して、接続をクリック。</p>
-                <p class="method-title">ステップ3: ゲームを楽しむ</p>
-                <p class="method-step">サーバーに入ったら、思いっきり楽しもう！</p>
+                <p class="method-title">Java版の参加方法</p>
+                <p>1. Minecraftを起動し、「マルチプレイヤー」を選択。</p>
+                <p>2. サーバーを追加して、IPアドレスを入力。</p>
+                <p>3. 接続をクリックして、サーバーに入ります。</p>
+            </div>
+            <div class="method-card">
+                <p class="method-title">統合版の参加方法</p>
+                <p>1. Minecraftを起動し、「サーバー」を選択。</p>
+                <p>2. サーバーを追加して、IPアドレスを入力。</p>
+                <p>3. 接続をクリックして、サーバーに入ります。</p>
             </div>
         </div>
     </main>
