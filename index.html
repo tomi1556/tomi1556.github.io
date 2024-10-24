@@ -85,13 +85,14 @@
             background-color: #ffffff;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
-            text-align: center;
+            text-align: left; /* 左揃えに変更 */
         }
         main h2 {
             font-size: 2.8em;
             margin-bottom: 40px;
             color: #558b2f;
             font-family: 'Potta One', cursive;
+            text-align: center; /* タイトルは中央揃え */
         }
         .content {
             margin-top: 30px;
@@ -105,7 +106,15 @@
             opacity: 0; /* アニメーション効果用 */
             transform: translateY(50px); /* アニメーション効果用 */
             animation: fadeUp 1.5s ease-out forwards; /* アニメーション */
-            animation-delay: 0.5s; /* アニメーション遅延 */
+        }
+        .section:nth-child(1) {
+            animation-delay: 0.3s; /* 最初のセクションの遅延 */
+        }
+        .section:nth-child(2) {
+            animation-delay: 0.6s; /* 2つ目のセクションの遅延 */
+        }
+        .section:nth-child(3) {
+            animation-delay: 0.9s; /* 3つ目のセクションの遅延 */
         }
         .section h3 {
             font-size: 2.2em;
@@ -117,7 +126,7 @@
             font-size: 1.5em;
             line-height: 2.2;
             margin: 0 auto;
-            max-width: 850px;
+            max-width: 850px; /* 最大幅を設定 */
             color: #555;
         }
         @keyframes fadeUp {
@@ -148,6 +157,12 @@
             nav ul li {
                 margin: 10px 0;
             }
+            main h2 {
+                font-size: 2.4em; /* モバイル用のフォントサイズ調整 */
+            }
+            .section p {
+                font-size: 1.2em; /* モバイル用のフォントサイズ調整 */
+            }
         }
     </style>
 </head>
@@ -171,6 +186,16 @@
                 <p>すてらサーバーはMinecraftサーバーです。</p>
                 <p>現実でいろいろ疲れやストレスなどで大変だろうとは思いますが、</p>
                 <p>癒やしや楽しいを提供する心地の良い居場所を作ることを目標としたサーバーです。</p>
+            </section>
+            <section class="section">
+                <h3>参加方法</h3>
+                <p>私たちのサーバーに参加するのはとても簡単です！</p>
+                <p>まずはMinecraftを起動し、サーバーIPを入力してください。</p>
+            </section>
+            <section class="section">
+                <h3>推奨MOD</h3>
+                <p>楽しい体験をするために、以下のMODを推奨しています。</p>
+                <p>OptiFineやJourneyMapなど、ぜひお試しください。</p>
             </section>
         </div>
     </main>
