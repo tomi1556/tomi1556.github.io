@@ -11,41 +11,30 @@
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #f0f8ff; /* 背景を柔らかい色に変更 */
+            background-color: #f0f8ff;
             color: #333;
             line-height: 1.8;
+            overflow-x: hidden; /* 横スクロールを防ぐ */
         }
         header {
-            background-color: #8bc34a;
+            background: linear-gradient(135deg, #8bc34a 40%, #c5e1a5);
             color: #fff;
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
             font-family: 'Potta One', cursive;
             position: relative;
             overflow: hidden;
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://example.com/nature_background.png') no-repeat center / cover;
-            opacity: 0.4;
-            z-index: -1;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
         }
         header h1 {
             margin: 0;
             font-size: 4.5em;
-            color: #fff;
             text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
             animation: bounce 1s infinite alternate;
         }
         header p {
             font-size: 1.8em;
             margin-top: 20px;
-            color: #fff;
             animation: fadeIn 1.5s ease-in;
         }
         @keyframes bounce {
@@ -58,11 +47,14 @@
         }
         nav {
             background-color: #fff;
-            padding: 15px;
-            text-align: center;
+            padding: 20px;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
             border-radius: 15px;
+            transition: background 0.3s;
+        }
+        nav:hover {
+            background-color: #f9f9f9;
         }
         nav ul {
             list-style: none;
@@ -77,10 +69,9 @@
         nav ul li a {
             text-decoration: none;
             color: #558b2f;
-            font-size: 1.2em;
+            font-size: 1.5em;
             font-weight: bold;
             padding: 10px 20px;
-            background-color: #fff;
             border: 2px solid #558b2f;
             border-radius: 25px;
             transition: all 0.3s ease;
@@ -89,7 +80,7 @@
         nav ul li a:hover {
             background-color: #558b2f;
             color: #fff;
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
         main {
             padding: 60px 20px;
@@ -101,17 +92,17 @@
             text-align: center;
             position: relative;
             overflow: hidden;
+            animation: fadeInUp 1s forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         main h2 {
             font-size: 3.2em;
             margin-bottom: 40px;
             color: #558b2f;
             font-family: 'Potta One', cursive;
-            animation: fadeInUp 1s forwards;
-        }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
         }
         .content {
             margin-top: 30px;
@@ -124,17 +115,11 @@
             animation-delay: 0.5s;
         }
         @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .section h3 {
-            font-size: 2.5em;
+            font-size: 2.8em;
             color: #33691e;
             font-family: 'Potta One', cursive;
             margin-bottom: 25px;
@@ -145,7 +130,7 @@
             100% { transform: scale(1); opacity: 1; }
         }
         .section p {
-            font-size: 1.5em;
+            font-size: 1.6em;
             line-height: 2.2;
             margin: 0 auto;
             max-width: 850px;
@@ -160,7 +145,7 @@
             display: inline-block;
         }
         .features-list li {
-            font-size: 1.5em;
+            font-size: 1.6em;
             margin: 15px 0;
             animation: fadeIn 1.5s forwards;
             opacity: 0;
@@ -169,7 +154,7 @@
             animation-fill-mode: forwards;
         }
         .method-card {
-            background-color: #e8f5e9; /* 薄い緑 */
+            background-color: #e8f5e9;
             border-radius: 15px;
             padding: 20px;
             margin: 20px auto;
@@ -181,20 +166,15 @@
             animation: slideIn 1s forwards;
         }
         @keyframes slideIn {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+            from { opacity: 0; transform: translateY(50px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .method-title {
-            font-size: 1.8em;
+            font-size: 2em;
             color: #558b2f;
             font-weight: bold;
             margin-bottom: 15px;
+            text-decoration: underline;
         }
         .method-step {
             font-size: 1.4em;
@@ -203,11 +183,11 @@
             padding-left: 25px;
         }
         .method-step::before {
-            content: '✔️'; /* チェックマークアイコン */
+            content: '✔️';
             position: absolute;
             left: 0;
             top: 0;
-            font-size: 1.8em; /* アイコンのサイズ */
+            font-size: 1.5em;
         }
         footer {
             background-color: #8bc34a;
@@ -216,6 +196,7 @@
             padding: 35px 0;
             font-size: 0.9em;
             border-top: 5px solid #7cb342;
+            position: relative;
         }
         footer p {
             margin: 0;
@@ -250,12 +231,12 @@
         <div class="content">
             <section class="section">
                 <h3>すてらサーバーの特徴</h3>
-                <p>すてらサーバーは、誰もが楽しめる、居心地の良いMinecraftの世界を提供します。以下のような特徴があります：</p>
+                <p>すてらサーバーは、友好的で楽しい環境を提供し、Minecraftの世界で特別な体験をしていただけます。以下の魅力が満載です：</p>
                 <ul class="features-list">
-                    <li>✨ フレンドリーなコミュニティ</li>
-                    <li>🌍 定期的なイベントやアクティビティ</li>
-                    <li>🏰 多様なゲームモードとカスタムコンテンツ</li>
-                    <li>🔒 安全なプレイ環境</li>
+                    <li>✨ フレンドリーなコミュニティ：誰でも歓迎します！</li>
+                    <li>🌍 定期的なイベントやアクティビティ：仲間と楽しもう！</li>
+                    <li>🏰 多様なゲームモードとカスタムコンテンツ：あなたの冒険をサポート！</li>
+                    <li>🔒 安全なプレイ環境：安心して遊べる！</li>
                 </ul>
             </section>
             <section class="section">
