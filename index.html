@@ -98,6 +98,20 @@
         }
         .section {
             margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeUp 1.5s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .section h3 {
             font-size: 2.2em;
@@ -112,23 +126,39 @@
             max-width: 850px;
             color: #555;
         }
-        .features-list {
-            list-style: none;
-            padding: 0;
-            text-align: left; /* 左寄せにする */
-            margin: 20px auto; /* 上下のマージンを追加 */
-            max-width: 800px; /* 幅を指定 */
+        .method-card {
+            background-color: #e8f5e9; /* 薄い緑 */
+            border-radius: 15px;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 700px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+            overflow: hidden;
         }
-        .features-list li {
+        .method-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .method-title {
+            font-size: 1.8em;
+            color: #558b2f;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+        .method-step {
             font-size: 1.4em;
-            margin: 10px 0; /* 各要素の間にスペースを追加 */
-            padding: 10px;
-            background-color: rgba(139, 195, 74, 0.1); /* 薄い緑の背景 */
-            border-radius: 8px; /* 角を丸く */
-            transition: background-color 0.3s;
+            margin: 10px 0;
+            position: relative;
+            padding-left: 25px;
         }
-        .features-list li:hover {
-            background-color: rgba(139, 195, 74, 0.2); /* ホバー時の色変更 */
+        .method-step::before {
+            content: '✔️'; /* チェックマークアイコン */
+            position: absolute;
+            left: 0;
+            top: 0;
+            font-size: 1.8em; /* アイコンのサイズ */
         }
         footer {
             background-color: #8bc34a;
@@ -147,22 +177,6 @@
             }
             nav ul li {
                 margin: 10px 0;
-            }
-        }
-        .section {
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeUp 1.5s ease-out forwards;
-            animation-delay: 0.5s;
-        }
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
     </style>
@@ -197,13 +211,28 @@
             <section class="section">
                 <h3>サーバー参加方法</h3>
                 <p>すてらサーバーへの参加はとても簡単です！以下の手順で参加できます：</p>
-                <h4>Java版の参加方法</h4>
-                <p>1. Minecraftを起動し、マルチプレイヤーを選択します。</p>
-                <p>2. 「サーバー追加」をクリックし、以下の情報を入力します：</p>
-                <p><strong>サーバー名:</strong> すてら</p>
-                <p><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</p>
-                <p>3. サーバーを選択し、「接続」をクリックして参加！</p>
-
-                <h4>統合版の参加方法</h4>
-                <p>1. Minecraftを起動し、「プレイ」を選択します。</p>
-                <p>2. 「サーバー」タブを開き、「サーバー
+                <div class="method-card">
+                    <div class="method-title">Java版の参加方法</div>
+                    <div class="method-step">Minecraftを起動し、マルチプレイヤーを選択します。</div>
+                    <div class="method-step">「サーバー追加」をクリックし、以下の情報を入力します：</div>
+                    <div class="method-step"><strong>サーバー名:</strong> すてら</div>
+                    <div class="method-step"><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</div>
+                    <div class="method-step">サーバーを選択し、「参加」をクリック！</div>
+                </div>
+                <div class="method-card">
+                    <div class="method-title">統合版の参加方法</div>
+                    <div class="method-step">Minecraftを起動し、「サーバー」を選択します。</div>
+                    <div class="method-step">「サーバーを追加」をクリックします。</div>
+                    <div class="method-step">以下の情報を入力します：</div>
+                    <div class="method-step"><strong>サーバー名:</strong> すてら</div>
+                    <div class="method-step"><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</div>
+                    <div class="method-step">サーバーを選択し、「参加」をクリック！</div>
+                </div>
+            </section>
+        </div>
+    </main>
+    <footer>
+        <p>© 2024 すてらサーバー. All Rights Reserved.</p>
+    </footer>
+</body>
+</html>
