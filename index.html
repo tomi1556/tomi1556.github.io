@@ -11,7 +11,7 @@
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #f9f9f9; /* 背景をさらに明るい色に変更 */
+            background-color: #f9f9f9; /* 背景色 */
             color: #333;
             line-height: 1.8;
         }
@@ -49,7 +49,6 @@
         nav {
             background-color: #fff;
             padding: 15px;
-            text-align: center;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
         }
@@ -85,36 +84,28 @@
             background-color: #ffffff;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
-            text-align: left; /* 左揃えに変更 */
+            text-align: left;
         }
         main h2 {
             font-size: 2.8em;
             margin-bottom: 40px;
             color: #558b2f;
             font-family: 'Potta One', cursive;
-            text-align: center; /* タイトルは中央揃え */
+            text-align: center;
         }
         .content {
             margin-top: 30px;
         }
         .section {
             margin-bottom: 60px;
-            padding: 30px; /* セクションの内側の余白 */
+            padding: 30px;
             background-color: #f0f8ff; /* 明るい背景 */
             border-radius: 15px;
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            opacity: 0; /* アニメーション効果用 */
-            transform: translateY(50px); /* アニメーション効果用 */
-            animation: fadeUp 1.5s ease-out forwards; /* アニメーション */
+            transition: all 0.3s ease; /* ホバー効果 */
         }
-        .section:nth-child(1) {
-            animation-delay: 0.3s; /* 最初のセクションの遅延 */
-        }
-        .section:nth-child(2) {
-            animation-delay: 0.6s; /* 2つ目のセクションの遅延 */
-        }
-        .section:nth-child(3) {
-            animation-delay: 0.9s; /* 3つ目のセクションの遅延 */
+        .section:hover {
+            transform: translateY(-5px); /* ホバー時に少し浮く効果 */
         }
         .section h3 {
             font-size: 2.2em;
@@ -126,18 +117,8 @@
             font-size: 1.5em;
             line-height: 2.2;
             margin: 0 auto;
-            max-width: 850px; /* 最大幅を設定 */
+            max-width: 850px;
             color: #555;
-        }
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
         footer {
             background-color: #8bc34a; /* フッターの背景色 */
