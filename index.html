@@ -11,12 +11,12 @@
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #f0f8ff; /* 背景を柔らかい色に変更 */
+            background-color: #f9f9f9; /* 背景をさらに明るい色に変更 */
             color: #333;
             line-height: 1.8;
         }
         header {
-            background-color: #8bc34a;
+            background-color: #8bc34a; /* ヘッダーの背景色 */
             color: #fff;
             padding: 100px 0;
             text-align: center;
@@ -82,7 +82,7 @@
             padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            background-color: #fff;
+            background-color: #ffffff;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
             text-align: center;
@@ -98,6 +98,14 @@
         }
         .section {
             margin-bottom: 60px;
+            padding: 30px; /* セクションの内側の余白 */
+            background-color: #f0f8ff; /* 明るい背景 */
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            opacity: 0; /* アニメーション効果用 */
+            transform: translateY(50px); /* アニメーション効果用 */
+            animation: fadeUp 1.5s ease-out forwards; /* アニメーション */
+            animation-delay: 0.5s; /* アニメーション遅延 */
         }
         .section h3 {
             font-size: 2.2em;
@@ -112,18 +120,6 @@
             max-width: 850px;
             color: #555;
         }
-        .section:first-of-type {
-            background-color: #fff;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
-        }
-        .section {
-            opacity: 0;
-            transform: translateY(50px);
-            animation: fadeUp 1.5s ease-out forwards;
-            animation-delay: 0.5s;
-        }
         @keyframes fadeUp {
             from {
                 opacity: 0;
@@ -135,7 +131,7 @@
             }
         }
         footer {
-            background-color: #8bc34a;
+            background-color: #8bc34a; /* フッターの背景色 */
             color: #fff;
             text-align: center;
             padding: 35px 0;
@@ -164,7 +160,7 @@
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">はじめての方へ</a></li>
-            <li><a href="#">知っておきたい</a></li>
+            <li><a href="#">知っておきたいこと</a></li>
         </ul>
     </nav>
     <main>
@@ -172,9 +168,9 @@
         <div class="content">
             <section class="section">
                 <h3>すてらサーバーってなぁに？</h3>
-                <p>すてらサーバーはMinecraftサーバーです</p>
-                <p>現実でいろいろ疲れやストレスなどで大変だろうとは思いますが</p>
-                <p>癒やしや楽しいを提供する心地の良い居場所を作ることを目標としたサーバーです</p>
+                <p>すてらサーバーはMinecraftサーバーです。</p>
+                <p>現実でいろいろ疲れやストレスなどで大変だろうとは思いますが、</p>
+                <p>癒やしや楽しいを提供する心地の良い居場所を作ることを目標としたサーバーです。</p>
             </section>
         </div>
     </main>
