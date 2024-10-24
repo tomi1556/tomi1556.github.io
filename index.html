@@ -228,9 +228,10 @@
                 <p>1. Minecraftを起動し、「サーバー」を選択。</p>
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
-                <p>アドレス: <strong id="bedrockAddress">example.bedrock.server:19132</strong></p>
-                <button class="copy-button" onclick="copyToClipboard('example.bedrock.server:19132', this)">コピー</button>
+                <p>アドレス: <strong id="bedrockAddress">example.bedrock.server</strong></p>
+                <button class="copy-button" onclick="copyToClipboard('example.bedrock.server', this)">コピー</button>
                 <span class="copy-confirmation"></span>
+                <p>ポート: <strong>19132</strong></p>
             </div>
         </div>
     </main>
@@ -247,6 +248,12 @@
                     confirmation.style.display = 'none'; // 3秒後に非表示にする
                 }, 3000);
             }, (err) => {
+                const confirmation = button.nextElementSibling;
+                confirmation.textContent = 'コピー❌️';
+                confirmation.style.display = 'inline'; // 表示する
+                setTimeout(() => {
+                    confirmation.style.display = 'none'; // 3秒後に非表示にする
+                }, 3000);
                 console.error('コピーに失敗しました:', err);
             });
         }
