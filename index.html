@@ -128,6 +128,7 @@
             padding: 20px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s;
+            position: relative; /* positionをrelativeに設定 */
         }
         .method-card:hover {
             transform: scale(1.05);
@@ -137,6 +138,20 @@
             color: #558b2f;
             font-weight: bold;
             margin-bottom: 10px;
+        }
+        .copy-button {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 10px 15px;
+            background-color: #558b2f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .copy-button:hover {
+            background-color: #4e7d2f;
         }
         footer {
             background-color: #8bc34a;
@@ -198,17 +213,30 @@
                 <p>1. Minecraftを起動し、「マルチプレイヤー」を選択。</p>
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
+                <p>アドレス: <strong id="javaAddress">example.java.server:25565</strong></p>
+                <button class="copy-button" onclick="copyToClipboard('example.java.server:25565')">コピー</button>
             </div>
             <div class="method-card">
                 <p class="method-title">統合版の参加方法</p>
                 <p>1. Minecraftを起動し、「サーバー」を選択。</p>
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
+                <p>アドレス: <strong id="bedrockAddress">example.bedrock.server:19132</strong></p>
+                <button class="copy-button" onclick="copyToClipboard('example.bedrock.server:19132')">コピー</button>
             </div>
         </div>
     </main>
     <footer>
         <p>© 2024 すてら - All Rights Reserved.</p>
     </footer>
+    <script>
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                alert('コピーしました: ' + text);
+            }, (err) => {
+                alert('コピーに失敗しました: ' + err);
+            });
+        }
+    </script>
 </body>
 </html>
