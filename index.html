@@ -14,7 +14,7 @@
             background-color: #f0f8ff;
             color: #333;
             line-height: 1.8;
-            overflow-x: hidden; /* 横スクロールを防ぐ */
+            overflow-x: hidden;
         }
         header {
             background: linear-gradient(135deg, #8bc34a 40%, #c5e1a5);
@@ -93,6 +93,10 @@
             position: relative;
             overflow: hidden;
             animation: fadeInUp 1s forwards;
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+            height: calc(100vh - 250px); /* ヘッダーとフッターを考慮 */
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -103,22 +107,29 @@
             margin-bottom: 40px;
             color: #558b2f;
             font-family: 'Potta One', cursive;
+            width: 100%;
         }
         .content {
             margin-top: 30px;
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            padding: 20px; /* 内側のパディングを追加 */
         }
-        .section {
-            margin-bottom: 60px;
-            opacity: 0;
-            transform: translateY(50px);
+        .features, .method {
+            flex: 1;
+            margin: 10px; /* 各セクションの間にマージンを追加 */
+            padding: 20px; /* 内側のパディングを追加 */
+            background: #e8f5e9;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             animation: fadeUp 1.5s ease-out forwards;
-            animation-delay: 0.5s;
         }
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(50px); }
             to { opacity: 1; transform: translateY(0); }
         }
-        .section h3 {
+        .features h3, .method h3 {
             font-size: 2.8em;
             color: #33691e;
             font-family: 'Potta One', cursive;
@@ -129,11 +140,11 @@
             0% { transform: scale(0.8); opacity: 0; }
             100% { transform: scale(1); opacity: 1; }
         }
-        .section p {
+        .features p, .method p {
             font-size: 1.6em;
             line-height: 2.2;
             margin: 0 auto;
-            max-width: 850px;
+            max-width: 100%;
             color: #555;
             animation: fadeIn 1s forwards;
         }
@@ -142,7 +153,6 @@
             padding: 0;
             margin: 0;
             text-align: left;
-            display: inline-block;
         }
         .features-list li {
             font-size: 1.6em;
@@ -154,7 +164,7 @@
             animation-fill-mode: forwards;
         }
         .method-card {
-            background-color: #e8f5e9;
+            background-color: #f1f8e9;
             border-radius: 15px;
             padding: 20px;
             margin: 20px auto;
@@ -211,6 +221,12 @@
             main h2 {
                 font-size: 2.8em;
             }
+            .content {
+                flex-direction: column; /* スマホでは縦に配置 */
+            }
+            .features, .method {
+                width: 100%; /* 幅を100%に設定 */
+            }
         }
     </style>
 </head>
@@ -221,25 +237,24 @@
     </header>
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">はじめての方へ</a></li>
-            <li><a href="#">知っておきたいこと</a></li>
+            <li><a href="#home">ホーム</a></li>
+            <li><a href="#features">特徴</a></li>
+            <li><a href="#join">参加方法</a></li>
         </ul>
     </nav>
     <main>
-        <h2>すてらサーバーへようこそ！</h2>
+        <h2>サーバーの特徴と参加方法</h2>
         <div class="content">
-            <section class="section">
-                <h3>すてらサーバーの特徴</h3>
-                <p>すてらサーバーは、友好的で楽しい環境を提供し、Minecraftの世界で特別な体験をしていただけます。以下の魅力が満載です：</p>
+            <div class="features">
+                <h3>サーバーの特徴</h3>
                 <ul class="features-list">
-                    <li>✨ フレンドリーなコミュニティ：誰でも歓迎します！</li>
+                    <li>✨ 友達と一緒に楽しむカジュアルな雰囲気</li>
                     <li>🌍 定期的なイベントやアクティビティ：仲間と楽しもう！</li>
                     <li>🏰 多様なゲームモードとカスタムコンテンツ：あなたの冒険をサポート！</li>
                     <li>🔒 安全なプレイ環境：安心して遊べる！</li>
                 </ul>
-            </section>
-            <section class="section">
+            </div>
+            <div class="method">
                 <h3>参加方法</h3>
                 <div class="method-card">
                     <div class="method-title">Java版の参加方法</div>
@@ -259,7 +274,7 @@
                     <div class="method-step"><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</div>
                     <div class="method-step">サーバーを選択し、「参加」をクリック！</div>
                 </div>
-            </section>
+            </div>
         </div>
     </main>
     <footer>
