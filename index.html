@@ -91,18 +91,17 @@
             border-radius: 20px;
             position: relative;
             overflow: hidden;
-            display: flex; /* フレックスボックスを利用 */
-            flex-direction: row; /* 水平方向に配置 */
-            justify-content: space-between; /* 間隔を空ける */
         }
         .features, .method {
-            width: 48%; /* 各セクションの幅を48%に設定 */
             padding: 20px;
-            margin: 10px;
+            margin: 10px 0;
             border-radius: 15px;
             background: #e8f5e9;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             animation: fadeInUp 1s forwards;
+            opacity: 0; /* 初期状態で非表示 */
+            transform: translateY(20px); /* 初期位置を下に設定 */
+            animation-fill-mode: forwards; /* アニメーション終了後も状態を保持 */
         }
         @keyframes fadeInUp {
             from { opacity: 0; transform: translateY(20px); }
@@ -114,6 +113,9 @@
             font-family: 'Potta One', cursive;
             margin-bottom: 25px;
             animation: popIn 0.6s forwards;
+            opacity: 0; /* 初期状態で非表示 */
+            transform: translateY(20px); /* 初期位置を下に設定 */
+            animation-delay: 0.2s; /* アニメーションの遅延 */
         }
         @keyframes popIn {
             0% { transform: scale(0.8); opacity: 0; }
@@ -141,7 +143,7 @@
             font-size: 1.6em;
             margin: 15px 0;
             animation: fadeIn 1.5s forwards;
-            opacity: 0;
+            opacity: 0; /* 初期状態で非表示 */
             transform: translateY(10px);
             animation-delay: 0.7s;
             animation-fill-mode: forwards;
@@ -157,6 +159,9 @@
             position: relative;
             overflow: hidden;
             animation: slideIn 1s forwards;
+            opacity: 0; /* 初期状態で非表示 */
+            transform: translateY(50px); /* 初期位置を下に設定 */
+            animation-fill-mode: forwards; /* アニメーション終了後も状態を保持 */
         }
         @keyframes slideIn {
             from { opacity: 0; transform: translateY(50px); }
@@ -168,6 +173,10 @@
             font-weight: bold;
             margin-bottom: 15px;
             text-decoration: underline;
+            animation: fadeIn 1.5s forwards; /* 新しいアニメーション追加 */
+            opacity: 0; /* 初期状態で非表示 */
+            animation-delay: 0.5s; /* アニメーションの遅延 */
+            animation-fill-mode: forwards; /* アニメーション終了後も状態を保持 */
         }
         .method-step {
             font-size: 1.4em;
@@ -179,51 +188,25 @@
             animation-delay: 0.5s; /* アニメーションの遅延 */
             animation-fill-mode: forwards; /* アニメーション終了後も状態を保持 */
         }
-        .method-step::before {
-            content: '✔️';
-            position: absolute;
-            left: 0;
-            top: 0;
-            font-size: 1.5em;
-        }
         footer {
-            background-color: #8bc34a;
+            background-color: #558b2f;
             color: #fff;
             text-align: center;
-            padding: 35px 0;
-            font-size: 0.9em;
-            border-top: 5px solid #7cb342;
+            padding: 20px 0;
             position: relative;
-        }
-        footer p {
-            margin: 0;
-        }
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-                align-items: center;
-            }
-            nav ul li {
-                margin: 10px 0;
-            }
-            main {
-                flex-direction: column; /* 縦に配置 */
-                height: auto; /* 自動調整 */
-            }
-            .features, .method {
-                width: 100%; /* 幅を100%に設定 */
-            }
+            z-index: 10;
+            border-top: 3px solid #33691e;
+            font-size: 1.2em;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>すてら</h1>
-        <p>ほのぼのとしたMinecraftの世界へようこそ！</p>
+        <p>ほのぼのマイクラサーバーへようこそ！</p>
     </header>
     <nav>
         <ul>
-            <li><a href="#home">ホーム</a></li>
             <li><a href="#features">特徴</a></li>
             <li><a href="#join">参加方法</a></li>
         </ul>
