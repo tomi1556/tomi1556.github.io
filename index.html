@@ -18,7 +18,7 @@
         header {
             background-color: #8bc34a;
             color: #fff;
-            padding: 100px 0;
+            padding: 80px 0;
             text-align: center;
             font-family: 'Potta One', cursive;
             position: relative;
@@ -32,19 +32,29 @@
             width: 100%;
             height: 100%;
             background: url('https://example.com/nature_background.png') no-repeat center / cover;
-            opacity: 0.3;
+            opacity: 0.4;
             z-index: -1;
         }
         header h1 {
             margin: 0;
-            font-size: 4em;
+            font-size: 4.5em;
             color: #fff;
             text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+            animation: bounce 1s infinite alternate;
         }
         header p {
-            font-size: 1.5em;
+            font-size: 1.8em;
             margin-top: 20px;
             color: #fff;
+            animation: fadeIn 1.5s ease-in;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
         nav {
             background-color: #fff;
@@ -52,6 +62,7 @@
             text-align: center;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
+            border-radius: 15px;
         }
         nav ul {
             list-style: none;
@@ -73,10 +84,12 @@
             border: 2px solid #558b2f;
             border-radius: 25px;
             transition: all 0.3s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         nav ul li a:hover {
             background-color: #558b2f;
             color: #fff;
+            transform: scale(1.05);
         }
         main {
             padding: 60px 20px;
@@ -86,12 +99,19 @@
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
             text-align: center;
+            position: relative;
+            overflow: hidden;
         }
         main h2 {
-            font-size: 2.8em;
+            font-size: 3.2em;
             margin-bottom: 40px;
             color: #558b2f;
             font-family: 'Potta One', cursive;
+            animation: fadeInUp 1s forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         .content {
             margin-top: 30px;
@@ -114,10 +134,15 @@
             }
         }
         .section h3 {
-            font-size: 2.2em;
+            font-size: 2.5em;
             color: #33691e;
             font-family: 'Potta One', cursive;
             margin-bottom: 25px;
+            animation: popIn 0.6s forwards;
+        }
+        @keyframes popIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
         }
         .section p {
             font-size: 1.5em;
@@ -125,6 +150,23 @@
             margin: 0 auto;
             max-width: 850px;
             color: #555;
+            animation: fadeIn 1s forwards;
+        }
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            text-align: left;
+            display: inline-block;
+        }
+        .features-list li {
+            font-size: 1.5em;
+            margin: 15px 0;
+            animation: fadeIn 1.5s forwards;
+            opacity: 0;
+            transform: translateY(10px);
+            animation-delay: 0.7s;
+            animation-fill-mode: forwards;
         }
         .method-card {
             background-color: #e8f5e9; /* 薄い緑 */
@@ -136,10 +178,17 @@
             transition: transform 0.3s, box-shadow 0.3s;
             position: relative;
             overflow: hidden;
+            animation: slideIn 1s forwards;
         }
-        .method-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         .method-title {
             font-size: 1.8em;
@@ -178,6 +227,9 @@
             nav ul li {
                 margin: 10px 0;
             }
+            main h2 {
+                font-size: 2.8em;
+            }
         }
     </style>
 </head>
@@ -190,7 +242,7 @@
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">はじめての方へ</a></li>
-            <li><a href="#">知っておきたい</a></li>
+            <li><a href="#">知っておきたいこと</a></li>
         </ul>
     </nav>
     <main>
@@ -198,23 +250,21 @@
         <div class="content">
             <section class="section">
                 <h3>すてらサーバーの特徴</h3>
-                <p>すてらサーバーは、誰もが楽しめる、居心地の良いMinecraftの世界です！</p>
-                <p>私たちのサーバーでは、次のような楽しい要素が満載です：</p>
+                <p>すてらサーバーは、誰もが楽しめる、居心地の良いMinecraftの世界を提供します。以下のような特徴があります：</p>
                 <ul class="features-list">
-                    <li>🏰 <strong>クリエイティブな建築:</strong> 自由に建築を楽しめる環境を提供しています。</li>
-                    <li>🌍 <strong>広大なサバイバルマップ:</strong> 冒険心をくすぐる広いマップが待っています！</li>
-                    <li>🎉 <strong>楽しいイベント:</strong> 定期的に行われるイベントで仲間と一緒に盛り上がりましょう。</li>
-                    <li>🛡️ <strong>安心のセキュリティ:</strong> 充実したセキュリティ対策で、みんなが安心して楽しめます。</li>
-                    <li>🌟 <strong>フレンドリーなコミュニティ:</strong> 新しい仲間と出会えるチャンスがたくさんあります。</li>
+                    <li>✨ フレンドリーなコミュニティ</li>
+                    <li>🌍 定期的なイベントやアクティビティ</li>
+                    <li>🏰 多様なゲームモードとカスタムコンテンツ</li>
+                    <li>🔒 安全なプレイ環境</li>
                 </ul>
             </section>
             <section class="section">
-                <h3>サーバー参加方法</h3>
-                <p>すてらサーバーへの参加はとても簡単です！以下の手順で参加できます：</p>
+                <h3>参加方法</h3>
                 <div class="method-card">
                     <div class="method-title">Java版の参加方法</div>
-                    <div class="method-step">Minecraftを起動し、マルチプレイヤーを選択します。</div>
-                    <div class="method-step">「サーバー追加」をクリックし、以下の情報を入力します：</div>
+                    <div class="method-step">Minecraftを起動し、「マルチプレイヤー」を選択します。</div>
+                    <div class="method-step">「サーバーを追加」をクリックします。</div>
+                    <div class="method-step">以下の情報を入力します：</div>
                     <div class="method-step"><strong>サーバー名:</strong> すてら</div>
                     <div class="method-step"><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</div>
                     <div class="method-step">サーバーを選択し、「参加」をクリック！</div>
