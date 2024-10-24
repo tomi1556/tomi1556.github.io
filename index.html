@@ -148,10 +148,14 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: background-color 0.3s, transform 0.2s; /* アニメーション追加 */
         }
         .copy-button:hover {
             background-color: #039be5; /* ホバー時の色 */
+            transform: scale(1.1); /* ホバー時に少し拡大 */
+        }
+        .copy-success {
+            color: #4caf50; /* 成功時の色 */
         }
         footer {
             background-color: #8bc34a;
@@ -232,6 +236,9 @@
                     <p>アドレス: <strong id="bedrockAddress">example.bedrock.server:19132</strong></p>
                     <button class="copy-button" onclick="copyToClipboard('example.bedrock.server:19132', this)">コピー</button>
                 </div>
+                <div class="port-container">
+                    <p>ポート: <strong id="bedrockPort">19132</strong></p>
+                </div>
             </div>
         </div>
     </main>
@@ -241,9 +248,11 @@
     <script>
         function copyToClipboard(text, button) {
             navigator.clipboard.writeText(text).then(() => {
-                button.textContent = 'コピー✅️'; // ボタンの文字を変更
+                button.textContent = 'コピー済✅️'; // ボタンの文字を変更
+                button.classList.add('copy-success'); // 成功時のクラス追加
                 setTimeout(() => {
                     button.textContent = 'コピー'; // 元に戻す
+                    button.classList.remove('copy-success'); // クラスを削除
                 }, 3000);
             }, (err) => {
                 button.textContent = 'コピー❌️'; // ボタンの文字を変更
