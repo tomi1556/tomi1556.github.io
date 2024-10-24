@@ -11,32 +11,40 @@
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #f0f8ff;
+            background-color: #f0f8ff; /* 背景を柔らかい色に変更 */
             color: #333;
             line-height: 1.8;
         }
         header {
-            background-color: #66bb6a; /* 濃い緑 */
+            background-color: #8bc34a;
             color: #fff;
-            padding: 80px 20px; /* 上下のパディングを調整 */
+            padding: 100px 0;
             text-align: center;
             font-family: 'Potta One', cursive;
             position: relative;
             overflow: hidden;
         }
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://example.com/nature_background.png') no-repeat center / cover;
+            opacity: 0.3;
+            z-index: -1;
+        }
         header h1 {
             margin: 0;
-            font-size: 4.5em;
+            font-size: 4em;
             color: #fff;
             text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
-            animation: slideDown 0.5s ease forwards; /* タイトルのスライドダウンアニメーション */
         }
         header p {
             font-size: 1.5em;
-            margin-top: 10px;
+            margin-top: 20px;
             color: #fff;
-            opacity: 0; /* 初期状態を透明に */
-            animation: fadeIn 0.8s ease forwards 0.5s; /* 説明のフェードインアニメーション */
         }
         nav {
             background-color: #fff;
@@ -77,50 +85,53 @@
             background-color: #fff;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
-            text-align: left; /* 左揃えに変更 */
+            text-align: center;
         }
         main h2 {
             font-size: 2.8em;
             margin-bottom: 40px;
             color: #558b2f;
             font-family: 'Potta One', cursive;
-            animation: fadeIn 1s ease forwards; /* アニメーション追加 */
-            text-align: center; /* タイトルは中央揃え */
         }
         .content {
             margin-top: 30px;
         }
         .section {
             margin-bottom: 60px;
-            padding: 20px; /* セクションにパディングを追加 */
-            border-radius: 15px;
-            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
-            background-color: #ffffff; /* 背景色を白に設定 */
-            transition: transform 0.3s ease, box-shadow 0.3s ease; /* ホバー効果用 */
-            opacity: 0; /* 初期状態を透明に */
-            transform: translateY(30px); /* 初期位置を下に設定 */
-            animation: fadeInUp 0.6s forwards; /* スライドアップアニメーション追加 */
-            max-width: 800px; /* セクションの最大幅を設定 */
-            margin: 0 auto; /* 中央に配置 */
-        }
-        .section:hover {
-            transform: translateY(-5px); /* ホバー時のアニメーション */
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
         .section h3 {
             font-size: 2.2em;
             color: #33691e;
             font-family: 'Potta One', cursive;
-            margin-bottom: 15px; /* マージン調整 */
+            margin-bottom: 25px;
         }
         .section p {
             font-size: 1.5em;
             line-height: 2.2;
             margin: 0 auto;
+            max-width: 850px;
             color: #555;
         }
+        .features-list {
+            list-style: none;
+            padding: 0;
+            text-align: left; /* 左寄せにする */
+            margin: 20px auto; /* 上下のマージンを追加 */
+            max-width: 800px; /* 幅を指定 */
+        }
+        .features-list li {
+            font-size: 1.4em;
+            margin: 10px 0; /* 各要素の間にスペースを追加 */
+            padding: 10px;
+            background-color: rgba(139, 195, 74, 0.1); /* 薄い緑の背景 */
+            border-radius: 8px; /* 角を丸く */
+            transition: background-color 0.3s;
+        }
+        .features-list li:hover {
+            background-color: rgba(139, 195, 74, 0.2); /* ホバー時の色変更 */
+        }
         footer {
-            background-color: #66bb6a; /* 濃い緑 */
+            background-color: #8bc34a;
             color: #fff;
             text-align: center;
             padding: 35px 0;
@@ -130,42 +141,28 @@
         footer p {
             margin: 0;
         }
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-        @keyframes slideDown {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
             }
             nav ul li {
                 margin: 10px 0;
+            }
+        }
+        .section {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeUp 1.5s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        @keyframes fadeUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
             }
         }
     </style>
@@ -179,37 +176,34 @@
         <ul>
             <li><a href="#">Home</a></li>
             <li><a href="#">はじめての方へ</a></li>
-            <li><a href="#">知っておきたいこと</a></li>
+            <li><a href="#">知っておきたい</a></li>
         </ul>
     </nav>
     <main>
         <h2>すてらサーバーへようこそ！</h2>
         <div class="content">
             <section class="section">
-                <h3>すてらサーバーってなぁに？</h3>
-                <p>すてらサーバーはMinecraftサーバーです。</p>
-                <p>現実でいろいろ疲れやストレスなどで大変だろうとは思いますが、</p>
-                <p>癒やしや楽しいを提供する心地の良い居場所を作ることを目標としたサーバーです。</p>
+                <h3>すてらサーバーの特徴</h3>
+                <p>すてらサーバーは、誰もが楽しめる、居心地の良いMinecraftの世界です！</p>
+                <p>私たちのサーバーでは、次のような楽しい要素が満載です：</p>
+                <ul class="features-list">
+                    <li>🏰 <strong>クリエイティブな建築:</strong> 自由に建築を楽しめる環境を提供しています。</li>
+                    <li>🌍 <strong>広大なサバイバルマップ:</strong> 冒険心をくすぐる広いマップが待っています！</li>
+                    <li>🎉 <strong>楽しいイベント:</strong> 定期的に行われるイベントで仲間と一緒に盛り上がりましょう。</li>
+                    <li>🛡️ <strong>安心のセキュリティ:</strong> 充実したセキュリティ対策で、みんなが安心して楽しめます。</li>
+                    <li>🌟 <strong>フレンドリーなコミュニティ:</strong> 新しい仲間と出会えるチャンスがたくさんあります。</li>
+                </ul>
             </section>
             <section class="section">
-                <h3>参加方法 (Java版)</h3>
-                <p>1. Minecraftを起動します。</p>
-                <p>2. マルチプレイヤーを選択します。</p>
-                <p>3. サーバー追加を選択し、IPアドレス「123.45.67.89」を入力します。</p>
-                <p>4. サーバーに接続をクリックして、すてらの世界に飛び込みましょう！</p>
-            </section>
-            <section class="section">
-                <h3>参加方法 (統合版)</h3>
-                <p>1. Minecraftを起動します。</p>
-                <p>2. 友達と遊ぶを選択します。</p>
-                <p>3. サーバーに接続を選択し、IPアドレス「123.45.67.89」を入力します。</p>
-                <p>4. サーバーに接続をクリックして、すてらの世界に飛び込みましょう！</p>
-            </section>
-        </div>
-    </main>
+                <h3>サーバー参加方法</h3>
+                <p>すてらサーバーへの参加はとても簡単です！以下の手順で参加できます：</p>
+                <h4>Java版の参加方法</h4>
+                <p>1. Minecraftを起動し、マルチプレイヤーを選択します。</p>
+                <p>2. 「サーバー追加」をクリックし、以下の情報を入力します：</p>
+                <p><strong>サーバー名:</strong> すてら</p>
+                <p><strong>サーバーアドレス:</strong> (ここにサーバーのIPを入力)</p>
+                <p>3. サーバーを選択し、「接続」をクリックして参加！</p>
 
-    <footer>
-        <p>&copy; 2024 すてら</p>
-    </footer>
-</body>
-</html>
+                <h4>統合版の参加方法</h4>
+                <p>1. Minecraftを起動し、「プレイ」を選択します。</p>
+                <p>2. 「サーバー」タブを開き、「サーバー
