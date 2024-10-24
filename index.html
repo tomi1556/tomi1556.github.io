@@ -93,72 +93,61 @@
             color: #558b2f;
             font-family: 'Potta One', cursive;
         }
-        .features {
-            margin-bottom: 60px;
+        .content {
+            margin-top: 30px;
         }
-        .features h3 {
+        .info {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            margin: 0 20px;
+        }
+        .info .features, .info .join {
+            flex: 1;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 15px;
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
+        }
+        .info h3 {
             font-size: 2.2em;
             color: #33691e;
             font-family: 'Potta One', cursive;
             margin-bottom: 25px;
         }
-        .features p {
+        .info p {
             font-size: 1.5em;
             line-height: 2.2;
+            margin: 0;
             color: #555;
-            max-width: 600px;
-            margin: 0 auto;
         }
-        .features-list {
-            list-style-type: disc;
-            margin-left: 20px;
-            text-align: left;
-        }
-        .method {
+        .address {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 40px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
         }
-        .method-card {
-            width: 45%;
-            margin: 10px;
-            background-color: #e8f5e9;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            position: relative; /* positionをrelativeに設定 */
+        .address input {
+            padding: 10px;
+            font-size: 1.2em;
+            border: 2px solid #558b2f;
+            border-radius: 10px;
+            margin-right: 10px;
         }
-        .method-card:hover {
-            transform: scale(1.05);
-        }
-        .method-title {
-            font-size: 1.8em;
-            color: #558b2f;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-        .copy-button {
-            display: inline-block;
-            margin-left: 10px;
+        .address button {
             padding: 10px 15px;
-            background-color: #03a9f4; /* 水色に変更 */
-            color: #fff;
+            font-size: 1.2em;
+            background-color: #81d4fa; /* 水色 */
             border: none;
-            border-radius: 5px;
+            border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s; /* アニメーション追加 */
+            transition: background-color 0.3s ease;
         }
-        .copy-button:hover {
-            background-color: #039be5; /* ホバー時の色 */
-            transform: scale(1.1); /* ホバー時に少し拡大 */
+        .address button.copied {
+            background-color: #66bb6a; /* 緑色 */
         }
-        .copy-success {
-            background-color: #4caf50; /* 成功時の色 */
-        }
-        .copy-fail {
-            background-color: #f44336; /* 失敗時の色 */
+        .address button.error {
+            background-color: #ef5350; /* 赤色 */
         }
         footer {
             background-color: #8bc34a;
@@ -178,22 +167,10 @@
             nav ul li {
                 margin: 10px 0;
             }
-            .method {
+            .info {
                 flex-direction: column;
                 align-items: center;
             }
-            .method-card {
-                width: 90%;
-            }
-        }
-        .address-container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-top: 10px; /* 上部の余白を追加 */
-        }
-        .address-container p {
-            margin: 0; /* p要素の余白を削除 */
         }
     </style>
 </head>
@@ -212,66 +189,79 @@
     </nav>
     <main>
         <h2>すてらサーバーへようこそ！</h2>
-        <div class="features">
-            <h3>サーバーの特徴</h3>
-            <p>『すてら』のサーバーは、以下のような特徴を持っています：</p>
-            <ul class="features-list">
-                <li>初心者から上級者まで楽しめる環境</li>
-                <li>プレイヤー同士の助け合いを大切に</li>
-                <li>定期的なイベントやコンテスト</li>
-                <li>温かみのあるコミュニティ</li>
-                <li>安全で安心なプレイ環境</li>
-            </ul>
-        </div>
-        <div class="method">
-            <div class="method-card">
-                <p class="method-title">Java版の参加方法</p>
-                <p>1. Minecraftを起動し、「マルチプレイヤー」を選択。</p>
-                <p>2. サーバーを追加して、IPアドレスを入力。</p>
-                <p>3. 接続をクリックして、サーバーに入ります。</p>
-                <div class="address-container">
-                    <p>アドレス: <strong id="javaAddress">example.java.server</strong>:<strong>25565</strong></p>
-                    <button class="copy-button" onclick="copyToClipboard('example.java.server:25565', this)">コピー</button>
+        <div class="content">
+            <div class="info">
+                <div class="features">
+                    <h3>サーバーの特徴</h3>
+                    <p>楽しい仲間との交流</p>
+                    <p>快適なプレイ環境</p>
+                    <p>多様なゲームモード</p>
                 </div>
-            </div>
-            <div class="method-card">
-                <p class="method-title">統合版の参加方法</p>
-                <p>1. Minecraftを起動し、「サーバー」を選択。</p>
-                <p>2. サーバーを追加して、アドレスを入力。</p>
-                <p>3. 接続をクリックして、サーバーに入ります。</p>
-                <div class="address-container">
-                    <p>アドレス: <strong id="bedrockAddress">example.bedrock.server</strong></p>
-                    <button class="copy-button" onclick="copyToClipboard('example.bedrock.server', this)">コピー</button>
-                </div>
-                <div class="address-container">
-                    <p>ポート: <strong>19132</strong></p>
+                <div class="join">
+                    <h3>参加方法</h3>
+                    <div class="address">
+                        <input type="text" id="javaAddress" value="your.java.server" readonly>
+                        <button id="copyJavaButton">コピー</button>
+                    </div>
+                    <div class="address">
+                        <input type="text" id="javaPort" value="25565" readonly>
+                        <button id="copyJavaPortButton">コピー</button>
+                    </div>
+                    <div class="address">
+                        <input type="text" id="bedrockAddress" value="your.bedrock.server" readonly>
+                        <button id="copyBedrockButton">コピー</button>
+                    </div>
+                    <div class="address">
+                        <input type="text" id="bedrockPort" value="19132" readonly>
+                        <button id="copyBedrockPortButton">コピー</button>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
+
     <footer>
-        <p>© 2024 すてら. All Rights Reserved.</p>
+        <p>&copy; 2024 すてら</p>
     </footer>
+
     <script>
-        function copyToClipboard(text, button) {
+        const copyToClipboard = (text, button) => {
             navigator.clipboard.writeText(text).then(() => {
-                button.textContent = 'コピー済'; // ボタンの文字を変更
-                button.classList.add('copy-success'); // 成功時のクラス追加
-                button.classList.remove('copy-fail'); // 失敗時のクラス削除
+                button.innerText = "コピー済";
+                button.classList.add('copied');
                 setTimeout(() => {
-                    button.textContent = 'コピー'; // 元に戻す
-                    button.classList.remove('copy-success'); // クラスを削除
-                }, 3000);
-            }, (err) => {
-                button.textContent = 'コピー不可'; // ボタンの文字を変更
-                button.classList.add('copy-fail'); // 失敗時のクラス追加
+                    button.innerText = "コピー";
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                button.innerText = "コピー不可";
+                button.classList.add('error');
                 setTimeout(() => {
-                    button.textContent = 'コピー'; // 元に戻す
-                    button.classList.remove('copy-fail'); // クラスを削除
-                }, 3000);
-                console.error('コピーに失敗しました:', err);
+                    button.innerText = "コピー";
+                    button.classList.remove('error');
+                }, 2000);
             });
-        }
+        };
+
+        document.getElementById("copyJavaButton").onclick = function() {
+            const javaAddress = document.getElementById("javaAddress").value;
+            copyToClipboard(javaAddress, this);
+        };
+
+        document.getElementById("copyJavaPortButton").onclick = function() {
+            const javaPort = document.getElementById("javaPort").value;
+            copyToClipboard(javaPort, this);
+        };
+
+        document.getElementById("copyBedrockButton").onclick = function() {
+            const bedrockAddress = document.getElementById("bedrockAddress").value;
+            copyToClipboard(bedrockAddress, this);
+        };
+
+        document.getElementById("copyBedrockPortButton").onclick = function() {
+            const bedrockPort = document.getElementById("bedrockPort").value;
+            copyToClipboard(bedrockPort, this);
+        };
     </script>
 </body>
 </html>
