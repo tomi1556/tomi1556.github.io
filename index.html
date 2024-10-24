@@ -143,7 +143,7 @@
             display: inline-block;
             margin-left: 10px;
             padding: 10px 15px;
-            background-color: #558b2f;
+            background-color: #03a9f4; /* 水色に変更 */
             color: #fff;
             border: none;
             border-radius: 5px;
@@ -151,13 +151,7 @@
             transition: background-color 0.3s;
         }
         .copy-button:hover {
-            background-color: #4e7d2f;
-        }
-        .copy-confirmation {
-            margin-left: 10px;
-            color: #4caf50;
-            font-weight: bold;
-            display: none; /* 初期状態では非表示 */
+            background-color: #039be5; /* ホバー時の色 */
         }
         footer {
             background-color: #8bc34a;
@@ -184,6 +178,11 @@
             .method-card {
                 width: 90%;
             }
+        }
+        .address-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
     </style>
 </head>
@@ -219,19 +218,20 @@
                 <p>1. Minecraftを起動し、「マルチプレイヤー」を選択。</p>
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
-                <p>アドレス: <strong id="javaAddress">example.java.server:25565</strong></p>
-                <button class="copy-button" onclick="copyToClipboard('example.java.server:25565', this)">コピー</button>
-                <span class="copy-confirmation"></span>
+                <div class="address-container">
+                    <p>アドレス: <strong id="javaAddress">example.java.server:25565</strong></p>
+                    <button class="copy-button" onclick="copyToClipboard('example.java.server:25565', this)">コピー</button>
+                </div>
             </div>
             <div class="method-card">
                 <p class="method-title">統合版の参加方法</p>
                 <p>1. Minecraftを起動し、「サーバー」を選択。</p>
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
-                <p>アドレス: <strong id="bedrockAddress">example.bedrock.server</strong></p>
-                <button class="copy-button" onclick="copyToClipboard('example.bedrock.server', this)">コピー</button>
-                <span class="copy-confirmation"></span>
-                <p>ポート: <strong>19132</strong></p>
+                <div class="address-container">
+                    <p>アドレス: <strong id="bedrockAddress">example.bedrock.server:19132</strong></p>
+                    <button class="copy-button" onclick="copyToClipboard('example.bedrock.server:19132', this)">コピー</button>
+                </div>
             </div>
         </div>
     </main>
@@ -241,18 +241,14 @@
     <script>
         function copyToClipboard(text, button) {
             navigator.clipboard.writeText(text).then(() => {
-                const confirmation = button.nextElementSibling;
-                confirmation.textContent = 'コピー✅️';
-                confirmation.style.display = 'inline'; // 表示する
+                button.textContent = 'コピー✅️'; // ボタンの文字を変更
                 setTimeout(() => {
-                    confirmation.style.display = 'none'; // 3秒後に非表示にする
+                    button.textContent = 'コピー'; // 元に戻す
                 }, 3000);
             }, (err) => {
-                const confirmation = button.nextElementSibling;
-                confirmation.textContent = 'コピー❌️';
-                confirmation.style.display = 'inline'; // 表示する
+                button.textContent = 'コピー❌️'; // ボタンの文字を変更
                 setTimeout(() => {
-                    confirmation.style.display = 'none'; // 3秒後に非表示にする
+                    button.textContent = 'コピー'; // 元に戻す
                 }, 3000);
                 console.error('コピーに失敗しました:', err);
             });
