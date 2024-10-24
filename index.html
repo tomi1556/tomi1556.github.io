@@ -16,7 +16,7 @@
             line-height: 1.8;
         }
         header {
-            background-color: #66bb6a; /* 濃い緑に変更 */
+            background-color: #66bb6a; /* 濃い緑 */
             color: #fff;
             padding: 80px 20px; /* 上下のパディングを調整 */
             text-align: center;
@@ -29,11 +29,14 @@
             font-size: 4.5em;
             color: #fff;
             text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+            animation: slideDown 0.5s ease forwards; /* タイトルのスライドダウンアニメーション */
         }
         header p {
             font-size: 1.5em;
             margin-top: 10px;
             color: #fff;
+            opacity: 0; /* 初期状態を透明に */
+            animation: fadeIn 0.8s ease forwards 0.5s; /* 説明のフェードインアニメーション */
         }
         nav {
             background-color: #fff;
@@ -74,7 +77,7 @@
             background-color: #fff;
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
-            text-align: center;
+            text-align: left; /* 左揃えに変更 */
         }
         main h2 {
             font-size: 2.8em;
@@ -82,6 +85,7 @@
             color: #558b2f;
             font-family: 'Potta One', cursive;
             animation: fadeIn 1s ease forwards; /* アニメーション追加 */
+            text-align: center; /* タイトルは中央揃え */
         }
         .content {
             margin-top: 30px;
@@ -93,9 +97,11 @@
             box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
             background-color: #ffffff; /* 背景色を白に設定 */
             transition: transform 0.3s ease, box-shadow 0.3s ease; /* ホバー効果用 */
-            opacity: 0;
-            transform: translateY(30px);
-            animation: slideIn 0.5s forwards; /* スライドインアニメーション追加 */
+            opacity: 0; /* 初期状態を透明に */
+            transform: translateY(30px); /* 初期位置を下に設定 */
+            animation: fadeInUp 0.6s forwards; /* スライドアップアニメーション追加 */
+            max-width: 800px; /* セクションの最大幅を設定 */
+            margin: 0 auto; /* 中央に配置 */
         }
         .section:hover {
             transform: translateY(-5px); /* ホバー時のアニメーション */
@@ -111,11 +117,10 @@
             font-size: 1.5em;
             line-height: 2.2;
             margin: 0 auto;
-            max-width: 850px;
             color: #555;
         }
         footer {
-            background-color: #66bb6a; /* 濃い緑に変更 */
+            background-color: #66bb6a; /* 濃い緑 */
             color: #fff;
             text-align: center;
             padding: 35px 0;
@@ -135,7 +140,7 @@
                 transform: translateY(0);
             }
         }
-        @keyframes slideIn {
+        @keyframes fadeInUp {
             from {
                 opacity: 0;
                 transform: translateY(30px);
@@ -143,6 +148,16 @@
             to {
                 opacity: 1;
                 transform: translateY(0);
+            }
+        }
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
             }
         }
         @media (max-width: 768px) {
