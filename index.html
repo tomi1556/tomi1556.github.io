@@ -199,7 +199,7 @@
         }
         .address-row {
             display: flex;
-            align-items: center;
+            align-items: flex-start; /* 上揃えにする */
             justify-content: center;
         }
         .address-row p {
@@ -242,42 +242,49 @@
                 <div class="address-container">
                     <div class="address-row">
                         <p>アドレス: <strong id="javaAddress">stella.xgames.jp</strong></p>
-                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
+                        <button class="copy-button" onclick="copyToClipboard('javaAddress')">コピー</button>
                     </div>
+                    <p>ポート: <strong>25565</strong></p>
                 </div>
             </div>
             <div class="method-card">
                 <p class="method-title">統合版の参加方法</p>
-                <p>1. Minecraftを起動し、「プレイ」を選択。</p>
-                <p>2. サーバーを追加して、IPアドレスとポートを入力。</p>
+                <p>1. Minecraftを起動し、「マルチプレイヤー」を選択。</p>
+                <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
                 <div class="address-container">
                     <div class="address-row">
                         <p>アドレス: <strong id="bedrockAddress">stella.xgames.jp</strong></p>
-                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
-                    </div>    
-                        <p> ポート: <strong>25565</strong></p>
+                        <button class="copy-button" onclick="copyToClipboard('bedrockAddress')">コピー</button>
+                    </div>
+                    <p>ポート: <strong>25565</strong></p>
                 </div>
             </div>
         </div>
     </main>
     <footer>
-        <p>© 2024 すてら. All rights reserved.</p>
+        <p>&copy; 2024 すてら. All rights reserved.</p>
     </footer>
     <script>
-        function copyToClipboard(address, button) {
-            const el = document.createElement('textarea');
-            el.value = address;
-            document.body.appendChild(el);
-            el.select();
-            document.execCommand('copy');
-            document.body.removeChild(el);
-            button.classList.add('copy-success');
-            button.innerText = '完了！';
-            setTimeout(() => {
-                button.classList.remove('copy-success');
-                button.innerText = 'コピー';
-            }, 2000);
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                const button = event.target;
+                button.classList.add('copy-success');
+                button.innerText = 'コピーしました！';
+                setTimeout(() => {
+                    button.classList.remove('copy-success');
+                    button.innerText = 'コピー';
+                }, 2000);
+            }).catch(err => {
+                const button = event.target;
+                button.classList.add('copy-fail');
+                button.innerText = 'コピー失敗';
+                setTimeout(() => {
+                    button.classList.remove('copy-fail');
+                    button.innerText = 'コピー';
+                }, 2000);
+            });
         }
     </script>
 </body>
