@@ -291,14 +291,14 @@
                 const text = this.getAttribute('data-clipboard-text');
                 navigator.clipboard.writeText(text).then(() => {
                     this.classList.add('copy-success');
-                    this.textContent = 'コピーしました！';
+                    this.textContent = '成功！';
                     setTimeout(() => {
                         this.classList.remove('copy-success');
                         this.textContent = 'コピー';
                     }, 2000);
                 }).catch(() => {
                     this.classList.add('copy-fail');
-                    this.textContent = 'コピー失敗';
+                    this.textContent = 'エラー';
                     setTimeout(() => {
                         this.classList.remove('copy-fail');
                         this.textContent = 'コピー';
