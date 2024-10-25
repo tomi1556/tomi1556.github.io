@@ -206,6 +206,17 @@
         .address-row p {
             margin-right: 10px;
         }
+      /* アニメーションを追加するための新しいクラス */
+       @keyframes fadeIn {
+           from {
+              opacity: 0;
+              transform: translateY(20px);
+          }
+         to {
+               opacity: 1;
+             transform: translateY(0);
+        }
+
         .features-images {
             display: flex;
             justify-content: space-between;
