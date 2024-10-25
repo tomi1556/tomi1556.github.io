@@ -202,9 +202,6 @@
             align-items: center;
             justify-content: center;
         }
-        .address-row p {
-            margin-right: 20px; /* ポートの位置を調整 */
-        }
     </style>
 </head>
 <body>
@@ -241,21 +238,20 @@
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
                 <div class="address-container">
                     <div class="address-row">
-                        <p>アドレス: <strong id="javaAddress">stella.xgames.jp</strong></p>
+                        <p>アドレス: <strong id="javaAddress" style="font-weight: bold;">stella.xgames.jp</strong></p>
                         <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
                     </div>
-                    <p>ポート: <strong>25565</strong></p>
                 </div>
             </div>
             <div class="method-card">
                 <p class="method-title">統合版の参加方法</p>
                 <p>1. Minecraftを起動し、「プレイ」を選択。</p>
-                <p>2. 「サーバー」を選択し、新しいサーバーを追加。</p>
-                <p>3. サーバー名を設定し、IPアドレスを入力。</p>
-                <p>4. 保存して、サーバーに接続します。</p>
+                <p>2. 「サーバー」を選び、「サーバーを追加」をタップ。</p>
+                <p>3. サーバー名を入力し、IPアドレスを追加します。</p>
+                <p>4. ポートは <strong>25565</strong> を入力。</p>
                 <div class="address-container">
                     <div class="address-row">
-                        <p>アドレス: <strong id="bedrockAddress">stella.xgames.jp</strong></p>
+                        <p>アドレス: <strong id="bedrockAddress" style="font-weight: bold;">stella.xgames.jp</strong></p>
                         <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
                     </div>
                     <p>ポート: <strong>25565</strong></p>
@@ -264,24 +260,23 @@
         </div>
     </main>
     <footer>
-        <p>© 2024 すてらサーバー. All rights reserved.</p>
+        <p>© 2024 すてら. All rights reserved.</p>
     </footer>
     <script>
         function copyToClipboard(text, button) {
             navigator.clipboard.writeText(text).then(() => {
-                button.textContent = "コピーしました！";
-                button.classList.add("copy-success");
+                button.classList.add('copy-success');
+                button.textContent = 'コピーしました！';
                 setTimeout(() => {
-                    button.textContent = "コピー";
-                    button.classList.remove("copy-success");
+                    button.classList.remove('copy-success');
+                    button.textContent = 'コピー';
                 }, 2000);
             }).catch(err => {
-                console.error('コピーに失敗しました:', err);
-                button.textContent = "コピー失敗";
-                button.classList.add("copy-fail");
+                button.classList.add('copy-fail');
+                button.textContent = 'コピー失敗';
                 setTimeout(() => {
-                    button.textContent = "コピー";
-                    button.classList.remove("copy-fail");
+                    button.classList.remove('copy-fail');
+                    button.textContent = 'コピー';
                 }, 2000);
             });
         }
