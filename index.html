@@ -188,13 +188,14 @@
         }
         .address-container {
             display: flex;
+            flex-direction: column; /* 縦方向に配置 */
             align-items: center;
             justify-content: center;
             margin-top: 10px; /* 上部の余白を追加 */
         }
         .address-container p {
             margin: 0; /* p要素の余白を削除 */
-            margin-right: 10px; /* アドレスとポートの間に余白を追加 */
+            margin-bottom: 5px; /* アドレスとポートの間に余白を追加 */
         }
     </style>
 </head>
@@ -243,7 +244,7 @@
                 <div class="address-container">
                     <p>アドレス: <strong id="bedrockAddress">example.bedrock.server</strong></p>
                     <button class="copy-button" onclick="copyToClipboard('example.bedrock.server', this)">コピー</button>
-                    <p style="margin-left: 10px;">ポート: <strong id="bedrockPort">19132</strong></p>
+                    <p>ポート: <strong id="bedrockPort">19132</strong></p>
                 </div>
             </div>
         </div>
