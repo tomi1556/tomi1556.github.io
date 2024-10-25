@@ -7,6 +7,7 @@
     <title>すてら - ほのぼのマイクラサーバー</title>
     <link rel="stylesheet" href="style.css">
     <style>
+        /* フォントと基本設定 */
         @import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Nunito+Sans:wght@300;400;700&display=swap');
         body {
             margin: 0;
@@ -15,6 +16,8 @@
             color: #333;
             line-height: 1.8;
         }
+
+        /* ヘッダー */
         header {
             background-color: #8bc34a;
             color: #fff;
@@ -24,28 +27,8 @@
             position: relative;
             overflow: hidden;
         }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://s3.ap-northeast-1-ntt.wasabisys.com/ak1520d-filenow-1/files/20241025-1056_a217e5f6b7edc2bbf36b688c2d9f72f5.mp4') no-repeat center / cover;
-            opacity: 0.3;
-            z-index: -1;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 4em;
-            color: #fff;
-            text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
-        }
-        header p {
-            font-size: 1.5em;
-            margin-top: 20px;
-            color: #fff;
-        }
+
+        /* ナビゲーション */
         nav {
             background-color: #fff;
             padding: 15px;
@@ -78,6 +61,8 @@
             background-color: #558b2f;
             color: #fff;
         }
+
+        /* メインセクション */
         main {
             padding: 60px 20px;
             max-width: 1200px;
@@ -93,27 +78,31 @@
             color: #558b2f;
             font-family: 'Potta One', cursive;
         }
-        .features {
-            margin-bottom: 60px;
+
+        /* 特徴セクション */
+        .feature-grid {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin: 40px 0;
         }
-        .features h3 {
-            font-size: 2.2em;
-            color: #33691e;
-            font-family: 'Potta One', cursive;
-            margin-bottom: 25px;
+        .feature-item {
+            width: 22%;
+            text-align: center;
         }
-        .features p {
-            font-size: 1.5em;
-            line-height: 2.2;
+        .feature-item img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+        .feature-description {
+            margin-top: 15px;
+            font-size: 1.2em;
             color: #555;
-            max-width: 600px;
-            margin: 0 auto;
         }
-        .features-list {
-            list-style-type: disc;
-            margin-left: 20px;
-            text-align: left;
-        }
+
+        /* 参加方法セクション */
         .method {
             display: flex;
             justify-content: space-around;
@@ -139,6 +128,8 @@
             font-weight: bold;
             margin-bottom: 10px;
         }
+
+        /* コピーボタン */
         .copy-button {
             display: inline-block;
             margin-left: 6px;
@@ -160,6 +151,8 @@
         .copy-fail {
             background-color: #f44336;
         }
+
+        /* フッター */
         footer {
             background-color: #8bc34a;
             color: #fff;
@@ -167,43 +160,6 @@
             padding: 35px 0;
             font-size: 0.9em;
             border-top: 5px solid #7cb342;
-        }
-        footer p {
-            margin: 0;
-        }
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-            }
-            nav ul li {
-                margin: 10px 0;
-            }
-            .method {
-                flex-direction: column;
-                align-items: center;
-            }
-            .method-card {
-                width: 90%;
-            }
-        }
-        .address-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            margin-top: 10px;
-        }
-        .address-container p {
-            margin: 0;
-            margin-bottom: 5px;
-        }
-        .address-row {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .address-row p {
-            margin-right: 10px; /* ここを調整してボタンとの間隔を設定 */
         }
     </style>
 </head>
@@ -224,15 +180,26 @@
         <h2>すてらサーバーへようこそ！</h2>
         <div class="features">
             <h3>サーバーの特徴</h3>
-            <p>『すてら』のサーバーは、以下のような特徴を持っています：</p>
-            <ul class="features-list">
-                <li>初心者から上級者まで楽しめる環境</li>
-                <li>プレイヤー同士の助け合いを大切に</li>
-                <li>定期的なイベントやコンテスト</li>
-                <li>温かみのあるコミュニティ</li>
-                <li>安全で安心なプレイ環境</li>
-            </ul>
+            <div class="feature-grid">
+                <div class="feature-item">
+                    <img src="image1.jpg" alt="特徴1の画像">
+                    <p class="feature-description">初心者から上級者まで楽しめる環境</p>
+                </div>
+                <div class="feature-item">
+                    <img src="image2.jpg" alt="特徴2の画像">
+                    <p class="feature-description">プレイヤー同士の助け合いを大切に</p>
+                </div>
+                <div class="feature-item">
+                    <img src="image3.jpg" alt="特徴3の画像">
+                    <p class="feature-description">定期的なイベントやコンテスト</p>
+                </div>
+                <div class="feature-item">
+                    <img src="image4.jpg" alt="特徴4の画像">
+                    <p class="feature-description">温かみのあるコミュニティ</p>
+                </div>
+            </div>
         </div>
+
         <div class="method">
             <div class="method-card">
                 <p class="method-title">Java版の参加方法</p>
@@ -242,7 +209,7 @@
                 <div class="address-container">
                     <div class="address-row">
                         <p>アドレス: <strong id="javaAddress">stella.xgames.jp</strong></p>
-                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp',this)">コピー</button>
+                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
                     </div>
                 </div>
             </div>
@@ -254,8 +221,8 @@
                 <div class="address-container">
                     <div class="address-row">
                         <p>アドレス: <strong id="bedrockAddress">stella.xgames.jp</strong></p>
-                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp',this)">コピー</button>
-                        <span style="display: inline-block; width: 14px;"></span> <!-- ここでスペースを作る -->
+                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
+                        <span style="display: inline-block; width: 14px;"></span>
                         <p>ポート: <strong>25565</strong></p>
                     </div>
                 </div>
@@ -273,14 +240,14 @@
                 setTimeout(() => {
                     button.classList.remove('copy-success');
                     button.innerText = 'コピー';
-                }, 2000);
-            }).catch(err => {
+                }, 1500);
+            }).catch(() => {
                 button.classList.add('copy-fail');
-                button.innerText = '失敗！';
+                button.innerText = 'エラー';
                 setTimeout(() => {
                     button.classList.remove('copy-fail');
                     button.innerText = 'コピー';
-                }, 2000);
+                }, 1500);
             });
         }
     </script>
