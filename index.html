@@ -5,43 +5,106 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="自然で温かみのあるMinecraftサーバー『すてら』のウェブサイト">
     <title>すてら - ほのぼのマイクラサーバー</title>
+    <link rel="stylesheet" href="style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Nunito+Sans:wght@300;400;700&display=swap');
+        
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
             background-color: #f0f8ff;
             color: #333;
             line-height: 1.8;
+            overflow-x: hidden;
         }
+
         header {
-            background-color: #8bc34a;
+            background-color: #66bb6a;
             color: #fff;
-            padding: 100px 0;
+            padding: 80px 0;
             text-align: center;
             font-family: 'Potta One', cursive;
             position: relative;
-            animation: fadeIn 1.5s ease-in-out;
+            overflow: hidden;
         }
-        @keyframes fadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://example.com/nature_background.png') no-repeat center / cover;
+            opacity: 0.3;
+            z-index: -1;
+            animation: slideInBackground 8s ease-in-out infinite alternate;
         }
+
+        @keyframes slideInBackground {
+            from {
+                transform: translateX(-20%);
+            }
+            to {
+                transform: translateX(20%);
+            }
+        }
+
         header h1 {
             margin: 0;
             font-size: 4em;
+            color: #fff;
+            text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease-in-out;
         }
+
+        header p {
+            font-size: 1.5em;
+            margin-top: 20px;
+            color: #fff;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         nav {
             background-color: #fff;
             padding: 15px;
             text-align: center;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
-            animation: slideIn 1.5s ease-in-out;
+            animation: fadeIn 1.5s ease-in-out;
         }
-        @keyframes slideIn {
-            0% { transform: translateY(-100px); }
-            100% { transform: translateY(0); }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
+
         nav ul {
             list-style: none;
             padding: 0;
@@ -49,136 +112,195 @@
             display: flex;
             justify-content: center;
         }
+
         nav ul li {
             margin: 0 20px;
         }
+
         nav ul li a {
             text-decoration: none;
             color: #558b2f;
             font-size: 1.2em;
             font-weight: bold;
-            transition: color 0.3s ease;
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #558b2f;
+            border-radius: 25px;
+            transition: all 0.3s ease;
         }
+
         nav ul li a:hover {
-            color: #8bc34a;
+            background-color: #558b2f;
+            color: #fff;
+            animation: bounce 0.5s;
         }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
+        }
+
         main {
             padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            animation: fadeIn 2s ease-in-out;
+            background-color: #fff;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            text-align: center;
         }
-        .server-info {
-            margin-bottom: 50px;
+
+        main h2 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            color: #558b2f;
+            font-family: 'Potta One', cursive;
+            animation: fadeInScale 1s ease-in-out;
         }
-        .server-info h2 {
-            font-size: 2.5em;
-            margin-bottom: 20px;
+
+        @keyframes fadeInScale {
+            from {
+                transform: scale(0.9);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .content {
+            margin-top: 30px;
+        }
+
+        .section {
+            margin-bottom: 60px;
+        }
+
+        .section h3 {
+            font-size: 2.2em;
             color: #33691e;
+            font-family: 'Potta One', cursive;
+            margin-bottom: 25px;
+            animation: slideInLeft 1.5s ease-in-out;
         }
-        .copy-info {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-bottom: 20px;
+
+        @keyframes slideInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
-        .copy-info p {
+
+        .section p {
             font-size: 1.5em;
-            margin-right: 10px;
+            line-height: 2.2;
+            margin: 0 auto;
+            max-width: 850px;
+            color: #555;
+            animation: fadeIn 1.5s ease-in-out;
         }
-        .copy-btn {
+
+        .copy-button {
             background-color: #00bcd4;
-            color: white;
             border: none;
-            padding: 10px 15px;
-            font-size: 1em;
-            cursor: pointer;
+            padding: 10px;
             border-radius: 5px;
-            transition: background-color 0.3s ease, transform 0.3s ease;
+            color: white;
+            cursor: pointer;
+            margin-left: 10px;
+            transition: background-color 0.3s ease, transform 0.2s;
+            animation: pulse 2s infinite;
         }
-        .copy-btn:hover {
-            background-color: #0288d1;
-            transform: scale(1.05);
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
         }
-        .copy-success {
-            background-color: #4caf50 !important;
+
+        .copy-button:active {
+            transform: scale(0.95);
         }
-        .copy-error {
-            background-color: #f44336 !important;
-        }
-        .copy-btn.success {
+
+        .copy-button.success {
             background-color: #4caf50;
         }
-        .copy-btn.error {
+
+        .copy-button.error {
             background-color: #f44336;
         }
-        .copy-btn.active {
-            animation: pulse 0.6s ease-in-out;
-        }
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
-        }
+
         footer {
-            background-color: #8bc34a;
+            background-color: #66bb6a;
             color: #fff;
             text-align: center;
-            padding: 20px 0;
-            animation: fadeIn 2.5s ease-in-out;
+            padding: 35px 0;
+            font-size: 0.9em;
+            animation: fadeInUp 1s ease-in-out;
+        }
+
+        footer p {
+            margin: 0;
         }
     </style>
 </head>
 <body>
-    <header>
-        <h1>すてらサーバー</h1>
-        <p>ほのぼのとしたMinecraftの居場所</p>
-    </header>
 
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">参加方法</a></li>
-            <li><a href="#">はじめての方へ</a></li>
-            <li><a href="#">知っておきたい</a></li>
-        </ul>
-    </nav>
+<header>
+    <h1>すてら</h1>
+    <p>心地のいいMinecraftサーバーへようこそ</p>
+</header>
 
-    <main>
-        <div class="server-info">
-            <h2>サーバー情報</h2>
-            <div class="copy-info">
-                <p>アドレス: stella.xgames.jp</p>
-                <button class="copy-btn" id="copyAddressBtn">コピー</button>
-            </div>
-            <div class="copy-info">
-                <p>ポート: 25565</p>
-            </div>
-        </div>
-    </main>
+<nav>
+    <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">はじめての方へ</a></li>
+        <li><a href="#">知っておきたい</a></li>
+    </ul>
+</nav>
 
-    <footer>
-        <p>&copy; 2024 すてらサーバー</p>
-    </footer>
+<main>
+    <h2>すてらサーバーへようこそ！</h2>
+    <div class="content fade-in">
+        <section class="section">
+            <h3>参加方法</h3>
+            <p>アドレス: stella.xgames.jp</p>
+            <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
+            <p>ポート: 25565</p>
+        </section>
+    </div>
+</main>
 
-    <script>
-        const copyAddressBtn = document.getElementById('copyAddressBtn');
-        copyAddressBtn.addEventListener('click', function() {
-            const addressText = 'stella.xgames.jp';
-            navigator.clipboard.writeText(addressText).then(function() {
-                copyAddressBtn.textContent = 'コピー済';
-                copyAddressBtn.classList.add('copy-success', 'active');
-                setTimeout(() => {
-                    copyAddressBtn.classList.remove('active');
-                }, 600);
-            }).catch(function() {
-                copyAddressBtn.textContent = 'コピー不可';
-                copyAddressBtn.classList.add('copy-error', 'active');
-                setTimeout(() => {
-                    copyAddressBtn.classList.remove('active');
-                }, 600);
-            });
+<footer>
+    <p>&copy; 2024 すてら</p>
+</footer>
+
+<script>
+    function copyToClipboard(text, button) {
+        navigator.clipboard.writeText(text).then(function() {
+            button.textContent = 'コピー済';
+            button.classList.add('success');
+        }, function() {
+            button.textContent = 'コピー不可';
+            button.classList.add('error');
         });
-    </script>
+    }
+</script>
+
 </body>
 </html>
