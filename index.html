@@ -11,10 +11,9 @@
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #f0f8ff;
+            background-color: #f0f8ff; /* 背景を柔らかい色に変更 */
             color: #333;
             line-height: 1.8;
-            overflow-x: hidden; /* 横スクロールを防ぐ */
         }
         header {
             background-color: #8bc34a;
@@ -131,6 +130,7 @@
         .address label {
             margin-right: 10px;
             font-size: 1.2em;
+            color: #333;
         }
         .address input {
             padding: 10px;
@@ -138,24 +138,22 @@
             border: 2px solid #558b2f;
             border-radius: 10px;
             margin-right: 10px;
-            width: 200px; /* アドレスの幅を固定 */
+            width: 200px; /* 幅を指定 */
         }
         .address button {
             padding: 10px 15px;
             font-size: 1.2em;
-            background-color: #81d4fa;
+            background-color: #81d4fa; /* 水色 */
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            transition: background-color 0.3s ease;
         }
         .address button.copied {
-            background-color: #66bb6a;
-            transform: scale(1.1); /* ボタンの拡大アニメーション */
+            background-color: #66bb6a; /* 緑色 */
         }
         .address button.error {
-            background-color: #ef5350;
-            transform: scale(1.1); /* ボタンの拡大アニメーション */
+            background-color: #ef5350; /* 赤色 */
         }
         footer {
             background-color: #8bc34a;
@@ -208,13 +206,22 @@
                 <div class="join">
                     <h3>参加方法</h3>
                     <div class="address">
-                        <label for="serverAddress">アドレス：</label>
-                        <input type="text" id="serverAddress" value="stella.xgames.jp" readonly>
-                        <button id="copyAddressButton">コピー</button>
+                        <label for="javaAddress">アドレス:</label>
+                        <input type="text" id="javaAddress" value="your.java.server" readonly>
+                        <button id="copyJavaButton">コピー</button>
                     </div>
                     <div class="address">
-                        <label for="serverPort">ポート：</label>
-                        <input type="text" id="serverPort" value="25565" readonly>
+                        <label for="javaPort">ポート:</label>
+                        <input type="text" id="javaPort" value="25565" readonly>
+                    </div>
+                    <div class="address">
+                        <label for="bedrockAddress">アドレス:</label>
+                        <input type="text" id="bedrockAddress" value="your.bedrock.server" readonly>
+                        <button id="copyBedrockButton">コピー</button>
+                    </div>
+                    <div class="address">
+                        <label for="bedrockPort">ポート:</label>
+                        <input type="text" id="bedrockPort" value="19132" readonly>
                     </div>
                 </div>
             </div>
@@ -244,10 +251,15 @@
             });
         };
 
-        document.getElementById("copyAddressButton").onclick = function() {
-            const serverAddress = document.getElementById("serverAddress").value;
-            copyToClipboard(serverAddress, this);
-        };
+        document.getElementById("copyJavaButton").addEventListener("click", () => {
+            const address = document.getElementById("javaAddress").value;
+            copyToClipboard(address, document.getElementById("copyJavaButton"));
+        });
+
+        document.getElementById("copyBedrockButton").addEventListener("click", () => {
+            const address = document.getElementById("bedrockAddress").value;
+            copyToClipboard(address, document.getElementById("copyBedrockButton"));
+        });
     </script>
 </body>
 </html>
