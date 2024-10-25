@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="自然で温かみのあるMinecraftサーバー『すてら』のウェブサイト">
     <title>すてら - ほのぼのマイクラサーバー</title>
-    <link rel="stylesheet" href="style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Nunito+Sans:wght@300;400;700&display=swap');
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #f0f8ff; /* 背景を柔らかい色に変更 */
+            background-color: #f0f8ff;
             color: #333;
             line-height: 1.8;
         }
@@ -22,35 +21,15 @@
             text-align: center;
             font-family: 'Potta One', cursive;
             position: relative;
-            overflow: hidden;
-        }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://example.com/nature_background.png') no-repeat center / cover;
-            opacity: 0.3;
-            z-index: -1;
         }
         header h1 {
             margin: 0;
             font-size: 4em;
-            color: #fff;
-            text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
-        }
-        header p {
-            font-size: 1.5em;
-            margin-top: 20px;
-            color: #fff;
         }
         nav {
             background-color: #fff;
             padding: 15px;
             text-align: center;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
         }
         nav ul {
@@ -68,117 +47,63 @@
             color: #558b2f;
             font-size: 1.2em;
             font-weight: bold;
-            padding: 10px 20px;
-            background-color: #fff;
-            border: 2px solid #558b2f;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-        nav ul li a:hover {
-            background-color: #558b2f;
-            color: #fff;
         }
         main {
             padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            background-color: #fff;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            text-align: center;
         }
-        main h2 {
-            font-size: 2.8em;
-            margin-bottom: 40px;
-            color: #558b2f;
-            font-family: 'Potta One', cursive;
+        .server-info {
+            margin-bottom: 50px;
         }
-        .content {
-            margin-top: 30px;
-        }
-        .info {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin: 0 20px;
-        }
-        .info .features, .info .join {
-            flex: 1;
-            padding: 20px;
-            margin: 10px;
-            border-radius: 15px;
-            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
-        }
-        .info h3 {
-            font-size: 2.2em;
+        .server-info h2 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
             color: #33691e;
-            font-family: 'Potta One', cursive;
-            margin-bottom: 25px;
         }
-        .info p {
-            font-size: 1.5em;
-            line-height: 2.2;
-            margin: 0;
-            color: #555;
-        }
-        .address {
+        .copy-info {
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             margin-bottom: 20px;
         }
-        .address input {
-            padding: 10px;
-            font-size: 1.2em;
-            border: 2px solid #558b2f;
-            border-radius: 10px;
+        .copy-info p {
+            font-size: 1.5em;
             margin-right: 10px;
         }
-        .address button {
-            padding: 10px 15px;
-            font-size: 1.2em;
-            background-color: #81d4fa; /* 水色 */
+        .copy-btn {
+            background-color: #00bcd4;
+            color: white;
             border: none;
-            border-radius: 10px;
+            padding: 10px 15px;
+            font-size: 1em;
             cursor: pointer;
+            border-radius: 5px;
             transition: background-color 0.3s ease;
         }
-        .address button.copied {
-            background-color: #66bb6a; /* 緑色 */
+        .copy-btn:hover {
+            background-color: #0288d1;
         }
-        .address button.error {
-            background-color: #ef5350; /* 赤色 */
+        .copy-success {
+            background-color: #4caf50 !important;
+        }
+        .copy-error {
+            background-color: #f44336 !important;
         }
         footer {
             background-color: #8bc34a;
             color: #fff;
             text-align: center;
-            padding: 35px 0;
-            font-size: 0.9em;
-            border-top: 5px solid #7cb342;
-        }
-        footer p {
-            margin: 0;
-        }
-        @media (max-width: 768px) {
-            nav ul {
-                flex-direction: column;
-            }
-            nav ul li {
-                margin: 10px 0;
-            }
-            .info {
-                flex-direction: column;
-                align-items: center;
-            }
+            padding: 20px 0;
         }
     </style>
 </head>
 <body>
     <header>
-        <h1>すてら</h1>
-        <p>居心地のいい居場所となるようなMinecraftサーバー</p>
+        <h1>すてらサーバー</h1>
+        <p>ほのぼのとしたMinecraftの居場所</p>
     </header>
+
     <nav>
         <ul>
             <li><a href="#">Home</a></li>
@@ -187,81 +112,36 @@
             <li><a href="#">知っておきたい</a></li>
         </ul>
     </nav>
+
     <main>
-        <h2>すてらサーバーへようこそ！</h2>
-        <div class="content">
-            <div class="info">
-                <div class="features">
-                    <h3>サーバーの特徴</h3>
-                    <p>楽しい仲間との交流</p>
-                    <p>快適なプレイ環境</p>
-                    <p>多様なゲームモード</p>
-                </div>
-                <div class="join">
-                    <h3>参加方法</h3>
-                    <div class="address">
-                        <input type="text" id="javaAddress" value="your.java.server" readonly>
-                        <button id="copyJavaButton">コピー</button>
-                    </div>
-                    <div class="address">
-                        <input type="text" id="javaPort" value="25565" readonly>
-                        <button id="copyJavaPortButton">コピー</button>
-                    </div>
-                    <div class="address">
-                        <input type="text" id="bedrockAddress" value="your.bedrock.server" readonly>
-                        <button id="copyBedrockButton">コピー</button>
-                    </div>
-                    <div class="address">
-                        <input type="text" id="bedrockPort" value="19132" readonly>
-                        <button id="copyBedrockPortButton">コピー</button>
-                    </div>
-                </div>
+        <div class="server-info">
+            <h2>サーバー情報</h2>
+            <div class="copy-info">
+                <p>アドレス: stella.xgames.jp</p>
+                <button class="copy-btn" id="copyAddressBtn">コピー</button>
+            </div>
+            <div class="copy-info">
+                <p>ポート: 25565</p>
             </div>
         </div>
     </main>
 
     <footer>
-        <p>&copy; 2024 すてら</p>
+        <p>&copy; 2024 すてらサーバー</p>
     </footer>
 
     <script>
-        const copyToClipboard = (text, button) => {
-            navigator.clipboard.writeText(text).then(() => {
-                button.innerText = "コピー済";
-                button.classList.add('copied');
-                setTimeout(() => {
-                    button.innerText = "コピー";
-                    button.classList.remove('copied');
-                }, 2000);
-            }).catch(() => {
-                button.innerText = "コピー不可";
-                button.classList.add('error');
-                setTimeout(() => {
-                    button.innerText = "コピー";
-                    button.classList.remove('error');
-                }, 2000);
+        const copyAddressBtn = document.getElementById('copyAddressBtn');
+        copyAddressBtn.addEventListener('click', function() {
+            const addressText = 'stella.xgames.jp';
+            navigator.clipboard.writeText(addressText).then(function() {
+                copyAddressBtn.textContent = 'コピー済';
+                copyAddressBtn.classList.add('copy-success');
+            }).catch(function() {
+                copyAddressBtn.textContent = 'コピー不可';
+                copyAddressBtn.classList.add('copy-error');
             });
-        };
-
-        document.getElementById("copyJavaButton").onclick = function() {
-            const javaAddress = document.getElementById("javaAddress").value;
-            copyToClipboard(javaAddress, this);
-        };
-
-        document.getElementById("copyJavaPortButton").onclick = function() {
-            const javaPort = document.getElementById("javaPort").value;
-            copyToClipboard(javaPort, this);
-        };
-
-        document.getElementById("copyBedrockButton").onclick = function() {
-            const bedrockAddress = document.getElementById("bedrockAddress").value;
-            copyToClipboard(bedrockAddress, this);
-        };
-
-        document.getElementById("copyBedrockPortButton").onclick = function() {
-            const bedrockPort = document.getElementById("bedrockPort").value;
-            copyToClipboard(bedrockPort, this);
-        };
+        });
     </script>
 </body>
 </html>
