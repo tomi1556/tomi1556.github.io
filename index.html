@@ -121,19 +121,6 @@
             flex-wrap: wrap;
             margin-top: 40px;
         }
-        .method-card {
-            width: 45%;
-            margin: 10px;
-            background-color: #e8f5e9;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            position: relative;
-        }
-        .method-card:hover {
-            transform: scale(1.05);
-        }
         .method-title {
             font-size: 1.8em;
             color: #558b2f;
@@ -206,15 +193,44 @@
         .address-row p {
             margin-right: 10px;
         }
-      /* アニメーションを追加するための新しいクラス */
-       @keyframes fadeIn {
-           from {
-              opacity: 0;
-              transform: translateY(20px);
-          }
-         to {
-               opacity: 1;
-             transform: translateY(0);
+    /* アニメーションを追加するための新しいクラス */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+     　 }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+        }
+
+        .feature-image-card img {
+            width: 100%;
+            border-radius: 15px;
+            opacity: 0; /* 初期状態を透明に */
+            animation: fadeIn 0.5s forwards; /* アニメーションを適用 */
+        }
+
+        .method-card {
+            width: 45%;
+            margin: 10px;
+            background-color: #e8f5e9;
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s; /* box-shadowのトランジションを追加 */
+            position: relative;
+        }
+
+        .method-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* ホバー時の影を強化 */
+        }
+
+        .copy-button:hover {
+            background-color: #039be5;
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* ホバー時に影を追加 */
         }
 
         .features-images {
@@ -226,10 +242,6 @@
             width: 30%;
             margin: 10px;
             text-align: center;
-        }
-        .feature-image-card img {
-            width: 100%;
-            border-radius: 15px;
         }
     </style>
 </head>
