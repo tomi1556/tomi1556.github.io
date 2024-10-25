@@ -271,14 +271,14 @@
         function copyToClipboard(text, button) {
             navigator.clipboard.writeText(text).then(() => {
                 button.classList.add('copy-success');
-                button.innerText = 'コピーしました！';
+                button.innerText = '完了！';
                 setTimeout(() => {
                     button.classList.remove('copy-success');
                     button.innerText = 'コピー';
                 }, 2000);
             }).catch(err => {
                 button.classList.add('copy-fail');
-                button.innerText = 'コピー失敗';
+                button.innerText = '失敗！';
                 setTimeout(() => {
                     button.classList.remove('copy-fail');
                     button.innerText = 'コピー';
