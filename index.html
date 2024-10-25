@@ -289,15 +289,15 @@
     <script>
         function copyToClipboard(address, button) {
             navigator.clipboard.writeText(address).then(() => {
-                button.textContent = 'コピー完了';
+                button.textContent = '完了！';
                 button.classList.add('copy-success');
                 setTimeout(() => {
                     button.textContent = 'コピー';
                     button.classList.remove('copy-success');
                 }, 2000);
             }).catch(err => {
-                console.error('コピー失敗:', err);
-                button.textContent = 'コピー失敗';
+                console.error('エラー:', err);
+                button.textContent = 'エラー';
                 button.classList.add('copy-fail');
                 setTimeout(() => {
                     button.textContent = 'コピー';
