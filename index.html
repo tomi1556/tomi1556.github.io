@@ -7,8 +7,7 @@
     <title>すてら - ほのぼのマイクラサーバー</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        /* フォントと基本設定 */
-        @import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Nunito+Sans:wght@300;400;700&display=swap');
+        /* 基本設定 */
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
@@ -16,120 +15,18 @@
             color: #333;
             line-height: 1.8;
         }
-
-        /* ヘッダー */
-        header {
-            background-color: #8bc34a;
-            color: #fff;
-            padding: 100px 0;
-            text-align: center;
-            font-family: 'Potta One', cursive;
-            position: relative;
-            overflow: hidden;
-        }
-
-        /* ナビゲーション */
-        nav {
-            background-color: #fff;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-            margin-bottom: 50px;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
+        
+        /* コピーボタンの配置と見た目 */
+        .address-container {
             display: flex;
             justify-content: center;
-        }
-        nav ul li {
-            margin: 0 20px;
-        }
-        nav ul li a {
-            text-decoration: none;
-            color: #558b2f;
-            font-size: 1.2em;
-            font-weight: bold;
-            padding: 10px 20px;
-            background-color: #fff;
-            border: 2px solid #558b2f;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-        nav ul li a:hover {
-            background-color: #558b2f;
-            color: #fff;
-        }
-
-        /* メインセクション */
-        main {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #fff;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            text-align: center;
-        }
-        main h2 {
-            font-size: 2.8em;
-            margin-bottom: 40px;
-            color: #558b2f;
-            font-family: 'Potta One', cursive;
-        }
-
-        /* 特徴セクション */
-        .feature-grid {
-            display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 40px 0;
-        }
-        .feature-item {
-            width: 22%;
-            text-align: center;
-        }
-        .feature-item img {
-            width: 100%;
-            height: auto;
-            border-radius: 10px;
-        }
-        .feature-description {
+            align-items: center;
             margin-top: 15px;
-            font-size: 1.2em;
-            color: #555;
         }
-
-        /* 参加方法セクション */
-        .method {
+        .address-row {
             display: flex;
-            justify-content: space-around;
-            flex-wrap: wrap;
-            margin-top: 40px;
+            align-items: center;
         }
-        .method-card {
-            width: 45%;
-            margin: 10px;
-            background-color: #e8f5e9;
-            border-radius: 15px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
-            position: relative;
-        }
-        .method-card:hover {
-            transform: scale(1.05);
-        }
-        .method-title {
-            font-size: 1.8em;
-            color: #558b2f;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        /* コピーボタン */
         .copy-button {
             display: inline-block;
             margin-left: 6px;
@@ -151,87 +48,31 @@
         .copy-fail {
             background-color: #f44336;
         }
-
-        /* フッター */
-        footer {
-            background-color: #8bc34a;
-            color: #fff;
-            text-align: center;
-            padding: 35px 0;
-            font-size: 0.9em;
-            border-top: 5px solid #7cb342;
-        }
     </style>
 </head>
 <body>
-    <header>
-        <h1>すてら</h1>
-        <p>居心地のいい居場所となるようなMinecraftサーバー</p>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">参加方法</a></li>
-            <li><a href="#">はじめての方へ</a></li>
-            <li><a href="#">知っておきたい</a></li>
-        </ul>
-    </nav>
-    <main>
-        <h2>すてらサーバーへようこそ！</h2>
-        <div class="features">
-            <h3>サーバーの特徴</h3>
-            <div class="feature-grid">
-                <div class="feature-item">
-                    <img src="image1.jpg" alt="特徴1の画像">
-                    <p class="feature-description">初心者から上級者まで楽しめる環境</p>
-                </div>
-                <div class="feature-item">
-                    <img src="image2.jpg" alt="特徴2の画像">
-                    <p class="feature-description">プレイヤー同士の助け合いを大切に</p>
-                </div>
-                <div class="feature-item">
-                    <img src="image3.jpg" alt="特徴3の画像">
-                    <p class="feature-description">定期的なイベントやコンテスト</p>
-                </div>
-                <div class="feature-item">
-                    <img src="image4.jpg" alt="特徴4の画像">
-                    <p class="feature-description">温かみのあるコミュニティ</p>
+    <div class="method">
+        <div class="method-card">
+            <p class="method-title">Java版の参加方法</p>
+            <div class="address-container">
+                <div class="address-row">
+                    <p>アドレス: <strong id="javaAddress">stella.xgames.jp</strong></p>
+                    <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
                 </div>
             </div>
         </div>
-
-        <div class="method">
-            <div class="method-card">
-                <p class="method-title">Java版の参加方法</p>
-                <p>1. Minecraftを起動し、「マルチプレイヤー」を選択。</p>
-                <p>2. サーバーを追加して、IPアドレスを入力。</p>
-                <p>3. 接続をクリックして、サーバーに入ります。</p>
-                <div class="address-container">
-                    <div class="address-row">
-                        <p>アドレス: <strong id="javaAddress">stella.xgames.jp</strong></p>
-                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
-                    </div>
-                </div>
-            </div>
-            <div class="method-card">
-                <p class="method-title">統合版の参加方法</p>
-                <p>1. Minecraftを起動し、「プレイ」を選択。</p>
-                <p>2. 「サーバー」を選び、「サーバーを追加」をクリック。</p>
-                <p>3. サーバー名、アドレス、ポートを入力。</p>
-                <div class="address-container">
-                    <div class="address-row">
-                        <p>アドレス: <strong id="bedrockAddress">stella.xgames.jp</strong></p>
-                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
-                        <span style="display: inline-block; width: 10px;"></span>
-                        <p>ポート: <strong>25565</strong></p>
-                    </div>
+        <div class="method-card">
+            <p class="method-title">統合版の参加方法</p>
+            <div class="address-container">
+                <div class="address-row">
+                    <p>アドレス: <strong id="bedrockAddress">stella.xgames.jp</strong></p>
+                    <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
+                    <span style="display: inline-block; width: 14px;"></span>
+                    <p>ポート: <strong>25565</strong></p>
                 </div>
             </div>
         </div>
-    </main>
-    <footer>
-        <p>© 2024 すてら. All rights reserved.</p>
-    </footer>
+    </div>
     <script>
         function copyToClipboard(text, button) {
             navigator.clipboard.writeText(text).then(() => {
