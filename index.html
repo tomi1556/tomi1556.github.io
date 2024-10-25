@@ -131,6 +131,12 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
+            flex-direction: column; /* 縦並び */
+        }
+        .address label {
+            font-size: 1.2em;
+            margin-bottom: 5px;
+            color: #558b2f; /* ラベルの色 */
         }
         .address input {
             padding: 10px;
@@ -214,10 +220,12 @@
                 <div class="join">
                     <h3>参加方法</h3>
                     <div class="address">
+                        <label for="serverAddress">アドレス：</label>
                         <input type="text" id="serverAddress" value="stella.xgames.jp" readonly>
                         <button id="copyAddressButton">コピー</button>
                     </div>
                     <div class="address">
+                        <label for="serverPort">ポート：</label>
                         <input type="text" id="serverPort" value="25565" readonly>
                         <button id="copyPortButton">コピー</button>
                     </div>
@@ -240,7 +248,7 @@
                     button.classList.remove('copied');
                 }, 2000);
             }).catch(() => {
-                button.innerText = "コピー不可";
+                button.innerText = "エラー";
                 button.classList.add('error');
                 setTimeout(() => {
                     button.innerText = "コピー";
@@ -249,6 +257,16 @@
             });
         };
 
-        document.getElementById("copyAddressButton").onclick = function() {
-            const serverAddress = document.getElementById("serverAddress").value;
-            copyToClipboard(server
+        document.getElementById('copyAddressButton').addEventListener('click', () => {
+            const address = document.getElementById('serverAddress').value;
+            copyToClipboard(address, document.getElementById('copyAddressButton'));
+        });
+
+        document.getElementById('copyPortButton').addEventListener('click', () => {
+            const port = document.getElementById('serverPort').value;
+            copyToClipboard(port, document.getElementById('copyPortButton'));
+        });
+    </script>
+</body>
+</html>
+
