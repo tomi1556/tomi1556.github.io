@@ -294,7 +294,7 @@
             font-size: 2.5em;
             color: #8bc34a;
             font-family: 'Potta One', 
-         .player {
+        .player {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -312,6 +312,11 @@
             font-size: 1.5em; /* プレイヤー名のサイズを調整 */
             margin: 0;
             color: #333;
+        }
+        #online-players {
+            display: flex;
+            flex-wrap: wrap; /* 横方向に並べて、折り返しも考慮 */
+            justify-content: center; /* 中央揃え */
         }
     </style>
 </head>
