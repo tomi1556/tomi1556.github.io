@@ -241,46 +241,42 @@
                         <p>アドレス: <strong id="javaAddress">stella.xgames.jp</strong></p>
                         <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
                     </div>
-                    <p class="copy-message" style="display: none;"></p>
+                    <p>ポート: <strong>25565</strong></p>
                 </div>
             </div>
             <div class="method-card">
                 <p class="method-title">統合版の参加方法</p>
-                <p>1. Minecraftを起動し、「プレイ」を選択。</p>
+                <p>1. Minecraftを起動し、「サーバー」を選択。</p>
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
                 <div class="address-container">
                     <div class="address-row">
                         <p>アドレス: <strong id="bedrockAddress">stella.xgames.jp</strong></p>
-                        </div>
-                        <p>ポート：25565</p>
                         <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
                     </div>
-                    <p class="copy-message" style="display: none;"></p>
+                    <p>ポート: <strong>19132</strong></p>
                 </div>
             </div>
         </div>
     </main>
     <footer>
-        <p>&copy; 2024 すてらサーバー. All Rights Reserved.</p>
+        <p>&copy; 2024 すてら. All Rights Reserved.</p>
     </footer>
-
     <script>
         function copyToClipboard(text, button) {
-            const copyText = text;
-            navigator.clipboard.writeText(copyText).then(() => {
+            navigator.clipboard.writeText(text).then(() => {
                 button.classList.add('copy-success');
-                button.textContent = '完了！';
+                button.innerText = 'コピーしました!';
                 setTimeout(() => {
                     button.classList.remove('copy-success');
-                    button.textContent = 'コピー';
+                    button.innerText = 'コピー';
                 }, 2000);
-            }).catch(err => {
+            }).catch(() => {
                 button.classList.add('copy-fail');
-                button.textContent = '失敗！';
+                button.innerText = 'コピー失敗';
                 setTimeout(() => {
                     button.classList.remove('copy-fail');
-                    button.textContent = 'コピー';
+                    button.innerText = 'コピー';
                 }, 2000);
             });
         }
