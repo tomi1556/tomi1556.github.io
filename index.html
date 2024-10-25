@@ -86,6 +86,15 @@
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
             text-align: center;
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeIn 1.5s ease-out forwards;
+        }
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         main h2 {
             font-size: 2.8em;
@@ -95,6 +104,9 @@
         }
         .features {
             margin-bottom: 60px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 0.5s;
         }
         .features h3 {
             font-size: 2.2em;
@@ -129,6 +141,9 @@
             justify-content: space-between;
             flex-wrap: wrap;
             margin-top: 40px;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 1s;
         }
         .method-card {
             width: 45%;
@@ -183,6 +198,9 @@
             padding: 35px 0;
             font-size: 0.9em;
             border-top: 5px solid #7cb342;
+            opacity: 0;
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 1.5s;
         }
         footer p {
             margin: 0;
