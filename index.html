@@ -255,7 +255,7 @@
                     <div class="address-row">
                         <p>アドレス: <strong id="bedrockAddress">stella.xgames.jp</strong></p>
                         <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
-                        <p>ポート: <strong>25565</strong></p>
+                        <p> ポート: <strong>25565</strong></p>
                     </div>
                 </div>
             </div>
@@ -273,7 +273,7 @@
             document.execCommand('copy');
             document.body.removeChild(el);
             button.classList.add('copy-success');
-            button.innerText = 'コピーしました！';
+            button.innerText = '完了！';
             setTimeout(() => {
                 button.classList.remove('copy-success');
                 button.innerText = 'コピー';
