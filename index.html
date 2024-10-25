@@ -220,6 +220,43 @@
                 width: 90%;
             }
         }
+        body {
+            margin: 0;
+            font-family: 'Nunito Sans', sans-serif;
+            background-color: #f0f8ff;
+            color: #333;
+            line-height: 1.8;
+        }
+
+        header, nav, main, footer {
+            opacity: 0;
+            transform: translateY(50px);
+            animation: fadeIn 1.5s ease-out forwards;
+            padding-left: 20px; /* 左端に空白を追加 */
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        header {
+            animation-delay: 0.5s;
+        }
+
+        nav {
+            animation-delay: 1s;
+        }
+
+        main {
+            animation-delay: 1.5s;
+        }
+
+        footer {
+            animation-delay: 2s;
+        }
     </style>
 </head>
 <body>
