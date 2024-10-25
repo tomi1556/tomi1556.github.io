@@ -8,15 +8,18 @@
     <link rel="stylesheet" href="style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Nunito+Sans:wght@300;400;700&display=swap');
+
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #f0f8ff; /* 背景を柔らかい色に変更 */
+            background: linear-gradient(to right, #f0f8ff, #e0f7fa);
             color: #333;
             line-height: 1.8;
+            overflow-x: hidden;
         }
+
         header {
-            background-color: #8bc34a;
+            background: url('https://example.com/nature_background.png') no-repeat center / cover;
             color: #fff;
             padding: 100px 0;
             text-align: center;
@@ -24,45 +27,43 @@
             position: relative;
             overflow: hidden;
         }
-        header::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: url('https://example.com/nature_background.png') no-repeat center / cover;
-            opacity: 0.3;
-            z-index: -1;
-        }
+
         header h1 {
             margin: 0;
             font-size: 4em;
             color: #fff;
             text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+            animation: fadeInDown 1s ease forwards;
         }
+
         header p {
             font-size: 1.5em;
             margin-top: 20px;
             color: #fff;
+            animation: fadeInUp 1.5s ease forwards;
         }
+
         nav {
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.8);
             padding: 15px;
             text-align: center;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
         }
+
         nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
             justify-content: center;
+            transition: all 0.5s ease;
         }
+
         nav ul li {
             margin: 0 20px;
         }
+
         nav ul li a {
             text-decoration: none;
             color: #558b2f;
@@ -73,73 +74,92 @@
             border: 2px solid #558b2f;
             border-radius: 25px;
             transition: all 0.3s ease;
+            position: relative;
         }
+
         nav ul li a:hover {
             background-color: #558b2f;
             color: #fff;
         }
+
         main {
             padding: 60px 20px;
             max-width: 1200px;
             margin: 0 auto;
-            background-color: #fff;
+            background-color: rgba(255, 255, 255, 0.9);
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
             text-align: center;
+            animation: slideInUp 1s ease forwards;
         }
+
         main h2 {
             font-size: 2.8em;
             margin-bottom: 40px;
             color: #558b2f;
             font-family: 'Potta One', cursive;
         }
+
         .content {
             margin-top: 30px;
         }
+
         .info {
             display: flex;
             justify-content: space-around;
             flex-wrap: wrap;
             margin: 0 20px;
         }
+
         .info .features, .info .join {
             flex: 1;
             padding: 20px;
             margin: 10px;
             border-radius: 15px;
             box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
         }
+
+        .info .features:hover, .info .join:hover {
+            transform: translateY(-10px);
+        }
+
         .info h3 {
             font-size: 2.2em;
             color: #33691e;
             font-family: 'Potta One', cursive;
             margin-bottom: 25px;
         }
+
         .info p {
             font-size: 1.5em;
             line-height: 2.2;
             margin: 0;
             color: #555;
         }
+
         .address {
             display: flex;
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
         }
+
         .address label {
+            font-size: 1.5em;
+            color: #33691e;
             margin-right: 10px;
-            font-size: 1.2em;
-            color: #333;
         }
+
         .address input {
             padding: 10px;
             font-size: 1.2em;
             border: 2px solid #558b2f;
             border-radius: 10px;
             margin-right: 10px;
-            width: 200px; /* 幅を指定 */
+            flex: 1;
         }
+
         .address button {
             padding: 10px 15px;
             font-size: 1.2em;
@@ -147,14 +167,22 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            flex-shrink: 0;
         }
+
+        .address button:hover {
+            transform: scale(1.1);
+        }
+
         .address button.copied {
             background-color: #66bb6a; /* 緑色 */
         }
+
         .address button.error {
             background-color: #ef5350; /* 赤色 */
         }
+
         footer {
             background-color: #8bc34a;
             color: #fff;
@@ -162,10 +190,47 @@
             padding: 35px 0;
             font-size: 0.9em;
             border-top: 5px solid #7cb342;
+            position: relative;
+            animation: fadeInUp 1s ease forwards;
         }
+
         footer p {
             margin: 0;
         }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
         @media (max-width: 768px) {
             nav ul {
                 flex-direction: column;
@@ -206,22 +271,13 @@
                 <div class="join">
                     <h3>参加方法</h3>
                     <div class="address">
-                        <label for="javaAddress">アドレス:</label>
-                        <input type="text" id="javaAddress" value="your.java.server" readonly>
-                        <button id="copyJavaButton">コピー</button>
+                        <label for="address">アドレス：</label>
+                        <input type="text" id="address" value="stella.xgames.jp" readonly>
+                        <button id="copyButton">コピー</button>
                     </div>
                     <div class="address">
-                        <label for="javaPort">ポート:</label>
-                        <input type="text" id="javaPort" value="25565" readonly>
-                    </div>
-                    <div class="address">
-                        <label for="bedrockAddress">アドレス:</label>
-                        <input type="text" id="bedrockAddress" value="your.bedrock.server" readonly>
-                        <button id="copyBedrockButton">コピー</button>
-                    </div>
-                    <div class="address">
-                        <label for="bedrockPort">ポート:</label>
-                        <input type="text" id="bedrockPort" value="19132" readonly>
+                        <label for="port">ポート：</label>
+                        <input type="text" id="port" value="25565" readonly>
                     </div>
                 </div>
             </div>
@@ -233,32 +289,19 @@
     </footer>
 
     <script>
-        const copyToClipboard = (text, button) => {
-            navigator.clipboard.writeText(text).then(() => {
-                button.innerText = "コピー済";
-                button.classList.add('copied');
-                setTimeout(() => {
-                    button.innerText = "コピー";
-                    button.classList.remove('copied');
-                }, 2000);
-            }).catch(() => {
-                button.innerText = "コピー不可";
-                button.classList.add('error');
-                setTimeout(() => {
-                    button.innerText = "コピー";
-                    button.classList.remove('error');
-                }, 2000);
-            });
-        };
+        const copyButton = document.getElementById("copyButton");
+        const addressInput = document.getElementById("address");
 
-        document.getElementById("copyJavaButton").addEventListener("click", () => {
-            const address = document.getElementById("javaAddress").value;
-            copyToClipboard(address, document.getElementById("copyJavaButton"));
-        });
+        copyButton.addEventListener("click", () => {
+            addressInput.select();
+            document.execCommand("copy");
 
-        document.getElementById("copyBedrockButton").addEventListener("click", () => {
-            const address = document.getElementById("bedrockAddress").value;
-            copyToClipboard(address, document.getElementById("copyBedrockButton"));
+            copyButton.classList.add("copied");
+            copyButton.textContent = "コピーしました！";
+            setTimeout(() => {
+                copyButton.classList.remove("copied");
+                copyButton.textContent = "コピー";
+            }, 2000);
         });
     </script>
 </body>
