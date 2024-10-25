@@ -202,6 +202,10 @@
             align-items: center;
             justify-content: center;
         }
+        /* ポートの位置を調整 */
+        .port {
+            margin-left: -10px; /* ここを調整 */
+        }
     </style>
 </head>
 <body>
@@ -238,48 +242,33 @@
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
                 <div class="address-container">
                     <div class="address-row">
-                        <p>アドレス: <strong id="javaAddress">stella.xgames.jp</strong></p>
-                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
+                        <p>アドレス: <span id="java-address">stella.xgames.jp</span></p>
+                        <button class="copy-button" data-clipboard-target="#java-address">コピー</button>
                     </div>
-                    <p>ポート: <strong>25565</strong></p>
+                    <div class="address-row">
+                        <p class="port">ポート: <span id="java-port">25565</span></p>
+                    </div>
                 </div>
             </div>
             <div class="method-card">
                 <p class="method-title">統合版の参加方法</p>
-                <p>1. Minecraftを起動し、「サーバー」を選択。</p>
+                <p>1. Minecraftを起動し、「プレイ」を選択。</p>
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
                 <div class="address-container">
                     <div class="address-row">
-                        <p>アドレス: <strong id="bedrockAddress">stella.xgames.jp</strong></p>
-                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
+                        <p>アドレス: <span id="bedrock-address">stella.xgames.jp</span></p>
+                        <button class="copy-button" data-clipboard-target="#bedrock-address">コピー</button>
                     </div>
-                    <p>ポート: <strong>19132</strong></p>
+                    <div class="address-row">
+                        <p class="port">ポート: <span id="bedrock-port">19132</span></p>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
     <footer>
-        <p>&copy; 2024 すてら. All Rights Reserved.</p>
+        <p>&copy; 2024 すてらサーバー. All rights reserved.</p>
     </footer>
-    <script>
-        function copyToClipboard(text, button) {
-            navigator.clipboard.writeText(text).then(() => {
-                button.classList.add('copy-success');
-                button.innerText = 'コピーしました!';
-                setTimeout(() => {
-                    button.classList.remove('copy-success');
-                    button.innerText = 'コピー';
-                }, 2000);
-            }).catch(() => {
-                button.classList.add('copy-fail');
-                button.innerText = 'コピー失敗';
-                setTimeout(() => {
-                    button.classList.remove('copy-fail');
-                    button.innerText = 'コピー';
-                }, 2000);
-            });
-        }
-    </script>
 </body>
 </html>
