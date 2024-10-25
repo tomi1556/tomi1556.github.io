@@ -8,26 +8,22 @@
     <link rel="stylesheet" href="style.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Potta+One&family=Nunito+Sans:wght@300;400;700&display=swap');
-        
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #f0f8ff;
+            background-color: #f0f8ff; /* 背景を柔らかい色に変更 */
             color: #333;
             line-height: 1.8;
-            overflow-x: hidden;
         }
-
         header {
-            background-color: #66bb6a;
+            background-color: #8bc34a;
             color: #fff;
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
             font-family: 'Potta One', cursive;
             position: relative;
             overflow: hidden;
         }
-
         header::before {
             content: '';
             position: absolute;
@@ -38,41 +34,194 @@
             background: url('https://example.com/nature_background.png') no-repeat center / cover;
             opacity: 0.3;
             z-index: -1;
-            animation: slideInBackground 8s ease-in-out infinite alternate;
         }
-
-        @keyframes slideInBackground {
-            from {
-                transform: translateX(-20%);
-            }
-            to {
-                transform: translateX(20%);
-            }
-        }
-
         header h1 {
             margin: 0;
             font-size: 4em;
             color: #fff;
             text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
-            animation: fadeInDown 1s ease-in-out;
+            animation: fadeIn 1s ease-in;
         }
-
         header p {
             font-size: 1.5em;
             margin-top: 20px;
             color: #fff;
-            animation: fadeInUp 1.5s ease-in-out;
+            animation: fadeIn 1.5s ease-in;
+        }
+        nav {
+            background-color: #fff;
+            padding: 15px;
+            text-align: center;
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
+            margin-bottom: 50px;
+            animation: slideIn 0.5s ease-in;
+        }
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+        }
+        nav ul li {
+            margin: 0 20px;
+        }
+        nav ul li a {
+            text-decoration: none;
+            color: #558b2f;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 10px 20px;
+            background-color: #fff;
+            border: 2px solid #558b2f;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        nav ul li a:hover {
+            background-color: #558b2f;
+            color: #fff;
+        }
+        nav ul li a::after {
+            content: '';
+            position: absolute;
+            background: #81d4fa;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            transform: scale(0);
+            transition: transform 0.5s ease;
+        }
+        nav ul li a:hover::after {
+            transform: scale(1);
+        }
+        main {
+            padding: 60px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: #fff;
+            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            text-align: center;
+            animation: fadeInUp 1s ease-in;
+        }
+        main h2 {
+            font-size: 2.8em;
+            margin-bottom: 40px;
+            color: #558b2f;
+            font-family: 'Potta One', cursive;
+        }
+        .content {
+            margin-top: 30px;
+        }
+        .info {
+            display: flex;
+            justify-content: center; /* 中央に配置 */
+            flex-wrap: wrap;
+            margin: 0 20px;
+        }
+        .info .features, .info .join {
+            flex: 1;
+            padding: 20px;
+            margin: 10px;
+            border-radius: 15px;
+            box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+        }
+        .info .features:hover, .info .join:hover {
+            transform: scale(1.05);
+        }
+        .info h3 {
+            font-size: 2.2em;
+            color: #33691e;
+            font-family: 'Potta One', cursive;
+            margin-bottom: 25px;
+        }
+        .info p {
+            font-size: 1.5em;
+            line-height: 2.2;
+            margin: 0;
+            color: #555;
+        }
+        .address {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+        .address input {
+            padding: 10px;
+            font-size: 1.2em;
+            border: 2px solid #558b2f;
+            border-radius: 10px;
+            margin-right: 10px;
+            transition: border-color 0.3s;
+        }
+        .address input:focus {
+            border-color: #81d4fa;
+            outline: none;
+        }
+        .address button {
+            padding: 10px 15px;
+            font-size: 1.2em;
+            background-color: #81d4fa; /* 水色 */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+        }
+        .address button.copied {
+            background-color: #66bb6a; /* 緑色 */
+            transform: scale(1.1); /* 大きさを少し増加 */
+        }
+        .address button.error {
+            background-color: #ef5350; /* 赤色 */
+        }
+        footer {
+            background-color: #8bc34a;
+            color: #fff;
+            text-align: center;
+            padding: 35px 0;
+            font-size: 0.9em;
+            border-top: 5px solid #7cb342;
+        }
+        footer p {
+            margin: 0;
+        }
+        @media (max-width: 768px) {
+            nav ul {
+                flex-direction: column;
+            }
+            nav ul li {
+                margin: 10px 0;
+            }
+            .info {
+                flex-direction: column;
+                align-items: center;
+            }
         }
 
-        @keyframes fadeInDown {
+        @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
             }
             to {
                 opacity: 1;
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
                 transform: translateY(0);
+                opacity: 1;
             }
         }
 
@@ -86,221 +235,68 @@
                 transform: translateY(0);
             }
         }
-
-        nav {
-            background-color: #fff;
-            padding: 15px;
-            text-align: center;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-            margin-bottom: 50px;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-        }
-
-        nav ul li {
-            margin: 0 20px;
-        }
-
-        nav ul li a {
-            text-decoration: none;
-            color: #558b2f;
-            font-size: 1.2em;
-            font-weight: bold;
-            padding: 10px 20px;
-            background-color: #fff;
-            border: 2px solid #558b2f;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-
-        nav ul li a:hover {
-            background-color: #558b2f;
-            color: #fff;
-            animation: bounce 0.5s;
-        }
-
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
-
-        main {
-            padding: 60px 20px;
-            max-width: 1200px;
-            margin: 0 auto;
-            background-color: #fff;
-            box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
-            border-radius: 20px;
-            text-align: center;
-        }
-
-        main h2 {
-            font-size: 2.8em;
-            margin-bottom: 40px;
-            color: #558b2f;
-            font-family: 'Potta One', cursive;
-            animation: fadeInScale 1s ease-in-out;
-        }
-
-        @keyframes fadeInScale {
-            from {
-                transform: scale(0.9);
-                opacity: 0;
-            }
-            to {
-                transform: scale(1);
-                opacity: 1;
-            }
-        }
-
-        .content {
-            margin-top: 30px;
-        }
-
-        .section {
-            margin-bottom: 60px;
-        }
-
-        .section h3 {
-            font-size: 2.2em;
-            color: #33691e;
-            font-family: 'Potta One', cursive;
-            margin-bottom: 25px;
-            animation: slideInLeft 1.5s ease-in-out;
-        }
-
-        @keyframes slideInLeft {
-            from {
-                opacity: 0;
-                transform: translateX(-50px);
-            }
-            to {
-                opacity: 1;
-                transform: translateX(0);
-            }
-        }
-
-        .section p {
-            font-size: 1.5em;
-            line-height: 2.2;
-            margin: 0 auto;
-            max-width: 850px;
-            color: #555;
-            animation: fadeIn 1.5s ease-in-out;
-        }
-
-        .copy-button {
-            background-color: #00bcd4;
-            border: none;
-            padding: 10px;
-            border-radius: 5px;
-            color: white;
-            cursor: pointer;
-            margin-left: 10px;
-            transition: background-color 0.3s ease, transform 0.2s;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% {
-                transform: scale(1);
-            }
-            50% {
-                transform: scale(1.05);
-            }
-            100% {
-                transform: scale(1);
-            }
-        }
-
-        .copy-button:active {
-            transform: scale(0.95);
-        }
-
-        .copy-button.success {
-            background-color: #4caf50;
-        }
-
-        .copy-button.error {
-            background-color: #f44336;
-        }
-
-        footer {
-            background-color: #66bb6a;
-            color: #fff;
-            text-align: center;
-            padding: 35px 0;
-            font-size: 0.9em;
-            animation: fadeInUp 1s ease-in-out;
-        }
-
-        footer p {
-            margin: 0;
-        }
     </style>
 </head>
 <body>
+    <header>
+        <h1>すてら</h1>
+        <p>居心地のいい居場所となるようなMinecraftサーバー</p>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">参加方法</a></li>
+            <li><a href="#">はじめての方へ</a></li>
+            <li><a href="#">知っておきたい</a></li>
+        </ul>
+    </nav>
+    <main>
+        <h2>すてらサーバーへようこそ！</h2>
+        <div class="content">
+            <div class="info">
+                <div class="features">
+                    <h3>サーバーの特徴</h3>
+                    <p>楽しい仲間との交流</p>
+                    <p>快適なプレイ環境</p>
+                    <p>多様なゲームモード</p>
+                </div>
+                <div class="join">
+                    <h3>参加方法</h3>
+                    <div class="address">
+                        <input type="text" id="serverAddress" value="stella.xgames.jp:25565" readonly>
+                        <button id="copyButton">コピー</button>
+                    </div>
+                    <p>サーバーに参加するには、上記のアドレスをMinecraftで入力してください。</p>
+                </div>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <p>&copy; 2024 すてらサーバー. All rights reserved.</p>
+    </footer>
+    <script>
+        const copyButton = document.getElementById('copyButton');
+        const serverAddress = document.getElementById('serverAddress');
 
-<header>
-    <h1>すてら</h1>
-    <p>心地のいいMinecraftサーバーへようこそ</p>
-</header>
-
-<nav>
-    <ul>
-        <li><a href="#">Home</a></li>
-        <li><a href="#">はじめての方へ</a></li>
-        <li><a href="#">知っておきたい</a></li>
-    </ul>
-</nav>
-
-<main>
-    <h2>すてらサーバーへようこそ！</h2>
-    <div class="content fade-in">
-        <section class="section">
-            <h3>参加方法</h3>
-            <p>アドレス: stella.xgames.jp</p>
-            <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
-            <p>ポート: 25565</p>
-        </section>
-    </div>
-</main>
-
-<footer>
-    <p>&copy; 2024 すてら</p>
-</footer>
-
-<script>
-    function copyToClipboard(text, button) {
-        navigator.clipboard.writeText(text).then(function() {
-            button.textContent = 'コピー済';
-            button.classList.add('success');
-        }, function() {
-            button.textContent = 'コピー不可';
-            button.classList.add('error');
+        copyButton.addEventListener('click', () => {
+            navigator.clipboard.writeText(serverAddress.value)
+                .then(() => {
+                    copyButton.classList.add('copied');
+                    copyButton.textContent = 'コピーしました！';
+                    setTimeout(() => {
+                        copyButton.classList.remove('copied');
+                        copyButton.textContent = 'コピー';
+                    }, 2000);
+                })
+                .catch(() => {
+                    copyButton.classList.add('error');
+                    copyButton.textContent = 'コピー失敗';
+                    setTimeout(() => {
+                        copyButton.classList.remove('error');
+                        copyButton.textContent = 'コピー';
+                    }, 2000);
+                });
         });
-    }
-</script>
-
+    </script>
 </body>
 </html>
