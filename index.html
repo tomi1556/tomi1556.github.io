@@ -294,7 +294,7 @@
             font-size: 2.5em;
             color: #8bc34a;
             font-family: 'Potta One', 
-      　.player {
+         .player {
             display: flex;
             align-items: center;
             justify-content: center;
@@ -302,8 +302,16 @@
         }
 
         .player img {
-            margin-left: 10px;
+            width: 100px; /* 画像サイズを大きく */
+            height: 100px;
+            margin-right: 20px; /* 右にスペースを追加 */
             border-radius: 50%;
+        }
+
+        .player p {
+            font-size: 1.5em; /* プレイヤー名のサイズを調整 */
+            margin: 0;
+            color: #333;
         }
     </style>
 </head>
@@ -381,14 +389,14 @@
                         const playerDiv = document.createElement('div');
                         playerDiv.className = 'player';
 
+                        const playerImg = document.createElement('img');
+                        playerImg.src = `https://crafatar.com/avatars/${player.id}?size=100&overlay`;
+
                         const playerId = document.createElement('p');
                         playerId.textContent = player.name;
 
-                        const playerImg = document.createElement('img');
-                        playerImg.src = `https://crafatar.com/avatars/${player.id}?size=50&overlay`;
-
-                        playerDiv.appendChild(playerId);
                         playerDiv.appendChild(playerImg);
+                        playerDiv.appendChild(playerId);
                         onlinePlayers.appendChild(playerDiv);
                     });
                 } else {
