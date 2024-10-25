@@ -11,7 +11,7 @@
         body {
             margin: 0;
             font-family: 'Nunito Sans', sans-serif;
-            background-color: #f0f8ff; /* 背景を柔らかい色に変更 */
+            background-color: #f0f8ff;
             color: #333;
             line-height: 1.8;
         }
@@ -128,16 +128,17 @@
             margin-bottom: 20px;
         }
         .address label {
-            margin-right: 10px;
-            font-size: 1.2em;
+            width: 60px; /* ラベルの幅を固定 */
+            text-align: right; /* テキストを右揃えに */
+            margin-right: 10px; /* ラベルと入力枠の間にスペースを追加 */
         }
         .address input {
             padding: 10px;
             font-size: 1.2em;
             border: 2px solid #558b2f;
             border-radius: 10px;
+            width: 200px; /* 入力ボックスの幅を固定 */
             margin-right: 10px;
-            flex: 1;
         }
         .address button {
             padding: 10px 15px;
@@ -146,15 +147,14 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s;
+            transition: background-color 0.3s ease;
+            margin-left: 10px; /* ボタンと入力の間にスペースを追加 */
         }
         .address button.copied {
             background-color: #66bb6a; /* 緑色 */
-            transform: scale(1.1);
         }
         .address button.error {
             background-color: #ef5350; /* 赤色 */
-            transform: scale(1.1);
         }
         footer {
             background-color: #8bc34a;
@@ -207,12 +207,12 @@
                 <div class="join">
                     <h3>参加方法</h3>
                     <div class="address">
-                        <label for="serverAddress">アドレス：</label>
+                        <label for="serverAddress">アドレス:</label>
                         <input type="text" id="serverAddress" value="stella.xgames.jp" readonly>
-                        <button id="copyButton">コピー</button>
+                        <button id="copyAddressButton">コピー</button>
                     </div>
                     <div class="address">
-                        <label for="serverPort">ポート：</label>
+                        <label for="serverPort">ポート:</label>
                         <input type="text" id="serverPort" value="25565" readonly>
                     </div>
                 </div>
@@ -243,7 +243,7 @@
             });
         };
 
-        document.getElementById("copyButton").onclick = function() {
+        document.getElementById("copyAddressButton").onclick = function() {
             const serverAddress = document.getElementById("serverAddress").value;
             copyToClipboard(serverAddress, this);
         };
