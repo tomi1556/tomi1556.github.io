@@ -268,14 +268,14 @@
             const copyText = text;
             navigator.clipboard.writeText(copyText).then(() => {
                 button.classList.add('copy-success');
-                button.textContent = 'コピーしました！';
+                button.textContent = '完了！';
                 setTimeout(() => {
                     button.classList.remove('copy-success');
                     button.textContent = 'コピー';
                 }, 2000);
             }).catch(err => {
                 button.classList.add('copy-fail');
-                button.textContent = 'コピー失敗';
+                button.textContent = '失敗！';
                 setTimeout(() => {
                     button.classList.remove('copy-fail');
                     button.textContent = 'コピー';
