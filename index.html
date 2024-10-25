@@ -40,13 +40,11 @@
             font-size: 4em;
             color: #fff;
             text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
-            animation: fadeIn 1s ease-in;
         }
         header p {
             font-size: 1.5em;
             margin-top: 20px;
             color: #fff;
-            animation: fadeIn 1.5s ease-in;
         }
         nav {
             background-color: #fff;
@@ -54,7 +52,6 @@
             text-align: center;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
-            animation: slideIn 0.5s ease-in;
         }
         nav ul {
             list-style: none;
@@ -76,27 +73,10 @@
             border: 2px solid #558b2f;
             border-radius: 25px;
             transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
         }
         nav ul li a:hover {
             background-color: #558b2f;
             color: #fff;
-        }
-        nav ul li a::after {
-            content: '';
-            position: absolute;
-            background: #81d4fa;
-            height: 100%;
-            width: 100%;
-            top: 0;
-            left: 0;
-            z-index: -1;
-            transform: scale(0);
-            transition: transform 0.5s ease;
-        }
-        nav ul li a:hover::after {
-            transform: scale(1);
         }
         main {
             padding: 60px 20px;
@@ -106,7 +86,6 @@
             box-shadow: 0 5px 25px rgba(0, 0, 0, 0.1);
             border-radius: 20px;
             text-align: center;
-            animation: fadeInUp 1s ease-in;
         }
         main h2 {
             font-size: 2.8em;
@@ -119,7 +98,7 @@
         }
         .info {
             display: flex;
-            justify-content: center; /* 中央に配置 */
+            justify-content: space-around;
             flex-wrap: wrap;
             margin: 0 20px;
         }
@@ -129,10 +108,11 @@
             margin: 10px;
             border-radius: 15px;
             box-shadow: 0 7px 20px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
         }
         .info .features:hover, .info .join:hover {
-            transform: scale(1.05);
+            transform: translateY(-10px);
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
         }
         .info h3 {
             font-size: 2.2em;
@@ -151,7 +131,6 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
-            animation: fadeIn 1s ease-in;
         }
         .address input {
             padding: 10px;
@@ -159,10 +138,10 @@
             border: 2px solid #558b2f;
             border-radius: 10px;
             margin-right: 10px;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s ease;
         }
         .address input:focus {
-            border-color: #81d4fa;
+            border-color: #8bc34a;
             outline: none;
         }
         .address button {
@@ -172,11 +151,14 @@
             border: none;
             border-radius: 10px;
             cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+        .address button:hover {
+            background-color: #8de0f8; /* 明るい水色 */
+            transform: scale(1.05);
         }
         .address button.copied {
             background-color: #66bb6a; /* 緑色 */
-            transform: scale(1.1); /* 大きさを少し増加 */
         }
         .address button.error {
             background-color: #ef5350; /* 赤色 */
@@ -202,37 +184,6 @@
             .info {
                 flex-direction: column;
                 align-items: center;
-            }
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-            }
-            to {
-                opacity: 1;
-            }
-        }
-
-        @keyframes slideIn {
-            from {
-                transform: translateY(-20px);
-                opacity: 0;
-            }
-            to {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
             }
         }
     </style>
@@ -263,40 +214,41 @@
                 <div class="join">
                     <h3>参加方法</h3>
                     <div class="address">
-                        <input type="text" id="serverAddress" value="stella.xgames.jp:25565" readonly>
-                        <button id="copyButton">コピー</button>
+                        <input type="text" id="serverAddress" value="stella.xgames.jp" readonly>
+                        <button id="copyAddressButton">コピー</button>
                     </div>
-                    <p>サーバーに参加するには、上記のアドレスをMinecraftで入力してください。</p>
+                    <div class="address">
+                        <input type="text" id="serverPort" value="25565" readonly>
+                        <button id="copyPortButton">コピー</button>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
-    <footer>
-        <p>&copy; 2024 すてらサーバー. All rights reserved.</p>
-    </footer>
-    <script>
-        const copyButton = document.getElementById('copyButton');
-        const serverAddress = document.getElementById('serverAddress');
 
-        copyButton.addEventListener('click', () => {
-            navigator.clipboard.writeText(serverAddress.value)
-                .then(() => {
-                    copyButton.classList.add('copied');
-                    copyButton.textContent = 'コピーしました！';
-                    setTimeout(() => {
-                        copyButton.classList.remove('copied');
-                        copyButton.textContent = 'コピー';
-                    }, 2000);
-                })
-                .catch(() => {
-                    copyButton.classList.add('error');
-                    copyButton.textContent = 'コピー失敗';
-                    setTimeout(() => {
-                        copyButton.classList.remove('error');
-                        copyButton.textContent = 'コピー';
-                    }, 2000);
-                });
-        });
-    </script>
-</body>
-</html>
+    <footer>
+        <p>&copy; 2024 すてら</p>
+    </footer>
+
+    <script>
+        const copyToClipboard = (text, button) => {
+            navigator.clipboard.writeText(text).then(() => {
+                button.innerText = "コピー済";
+                button.classList.add('copied');
+                setTimeout(() => {
+                    button.innerText = "コピー";
+                    button.classList.remove('copied');
+                }, 2000);
+            }).catch(() => {
+                button.innerText = "コピー不可";
+                button.classList.add('error');
+                setTimeout(() => {
+                    button.innerText = "コピー";
+                    button.classList.remove('error');
+                }, 2000);
+            });
+        };
+
+        document.getElementById("copyAddressButton").onclick = function() {
+            const serverAddress = document.getElementById("serverAddress").value;
+            copyToClipboard(server
