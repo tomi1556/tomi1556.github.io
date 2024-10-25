@@ -109,10 +109,19 @@
             max-width: 600px;
             margin: 0 auto;
         }
-        .features-list {
-            list-style-type: disc;
-            margin-left: 20px;
-            text-align: left;
+        .feature-images {
+            display: flex;
+            justify-content: space-around; /* 等間隔に配置 */
+            margin-top: 20px; /* 余白を追加 */
+        }
+        .feature-card {
+            text-align: center; /* 画像と説明を中央揃え */
+            width: 30%; /* 各カードの幅を30%に設定 */
+        }
+        .feature-image {
+            width: 100%; /* 画像の幅を100%に設定 */
+            height: auto; /* 高さは自動調整 */
+            border-radius: 10px; /* 角を丸くする */
         }
         .method {
             display: flex;
@@ -185,6 +194,14 @@
             .method-card {
                 width: 90%;
             }
+            .feature-images {
+                flex-direction: column;
+                align-items: center; /* スマホ用に中央揃え */
+            }
+            .feature-card {
+                width: 90%; /* スマホ用の幅 */
+                margin-bottom: 20px; /* 下の余白 */
+            }
         }
         .address-container {
             display: flex;
@@ -225,38 +242,41 @@
         <div class="features">
             <h3>サーバーの特徴</h3>
             <p>『すてら』のサーバーは、以下のような特徴を持っています：</p>
-            <ul class="features-list">
-                <li>初心者から上級者まで楽しめる環境</li>
-                <li>プレイヤー同士の助け合いを大切に</li>
-                <li>定期的なイベントやコンテスト</li>
-                <li>温かみのあるコミュニティ</li>
-                <li>安全で安心なプレイ環境</li>
-            </ul>
+            <div class="feature-images">
+                <div class="feature-card">
+                    <img src="画像URL1" alt="特徴1" class="feature-image">
+                    <p>特徴1の説明文がここに入ります。</p>
+                </div>
+                <div class="feature-card">
+                    <img src="画像URL2" alt="特徴2" class="feature-image">
+                    <p>特徴2の説明文がここに入ります。</p>
+                </div>
+                <div class="feature-card">
+                    <img src="画像URL3" alt="特徴3" class="feature-image">
+                    <p>特徴3の説明文がここに入ります。</p>
+                </div>
+            </div>
         </div>
         <div class="method">
             <div class="method-card">
-                <p class="method-title">Java版の参加方法</p>
-                <p>1. Minecraftを起動し、「マルチプレイヤー」を選択。</p>
-                <p>2. サーバーを追加して、IPアドレスを入力。</p>
-                <p>3. 接続をクリックして、サーバーに入ります。</p>
+                <h4 class="method-title">参加方法（Java版）</h4>
+                <p>サーバーに参加するには、Minecraftのメニューから「マルチプレイ」を選択し、サーバーのアドレスを入力してください。</p>
                 <div class="address-container">
                     <div class="address-row">
-                        <p>アドレス: <strong id="javaAddress">stella.xgames.jp</strong></p>
-                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp',this)">コピー</button>
+                        <p>アドレス:</p>
+                        <p><strong>stella.xgames.jp</strong></p>
+                        <button class="copy-button" data-clipboard-text="stella.xgames.jp">コピー</button>
                     </div>
                 </div>
             </div>
             <div class="method-card">
-                <p class="method-title">統合版の参加方法</p>
-                <p>1. Minecraftを起動し、「プレイ」を選択。</p>
-                <p>2. 「サーバー」タブでサーバーを追加し、IPアドレスとポートを入力。</p>
-                <p>3. サーバーに接続して、遊び始めましょう。</p>
+                <h4 class="method-title">参加方法（統合版）</h4>
+                <p>サーバーに参加するには、Minecraftのメニューから「サーバー」を選択し、サーバーのアドレスを入力してください。</p>
                 <div class="address-container">
                     <div class="address-row">
-                        <p>アドレス: <strong id="bedrockAddress">stella.xgames.jp</strong></p>
-                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp',this)">コピー</button>
-                        <span style="display: inline-block; width: 10px;"></span> <!-- ここでスペースを作る -->
-                        <p>ポート: <strong>25565</strong></p>
+                        <p>アドレス:</p>
+                        <p><strong>stella.xgames.jp</strong></p>
+                        <button class="copy-button" data-clipboard-text="stella.xgames.jp">コピー</button>
                     </div>
                 </div>
             </div>
@@ -266,23 +286,26 @@
         <p>&copy; 2024 すてらサーバー. All rights reserved.</p>
     </footer>
     <script>
-        function copyToClipboard(text, button) {
-            navigator.clipboard.writeText(text).then(() => {
-                button.classList.add('copy-success');
-                button.innerText = '完了！';
-                setTimeout(() => {
-                    button.classList.remove('copy-success');
-                    button.innerText = 'コピー';
-                }, 1500);
-            }).catch(() => {
-                button.classList.add('copy-fail');
-                button.innerText = 'エラー';
-                setTimeout(() => {
-                    button.classList.remove('copy-fail');
-                    button.innerText = 'コピー';
-                }, 1500);
+        document.querySelectorAll('.copy-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const text = this.getAttribute('data-clipboard-text');
+                navigator.clipboard.writeText(text).then(() => {
+                    this.classList.add('copy-success');
+                    this.textContent = 'コピーしました！';
+                    setTimeout(() => {
+                        this.classList.remove('copy-success');
+                        this.textContent = 'コピー';
+                    }, 2000);
+                }).catch(() => {
+                    this.classList.add('copy-fail');
+                    this.textContent = 'コピー失敗';
+                    setTimeout(() => {
+                        this.classList.remove('copy-fail');
+                        this.textContent = 'コピー';
+                    }, 2000);
+                });
             });
-        }
+        });
     </script>
 </body>
 </html>
