@@ -280,32 +280,17 @@
             animation-delay: 2s;
             animation-name: fadeIn;
         }
-        online-users-title {
+        #online-users-title {
             font-size: 1.8em;
             color: #33691e;
             font-family: 'Potta One', cursive;
         }
 
-        online-users {
+        #online-users {
             font-size: 2.5em;
             color: #8bc34a;
             font-family: 'Potta One', 
     </style>
-        <script>
-        async function fetchOnlineUsers() {
-            try {
-                const response = await fetch('https://mcapi.us/server/status?ip=stella.xgames.jp');
-                const data = await response.json();
-                document.getElementById('online-users').textContent = `オンラインのユーザー: ${data.players.now}`;
-            } catch (error) {
-                console.error('エラー:', error);
-                document.getElementById('online-users').textContent = 'オンラインのユーザー数を取得できませんでした';
-            }
-        }
-
-        fetchOnlineUsers();
-        setInterval(fetchOnlineUsers, 60000); // 1分ごとに更新
-    </script>
 </head>
 <body>
     <header>
@@ -367,8 +352,21 @@
                 </div>
             </div>
         </div>
-            <div class="online-users-title">
-                <p class="online-users">今参加している人</p>
+    <script>
+        async function fetchOnlineUsers() {
+            try {
+                const response = await fetch('https://mcapi.us/server/status?ip=stella.xgames.jp');
+                const data = await response.json();
+                document.getElementById('online-users').textContent = data.players.now;
+            } catch (error) {
+                console.error('エラー:', error);
+                document.getElementById('online-users').textContent = 'オンラインのユーザー数を取得できませんでした';
+            }
+        }
+
+        fetchOnlineUsers();
+        setInterval(fetchOnlineUsers, 60000); // 1分ごとに更新
+    </script>
     </main>
     <footer>
         <p>&copy; 2024 すてら. All Rights Reserved.</p>
