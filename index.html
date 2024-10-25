@@ -234,7 +234,6 @@
             opacity: 0;
             transform: translateY(50px);
             animation: fadeIn 1.5s ease-out forwards;
-            padding-left: 20px; /* 左端に空白を追加 */
         }
 
         @keyframes fadeIn {
@@ -250,14 +249,37 @@
 
         nav {
             animation-delay: 1s;
+            animation-name: slideIn;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(-100%);
+            }
+            to {
+                transform: translateX(0);
+            }
         }
 
         main {
             animation-delay: 1.5s;
+            animation-name: zoomIn;
+        }
+
+        @keyframes zoomIn {
+            from {
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
         }
 
         footer {
             animation-delay: 2s;
+            animation-name: fadeIn;
         }
     </style>
 </head>
