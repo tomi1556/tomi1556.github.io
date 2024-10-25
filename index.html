@@ -197,6 +197,11 @@
             margin: 0; /* p要素の余白を削除 */
             margin-bottom: 5px; /* アドレスとポートの間に余白を追加 */
         }
+        .address-row {
+            display: flex;
+            align-items: center; /* 垂直中央揃え */
+            justify-content: center; /* 中央揃え */
+        }
     </style>
 </head>
 <body>
@@ -232,8 +237,11 @@
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
                 <div class="address-container">
-                    <p>アドレス: <strong id="javaAddress">example.java.server</strong></p>
-                    <button class="copy-button" onclick="copyToClipboard('example.java.server', this)">コピー</button>
+                    <div class="address-row">
+                        <p>アドレス: <strong id="javaAddress">stella.xgames.jp</strong></p>
+                        <button class="copy-button" onclick="copyToClipboard('stella.xgames.jp', this)">コピー</button>
+                    </div>
+                    <p>ポート: <strong id="javaPort">25565</strong></p>
                 </div>
             </div>
             <div class="method-card">
@@ -242,8 +250,10 @@
                 <p>2. サーバーを追加して、IPアドレスを入力。</p>
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
                 <div class="address-container">
-                    <p>アドレス: <strong id="bedrockAddress">example.bedrock.server</strong></p>
-                    <button class="copy-button" onclick="copyToClipboard('example.bedrock.server', this)">コピー</button>
+                    <div class="address-row">
+                        <p>アドレス: <strong id="bedrockAddress">example.bedrock.server</strong></p>
+                        <button class="copy-button" onclick="copyToClipboard('example.bedrock.server', this)">コピー</button>
+                    </div>
                     <p>ポート: <strong id="bedrockPort">19132</strong></p>
                 </div>
             </div>
