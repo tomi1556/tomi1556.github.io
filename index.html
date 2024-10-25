@@ -194,7 +194,6 @@
         }
         .address-container p {
             margin: 0; /* p要素の余白を削除 */
-            margin-right: 10px; /* アドレスの右側に余白を追加 */
         }
     </style>
 </head>
@@ -234,9 +233,6 @@
                     <p>アドレス: <strong id="javaAddress">example.java.server</strong></p>
                     <button class="copy-button" onclick="copyToClipboard('example.java.server', this)">コピー</button>
                 </div>
-                <div class="address-container">
-                    <p>ポート: <strong>25565</strong></p>
-                </div>
             </div>
             <div class="method-card">
                 <p class="method-title">統合版の参加方法</p>
@@ -245,31 +241,33 @@
                 <p>3. 接続をクリックして、サーバーに入ります。</p>
                 <div class="address-container">
                     <p>アドレス: <strong id="bedrockAddress">example.bedrock.server</strong></p>
+                    <p>ポート: <strong id="bedrockPort">19132</strong></p>
                     <button class="copy-button" onclick="copyToClipboard('example.bedrock.server', this)">コピー</button>
-                </div>
-                <div class="address-container">
-                    <p>ポート: <strong>19132</strong></p>
                 </div>
             </div>
         </div>
     </main>
     <footer>
-        <p>© 2024 すてら - All rights reserved.</p>
+        <p>&copy; 2024 すてら. All rights reserved.</p>
     </footer>
+
     <script>
         function copyToClipboard(text, button) {
-            const tempInput = document.createElement("input");
-            tempInput.value = text;
-            document.body.appendChild(tempInput);
-            tempInput.select();
-            document.execCommand("copy");
-            document.body.removeChild(tempInput);
-            button.classList.add("copy-success");
-            button.textContent = "コピーしました！";
-            setTimeout(() => {
-                button.classList.remove("copy-success");
-                button.textContent = "コピー";
-            }, 2000);
+            navigator.clipboard.writeText(text).then(() => {
+                button.innerText = 'コピー成功!';
+                button.classList.add('copy-success');
+                setTimeout(() => {
+                    button.innerText = 'コピー';
+                    button.classList.remove('copy-success');
+                }, 2000);
+            }).catch(err => {
+                button.innerText = 'コピー失敗';
+                button.classList.add('copy-fail');
+                setTimeout(() => {
+                    button.innerText = 'コピー';
+                    button.classList.remove('copy-fail');
+                }, 2000);
+            });
         }
     </script>
 </body>
