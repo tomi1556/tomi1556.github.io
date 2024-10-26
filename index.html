@@ -18,34 +18,54 @@
         header {
             position: relative;
             overflow: hidden;
-            height: 100vh; /* ヘッダーの高さを全画面に */
+            height: 100vh;
+        }
+
+        .slideshow-wrapper {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
         }
 
         .slideshow-container {
+            display: flex;
+            transition: transform 1s ease-in-out;
             width: 100%;
             height: 100%;
-            position: relative;
-            margin: auto;
         }
 
         .mySlides {
-            display: none;
+            flex: 0 0 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
         }
 
         .mySlides img {
             width: 100%;
             height: 100vh;
-            object-fit: cover; /* 画像をコンテナに収める */
+            object-fit: cover;
         }
 
-        .fade {
-            animation-name: fade;
-            animation-duration: 1.5s;
+        .header-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
         }
 
-        @keyframes fade {
-            from {opacity: .4}
-            to {opacity: 1}
+        .header-text h1 {
+            font-size: 4em;
+            margin: 0;
+            text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-text p {
+            font-size: 1.5em;
+            margin-top: 20px;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
         nav {
             background-color: #f0f8ff;
@@ -413,16 +433,24 @@
         showSlides();
 
         function showSlides() {
-            let i;
-            let slides = document.getElementsByClassName("mySlides");
-            for (i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
-            }
+            const slides = document.getElementsByClassName("mySlides");
+            const slideshowContainer = document.querySelector(".slideshow-container");
+
             slideIndex++;
-            if (slideIndex > slides.length) {slideIndex = 1}
-            slides[slideIndex-1].style.display = "block";
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
+            }
+
+            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+
             setTimeout(showSlides, 3000); // 3秒ごとに画像を切り替える
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const slides = document.getElementsByClassName("mySlides");
+            slides[0].style.display = "flex";
+            setTimeout(showSlides, 3000); // 3秒後にスライドショーを開始
+        });
     </script>
     <script>
         async function fetchOnlineUsers() {
