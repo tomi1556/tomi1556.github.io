@@ -18,7 +18,7 @@
         header {
             position: relative;
             overflow: hidden;
-            height: 100vh;
+            height: 100vh; /* ヘッダーの高さを全画面に */
         }
 
         .slideshow-wrapper {
@@ -28,17 +28,18 @@
         }
 
         .slideshow-container {
-            display: flex;
-            transition: transform 1s ease-in-out;
-            width: 100%;
+            display: flex; /* 横方向に並べる */
+            transition: transform 1s ease-in-out; /* スライドのアニメーション */
+            width: calc(100% * 3); /* スライドの数に応じて設定 */
             height: 100%;
         }
 
         .mySlides {
-            flex: 0 0 100%;
+            flex: 0 0 100%; /* 1スライドを全幅に設定 */
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; /* 縦方向に中央揃え */
+            position: relative;
         }
 
         .mySlides img {
@@ -341,26 +342,28 @@
 </head>
 <body>
     <header>
-        <div class="slideshow-container">
-            <div class="mySlides">
-                <img src="header1.png" alt="スライド1">
-                <div class="header-text">
-                    <h1>すてら</h1>
-                    <p>居心地のいい居場所となるようなMinecraftサーバー</p>
+        <div class="slideshow-wrapper">
+            <div class="slideshow-container">
+                <div class="mySlides">
+                    <img src="header1.png" alt="スライド1">
+                    <div class="header-text">
+                        <h1>すてら</h1>
+                        <p>居心地のいい居場所となるようなMinecraftサーバー</p>
+                    </div>
                 </div>
-            </div>
-            <div class="mySlides">
-                <img src="header2.png" alt="スライド2">
-                <div class="header-text">
-                    <h1>すてら</h1>
-                    <p>楽しさと癒やしを提供する場所</p>
+                <div class="mySlides">
+                    <img src="header2.png" alt="スライド2">
+                    <div class="header-text">
+                        <h1>すてら</h1>
+                        <p>楽しさと癒やしを提供する場所</p>
+                    </div>
                 </div>
-            </div>
-            <div class="mySlides">
-                <img src="header3.png" alt="スライド3">
-                <div class="header-text">
-                    <h1>すてら</h1>
-                    <p>仲間と共に素晴らしい世界を作りましょう</p>
+                <div class="mySlides">
+                    <img src="header3.png" alt="スライド3">
+                    <div class="header-text">
+                        <h1>すてら</h1>
+                        <p>仲間と共に素晴らしい世界を作りましょう</p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -430,12 +433,10 @@
     </footer>
     <script>
         let slideIndex = 0;
-        showSlides();
+        const slides = document.querySelectorAll(".mySlides");
+        const slideshowContainer = document.querySelector(".slideshow-container");
 
         function showSlides() {
-            const slides = document.getElementsByClassName("mySlides");
-            const slideshowContainer = document.querySelector(".slideshow-container");
-
             slideIndex++;
             if (slideIndex >= slides.length) {
                 slideIndex = 0;
@@ -447,9 +448,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            const slides = document.getElementsByClassName("mySlides");
-            slides[0].style.display = "flex";
-            setTimeout(showSlides, 3000); // 3秒後にスライドショーを開始
+            showSlides(); // スライドショーを開始
         });
     </script>
     <script>
