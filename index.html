@@ -19,6 +19,7 @@
             position: relative;
             overflow: hidden;
             height: 100vh;
+            margin-top: 70px; /* ナビゲーションの高さ分のマージンを追加 */
         }
 
         .slideshow-wrapper {
@@ -92,6 +93,10 @@
             text-align: center;
             box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
             margin-bottom: 50px;
+            position: fixed; /* ナビゲーションを固定 */
+            width: 100%;
+            top: 0;
+            z-index: 1000;
         }
         nav ul {
             list-style: none;
