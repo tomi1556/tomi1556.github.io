@@ -449,22 +449,12 @@
             let slides = document.getElementsByClassName("mySlides");
             let slideshowContainer = document.querySelector(".slideshow-container");
 
-        // 全てのスライドを非表示にする
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none";
+            slideIndex++;
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
             }
     
-        // 表示するスライドのインデックスを計算
-            slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
-            }
-
-        // 表示するスライドをブロック表示
-            slides[slideIndex - 1].style.display = "block";
-
-        // 横スライド用にスライドコンテナの位置を調整
-            slideshowContainer.style.transform = `translateX(-${(slideIndex - 1) * 100}%)`;
+            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
 
             setTimeout(showSlides, 3000); // 3秒ごとに画像を切り替える
         }
