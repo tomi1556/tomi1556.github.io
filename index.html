@@ -22,14 +22,14 @@
         }
 
         .slideshow-container {
-            display: flex; /* 横方向に並べる */
-            transition: transform 1s ease-in-out; /* スライドのアニメーション */
-            width: 300%; /* スライドの数に応じて設定 */
+            width: 100%;
+            height: 100%;
+            position: relative;
+            margin: auto;
         }
 
         .mySlides {
-            min-width: 100%; /* 1スライドを全幅に設定 */
-            flex-shrink: 0; /* スライドのサイズを変えないようにする */
+            display: none;
         }
 
         .mySlides img {
@@ -38,25 +38,14 @@
             object-fit: cover; /* 画像をコンテナに収める */
         }
 
-        .header-text {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            color: #fff;
+        .fade {
+            animation-name: fade;
+            animation-duration: 1.5s;
         }
 
-        .header-text h1 {
-            font-size: 4em;
-            margin: 0;
-            text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
-        }
-
-        .header-text p {
-            font-size: 1.5em;
-            margin-top: 20px;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        @keyframes fade {
+            from {opacity: .4}
+            to {opacity: 1}
         }
         nav {
             background-color: #f0f8ff;
@@ -424,24 +413,16 @@
         showSlides();
 
         function showSlides() {
+            let i;
             let slides = document.getElementsByClassName("mySlides");
-            let slideshowContainer = document.querySelector(".slideshow-container");
-
-            slideIndex++;
-            if (slideIndex >= slides.length) {
-                slideIndex = 0;
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
             }
-
-            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.display = "block";
             setTimeout(showSlides, 3000); // 3秒ごとに画像を切り替える
         }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            let slides = document.getElementsByClassName("mySlides");
-            slides[0].style.display = "block";
-            setTimeout(showSlides, 3000); // 3秒後にスライドショーを開始
-        });
     </script>
     <script>
         async function fetchOnlineUsers() {
