@@ -366,15 +366,18 @@
             flex-direction: column;
             align-items: center;
             margin: 20px;
-            border: 2px solid #558b2f; /* 枠を追加 */
-            border-radius: 10px;
+            border: 2px solid #4caf50; /* 明るいけど濃い緑の枠 */
+            border-radius: 15px; /* 丸みを帯びた角 */
             padding: 10px;
-            transition: transform 0.3s ease-in-out; /* アニメーションを追加 */
+            transition: transform 0.3s ease-in-out;
+            background-color: #e8f5e9; /* 背景色を淡い緑に */
+            width: 150px; /* 全プレイヤー同じ幅 */
+            height: 200px; /* 全プレイヤー同じ高さ */
         }
 
         .player img {
-            width: 100px;
-            height: 100px;
+            width: 80px; /* 全プレイヤー同じ画像幅 */
+            height: 80px; /* 全プレイヤー同じ画像高さ */
             border-radius: 50%;
         }
 
@@ -382,10 +385,11 @@
             font-size: 1.2em;
             margin-top: 10px;
             color: #333;
+            font-family: 'Potta One', cursive; /* 可愛いフォント */
         }
 
         .player:hover {
-            transform: scale(1.1); /* ホバー時に拡大 */
+            transform: scale(1.1);
         }
 
         @keyframes fadeIn {
