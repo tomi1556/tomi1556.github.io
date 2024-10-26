@@ -372,7 +372,7 @@
             transition: transform 0.3s ease-in-out;
             background-color: #e8f5e9; /* 背景色を淡い緑に */
             width: 150px; /* 全プレイヤー同じ幅 */
-            height: 200px; /* 全プレイヤー同じ高さ */
+            height: 180px; /* 全プレイヤー同じ高さ（少し短く） */
         }
 
         .player img {
@@ -386,6 +386,11 @@
             margin-top: 10px;
             color: #333;
             font-family: 'Potta One', cursive; /* 可愛いフォント */
+        }
+
+        .player .version {
+            font-size: 0.8em;
+            color: #999;
         }
 
         .player:hover {
@@ -539,6 +544,25 @@
     <footer>
         <p>&copy; 2024 すてら. All Rights Reserved.</p>
     </footer>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const players = document.querySelectorAll(".player");
+        
+            players.forEach(player => {
+                const mcid = player.querySelector("p").textContent;
+                const version = document.createElement("div");
+                version.className = "version";
+            
+                if (mcid.startsWith(".")) {
+                    version.textContent = "統合版";
+                } else {
+                    version.textContent = "Java版";
+                }
+            
+                player.appendChild(version);
+            });
+        });
+    </script>
     <script>
         let slideIndex = 1; // スライドインデックスを1から開始
         const slides = document.querySelectorAll(".mySlides");
