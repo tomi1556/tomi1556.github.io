@@ -442,7 +442,6 @@
     </footer>
     <script>
         let slideIndex = 0;
-        showSlides();
 
         function showSlides() {
             let slides = document.getElementsByClassName("mySlides");
@@ -453,7 +452,7 @@
 
             slideIndex++;
             if (slideIndex > slides.length) {
-            slideIndex = 1;
+                slideIndex = 1;
             }
 
             slides[slideIndex-1].style.display = "block"; // 表示するスライドをブロック表示
@@ -464,9 +463,11 @@
     // 最初のスライドを表示
         document.addEventListener("DOMContentLoaded", function() {
             let slides = document.getElementsByClassName("mySlides");
-            slides[slideIndex].style.display = "block";
+            slides[0].style.display = "block";
+            setTimeout(showSlides, 3000); // 3秒後にスライドショーを開始
         });
     </script>
+
     <script>
         async function fetchOnlineUsers() {
             try {
