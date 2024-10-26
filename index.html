@@ -431,14 +431,17 @@
 
         function showSlides() {
             let slides = document.getElementsByClassName("mySlides");
-            let slideshowContainer = document.querySelector(".slideshow-container");
 
-            slideIndex++;
-            if (slideIndex >= slides.length) {
-                slideIndex = 0;
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none"; // 全てのスライドを非表示にする
             }
 
-            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+            slideIndex++;
+            if (slideIndex > slides.length) {
+                slideIndex = 1;
+            }
+
+            slides[slideIndex-1].style.display = "block"; // 表示するスライドをブロック表示
 
             setTimeout(showSlides, 3000); // 3秒ごとに画像を切り替える
         }
@@ -447,7 +450,6 @@
         document.addEventListener("DOMContentLoaded", function() {
             let slides = document.getElementsByClassName("mySlides");
             slides[0].style.display = "block";
-            setTimeout(showSlides, 3000); // 3秒後にスライドショーを開始
         });
     </script>
     <script>
