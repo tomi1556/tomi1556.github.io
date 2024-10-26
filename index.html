@@ -439,17 +439,22 @@
         <p>&copy; 2024 すてら. All Rights Reserved.</p>
     </footer>
     <script>
-        let slideIndex = 0;
+        let slideIndex = 1;
         const slides = document.querySelectorAll(".mySlides");
         const slideshowContainer = document.querySelector(".slideshow-container");
 
         function showSlides() {
+            slideshowContainer.style.transition = "transform 1s ease-in-out";
+            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+
             slideIndex++;
             if (slideIndex >= slides.length) {
-                slideIndex = 0;
+                setTimeout(() => {
+                    slideshowContainer.style.transition = "none";
+                    slideshowContainer.style.transform = "translateX(0)";
+                    slideIndex = 1;
+                }, 1000); // 1秒後にリセット
             }
-
-            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
 
             setTimeout(showSlides, 3000); // 3秒ごとに画像を切り替える
         }
