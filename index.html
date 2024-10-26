@@ -444,7 +444,7 @@
         const slideshowContainer = document.querySelector(".slideshow-container");
 
         function showSlides() {
-            slideshowContainer.style.transition = "transform 1s ease-in-out";
+            slideshowContainer.style.transition = "transform 2s ease-in-out"; // スライドのスピードを2秒に設定
             slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
 
             slideIndex++;
@@ -453,14 +453,14 @@
                     slideshowContainer.style.transition = "none";
                     slideshowContainer.style.transform = "translateX(0)";
                     slideIndex = 1;
-                }, 1000); // 1秒後にリセット
+                }, 2000); // スピードに合わせてリセットタイミングも変更
             }
 
-            setTimeout(showSlides, 3000); // 3秒ごとに画像を切り替える
+            setTimeout(showSlides, 5000); // スライドの表示時間を5秒に変更
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(showSlides, 3000); // 3秒後にスライドショーを開始
+            setTimeout(showSlides, 5000); // 5秒後にスライドショーを開始
         });
     </script>
     <script>
