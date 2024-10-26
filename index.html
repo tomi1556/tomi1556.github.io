@@ -88,26 +88,28 @@
             }
         }    
         nav {
-            background-color: #f0f8ff;
+            background-color: transparent; /* 背景を透明に */
             padding: 15px;
-            text-align: center;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.1);
-            margin-bottom: 50px;
+            text-align: right; /* 右揃えにする */
+            box-shadow: none; /* ボックスシャドウを外す */
             position: fixed; /* ナビゲーションを固定 */
             width: 100%;
             top: 0;
             z-index: 1000;
         }
+
         nav ul {
             list-style: none;
             padding: 0;
             margin: 0;
             display: flex;
-            justify-content: center;
+            justify-content: flex-end; /* 右揃えにする */
         }
+
         nav ul li {
             margin: 0 20px;
         }
+
         nav ul li a {
             text-decoration: none;
             color: #558b2f;
@@ -119,6 +121,7 @@
             border-radius: 25px;
             transition: all 0.3s ease;
         }
+
         nav ul li a:hover {
             background-color: #558b2f;
             color: #fff;
