@@ -18,7 +18,7 @@
         header {
             position: relative;
             overflow: hidden;
-            height: 100vh; /* ヘッダーの高さを全画面に */
+            height: 100vh;
         }
 
         .slideshow-wrapper {
@@ -28,17 +28,17 @@
         }
 
         .slideshow-container {
-            display: flex; /* 横方向に並べる */
-            transition: transform 1s ease-in-out; /* スライドのアニメーション */
+            display: flex;
+            transition: transform 2s ease-in-out; /* スライドのアニメーション */
             width: 100%; /* スライドの数に応じて設定 */
             height: 100%;
         }
 
         .mySlides {
-            flex: 0 0 100%; /* 1スライドを全幅に設定 */
+            flex: 0 0 100%;
             display: flex;
             justify-content: center;
-            align-items: center; /* 縦方向に中央揃え */
+            align-items: center;
             position: relative;
         }
 
@@ -50,22 +50,18 @@
 
         .header-text {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
+            bottom: 20px; /* テキストを下部に配置 */
+            right: 20px; /* テキストを右下に配置 */
+            text-align: right;
             color: #fff;
+            background: rgba(0, 0, 0, 0.5); /* 背景を暗くする */
+            padding: 10px 20px;
+            border-radius: 10px;
         }
 
         .header-text h1 {
-            font-size: 4em;
+            font-size: 2.5em; /* フォントサイズを調整 */
             margin: 0;
-            text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
-        }
-
-        .header-text p {
-            font-size: 1.5em;
-            margin-top: 20px;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
         nav {
