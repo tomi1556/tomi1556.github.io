@@ -16,37 +16,66 @@
             line-height: 1.8;
         }
         header {
-            background-image: url('header.png');
-            background-size: cover;
-            background-position: center;
-            color: #f0f8ff;
-            padding: 80px 0;
-            text-align: center;
-            font-family: 'Potta One', cursive;
             position: relative;
             overflow: hidden;
+            height: 100vh; /* ヘッダーの高さを全画面に */
         }
 
-        header::before {
-            content: '';
+        .slideshow-container {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.3); /* 黒の半透明レイヤー */
-            z-index: -1;
         }
-        header h1 {
+
+        .mySlides {
+            display: none;
+            height: 100%;
+        }
+
+        .mySlides img {
+            width: 100%;
+            height: 100vh;
+            object-fit: cover;
+        }
+
+        .header-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #fff;
+        }
+
+        .header-text h1 {
+            font-size: 4em;
             margin: 0;
-            font-size: 3em;
-            color: #f0f8ff;
             text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.3);
         }
-        header p {
-            font-size: 1.2em;
+
+        .header-text p {
+            font-size: 1.5em;
             margin-top: 20px;
-            color: #f0f8ff;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+
+        .fade {
+            -webkit-animation-name: fade;
+            -webkit-animation-duration: 1.5s;
+            animation-name: fade;
+            animation-duration: 1.5s;
+        }
+
+        @-webkit-keyframes fade {
+            from {opacity: 0.4}
+            to {opacity: 1}
+        }
+
+        @keyframes fade {
+            from {opacity: 0.4}
+            to {opacity: 1}
         }
         nav {
             background-color: #f0f8ff;
@@ -322,8 +351,29 @@
 </head>
 <body>
     <header>
-        <h1>すてら</h1>
-        <p>居心地のいい居場所となるようなMinecraftサーバー</p>
+        <div class="slideshow-container">
+            <div class="mySlides fade">
+                <img src="header1.png" alt="スライド1">
+                <div class="header-text">
+                    <h1>すてら</h1>
+                    <p>居心地のいい居場所となるようなMinecraftサーバー</p>
+                </div>
+            </div>
+            <div class="mySlides fade">
+                <img src="header2.png" alt="スライド2">
+                <div class="header-text">
+                    <h1>すてら</h1>
+                    <p>楽しさと癒やしを提供する場所</p>
+                </div>
+            </div>
+            <div class="mySlides fade">
+                <img src="header3.png" alt="スライド3">
+                <div class="header-text">
+                    <h1>すてら</h1>
+                    <p>仲間と共に素晴らしい世界を作りましょう</p>
+                </div>
+            </div>
+        </div>
     </header>
     <nav>
         <ul>
@@ -388,6 +438,22 @@
     <footer>
         <p>&copy; 2024 すてら. All Rights Reserved.</p>
     </footer>
+    <script>
+        let slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            let i;
+            let slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.display = "block";
+            setTimeout(showSlides, 3000); // 3秒ごとに画像を切り替える
+        }
+    </script>
     <script>
         async function fetchOnlineUsers() {
             try {
