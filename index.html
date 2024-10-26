@@ -547,12 +547,13 @@
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             const players = document.querySelectorAll(".player");
-        
+
             players.forEach(player => {
-                const mcid = player.querySelector("p").textContent;
+                const mcidElement = player.querySelector("p");
+                const mcid = mcidElement.textContent;
                 const version = document.createElement("div");
                 version.className = "version";
-            
+
                 if (mcid.startsWith(".")) {
                     version.textContent = "統合版";
                     version.style.color = "#1e90ff"; // 明るい濃い青色
@@ -560,8 +561,8 @@
                     version.textContent = "Java版";
                     version.style.color = "#4caf50"; // 明るい濃い緑色
                 }
-            
-                player.appendChild(version);
+
+                mcidElement.insertAdjacentElement('afterend', version);
             });
         });
     </script>
