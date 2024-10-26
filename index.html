@@ -548,6 +548,31 @@
         <p>&copy; 2024 すてら. All Rights Reserved.</p>
     </footer>
     <script>
+        let slideIndex = 0;
+        const slides = document.querySelectorAll(".mySlides");
+        const headerMessage = document.getElementById("header-message");
+        const messages = [
+            "すてらサーバーへようこそ！",
+            "日々の疲れから開放されよう",
+            "ぜひ参加していってください"
+        ];
+
+        function showSlides() {
+            for (let i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}
+            slides[slideIndex-1].style.display = "block";
+            headerMessage.textContent = messages[slideIndex-1];
+            setTimeout(showSlides, 3000);
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            showSlides();
+        });
+    </script>
+    <script>
         let slideIndex = 1; // スライドインデックスを1から開始
         const slides = document.querySelectorAll(".mySlides");
         const slideshowContainer = document.querySelector(".slideshow-container");
