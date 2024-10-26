@@ -453,10 +453,10 @@
 
             slideIndex++;
             if (slideIndex > slides.length) {
-                slideIndex = 1;
+            slideIndex = 1;
             }
 
-            slides[slideIndex - 1].style.display = "block"; // 表示するスライドをブロック表示
+            slides[slideIndex-1].style.display = "block"; // 表示するスライドをブロック表示
 
             setTimeout(showSlides, 3000); // 3秒ごとに画像を切り替える
         }
