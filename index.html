@@ -92,10 +92,11 @@
             text-align: right; /* 右揃えにする */
             box-shadow: none; /* ボックスシャドウを外す */
             position: fixed; /* ナビゲーションを固定 */
-            width: 100%;
+            width: calc(100% - 20px); /* 全幅から20px引いた幅に設定 */
             top: 0;
             z-index: 1000;
-            padding-right: -35px; /* 右端が見えるように少し左にずらす */
+            right: 0; /* 右端に固定 */
+            margin-right: 0; /* 右端が見えるようにする */
         }
 
         nav ul {
@@ -105,6 +106,7 @@
             display: flex;
             justify-content: flex-end; /* 右揃えにする */
         }
+
         nav ul li {
             margin: 0;
         }
@@ -115,7 +117,7 @@
             font-size: 1em;
             font-weight: bold;
             padding: 10px 20px;
-            background-color: #558b2f; /* 少し明るい緑に変更 */
+            background-color: #6abf4b; /* 少し明るい緑に変更 */
             border: none;
             border-radius: 0; /* 角を取る */
             transition: all 0.3s ease;
@@ -128,6 +130,7 @@
             background-color: #8bc34a; /* ホバー時の背景色も明るい緑に */
             color: #fff;
         }
+
         nav ul li:first-child a {
             border-top-left-radius: 25px; /* 左端のボタンに角丸を追加 */
             border-bottom-left-radius: 25px;
