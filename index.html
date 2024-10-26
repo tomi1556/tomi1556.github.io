@@ -22,22 +22,20 @@
         }
 
         .slideshow-container {
-            position: relative;
-            width: 100%;
-            height: 100%;
+            display: flex; /* 横方向に並べる */
+            transition: transform 1s ease-in-out; /* スライドのアニメーション */
+            width: 300%; /* スライドの数に応じて調整 */
         }
 
         .mySlides {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            display: none;
+            min-width: 100%; /* 1スライドを全幅に設定 */
+            flex-shrink: 0; /* スライドのサイズを変えないようにする */
         }
 
         .mySlides img {
             width: 100%;
             height: 100vh;
-            object-fit: cover;
+            object-fit: cover; /* 画像をコンテナに収める */
         }
 
         .header-text {
@@ -423,27 +421,26 @@
     </footer>
     <script>
         let slideIndex = 0;
-        let slides = document.getElementsByClassName("mySlides");
         showSlides();
 
         function showSlides() {
-            for (let i = 0; i < slides.length; i++) {
-                slides[i].style.display = "none"; // 全てのスライドを非表示にする
-            }
+            let slides = document.getElementsByClassName("mySlides");
+            let slideshowContainer = document.querySelector(".slideshow-container");
 
             slideIndex++;
-            if (slideIndex > slides.length) {
-                slideIndex = 1;
+            if (slideIndex >= slides.length) {
+                slideIndex = 0;
             }
 
-            slides[slideIndex - 1].style.display = "block"; // 表示するスライドをブロック表示
+            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
 
             setTimeout(showSlides, 3000); // 3秒ごとに画像を切り替える
         }
 
-        // 最初のスライドを表示
         document.addEventListener("DOMContentLoaded", function() {
-            slides[slideIndex].style.display = "block";
+            let slides = document.getElementsByClassName("mySlides");
+            slides[0].style.display = "block";
+            setTimeout(showSlides, 3000); // 3秒後にスライドショーを開始
         });
     </script>
     <script>
