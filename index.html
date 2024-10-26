@@ -555,8 +555,10 @@
             
                 if (mcid.startsWith(".")) {
                     version.textContent = "統合版";
+                    version.style.color = "#1e90ff"; // 明るい濃い青色
                 } else {
                     version.textContent = "Java版";
+                    version.style.color = "#4caf50"; // 明るい濃い緑色
                 }
             
                 player.appendChild(version);
