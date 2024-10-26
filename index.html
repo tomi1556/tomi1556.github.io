@@ -429,7 +429,6 @@
         }
     </style>
 </head>
-<body>
     <header>
         <div class="slideshow-wrapper">
             <div class="slideshow-container">
@@ -494,6 +493,7 @@
             </li>
         </ul>
     </nav>
+<body>
     <main>
         <h2>すてらサーバーへようこそ！</h2>
         <div class="features">
@@ -549,28 +549,6 @@
     <footer>
         <p>&copy; 2024 すてら. All Rights Reserved.</p>
     </footer>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const players = document.querySelectorAll(".player");
-        
-            players.forEach(player => {
-                const mcidElement = player.querySelector("p");
-                const mcid = mcidElement.textContent;
-                const version = document.createElement("div");
-                version.className = "version";
-            
-                if (mcid.startsWith(".")) {
-                    version.textContent = "統合版";
-                    version.style.color = "#1e90ff"; // 明るい濃い青色
-                } else {
-                    version.textContent = "Java版";
-                    version.style.color = "#4caf50"; // 明るい濃い緑色
-                }
-            
-                player.appendChild(version); // 親要素に追加
-            });
-        });
-    </script>
     <script>
         let slideIndex = 1; // スライドインデックスを1から開始
         const slides = document.querySelectorAll(".mySlides");
