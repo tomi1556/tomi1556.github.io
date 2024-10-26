@@ -87,14 +87,18 @@
             }
         }    
         nav {
-            background-color: transparent; /* 背景を透明に */
-            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.8); /* 透明感のある白背景 */
+            backdrop-filter: blur(10px); /* 背景をぼかす */
+            padding: 10px 20px;
             text-align: right; /* 右揃えにする */
-            box-shadow: none; /* ボックスシャドウを外す */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* 柔らかい影を追加 */
             position: fixed; /* ナビゲーションを固定 */
             width: 100%;
             top: 0;
             z-index: 1000;
+            border-radius: 0 0 10px 10px; /* 下部の角を丸くする */
+            display: flex;
+            justify-content: flex-end;
         }
 
         nav ul {
@@ -102,34 +106,37 @@
             padding: 0;
             margin: 0;
             display: flex;
-            justify-content: flex-end; /* 右揃えにする */
         }
 
         nav ul li {
-            margin: 0 20px;
+            margin: 0;
         }
-        nav ul li a:hover {
-            background-color: #558b2f;
-            color: #fff;
-        }
+
         nav ul li a {
             text-decoration: none;
             color: #fff;
             font-size: 1em;
             font-weight: bold;
-            padding: 10px;
-            background-color: #558b2f;
+            padding: 10px 20px;
+            background-color: #558b2f; /* 背景色を変更 */
             border: none;
-            border-radius: 25px;
+            border-radius: 0; /* 角を取る */
             transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
         nav ul li a:hover {
-            background-color: #33691e;
-            color: #fff;
+            background-color: #33691e; /* ホバー時の背景色を変更 */
+            color: #fff; /* テキストを白に保つ */
+        }
+
+        nav ul li:first-child a {
+            border-top-left-radius: 25px; /* 左端のボタンに角丸を追加 */
+            border-bottom-left-radius: 25px;
+        }
+
+        nav ul li:last-child a {
+            border-top-right-radius: 25px; /* 右端のボタンに角丸を追加 */
+            border-bottom-right-radius: 25px;
         }
 
         nav ul li a .icon {
