@@ -65,6 +65,27 @@
             font-family: 'Potta One', cursive;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
         }
+                .scroll-indicator {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2em;
+            color: #fff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }    
         nav {
             background-color: #f0f8ff;
             padding: 15px;
@@ -359,12 +380,15 @@
                         <h1>みんながあなたを待っているよ！</h1>
                     </div>
                 </div>
-                    <div class="mySlides">
+                <div class="mySlides">
                     <img src="header1.png" alt="スライド1複製">
                     <div class="header-text">
                         <h1>すてらサーバーに入ってみよう！</h1>
                     </div>
                 </div>
+            </div>
+            <div class="scroll-indicator">
+                <span>&#x2193;</span>
             </div>
         </div>
     </header>
