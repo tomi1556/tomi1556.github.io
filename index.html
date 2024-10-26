@@ -439,7 +439,7 @@
         <p>&copy; 2024 すてら. All Rights Reserved.</p>
     </footer>
     <script>
-        let slideIndex = 1;
+        let slideIndex = 1; // スライドインデックスを1から開始
         const slides = document.querySelectorAll(".mySlides");
         const slideshowContainer = document.querySelector(".slideshow-container");
 
@@ -460,7 +460,7 @@
         }
 
         document.addEventListener("DOMContentLoaded", function() {
-            showSlides(); // スライドショーを開始
+            setTimeout(showSlides, 3000); // 3秒後にスライドショーを開始
         });
     </script>
     <script>
