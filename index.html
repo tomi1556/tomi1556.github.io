@@ -566,8 +566,6 @@
                 // 最後のスライド（ダミー）から1枚目に戻る処理
                 if (slideIndex === slides.length) {
                     setTimeout(() => {
-                        slideshowContainer.style.transition = "none"; // アニメーションを無効にする
-                        slideshowContainer.style.transform = "translateX(0)"; // 1枚目にリセット
                         slideIndex = 0; // インデックスもリセット
                     }, 2000); // アニメーションが完了してから実行
                 }
