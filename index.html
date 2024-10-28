@@ -533,23 +533,34 @@
         <p>&copy; 2024 すてら. All Rights Reserved.</p>
     </footer>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const slides = document.querySelectorAll(".mySlides");
-        const slideshowContainer = document.querySelector(".slideshow-container");
-        const headerText = document.querySelector(".header-text h1");
-        let slideIndex = 0;
-        const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
+        document.addEventListener("DOMContentLoaded", function() {
+            const slides = document.querySelectorAll(".mySlides");
+            const slideshowContainer = document.querySelector(".slideshow-container");
+            const headerText = document.querySelector(".header-text h1");
 
-        function showSlides() {
-            slideIndex = (slideIndex + 1) % slides.length; // スライドインデックスを循環させる
-            slideshowContainer.style.transition = "transform 2s ease-in-out"; // アニメーションを設定
-            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-            headerText.textContent = texts[slideIndex]; // テキストを更新
-            setTimeout(showSlides, 5000); // 次のスライドを表示するまでの待機時間
-        }
+            let slideIndex = 0;
+            const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
 
-        showSlides();
-    });
+            function showSlides() {
+                slideshowContainer.style.transition = "transform 2s ease-in-out";
+                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+                headerText.textContent = texts[slideIndex];
+            
+                slideIndex++;
+            
+                if (slideIndex >= slides.length) {
+                    setTimeout(() => {
+                        slideshowContainer.style.transition = "none";
+                        slideshowContainer.style.transform = "translateX(0)";
+                        slideIndex = 0;
+                    }, 2000); // リセットまでの時間
+                }
+            
+                setTimeout(showSlides, 5000);
+            }
+
+            showSlides();
+        });
     </script>
     <script>
         async function fetchOnlineUsers() {
