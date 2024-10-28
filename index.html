@@ -574,8 +574,9 @@
             let slideIndex = 0; // スライドインデックスを0から開始
 
             function showSlides() {
-                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`; // スライドの動き
-                slideshowContainer.style.transition = "transform 2s ease-in-out"; // アニメーションの設定
+                // 現在のスライドを表示
+                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+                slideshowContainer.style.transition = "transform 2s ease-in-out"; // スライドのアニメーション
 
                 // スライドに応じたテキストを設定
                 const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
@@ -591,7 +592,8 @@
                     }, 2000); // リセットまでの時間
                 }
 
-                setTimeout(showSlides, 5000); // 次のスライドへ進む
+                // スライドの表示時間を延長（アニメーションが完了する時間を確保）
+                setTimeout(showSlides, 7000); // 次のスライドへ進むまでの時間（7秒）
             }
 
             showSlides(); // スライドショーを開始
