@@ -543,42 +543,28 @@
     </footer>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const slides = document.querySelectorAll(".mySlides");
+          　const slides = document.querySelectorAll(".mySlides");
             const slideshowContainer = document.querySelector(".slideshow-container");
-            const headerText = document.querySelector(".header-text h1"); // 変数名を統一
-
+            const headerText = document.querySelector(".header-text h1");
+    
             let slideIndex = 0;
 
-            const messages = [
-                "すてらサーバーへようこそ！",
-                "他のスライドのメッセージ",
-                "さらに別のメッセージ"
-            ];
-
             function showSlides() {
-                // 画像をスライドさせる
+                // スライドのインデックスを更新
+                slideIndex = (slideIndex + 1) % slides.length; // インデックスを循環させる
+
+                // スライドの移動
                 slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
                 slideshowContainer.style.transition = "transform 2s ease-in-out";
 
-                // スライドインデックスを元にテキストを更新
-                headerText.textContent = messages[slideIndex];
+                // テキストを更新（必要な場合）
+                const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
+                headerText.textContent = texts[slideIndex];
 
-                slideIndex++;
-
-                // スライドが最後に到達したときの処理
-                if (slideIndex >= slides.length) {
-                    setTimeout(() => {
-                        slideshowContainer.style.transition = "none"; // トランジションを無効に
-                        slideshowContainer.style.transform = "translateX(0)"; // 最初に戻す
-                        slideIndex = 0; // インデックスをリセット
-                    }, 2000); // 2秒待つ
-                }
-
-                // 次のスライドを表示するためのタイマー
-                setTimeout(showSlides, 5000); // 5秒ごとに次のスライドを表示
+                setTimeout(showSlides, 5000); // 次のスライドを表示するまでの待機時間
             }
 
-            showSlides(); // スライドショーを開始
+            showSlides(); // 最初のスライドショーを開始
         });
     </script>
     <script>
