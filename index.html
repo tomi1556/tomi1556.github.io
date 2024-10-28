@@ -548,16 +548,27 @@
             let slideIndex = 0;
 
             function showSlides() {
-                // スライドの移動
-                slideshowContainer.style.transition = "transform 2s ease-in-out"; // アニメーションを設定
-                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-
                 // テキストを更新
                 const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
                 headerText.textContent = texts[slideIndex];
-    
+
+                // スライドの移動
+                slideshowContainer.style.transition = "transform 2s ease-in-out"; // アニメーションを設定
+            
+                // 次のスライドに進む前に現在のスライドを表示
+                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+
                 // スライドインデックスを更新
                 slideIndex = (slideIndex + 1) % slides.length; // インデックスを循環させる
+
+                // 3枚目から1枚目に戻る際の処理
+                if (slideIndex === 0) {
+                    // 3枚目の後、1枚目に戻る際のアニメーションを設定
+                    setTimeout(() => {
+                        slideshowContainer.style.transition = "none"; // アニメーションを無効にする
+                        slideshowContainer.style.transform = "translateX(0)"; // スライドをリセット
+                    }, 2000); // 2000ms後にリセット
+                }
 
                 // 次のスライドを表示するまでの待機時間
                 setTimeout(showSlides, 5000); // 5秒後に次のスライドを表示
