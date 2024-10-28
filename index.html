@@ -545,33 +545,25 @@
             const slideshowContainer = document.querySelector(".slideshow-container");
             const headerText = document.querySelector(".header-text h1");
 
-            let slideIndex = 1; // スライドインデックスを0から開始
+            let slideIndex = 0;
 
             function showSlides() {
-                // 現在のスライドを表示
+                // スライドの移動
+                slideshowContainer.style.transition = "transform 2s ease-in-out"; // アニメーションを設定
                 slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-                slideshowContainer.style.transition = "transform 2s ease-in-out"; // スライドのアニメーション
 
-                // スライドに応じたテキストを設定
+                // テキストを更新
                 const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
                 headerText.textContent = texts[slideIndex];
+    
+                // スライドインデックスを更新
+                slideIndex = (slideIndex + 1) % slides.length; // インデックスを循環させる
 
-                slideIndex++; // 次のスライドに移動
-
-                if (slideIndex >= slides.length) {
-                    slideIndex = 1; // 1枚目に戻る
-                    setTimeout(() => {
-                        slideshowContainer.style.transition = "none"; // アニメーションを無効にする
-                        slideshowContainer.style.transform = "translateX(0)"; // スライドをリセット
-                    }, 2000); // リセットまでの時間
-                }
-
-                // スライドの表示時間を延長（アニメーションが完了する時間を確保）
-                setTimeout(showSlides, 5000); // 次のスライドへ進むまでの時間（7秒）
+                // 次のスライドを表示するまでの待機時間
+                setTimeout(showSlides, 5000); // 5秒後に次のスライドを表示
             }
 
-            document.addEventListener("DOMContentLoaded", function() {
-                setTimeout(showSlides, 5000); // 5秒後にスライドショーを開始
+            showSlides(); // 最初のスライドショーを開始
         });
     </script>
     <script>
