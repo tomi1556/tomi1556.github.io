@@ -446,11 +446,9 @@
                     <img src="header3.png" alt="スライド3">
                 </div>
             </div> <!-- slideshow-container の閉じタグ -->
-
             <div class="header-text">
                 <h1>すてらサーバーへようこそ！</h1>
             </div>
-
             <div class="scroll-indicator">
                 <span>&#x2193;</span>
             </div>
@@ -574,30 +572,27 @@
             const slideshowContainer = document.querySelector(".slideshow-container");
             const headerText = document.querySelector(".header-text h1");
 
-            let slideIndex = 0;
+            let slideIndex = 0; // スライドインデックスを0から開始
 
             function showSlides() {
-                // 画像をスライドさせる
-                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-                slideshowContainer.style.transition = "transform 2s ease-in-out";
+                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`; // スライドの動き
+                slideshowContainer.style.transition = "transform 2s ease-in-out"; // アニメーションの設定
 
-                // 必要に応じてテキストをスライドに応じて変更
+                // スライドに応じたテキストを設定
                 const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
                 headerText.textContent = texts[slideIndex];
 
-                slideIndex++;
+                slideIndex++; // 次のスライドに移動
 
-                // スライドが最後に到達したときの処理
                 if (slideIndex >= slides.length) {
+                    slideIndex = 0; // 1枚目に戻る
                     setTimeout(() => {
-                        slideshowContainer.style.transition = "none"; // トランジションを無効に
-                        slideshowContainer.style.transform = "translateX(0)"; // 最初に戻す
-                        slideIndex = 0; // インデックスをリセット
-                    }, 2000); // 2秒待つ
+                        slideshowContainer.style.transition = "none"; // アニメーションを無効にする
+                        slideshowContainer.style.transform = "translateX(0)"; // スライドをリセット
+                    }, 2000); // リセットまでの時間
                 }
 
-                // 次のスライドを表示するためのタイマー
-                setTimeout(showSlides, 5000); // 5秒ごとに次のスライドを表示
+                setTimeout(showSlides, 5000); // 次のスライドへ進む
             }
 
             showSlides(); // スライドショーを開始
