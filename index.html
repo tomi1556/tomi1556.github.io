@@ -544,37 +544,50 @@
             const slides = document.querySelectorAll(".mySlides");
             const slideshowContainer = document.querySelector(".slideshow-container");
             const headerText = document.querySelector(".header-text h1");
+            const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
 
             let slideIndex = 0;
+            let isTransitioning = false;
+
+            // コンテナの幅を調整（スライド数 + ダミースライド分）
+            slideshowContainer.style.width = `${(slides.length + 1) * 100}%`;
+        
+            // 最後のスライドを複製してコンテナの最後に追加（無限ループ効果）
+            const firstSlideClone = slides[0].cloneNode(true);
+            slideshowContainer.appendChild(firstSlideClone);
 
             function showSlides() {
-                // テキストを更新
-                const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
-                headerText.textContent = texts[slideIndex];
+                if (!isTransitioning) {
+                    isTransitioning = true;
 
-                // スライドの移動
-                slideshowContainer.style.transition = "transform 2s ease-in-out"; // アニメーションを設定
-            
-                // 次のスライドに進む前に現在のスライドを表示
-                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+                    // スライドのアニメーション
+                    slideshowContainer.style.transition = "transform 2s ease-in-out";
+                    slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+                
+                    // テキストを更新
+                    headerText.textContent = texts[slideIndex % texts.length];
 
-                // スライドインデックスを更新
-                slideIndex = (slideIndex + 1) % slides.length; // インデックスを循環させる
+                    slideIndex++;
 
-                // 3枚目から1枚目に戻る際の処理
-                if (slideIndex === 0) {
-                    // 3枚目の後、1枚目に戻る際のアニメーションを設定
+                    // 3枚目の次に1枚目に戻る際の処理
+                    if (slideIndex === slides.length) {
+                        setTimeout(() => {
+                            slideshowContainer.style.transition = "none"; // アニメーションを無効に
+                            slideshowContainer.style.transform = "translateX(0)"; // 1枚目にリセット
+                            slideIndex = 0;
+                        }, 2000); // アニメーションが完了した後に実行
+                    }
+
+                    // アニメーション完了後にフラグをリセット
                     setTimeout(() => {
-                        slideshowContainer.style.transition = "none"; // アニメーションを無効にする
-                        slideshowContainer.style.transform = "translateX(0)"; // スライドをリセット
-                    }, 2000); // 2000ms後にリセット
+                        isTransitioning = false;
+                    }, 5000); // 次のスライドまでの待機時間
                 }
 
-                // 次のスライドを表示するまでの待機時間
-                setTimeout(showSlides, 5000); // 5秒後に次のスライドを表示
+                setTimeout(showSlides, 5000); // 次のスライドへの移行タイミング
             }
 
-            showSlides(); // 最初のスライドショーを開始
+            showSlides(); // スライドショーを開始
         });
     </script>
     <script>
