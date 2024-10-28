@@ -541,32 +541,6 @@
     </footer>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-          　const slides = document.querySelectorAll(".mySlides");
-            const slideshowContainer = document.querySelector(".slideshow-container");
-            const headerText = document.querySelector(".header-text h1");
-    
-            let slideIndex = 0;
-
-            function showSlides() {
-                // スライドのインデックスを更新
-                slideIndex = (slideIndex + 1) % slides.length; // インデックスを循環させる
-
-                // スライドの移動
-                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-                slideshowContainer.style.transition = "transform 2s ease-in-out";
-
-                // テキストを更新（必要な場合）
-                const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
-                headerText.textContent = texts[slideIndex];
-
-                setTimeout(showSlides, 5000); // 次のスライドを表示するまでの待機時間
-            }
-
-            showSlides(); // 最初のスライドショーを開始
-        });
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
             const slides = document.querySelectorAll(".mySlides");
             const slideshowContainer = document.querySelector(".slideshow-container");
             const headerText = document.querySelector(".header-text h1");
