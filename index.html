@@ -37,12 +37,12 @@
         .slideshow-container {
             display: flex;
             transition: transform 2s ease-in-out;
-            width: 100%; /* スライドの数に応じて設定 */
+            width: 400%; /* スライドの数に応じて設定 */
             height: 100%;
         }
 
         .mySlides {
-            min-width: 100%;
+            width: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -544,36 +544,31 @@
             const slides = document.querySelectorAll(".mySlides");
             const slideshowContainer = document.querySelector(".slideshow-container");
             const headerText = document.querySelector(".header-text h1");
-            const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
 
             let slideIndex = 0;
 
-            // 最初のスライドを複製して最後に追加
-            const firstSlideClone = slides[0].cloneNode(true);
-            slideshowContainer.appendChild(firstSlideClone);
-
             function showSlides() {
-                // スライドを右にアニメーション
-                slideshowContainer.style.transition = "transform 2s ease-in-out";
-                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-
-                // テキストを更新
-                headerText.textContent = texts[slideIndex % texts.length];
-
-                // スライドインデックスを次に進める
                 slideIndex++;
-
-                // 最後のスライド（ダミー）から1枚目に戻る処理
-                if (slideIndex === slides.length) {
+                if (slideIndex === slides.length - 1) {
+                    slideshowContainer.style.transition = "transform 2s ease-in-out";
+                    slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
                     setTimeout(() => {
-                        slideIndex = 0; // インデックスもリセット
-                    }, 2000); // アニメーションが完了してから実行
+                        slideshowContainer.style.transition = "none";
+                        slideshowContainer.style.transform = "translateX(0)";
+                        slideIndex = 0;
+                    }, 2000);
+                } else {
+                    slideshowContainer.style.transition = "transform 2s ease-in-out";
+                    slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
                 }
 
-                setTimeout(showSlides, 5000); // 5秒後に次のスライドを表示
+                const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
+                headerText.textContent = texts[slideIndex % texts.length];
+
+                setTimeout(showSlides, 5000);
             }
 
-            showSlides(); // スライドショーを開始
+            showSlides();
         });
     </script>
     <script>
