@@ -65,6 +65,7 @@
             padding: 10px 20px;
             border-radius: 10px;
             z-index: 1000;
+            pointer-events: none;
         }
         .header-text h1 {
             font-size: 3em; /* フォントサイズを大きく */
@@ -572,31 +573,36 @@
         });
     </script>
     <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const slides = document.querySelectorAll(".mySlides");
-        const slideshowContainer = document.querySelector(".slideshow-container");
+        document.addEventListener("DOMContentLoaded", function() {
+            const slides = document.querySelectorAll(".mySlides");
+            const slideshowContainer = document.querySelector(".slideshow-container");
+            const headerText = document.querySelector(".header-text h1");
+    
+            let slideIndex = 0;
 
-        let slideIndex = 0;
+            function showSlides() {
+                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+                slideshowContainer.style.transition = "transform 2s ease-in-out";
 
-        function showSlides() {
-            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-            slideshowContainer.style.transition = "transform 2s ease-in-out";
+                // 必要であればテキストをスライドに応じて変更
+                const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
+                headerText.textContent = texts[slideIndex];
 
-            slideIndex++;
+                slideIndex++;
 
-            if (slideIndex >= slides.length) {
-                setTimeout(() => {
-                    slideshowContainer.style.transition = "none";
-                    slideshowContainer.style.transform = "translateX(0)";
-                    slideIndex = 0;
-                }, 2000);
+                if (slideIndex >= slides.length) {
+                    setTimeout(() => {
+                        slideshowContainer.style.transition = "none";
+                        slideshowContainer.style.transform = "translateX(0)";
+                        slideIndex = 0;
+                    }, 2000);
+                }
+
+                setTimeout(showSlides, 5000);
             }
 
-            setTimeout(showSlides, 5000);
-        }
-
-        showSlides(); // スライドショーを開始
-    });
+            showSlides();
+        });
     </script>
     <script>
         async function fetchOnlineUsers() {
