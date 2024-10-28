@@ -572,31 +572,31 @@
         });
     </script>
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const slides = document.querySelectorAll(".mySlides");
-            const slideshowContainer = document.querySelector(".slideshow-container");
+    document.addEventListener("DOMContentLoaded", function() {
+        const slides = document.querySelectorAll(".mySlides");
+        const slideshowContainer = document.querySelector(".slideshow-container");
 
-            let slideIndex = 0;
+        let slideIndex = 0;
 
-            function showSlides() {
-                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-                slideshowContainer.style.transition = "transform 2s ease-in-out"; // スライドアニメーションの速度
+        function showSlides() {
+            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+            slideshowContainer.style.transition = "transform 2s ease-in-out";
 
-                slideIndex++;
+            slideIndex++;
 
-                if (slideIndex >= slides.length) {
-                    setTimeout(() => {
-                        slideshowContainer.style.transition = "none";
-                        slideshowContainer.style.transform = "translateX(0)";
-                        slideIndex = 0;
-                    }, 2000); // 2秒後にリセット
-                }
-
-                setTimeout(showSlides, 5000); // 次のスライドまでの表示時間
+            if (slideIndex >= slides.length) {
+                setTimeout(() => {
+                    slideshowContainer.style.transition = "none";
+                    slideshowContainer.style.transform = "translateX(0)";
+                    slideIndex = 0;
+                }, 2000);
             }
 
-            setTimeout(showSlides, 5000); // 最初のスライド表示の遅延
-        });
+            setTimeout(showSlides, 5000);
+        }
+
+        showSlides(); // スライドショーを開始
+    });
     </script>
     <script>
         async function fetchOnlineUsers() {
