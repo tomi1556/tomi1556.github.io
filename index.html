@@ -571,7 +571,7 @@
             const slideshowContainer = document.querySelector(".slideshow-container");
             const headerText = document.querySelector(".header-text h1");
 
-            let slideIndex = 0; // スライドインデックスを0から開始
+            let slideIndex = 1; // スライドインデックスを0から開始
 
             function showSlides() {
                 // 現在のスライドを表示
@@ -585,7 +585,7 @@
                 slideIndex++; // 次のスライドに移動
 
                 if (slideIndex >= slides.length) {
-                    slideIndex = 0; // 1枚目に戻る
+                    slideIndex = 1; // 1枚目に戻る
                     setTimeout(() => {
                         slideshowContainer.style.transition = "none"; // アニメーションを無効にする
                         slideshowContainer.style.transform = "translateX(0)"; // スライドをリセット
@@ -593,10 +593,11 @@
                 }
 
                 // スライドの表示時間を延長（アニメーションが完了する時間を確保）
-                setTimeout(showSlides, 7000); // 次のスライドへ進むまでの時間（7秒）
+                setTimeout(showSlides, 5000); // 次のスライドへ進むまでの時間（7秒）
             }
 
-            showSlides(); // スライドショーを開始
+            document.addEventListener("DOMContentLoaded", function() {
+                setTimeout(showSlides, 5000); // 5秒後にスライドショーを開始
         });
     </script>
     <script>
