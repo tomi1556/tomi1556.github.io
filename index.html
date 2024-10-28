@@ -548,9 +548,6 @@
 
             let slideIndex = 0;
             let isTransitioning = false;
-
-            // コンテナの幅を調整（スライド数 + ダミースライド分）
-            slideshowContainer.style.width = `${(slides.length + 1) * 100}%`;
         
             // 最後のスライドを複製してコンテナの最後に追加（無限ループ効果）
             const firstSlideClone = slides[0].cloneNode(true);
