@@ -573,29 +573,29 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            const slideshowContainer = document.querySelector(".slideshow-container");
             const slides = document.querySelectorAll(".mySlides");
-            slideshowContainer.style.width = `${slides.length * 100}%`; // スライド数に応じた幅を設定
+            const slideshowContainer = document.querySelector(".slideshow-container");
 
-            let slideIndex = 1;
+            let slideIndex = 0;
+
             function showSlides() {
                 slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-        
+                slideshowContainer.style.transition = "transform 2s ease-in-out"; // スライドアニメーションの速度
+
                 slideIndex++;
+
                 if (slideIndex >= slides.length) {
                     setTimeout(() => {
                         slideshowContainer.style.transition = "none";
                         slideshowContainer.style.transform = "translateX(0)";
-                        slideIndex = 1;
-                    }, 2000);
-                } else {
-                    slideshowContainer.style.transition = "transform 2s ease-in-out";
+                        slideIndex = 0;
+                    }, 2000); // 2秒後にリセット
                 }
 
-                setTimeout(showSlides, 5000);
+                setTimeout(showSlides, 5000); // 次のスライドまでの表示時間
             }
 
-            setTimeout(showSlides, 5000);
+            setTimeout(showSlides, 5000); // 最初のスライド表示の遅延
         });
     </script>
     <script>
