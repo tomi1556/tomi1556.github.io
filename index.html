@@ -571,32 +571,31 @@
             const slides = document.querySelectorAll(".mySlides");
             const slideshowContainer = document.querySelector(".slideshow-container");
             const headerText = document.querySelector(".header-text h1");
-    
-            let slideIndex = 0; // スライドの初期インデックスを0に設定
+
+            let slideIndex = 0;
 
             function showSlides() {
-                slideshowContainer.style.transition = "transform 2s ease-in-out"; // スライドのアニメーションを設定
+                // 画像をスライドさせる
                 slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+                slideshowContainer.style.transition = "transform 2s ease-in-out";
 
-                // 必要であればテキストをスライドに応じて変更
+                // 必要に応じてテキストをスライドに応じて変更
                 const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
-                if (headerText) {
-                    headerText.textContent = texts[slideIndex % texts.length]; // 配列の長さを考慮してインデックスを修正
-                } else {
-                    console.error("headerTextが見つかりません");
-                }
+                headerText.textContent = texts[slideIndex];
 
                 slideIndex++;
 
+                // スライドが最後に到達したときの処理
                 if (slideIndex >= slides.length) {
                     setTimeout(() => {
-                        slideshowContainer.style.transition = "none"; // スライドの遷移を無効化
-                        slideshowContainer.style.transform = "translateX(0)"; // 最初のスライドに戻す
-                        slideIndex = 0; // スライドインデックスをリセット
-                    }, 2000);
+                        slideshowContainer.style.transition = "none"; // トランジションを無効に
+                        slideshowContainer.style.transform = "translateX(0)"; // 最初に戻す
+                        slideIndex = 0; // インデックスをリセット
+                    }, 2000); // 2秒待つ
                 }
 
-                setTimeout(showSlides, 5000); // スライドを表示する間隔
+                // 次のスライドを表示するためのタイマー
+                setTimeout(showSlides, 5000); // 5秒ごとに次のスライドを表示
             }
 
             showSlides(); // スライドショーを開始
