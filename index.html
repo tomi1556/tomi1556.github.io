@@ -539,28 +539,29 @@
             const headerText = document.querySelector(".header-text h1");
 
             let slideIndex = 0;
-            const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
 
             function showSlides() {
+                const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
+                headerText.textContent = texts[slideIndex];
+
+                // スライドの移動
                 slideshowContainer.style.transition = "transform 2s ease-in-out";
                 slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-                headerText.textContent = texts[slideIndex];
-            
+
                 slideIndex++;
-            
                 if (slideIndex >= slides.length) {
+                    slideIndex = 0; // 最後のスライドから最初に戻る
                     setTimeout(() => {
-                        slideshowContainer.style.transition = "none";
-                        slideshowContainer.style.transform = "translateX(0)";
-                        slideIndex = 0;
+                        slideshowContainer.style.transition = "none"; // アニメーションを無効にする
+                        slideshowContainer.style.transform = "translateX(0)"; // スライドをリセット
                     }, 2000); // リセットまでの時間
                 }
-            
-                setTimeout(showSlides, 5000);
+
+                setTimeout(showSlides, 5000); // 次のスライドを表示するまでの待機時間
             }
 
-            showSlides();
-        });
+            showSlides(); // スライドショーを開始
+            });
     </script>
     <script>
         async function fetchOnlineUsers() {
