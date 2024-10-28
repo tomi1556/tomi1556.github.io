@@ -572,28 +572,30 @@
         });
     </script>
     <script>
-        let slideIndex = 1; // スライドインデックスを1から開始
-        const slides = document.querySelectorAll(".mySlides");
-        const slideshowContainer = document.querySelector(".slideshow-container");
+        document.addEventListener("DOMContentLoaded", function() {
+            const slideshowContainer = document.querySelector(".slideshow-container");
+            const slides = document.querySelectorAll(".mySlides");
+            slideshowContainer.style.width = `${slides.length * 100}%`; // スライド数に応じた幅を設定
 
-        function showSlides() {
-            slideshowContainer.style.transition = "transform 2s ease-in-out"; // スライドのスピードを2秒に設定
-            slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+            let slideIndex = 1;
+            function showSlides() {
+                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
+        
+                slideIndex++;
+                if (slideIndex >= slides.length) {
+                    setTimeout(() => {
+                        slideshowContainer.style.transition = "none";
+                        slideshowContainer.style.transform = "translateX(0)";
+                        slideIndex = 1;
+                    }, 2000);
+                } else {
+                    slideshowContainer.style.transition = "transform 2s ease-in-out";
+                }
 
-            slideIndex++;
-            if (slideIndex >= slides.length) {
-                setTimeout(() => {
-                    slideshowContainer.style.transition = "none";
-                    slideshowContainer.style.transform = "translateX(0)";
-                    slideIndex = 1;
-                }, 2000); // スピードに合わせてリセットタイミングも変更
+                setTimeout(showSlides, 5000);
             }
 
-            setTimeout(showSlides, 5000); // スライドの表示時間を5秒に変更
-        }
-
-        document.addEventListener("DOMContentLoaded", function() {
-            setTimeout(showSlides, 5000); // 5秒後にスライドショーを開始
+            setTimeout(showSlides, 5000);
         });
     </script>
     <script>
