@@ -543,22 +543,25 @@
             const slideInterval = 5000;
 
             function showSlides() {
+                // スライドテキストの設定
                 headerText.textContent = texts[slideIndex];
-            
+
+                // スライドの移動設定
                 slideshowContainer.style.transition = "transform 2s ease-in-out";
                 slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
 
+                // 次のスライドのインデックスを設定
                 slideIndex++;
 
-                // もし最後のスライドならリセットし、アニメーションなしで最初に戻る
                 if (slideIndex >= slides.length) {
                     setTimeout(() => {
-                        slideshowContainer.style.transition = "none"; // アニメーションなしでリセット
-                        slideshowContainer.style.transform = "translateX(0)";
-                        slideIndex = 0;
-                    }, 2000); // アニメーションの終了後にリセット
+                        slideshowContainer.style.transition = "none"; // トランジションを一時的に無効に
+                        slideshowContainer.style.transform = "translateX(0)"; // 最初のスライドに戻す
+                        slideIndex = 1; // 次は2番目のスライドからスタート
+                    }, 2000); // アニメーションの完了を待ってからリセット
                 }
 
+                // 次のスライドを5秒後に表示
                 setTimeout(showSlides, slideInterval);
             }
 
