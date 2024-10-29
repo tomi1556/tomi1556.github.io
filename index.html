@@ -267,57 +267,6 @@
         .arrows .next:hover .svg {
           left: 10px;
         }
-        header {
-            position: relative;
-            overflow: hidden;
-            height: 100vh;
-        }
-
-        .slideshow-wrapper {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-        }
-
-        .slideshow-container {
-            display: flex;
-            transition: transform 2s ease-in-out;
-            width: 300%; /* スライドの数に応じて設定 */
-            height: 100%;
-        }
-
-        .mySlides {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            position: relative; /* 相対位置に設定 */
-        }
-
-        .mySlides img {
-            width: 100%;
-            height: 100vh;
-            object-fit: cover;
-        }
-
-        .header-text {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            text-align: center;
-            color: #fff;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px 20px;
-            border-radius: 10px;
-            z-index: 1000;
-            pointer-events: none;
-        }
-        .header-text h1 {
-            font-size: 3em; /* フォントサイズを大きく */
-            margin: 0;
-            font-family: 'Potta One', cursive;
-            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
-        }
         .scroll-indicator {
             position: absolute;
             bottom: 10px;
@@ -548,7 +497,7 @@
                 width: 90%;
             }
         }
-        header, nav, main, footer {
+        nav, main, footer {
             opacity: 0;
             animation: fadeIn 1.5s ease-out forwards;
         }
@@ -558,10 +507,6 @@
                 opacity: 1;
                 transform: translateY(0);
             }
-        }
-
-        header {
-            animation-delay: 0.5s;
         }
 
         nav {
@@ -677,20 +622,6 @@
             justify-content: center; /* 中央揃え */
         }
     </style>
-    <header>
-            <div class="slideshow-wrapper">
-                <div class="slideshow-container">
-                    <div class="mySlides"><img src="header1.png" alt="スライド1"></div>
-                    <div class="mySlides"><img src="header2.png" alt="スライド2"></div>
-                    <div class="mySlides"><img src="header3.png" alt="スライド3"></div>
-                </div>
-                <div class="header-text"><h1>すてらサーバーへようこそ！</h1></div>
-            </div>
-            <div class="scroll-indicator">
-                <span>&#x2193;</span>
-            </div>
-        </div> <!-- slideshow-wrapper の閉じタグ -->
-    </header>
     <head>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     </head>
@@ -1100,42 +1031,6 @@
         if ($('.main-content .slideshow').length > 1) {
             $(window).on('scroll', homeSlideshowParallax);
         }
-    </script>
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const slides = document.querySelectorAll(".mySlides");
-            const slideshowContainer = document.querySelector(".slideshow-container");
-            const headerText = document.querySelector(".header-text h1");
-
-            let slideIndex = 0;
-            const texts = ["すてらサーバーへようこそ！", "他のスライドのメッセージ", "さらに別のメッセージ"];
-            const slideInterval = 5000;
-
-            function showSlides() {
-                // スライドテキストの設定
-                headerText.textContent = texts[slideIndex];
-
-                // スライドの移動設定
-                slideshowContainer.style.transition = "transform 2s ease-in-out";
-                slideshowContainer.style.transform = `translateX(-${slideIndex * 100}%)`;
-
-                // 次のスライドのインデックスを設定
-                slideIndex++;
-
-                if (slideIndex >= slides.length) {
-                    setTimeout(() => {
-                        slideshowContainer.style.transition = "none"; // トランジションを一時的に無効に
-                        slideshowContainer.style.transform = "translateX(0)"; // 最初のスライドに戻す
-                        slideIndex = 1; // 次は2番目のスライドからスタート
-                    }, 2000); // アニメーションの完了を待ってからリセット
-                }
-
-                // 次のスライドを5秒後に表示
-                setTimeout(showSlides, slideInterval);
-            }
-
-            showSlides();
-        });
     </script>
     <script>
         async function fetchOnlineUsers() {
