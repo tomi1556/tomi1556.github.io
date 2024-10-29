@@ -640,15 +640,3 @@ footer {
     flex-wrap: wrap; /* 横方向に並べて、折り返しも考慮 */
     justify-content: center; /* 中央揃え */
 }
-
-#online-users-title {
-    font-size: 1.8em;
-    color: #33691e;
-    font-family: 'Potta One', cursive;
-}
-
-#online-users {
-    font-size: 2.5em;
-    color: #8bc34a;
-    font-family: 'Potta One', cursive;
-}
