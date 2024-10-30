@@ -158,6 +158,7 @@ function slideshowSwitch(slideshow, index, auto) {
   }
 }
 
+
 function slideshowNext(slideshow, previous, auto) {
   var slides = slideshow.find(".slide");
   var activeSlide = slides.filter(".is-active");
@@ -229,6 +230,7 @@ if ($(".main-content .slideshow").length > 1) {
   $(window).on("scroll", homeSlideshowParallax);
 }
 
+
 async function fetchOnlineUsers() {
     try {
         const response = await fetch('https://mcapi.us/server/status?ip=stella.xgames.jp');
@@ -264,6 +266,8 @@ async function fetchOnlineUsers() {
 
 fetchOnlineUsers();
 setInterval(fetchOnlineUsers, 60000);
+
+
 function copyToClipboard(address, button) {
     navigator.clipboard.writeText(address).then(() => {
         button.textContent = '完了！';
