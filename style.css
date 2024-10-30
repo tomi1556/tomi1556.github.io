@@ -331,16 +331,17 @@ body {
 
   .arrows {
     .arrow {
-      margin: -33px 0 0;
+      margin: 0; /* 上下のマージンをなくす */
       padding: 20px;
       position: absolute;
-      top: 50%;
+      top: 50%; /* 画面の中央に配置 */
+      transform: translateY(-50%); /* 中央に合わせるためにtranslateを追加 */
       cursor: pointer;
       z-index: 3;
     }
 
     .prev {
-      left: 30px;
+      left: 20px;
 
       &:hover .svg {
         left: -10px;
@@ -348,7 +349,7 @@ body {
     }
 
     .next {
-      right: 30px;
+      right: 20px;
 
       &:hover .svg {
         left: 10px;
