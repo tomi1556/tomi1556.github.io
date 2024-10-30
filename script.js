@@ -235,7 +235,7 @@ async function fetchOnlineUsers() {
     try {
         const response = await fetch('https://mcapi.us/server/status?ip=stella.xgames.jp');
         const data = await response.json();
-        document.getElementById('user-count').textContent = data.players.now;
+        document.getElementById('online-users').textContent = data.players.now;
 
         const onlinePlayers = document.getElementById('online-players');
         onlinePlayers.innerHTML = '';
