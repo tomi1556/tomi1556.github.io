@@ -1,156 +1,144 @@
-//Based on https://codepen.io/zuraizm/pen/vGDHl pen by zuraiz
-jQuery(document).ready(function ($) {
+var slideshowDuration = 4000;
+var slideshow = $(".main-content .slideshow");
+var windowHeight = $(window).height(); // ウィンドウの初期高さを取得
+
+function slideshowSwitch(slideshow, index, auto) {
+  if (slideshow.data("wait")) return;
+
+  var slides = slideshow.find(".slide");
+  var activeSlide = slides.filter(".is-active");
+  var newSlide = slides.eq(index);
   
-    startSlider($('#slider'), 30); // Slide container ID, SlideShow interval 
+  if (newSlide.is(activeSlide)) return;
+
+  newSlide.addClass("is-new");
+  var timeout = slideshow.data("timeout");
+  clearTimeout(timeout);
+  slideshow.data("wait", true);
+  var transition = slideshow.attr("data-transition");
   
-    function startSlider(obj, timer) {
-      
-        var obj, timer;
-        var id = "#"+obj.attr("id");
-        var slideCount = obj.find('ul li').length;
-        slideWidth = obj.attr("data-width");
-        var sliderUlWidth = (slideCount+1) * slideWidth;
-        var time = 2;
-        var $bar,
-        
-        isPause,
-        tick,
-        percentTime;
-        isPause = false; //false for auto slideshow
-
-        $bar = obj.find('.progress .bar');
-
-        function startProgressbar() {
-            resetProgressbar();
-            percentTime = 0;    
-            tick = setInterval(interval, timer);
+  if (transition == "fade") {
+    newSlide.css({ display: "block", opacity: 0 });
+    TweenMax.to(newSlide, 1, {
+      opacity: 1,
+      onComplete: function () {
+        newSlide.addClass("is-active").removeClass("is-new");
+        activeSlide.removeClass("is-active").css({ display: "none" });
+        slideshow.data("wait", false);
+        if (auto) {
+          timeout = setTimeout(function () {
+            slideshowNext(slideshow, false, true);
+          }, slideshowDuration);
+          slideshow.data("timeout", timeout);
         }
+      }
+    });
+  } else {
+    var newSlideRight = (newSlide.index() > activeSlide.index()) ? 0 : "auto";
+    var newSlideLeft = (newSlide.index() > activeSlide.index()) ? "auto" : 0;
+    var activeSlideImageLeft = (newSlide.index() > activeSlide.index()) ? -slideshow.width() : slideshow.width();
 
-        function interval() {
-            if (isPause === false) {
-              percentTime += 1 / (time + 0.1);
-              $bar.css({
-                width: percentTime + "%"
-              });
-              if (percentTime >= 100) {
-                moveRight();
-                startProgressbar();
-              }
-            }
+    newSlide.css({
+      display: "block",
+      left: (newSlide.index() > activeSlide.index()) ? "100%" : "-100%",
+      zIndex: 2
+    });
+
+    TweenMax.to(activeSlide, 1, {
+      left: activeSlideImageLeft,
+      ease: Power3.easeInOut
+    });
+
+    TweenMax.to(newSlide, 1, {
+      left: 0,
+      ease: Power3.easeInOut,
+      onComplete: function () {
+        newSlide.addClass("is-active").removeClass("is-new");
+        activeSlide.removeClass("is-active").css({ display: "none" });
+        slideshow.data("wait", false);
+        if (auto) {
+          timeout = setTimeout(function () {
+            slideshowNext(slideshow, false, true);
+          }, slideshowDuration);
+          slideshow.data("timeout", timeout);
         }
-
-        function resetProgressbar() {
-            $bar.css({
-              width: 0 + '%'
-            });
-            clearTimeout(tick);
-        }
-  
-        function startslide() {
-
-            $(id+' ul li:last-child').prependTo(id+' ul');        
-            obj.find('ul').css({ width: sliderUlWidth+'vw', marginLeft: - slideWidth+'vw' });
-            
-            obj.find('ul li:last-child').appendTo(obj.attr('id')+' ul');
-
-        }
-
-        if (slideCount>1) {
-            startslide();
-            startProgressbar();
-        }
-        else { // hade navigation buttons for 1 slide only
-             $(id+' button.control_prev').hide();
-             $(id+' button.control_next').hide();
-        }
+      }
+    });
+  }
+}
 
 
-        
 
-        function moveLeft() {
-           $(id+' ul').css( { transition: "1s",
-                  transform:  "translateX(" + slideWidth + "vw)" 
-            });
+function slideshowNext(slideshow, previous, auto) {
+  var slides = slideshow.find(".slide");
+  var activeSlide = slides.filter(".is-active");
+  var newSlide = null;
+  if (previous) {
+    newSlide = activeSlide.prev(".slide");
+    if (newSlide.length === 0) {
+      newSlide = slides.last();
+    }
+  } else {
+    newSlide = activeSlide.next(".slide");
+    if (newSlide.length == 0) newSlide = slides.filter(".slide").first();
+  }
 
-            setTimeout( function() { 
-                
-                $(id+' ul li:last-child').prependTo(id+' ul');
-                $(id+' ul').css( { transition: "none",
-                  transform:  "translateX(" + 0 + "vw)" 
-                });
+  slideshowSwitch(slideshow, newSlide.index(), auto);
+}
 
-                $('li.actslide').prev().addClass('actslide').next().removeClass('actslide');
-            }, 1000 );
-          
-        }
+function homeSlideshowParallax() {
+  var scrollTop = $(window).scrollTop();
+  if (scrollTop > windowHeight) return;
+  var inner = slideshow.find(".slideshow-inner");
+  var newHeight = windowHeight - scrollTop / 2;
+  var newTop = scrollTop * 0.8;
 
-        function moveRight2() { // fix for only 2 slades
-          $(id+' ul li:first-child').appendTo(id+' ul'); 
-         
-          
-$(id+' ul').css( { transition: "none",                      transform:  "translateX(100vw)"}).delay(); 
-          
-          setTimeout( function() { 
-                    
-$(id+' ul').css( { transition: "1s",                      transform:  "translateX(0vw)" }); 
+  inner.css({
+    transform: "translateY(" + newTop + "px)",
+    height: newHeight
+  });
+}
 
-                    
-                }, 100, setTimeout( function() { 
-                    
-                   
-$(id+' ul').css( { transition: "none",                      transform:  "translateX(0vw)" }); 
-$('li.actslide').next().addClass('actslide').prev().removeClass('actslide');
-                    
-                }, 1000 )  ); 
-          
-         
-          
-           
-        }
+$(document).ready(function () {
+  $(".slide").addClass("is-loaded");
 
-        function moveRight() {
-            if (slideCount>2) {
-                  $(id+' ul').css( { transition: "1s",
-                  transform:  "translateX(" + (-1)*slideWidth + "vw)" 
-                });
+  $(".slideshow .arrows .arrow").on("click", function () {
+    slideshowNext($(this).closest(".slideshow"), $(this).hasClass("prev"));
+  });
 
-                setTimeout( function() { 
-                    
-                    $(id+' ul li:first-child').appendTo(id+' ul');
-                    $(id+' ul').css( { transition: "none",
-                      transform:  "translateX(" + 0 + "vw)" 
-                    });
+  $(".slideshow .pagination .item").on("click", function () {
+    slideshowSwitch($(this).closest(".slideshow"), $(this).index());
+  });
 
-                    $('li.actslide').next().addClass('actslide').prev().removeClass('actslide');
-                }, 1000 );  
-            }
-            else {
-                moveRight2();
-            }          
-        }
+  $(".slideshow .pagination").on("check", function () {
+    var slideshow = $(this).closest(".slideshow");
+    var pages = $(this).find(".item");
+    var index = slideshow.find(".slides .is-active").index();
+    pages.removeClass("is-active");
+    pages.eq(index).addClass("is-active");
+  });
 
-        $(id+' button.control_prev').click(function () {
-            moveLeft();
-            startProgressbar();
-        });
+  /* Lazyloading
+$('.slideshow').each(function(){
+  var slideshow=$(this);
+  var images=slideshow.find('.image').not('.is-loaded');
+  images.on('loaded',function(){
+    var image=$(this);
+    var slide=image.closest('.slide');
+    slide.addClass('is-loaded');
+  });
+*/
 
-        $(id+' button.control_next').click(function () {
+  var timeout = setTimeout(function () {
+    slideshowNext(slideshow, false, true);
+  }, slideshowDuration);
 
-              moveRight();
+  slideshow.data("timeout", timeout);
+});
 
-            startProgressbar();
-        });
-
-        $(id+' .progress').click(function() {
-            if (isPause === false) {
-                isPause = true;
-            }
-            else {
-                isPause = false;
-            }   
-      });
-  };
-});   
+if ($(".main-content .slideshow").length > 1) {
+  $(window).on("scroll", homeSlideshowParallax);
+}
 
 
 async function fetchOnlineUsers() {
