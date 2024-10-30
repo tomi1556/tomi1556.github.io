@@ -1,5 +1,6 @@
 var slideshowDuration = 4000;
 var slideshow = $(".main-content .slideshow");
+var windowHeight = $(window).height(); // ウィンドウの初期高さを取得
 
 function slideshowSwitch(slideshow, index, auto) {
   if (slideshow.data("wait")) return;
@@ -19,6 +20,10 @@ function slideshowSwitch(slideshow, index, auto) {
   clearTimeout(timeout);
   slideshow.data("wait", true);
   var transition = slideshow.attr("data-transition");
+  
+  // 以下にウィンドウの高さを使用する必要がある場合は追加
+  console.log("Current window height: " + windowHeight); // 例: ウィンドウの高さをデバッグ用に表示
+
   if (transition == "fade") {
     newSlide.css({
       display: "block",
@@ -46,6 +51,7 @@ function slideshowSwitch(slideshow, index, auto) {
       }
     });
   } else {
+    // 以降のコードも同様に続ける
     if (newSlide.index() > activeSlide.index()) {
       var newSlideRight = 0;
       var newSlideLeft = "auto";
