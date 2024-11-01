@@ -1,14 +1,11 @@
 body {
   margin: 0;
   padding: 0;
-  overflow-x: hidden; /* 横方向のスクロールを隠す */
 }
 
 .swiper-container {
   width: 100vw; /* ビューポートの幅に合わせる */
   height: 100vh; /* ビューポートの高さに合わせる */
-  overflow-x: hidden; /* 横方向のスクロールを隠す */
-  margin-bottom: 0; /* スライドショーの下のマージンを0に */
 }
 
 .swiper-slide {
