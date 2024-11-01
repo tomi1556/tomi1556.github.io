@@ -1,6 +1,25 @@
 body {
-  font: 14px/2 "Open sans",sans-serif;
+  margin: 0;
+  padding: 0;
+  overflow: hidden; /* スクロールバーを非表示にする場合 */
 }
+
+.swiper-container {
+  width: 100vw; /* ビューポートの幅に合わせる */
+  height: 100vh; /* ビューポートの高さに合わせる */
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center; /* 画像を中央に配置 */
+  align-items: center; /* 画像を中央に配置 */
+}
+
+.swiper-slide img {
+  max-width: 100%; /* 画像をスライドの幅に合わせる */
+  max-height: 100%; /* 画像をスライドの高さに合わせる */
+}
+
 
 .scroll-indicator {
   position: absolute;
