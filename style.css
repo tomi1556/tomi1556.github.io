@@ -1,7 +1,7 @@
 body {
   margin: 0;
   padding: 0;
-  overflow: auto; /* スクロールを許可 */
+  overflow-x: hidden; /* 横方向のスクロールを隠す */
 }
 
 .swiper-container {
