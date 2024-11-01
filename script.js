@@ -12,6 +12,7 @@ const swiper = new Swiper('.swiper-container', {
     nextEl: '.swiper-button-next', // 次のスライドボタン
     prevEl: '.swiper-button-prev', // 前のスライドボタン
   },
+  speed: 800, // スライドの移動速度を800ミリ秒に設定
 });
 
 
