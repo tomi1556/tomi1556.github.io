@@ -23,19 +23,18 @@ body {
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: #fff; /* ボタンの色 */
-  background: rgba(0, 0, 0, 0.5); /* ボタンの背景色（半透明） */
-  border-radius: 50%; /* ボタンを丸くする */
-  width: 40px; /* ボタンの幅 */
-  height: 40px; /* ボタンの高さ */
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  background-color: white; /* 背景色を白に */
+  color: #4CAF50; /* テキスト色を緑に */
+  border: 2px solid #4CAF50; /* 緑のボーダーを追加 */
+  border-radius: 5px; /* 角を丸く */
+  padding: 10px 15px; /* パディングを調整 */
+  transition: background-color 0.3s, color 0.3s; /* ホバー時のアニメーションを追加 */
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  background: rgba(0, 0, 0, 0.7); /* ホバー時の背景色 */
+  background-color: #4CAF50; /* ホバー時に背景色を緑に */
+  color: white; /* ホバー時にテキスト色を白に */
 }
 
 
