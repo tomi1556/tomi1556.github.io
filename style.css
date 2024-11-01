@@ -29,12 +29,30 @@ body {
   border-radius: 5px; /* 角を丸く */
   padding: 10px 15px; /* パディングを調整 */
   transition: background-color 0.3s, color 0.3s; /* ホバー時のアニメーションを追加 */
+  font-weight: bold; /* テキストを太字に */
+  font-size: 16px; /* フォントサイズを調整 */
+  opacity: 1; /* 不透明度を設定 */
+}
+
+.swiper-button-next {
+  background: none; /* デフォルトの背景を無効に */
+  color: #4CAF50; /* 初期のテキスト色を緑に */
+}
+
+.swiper-button-prev {
+  background: none; /* デフォルトの背景を無効に */
+  color: #4CAF50; /* 初期のテキスト色を緑に */
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
   background-color: #4CAF50; /* ホバー時に背景色を緑に */
   color: white; /* ホバー時にテキスト色を白に */
+}
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+  color: #4CAF50; /* 矢印の色を緑に */
 }
 
 
