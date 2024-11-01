@@ -16,8 +16,8 @@ body {
 }
 
 .swiper-slide img {
-  max-width: 100%; /* 画像をスライドの幅に合わせる */
-  max-height: 100%; /* 画像をスライドの高さに合わせる */
+  width: 100%; /* 画像をスライドの幅に合わせる */
+  height: 100%; /* 画像をスライドの高さに合わせる */
 }
 
 .swiper-button-next,
