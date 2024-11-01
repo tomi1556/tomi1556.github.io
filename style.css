@@ -20,6 +20,23 @@ body {
   max-height: 100%; /* 画像をスライドの高さに合わせる */
 }
 
+.swiper-button-next,
+.swiper-button-prev {
+  color: #fff; /* ボタンの色 */
+  background: rgba(0, 0, 0, 0.5); /* ボタンの背景色（半透明） */
+  border-radius: 50%; /* ボタンを丸くする */
+  width: 40px; /* ボタンの幅 */
+  height: 40px; /* ボタンの高さ */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  background: rgba(0, 0, 0, 0.7); /* ホバー時の背景色 */
+}
+
 
 .scroll-indicator {
   position: absolute;
