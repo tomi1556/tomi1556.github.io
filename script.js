@@ -1,20 +1,18 @@
-responsive: [
-  {
-    breakpoint: 768,
-    settings: {
-      slidesToShow: 1,
-      slidesToScroll: 1
-    }
+const swiper = new Swiper('.swiper-container', {
+  loop: true, // 無限ループを有効にする
+  autoplay: {
+    delay: 3000, // スライドを自動的に切り替える時間（ミリ秒）
+    disableOnInteraction: false, // ユーザー操作後も自動再生を続ける
   },
-  {
-    breakpoint: 1024,
-    settings: {
-      slidesToShow: 2,
-      slidesToScroll: 1
-    }
-  }
-]
-
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true, // ドットナビゲーションをクリック可能にする
+  },
+  navigation: {
+    nextEl: '.swiper-button-next', // 次のスライドボタン
+    prevEl: '.swiper-button-prev', // 前のスライドボタン
+  },
+});
 
 
 async function fetchOnlineUsers() {
