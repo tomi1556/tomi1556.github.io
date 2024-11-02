@@ -83,7 +83,7 @@ body {
 }
 
 .swiper-button-prev:after {
-  content: '➔'; /* 前のスライドのアイコン */
+  content: '⬅'; /* 前のスライドのアイコン */
   transform: rotate(180deg); /* 左向きに回転させる */
 }
 
