@@ -27,19 +27,20 @@ body {
 /* ページネーションのスタイル */
 .swiper-pagination {
   position: absolute; /* 絶対配置 */
-  bottom: 20px; /* 画面下からの距離 */
-  right: 20px; /* 画面右からの距離 */
+  bottom: 20px; /* スライダー下からの距離 */
+  right: 20px; /* スライダー右からの距離 */
   display: flex; /* フレックスボックスを使用 */
   justify-content: center; /* 中央に配置 */
   align-items: center; /* 垂直方向にも中央に配置 */
+  gap: 10px; /* 線の間隔を設定 */
 }
 
 /* ページネーションの横長線 */
 .swiper-pagination-bullet {
-  width: 80px; /* 横の長さ */
-  height: 5px; /* 縦の高さ */
+  width: 100px; /* 横の長さを100pxに変更 */
+  height: 8px; /* 縦の高さを8pxに変更 */
   background-color: rgba(0, 204, 102, 0.5); /* 非アクティブ時の色 */
-  margin: 0 5px; /* 各線の間の余白 */
+  border-radius: 4px; /* 丸みを持たせる */
   transition: background-color 0.3s, transform 0.3s; /* 背景色とサイズの変化にアニメーションを追加 */
   cursor: pointer; /* カーソルをポインターに変更 */
 }
