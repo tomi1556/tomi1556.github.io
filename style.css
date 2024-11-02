@@ -11,6 +11,7 @@ body {
 .swiper-container {
   width: 100vw; /* ビューポートの幅に合わせる */
   height: 100vh; /* ビューポートの高さに合わせる */
+  background-color: rgba(0, 0, 0, 0.7); /* 背景を暗くする */
 }
 
 .swiper-slide {
@@ -50,6 +51,25 @@ body {
   background-color: #00cc66; /* アクティブ時の色 */
   transform: scale(1.2); /* アクティブ時に拡大 */
   box-shadow: 0 0 10px rgba(0, 255, 136, 0.7); /* 強調のための光 */
+}
+
+/* スライド内のテキストスタイル */
+.swiper-slide {
+  position: relative; /* テキストを絶対配置するために相対配置 */
+  color: white; /* テキストの色を白に */
+  text-align: right; /* テキストを右寄せ */
+}
+
+/* スライド内のテキストコンテナ */
+.slide-text {
+  position: absolute; /* 絶対配置 */
+  right: 20px; /* スライドの右からの距離 */
+  top: 50%; /* スライドの中央に配置 */
+  transform: translateY(-50%); /* 垂直方向に中央に配置 */
+  font-size: 24px; /* フォントサイズを設定 */
+  background-color: rgba(0, 0, 0, 0.5); /* テキストの背景に半透明の黒を追加 */
+  padding: 10px; /* テキストの周りに余白 */
+  border-radius: 8px; /* テキストコンテナに丸みを持たせる */
 }
 
 
