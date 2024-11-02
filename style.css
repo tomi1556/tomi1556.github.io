@@ -14,12 +14,6 @@ body {
   background-color: rgba(0, 0, 0, 0.7); /* 背景を暗くする */
 }
 
-.swiper-slide {
-  display: flex;
-  justify-content: center; /* 画像を中央に配置 */
-  align-items: center; /* 画像を中央に配置 */
-}
-
 .swiper-slide img {
   width: 100%; /* 画像をスライドの幅に合わせる */
   height: 100%; /* 画像をスライドの高さに合わせる */
