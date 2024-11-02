@@ -71,14 +71,11 @@ body {
   bottom: 0px;
   left: 0; /* 左端に配置 */
   background-color: white; /* 背景を白に設定 */
-  width: 25%; /* 横幅を画面の60%程度に設定 */
-  aspect-ratio: 3 / 2; /* 横：縦 = 3:2の比率に設定 */
+  width: 28%; /* 横幅を画面の60%程度に設定 */
+  aspect-ratio: 5 / 3; /* 横：縦 = 3:2の比率に設定 */
   padding: 10px 20px; /* 内側の余白 */
   color: #006400; /* 濃く明るい緑 */
   font-family: 'Potta One', cursive;
-  border-top-right-radius: 8px; /* 右上の角を少し丸める */
-  border-bottom-right-radius: 8px; /* 右下の角も丸める */
-  box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.2); /* 少し影をつける */
   z-index: 2;
 }
 
