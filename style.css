@@ -47,24 +47,37 @@ body {
   box-shadow: 0 0 10px rgba(0, 255, 136, 0.7); /* 強調のための光 */
 }
 
-/* スライド内のテキストスタイル */
+/* スライドのスタイル */
 .swiper-slide {
   position: relative; /* テキストを絶対配置するために相対配置 */
   color: white; /* テキストの色を白に */
-  text-align: right; /* テキストを右寄せ */
 }
 
-/* スライド内のテキストコンテナ */
+/* スライド内の画像全体を暗くするための擬似要素 */
+.swiper-slide::before {
+  content: '';
+  position: absolute; /* 絶対配置 */
+  top: 0; /* スライドの上部に配置 */
+  left: 0; /* スライドの左側に配置 */
+  right: 0; /* スライドの右側に配置 */
+  bottom: 0; /* スライドの下部に配置 */
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒色でオーバーレイ */
+  z-index: 0; /* 画像の下に配置 */
+}
+
+/* スライド内のテキストスタイル */
 .slide-text {
   position: absolute; /* 絶対配置 */
-  right: 20px; /* スライドの右からの距離 */
+  right: 15px; /* スライドの右からの距離を調整 */
   top: 50%; /* スライドの中央に配置 */
   transform: translateY(-50%); /* 垂直方向に中央に配置 */
   font-size: 24px; /* フォントサイズを設定 */
-  background-color: rgba(0, 0, 0, 0.5); /* テキストの背景に半透明の黒を追加 */
+  background-color: rgba(0, 0, 0, 0.8); /* テキストの背景に濃い半透明の黒を追加 */
   padding: 10px; /* テキストの周りに余白 */
   border-radius: 8px; /* テキストコンテナに丸みを持たせる */
+  z-index: 1; /* テキストを前面に表示 */
 }
+
 
 
 nav {
