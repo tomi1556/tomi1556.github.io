@@ -51,16 +51,6 @@ body {
 }
 
 
-.scroll-indicator {
-  position: absolute;
-  bottom: 10px;
-  left: 50%;
-  transform: translateX(-50%);
-  font-size: 2em;
-  color: #fff;
-  animation: bounce 2s infinite;
-}
-
 nav {
     background-color: transparent; /* 背景を透明に */
     padding: 15px;
