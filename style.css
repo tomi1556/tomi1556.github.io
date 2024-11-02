@@ -34,7 +34,7 @@ body {
 
 /* ページネーションのドットを横長のバーに変更 */
 .swiper-pagination-bullet {
-  width: 40px; /* 横長のバー幅 */
+  width: 60px; /* 横長のバー幅 */
   height: 8px; /* バーの高さ */
   border-radius: 5px; /* 丸みを追加 */
   background-color: rgba(0, 204, 102, 0.5); /* 非アクティブ時の色 */
