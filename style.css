@@ -24,69 +24,22 @@ body {
   height: 100%; /* 画像をスライドの高さに合わせる */
 }
 
-.swiper-button-next,
-.swiper-button-prev {
-  position: relative;
-  color: white;
-  background: linear-gradient(145deg, #00cc66, #009900); /* グラデーションの緑色 */
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3), 
-              0 0 10px rgba(0, 204, 102, 0.5); /* 影と光沢 */
-  transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
-  z-index: 10;
+/* ページネーションのスタイル */
+.swiper-pagination-bullet {
+  width: 40px; /* ドットを広げる */
+  height: 10px;
+  border-radius: 5px; /* 丸みを付ける */
+  background-color: rgba(0, 204, 102, 0.5); /* ドットの色 */
+  margin: 0 5px; /* ドット間の余白 */
+  transition: background-color 0.3s, transform 0.3s;
+  cursor: pointer; /* クリック可能に */
 }
 
-.swiper-button-next:hover,
-.swiper-button-prev:hover {
-  background: linear-gradient(145deg, #00ff88, #00cc66); /* ホバー時のより鮮やかなグラデーション */
-  transform: scale(1.2); /* ホバー時に拡大 */
-  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), 
-              0 0 15px rgba(0, 255, 136, 0.7); /* ホバー時の強調された影と光沢 */
-}
-
-/* 外枠のスタイル */
-.swiper-button-next::before,
-.swiper-button-prev::before {
-  content: '';
-  position: absolute;
-  top: -8px;
-  left: -8px;
-  right: -8px;
-  bottom: -8px;
-  border-radius: 50%;
-  border: 2px solid rgba(0, 255, 136, 0.6); /* 光沢のある緑色の枠 */
-  animation: pulse 2s infinite;
-}
-
-/* 矢印アイコンのデザイン */
-.swiper-button-next:after {
-  content: '▶'; /* 右向きの矢印 */
-  font-size: 24px;
-  color: white;
-  font-weight: bold;
-}
-
-.swiper-button-prev:after {
-  content: '◀'; /* 左向きの矢印 */
-  font-size: 24px;
-  color: white;
-  font-weight: bold;
-}
-
-/* 枠のアニメーション */
-@keyframes pulse {
-  0%, 100% {
-    box-shadow: 0 0 5px rgba(0, 255, 136, 0.5), 0 0 15px rgba(0, 255, 136, 0.2);
-  }
-  50% {
-    box-shadow: 0 0 10px rgba(0, 255, 136, 0.7), 0 0 20px rgba(0, 255, 136, 0.4);
-  }
+/* アクティブなページのスタイル */
+.swiper-pagination-bullet-active {
+  background-color: #00cc66; /* アクティブなドットの色 */
+  transform: scale(1.2); /* アクティブ時に拡大 */
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.7); /* 強調のための光 */
 }
 
 
