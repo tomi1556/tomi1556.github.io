@@ -24,24 +24,29 @@ body {
   height: 100%; /* 画像をスライドの高さに合わせる */
 }
 
-/* ページネーションのスタイル */
-.swiper-pagination-bullet {
-  width: 40px; /* ドットを広げる */
-  height: 10px;
-  border-radius: 5px; /* 丸みを付ける */
-  background-color: rgba(0, 204, 102, 0.5); /* ドットの色 */
-  margin: 0 5px; /* ドット間の余白 */
-  transition: background-color 0.3s, transform 0.3s;
-  cursor: pointer; /* クリック可能に */
+.swiper-pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  bottom: 20px; /* ページ下部に配置 */
+  gap: 10px; /* 各ドットの間隔 */
 }
 
-/* アクティブなページのスタイル */
+/* ページネーションのドットを横長のバーに変更 */
+.swiper-pagination-bullet {
+  width: 40px; /* 横長のバー幅 */
+  height: 8px; /* バーの高さ */
+  border-radius: 5px; /* 丸みを追加 */
+  background-color: rgba(0, 204, 102, 0.5); /* 非アクティブ時の色 */
+  transition: background-color 0.3s, transform 0.3s;
+  cursor: pointer;
+}
+
 .swiper-pagination-bullet-active {
-  background-color: #00cc66; /* アクティブなドットの色 */
-  transform: scale(1.2); /* アクティブ時に拡大 */
+  background-color: #00cc66; /* アクティブなバーの色 */
+  transform: scale(1.2); /* アクティブ時の拡大 */
   box-shadow: 0 0 10px rgba(0, 255, 136, 0.7); /* 強調のための光 */
 }
-
 
 
 .scroll-indicator {
