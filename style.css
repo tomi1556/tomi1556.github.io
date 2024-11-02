@@ -31,8 +31,8 @@ body {
   background: linear-gradient(145deg, #00cc66, #009900); /* グラデーションの緑色 */
   border: none;
   border-radius: 50%;
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,17 +73,17 @@ body {
 /* 矢印アイコンのデザイン */
 .swiper-button-next:after,
 .swiper-button-prev:after {
-  font-size: 24px;
+  font-size: 26px;
   color: white;
   font-weight: bold;
 }
 
 .swiper-button-next:after {
-  content: '➔'; /* 次のスライドのアイコン */
+  content: '>'; /* 次のスライドのアイコン */
 }
 
 .swiper-button-prev:after {
-  content: '⬅'; /* 前のスライドのアイコン */
+  content: '<'; /* 前のスライドのアイコン */
   transform: rotate(180deg); /* 左向きに回転させる */
 }
 
