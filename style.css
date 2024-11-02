@@ -71,11 +71,9 @@ body {
   right: 40px; /* スライドの右からの距離を調整 */
   top: 50%; /* スライドの中央に配置 */
   transform: translateY(-50%); /* 垂直方向に中央に配置 */
-  font-size: 25px; /* フォントサイズを設定 */
+  font-size: 36px; /* フォントサイズを設定 */
   font-family: 'Potta One', cursive;
-  background-color: rgba(0, 0, 0, 0.8); /* テキストの背景に濃い半透明の黒を追加 */
   padding: 10px; /* テキストの周りに余白 */
-  border-radius: 8px; /* テキストコンテナに丸みを持たせる */
   z-index: 1; /* テキストを前面に表示 */
 }
 
