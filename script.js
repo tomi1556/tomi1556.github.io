@@ -1,7 +1,7 @@
 const swiper = new Swiper('.swiper-container', {
   loop: true, // 無限ループを有効にする
   autoplay: {
-    delay: 5000, // スライドを自動的に切り替える時間（ミリ秒）
+    delay: 4000, // スライドを自動的に切り替える時間（ミリ秒）
     disableOnInteraction: true, // ユーザー操作後も自動再生を続ける
   },
   pagination: {
