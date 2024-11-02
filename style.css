@@ -68,10 +68,10 @@ body {
 /* 左下のサーバー名と説明用のスタイル */
 .server-info {
   position: absolute;
-  bottom: 20px;
+  bottom: 0px;
   left: 0; /* 左端に配置 */
   background-color: white; /* 背景を白に設定 */
-  width: 20%; /* 横幅を画面の60%程度に設定 */
+  width: 25%; /* 横幅を画面の60%程度に設定 */
   aspect-ratio: 3 / 2; /* 横：縦 = 3:2の比率に設定 */
   padding: 10px 20px; /* 内側の余白 */
   color: #006400; /* 濃く明るい緑 */
