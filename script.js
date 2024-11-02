@@ -15,6 +15,14 @@ const swiper = new Swiper('.swiper-container', {
   speed: 800, // スライドの移動速度を800ミリ秒に設定
 });
 
+const swiper = new Swiper('.swiper-container', {
+  loop: true,
+  pagination: {
+    el: '.swiper-pagination',
+    clickable: true, // クリックで移動を有効にする
+  },
+});
+
 
 async function fetchOnlineUsers() {
     try {
