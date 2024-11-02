@@ -147,21 +147,70 @@ nav ul li a .item-name {
 
 /* スマホ画面用の自動調整スタイル（768px以下） */
 @media (max-width: 768px) {
-    nav {
-        height: auto; /* 自動調整 */
-        padding: 10px; /* 余白を少し小さく */
+      nav {
+        background-color: transparent;
+        padding: 10px;
+        text-align: right;
+        box-shadow: none;
+        position: fixed;
+        width: calc(100% - 20px);
+        top: 0;
+        z-index: 1000;
+        right: 0;
+        margin-right: 0;
+        height: auto;
     }
-    
+
     nav ul {
-        flex-direction: column; /* リストを縦並びにする */
-        align-items: flex-start; /* 左寄せにする */
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    nav ul li {
+        margin: 0;
     }
 
     nav ul li a {
-        padding: 8px 15px; /* ボタンのパディングを少し小さく */
-        font-size: 0.9em; /* フォントサイズを調整 */
+        text-decoration: none;
+        color: #fff;
+        font-size: 0.9em;
+        font-weight: bold;
+        padding: 8px 15px;
+        background-color: #6abf4b;
+        border: none;
+        border-radius: 0;
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
     }
-}
+
+    nav ul li a:hover {
+        background-color: #8bc34a;
+        color: #fff;
+    }
+
+    nav ul li:first-child a {
+        border-top-left-radius: 20px;
+        border-bottom-left-radius: 20px;
+    }
+
+    nav ul li:last-child a {
+        border-top-right-radius: 20px;
+        border-bottom-right-radius: 20px;
+    }
+
+    nav ul li a .icon {
+        font-size: 1.3em;
+        margin-bottom: 3px;
+    }
+
+    nav ul li a .item-name {
+        font-size: 0.8em;
+    }
 
 
 main {
