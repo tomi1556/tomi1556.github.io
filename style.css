@@ -27,41 +27,41 @@ body {
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: white; /* ボタンのテキスト色 */
-  background-color: #ff4081; /* ボタンの背景色（ピンク） */
-  border: none; /* ボーダーを削除 */
-  border-radius: 50%; /* 丸くする */
-  width: 50px; /* ボタンの幅 */
-  height: 50px; /* ボタンの高さ */
+  color: white;
+  background-color: #009900; /* 濃い明るい緑色 */
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* 影を追加 */
-  transition: background-color 0.3s, transform 0.3s; /* ホバー時のトランジション */
-  z-index: 10; /* ボタンをスライドの上に配置 */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s, transform 0.3s;
+  z-index: 10;
 }
 
 .swiper-button-next:hover,
 .swiper-button-prev:hover {
-  background-color: #ff80ab; /* ホバー時の背景色（明るいピンク） */
-  transform: scale(1.1); /* ホバー時に拡大 */
+  background-color: #00cc00; /* ホバー時のより鮮やかな緑色 */
+  transform: scale(1.1);
 }
 
-/* アイコンを追加する場合 */
+/* 矢印アイコンのデザイン */
 .swiper-button-next:after,
 .swiper-button-prev:after {
-  font-size: 20px; /* アイコンのサイズ */
-  color: white; /* アイコンの色 */
+  font-size: 20px;
+  color: white;
 }
 
 .swiper-button-next:after {
-  content: '➔'; /* 次のスライドのアイコン */
+  content: '＞'; /* 次のスライドのアイコン */
 }
 
 .swiper-button-prev:after {
-  content: '➔'; /* 前のスライドのアイコン */
-  transform: rotate(180deg); /* アイコンを180度回転させる */
+  content: '＜'; /* 前のスライドのアイコン */
 }
+
 
 
 .scroll-indicator {
