@@ -31,8 +31,8 @@ body {
   background: linear-gradient(145deg, #00cc66, #009900); /* グラデーションの緑色 */
   border: none;
   border-radius: 50%;
-  width: 80px;
-  height: 80px;
+  width: 60px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -50,7 +50,7 @@ body {
               0 0 15px rgba(0, 255, 136, 0.7); /* ホバー時の強調された影と光沢 */
 }
 
-/* 枠のスタイル */
+/* 外枠のスタイル */
 .swiper-button-next::before,
 .swiper-button-prev::before {
   content: '';
@@ -64,27 +64,21 @@ body {
   animation: pulse 2s infinite;
 }
 
-/* 枠のホバー効果 */
-.swiper-button-next:hover::before,
-.swiper-button-prev:hover::before {
-  border-color: rgba(0, 255, 136, 0.9);
-}
-
 /* 矢印アイコンのデザイン */
 .swiper-button-next:after,
 .swiper-button-prev:after {
-  font-size: 26px;
+  font-size: 24px;
   color: white;
   font-weight: bold;
 }
 
 .swiper-button-next:after {
-  content: '>'; /* 次のスライドのアイコン */
+  content: '➔'; /* 右向きの矢印 */
 }
 
 .swiper-button-prev:after {
-  content: '<'; /* 前のスライドのアイコン */
-  transform: rotate(180deg); /* 左向きに回転させる */
+  content: '➔'; /* 左向きの矢印を表示 */
+  transform: rotate(180deg); /* 左向きに回転 */
 }
 
 /* 枠のアニメーション */
@@ -96,7 +90,6 @@ body {
     box-shadow: 0 0 10px rgba(0, 255, 136, 0.7), 0 0 20px rgba(0, 255, 136, 0.4);
   }
 }
-
 
 
 .scroll-indicator {
