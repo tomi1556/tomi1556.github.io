@@ -65,20 +65,18 @@ body {
 }
 
 /* 矢印アイコンのデザイン */
-.swiper-button-next:after,
-.swiper-button-prev:after {
+.swiper-button-next:after {
+  content: '▶'; /* 右向きの矢印 */
   font-size: 24px;
   color: white;
   font-weight: bold;
 }
 
-.swiper-button-next:after {
-  content: '➔'; /* 右向きの矢印 */
-}
-
 .swiper-button-prev:after {
-  content: '➔'; /* 左向きの矢印を表示 */
-  transform: rotate(180deg); /* 左向きに回転 */
+  content: '◀'; /* 左向きの矢印 */
+  font-size: 24px;
+  color: white;
+  font-weight: bold;
 }
 
 /* 枠のアニメーション */
@@ -90,6 +88,7 @@ body {
     box-shadow: 0 0 10px rgba(0, 255, 136, 0.7), 0 0 20px rgba(0, 255, 136, 0.4);
   }
 }
+
 
 
 .scroll-indicator {
