@@ -68,7 +68,7 @@ body {
 /* スライド内のテキストスタイル */
 .slide-text {
   position: absolute; /* 絶対配置 */
-  right: 20px; /* スライドの右からの距離を調整 */
+  right: 50px; /* スライドの右からの距離を調整 */
   top: 50%; /* スライドの中央に配置 */
   transform: translateY(-50%); /* 垂直方向に中央に配置 */
   font-size: 24px; /* フォントサイズを設定 */
