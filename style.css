@@ -70,7 +70,7 @@ body {
   position: absolute;
   bottom: 0px;
   left: 0; /* 左端に配置 */
-  background-color: white; /* 背景を白に設定 */
+  background-color: rgba(0, 0, 0, 0.5); /* 背景を白に設定 */
   width: 28%; /* 横幅を画面の60%程度に設定 */
   aspect-ratio: 5 / 3; /* 横：縦 = 3:2の比率に設定 */
   padding: 10px 20px; /* 内側の余白 */
