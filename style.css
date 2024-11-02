@@ -65,17 +65,28 @@ body {
   z-index: 0; /* 画像の下に配置 */
 }
 
-/* スライド内のテキストスタイル */
-.slide-text {
-  position: absolute; /* 絶対配置 */
-  right: 40px; /* スライドの右からの距離を調整 */
-  top: 50%; /* スライドの中央に配置 */
-  transform: translateY(-50%); /* 垂直方向に中央に配置 */
-  font-size: 36px; /* フォントサイズを設定 */
+/* 左下のサーバー名と説明用のスタイル */
+.server-info {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  color: white;
   font-family: 'Potta One', cursive;
-  padding: 10px; /* テキストの周りに余白 */
-  z-index: 1; /* テキストを前面に表示 */
+  z-index: 2;
 }
+
+.server-info .server-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 8px;
+}
+
+.server-info .server-description p {
+  font-size: 16px;
+  line-height: 1.4;
+  margin: 5px 0; /* 段落の間隔を設定 */
+}
+
 
 
 nav {
