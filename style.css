@@ -86,9 +86,9 @@ body {
 }
 
 .server-info .server-description p {
-  font-size: 30px;
-  line-height: 1.2;
-  margin: 5px 0;
+  font-size: 27px;
+  line-height: 1.6;
+  margin: 15px 0;
   color: #006400;
 }
 
