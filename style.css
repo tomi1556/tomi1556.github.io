@@ -74,7 +74,6 @@ body {
   width: 28%; /* 横幅を画面の60%程度に設定 */
   aspect-ratio: 5 / 3; /* 横：縦 = 3:2の比率に設定 */
   padding: 10px 20px; /* 内側の余白 */
-  color: #006400; /* 濃く明るい緑 */
   font-family: 'Potta One', cursive;
   z-index: 2;
 }
@@ -83,12 +82,14 @@ body {
   font-size: 40px;
   font-weight: bold;
   margin-bottom: 8px;
+  color: #fff;
 }
 
 .server-info .server-description p {
   font-size: 24px;
   line-height: 1.4;
   margin: 5px 0;
+  color: #006400;
 }
 
 
