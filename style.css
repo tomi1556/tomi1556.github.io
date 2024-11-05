@@ -79,15 +79,15 @@ body {
 }
 
 .server-info .server-name {
-  font-size: 40px;
+  font-size: 50px;
   font-weight: bold;
   margin-bottom: 8px;
   color: #fff;
 }
 
 .server-info .server-description p {
-  font-size: 24px;
-  line-height: 1.4;
+  font-size: 30px;
+  line-height: 1.2;
   margin: 5px 0;
   color: #006400;
 }
