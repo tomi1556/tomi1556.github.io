@@ -4,6 +4,55 @@ body {
   overflow-x: hidden; /* 横方向のスクロールを防ぐ */
 }
 
+.rules-container {
+  width: 90%;
+  max-width: 700px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  padding: 20px;
+}
+
+.rule-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.rule-icon {
+  flex-shrink: 0;
+}
+
+.circle {
+  width: 100px;
+  height: 100px;
+  background-color: #0a4610;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  font-size: 0.9em;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.rule-details {
+  margin-left: 20px;
+}
+
+.rule-details ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.rule-details li {
+  font-size: 1em;
+  padding: 5px 0;
+  color: #1a5c1a;
+}
+
 .content {
   overflow-y: auto; /* 縦方向のスクロールを許可 */
 }
