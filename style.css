@@ -1,45 +1,59 @@
 body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f8f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
   margin: 0;
-  padding: 0;
-  overflow-x: hidden; /* 横方向のスクロールを防ぐ */
 }
 
 .rules-container {
   width: 90%;
-  max-width: 700px;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-start;
+  gap: 20px;
   background-color: #ffffff;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .rule-section {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  margin-bottom: 20px;
+  width: 45%;
 }
 
 .rule-icon {
-  flex-shrink: 0;
-}
-
-.circle {
-  width: 100px;
-  height: 100px;
-  background-color: #558b2f;
-  border-radius: 50%;
+  width: 120px;
+  height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #ffffff;
-  font-size: 0.9em;
+  font-size: 1em;
   text-align: center;
-  padding: 10px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.15);
+  padding: 15px;
+  border-radius: 50%;
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 10px;
+}
+
+/* 緑と赤のテーマカラー */
+.green-circle {
+  background-color: #32a852;
+}
+
+.red-circle {
+  background-color: #d9534f;
 }
 
 .rule-details {
-  margin-left: 20px;
+  text-align: left;
 }
 
 .rule-details ul {
@@ -49,8 +63,21 @@ body {
 
 .rule-details li {
   font-size: 1em;
-  padding: 5px 0;
-  color: #1a5c1a;
+  margin: 5px 0;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.rule-details li::before {
+  content: "•";
+  font-size: 1.2em;
+  color: #32a852;
+}
+
+.red-circle + .rule-details li::before {
+  color: #d9534f;
 }
 
 .content {
