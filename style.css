@@ -8,7 +8,7 @@ body {
 
 .methodrule {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* 子要素を中央揃えに */
     flex-wrap: wrap;
     margin-top: 40px;
     opacity: 0;
