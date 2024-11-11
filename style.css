@@ -31,6 +31,13 @@ body {
     transform: scale(1.05);
 }
 
+.method-titlerule {
+    font-size: 1.6em;
+    color: #558b2f;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
 .content {
   overflow-y: auto; /* 縦方向のスクロールを許可 */
 }
