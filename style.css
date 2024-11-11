@@ -1,7 +1,8 @@
 body {
   font-family: 'Arial', sans-serif;
   letter-spacing: 0.05em;
-  min-height: 100vh;
+  margin: 0;
+  padding: 0;
 }
 
 .content {
