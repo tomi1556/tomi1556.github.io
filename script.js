@@ -1,3 +1,22 @@
+// タブの切り替え機能
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabPanes = document.querySelectorAll('.tab-pane');
+
+tabButtons.forEach(button => {
+  button.addEventListener('click', () => {
+    // すべてのボタンから"active"クラスを削除
+    tabButtons.forEach(btn => btn.classList.remove('active'));
+    // クリックしたボタンに"active"クラスを追加
+    button.classList.add('active');
+    
+    // すべてのタブコンテンツから"active"クラスを削除
+    tabPanes.forEach(pane => pane.classList.remove('active'));
+    // 選択したタブのコンテンツを表示
+    document.getElementById(button.getAttribute('data-tab')).classList.add('active');
+  });
+});
+
+
 const swiper = new Swiper('.swiper-container', {
   loop: true, // 無限ループを有効にする
   autoplay: {
