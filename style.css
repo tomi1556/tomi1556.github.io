@@ -6,38 +6,70 @@ body {
   overflow-x: hidden;
 }
 
-.methodrule {
-    display: flex;
-    justify-content: center; /* 子要素を中央揃えに */
-    flex-wrap: wrap;
-    margin-top: 40px;
+/* 全体のスタイル */
+.tabs {
+  max-width: 600px;
+  margin: 50px auto;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* タブボタン */
+.tab-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #ddd;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 10px;
+  font-size: 1.1em;
+  font-weight: bold;
+  color: #777;
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: color 0.3s, border-bottom 0.3s;
+  border-bottom: 2px solid transparent;
+}
+
+.tab-button.active {
+  color: #558b2f;
+  border-bottom: 2px solid #558b2f;
+}
+
+/* コンテンツ */
+.tab-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.tab-pane {
+  display: none;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.tab-pane.active {
+  display: block;
+}
+
+/* アニメーション */
+@keyframes fadeIn {
+  from {
     opacity: 0;
-    animation: fadeIn 1.5s ease-out forwards;
-    animation-delay: 1s;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
-.method-cardrule {
-    width: 45%;
-    margin: 10px;
-    background-color: #ffffff; /* 背景を白に */
-    border: 2px solid #ff0000; /* 枠を赤に */
-    border-radius: 15px;
-    padding: 20px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s;
-    position: relative;
-}
-
-.method-cardrule:hover {
-    transform: scale(1.05);
-}
-
-.method-titlerule {
-    font-size: 1.6em;
-    color: #558b2f;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
 
 .content {
   overflow-y: auto; /* 縦方向のスクロールを許可 */
