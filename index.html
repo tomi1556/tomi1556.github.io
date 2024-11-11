@@ -83,13 +83,26 @@
                 </div>
             </div>
         </div>
-        <div class="methodrule">
-            <div class="method-cardrule">
-                <p class="method-titlerule">規約・禁止行為</p>
-                <p>1. 運営の指示に従ってください</p>
-                <p>2. 運営判断で処罰する場合もあります</p>
-                <p>3. 禁止行為を行うと処罰が行われます</p>
+        <div class="tabs">
+          <div class="tab-buttons">
+            <button class="tab-button active" data-tab="rules">規約</button>
+            <button class="tab-button" data-tab="prohibited">禁止事項</button>
+            <button class="tab-button" data-tab="notes">注意事項</button>
+          </div>
+          <div class="tab-content">
+            <div class="tab-pane active" id="rules">
+              <h2>規約</h2>
+              <p>ここに規約の内容が表示されます。</p>
             </div>
+            <div class="tab-pane" id="prohibited">
+              <h2>禁止事項</h2>
+              <p>ここに禁止事項の内容が表示されます。</p>
+            </div>
+            <div class="tab-pane" id="notes">
+              <h2>注意事項</h2>
+              <p>ここに注意事項の内容が表示されます。</p>
+            </div>
+          </div>
         </div>
         <div class="method">
             <div class="method-card">
