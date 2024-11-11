@@ -1,7 +1,6 @@
 body {
   font-family: 'Arial', sans-serif;
   letter-spacing: 0.05em;
-  display: flex;
   min-height: 100vh;
 }
 
