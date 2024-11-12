@@ -256,31 +256,23 @@ nav ul li a .item-name {
     font-size: 0.9em;
 }
 
+/* スマホ用スタイル */
 @media (max-width: 768px) {
     nav {
-        padding: 10px 0;
-        height: auto; /* 高さを自動調整 */
+        padding: 5px 0;  /* さらに上下の余白を減らす */
+        height: auto;
         width: 100%;
         text-align: center;
+        background-color: transparent; /* 必要に応じて透明に */
     }
 
     nav ul {
-        justify-content: center; /* 中央揃え */
+        justify-content: center;
     }
 
     nav ul li a {
-        padding: 8px 12px; /* コンパクトに */
-        font-size: 0.9em;  /* 少し小さめのフォント */
-    }
-
-    nav ul li:first-child a {
-        border-top-left-radius: 15px;
-        border-bottom-left-radius: 15px;
-    }
-
-    nav ul li:last-child a {
-        border-top-right-radius: 15px;
-        border-bottom-right-radius: 15px;
+        padding: 5px 8px; /* 内側の余白も減らす */
+        font-size: 0.8em;  /* スマホ向けにさらに小さく */
     }
 }
 
