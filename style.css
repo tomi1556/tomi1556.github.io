@@ -63,6 +63,7 @@ body {
   font-size: 1.8em; /* 見出しの文字サイズ */
   font-weight: bold;
   margin-bottom: 30px;
+  font-family: 'Potta One', cursive;
   color: #558b2f; /* 色 */
 }
 
@@ -71,6 +72,7 @@ body {
   font-size: 1.5em; /* 本文の文字サイズ */
   line-height: 1.6; /* 行間 */
   color: #558b2f; /* 色 */
+  font-family: 'Potta One', cursive;
   margin-top: 10px;
 }
 
