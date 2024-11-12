@@ -256,6 +256,34 @@ nav ul li a .item-name {
     font-size: 0.9em;
 }
 
+@media (max-width: 768px) {
+    nav {
+        padding: 10px 0;
+        height: auto; /* 高さを自動調整 */
+        width: 100%;
+        text-align: center;
+    }
+
+    nav ul {
+        justify-content: center; /* 中央揃え */
+    }
+
+    nav ul li a {
+        padding: 8px 12px; /* コンパクトに */
+        font-size: 0.9em;  /* 少し小さめのフォント */
+    }
+
+    nav ul li:first-child a {
+        border-top-left-radius: 15px;
+        border-bottom-left-radius: 15px;
+    }
+
+    nav ul li:last-child a {
+        border-top-right-radius: 15px;
+        border-bottom-right-radius: 15px;
+    }
+}
+
 main {
     padding: 40px 20px;
     max-width: 1200px;
