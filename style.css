@@ -177,6 +177,18 @@ body {
   color: #006400;
 }
 
+/* スマホ用のスタイル */
+@media (max-width: 768px) {
+  .server-info .server-name {
+    font-size: 32px; /* スマホで見やすいサイズに調整 */
+  }
+
+  .server-info .server-description p {
+    font-size: 20px; /* 説明のフォントも小さめに調整 */
+    line-height: 1.4; /* 行間も少し詰める */
+    margin: 10px auto; /* マージンも調整 */
+  }
+}
 
 
 nav {
