@@ -68,7 +68,7 @@ body {
 
 /* タブコンテンツの本文 */
 .tab-pane p {
-  font-size: 1em; /* 本文の文字サイズ */
+  font-size: 1.5em; /* 本文の文字サイズ */
   line-height: 1.6; /* 行間 */
   color: #558b2f; /* 色 */
   margin-top: 10px;
