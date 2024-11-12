@@ -62,7 +62,7 @@ body {
 .tab-pane h2 {
   font-size: 1.8em; /* 見出しの文字サイズ */
   font-weight: bold;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
   color: #558b2f; /* 色 */
 }
 
