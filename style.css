@@ -173,7 +173,7 @@ body {
 .server-info .server-description p {
   font-size: 27px;
   line-height: 1.5;
-  margin: 15px 0;
+  margin: 15px auto;
   color: #006400;
 }
 
