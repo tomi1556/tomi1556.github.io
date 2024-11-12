@@ -58,6 +58,22 @@ body {
   display: block;
 }
 
+/* タブコンテンツの見出し */
+.tab-pane h2 {
+  font-size: 1.8em; /* 見出しの文字サイズ */
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: #558b2f; /* 色 */
+}
+
+/* タブコンテンツの本文 */
+.tab-pane p {
+  font-size: 1em; /* 本文の文字サイズ */
+  line-height: 1.6; /* 行間 */
+  color: #fff; /* 色 */
+  margin-top: 10px;
+}
+
 /* アニメーション */
 @keyframes fadeIn {
   from {
