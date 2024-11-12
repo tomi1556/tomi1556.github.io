@@ -214,6 +214,7 @@ nav ul {
 
 nav ul li {
     margin: 0;
+    flex: 1; /* 各リンクが均等な幅になるように設定 */
 }
 
 nav ul li a {
@@ -221,8 +222,9 @@ nav ul li a {
     color: #fff;
     font-size: 1em;
     font-weight: bold;
-    padding: 10px 20px;
+    padding: 10px 0; /* 均等な横幅のために上下の余白だけ指定 */
     background-color: #6abf4b;
+    text-align: center; /* テキストを中央揃え */
     transition: background-color 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -257,10 +259,11 @@ nav ul li a .item-name {
     }
 
     nav ul li a {
-        padding: 5px 8px;
+        padding: 5px 0;
         font-size: 0.8em;
     }
 }
+
 
 
 main {
