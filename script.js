@@ -57,7 +57,7 @@ async function fetchOnlineUsers() {
                 onlinePlayers.appendChild(playerDiv);
             });
         } else {
-            onlinePlayers.textContent = '現在オンラインのプレイヤーはいません。';
+            onlinePlayers.textContent = '　';
         }
     } catch (error) {
         console.error('エラー:', error);
