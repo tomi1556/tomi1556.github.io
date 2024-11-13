@@ -96,7 +96,7 @@ body {
 /* スライドのスタイル */
 .swiper-slide {
   position: absolute;
-  width: 100%;
+  width: 75%;
   height: 100%; /* 高さを画面の高さに合わせる */
   display: flex;
   overflow: hidden; /* 内容がはみ出さないように */
@@ -104,7 +104,7 @@ body {
 }
 
 .swiper-slide img {
-  width: 100%;
+  width: 75%;
   height: 100%;
   object-fit: cover;
 }
