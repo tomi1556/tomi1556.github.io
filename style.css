@@ -231,7 +231,6 @@ nav ul li a {
     font-weight: bold;
     width: 60px; /* 正方形のサイズ */
     height: 60px; /* 正方形のサイズ */
-    background-color: #388e3c; /* アイテムの背景色 */
     display: flex;
     flex-direction: column;
     align-items: center;
