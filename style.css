@@ -95,7 +95,7 @@ body {
 
 /* スライドのスタイル */
 .swiper-slide {
-  position: relative;
+  position: absolute;
   width: 75%;
   height: 100%; /* 高さを画面の高さに合わせる */
   display: flex;
