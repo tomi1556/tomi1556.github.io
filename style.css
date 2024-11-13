@@ -191,6 +191,7 @@ body {
 }
 
 
+/* 基本のスタイル */
 nav {
     background-color: transparent;
     padding: 15px;
@@ -201,7 +202,6 @@ nav {
     top: 0;
     z-index: 1000;
     right: 0;
-    height: 60px;
 }
 
 nav ul {
@@ -214,7 +214,6 @@ nav ul {
 
 nav ul li {
     margin: 0;
-    flex: 1; /* 各リンクが均等な幅になるように設定 */
 }
 
 nav ul li a {
@@ -222,9 +221,9 @@ nav ul li a {
     color: #fff;
     font-size: 1em;
     font-weight: bold;
-    padding: 10px 0; /* 均等な横幅のために上下の余白だけ指定 */
+    padding: 10px 20px;
     background-color: #6abf4b;
-    text-align: center; /* テキストを中央揃え */
+    text-align: center;
     transition: background-color 0.3s ease;
     display: flex;
     flex-direction: column;
@@ -244,25 +243,41 @@ nav ul li a .item-name {
     font-size: 0.9em;
 }
 
+/* スマホ用メニューボタン */
+.menu-toggle {
+    display: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #fff;
+    padding: 10px;
+}
+
 /* スマホ用スタイル */
 @media (max-width: 768px) {
-    nav {
-        padding: 5px 0;
-        height: auto;
-        width: 100%;
-        text-align: center;
+    .menu-toggle {
+        display: block; /* メニューボタンを表示 */
     }
 
-    nav ul {
-        justify-content: center;
-        flex-wrap: nowrap;
+    #nav-menu {
+        display: none; /* デフォルトでメニューを非表示 */
+        flex-direction: column;
+        position: absolute;
+        top: 60px;
+        right: 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        width: 100%;
+    }
+
+    #nav-menu.show {
+        display: flex; /* メニューボタンがクリックされたら表示 */
     }
 
     nav ul li a {
-        padding: 5px 0;
-        font-size: 0.8em;
+        padding: 15px;
+        font-size: 1em;
     }
 }
+
 
 
 
