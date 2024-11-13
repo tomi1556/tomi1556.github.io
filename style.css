@@ -145,7 +145,6 @@ body {
   left: 0; /* スライドの左側に配置 */
   right: 0; /* スライドの右側に配置 */
   bottom: 0; /* スライドの下部に配置 */
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明の黒色でオーバーレイ */
   z-index: 0; /* 画像の下に配置 */
 }
 
@@ -154,7 +153,6 @@ body {
   position: absolute;
   bottom: 0px;
   left: 0; /* 左端に配置 */
-  background-color: rgba(0, 0, 0, 0.5); /* 背景を白に設定 */
   width: 28%; /* 横幅を画面の60%程度に設定 */
   aspect-ratio: 5 / 3; /* 横：縦 = 3:2の比率に設定 */
   padding: 10px 20px; /* 内側の余白 */
