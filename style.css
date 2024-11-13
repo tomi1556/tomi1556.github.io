@@ -97,8 +97,10 @@ body {
 .swiper-slide {
   position: relative;
   color: white;
-  height: 75vh; /* スライドの高さをビューポートの75%に変更 */
+  height: auto; /* 高さを自動にして、画像に合わせる */
+  display: flex;
   overflow: hidden; /* 内容がはみ出さないように */
+  justify-content: flex-end; /* サーバー情報を下に寄せる */
 }
 
 /* サーバー情報のスタイル */
