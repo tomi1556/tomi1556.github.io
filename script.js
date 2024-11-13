@@ -12,16 +12,6 @@ const observer = new IntersectionObserver(entries => {
 fadeInElements.forEach(el => observer.observe(el));
 
 
-window.addEventListener("scroll", function() {
-  const nav = document.querySelector(".nav");
-  if (window.scrollY > 50) { // スクロール位置に応じて調整
-    nav.classList.add("shrink");
-  } else {
-    navbar.classList.remove("shrink");
-  }
-});
-
-
 // タブの切り替え機能
 const tabButtons = document.querySelectorAll('.tab-button');
 const tabPanes = document.querySelectorAll('.tab-pane');
