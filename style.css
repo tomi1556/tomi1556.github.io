@@ -246,7 +246,7 @@ nav ul li a:hover {
 /* アイコンとテキストの調整 */
 nav ul li a .icon {
     font-size: 1.3em;
-    margin-bottom: 6px;
+    margin-bottom: 10px;
 }
 
 nav ul li a .item-name {
