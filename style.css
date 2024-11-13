@@ -96,6 +96,7 @@ body {
 /* スライドのスタイル */
 .swiper-slide {
   position: relative;
+  left: 0%; /* 左端から75%に配置して4分の1を使用 */
   width: 75%;
   color: white;
   height: 100%; /* 高さを画面の高さに合わせる */
