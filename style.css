@@ -98,7 +98,7 @@ body {
   position: relative;
   width: 75%;
   color: white;
-  height: 75vh; /* 高さを画面の高さに合わせる */
+  height: 100%; /* 高さを画面の高さに合わせる */
   display: flex;
   overflow: hidden; /* 内容がはみ出さないように */
 }
