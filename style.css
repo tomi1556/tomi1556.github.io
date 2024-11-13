@@ -97,26 +97,27 @@ body {
 .swiper-slide {
   position: relative;
   color: white;
-  height: auto; /* 高さを自動にして、画像に合わせる */
+  height: 100vh; /* 高さを画面の高さに合わせる */
   display: flex;
   overflow: hidden; /* 内容がはみ出さないように */
-  justify-content: flex-end; /* サーバー情報を下に寄せる */
 }
 
 /* サーバー情報のスタイル */
 .server-info {
   position: absolute;
   bottom: 0; /* スライドの下端に配置 */
-  left: 0; /* 左端に配置 */
-  width: 100%; /* 横幅はスライドの100%に */
-  height: 25%; /* スライドの4分の1の高さに */
+  left: 75%; /* 左端から75%に配置して4分の1を使用 */
+  width: 25%; /* 横幅はスライドの25%に */
+  height: 100%; /* 高さはスライドの100%に */
   padding: 10px 20px; /* 内側の余白 */
   font-family: 'Potta One', cursive;
   z-index: 2;
   display: flex;
   flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明の黒にする */
 }
 
+/* サーバー情報内のテキスト */
 .server-info .server-name {
   font-size: 40px; /* フォントサイズを調整 */
   font-weight: bold;
@@ -159,6 +160,7 @@ body {
   transform: scale(1.2); /* アクティブ時に拡大 */
   box-shadow: 0 0 10px rgba(0, 255, 136, 0.7); /* 強調のための光 */
 }
+
 
 
 
