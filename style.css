@@ -128,6 +128,36 @@ body {
   color: #00cc66; /* 色を変更 */
 }
 
+/* ページネーションのスタイル */
+.swiper-pagination {
+  position: absolute; /* 絶対配置 */
+  bottom: 10px; /* スライド下からの距離 */
+  left: 50%; /* 横方向の中央に配置 */
+  transform: translateX(-50%); /* 中央寄せのための補正 */
+  display: flex; /* フレックスボックスを使用 */
+  justify-content: center; /* 中央に配置 */
+  align-items: center; /* 垂直方向にも中央に配置 */
+  gap: 10px; /* 線の間隔を設定 */
+}
+
+/* ページネーションの横長線 */
+.swiper-pagination-bullet {
+  width: 100px; /* 横の長さを100pxに変更 */
+  height: 8px; /* 縦の高さを8pxに変更 */
+  background-color: rgba(0, 204, 102, 0.5); /* 非アクティブ時の色 */
+  border-radius: 4px; /* 丸みを持たせる */
+  transition: background-color 0.3s, transform 0.3s; /* 背景色とサイズの変化にアニメーションを追加 */
+  cursor: pointer; /* カーソルをポインターに変更 */
+}
+
+/* アクティブな線のスタイル */
+.swiper-pagination-bullet-active {
+  background-color: #00cc66; /* アクティブ時の色 */
+  transform: scale(1.2); /* アクティブ時に拡大 */
+  box-shadow: 0 0 10px rgba(0, 255, 136, 0.7); /* 強調のための光 */
+}
+
+
 
 /* ナビゲーション全体のスタイル */
 nav {
