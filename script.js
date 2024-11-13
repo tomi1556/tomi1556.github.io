@@ -1,7 +1,7 @@
 window.addEventListener("scroll", function() {
-  const navbar = document.querySelector(".navbar");
+  const nav = document.querySelector(".nav");
   if (window.scrollY > 50) { // スクロール位置に応じて調整
-    navbar.classList.add("shrink");
+    nav.classList.add("shrink");
   } else {
     navbar.classList.remove("shrink");
   }
