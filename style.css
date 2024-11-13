@@ -200,7 +200,7 @@ nav {
     width: 80px; /* ナビゲーションの幅 */
     top: 0; /* 上端から下端までの配置 */
     bottom: 0;
-    left: 10px; /* 左側に少しだけスペースを確保 */
+    left: 0px; /* 左側に少しだけスペースを確保 */
     z-index: 1000;
     display: flex;
     flex-direction: column; /* 縦にアイテムを並べる */
