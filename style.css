@@ -93,98 +93,39 @@ body {
   overflow-y: auto; /* 縦方向のスクロールを許可 */
 }
 
-.swiper-container {
-  width: 100vw; /* ビューポートの幅に合わせる */
-  height: 100vh; /* ビューポートの高さに合わせる */
-}
-
-.swiper-slide img {
-  width: 100%; /* 画像をスライドの幅に合わせる */
-  height: 100%; /* 画像をスライドの高さに合わせる */
-}
-
-/* ページネーションのスタイル */
-.swiper-pagination {
-  position: absolute; /* 絶対配置 */
-  bottom: 20px; /* スライダー下からの距離 */
-  right: 20px; /* スライダー右からの距離 */
-  display: flex; /* フレックスボックスを使用 */
-  justify-content: center; /* 中央に配置 */
-  align-items: center; /* 垂直方向にも中央に配置 */
-  gap: 10px; /* 線の間隔を設定 */
-}
-
-/* ページネーションの横長線 */
-.swiper-pagination-bullet {
-  width: 100px; /* 横の長さを100pxに変更 */
-  height: 8px; /* 縦の高さを8pxに変更 */
-  background-color: rgba(0, 204, 102, 0.5); /* 非アクティブ時の色 */
-  border-radius: 4px; /* 丸みを持たせる */
-  transition: background-color 0.3s, transform 0.3s; /* 背景色とサイズの変化にアニメーションを追加 */
-  cursor: pointer; /* カーソルをポインターに変更 */
-}
-
-/* アクティブな線のスタイル */
-.swiper-pagination-bullet-active {
-  background-color: #00cc66; /* アクティブ時の色 */
-  transform: scale(1.2); /* アクティブ時に拡大 */
-  box-shadow: 0 0 10px rgba(0, 255, 136, 0.7); /* 強調のための光 */
-}
-
 /* スライドのスタイル */
 .swiper-slide {
-  position: relative; /* テキストを絶対配置するために相対配置 */
-  color: white; /* テキストの色を白に */
+  position: relative;
+  color: white;
+  height: 75vh; /* スライドの高さをビューポートの75%に変更 */
+  overflow: hidden; /* 内容がはみ出さないように */
 }
 
-/* スライド内の画像全体を暗くするための擬似要素 */
-.swiper-slide::before {
-  content: '';
-  position: absolute; /* 絶対配置 */
-  top: 0; /* スライドの上部に配置 */
-  left: 0; /* スライドの左側に配置 */
-  right: 0; /* スライドの右側に配置 */
-  bottom: 0; /* スライドの下部に配置 */
-  z-index: 0; /* 画像の下に配置 */
-}
-
-/* 左下のサーバー名と説明用のスタイル */
+/* サーバー情報のスタイル */
 .server-info {
   position: absolute;
-  bottom: 0px;
+  bottom: 0; /* スライドの下端に配置 */
   left: 0; /* 左端に配置 */
-  width: 28%; /* 横幅を画面の60%程度に設定 */
-  aspect-ratio: 5 / 3; /* 横：縦 = 3:2の比率に設定 */
+  width: 100%; /* 横幅はスライドの100%に */
+  height: 25%; /* スライドの4分の1の高さに */
   padding: 10px 20px; /* 内側の余白 */
   font-family: 'Potta One', cursive;
   z-index: 2;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景色を追加 */
 }
 
 .server-info .server-name {
-  font-size: 50px;
+  font-size: 40px; /* フォントサイズを調整 */
   font-weight: bold;
-  margin-bottom: 20px;
-  color: #006400;
+  margin-bottom: 10px;
+  color: #00cc66; /* 色を変更 */
 }
 
 .server-info .server-description p {
-  font-size: 27px;
+  font-size: 20px; /* フォントサイズを調整 */
   line-height: 1.5;
-  margin: 15px auto;
-  color: #006400;
-}
-
-/* スマホ用のスタイル */
-@media (max-width: 768px) {
-  .server-info .server-name {
-    font-size: 32px; /* スマホで見やすいサイズに調整 */
-  }
-
-  .server-info .server-description p {
-    font-size: 20px; /* 説明のフォントも小さめに調整 */
-    line-height: 1.4; /* 行間も少し詰める */
-    margin: 10px auto; /* マージンも調整 */
-  }
+  margin: 10px 0;
+  color: #00cc66; /* 色を変更 */
 }
 
 
