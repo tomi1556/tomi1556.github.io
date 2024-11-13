@@ -96,8 +96,9 @@ body {
 /* スライドのスタイル */
 .swiper-slide {
   position: relative;
+  width: 75%
   color: white;
-  height: 100vh; /* 高さを画面の高さに合わせる */
+  height: 75vh; /* 高さを画面の高さに合わせる */
   display: flex;
   overflow: hidden; /* 内容がはみ出さないように */
 }
@@ -114,7 +115,6 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
-  background-color: rgba(0, 0, 0, 0.5); /* 背景を半透明の黒にする */
 }
 
 /* サーバー情報内のテキスト */
@@ -160,8 +160,6 @@ body {
   transform: scale(1.2); /* アクティブ時に拡大 */
   box-shadow: 0 0 10px rgba(0, 255, 136, 0.7); /* 強調のための光 */
 }
-
-
 
 
 /* ナビゲーション全体のスタイル */
