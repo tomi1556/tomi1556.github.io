@@ -199,14 +199,12 @@ nav {
     position: fixed;
     width: 80px; /* ナビゲーションの幅 */
     top: 0;
-    bottom: 0; /* 画面下までの固定 */
-    left: 0; /* 画面の左側に配置 */
+    left: 50%; /* 横方向の中央に配置 */
+    transform: translateX(-50%); /* 左に半分移動して中央揃え */
     z-index: 1000;
-    display: flex;
-    align-items: center;
 }
 
-/* リストを縦並びに */
+/* リストを縦並びに、上から埋める */
 nav ul {
     list-style: none;
     padding: 0;
@@ -218,7 +216,7 @@ nav ul {
 
 /* リストアイテムのスタイル */
 nav ul li {
-    margin: 10px 0; /* 各項目の間にスペースを追加 */
+    margin: 15px 0; /* 各項目の間に少し多めのスペース */
 }
 
 /* リンクのスタイル */
