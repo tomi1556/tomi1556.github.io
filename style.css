@@ -193,11 +193,11 @@ body {
 
 /* ナビゲーション全体のスタイル */
 nav {
-    background-color: #333; /* 背景色を少し濃く変更 */
+    background-color: #4caf50; /* 濃い明るい黄緑 */
     padding: 20px 0;
     box-shadow: none;
     position: fixed;
-    width: 200px; /* ナビゲーションの幅 */
+    width: 150px; /* ナビゲーションの幅を調整 */
     top: 0;
     bottom: 0; /* 画面下までの固定 */
     left: 0; /* 画面の左側に配置 */
@@ -211,7 +211,7 @@ nav ul {
     margin: 0;
     display: flex;
     flex-direction: column; /* 縦方向に配置 */
-    align-items: center; /* アイテムを中央寄せに */
+    align-items: stretch; /* アイテムを幅いっぱいに配置 */
 }
 
 /* リストアイテムのスタイル */
@@ -225,19 +225,22 @@ nav ul li a {
     color: #fff;
     font-size: 1em;
     font-weight: bold;
-    padding: 10px 20px;
-    background-color: #6abf4b;
+    padding: 10px 15px;
+    background-color: #388e3c; /* アイテムの背景色 */
+    border: 2px solid #2e7d32; /* 枠線の追加 */
     text-align: center;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 100%; /* リンクを幅いっぱいに */
+    box-sizing: border-box;
 }
 
 /* ホバー時のスタイル */
 nav ul li a:hover {
-    background-color: #8bc34a;
+    background-color: #66bb6a; /* ホバー時の背景色 */
+    transform: scale(1.05); /* ホバー時の軽い拡大効果 */
 }
 
 /* アイコンとテキストの調整 */
