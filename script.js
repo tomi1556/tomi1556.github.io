@@ -1,3 +1,17 @@
+const fadeInElements = document.querySelectorAll(".fade-in");
+
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("visible");
+      observer.unobserve(entry.target); // 一度だけアニメーションを適用する場合
+    }
+  });
+});
+
+fadeInElements.forEach(el => observer.observe(el));
+
+
 window.addEventListener("scroll", function() {
   const nav = document.querySelector(".nav");
   if (window.scrollY > 50) { // スクロール位置に応じて調整
@@ -6,6 +20,7 @@ window.addEventListener("scroll", function() {
     navbar.classList.remove("shrink");
   }
 });
+
 
 // タブの切り替え機能
 const tabButtons = document.querySelectorAll('.tab-button');
