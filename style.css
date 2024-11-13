@@ -96,7 +96,6 @@ body {
 .swiper-container {
   width: 100vw; /* ビューポートの幅に合わせる */
   height: 100vh; /* ビューポートの高さに合わせる */
-  background-color: rgba(0, 0, 0, 0.7); /* 背景を暗くする */
 }
 
 .swiper-slide img {
