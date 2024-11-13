@@ -243,43 +243,6 @@ nav ul li a .item-name {
     font-size: 0.9em;
 }
 
-/* スマホ用メニューボタン */
-.menu-toggle {
-    display: none;
-    font-size: 1.5em;
-    cursor: pointer;
-    color: #fff;
-    padding: 10px;
-}
-
-/* スマホ用スタイル */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block; /* メニューボタンを表示 */
-    }
-
-    #nav-menu {
-        display: none; /* デフォルトでメニューを非表示 */
-        flex-direction: column;
-        position: absolute;
-        top: 60px;
-        right: 0;
-        background-color: rgba(0, 0, 0, 0.8);
-        width: 100%;
-    }
-
-    #nav-menu.show {
-        display: flex; /* メニューボタンがクリックされたら表示 */
-    }
-
-    nav ul li a {
-        padding: 15px;
-        font-size: 1em;
-    }
-}
-
-
-
 
 main {
     padding: 40px 20px;
