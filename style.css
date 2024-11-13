@@ -205,7 +205,7 @@ nav {
     display: flex;
     flex-direction: column; /* 縦にアイテムを並べる */
     align-items: center;
-    justify-content: center; /* 中央寄せ配置 */
+    justify-content: flex-start; /* 上から順にアイテムを配置 */
 }
 
 /* リストを縦並びに、中央寄せ */
@@ -256,6 +256,7 @@ nav ul li a .item-name {
     font-size: 0.7em;
     text-align: center; /* テキストを中央揃え */
 }
+
 
 
 
