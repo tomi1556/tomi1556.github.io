@@ -191,31 +191,35 @@ body {
 }
 
 
-/* 基本のスタイル */
+/* ナビゲーション全体のスタイル */
 nav {
-    background-color: transparent;
-    padding: 15px;
-    text-align: right;
+    background-color: #333; /* 背景色を少し濃く変更 */
+    padding: 20px 0;
     box-shadow: none;
     position: fixed;
-    width: 100%;
+    width: 200px; /* ナビゲーションの幅 */
     top: 0;
+    bottom: 0; /* 画面下までの固定 */
+    left: 0; /* 画面の左側に配置 */
     z-index: 1000;
-    right: 0;
 }
 
+/* リストを縦並びに */
 nav ul {
     list-style: none;
     padding: 0;
     margin: 0;
     display: flex;
-    justify-content: flex-end;
+    flex-direction: column; /* 縦方向に配置 */
+    align-items: center; /* アイテムを中央寄せに */
 }
 
+/* リストアイテムのスタイル */
 nav ul li {
-    margin: 0;
+    margin: 10px 0; /* 各項目の間にスペースを追加 */
 }
 
+/* リンクのスタイル */
 nav ul li a {
     text-decoration: none;
     color: #fff;
@@ -228,12 +232,15 @@ nav ul li a {
     display: flex;
     flex-direction: column;
     align-items: center;
+    width: 100%; /* リンクを幅いっぱいに */
 }
 
+/* ホバー時のスタイル */
 nav ul li a:hover {
     background-color: #8bc34a;
 }
 
+/* アイコンとテキストの調整 */
 nav ul li a .icon {
     font-size: 1.5em;
     margin-bottom: 5px;
@@ -242,6 +249,7 @@ nav ul li a .icon {
 nav ul li a .item-name {
     font-size: 0.9em;
 }
+
 
 
 main {
