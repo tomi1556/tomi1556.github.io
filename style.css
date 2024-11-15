@@ -101,11 +101,12 @@ body {
   display: flex;
   overflow: hidden; /* 内容がはみ出さないように */
   justify-content: center;
+  align-items: flex-end; /* 画像を下側に配置 */
 }
 
 .swiper-slide img {
   width: 80%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
 }
 
