@@ -96,7 +96,7 @@ body {
 /* スライドのスタイル */
 .swiper-slide {
   position: absolute;
-  width: 80%;
+  width: 70%;
   height: 100%; /* 高さを画面の高さに合わせる */
   display: flex;
   overflow: hidden; /* 内容がはみ出さないように */
@@ -105,7 +105,7 @@ body {
 }
 
 .swiper-slide img {
-  width: 80%;
+  width: 70%;
   height: auto;
   object-fit: cover;
 }
@@ -114,8 +114,8 @@ body {
 .server-info {
   position: absolute;
   bottom: 0; /* スライドの下端に配置 */
-  left: 80%; /* 左端から75%に配置して4分の1を使用 */
-  width: 20%; /* 横幅はスライドの25%に */
+  left: 70%; /* 左端から75%に配置して4分の1を使用 */
+  width: 30%; /* 横幅はスライドの25%に */
   height: 100%; /* 高さはスライドの100%に */
   padding: 10px 20px; /* 内側の余白 */
   font-family: 'Potta One', cursive;
