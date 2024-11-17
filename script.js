@@ -41,6 +41,8 @@ const swiper = new Swiper('.swiper-container', {
     el: '.swiper-pagination',
     clickable: true, // ドットナビゲーションをクリック可能にする
   },
+  slidesPerView: 'auto', // 各スライドの幅を自動的に調整
+  spaceBetween: 0, // スライド間の隙間を調整
   navigation: false,
   speed: 800, // スライドの移動速度を800ミリ秒に設定
 });
