@@ -98,6 +98,7 @@ body {
   position: absolute;
   width: 75%;
   height: 100%; /* 高さを画面の高さに合わせる */
+  margin-right: 25%; /* 次のスライドが右端に現れるよう余白を調整 */
   display: flex;
   overflow: hidden; /* 内容がはみ出さないように */
   justify-content: center;
@@ -122,6 +123,10 @@ body {
   z-index: 2;
   display: flex;
   flex-direction: column;
+}
+
+.swiper-wrapper {
+  transform: translateX(-25%); /* 75%幅のスライドが左端になるよう調整 */
 }
 
 /* サーバー情報内のテキスト */
