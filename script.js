@@ -50,7 +50,7 @@ const swiper = new Swiper('.swiper-container', {
 
 async function fetchOnlineUsers() {
     try {
-        const response = await fetch('https://mcapi.us/server/status?ip=stella.xgames.jp');
+        const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
         const data = await response.json();
         document.getElementById('online-users').textContent = data.players.now;
 
