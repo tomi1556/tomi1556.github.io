@@ -97,7 +97,7 @@ body {
 .swiper-slide {
   position: absolute;
   width: 100%;
-  height: 100%; /* 高さを画面の高さに合わせる */
+  height: auto;
   display: flex;
   overflow: hidden; /* 内容がはみ出さないように */
   justify-content: center;
