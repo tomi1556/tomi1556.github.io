@@ -97,7 +97,7 @@ body {
 .swiper-slide {
   position: absolute;
   width: 100%;
-  height: auto;
+  height: 80%;
   display: flex;
   overflow: hidden; /* 内容がはみ出さないように */
   justify-content: center;
@@ -106,7 +106,7 @@ body {
 
 .swiper-slide img {
   width: 100%;
-  height: auto;
+  height: 80%;
   object-fit: cover;
 }
 
