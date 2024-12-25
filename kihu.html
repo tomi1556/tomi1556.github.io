@@ -165,6 +165,9 @@
                 amazonInput.value = value;
             });
 
+            // Amazonコードの最大長を16に制限
+            amazonInput.setAttribute('maxlength', '16');
+
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const paypayLink = document.getElementById('paypay-link').value;
@@ -183,7 +186,7 @@
 
                 // Amazonギフト券コードが正しいかを検証
                 if (!amazonSection.classList.contains('hidden')) {
-                    const amazonRegex = /^[A-Z0-9]{16}$/;  // ハイフンなし
+                    const amazonRegex = /^[A-Z0-9]{16}$/;  // ハイフンなし、16文字
                     if (!amazonRegex.test(amazonCode)) {
                         alert('Amazonギフト券コードが正しくありません');
                         return;
