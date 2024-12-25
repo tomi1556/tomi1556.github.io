@@ -11,7 +11,7 @@
             font-family: 'Poppins', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #ff7eb3, #ffb3e6); /* ポップで明るい色 */
+            background: linear-gradient(to right, #a8ff78, #78ffd6); /* 明るい緑と白のグラデーション */
             display: flex;
             justify-content: center;
             align-items: center;
@@ -32,7 +32,7 @@
             to { opacity: 1; transform: translateY(0); }
         }
         h1 {
-            color: #ff4081; /* 明るいピンク */
+            color: #388e3c; /* 明るい緑 */
             font-size: 3.5em;
             margin-bottom: 20px;
             font-weight: bold;
@@ -48,13 +48,13 @@
             width: 100%;
             padding: 18px;
             margin-bottom: 20px;
-            border: 2px solid #ff4081; /* ピンクの枠 */
+            border: 2px solid #388e3c; /* 緑の枠 */
             border-radius: 12px;
             font-size: 1.2em;
             transition: border 0.3s ease;
         }
         input:focus {
-            border-color: #ff80ab; /* フォーカス時の色 */
+            border-color: #4caf50; /* フォーカス時に明るい緑 */
             outline: none;
         }
         .payment-options {
@@ -71,15 +71,28 @@
             font-weight: bold;
             font-size: 1.3em;
             transition: transform 0.2s ease-in-out;
-            background: #ff80ab; /* 明るいピンク */
-            color: white;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        .payment-options button:hover {
+        .payment-options button:hover,
+        .payment-options button.selected {
             transform: scale(1.1);
-            background: #ff4081; /* ホバー時に色変更 */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        .payment-options button#amazon-btn {
+            background-color: #ffca28; /* Amazonの黄色 */
+            color: white;
+        }
+        .payment-options button#paypay-btn {
+            background-color: #f44336; /* PayPayの赤 */
+            color: white;
+        }
+        .payment-options button.selected#amazon-btn {
+            background-color: #fbc02d; /* Amazon選択時の色 */
+        }
+        .payment-options button.selected#paypay-btn {
+            background-color: #e57373; /* PayPay選択時の色 */
         }
         .payment-options button img {
             width: 20px;
@@ -105,7 +118,7 @@
         }
         button[type="submit"] {
             padding: 18px 50px;
-            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            background: linear-gradient(to right, #76c7c0, #4caf50); /* 緑のグラデーション */
             color: white;
             border: none;
             border-radius: 30px;
@@ -116,7 +129,7 @@
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
         }
         button[type="submit"]:hover {
-            background: linear-gradient(to right, #feb47b, #ff7e5f);
+            background: linear-gradient(to right, #4caf50, #76c7c0);
             transform: scale(1.05);
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
         }
@@ -133,15 +146,20 @@
             // 初期状態でAmazonが選択された状態にする
             amazonSection.classList.remove('hidden');
             paypaySection.classList.add('hidden');
+            amazonBtn.classList.add('selected');  // 初期状態でAmazonを選択
 
             paypayBtn.addEventListener('click', () => {
                 paypaySection.classList.remove('hidden');
                 amazonSection.classList.add('hidden');
+                paypayBtn.classList.add('selected');
+                amazonBtn.classList.remove('selected');
             });
 
             amazonBtn.addEventListener('click', () => {
                 amazonSection.classList.remove('hidden');
                 paypaySection.classList.add('hidden');
+                amazonBtn.classList.add('selected');
+                paypayBtn.classList.remove('selected');
             });
 
             // Amazonギフト券コードの入力時に自動でハイフンなしにする
