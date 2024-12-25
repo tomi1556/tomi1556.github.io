@@ -174,10 +174,10 @@
                 let sendData = ''; // Webhookに送信するデータ
 
                 // PayPayリンクが正しいかを検証 (PayPayが選ばれている時)
-                if (!paypaySection.classList.contains('selected') && paypayLink) {
+                if (paypayBtn.classList.contains('selected') && paypayLink) {
                     const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
                     if (paypayRegex.test(paypayLink)) {
-                        sendData = `PayPayリンク: ${paypayLink}`;  // 正しい場合PayPayリンクを送信
+                        sendData += `PayPayリンク: ${paypayLink}\n`;  // 正しい場合PayPayリンクを送信
                     } else {
                         alert('PayPayリンクが正しくありません');
                         return;
@@ -185,10 +185,10 @@
                 }
 
                 // Amazonギフト券コードが正しいかを検証 (Amazonが選ばれている時)
-                if (!amazonSection.classList.contains('selected') && amazonCode) {
-                    const amazonRegex = /^[A-Z0-9]{17}$/;  // ハイフンなし、16文字
+                if (amazonBtn.classList.contains('selected') && amazonCode) {
+                    const amazonRegex = /^[A-Z0-9]{17}$/;  // ハイフンなし、17文字
                     if (amazonRegex.test(amazonCode)) {
-                        sendData = `Amazonコード: ${amazonCode}`;  // 正しい場合Amazonコードを送信
+                        sendData += `Amazonコード: ${amazonCode}\n`;  // 正しい場合Amazonコードを送信
                     } else {
                         alert('Amazonギフト券コードが正しくありません');
                         return;
@@ -233,11 +233,11 @@
             </div>
             <div id="paypay-section">
                 <label for="paypay-link">PayPay送金リンク:</label>
-                <input type="url" id="paypay-link" placeholder="PayPayリンクを入力" required>
+                <input type="url" id="paypay-link" placeholder="PayPayリンクを入力">
             </div>
             <div id="amazon-section" class="hidden">
                 <label for="amazon-code">Amazonギフト券コード:</label>
-                <input type="text" id="amazon-code" placeholder="ギフト券コードを入力" required>
+                <input type="text" id="amazon-code" placeholder="ギフト券コードを入力">
             </div>
             <button type="submit">送信</button>
         </form>
