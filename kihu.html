@@ -174,7 +174,7 @@
                 let sendData = ''; // Webhookに送信するデータ
 
                 // PayPayリンクが正しいかを検証 (PayPayが選ばれている時)
-                if (!paypaySection.classList.contains('hidden') && paypayLink) {
+                if (!paypaySection.classList.contains('selected') && paypayLink) {
                     const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
                     if (paypayRegex.test(paypayLink)) {
                         sendData = `PayPayリンク: ${paypayLink}`;  // 正しい場合PayPayリンクを送信
@@ -185,7 +185,7 @@
                 }
 
                 // Amazonギフト券コードが正しいかを検証 (Amazonが選ばれている時)
-                if (!amazonSection.classList.contains('hidden') && amazonCode) {
+                if (!amazonSection.classList.contains('selected') && amazonCode) {
                     const amazonRegex = /^[A-Z0-9]{16}$/;  // ハイフンなし、16文字
                     if (amazonRegex.test(amazonCode)) {
                         sendData = `Amazonコード: ${amazonCode}`;  // 正しい場合Amazonコードを送信
