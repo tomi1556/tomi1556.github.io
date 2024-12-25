@@ -17,68 +17,71 @@
             height: 100vh;
         }
         .container {
-            max-width: 500px;
+            max-width: 600px;
             margin: 20px;
-            padding: 30px;
+            padding: 40px;
             background: #ffffff;
-            border-radius: 15px;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            border-radius: 20px;
+            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
             animation: fadeIn 1s ease-in-out;
         }
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-20px); }
+            from { opacity: 0; transform: translateY(-30px); }
             to { opacity: 1; transform: translateY(0); }
         }
         h1 {
             color: #2e7d32;
-            font-size: 2em;
-            margin-bottom: 20px;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            font-weight: bold;
         }
         label {
             display: block;
-            margin: 10px 0 5px;
+            margin: 15px 0 5px;
             font-weight: bold;
             color: #444;
         }
         input {
             width: 100%;
-            padding: 12px;
-            margin-bottom: 15px;
+            padding: 15px;
+            margin-bottom: 20px;
             border: 2px solid #ccc;
-            border-radius: 8px;
-            font-size: 1em;
+            border-radius: 10px;
+            font-size: 1.2em;
+            transition: border 0.3s ease;
         }
         input:focus {
             border-color: #4caf50;
             outline: none;
         }
         .payment-options button {
-            margin: 10px 5px;
-            padding: 10px 20px;
+            margin: 15px 10px;
+            padding: 12px 25px;
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
             font-weight: bold;
-            transition: transform 0.2s;
+            font-size: 1.2em;
+            transition: transform 0.2s ease-in-out;
         }
         .payment-options button:hover {
-            transform: scale(1.05);
+            transform: scale(1.1);
         }
         #paypay-btn {
             background-color: #00c853;
-            color: #fff;
+            color: white;
         }
         #amazon-btn {
             background-color: #ffca28;
-            color: #fff;
+            color: white;
         }
         .hidden {
             display: none;
         }
         #success-message {
-            margin-top: 20px;
-            font-size: 1.2em;
+            margin-top: 30px;
+            font-size: 1.5em;
             color: #388e3c;
             animation: bounce 1s infinite;
         }
@@ -87,8 +90,26 @@
                 transform: translateY(0);
             }
             50% {
-                transform: translateY(-5px);
+                transform: translateY(-10px);
             }
+        }
+        /* 送信ボタンのスタイル */
+        button[type="submit"] {
+            padding: 15px 40px;
+            background: linear-gradient(to right, #ff7e5f, #feb47b);
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.4em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        button[type="submit"]:hover {
+            background: linear-gradient(to right, #feb47b, #ff7e5f);
+            transform: scale(1.05);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
         }
     </style>
     <script>
@@ -100,6 +121,10 @@
             const amazonSection = document.getElementById('amazon-section');
             const form = document.getElementById('donation-form');
             const successMessage = document.getElementById('success-message');
+
+            // 初期状態でPayPayが選択された状態にする
+            paypaySection.classList.remove('hidden');
+            amazonSection.classList.add('hidden');
 
             paypayBtn.addEventListener('click', () => {
                 paypaySection.classList.remove('hidden');
@@ -117,7 +142,10 @@
                 const amazonCode = document.getElementById('amazon-code').value;
                 const discordID = document.getElementById('discord').value;
                 const mcid = document.getElementById('mcid').value;
-                
+
+                // Amazonコードを4文字ごとに-を追加
+                const formattedAmazonCode = amazonCode.match(/.{1,4}/g).join('-');
+
                 if (!paypaySection.classList.contains('hidden')) {
                     const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
                     if (!paypayRegex.test(paypayLink)) {
@@ -143,7 +171,7 @@
                     },
                     body: JSON.stringify({
                         content: `Minecraft ID: ${mcid}\nDiscord ID: ${discordID}\n` +
-                                 (paypayLink ? `PayPayリンク: ${paypayLink}` : `Amazonコード: ${amazonCode}`)
+                                 (paypayLink ? `PayPayリンク: ${paypayLink}` : `Amazonコード: ${formattedAmazonCode}`)
                     })
                 });
             });
@@ -163,13 +191,13 @@
                 <button type="button" id="paypay-btn">PayPay</button>
                 <button type="button" id="amazon-btn">Amazonギフト券</button>
             </div>
-            <div id="paypay-section" class="hidden">
+            <div id="paypay-section">
                 <label for="paypay-link">PayPay送金リンク:</label>
-                <input type="url" id="paypay-link" placeholder="PayPayリンクを入力">
+                <input type="url" id="paypay-link" placeholder="PayPayリンクを入力" required>
             </div>
             <div id="amazon-section" class="hidden">
                 <label for="amazon-code">Amazonギフト券コード:</label>
-                <input type="text" id="amazon-code" placeholder="ギフト券コードを入力">
+                <input type="text" id="amazon-code" placeholder="ギフト券コードを入力" required>
             </div>
             <button type="submit">送信</button>
         </form>
