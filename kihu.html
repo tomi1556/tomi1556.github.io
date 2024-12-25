@@ -130,94 +130,94 @@
             box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
         }
     </style>
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const paypayBtn = document.getElementById('paypay-btn');
-        const amazonBtn = document.getElementById('amazon-btn');
-        const paypaySection = document.getElementById('paypay-section');
-        const amazonSection = document.getElementById('amazon-section');
-        const form = document.getElementById('donation-form');
-        const successMessage = document.getElementById('success-message');
-        const amazonInput = document.getElementById('amazon-code');
-        const paypayLinkInput = document.getElementById('paypay-link');
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const paypayBtn = document.getElementById('paypay-btn');
+            const amazonBtn = document.getElementById('amazon-btn');
+            const paypaySection = document.getElementById('paypay-section');
+            const amazonSection = document.getElementById('amazon-section');
+            const form = document.getElementById('donation-form');
+            const successMessage = document.getElementById('success-message');
+            const amazonInput = document.getElementById('amazon-code');
+            const paypayLinkInput = document.getElementById('paypay-link');
 
-        // 初期状態でAmazonが選択された状態にする
-        amazonSection.classList.remove('hidden');
-        paypaySection.classList.add('hidden');
-        amazonBtn.classList.add('selected');  // 初期状態でAmazonを選択
-
-        // PayPayボタンのクリックイベント
-        paypayBtn.addEventListener('click', () => {
-            paypaySection.classList.remove('hidden');
-            amazonSection.classList.add('hidden');
-            paypayBtn.classList.add('selected');
-            amazonBtn.classList.remove('selected');
-        });
-
-        // Amazonボタンのクリックイベント
-        amazonBtn.addEventListener('click', () => {
+            // 初期状態でAmazonが選択された状態にする
             amazonSection.classList.remove('hidden');
             paypaySection.classList.add('hidden');
-            amazonBtn.classList.add('selected');
-            paypayBtn.classList.remove('selected');
-        });
+            amazonBtn.classList.add('selected');  // 初期状態でAmazonを選択
 
-        // フォーム送信イベント
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-
-            // 入力値を取得
-            const paypayLink = paypayLinkInput.value.trim();
-            const amazonCode = amazonInput.value.trim();
-            const discordID = document.getElementById('discord').value;
-            const mcid = document.getElementById('mcid').value;
-
-            let sendData = ''; // Webhookに送信するデータ
-
-            // PayPayリンクが正しいかを検証 (PayPayが選ばれている時)
-            if (!paypaySection.classList.contains('hidden') && paypayLink) {
-                const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
-                if (paypayRegex.test(paypayLink)) {
-                    sendData = `PayPayリンク: ${paypayLink}`;  // 正しい場合PayPayリンクを送信
-                } else {
-                    alert('PayPayリンクが正しくありません');
-                    return;
-                }
-            }
-
-            // Amazonギフト券コードが正しいかを検証 (Amazonが選ばれている時)
-            if (!amazonSection.classList.contains('hidden') && amazonCode) {
-                const amazonRegex = /^[A-Z0-9]{16}$/;  // ハイフンなし、16文字
-                if (amazonRegex.test(amazonCode)) {
-                    sendData = `Amazonコード: ${amazonCode}`;  // 正しい場合Amazonコードを送信
-                } else {
-                    alert('Amazonギフト券コードが正しくありません');
-                    return;
-                }
-            }
-
-            // 片方が空でも、送信するために条件をチェック
-            if (sendData === '') {
-                alert('PayPayリンクまたはAmazonコードを入力してください');
-                return;
-            }
-
-            // Webhookにデータを送信
-            fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    content: `Minecraft ID: ${mcid}\nDiscord ID: ${discordID}\n${sendData}`
-                })
+            // PayPayボタンのクリックイベント
+            paypayBtn.addEventListener('click', () => {
+                paypaySection.classList.remove('hidden');
+                amazonSection.classList.add('hidden');
+                paypayBtn.classList.add('selected');
+                amazonBtn.classList.remove('selected');
             });
 
-            // 成功メッセージの表示
-            successMessage.classList.remove('hidden');
+            // Amazonボタンのクリックイベント
+            amazonBtn.addEventListener('click', () => {
+                amazonSection.classList.remove('hidden');
+                paypaySection.classList.add('hidden');
+                amazonBtn.classList.add('selected');
+                paypayBtn.classList.remove('selected');
+            });
+
+            // フォーム送信イベント
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                // 入力値を取得
+                const paypayLink = paypayLinkInput.value.trim();
+                const amazonCode = amazonInput.value.trim();
+                const discordID = document.getElementById('discord').value;
+                const mcid = document.getElementById('mcid').value;
+
+                let sendData = ''; // Webhookに送信するデータ
+
+                // PayPayリンクが正しいかを検証 (PayPayが選ばれている時)
+                if (!paypaySection.classList.contains('hidden') && paypayLink) {
+                    const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
+                    if (paypayRegex.test(paypayLink)) {
+                        sendData = `PayPayリンク: ${paypayLink}`;  // 正しい場合PayPayリンクを送信
+                    } else {
+                        alert('PayPayリンクが正しくありません');
+                        return;
+                    }
+                }
+
+                // Amazonギフト券コードが正しいかを検証 (Amazonが選ばれている時)
+                if (!amazonSection.classList.contains('hidden') && amazonCode) {
+                    const amazonRegex = /^[A-Z0-9]{16}$/;  // ハイフンなし、16文字
+                    if (amazonRegex.test(amazonCode)) {
+                        sendData = `Amazonコード: ${amazonCode}`;  // 正しい場合Amazonコードを送信
+                    } else {
+                        alert('Amazonギフト券コードが正しくありません');
+                        return;
+                    }
+                }
+
+                // 片方が空でも送信できるようにする
+                if (sendData === '') {
+                    alert('PayPayリンクまたはAmazonコードのいずれかを入力してください');
+                    return;
+                }
+
+                // Webhookにデータを送信
+                fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: `Minecraft ID: ${mcid}\nDiscord ID: ${discordID}\n${sendData}`
+                    })
+                });
+
+                // 成功メッセージの表示
+                successMessage.classList.remove('hidden');
+            });
         });
-    });
-</script>
+    </script>
 </head>
 <body>
     <div class="container">
