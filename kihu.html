@@ -163,15 +163,6 @@
             // Amazonコードの最大長を16に制限
             amazonInput.setAttribute('maxlength', '16');
 
-            // Amazonコードの入力時に自動でハイフンなしにする
-            amazonInput.addEventListener('input', function () {
-                let value = amazonInput.value.replace(/[^A-Z0-9]/g, '').toUpperCase();
-                amazonInput.value = value;
-            });
-
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-
                 // 入力値を取得
                 const paypayLink = paypayLinkInput.value;
                 const amazonCode = amazonInput.value;
