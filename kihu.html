@@ -160,6 +160,9 @@
                 paypayBtn.classList.remove('selected');
             });
 
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
                 // 入力値を取得
                 const paypayLink = paypayLinkInput.value;
                 const amazonCode = amazonInput.value;
