@@ -94,11 +94,6 @@
         .payment-options button.selected#paypay-btn {
             background-color: #e57373; /* PayPay選択時の色 */
         }
-        .payment-options button img {
-            width: 20px;
-            height: 20px;
-            margin-right: 8px;
-        }
         .hidden {
             display: none;
         }
@@ -221,12 +216,8 @@
             <input type="text" id="discord" placeholder="Discord IDを入力" required>
             <label>寄付方法を選択:</label>
             <div class="payment-options">
-                <button type="button" id="amazon-btn">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Amazon_icon.svg" alt="Amazon" /> Amazonギフト券
-                </button>
-                <button type="button" id="paypay-btn">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/PayPay_logo.svg/2560px-PayPay_logo.svg.png" alt="PayPay" /> PayPay
-                </button>
+                <button type="button" id="amazon-btn">Amazonギフト券</button>
+                <button type="button" id="paypay-btn">PayPay</button>
             </div>
             <div id="paypay-section">
                 <label for="paypay-link">PayPay送金リンク:</label>
