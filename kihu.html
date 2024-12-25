@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>寄付サイト</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* ====== CSS ====== */
         body {
@@ -56,8 +57,13 @@
             border-color: #ff80ab; /* フォーカス時の色 */
             outline: none;
         }
+        .payment-options {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
         .payment-options button {
-            margin: 15px 10px;
+            margin: 0 15px;
             padding: 14px 28px;
             border: none;
             border-radius: 12px;
@@ -67,10 +73,18 @@
             transition: transform 0.2s ease-in-out;
             background: #ff80ab; /* 明るいピンク */
             color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
         .payment-options button:hover {
             transform: scale(1.1);
             background: #ff4081; /* ホバー時に色変更 */
+        }
+        .payment-options button img {
+            width: 20px;
+            height: 20px;
+            margin-right: 8px;
         }
         .hidden {
             display: none;
@@ -116,9 +130,9 @@
             const form = document.getElementById('donation-form');
             const successMessage = document.getElementById('success-message');
 
-            // 初期状態でPayPayが選択された状態にする
-            paypaySection.classList.remove('hidden');
-            amazonSection.classList.add('hidden');
+            // 初期状態でAmazonが選択された状態にする
+            amazonSection.classList.remove('hidden');
+            paypaySection.classList.add('hidden');
 
             paypayBtn.addEventListener('click', () => {
                 paypaySection.classList.remove('hidden');
@@ -144,6 +158,7 @@
                 const discordID = document.getElementById('discord').value;
                 const mcid = document.getElementById('mcid').value;
 
+                // PayPayリンクが正しいかを検証
                 if (!paypaySection.classList.contains('hidden')) {
                     const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
                     if (!paypayRegex.test(paypayLink)) {
@@ -152,6 +167,7 @@
                     }
                 }
 
+                // Amazonギフト券コードが正しいかを検証
                 if (!amazonSection.classList.contains('hidden')) {
                     const amazonRegex = /^[A-Z0-9]{16}$/;  // ハイフンなし
                     if (!amazonRegex.test(amazonCode)) {
@@ -187,8 +203,12 @@
             <input type="text" id="discord" placeholder="Discord IDを入力" required>
             <label>寄付方法を選択:</label>
             <div class="payment-options">
-                <button type="button" id="paypay-btn">PayPay</button>
-                <button type="button" id="amazon-btn">Amazonギフト券</button>
+                <button type="button" id="amazon-btn">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Amazon_icon.svg" alt="Amazon" /> Amazonギフト券
+                </button>
+                <button type="button" id="paypay-btn">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/PayPay_logo.svg/2560px-PayPay_logo.svg.png" alt="PayPay" /> PayPay
+                </button>
             </div>
             <div id="paypay-section">
                 <label for="paypay-link">PayPay送金リンク:</label>
