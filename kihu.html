@@ -17,12 +17,12 @@
             height: 100vh;
         }
         .container {
-            max-width: 600px;
+            max-width: 650px;
             margin: 20px;
             padding: 40px;
             background: #ffffff;
-            border-radius: 20px;
-            box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
             text-align: center;
             animation: fadeIn 1s ease-in-out;
         }
@@ -32,22 +32,23 @@
         }
         h1 {
             color: #2e7d32;
-            font-size: 2.5em;
+            font-size: 3em;
             margin-bottom: 30px;
             font-weight: bold;
         }
         label {
             display: block;
-            margin: 15px 0 5px;
+            margin: 18px 0 8px;
             font-weight: bold;
             color: #444;
+            font-size: 1.2em;
         }
         input {
             width: 100%;
-            padding: 15px;
+            padding: 18px;
             margin-bottom: 20px;
             border: 2px solid #ccc;
-            border-radius: 10px;
+            border-radius: 12px;
             font-size: 1.2em;
             transition: border 0.3s ease;
         }
@@ -57,12 +58,12 @@
         }
         .payment-options button {
             margin: 15px 10px;
-            padding: 12px 25px;
+            padding: 14px 28px;
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1.2em;
+            font-size: 1.3em;
             transition: transform 0.2s ease-in-out;
         }
         .payment-options button:hover {
@@ -95,12 +96,12 @@
         }
         /* 送信ボタンのスタイル */
         button[type="submit"] {
-            padding: 15px 40px;
+            padding: 18px 50px;
             background: linear-gradient(to right, #ff7e5f, #feb47b);
             color: white;
             border: none;
             border-radius: 30px;
-            font-size: 1.4em;
+            font-size: 1.5em;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s ease;
@@ -136,15 +137,20 @@
                 paypaySection.classList.add('hidden');
             });
 
+            // Amazonギフト券コードの入力時に4文字おきに自動で-を挿入
+            const amazonInput = document.getElementById('amazon-code');
+            amazonInput.addEventListener('input', function () {
+                let value = amazonInput.value.replace(/[^A-Z0-9]/g, '').toUpperCase();
+                value = value.match(/.{1,4}/g)?.join('-') || value;
+                amazonInput.value = value;
+            });
+
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
                 const paypayLink = document.getElementById('paypay-link').value;
                 const amazonCode = document.getElementById('amazon-code').value;
                 const discordID = document.getElementById('discord').value;
                 const mcid = document.getElementById('mcid').value;
-
-                // Amazonコードを4文字ごとに-を追加
-                const formattedAmazonCode = amazonCode.match(/.{1,4}/g).join('-');
 
                 if (!paypaySection.classList.contains('hidden')) {
                     const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
@@ -155,7 +161,7 @@
                 }
 
                 if (!amazonSection.classList.contains('hidden')) {
-                    const amazonRegex = /^[A-Z0-9]{16}$/;
+                    const amazonRegex = /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
                     if (!amazonRegex.test(amazonCode)) {
                         alert('Amazonギフト券コードが正しくありません');
                         return;
@@ -171,7 +177,7 @@
                     },
                     body: JSON.stringify({
                         content: `Minecraft ID: ${mcid}\nDiscord ID: ${discordID}\n` +
-                                 (paypayLink ? `PayPayリンク: ${paypayLink}` : `Amazonコード: ${formattedAmazonCode}`)
+                                 (paypayLink ? `PayPayリンク: ${paypayLink}` : `Amazonコード: ${amazonCode}`)
                     })
                 });
             });
