@@ -139,6 +139,7 @@
             const form = document.getElementById('donation-form');
             const successMessage = document.getElementById('success-message');
             const amazonInput = document.getElementById('amazon-code');
+            const paypayLinkInput = document.getElementById('paypay-link');
 
             // 初期状態でAmazonが選択された状態にする
             amazonSection.classList.remove('hidden');
@@ -170,8 +171,10 @@
 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
-                const paypayLink = document.getElementById('paypay-link').value;
-                const amazonCode = document.getElementById('amazon-code').value;
+
+                // 入力値を取得
+                const paypayLink = paypayLinkInput.value;
+                const amazonCode = amazonInput.value;
                 const discordID = document.getElementById('discord').value;
                 const mcid = document.getElementById('mcid').value;
 
@@ -193,9 +196,10 @@
                     }
                 }
 
+                // 成功メッセージの表示
                 successMessage.classList.remove('hidden');
 
-                // Webhookの設定
+                // Webhookにデータを送信
                 fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
                     method: 'POST',
                     headers: {
