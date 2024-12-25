@@ -119,7 +119,7 @@
                 const mcid = document.getElementById('mcid').value;
                 
                 if (!paypaySection.classList.contains('hidden')) {
-                    const paypayRegex = /^https://pay.paypay.ne.jp/+/;
+                    const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
                     if (!paypayRegex.test(paypayLink)) {
                         alert('PayPayリンクが正しくありません');
                         return;
