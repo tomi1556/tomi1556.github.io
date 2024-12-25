@@ -146,6 +146,7 @@
             paypaySection.classList.add('hidden');
             amazonBtn.classList.add('selected');  // 初期状態でAmazonを選択
 
+            // PayPayボタンのクリックイベント
             paypayBtn.addEventListener('click', () => {
                 paypaySection.classList.remove('hidden');
                 amazonSection.classList.add('hidden');
@@ -153,6 +154,7 @@
                 amazonBtn.classList.remove('selected');
             });
 
+            // Amazonボタンのクリックイベント
             amazonBtn.addEventListener('click', () => {
                 amazonSection.classList.remove('hidden');
                 paypaySection.classList.add('hidden');
@@ -160,12 +162,13 @@
                 paypayBtn.classList.remove('selected');
             });
 
+            // フォーム送信イベント
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
 
                 // 入力値を取得
                 const paypayLink = paypayLinkInput.value;
-                const amazonCode = amazonInput.value;
+                const amazonCode = amazonInput.value.trim();
                 const discordID = document.getElementById('discord').value;
                 const mcid = document.getElementById('mcid').value;
 
