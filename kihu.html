@@ -7,41 +7,63 @@
     <style>
         /* ====== CSS ====== */
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #e8f5e9;
+            background: linear-gradient(to right, #a8ff78, #78ffd6);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
         }
         .container {
             max-width: 500px;
-            margin: 50px auto;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin: 20px;
+            padding: 30px;
+            background: #ffffff;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
             text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
         }
         h1 {
-            color: #388e3c;
+            color: #2e7d32;
+            font-size: 2em;
+            margin-bottom: 20px;
         }
         label {
             display: block;
             margin: 10px 0 5px;
             font-weight: bold;
+            color: #444;
         }
         input {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
+            border: 2px solid #ccc;
+            border-radius: 8px;
+            font-size: 1em;
+        }
+        input:focus {
+            border-color: #4caf50;
+            outline: none;
         }
         .payment-options button {
-            margin: 10px;
+            margin: 10px 5px;
             padding: 10px 20px;
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             cursor: pointer;
+            font-weight: bold;
+            transition: transform 0.2s;
+        }
+        .payment-options button:hover {
+            transform: scale(1.05);
         }
         #paypay-btn {
             background-color: #00c853;
@@ -58,6 +80,15 @@
             margin-top: 20px;
             font-size: 1.2em;
             color: #388e3c;
+            animation: bounce 1s infinite;
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
         }
     </style>
     <script>
@@ -88,7 +119,8 @@
                 const mcid = document.getElementById('mcid').value;
                 
                 if (!paypaySection.classList.contains('hidden')) {
-                    if (!paypayLink.startsWith('https://paypay.ne.jp/')) {
+                    const paypayRegex = /^https:\/\/paypay\.ne\.jp\/.+/;
+                    if (!paypayRegex.test(paypayLink)) {
                         alert('PayPayリンクが正しくありません');
                         return;
                     }
@@ -104,7 +136,7 @@
 
                 successMessage.classList.remove('hidden');
 
-                fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
+                fetch('https://discord.com/api/webhooks/YOUR_WEBHOOK_URL', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -124,29 +156,23 @@
         <form id="donation-form">
             <label for="mcid">Minecraft ID:</label>
             <input type="text" id="mcid" placeholder="Minecraft IDを入力" required>
-            
             <label for="discord">Discord ID:</label>
             <input type="text" id="discord" placeholder="Discord IDを入力" required>
-            
             <label>寄付方法を選択:</label>
             <div class="payment-options">
                 <button type="button" id="paypay-btn">PayPay</button>
                 <button type="button" id="amazon-btn">Amazonギフト券</button>
             </div>
-            
             <div id="paypay-section" class="hidden">
                 <label for="paypay-link">PayPay送金リンク:</label>
                 <input type="url" id="paypay-link" placeholder="PayPayリンクを入力">
             </div>
-            
             <div id="amazon-section" class="hidden">
                 <label for="amazon-code">Amazonギフト券コード:</label>
                 <input type="text" id="amazon-code" placeholder="ギフト券コードを入力">
             </div>
-            
             <button type="submit">送信</button>
         </form>
-        
         <div id="success-message" class="hidden">
             ✅ 送金が確認されました！ありがとうございます！
         </div>
