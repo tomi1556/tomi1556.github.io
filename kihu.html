@@ -138,6 +138,7 @@
             const amazonSection = document.getElementById('amazon-section');
             const form = document.getElementById('donation-form');
             const successMessage = document.getElementById('success-message');
+            const amazonInput = document.getElementById('amazon-code');
 
             // 初期状態でAmazonが選択された状態にする
             amazonSection.classList.remove('hidden');
@@ -157,8 +158,15 @@
                 amazonBtn.classList.add('selected');
                 paypayBtn.classList.remove('selected');
             });
+
             // Amazonコードの最大長を16に制限
             amazonInput.setAttribute('maxlength', '16');
+
+            // Amazonコードの入力時に自動でハイフンなしにする
+            amazonInput.addEventListener('input', function () {
+                let value = amazonInput.value.replace(/[^A-Z0-9]/g, '').toUpperCase();
+                amazonInput.value = value;
+            });
 
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
