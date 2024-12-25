@@ -167,31 +167,34 @@
                 e.preventDefault();
 
                 // 入力値を取得
-                const paypayLink = paypayLinkInput.value;
+                const paypayLink = paypayLinkInput.value.trim();
                 const amazonCode = amazonInput.value.trim();
                 const discordID = document.getElementById('discord').value;
                 const mcid = document.getElementById('mcid').value;
 
+                let sendData = ''; // Webhookに送信するデータ
+
                 // PayPayリンクが正しいかを検証
-                if (!paypaySection.classList.contains('hidden')) {
+                if (!amazonSection.classList.contains('hidden') && paypayLink) {
                     const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
-                    if (!paypayRegex.test(paypayLink)) {
+                    if (paypayRegex.test(paypayLink)) {
+                        sendData = `PayPayリンク: ${paypayLink}`;
+                    } else {
                         alert('PayPayリンクが正しくありません');
                         return;
                     }
                 }
 
                 // Amazonギフト券コードが正しいかを検証
-                if (!amazonSection.classList.contains('hidden')) {
+                if (!paypaySection.classList.contains('hidden') && amazonCode) {
                     const amazonRegex = /^[A-Z0-9]{16}$/;  // ハイフンなし、16文字
-                    if (!amazonRegex.test(amazonCode)) {
+                    if (amazonRegex.test(amazonCode)) {
+                        sendData = `Amazonコード: ${amazonCode}`;
+                    } else {
                         alert('Amazonギフト券コードが正しくありません');
                         return;
                     }
                 }
-
-                // 成功メッセージの表示
-                successMessage.classList.remove('hidden');
 
                 // Webhookにデータを送信
                 fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
@@ -200,10 +203,12 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        content: `Minecraft ID: ${mcid}\nDiscord ID: ${discordID}\n` +
-                                 (paypayLink ? `PayPayリンク: ${paypayLink}` : `Amazonコード: ${amazonCode}`)
+                        content: `Minecraft ID: ${mcid}\nDiscord ID: ${discordID}\n${sendData}`
                     })
                 });
+
+                // 成功メッセージの表示
+                successMessage.classList.remove('hidden');
             });
         });
     </script>
