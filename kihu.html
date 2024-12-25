@@ -186,7 +186,7 @@
 
                 // Amazonギフト券コードが正しいかを検証 (Amazonが選ばれている時)
                 if (amazonBtn.classList.contains('selected') && amazonCode) {
-                    const amazonRegex = /^[A-Z0-9]{17}$/;  // ハイフンなし、17文字
+                    const amazonRegex = /^[A-Z0-9]{1,17}$/;  // ハイフンなし、17文字
                     if (amazonRegex.test(amazonCode)) {
                         sendData += `Amazonコード: ${amazonCode}\n`;  // 正しい場合Amazonコードを送信
                     } else {
