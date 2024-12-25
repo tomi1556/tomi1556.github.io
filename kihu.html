@@ -119,7 +119,7 @@
                 const mcid = document.getElementById('mcid').value;
                 
                 if (!paypaySection.classList.contains('hidden')) {
-                    const paypayRegex = /^https:\/\/paypay\.ne\.jp\/.+/;
+                    const paypayRegex = /^https://pay.paypay.ne.jp/+/;
                     if (!paypayRegex.test(paypayLink)) {
                         alert('PayPayリンクが正しくありません');
                         return;
@@ -136,7 +136,7 @@
 
                 successMessage.classList.remove('hidden');
 
-                fetch('https://discord.com/api/webhooks/YOUR_WEBHOOK_URL', {
+                fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
