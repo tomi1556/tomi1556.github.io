@@ -157,14 +157,6 @@
                 amazonBtn.classList.add('selected');
                 paypayBtn.classList.remove('selected');
             });
-
-            // Amazonギフト券コードの入力時に自動でハイフンなしにする
-            const amazonInput = document.getElementById('amazon-code');
-            amazonInput.addEventListener('input', function () {
-                let value = amazonInput.value.replace(/[^A-Z0-9]/g, '').toUpperCase();
-                amazonInput.value = value;
-            });
-
             // Amazonコードの最大長を16に制限
             amazonInput.setAttribute('maxlength', '16');
 
