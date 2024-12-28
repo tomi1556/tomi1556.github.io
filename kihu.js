@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Discord Webhookにデータを送信
-        fetch('YOUR_WEBHOOK_URL', {  // 必ず実際のWebhook URLを挿入してください
+        fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {  // 必ず実際のWebhook URLを挿入してください
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
