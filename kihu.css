@@ -1,0 +1,121 @@
+/* ====== 全体スタイル ====== */
+body {
+    font-family: 'Poppins', Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background: linear-gradient(to right, #43cea2, #185a9d);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 600px;
+    margin: 20px;
+    padding: 40px;
+    background: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 1s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-30px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h1 {
+    color: #2c786c;
+    font-size: 2.8em;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 15px 0 8px;
+    font-weight: bold;
+    color: #444;
+    font-size: 1.1em;
+}
+
+input, select {
+    width: 80%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #b2dfdb;
+    border-radius: 8px;
+    font-size: 1em;
+    transition: border 0.3s ease;
+}
+
+input:focus, select:focus {
+    border-color: #26a69a;
+    outline: none;
+}
+
+/* ====== バージョン選択 ====== */
+.version-options button,
+.payment-options button {
+    margin: 0 10px;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    transition: all 0.2s ease;
+}
+
+#java-btn {
+    background-color: #ff8f00;
+    color: white;
+}
+
+#bedrock-btn {
+    background-color: #0288d1;
+    color: white;
+}
+
+#amazon-btn {
+    background-color: #fbc02d;
+    color: white;
+}
+
+#paypay-btn {
+    background-color: #e57373;
+    color: white;
+}
+
+button.selected {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== 送信ボタン ====== */
+button[type="submit"] {
+    padding: 14px 60px;
+    background: linear-gradient(to right, #43cea2, #185a9d);
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+button[type="submit"]:hover {
+    transform: scale(1.05);
+}
+
+/* ====== 成功メッセージ ====== */
+.hidden {
+    display: none;
+}
+
+#success-message {
+    margin-top: 30px;
+    font-size: 1.3em;
+    color: #388e3c;
+}
