@@ -1,0 +1,68 @@
+/* ====== スマホ用スタイル (最大幅 480px 以下) ====== */
+body {
+    justify-content: flex-start;  /* 上に寄せて、上部の余白を確保 */
+    padding-top: 10px;  /* 上部に少し余白を追加 */
+}
+
+.container {
+    width: 90%;  /* 幅を90%に設定 */
+    padding: 20px;
+    overflow-y: auto;  /* 縦方向にスクロールできるようにする */
+}
+
+/* 見出しのサイズを小さく */
+h1 {
+    font-size: 2.2em; 
+}
+
+input, button {
+    width: 100%;  /* 入力フィールドとボタンの幅を100% */
+    font-size: 1em;  /* フォントサイズを少し小さく */
+    padding: 10px;
+}
+
+/* ボタンの配置を縦に並べる */
+.donation-options {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.donation-btn-wrapper {
+    width: 100%; /* ボタンが1行に並ばないように */
+    max-width: 100%;
+}
+
+.donation-btn {
+    height: auto; /* 高さを自動に */
+    font-size: 16px; /* 少し大きくする */
+}
+
+/* 絵文字とプラン名のサイズ調整 */
+.plan-emoji {
+    font-size: 32px;
+}
+
+.plan-name {
+    font-size: 14px;
+}
+
+/* 送信ボタンの調整 */
+button[type="submit"] {
+    padding: 14px 40px;
+    font-size: 1.2em;
+}
+
+/* 寄付金額ラベルの調整 */
+.donation-amount-label {
+    font-size: 14px; /* 少し小さめに */
+}
+
+/* ボタンの幅を広げて使いやすくする */
+.payment-options {
+    flex-direction: column;
+    gap: 10px;
+}
+
+.payment-options button {
+    padding: 12px 40px;
+}
