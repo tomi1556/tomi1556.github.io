@@ -140,7 +140,7 @@ button[type="submit"] {
 
 /* 選択状態のボタン */
 .donation-btn.selected {
-    background-color: #2E8B57;
+    background-color: #0abf5a;
     color: #fff;
     font-weight: bold;
     border: 2px solid #1C6E42;
