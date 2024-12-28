@@ -6,18 +6,19 @@
     <title>寄付サイト</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
+        /* ====== 全体スタイル ====== */
         body {
             font-family: 'Poppins', Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(to right, #a8ff78, #78ffd6); /* 明るい緑と白のグラデーション */
+            background: linear-gradient(to right, #43cea2, #185a9d);
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
         }
         .container {
-            width: 550px; /* 幅を固定 */
+            width: 600px;
             margin: 20px;
             padding: 40px;
             background: #ffffff;
@@ -31,189 +32,135 @@
             to { opacity: 1; transform: translateY(0); }
         }
         h1 {
-            color: #388e3c; /* 明るい緑 */
-            font-size: 3.5em;
+            color: #2c786c;
+            font-size: 2.8em;
             margin-bottom: 20px;
-            font-weight: bold;
         }
         label {
             display: block;
-            margin: 18px 0 8px;
+            margin: 15px 0 8px;
             font-weight: bold;
             color: #444;
-            font-size: 1.2em;
+            font-size: 1.1em;
         }
-        input {
-            width: 75%;
-            padding: 18px;
+        input, select {
+            width: 80%;
+            padding: 12px;
             margin-bottom: 20px;
-            border: 2px solid #388e3c; /* 緑の枠 */
-            border-radius: 12px;
-            font-size: 1.2em;
+            border: 2px solid #b2dfdb;
+            border-radius: 8px;
+            font-size: 1em;
             transition: border 0.3s ease;
-            text-align: center;
         }
-        input:focus {
-            border-color: #4caf50; /* フォーカス時に明るい緑 */
+        input:focus, select:focus {
+            border-color: #26a69a;
             outline: none;
         }
+
+        /* ====== バージョン選択セクション ====== */
+        .version-options {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .version-options button {
+            margin: 0 10px;
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 1em;
+            transition: all 0.2s ease;
+        }
+        .version-options button#java-btn {
+            background-color: #ff8f00;
+            color: white;
+        }
+        .version-options button#bedrock-btn {
+            background-color: #0288d1;
+            color: white;
+        }
+        .version-options button.selected {
+            transform: scale(1.1);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* ====== 寄付金額 ====== */
+        .donation-amount {
+            margin: 20px 0;
+        }
+        .donation-amount input {
+            text-align: center;
+            font-size: 1.2em;
+        }
+
+        /* ====== 寄付方法選択 ====== */
         .payment-options {
             display: flex;
             justify-content: center;
             margin: 20px 0;
         }
         .payment-options button {
-            margin: 0 15px;
-            padding: 14px 28px;
+            margin: 0 10px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 12px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: bold;
-            font-size: 1.3em;
-            transition: transform 0.2s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .payment-options button:hover,
-        .payment-options button.selected {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            font-size: 1em;
+            transition: all 0.2s ease;
         }
         .payment-options button#amazon-btn {
-            background-color: #faca87; /* Amazonの黄色 */
+            background-color: #fbc02d;
             color: white;
         }
         .payment-options button#paypay-btn {
-            background-color: #e57373; /* PayPayの赤 */
+            background-color: #e57373;
             color: white;
         }
-        .payment-options button.selected#amazon-btn {
-            background-color: #fbc02d; /* Amazon選択時の色 */
+        .payment-options button.selected {
+            transform: scale(1.1);
         }
-        .payment-options button.selected#paypay-btn {
-            background-color: #f44336; /* PayPay選択時の色 */
-        }
-        .hidden {
-            display: none;
-        }
-        #success-message {
-            margin-top: 30px;
-            font-size: 1.5em;
-            color: #388e3c;
-            animation: bounce 1s infinite;
-        }
-        @keyframes bounce {
-            0%, 100% {
-                transform: translateY(0);
-            }
-            50% {
-                transform: translateY(-10px);
-            }
-        }
+
+        /* ====== 送信ボタン ====== */
         button[type="submit"] {
-            padding: 18px 50px;
-            background: linear-gradient(to right, #76c7c0, #4caf50); /* 緑のグラデーション */
+            padding: 14px 60px;
+            background: linear-gradient(to right, #43cea2, #185a9d);
             color: white;
             border: none;
             border-radius: 30px;
-            font-size: 1.5em;
-            font-weight: bold;
+            font-size: 1.2em;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
         }
         button[type="submit"]:hover {
-            background: linear-gradient(to right, #4caf50, #76c7c0);
             transform: scale(1.05);
-            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* ====== 成功メッセージ ====== */
+        #success-message {
+            margin-top: 30px;
+            font-size: 1.3em;
+            color: #388e3c;
         }
     </style>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const paypayBtn = document.getElementById('paypay-btn');
-            const amazonBtn = document.getElementById('amazon-btn');
-            const paypaySection = document.getElementById('paypay-section');
-            const amazonSection = document.getElementById('amazon-section');
-            const form = document.getElementById('donation-form');
-            const successMessage = document.getElementById('success-message');
-            const amazonInput = document.getElementById('amazon-code');
-            const paypayLinkInput = document.getElementById('paypay-link');
+            const javaBtn = document.getElementById('java-btn');
+            const bedrockBtn = document.getElementById('bedrock-btn');
+            const versionField = document.getElementById('version');
 
-            // 初期状態でAmazonが選択された状態にする
-            amazonSection.classList.remove('hidden');
-            paypaySection.classList.add('hidden');
-            amazonBtn.classList.add('selected');  // 初期状態でAmazonを選択
-
-            // PayPayボタンのクリックイベント
-            paypayBtn.addEventListener('click', () => {
-                paypaySection.classList.remove('hidden');
-                amazonSection.classList.add('hidden');
-                paypayBtn.classList.add('selected');
-                amazonBtn.classList.remove('selected');
+            javaBtn.addEventListener('click', () => {
+                versionField.value = 'Java版';
+                javaBtn.classList.add('selected');
+                bedrockBtn.classList.remove('selected');
             });
 
-            // Amazonボタンのクリックイベント
-            amazonBtn.addEventListener('click', () => {
-                amazonSection.classList.remove('hidden');
-                paypaySection.classList.add('hidden');
-                amazonBtn.classList.add('selected');
-                paypayBtn.classList.remove('selected');
-            });
-
-            // フォーム送信イベント
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                // 入力値を取得
-                const paypayLink = paypayLinkInput.value.trim();
-                const amazonCode = amazonInput.value.trim();
-                const discordID = document.getElementById('discord').value;
-                const mcid = document.getElementById('mcid').value;
-
-                let sendData = ''; // Webhookに送信するデータ
-
-                // PayPayリンクが正しいかを検証 (PayPayが選ばれている時)
-                if (paypayBtn.classList.contains('selected') && paypayLink) {
-                    const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
-                    if (paypayRegex.test(paypayLink)) {
-                        sendData += `PayPayリンク: ${paypayLink}\n`;  // 正しい場合PayPayリンクを送信
-                    } else {
-                        alert('PayPayリンクが正しくありません');
-                        return;
-                    }
-                }
-
-                // Amazonギフト券コードが正しいかを検証 (Amazonが選ばれている時)
-                if (amazonBtn.classList.contains('selected') && amazonCode) {
-                    const amazonRegex = /^[A-Z0-9]{14,17}$/;  // ハイフンなし、17文字
-                    if (amazonRegex.test(amazonCode)) {
-                        sendData += `Amazonコード: ${amazonCode}\n`;  // 正しい場合Amazonコードを送信
-                    } else {
-                        alert('Amazonギフト券コードが正しくありません');
-                        return;
-                    }
-                }
-
-                // 片方が空でも送信できるようにする
-                if (sendData === '') {
-                    alert('PayPayリンクまたはAmazonコードのいずれかを入力してください');
-                    return;
-                }
-
-                // Webhookにデータを送信
-                fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        content: `Minecraft ID: ${mcid}\nDiscord ID: ${discordID}\n${sendData}`
-                    })
-                });
-
-                // 成功メッセージの表示
-                successMessage.classList.remove('hidden');
+            bedrockBtn.addEventListener('click', () => {
+                versionField.value = '統合版';
+                bedrockBtn.classList.add('selected');
+                javaBtn.classList.remove('selected');
             });
         });
     </script>
@@ -222,28 +169,29 @@
     <div class="container">
         <h1>寄付サイト</h1>
         <form id="donation-form">
+            <label>Minecraftバージョンを選択:</label>
+            <div class="version-options">
+                <button type="button" id="java-btn">Java版</button>
+                <button type="button" id="bedrock-btn">統合版</button>
+            </div>
+            <input type="hidden" id="version" value="Java版">
+            
             <label for="mcid">Minecraft ID:</label>
-            <p>(統合版の方は最初に.を付けてください)</p>
             <input type="text" id="mcid" placeholder="Minecraft IDを入力" required>
-            <label for="discord">Discord ID:</label>
-            <input type="text" id="discord" placeholder="Discord IDを入力" required>
-            <label>寄付方法を選択:</label>
+
+            <label for="donation-amount">寄付金額:</label>
+            <input type="number" id="donation-amount" placeholder="金額を入力 (JPY)" required>
+
+            <label>寄付方法:</label>
             <div class="payment-options">
                 <button type="button" id="amazon-btn">Amazonギフト券</button>
                 <button type="button" id="paypay-btn">PayPay</button>
             </div>
-            <div id="paypay-section">
-                <label for="paypay-link">PayPay送金リンク:</label>
-                <input type="url" id="paypay-link" placeholder="例：https://pay.paypay.ne.jp/XXXXXXXXXXXXXXXX">
-            </div>
-            <div id="amazon-section" class="hidden">
-                <label for="amazon-code">Amazonギフト券コード:</label>
-                <input type="text" id="amazon-code" placeholder="例：XXXXXXXXXXXXXXXX">
-            </div>
+
             <button type="submit">送信</button>
         </form>
         <div id="success-message" class="hidden">
-            ✅ 送金されました！対応をお待ち下さい！
+            ✅ 送金が確認されました！ありがとうございます！
         </div>
     </div>
 </body>
