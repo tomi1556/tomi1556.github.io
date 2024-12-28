@@ -263,3 +263,46 @@ button[type="submit"] {
         padding: 12px 40px;
     }
 }
+
+/* ====== タブレット用レスポンシブ ====== */
+@media (min-width: 769px) and (max-width: 1024px) {
+    /* コンテナの幅調整 */
+    .container {
+        width: 80%;
+        padding: 30px;
+    }
+
+    /* 寄付金額ボタン配置の変更 */
+    .donation-options {
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .donation-btn-wrapper {
+        width: 200px; /* ボタンの幅をタブレット向けに調整 */
+    }
+
+    .donation-btn {
+        font-size: 16px; /* 少し大きくする */
+    }
+
+    button[type="submit"] {
+        padding: 14px 50px;
+        font-size: 1.2em;
+    }
+
+    /* 寄付金額ラベルの調整 */
+    .donation-amount-label {
+        font-size: 15px;
+    }
+
+    /* 寄付方法選択 */
+    .payment-options {
+        flex-direction: row;
+        gap: 15px;
+    }
+
+    .payment-options button {
+        padding: 12px 30px;
+    }
+}
