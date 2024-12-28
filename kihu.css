@@ -212,11 +212,17 @@ button[type="submit"] {
 
 /* ====== スマホ用レスポンシブ ====== */
 @media (max-width: 768px) {
-    /* コンテナの調整 */
+    body {
+        justify-content: flex-start;  /* 上に寄せて、上部の余白を確保 */
+        padding-top: 10px;  /* 上部に少し余白を追加 */
+    }
+
     .container {
         width: 90%;
         padding: 20px;
+        overflow-y: auto;  /* 縦方向にスクロールできるようにする */
     }
+}
 
     /* ボタンの配置を縦に並べる */
     .donation-options {
