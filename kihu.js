@@ -120,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
             if (!paypayRegex.test(paypayLink)) {
-                errorMessage.textContent = 'PayPayリンクが正しくありません。正しいURLを入力してください。';
+                errorMessage.textContent = 'PayPayリンクが正しくありません。';
                 errorMessage.classList.remove('hidden');
                 errorMessage.classList.add('show-error');
                 successMessage.classList.add('hidden');
@@ -131,7 +131,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Amazonギフト券コードの検証 (Amazon選択時)
         if (amazonBtn.classList.contains('selected')) {
             if (!amazonCode) {
-                errorMessage.textContent = 'Amazonギフト券コードを入力してください。コードが不足していないか確認してください。';
+                errorMessage.textContent = 'Amazonギフト券コードを入力してください。';
                 errorMessage.classList.remove('hidden');
                 errorMessage.classList.add('show-error');
                 successMessage.classList.add('hidden');
@@ -139,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             const amazonRegex = /^[A-Z0-9]{14,17}$/;
             if (!amazonRegex.test(amazonCode)) {
-                errorMessage.textContent = 'Amazonギフト券コードが正しくありません。14〜17文字のコードを入力してください。';
+                errorMessage.textContent = 'Amazonギフト券コードが正しくありません。';
                 errorMessage.classList.remove('hidden');
                 errorMessage.classList.add('show-error');
                 successMessage.classList.add('hidden');
