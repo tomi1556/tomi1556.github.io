@@ -1,55 +1,58 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const versionField = document.getElementById('version');
     const javaBtn = document.getElementById('java-btn');
     const bedrockBtn = document.getElementById('bedrock-btn');
     const amazonBtn = document.getElementById('amazon-btn');
     const paypayBtn = document.getElementById('paypay-btn');
+    const amazonCodeSection = document.getElementById('amazon-code-section');
+    const paypayLinkSection = document.getElementById('paypay-link-section');
     const form = document.getElementById('donation-form');
     const successMessage = document.getElementById('success-message');
-    const versionField = document.getElementById('version');
-    const amountField = document.getElementById('donation-amount');
-    const codeField = document.getElementById('code-input');
-    const paypayLinkField = document.getElementById('paypay-link');
 
     let selectedPaymentMethod = '';
 
-    // バージョン選択
-    javaBtn.addEventListener('click', () => {
+    javaBtn.onclick = () => {
         versionField.value = 'Java版';
         javaBtn.classList.add('selected');
         bedrockBtn.classList.remove('selected');
-    });
+    };
 
-    bedrockBtn.addEventListener('click', () => {
+    bedrockBtn.onclick = () => {
         versionField.value = '統合版';
         bedrockBtn.classList.add('selected');
         javaBtn.classList.remove('selected');
-    });
+    };
 
-    // 寄付方法選択
-    amazonBtn.addEventListener('click', () => {
+    amazonBtn.onclick = () => {
         selectedPaymentMethod = 'Amazonギフト券';
-        amazonBtn.classList.add('selected');
-        paypayBtn.classList.remove('selected');
-    });
+        amazonCodeSection.classList.remove('hidden');
+        paypayLinkSection.classList.add('hidden');
+    };
 
-    paypayBtn.addEventListener('click', () => {
+    paypayBtn.onclick = () => {
         selectedPaymentMethod = 'PayPay';
-        paypayBtn.classList.add('selected');
-        amazonBtn.classList.remove('selected');
-    });
+        paypayLinkSection.classList.remove('hidden');
+        amazonCodeSection.classList.add('hidden');
+    };
 
-    // 送信
-    form.addEventListener('submit', (e) => {
+    form.onsubmit = (e) => {
         e.preventDefault();
+        const mcid = document.getElementById('mcid').value;
+        const amount = document.getElementById('donation-amount').value;
 
-        const mcid = document.getElementById('mcid').value.trim();
-        const amount = amountField.value.trim();
-
-        if (!mcid || !amount || !selectedPaymentMethod) {
-            alert('すべての項目を入力してください。');
-            return;
-        }
-
-        successMessage.classList.remove('hidden');
-    });
+        fetch('YOUR_WEBHOOK_URL', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                mcid,
+                amount,
+                paymentMethod: selectedPaymentMethod,
+                version: versionField.value
+            })
+        }).then(() => {
+            successMessage.classList.remove('hidden');
+        }).catch(() => {
+            alert('送信に失敗しました');
+        });
+    };
 });
