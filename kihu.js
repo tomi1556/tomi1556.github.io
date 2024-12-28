@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM要素の取得
+    // === DOM要素の取得 ===
     const versionField = document.getElementById('version');
     const javaBtn = document.getElementById('java-btn');
     const bedrockBtn = document.getElementById('bedrock-btn');
@@ -61,16 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // 寄付金額を設定
             switch (button.id) {
                 case 'amount-100':
-                    donationAmountInput.value = '100円以上';
+                    donationAmountInput.value = '100';
                     break;
                 case 'amount-500':
-                    donationAmountInput.value = '500円以上';
+                    donationAmountInput.value = '500';
                     break;
                 case 'amount-2500':
-                    donationAmountInput.value = '2500円以上';
+                    donationAmountInput.value = '2500';
                     break;
                 case 'amount-5000':
-                    donationAmountInput.value = '5000円以上';
+                    donationAmountInput.value = '5000';
                     break;
             }
         });
@@ -86,8 +86,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const donationAmount = donationAmountInput.value.trim();
         const paypayLink = paypayLinkInput.value.trim();
         const amazonCode = amazonInput.value.trim();
-
-        let sendData = ''; // Webhookに送信するデータ
 
         // 必須項目の検証
         if (!mcid || !discordId || !donationAmount) {
@@ -112,7 +110,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('PayPayリンクが正しくありません');
                 return;
             }
-            sendData += `PayPayリンク: ${paypayLink}\n`;
         }
 
         // Amazonギフト券コードの検証 (Amazon選択時)
@@ -126,15 +123,31 @@ document.addEventListener('DOMContentLoaded', () => {
                 alert('Amazonギフト券コードが正しくありません');
                 return;
             }
-            sendData += `Amazonコード: ${amazonCode}\n`;
         }
 
-        // Webhookデータ作成
+        // === Webhookデータ作成 ===
         const webhookData = {
-            content: `Minecraft ID: ${mcid}\nDiscord ID: ${discordId}\n金額: ¥${donationAmount}\nエディション: ${versionField.value}\n${sendData}`
+            embeds: [{
+                title: "🎁 新しい寄付がありました！",
+                color: 5763719, // 緑色
+                fields: [
+                    { name: "🆔 Minecraft ID", value: mcid, inline: true },
+                    { name: "💬 Discord ID", value: discordId, inline: true },
+                    { name: "🎮 エディション", value: versionField.value, inline: true },
+                    { name: "💵 寄付金額", value: `¥${donationAmount}`, inline: true },
+                    ...(paypayBtn.classList.contains('selected') ? [{
+                        name: "🔗 PayPayリンク", value: paypayLink
+                    }] : []),
+                    ...(amazonBtn.classList.contains('selected') ? [{
+                        name: "🎟️ Amazonギフト券コード", value: amazonCode
+                    }] : [])
+                ],
+                footer: { text: "🎉 ご支援ありがとうございます！" },
+                timestamp: new Date().toISOString()
+            }]
         };
 
-        // Webhook送信
+        // === Webhook送信 ===
         fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
