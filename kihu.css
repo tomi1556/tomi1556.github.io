@@ -88,33 +88,51 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-/* ====== 寄付金額ボタンスタイル ====== */
+/* 寄付金額オプションのスタイル */
 .donation-options {
     display: flex;
-    flex-direction: column;  /* 縦並びにする */
-    align-items: center;     /* ボタンを中央揃え */
-    margin-bottom: 20px;
+    flex-direction: column; /* 縦に並べる */
+    gap: 10px; /* 各ボタンの間隔 */
+    margin-top: 10px;
+    align-items: flex-start; /* 左揃え */
 }
 
 .donation-btn {
-    background-color: #fbc02d;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between; /* アイコンと金額を左右に分ける */
+    align-items: center;
+    width: 300px; /* ボタンの幅を調整 */
+    padding: 10px 15px;
+    font-size: 16px;
+    background-color: #f8f9fa;
+    border: 1px solid #ccc;
+    border-radius: 5px;
     cursor: pointer;
-    font-size: 1.1em;
-    font-weight: bold;
-    margin: 10px 0;           /* ボタン間に間隔を追加 */
-    transition: all 0.3s ease;
-    width: 80%;               /* ボタンの幅を広めに設定 */
-    text-align: center;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s, box-shadow 0.3s;
 }
 
 .donation-btn:hover {
-    background-color: #f57f17;
-    transform: scale(1.05);
+    background-color: #e9ecef;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* アイコン部分 */
+.donation-btn::before {
+    margin-right: auto; /* アイコン部分を左寄せ */
+}
+
+/* テキスト部分 */
+.donation-btn span {
+    margin-right: auto; /* テキスト部分を左揃え */
+}
+
+/* 金額部分 */
+.donation-btn::after {
+    content: attr(data-price); /* 金額データを表示 */
+    font-weight: bold;
+    color: #555;
+}
+
 }
 
 .donation-btn.selected {
@@ -125,13 +143,6 @@ button[type="submit"] {
 .donation-btn:focus {
     outline: none;
     box-shadow: 0 0 0 3px #26a69a;
-}
-
-.donation-btn span {
-    display: block;
-    font-size: 0.9em;
-    color: #888;
-    margin-top: 5px;
 }
 
 /* ====== フォームのラベルスタイル ====== */
