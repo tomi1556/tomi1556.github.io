@@ -153,6 +153,13 @@ button[type="submit"] {
     font-weight: 600;
     text-align: center; /* 中央揃え */
     margin-bottom: 5px; /* プラン名と金額の間隔 */
+    font-size: 12px; /* プラン名を小さめに */
+}
+
+/* 絵文字 (大きめ) */
+.plan-emoji {
+    font-size: 28px; /* 絵文字の大きさ */
+    margin-bottom: 10px; /* 絵文字とプラン名の間隔 */
 }
 
 /* 金額 (下寄せ) */
@@ -176,4 +183,30 @@ button[type="submit"] {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
+/* === 寄付方法選択 === */
+.payment-options {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 20px;
+}
 
+.payment-options button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1em;
+    transition: all 0.2s ease;
+}
+
+.payment-options button.selected {
+    transform: scale(1.1);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* === 入力フィールドの余白調整 === */
+#paypay-section, #amazon-section {
+    margin-top: 10px;
+}
