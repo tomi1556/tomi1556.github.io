@@ -13,8 +13,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const paypayLinkInput = document.getElementById('paypay-link');
     const mcidInput = document.getElementById('mcid');
     const discordIdInput = document.getElementById('discord-id');
-    const donationAmountInput = document.getElementById('donation-amount');
     const donationButtons = document.querySelectorAll('.donation-btn');
+    let selectedDonationPlan = null;
 
     // === 初期設定 ===
     versionField.value = ''; // エディションは未選択状態
@@ -52,27 +52,14 @@ document.addEventListener('DOMContentLoaded', () => {
         paypayBtn.classList.remove('selected');
     });
 
-    // === 金額選択 ===
+    // === 寄付プラン選択 ===
     donationButtons.forEach(button => {
         button.addEventListener('click', () => {
             donationButtons.forEach(btn => btn.classList.remove('selected')); // 全てのボタンから selected を削除
             button.classList.add('selected'); // クリックしたボタンを選択状態に
 
-            // 寄付金額を設定
-            switch (button.id) {
-                case 'amount-100':
-                    donationAmountInput.value = '100';
-                    break;
-                case 'amount-500':
-                    donationAmountInput.value = '500';
-                    break;
-                case 'amount-2500':
-                    donationAmountInput.value = '2500';
-                    break;
-                case 'amount-5000':
-                    donationAmountInput.value = '5000';
-                    break;
-            }
+            // 寄付プランを設定
+            selectedDonationPlan = button.id;
         });
     });
 
@@ -83,13 +70,18 @@ document.addEventListener('DOMContentLoaded', () => {
         // 入力値の取得
         const mcid = mcidInput.value.trim();
         const discordId = discordIdInput.value.trim();
-        const donationAmount = donationAmountInput.value.trim();
         const paypayLink = paypayLinkInput.value.trim();
         const amazonCode = amazonInput.value.trim();
 
         // 必須項目の検証
-        if (!mcid || !discordId || !donationAmount) {
-            alert('Minecraft ID、Discord ID、金額は必須項目です');
+        if (!mcid || !discordId) {
+            alert('Minecraft ID、Discord IDは必須項目です');
+            return;
+        }
+
+        // 寄付プランの選択確認
+        if (!selectedDonationPlan) {
+            alert('寄付プランを選択してください');
             return;
         }
 
@@ -134,7 +126,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     { name: "🆔 Minecraft ID", value: mcid, inline: true },
                     { name: "💬 Discord ID", value: discordId, inline: true },
                     { name: "🎮 エディション", value: versionField.value, inline: true },
-                    { name: "💵 寄付金額", value: `¥${donationAmount}`, inline: true },
+                    { name: "💵 寄付プラン", value: selectedDonationPlan, inline: true },
                     ...(paypayBtn.classList.contains('selected') ? [{
                         name: "🔗 PayPayリンク", value: paypayLink
                     }] : []),
@@ -156,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
             successMessage.classList.remove('hidden');
             form.reset();
             versionField.value = '';  // フォームのリセット
+            selectedDonationPlan = null; // 寄付プランのリセット
         }).catch(() => {
             alert('送信に失敗しました');
         });
