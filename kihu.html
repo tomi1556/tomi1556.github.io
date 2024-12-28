@@ -27,8 +27,14 @@
             <input type="text" id="discord-id" placeholder="Discord IDを入力" required>
 
             <!-- 寄付金額選択 -->
-            <div class="donation-options">
+            <!-- 寄付金額ラベル -->
+            <div class="donation-amount-label">
                 <label for="donation-amount">寄付金額:</label>
+                <span id="donation-amount-display">選択されていません</span>
+            </div>
+
+            <!-- 寄付金額選択ボタン -->
+            <div class="donation-options">
                 <button type="button" id="amount-500" class="donation-btn">
                     <span class="plan-name">🪄 ライト</span>
                     <span class="plan-amount">500円以上</span>
@@ -46,6 +52,7 @@
                     <span class="plan-amount">100円以上</span>
                 </button>
             </div>
+
 
             <input type="hidden" id="donation-amount" value="">
 
