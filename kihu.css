@@ -87,3 +87,40 @@ button[type="submit"] {
     font-size: 1.2em;
     cursor: pointer;
 }
+
+/* ====== 寄付金額ボタンスタイル ====== */
+.donation-options {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.donation-btn {
+    background-color: #fbc02d;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 12px 30px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    width: 23%;
+    text-align: center;
+}
+
+.donation-btn:hover {
+    background-color: #f57f17;
+    transform: scale(1.05);
+}
+
+.donation-btn.selected {
+    background-color: #43cea2;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.donation-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px #26a69a;
+}
+
