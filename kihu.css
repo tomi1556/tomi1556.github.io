@@ -88,32 +88,38 @@ button[type="submit"] {
     cursor: pointer;
 }
 
-/* 全体の中央揃え */
-.donation-container {
+/* === 寄付金額ラベル === */
+.donation-amount-label {
     display: flex;
-    justify-content: center; /* 水平方向中央揃え */
-    margin-top: 20px;
+    align-items: center;
+    justify-content: flex-start; /* 左揃え */
+    gap: 10px; /* ラベルと金額の間隔 */
+    font-size: 16px;
+    margin: 20px auto;
+    width: 300px; /* ラベルの幅を揃える */
 }
 
-/* 寄付金額枠を中央揃え */
+/* 金額表示部分 */
+#donation-amount-display {
+    font-weight: bold;
+    color: #333;
+}
+
+/* === ボタンスタイル === */
 .donation-options {
     display: flex;
-    flex-direction: column; /* ボタンを縦並び */
-    align-items: center; /* 中央揃え */
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
-    margin: 20px auto; /* 上下に余白、中央揃え */
-    width: fit-content; /* 中身の幅に合わせる */
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    background-color: #f9f9f9;
+    gap: 10px; /* ボタン間隔 */
+    margin: 20px auto;
 }
 
-/* ボタンスタイル */
+/* 個別ボタン */
 .donation-btn {
-    display: flex; /* 横並び */
-    justify-content: space-between; /* 左右に要素を配置 */
-    align-items: center; /* 垂直方向に中央揃え */
+    display: flex;
+    justify-content: space-between; /* 左右に配置 */
+    align-items: center;
     margin: 5px 0;
     padding: 10px 20px;
     font-size: 16px;
@@ -121,27 +127,28 @@ button[type="submit"] {
     border-radius: 5px;
     cursor: pointer;
     width: 300px; /* ボタン幅を統一 */
-    text-align: left;
     background-color: #fff;
+    text-align: left;
 }
 
-/* ボタン選択時 */
+/* 選択状態のボタン */
 .donation-btn.selected {
-    background-color: #4caf50; /* 背景色 */
+    background-color: #4caf50;
     color: #fff;
     font-weight: bold;
     border: 2px solid #388e3c;
 }
 
-/* プラン名は左寄せ */
+/* プラン名 (左寄せ) */
 .plan-name {
-    flex: 1; /* 左端に配置 */
+    flex: 1;
     text-align: left;
 }
 
-/* 金額は右寄せ */
+/* 金額 (右寄せ) */
 .plan-amount {
     text-align: right;
     font-weight: bold;
     color: #666;
 }
+
