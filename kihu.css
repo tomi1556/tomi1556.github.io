@@ -218,6 +218,33 @@ button[type="submit"] {
     animation: slideIn 1s ease-in-out;
 }
 
+/* エラーメッセージアニメーション */
+.show-error {
+    animation: shake 0.5s ease-in-out;
+    color: red;
+    font-weight: bold;
+}
+
+@keyframes shake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    50% { transform: translateX(10px); }
+    75% { transform: translateX(-10px); }
+    100% { transform: translateX(0); }
+}
+
+/* 成功メッセージアニメーション */
+.show-success {
+    animation: fadeIn 1s ease-in;
+    color: green;
+    font-weight: bold;
+}
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
 /* エラーメッセージ */
 .error-popup {
     background-color: #dc3545; /* 赤色 */
