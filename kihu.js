@@ -62,6 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         let sendData = ''; // Webhookに送信するデータ
 
+        // 必須項目の検証
+        if (!mcid || !discordId || !donationAmount) {
+            alert('Minecraft ID、Discord ID、金額は必須項目です');
+            return;
+        }
+
         // PayPayリンクの検証 (PayPayが選択されている場合)
         if (paypayBtn.classList.contains('selected') && paypayLink) {
             const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
@@ -96,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // Discord Webhookにデータを送信
-        fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {  // 必ず実際のWebhook URLを挿入してください
+        fetch('YOUR_WEBHOOK_URL', {  // 必ず実際のWebhook URLを挿入してください
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
