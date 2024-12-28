@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // エディション選択確認
+        // エディション選択確認（未選択で送信できないように）
         if (!versionField.value) {
             alert('エディションを選択してください');
             return;
@@ -155,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }).then(() => {
             successMessage.classList.remove('hidden');
             form.reset();
-            versionField.value = '';
+            versionField.value = '';  // フォームのリセット
         }).catch(() => {
             alert('送信に失敗しました');
         });
