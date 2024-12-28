@@ -68,6 +68,12 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // エディションの選択を確認
+        if (!versionField.value) {
+            alert('エディションを選択してください');
+            return;
+        }
+
         // PayPayリンクの検証 (PayPayが選択されている場合)
         if (paypayBtn.classList.contains('selected') && paypayLink) {
             const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
