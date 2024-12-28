@@ -95,41 +95,38 @@ button[type="submit"] {
     margin-top: 20px;
 }
 
-/* 寄付金額オプション */
+/* 寄付金額の枠全体を中央に配置 */
 .donation-options {
     display: flex;
-    flex-direction: column; /* 縦に並べる */
-    gap: 10px; /* 各ボタンの間隔 */
-    align-items: center; /* ボタンを中央揃え */
-    padding: 15px;
-    border: 2px solid #ccc; /* 枠線 */
-    border-radius: 10px;
-    background-color: #f9fafc;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 350px; /* 最大幅 */
+    flex-direction: column; /* ボタンを縦方向に並べる */
+    align-items: center; /* 中央揃え */
+    justify-content: center; /* 中央揃え */
+    margin: 20px auto; /* 上下に余白、左右は自動で中央揃え */
+    width: fit-content; /* コンテンツの幅に合わせる */
+    padding: 10px;
+    border: 2px solid #ccc; /* 枠線を追加 */
+    border-radius: 8px; /* 角を丸く */
+    background-color: #f9f9f9; /* 背景色 */
 }
 
-/* 寄付ボタン */
+/* 寄付ボタンのスタイル */
 .donation-btn {
-    display: flex;
-    justify-content: space-between; /* アイコンと金額を左右に分ける */
-    align-items: center;
-    width: 100%;
-    padding: 10px 15px;
+    margin: 5px 0; /* 各ボタンに上下の間隔 */
+    padding: 10px 20px;
     font-size: 16px;
-    border: 2px solid transparent; /* 初期は透明枠 */
+    border: none;
     border-radius: 5px;
-    background-color: #ffffff;
     cursor: pointer;
-    transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
+    width: 200px; /* ボタン幅を統一 */
+    text-align: left; /* テキストを左揃え */
 }
 
-/* 選択中のボタン */
+/* 選択されたボタンのスタイル */
 .donation-btn.selected {
-    border-color: #4caf50; /* 強調色 (緑色) */
-    background-color: #e8f5e9;
-    box-shadow: 0 0 8px rgba(76, 175, 80, 0.5);
+    background-color: #4caf50; /* 選択時の背景色 */
+    color: #fff; /* テキスト色 */
     font-weight: bold;
+    border: 2px solid #388e3c;
 }
 
 /* ホバー時 */
