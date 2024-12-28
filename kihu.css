@@ -179,7 +179,6 @@ button[type="submit"] {
 
 /* === ホバーエフェクトの無効化 === */
 .donation-btn:hover {
-    background-color: #fff; /* ホバー時の色変更を無効 */
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* シャドウの軽い効果を追加 */
 }
 
