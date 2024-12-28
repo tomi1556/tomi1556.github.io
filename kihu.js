@@ -125,3 +125,27 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 });
+
+document.addEventListener('DOMContentLoaded', () => {
+    const donationButtons = document.querySelectorAll('.donation-btn');
+    const donationAmountInput = document.getElementById('donation-amount');
+
+    donationButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            donationButtons.forEach(btn => btn.classList.remove('selected')); // すべてのボタンから selected クラスを削除
+            button.classList.add('selected'); // クリックしたボタンに selected クラスを追加
+
+            // 寄付金額を設定
+            if (button.id === 'amount-100') {
+                donationAmountInput.value = '100';
+            } else if (button.id === 'amount-500') {
+                donationAmountInput.value = '500';
+            } else if (button.id === 'amount-2500') {
+                donationAmountInput.value = '2500';
+            } else if (button.id === 'amount-5000') {
+                donationAmountInput.value = '5000';
+            }
+        });
+    });
+});
+
