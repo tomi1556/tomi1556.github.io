@@ -29,18 +29,18 @@
             <!-- 寄付方法選択 -->
             <label>寄付方法:</label>
             <div class="payment-options">
-                <button type="button" id="amazon-btn">Amazonギフト券</button>
+                <button type="button" id="amazon-btn" class="selected">Amazonギフト券</button>
                 <button type="button" id="paypay-btn">PayPay</button>
             </div>
 
             <!-- Amazonコード入力 -->
-            <div id="amazon-code-section" class="hidden">
-                <label for="code-input">Amazonギフトコード:</label>
-                <input type="text" id="code-input" placeholder="Amazonギフトコードを入力">
+            <div id="amazon-section">
+                <label for="amazon-code">Amazonギフトコード:</label>
+                <input type="text" id="amazon-code" placeholder="Amazonギフトコードを入力">
             </div>
 
             <!-- PayPayリンク入力 -->
-            <div id="paypay-link-section" class="hidden">
+            <div id="paypay-section" class="hidden">
                 <label for="paypay-link">PayPayリンク:</label>
                 <input type="url" id="paypay-link" placeholder="PayPayリンクを入力">
             </div>
@@ -55,6 +55,7 @@
         </div>
     </div>
 
+    <!-- 外部JavaScriptファイルの読み込み -->
     <script src="kihu.js"></script>
 </body>
 </html>
