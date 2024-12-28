@@ -210,6 +210,14 @@ button[type="submit"] {
     margin-top: 20px;
 }
 
+/* ====== パソコン用スタイル ====== */
+@media (min-width: 769px) {
+    .container {
+        width: 600px;  /* パソコンでは600pxの幅 */
+        padding: 40px;
+    }
+}
+
 /* ====== スマホ用レスポンシブ ====== */
 @media (max-width: 768px) {
     body {
