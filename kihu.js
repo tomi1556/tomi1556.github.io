@@ -61,16 +61,16 @@ document.addEventListener('DOMContentLoaded', () => {
             // 寄付金額を設定
             switch (button.id) {
                 case 'amount-100':
-                    donationAmountInput.value = '100';
+                    donationAmountInput.value = '100円以上';
                     break;
                 case 'amount-500':
-                    donationAmountInput.value = '500';
+                    donationAmountInput.value = '500円以上';
                     break;
                 case 'amount-2500':
-                    donationAmountInput.value = '2500';
+                    donationAmountInput.value = '2500円以上';
                     break;
                 case 'amount-5000':
-                    donationAmountInput.value = '5000';
+                    donationAmountInput.value = '5000円以上';
                     break;
             }
         });
