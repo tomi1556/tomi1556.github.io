@@ -103,3 +103,9 @@ function copyToClipboard(address, button) {
         }, 2000);
     });
 }
+
+document.querySelector('.menu-button').addEventListener('click', function() {
+    const nav = document.querySelector('nav');
+    nav.classList.toggle('menu-open');
+});
+
