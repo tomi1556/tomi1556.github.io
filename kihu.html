@@ -29,11 +29,12 @@
             <!-- 寄付金額選択 -->
             <label for="donation-amount">寄付金額:</label>
             <div class="donation-options">
-                <button type="button" id="amount-500" class="donation-btn">🪄 ライト    (500円以上)</button>
-                <button type="button" id="amount-2500" class="donation-btn">🚀 スタンダード (2500円以上)</button>
-                <button type="button" id="amount-5000" class="donation-btn">👑 プレミアム   (5000円以上)</button>
-                <button type="button" id="amount-100" class="donation-btn">⚡️ 有効期限の延長 (100円以上)</button>
+                <button type="button" id="amount-500" class="donation-btn" data-price="500円以上">🪄 ライト</button>
+                <button type="button" id="amount-2500" class="donation-btn" data-price="2500円以上">🚀 スタンダード</button>
+                <button type="button" id="amount-5000" class="donation-btn" data-price="5000円以上">👑 プレミアム</button>
+                <button type="button" id="amount-100" class="donation-btn" data-price="100円以上">⚡️ 有効期限の延長</button>
             </div>
+
             <input type="hidden" id="donation-amount" value="">
 
             <!-- 寄付方法選択 -->
