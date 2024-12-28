@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 寄付プランの選択確認
         if (!selectedDonationPlan) {
-            errorMessage.textContent = '寄付プランを選択してください。寄付プランを選ぶと、送信ボタンが有効になります。';
+            errorMessage.textContent = '寄付プランを選択してください。';
             errorMessage.classList.remove('hidden');
             errorMessage.classList.add('show-error');
             successMessage.classList.add('hidden');
@@ -102,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // エディション選択確認（未選択で送信できないように）
         if (!versionField.value) {
-            errorMessage.textContent = 'Minecraftのエディションを選択してください。Java版または統合版を選べます。';
+            errorMessage.textContent = '機種を選択してください。';
             errorMessage.classList.remove('hidden');
             errorMessage.classList.add('show-error');
             successMessage.classList.add('hidden');
