@@ -208,5 +208,5 @@ button[type="submit"] {
 
 /* === 入力フィールドの余白調整 === */
 #paypay-section, #amazon-section {
-    margin-top: 10px;
+    margin-top: 20px;
 }
