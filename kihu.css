@@ -212,7 +212,10 @@ button[type="submit"] {
 
 /* ... (既存のCSS) ... */
 
+/* ... (既存のCSS) ... */
+
 @media (max-width: 768px) {
+
   html {
     font-size: 16px; /* 基準となるフォントサイズ */
   }
@@ -221,27 +224,17 @@ button[type="submit"] {
     display: flex;
     flex-direction: column; /* メインコンテンツを縦に並べる */
     overflow-x: hidden; /* 横スクロールを禁止 */
-  }
-    
-  header {
-    position: sticky; /* 画面上部に固定しつつ、スクロール可能 */
-    top: 0;
-    z-index: 1; /* 他の要素よりも手前に表示 */
-  }
-
-  .modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    z-index: 999; /* 最前面に表示 */
+    scroll-behavior: smooth; /* スクロールをスムーズにする */
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* 画面全体に表示 */
   }
 
   .container {
     width: 80%;
     margin: auto; /* 横方向中央寄せ */
+    padding: 10px;
+    box-sizing: border-box;
   }
 
   /* その他の要素のスタイルを調整 */
