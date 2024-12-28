@@ -27,7 +27,7 @@
             <input type="text" id="discord-id" placeholder="Discord IDを入力" required>
 
             <!-- 寄付金額選択 -->
-            <label for="donation-amount">寄付金額:</label>
+            <label>寄付金額:</label>
             <div class="donation-options">
                 <div class="donation-btn-wrapper">
                     <button type="button" id="amount-100" class="donation-btn">
@@ -53,6 +53,19 @@
                         <div class="plan-amount">5000円以上</div>
                     </button>
                 </div>
+            </div>
+
+            <!-- 寄付方法選択 -->
+            <label>寄付方法:</label>
+            <div class="payment-options">
+                <button type="button" id="paypay-btn">PayPay</button>
+                <button type="button" id="amazon-btn">Amazonギフト券</button>
+            </div>
+            <div id="paypay-section" class="hidden">
+                <input type="text" id="paypay-link" placeholder="PayPayリンクを入力">
+            </div>
+            <div id="amazon-section" class="hidden">
+                <input type="text" id="amazon-code" placeholder="Amazonギフト券コードを入力">
             </div>
 
             <!-- 送信ボタン -->
