@@ -165,7 +165,7 @@ button[type="submit"] {
 /* 金額 (下寄せ) */
 .plan-amount {
     font-weight: bold;
-    color: #ddd;
+    color: #edf584;
     text-align: center; /* 中央寄せ */
 }
 
