@@ -26,9 +26,15 @@
             <label for="discord-id">Discord ID:</label>
             <input type="text" id="discord-id" placeholder="Discord IDを入力" required>
 
-            <!-- 寄付金額入力 -->
+            <!-- 寄付金額選択 -->
             <label for="donation-amount">寄付金額:</label>
-            <input type="number" id="donation-amount" placeholder="金額を入力 (JPY)" required>
+            <div class="donation-options">
+                <button type="button" id="amount-100" class="donation-btn">100円 ～ (有効期限の延長)</button>
+                <button type="button" id="amount-500" class="donation-btn">500円 ～ (🪄ライト)</button>
+                <button type="button" id="amount-2500" class="donation-btn">2500円 ～ (🚀 スタンダード)</button>
+                <button type="button" id="amount-5000" class="donation-btn">5000円 ～ (👑 プレミアム)</button>
+            </div>
+            <input type="hidden" id="donation-amount" value="">
 
             <!-- 寄付方法選択 -->
             <label>寄付方法:</label>
