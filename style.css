@@ -573,4 +573,36 @@ footer {
     flex-direction: column;
   }
 
+  /* ナビゲーションメニューを隠す */
+  nav ul {
+    display: none; /* メニューを隠す */
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  /* メニューアイテムの間隔 */
+  nav ul li {
+    margin: 10px 0;
+  }
+
+  /* メニューボタン */
+  .menu-button {
+    display: block; /* メニューボタンを表示 */
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    font-size: 1.5em;
+    border: none;
+    width: 100%;
+    text-align: center;
+    cursor: pointer;
+    z-index: 1001; /* メニューボタンを上に配置 */
+  }
+
+  /* メニューを表示する */
+  .menu-open nav ul {
+    display: flex; /* メニューを表示 */
+  }
 }
+
