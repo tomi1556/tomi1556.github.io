@@ -1,16 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
+    const paypayBtn = document.getElementById('paypay-btn');
+    const amazonBtn = document.getElementById('amazon-btn');
+    const paypaySection = document.getElementById('paypay-section');
+    const amazonSection = document.getElementById('amazon-section');
+    const form = document.getElementById('donation-form');
+    const successMessage = document.getElementById('success-message');
+    const amazonInput = document.getElementById('amazon-code');
+    const paypayLinkInput = document.getElementById('paypay-link');
     const versionField = document.getElementById('version');
     const javaBtn = document.getElementById('java-btn');
     const bedrockBtn = document.getElementById('bedrock-btn');
-    const amazonBtn = document.getElementById('amazon-btn');
-    const paypayBtn = document.getElementById('paypay-btn');
-    const amazonCodeSection = document.getElementById('amazon-code-section');
-    const paypayLinkSection = document.getElementById('paypay-link-section');
-    const form = document.getElementById('donation-form');
-    const successMessage = document.getElementById('success-message');
 
-    let selectedPaymentMethod = '';
+    // 初期状態でAmazonが選択された状態にする
+    amazonSection.classList.remove('hidden');
+    paypaySection.classList.add('hidden');
+    amazonBtn.classList.add('selected');  // 初期状態でAmazonを選択
 
+    // PayPayボタンのクリックイベント
+    paypayBtn.addEventListener('click', () => {
+        paypaySection.classList.remove('hidden');
+        amazonSection.classList.add('hidden');
+        paypayBtn.classList.add('selected');
+        amazonBtn.classList.remove('selected');
+    });
+
+    // Amazonボタンのクリックイベント
+    amazonBtn.addEventListener('click', () => {
+        amazonSection.classList.remove('hidden');
+        paypaySection.classList.add('hidden');
+        amazonBtn.classList.add('selected');
+        paypayBtn.classList.remove('selected');
+    });
+
+    // Minecraftバージョン選択のクリックイベント
     javaBtn.onclick = () => {
         versionField.value = 'Java版';
         javaBtn.classList.add('selected');
@@ -23,36 +45,57 @@ document.addEventListener('DOMContentLoaded', () => {
         javaBtn.classList.remove('selected');
     };
 
-    amazonBtn.onclick = () => {
-        selectedPaymentMethod = 'Amazonギフト券';
-        amazonCodeSection.classList.remove('hidden');
-        paypayLinkSection.classList.add('hidden');
-    };
-
-    paypayBtn.onclick = () => {
-        selectedPaymentMethod = 'PayPay';
-        paypayLinkSection.classList.remove('hidden');
-        amazonCodeSection.classList.add('hidden');
-    };
-
-    form.onsubmit = (e) => {
+    // フォーム送信イベント
+    form.addEventListener('submit', (e) => {
         e.preventDefault();
-        const mcid = document.getElementById('mcid').value;
-        const amount = document.getElementById('donation-amount').value;
 
+        // 入力値を取得
+        const paypayLink = paypayLinkInput.value.trim();
+        const amazonCode = amazonInput.value.trim();
+        const mcid = document.getElementById('mcid').value;
+
+        let sendData = ''; // Webhookに送信するデータ
+
+        // PayPayリンクが正しいかを検証 (PayPayが選ばれている時)
+        if (paypayBtn.classList.contains('selected') && paypayLink) {
+            const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
+            if (paypayRegex.test(paypayLink)) {
+                sendData += `PayPayリンク: ${paypayLink}\n`;  // 正しい場合PayPayリンクを送信
+            } else {
+                alert('PayPayリンクが正しくありません');
+                return;
+            }
+        }
+
+        // Amazonギフト券コードが正しいかを検証 (Amazonが選ばれている時)
+        if (amazonBtn.classList.contains('selected') && amazonCode) {
+            const amazonRegex = /^[A-Z0-9]{14,17}$/;  // ハイフンなし、17文字
+            if (amazonRegex.test(amazonCode)) {
+                sendData += `Amazonコード: ${amazonCode}\n`;  // 正しい場合Amazonコードを送信
+            } else {
+                alert('Amazonギフト券コードが正しくありません');
+                return;
+            }
+        }
+
+        // 片方が空でも送信できるようにする
+        if (sendData === '') {
+            alert('PayPayリンクまたはAmazonコードのいずれかを入力してください');
+            return;
+        }
+
+        // Webhookにデータを送信
         fetch('YOUR_WEBHOOK_URL', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json'
+            },
             body: JSON.stringify({
-                mcid,
-                amount,
-                paymentMethod: selectedPaymentMethod,
-                version: versionField.value
+                content: `Minecraft ID: ${mcid}\n${sendData}`
             })
-        }).then(() => {
-            successMessage.classList.remove('hidden');
-        }).catch(() => {
-            alert('送信に失敗しました');
         });
-    };
+
+        // 成功メッセージの表示
+        successMessage.classList.remove('hidden');
+    });
 });
