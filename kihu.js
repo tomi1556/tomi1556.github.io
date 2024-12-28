@@ -15,7 +15,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const discordIdInput = document.getElementById('discord-id');
     const donationAmountInput = document.getElementById('donation-amount');
 
-    // 初期設定: Amazonが選択された状態
+    // 初期設定: エディション選択を未選択状態にする
+    versionField.value = '';  // 初期状態で空にする
+    javaBtn.classList.remove('selected');
+    bedrockBtn.classList.remove('selected');
     amazonSection.classList.remove('hidden');
     paypaySection.classList.add('hidden');
     amazonBtn.classList.add('selected');  // 初期状態でAmazonを選択
