@@ -210,3 +210,33 @@ button[type="submit"] {
     margin-top: 20px;
 }
 
+/* ... (既存のCSS) ... */
+
+@media (max-width: 768px) {
+  .container {
+    width: 90%;
+    margin: 10px;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  label, input {
+    font-size: 16px;
+  }
+
+  .donation-btn {
+    width: 80%;
+    padding: 1rem; /* remを使用 */
+  }
+
+  .payment-options {
+    flex-direction: column;
+  }
+
+  .donation-btn-wrapper {
+    width: 100%; /* 親要素の幅に合わせて広げる */
+  }
+}
