@@ -1,20 +1,37 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const paypayBtn = document.getElementById('paypay-btn');
+    // DOM要素の取得
+    const versionField = document.getElementById('version');
+    const javaBtn = document.getElementById('java-btn');
+    const bedrockBtn = document.getElementById('bedrock-btn');
     const amazonBtn = document.getElementById('amazon-btn');
+    const paypayBtn = document.getElementById('paypay-btn');
     const paypaySection = document.getElementById('paypay-section');
     const amazonSection = document.getElementById('amazon-section');
     const form = document.getElementById('donation-form');
     const successMessage = document.getElementById('success-message');
     const amazonInput = document.getElementById('amazon-code');
     const paypayLinkInput = document.getElementById('paypay-link');
-    const versionField = document.getElementById('version');
-    const javaBtn = document.getElementById('java-btn');
-    const bedrockBtn = document.getElementById('bedrock-btn');
+    const mcidInput = document.getElementById('mcid');
+    const discordIdInput = document.getElementById('discord-id');
+    const donationAmountInput = document.getElementById('donation-amount');
 
-    // 初期状態でAmazonが選択された状態にする
+    // 初期設定: Amazonが選択された状態
     amazonSection.classList.remove('hidden');
     paypaySection.classList.add('hidden');
     amazonBtn.classList.add('selected');  // 初期状態でAmazonを選択
+
+    // Minecraftバージョン選択
+    javaBtn.onclick = () => {
+        versionField.value = 'Java版';
+        javaBtn.classList.add('selected');
+        bedrockBtn.classList.remove('selected');
+    };
+
+    bedrockBtn.onclick = () => {
+        versionField.value = '統合版';
+        bedrockBtn.classList.add('selected');
+        javaBtn.classList.remove('selected');
+    };
 
     // PayPayボタンのクリックイベント
     paypayBtn.addEventListener('click', () => {
@@ -32,31 +49,20 @@ document.addEventListener('DOMContentLoaded', () => {
         paypayBtn.classList.remove('selected');
     });
 
-    // Minecraftバージョン選択のクリックイベント
-    javaBtn.onclick = () => {
-        versionField.value = 'Java版';
-        javaBtn.classList.add('selected');
-        bedrockBtn.classList.remove('selected');
-    };
-
-    bedrockBtn.onclick = () => {
-        versionField.value = '統合版';
-        bedrockBtn.classList.add('selected');
-        javaBtn.classList.remove('selected');
-    };
-
     // フォーム送信イベント
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // 入力値を取得
+        // 入力値の取得
+        const mcid = mcidInput.value;
+        const discordId = discordIdInput.value;
+        const donationAmount = donationAmountInput.value;
         const paypayLink = paypayLinkInput.value.trim();
         const amazonCode = amazonInput.value.trim();
-        const mcid = document.getElementById('mcid').value;
 
         let sendData = ''; // Webhookに送信するデータ
 
-        // PayPayリンクが正しいかを検証 (PayPayが選ばれている時)
+        // PayPayリンクの検証 (PayPayが選択されている場合)
         if (paypayBtn.classList.contains('selected') && paypayLink) {
             const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
             if (paypayRegex.test(paypayLink)) {
@@ -67,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // Amazonギフト券コードが正しいかを検証 (Amazonが選ばれている時)
+        // Amazonギフト券コードの検証 (Amazonが選択されている場合)
         if (amazonBtn.classList.contains('selected') && amazonCode) {
             const amazonRegex = /^[A-Z0-9]{14,17}$/;  // ハイフンなし、17文字
             if (amazonRegex.test(amazonCode)) {
@@ -78,24 +84,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
-        // 片方が空でも送信できるようにする
-        if (sendData === '') {
+        // 必要な情報が足りている場合は送信しない
+        if (!sendData) {
             alert('PayPayリンクまたはAmazonコードのいずれかを入力してください');
             return;
         }
 
-        // Webhookにデータを送信
-        fetch('YOUR_WEBHOOK_URL', {
+        // Webhookに送信するデータの作成
+        const webhookData = {
+            content: `Minecraft ID: ${mcid}\nDiscord ID: ${discordId}\n金額: ¥${donationAmount}\nエディション: ${versionField.value}\n${sendData}`
+        };
+
+        // Discord Webhookにデータを送信
+        fetch('YOUR_WEBHOOK_URL', {  // 必ず実際のWebhook URLを挿入してください
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                content: `Minecraft ID: ${mcid}\n${sendData}`
-            })
+            body: JSON.stringify(webhookData)
+        }).then(() => {
+            // 成功メッセージの表示
+            successMessage.classList.remove('hidden');
+        }).catch(() => {
+            alert('送信に失敗しました');
         });
-
-        // 成功メッセージの表示
-        successMessage.classList.remove('hidden');
     });
 });
