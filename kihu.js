@@ -84,24 +84,27 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 必須項目の検証
         if (!mcid || !discordId) {
-            errorMessage.textContent = 'Minecraft ID、Discord IDは必須項目です';
+            errorMessage.textContent = 'Minecraft ID と Discord ID は必須項目です。両方を入力してください。';
             errorMessage.classList.remove('hidden');
+            errorMessage.classList.add('show-error');  // アニメーション追加
             successMessage.classList.add('hidden');
             return;
         }
 
         // 寄付プランの選択確認
         if (!selectedDonationPlan) {
-            errorMessage.textContent = '寄付プランを選択してください';
+            errorMessage.textContent = '寄付プランを選択してください。寄付プランを選ぶと、送信ボタンが有効になります。';
             errorMessage.classList.remove('hidden');
+            errorMessage.classList.add('show-error');
             successMessage.classList.add('hidden');
             return;
         }
 
         // エディション選択確認（未選択で送信できないように）
         if (!versionField.value) {
-            errorMessage.textContent = 'エディションを選択してください';
+            errorMessage.textContent = 'Minecraftのエディションを選択してください。Java版または統合版を選べます。';
             errorMessage.classList.remove('hidden');
+            errorMessage.classList.add('show-error');
             successMessage.classList.add('hidden');
             return;
         }
@@ -109,15 +112,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // PayPayリンクの検証 (PayPay選択時)
         if (paypayBtn.classList.contains('selected')) {
             if (!paypayLink) {
-                errorMessage.textContent = 'PayPayリンクを入力してください';
+                errorMessage.textContent = 'PayPayリンクを入力してください。リンクの形式が間違っていないか確認してください。';
                 errorMessage.classList.remove('hidden');
+                errorMessage.classList.add('show-error');
                 successMessage.classList.add('hidden');
                 return;
             }
             const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
             if (!paypayRegex.test(paypayLink)) {
-                errorMessage.textContent = 'PayPayリンクが正しくありません';
+                errorMessage.textContent = 'PayPayリンクが正しくありません。正しいURLを入力してください。';
                 errorMessage.classList.remove('hidden');
+                errorMessage.classList.add('show-error');
                 successMessage.classList.add('hidden');
                 return;
             }
@@ -126,15 +131,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // Amazonギフト券コードの検証 (Amazon選択時)
         if (amazonBtn.classList.contains('selected')) {
             if (!amazonCode) {
-                errorMessage.textContent = 'Amazonギフト券コードを入力してください';
+                errorMessage.textContent = 'Amazonギフト券コードを入力してください。コードが不足していないか確認してください。';
                 errorMessage.classList.remove('hidden');
+                errorMessage.classList.add('show-error');
                 successMessage.classList.add('hidden');
                 return;
             }
             const amazonRegex = /^[A-Z0-9]{14,17}$/;
             if (!amazonRegex.test(amazonCode)) {
-                errorMessage.textContent = 'Amazonギフト券コードが正しくありません';
+                errorMessage.textContent = 'Amazonギフト券コードが正しくありません。14〜17文字のコードを入力してください。';
                 errorMessage.classList.remove('hidden');
+                errorMessage.classList.add('show-error');
                 successMessage.classList.add('hidden');
                 return;
             }
@@ -172,8 +179,9 @@ document.addEventListener('DOMContentLoaded', () => {
             body: JSON.stringify(webhookData)
         }).then(() => {
             // 成功メッセージの表示
+            successMessage.textContent = '送金が確認されました！ありがとうございます！';
             successMessage.classList.remove('hidden');
-            successMessage.classList.add('animated');
+            successMessage.classList.add('show-success');  // アニメーション追加
             errorMessage.classList.add('hidden');
             form.reset();
             versionField.value = '';  // フォームのリセット
