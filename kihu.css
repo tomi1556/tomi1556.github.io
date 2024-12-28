@@ -115,24 +115,27 @@ button[type="submit"] {
     border-radius: 5px;
     overflow: hidden; /* 枠の外にはみ出さないようにする */
     transition: transform 0.2s ease, box-shadow 0.3s ease;
+    height: auto;
 }
 
 /* 枠付きボタン */
 .donation-btn {
     display: flex;
-    justify-content: space-between; /* 左右に配置 */
+    flex-direction: column; /* 上下配置 */
+    justify-content: space-between; /* 上下にスペース */
     align-items: center;
-    padding: 12px 18px; /* よりコンパクトに */
+    padding: 15px 18px; /* よりコンパクトに */
     font-size: 14px; /* 小さめに */
     border: none;
     cursor: pointer;
     background-color: #fff;
     width: 100%;
-    text-align: left;
+    text-align: center; /* 中央揃え */
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
     font-family: 'Roboto', sans-serif; /* モダンなフォント */
+    height: 150px; /* 高さ固定 */
 }
 
 /* 選択状態のボタン */
@@ -145,18 +148,18 @@ button[type="submit"] {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 選択時にシャドウを強化 */
 }
 
-/* プラン名 (左寄せ) */
+/* プラン名 (上寄せ) */
 .plan-name {
-    flex: 1;
-    text-align: left;
     font-weight: 600;
+    text-align: center; /* 中央揃え */
+    margin-bottom: 5px; /* プラン名と金額の間隔 */
 }
 
-/* 金額 (右寄せ) */
+/* 金額 (下寄せ) */
 .plan-amount {
-    text-align: right;
     font-weight: bold;
     color: #ddd;
+    text-align: center; /* 中央寄せ */
 }
 
 /* === ボタン選択時の枠強調 === */
@@ -172,4 +175,5 @@ button[type="submit"] {
     background-color: #f5f5f5;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
+
 
