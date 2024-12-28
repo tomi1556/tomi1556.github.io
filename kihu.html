@@ -34,13 +34,17 @@
                 <button type="button" id="paypay-btn">PayPay</button>
             </div>
 
-            <!-- コード入力欄 -->
-            <label for="code-input">コード:</label>
-            <input type="text" id="code-input" placeholder="コードを入力">
+            <!-- Amazonコード入力 -->
+            <div id="amazon-code-section" class="hidden">
+                <label for="code-input">Amazonギフトコード:</label>
+                <input type="text" id="code-input" placeholder="Amazonギフトコードを入力">
+            </div>
 
-            <!-- PayPayリンク入力欄 -->
-            <label for="paypay-link">PayPayリンク:</label>
-            <input type="url" id="paypay-link" placeholder="PayPayリンクを入力">
+            <!-- PayPayリンク入力 -->
+            <div id="paypay-link-section" class="hidden">
+                <label for="paypay-link">PayPayリンク:</label>
+                <input type="url" id="paypay-link" placeholder="PayPayリンクを入力">
+            </div>
 
             <!-- 送信ボタン -->
             <button type="submit">送信</button>
