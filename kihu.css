@@ -95,63 +95,53 @@ button[type="submit"] {
     margin-top: 20px;
 }
 
-/* 寄付金額の枠全体を中央に配置 */
+/* 寄付金額枠を中央揃え */
 .donation-options {
     display: flex;
-    flex-direction: column; /* ボタンを縦方向に並べる */
+    flex-direction: column; /* ボタンを縦並び */
     align-items: center; /* 中央揃え */
-    justify-content: center; /* 中央揃え */
-    margin: 20px auto; /* 上下に余白、左右は自動で中央揃え */
-    width: fit-content; /* コンテンツの幅に合わせる */
+    justify-content: center;
+    margin: 20px auto; /* 上下に余白、中央揃え */
+    width: fit-content; /* 中身の幅に合わせる */
     padding: 10px;
-    border: 2px solid #ccc; /* 枠線を追加 */
-    border-radius: 8px; /* 角を丸く */
-    background-color: #f9f9f9; /* 背景色 */
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
 }
 
-/* 寄付ボタンのスタイル */
+/* ボタンスタイル */
 .donation-btn {
-    margin: 5px 0; /* 各ボタンに上下の間隔 */
+    display: flex; /* 横並び */
+    justify-content: space-between; /* 左右に要素を配置 */
+    align-items: center; /* 垂直方向に中央揃え */
+    margin: 5px 0;
     padding: 10px 20px;
     font-size: 16px;
     border: none;
     border-radius: 5px;
     cursor: pointer;
-    width: 200px; /* ボタン幅を統一 */
-    text-align: left; /* テキストを左揃え */
+    width: 300px; /* ボタン幅を統一 */
+    text-align: left;
+    background-color: #fff;
 }
 
-/* 選択されたボタンのスタイル */
+/* ボタン選択時 */
 .donation-btn.selected {
-    background-color: #4caf50; /* 選択時の背景色 */
-    color: #fff; /* テキスト色 */
+    background-color: #4caf50; /* 背景色 */
+    color: #fff;
     font-weight: bold;
     border: 2px solid #388e3c;
 }
 
-/* ホバー時 */
-.donation-btn:hover {
-    background-color: #f1f1f1;
+/* プラン名は左寄せ */
+.plan-name {
+    flex: 1; /* 左端に配置 */
+    text-align: left;
 }
 
-}
-
-.donation-btn.selected {
-    background-color: #43cea2;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.donation-btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px #26a69a;
-}
-
-/* ====== フォームのラベルスタイル ====== */
-label {
-    font-size: 1.2em;
+/* 金額は右寄せ */
+.plan-amount {
+    text-align: right;
     font-weight: bold;
-    color: #444;
-    margin-bottom: 15px;
-    text-align: center;
+    color: #666;
 }
-
