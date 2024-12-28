@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const amazonSection = document.getElementById('amazon-section');
     const form = document.getElementById('donation-form');
     const successMessage = document.getElementById('success-message');
+    const errorMessage = document.getElementById('error-message');
     const amazonInput = document.getElementById('amazon-code');
     const paypayLinkInput = document.getElementById('paypay-link');
     const mcidInput = document.getElementById('mcid');
@@ -83,31 +84,41 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // 必須項目の検証
         if (!mcid || !discordId) {
-            alert('Minecraft ID、Discord IDは必須項目です');
+            errorMessage.textContent = 'Minecraft ID、Discord IDは必須項目です';
+            errorMessage.classList.remove('hidden');
+            successMessage.classList.add('hidden');
             return;
         }
 
         // 寄付プランの選択確認
         if (!selectedDonationPlan) {
-            alert('寄付プランを選択してください');
+            errorMessage.textContent = '寄付プランを選択してください';
+            errorMessage.classList.remove('hidden');
+            successMessage.classList.add('hidden');
             return;
         }
 
         // エディション選択確認（未選択で送信できないように）
         if (!versionField.value) {
-            alert('エディションを選択してください');
+            errorMessage.textContent = 'エディションを選択してください';
+            errorMessage.classList.remove('hidden');
+            successMessage.classList.add('hidden');
             return;
         }
 
         // PayPayリンクの検証 (PayPay選択時)
         if (paypayBtn.classList.contains('selected')) {
             if (!paypayLink) {
-                alert('PayPayリンクを入力してください');
+                errorMessage.textContent = 'PayPayリンクを入力してください';
+                errorMessage.classList.remove('hidden');
+                successMessage.classList.add('hidden');
                 return;
             }
             const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
             if (!paypayRegex.test(paypayLink)) {
-                alert('PayPayリンクが正しくありません');
+                errorMessage.textContent = 'PayPayリンクが正しくありません';
+                errorMessage.classList.remove('hidden');
+                successMessage.classList.add('hidden');
                 return;
             }
         }
@@ -115,12 +126,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // Amazonギフト券コードの検証 (Amazon選択時)
         if (amazonBtn.classList.contains('selected')) {
             if (!amazonCode) {
-                alert('Amazonギフト券コードを入力してください');
+                errorMessage.textContent = 'Amazonギフト券コードを入力してください';
+                errorMessage.classList.remove('hidden');
+                successMessage.classList.add('hidden');
                 return;
             }
             const amazonRegex = /^[A-Z0-9]{14,17}$/;
             if (!amazonRegex.test(amazonCode)) {
-                alert('Amazonギフト券コードが正しくありません');
+                errorMessage.textContent = 'Amazonギフト券コードが正しくありません';
+                errorMessage.classList.remove('hidden');
+                successMessage.classList.add('hidden');
                 return;
             }
         }
@@ -156,7 +171,10 @@ document.addEventListener('DOMContentLoaded', () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(webhookData)
         }).then(() => {
+            // 成功メッセージの表示
             successMessage.classList.remove('hidden');
+            successMessage.classList.add('animated');
+            errorMessage.classList.add('hidden');
             form.reset();
             versionField.value = '';  // フォームのリセット
             selectedDonationPlan = null; // 寄付プランのリセット
