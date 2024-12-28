@@ -149,8 +149,16 @@
         document.addEventListener('DOMContentLoaded', () => {
             const javaBtn = document.getElementById('java-btn');
             const bedrockBtn = document.getElementById('bedrock-btn');
+            const amazonBtn = document.getElementById('amazon-btn');
+            const paypayBtn = document.getElementById('paypay-btn');
+            const form = document.getElementById('donation-form');
+            const successMessage = document.getElementById('success-message');
             const versionField = document.getElementById('version');
+            const amountField = document.getElementById('donation-amount');
 
+            let selectedPaymentMethod = ''; // 初期状態では未選択
+
+            // Minecraftバージョンの選択
             javaBtn.addEventListener('click', () => {
                 versionField.value = 'Java版';
                 javaBtn.classList.add('selected');
@@ -161,6 +169,63 @@
                 versionField.value = '統合版';
                 bedrockBtn.classList.add('selected');
                 javaBtn.classList.remove('selected');
+            });
+
+            // 寄付方法の選択
+            amazonBtn.addEventListener('click', () => {
+                selectedPaymentMethod = 'Amazonギフト券';
+                amazonBtn.classList.add('selected');
+                paypayBtn.classList.remove('selected');
+            });
+
+            paypayBtn.addEventListener('click', () => {
+                selectedPaymentMethod = 'PayPay';
+                paypayBtn.classList.add('selected');
+                amazonBtn.classList.remove('selected');
+            });
+
+            // フォーム送信時の検証
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const mcid = document.getElementById('mcid').value.trim();
+                const amount = amountField.value.trim();
+
+                if (!mcid) {
+                    alert('Minecraft IDを入力してください。');
+                    return;
+                }
+
+                if (!amount || isNaN(amount) || amount <= 0) {
+                    alert('有効な寄付金額を入力してください。');
+                    return;
+                }
+
+                if (!selectedPaymentMethod) {
+                    alert('寄付方法を選択してください。');
+                    return;
+                }
+
+                // Webhookに送信
+                fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        content: `Minecraft ID: ${mcid}\n寄付金額: ${amount}円\n寄付方法: ${selectedPaymentMethod}\nバージョン: ${versionField.value}`
+                    })
+                })
+                .then(response => {
+                    if (response.ok) {
+                        successMessage.classList.remove('hidden');
+                    } else {
+                        alert('送信中にエラーが発生しました。再試行してください。');
+                    }
+                })
+                .catch(() => {
+                    alert('送信に失敗しました。ネットワーク接続を確認してください。');
+                });
             });
         });
     </script>
