@@ -238,6 +238,31 @@ button[type="submit"] {
   .section {
     display: flex;
     flex-direction: column;
-    /* ... */
+  }
+
+  .donation-options {
+    display: flex;
+    flex-direction: column; /* 縦並びに変更 */
+    align-items: center; /* 横のセンタリング */
+    gap: 10px; /* ボタン間の間隔を調整 */
+  }
+
+  .donation-btn-wrapper {
+    width: 100%;  /* ボタンが1列に並ぶように幅を100%に設定 */
+    max-width: 100%;
+    padding: 10px;
+  }
+
+  .donation-btn {
+    font-size: 16px;  /* 少しフォントを大きくして見やすく */
+    height: auto;  /* 高さを自動にして調整 */
+    width: 100%; /* ボタンを親要素に合わせて広げる */
+    text-align: center; /* 中央揃え */
+  }
+
+  /* 必要なら他の要素にも調整を加える */
+  .plan-name, .plan-emoji, .plan-amount {
+    font-size: 14px; /* 少し小さめにしてバランスを取る */
   }
 }
+
