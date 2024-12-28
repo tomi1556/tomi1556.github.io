@@ -18,12 +18,6 @@ body {
     border-radius: 25px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
     text-align: center;
-    animation: fadeIn 1s ease-in-out;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(-30px); }
-    to { opacity: 1; transform: translateY(0); }
 }
 
 h1 {
@@ -40,7 +34,7 @@ label {
     font-size: 1.1em;
 }
 
-input, select {
+input {
     width: 80%;
     padding: 12px;
     margin-bottom: 20px;
@@ -50,12 +44,12 @@ input, select {
     transition: border 0.3s ease;
 }
 
-input:focus, select:focus {
+input:focus {
     border-color: #26a69a;
     outline: none;
 }
 
-/* ====== バージョン選択 ====== */
+/* ====== ボタンスタイル ====== */
 .version-options button,
 .payment-options button {
     margin: 0 10px;
@@ -68,29 +62,19 @@ input:focus, select:focus {
     transition: all 0.2s ease;
 }
 
-#java-btn {
-    background-color: #ff8f00;
-    color: white;
-}
-
-#bedrock-btn {
-    background-color: #0288d1;
-    color: white;
-}
-
-#amazon-btn {
-    background-color: #fbc02d;
-    color: white;
-}
-
-#paypay-btn {
-    background-color: #e57373;
-    color: white;
-}
+#java-btn { background-color: #ff8f00; color: white; }
+#bedrock-btn { background-color: #0288d1; color: white; }
+#amazon-btn { background-color: #fbc02d; color: white; }
+#paypay-btn { background-color: #e57373; color: white; }
 
 button.selected {
     transform: scale(1.1);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* ====== 隠し要素 ====== */
+.hidden {
+    display: none;
 }
 
 /* ====== 送信ボタン ====== */
@@ -102,20 +86,4 @@ button[type="submit"] {
     border-radius: 30px;
     font-size: 1.2em;
     cursor: pointer;
-    transition: transform 0.3s ease;
-}
-
-button[type="submit"]:hover {
-    transform: scale(1.05);
-}
-
-/* ====== 成功メッセージ ====== */
-.hidden {
-    display: none;
-}
-
-#success-message {
-    margin-top: 30px;
-    font-size: 1.3em;
-    color: #388e3c;
 }
