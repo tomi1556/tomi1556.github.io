@@ -220,6 +220,7 @@ button[type="submit"] {
   body {
     display: flex;
     flex-direction: column; /* メインコンテンツを縦に並べる */
+    overflow-x: hidden; /* 横スクロールを禁止 */
   }
 
   .container {
