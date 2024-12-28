@@ -92,37 +92,29 @@ button[type="submit"] {
 .donation-amount-label {
     display: flex;
     align-items: center;
-    justify-content: flex-start; /* 左揃え */
+    justify-content: center; /* 中央揃え */
     gap: 10px; /* ラベルと金額の間隔 */
     font-size: 16px;
     margin: 20px auto;
-    width: 300px; /* ラベルの幅を揃える */
-}
-
-/* 金額表示部分 */
-#donation-amount-display {
-    font-weight: bold;
-    color: #333;
+    width: auto;
 }
 
 /* === 寄付金額ボタン === */
 .donation-options {
     display: flex;
-    flex-direction: column;
-    align-items: center;
     justify-content: center;
-    gap: 10px;
-    margin: 20px auto;
+    gap: 15px;
+    margin-top: 20px;
 }
 
 /* 個別ボタンの枠 */
 .donation-btn-wrapper {
     position: relative;
-    width: 300px;
+    width: 250px; /* 幅を狭くする */
     padding: 5px;
     border-radius: 5px;
     overflow: hidden; /* 枠の外にはみ出さないようにする */
-    transition: transform 0.3s ease;
+    transition: transform 0.2s ease, box-shadow 0.3s ease;
 }
 
 /* 枠付きボタン */
@@ -130,8 +122,8 @@ button[type="submit"] {
     display: flex;
     justify-content: space-between; /* 左右に配置 */
     align-items: center;
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 12px 18px; /* よりコンパクトに */
+    font-size: 14px; /* 小さめに */
     border: none;
     cursor: pointer;
     background-color: #fff;
@@ -139,29 +131,32 @@ button[type="submit"] {
     text-align: left;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: background-color 0.3s ease, transform 0.3s ease; /* アニメーション追加 */
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    font-family: 'Roboto', sans-serif; /* モダンなフォント */
 }
 
 /* 選択状態のボタン */
 .donation-btn.selected {
-    background-color: #4caf50;
+    background-color: #2E8B57;
     color: #fff;
     font-weight: bold;
-    border: 2px solid #388e3c;
+    border: 2px solid #1C6E42;
     transform: scale(1.05); /* 選択時の拡大アニメーション */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 選択時にシャドウを強化 */
 }
 
 /* プラン名 (左寄せ) */
 .plan-name {
     flex: 1;
     text-align: left;
+    font-weight: 600;
 }
 
 /* 金額 (右寄せ) */
 .plan-amount {
     text-align: right;
     font-weight: bold;
-    color: #666;
+    color: #ddd;
 }
 
 /* === ボタン選択時の枠強調 === */
@@ -171,3 +166,10 @@ button[type="submit"] {
     font-weight: bold;
     transform: scale(1.05); /* 拡大 */
 }
+
+/* === ボタンのホバーエフェクト === */
+.donation-btn:hover {
+    background-color: #f5f5f5;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
