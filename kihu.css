@@ -211,7 +211,7 @@ button[type="submit"] {
 }
 
 /* ====== タブレット/スマホ用スタイル (768px 以下) ====== */
-@media (max-width: 480px) {
+@media screen and (max-width:480px) {
     body {
         justify-content: flex-start;  /* 上に寄せて、上部の余白を確保 */
         padding-top: 10px;  /* 上部に少し余白を追加 */
