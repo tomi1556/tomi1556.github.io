@@ -210,26 +210,39 @@ button[type="submit"] {
     margin-top: 20px;
 }
 
-/* ... (既存のCSS) ... */
+/* 既存のCSS部分 */
 
-/* ... (既存のCSS) ... */
-
+/* スマホ用のスタイル */
 @media (max-width: 768px) {
-
   html {
     font-size: 16px; /* 基準となるフォントサイズ */
+    scroll-behavior: smooth; /* スクロールをスムーズにする */
   }
 
   body {
     display: flex;
     flex-direction: column; /* メインコンテンツを縦に並べる */
     overflow-x: hidden; /* 横スクロールを禁止 */
-    scroll-behavior: smooth; /* スクロールをスムーズにする */
     margin: 0;
     padding: 0;
   }
 
+  /* 親要素にpositionを設定 */
+  .parent-element {
+    position: relative;
+    z-index: 1; /* これで他の要素より前面に表示させる */
+  }
+
+  /* DiscordIDより上の要素にz-indexを設定 */
+  .top-element {
+    position: relative;
+    z-index: 2; /* こちらが前面に表示される */
+  }
+
+  /* 高さの制御とスクロールの確認 */
   .container {
+    max-height: 100vh; /* 画面内に収める */
+    overflow-y: scroll; /* スクロールを有効に */
     width: 80%;
     margin: auto; /* 横方向中央寄せ */
     padding: 10px;
@@ -256,14 +269,14 @@ button[type="submit"] {
   }
 
   .donation-btn-wrapper {
-    width: 100%;  /* ボタンが1列に並ぶように幅を100%に設定 */
+    width: 100%; /* ボタンが1列に並ぶように幅を100%に設定 */
     max-width: 100%;
     padding: 10px;
   }
 
   .donation-btn {
-    font-size: 16px;  /* 少しフォントを大きくして見やすく */
-    height: auto;  /* 高さを自動にして調整 */
+    font-size: 16px; /* 少しフォントを大きくして見やすく */
+    height: auto; /* 高さを自動にして調整 */
     width: 100%; /* ボタンを親要素に合わせて広げる */
     text-align: center; /* 中央揃え */
   }
@@ -273,4 +286,3 @@ button[type="submit"] {
     font-size: 14px; /* 少し小さめにしてバランスを取る */
   }
 }
-
