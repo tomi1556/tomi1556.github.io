@@ -209,3 +209,57 @@ button[type="submit"] {
 #paypay-section, #amazon-section {
     margin-top: 20px;
 }
+
+/* ====== スマホ用レスポンシブ ====== */
+@media (max-width: 768px) {
+    /* コンテナの調整 */
+    .container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    /* ボタンの配置を縦に並べる */
+    .donation-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .donation-btn-wrapper {
+        width: 100%; /* ボタンが1行に並ばないように */
+        max-width: 100%;
+    }
+
+    .donation-btn {
+        height: auto; /* 高さを自動に */
+        font-size: 16px; /* 少し大きくする */
+    }
+
+    /* 絵文字とプラン名のサイズ調整 */
+    .plan-emoji {
+        font-size: 32px;
+    }
+
+    .plan-name {
+        font-size: 14px;
+    }
+
+    button[type="submit"] {
+        padding: 14px 40px;
+        font-size: 1.2em;
+    }
+
+    /* 寄付金額ラベルの調整 */
+    .donation-amount-label {
+        font-size: 14px; /* 少し小さめに */
+    }
+
+    /* ボタンの幅を広げて使いやすくする */
+    .payment-options {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .payment-options button {
+        padding: 12px 40px;
+    }
+}
