@@ -16,6 +16,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const donationButtons = document.querySelectorAll('.donation-btn');
     let selectedDonationPlan = null;
 
+    // === 寄付プラン名の定義 ===
+    const donationPlans = {
+        'amount-100': '有効期限の延長',
+        'amount-500': 'ライト',
+        'amount-2500': 'スタンダード',
+        'amount-5000': 'プレミアム'
+    };
+
     // === 初期設定 ===
     versionField.value = ''; // エディションは未選択状態
     javaBtn.classList.remove('selected');
@@ -117,6 +125,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
 
+        // 寄付プラン名を取得
+        const selectedPlanName = donationPlans[selectedDonationPlan];
+
         // === Webhookデータ作成 ===
         const webhookData = {
             embeds: [{
@@ -126,7 +137,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     { name: "🆔 Minecraft ID", value: mcid, inline: true },
                     { name: "💬 Discord ID", value: discordId, inline: true },
                     { name: "🎮 エディション", value: versionField.value, inline: true },
-                    { name: "💵 寄付プラン", value: selectedDonationPlan, inline: true },
+                    { name: "💵 寄付プラン", value: selectedPlanName, inline: true },
                     ...(paypayBtn.classList.contains('selected') ? [{
                         name: "🔗 PayPayリンク", value: paypayLink
                     }] : []),
