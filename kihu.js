@@ -14,29 +14,30 @@ document.addEventListener('DOMContentLoaded', () => {
     const mcidInput = document.getElementById('mcid');
     const discordIdInput = document.getElementById('discord-id');
     const donationAmountInput = document.getElementById('donation-amount');
+    const donationButtons = document.querySelectorAll('.donation-btn');
 
-    // 初期設定: エディション選択を未選択状態にする
-    versionField.value = '';  // 初期状態で空にする
+    // === 初期設定 ===
+    versionField.value = ''; // エディションは未選択状態
     javaBtn.classList.remove('selected');
     bedrockBtn.classList.remove('selected');
     amazonSection.classList.remove('hidden');
     paypaySection.classList.add('hidden');
-    amazonBtn.classList.add('selected');  // 初期状態でAmazonを選択
+    amazonBtn.classList.add('selected');
 
-    // Minecraftバージョン選択
-    javaBtn.onclick = () => {
+    // === エディション選択 ===
+    javaBtn.addEventListener('click', () => {
         versionField.value = 'Java版';
         javaBtn.classList.add('selected');
         bedrockBtn.classList.remove('selected');
-    };
+    });
 
-    bedrockBtn.onclick = () => {
+    bedrockBtn.addEventListener('click', () => {
         versionField.value = '統合版';
         bedrockBtn.classList.add('selected');
         javaBtn.classList.remove('selected');
-    };
+    });
 
-    // PayPayボタンのクリックイベント
+    // === 寄付方法選択 ===
     paypayBtn.addEventListener('click', () => {
         paypaySection.classList.remove('hidden');
         amazonSection.classList.add('hidden');
@@ -44,7 +45,6 @@ document.addEventListener('DOMContentLoaded', () => {
         amazonBtn.classList.remove('selected');
     });
 
-    // Amazonボタンのクリックイベント
     amazonBtn.addEventListener('click', () => {
         amazonSection.classList.remove('hidden');
         paypaySection.classList.add('hidden');
@@ -52,14 +52,38 @@ document.addEventListener('DOMContentLoaded', () => {
         paypayBtn.classList.remove('selected');
     });
 
-    // フォーム送信イベント
+    // === 金額選択 ===
+    donationButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            donationButtons.forEach(btn => btn.classList.remove('selected')); // 全てのボタンから selected を削除
+            button.classList.add('selected'); // クリックしたボタンを選択状態に
+
+            // 寄付金額を設定
+            switch (button.id) {
+                case 'amount-100':
+                    donationAmountInput.value = '100';
+                    break;
+                case 'amount-500':
+                    donationAmountInput.value = '500';
+                    break;
+                case 'amount-2500':
+                    donationAmountInput.value = '2500';
+                    break;
+                case 'amount-5000':
+                    donationAmountInput.value = '5000';
+                    break;
+            }
+        });
+    });
+
+    // === フォーム送信 ===
     form.addEventListener('submit', (e) => {
         e.preventDefault();
 
         // 入力値の取得
-        const mcid = mcidInput.value;
-        const discordId = discordIdInput.value;
-        const donationAmount = donationAmountInput.value;
+        const mcid = mcidInput.value.trim();
+        const discordId = discordIdInput.value.trim();
+        const donationAmount = donationAmountInput.value.trim();
         const paypayLink = paypayLinkInput.value.trim();
         const amazonCode = amazonInput.value.trim();
 
@@ -71,81 +95,56 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
-        // エディションの選択を確認
+        // エディション選択確認
         if (!versionField.value) {
             alert('エディションを選択してください');
             return;
         }
 
-        // PayPayリンクの検証 (PayPayが選択されている場合)
-        if (paypayBtn.classList.contains('selected') && paypayLink) {
+        // PayPayリンクの検証 (PayPay選択時)
+        if (paypayBtn.classList.contains('selected')) {
+            if (!paypayLink) {
+                alert('PayPayリンクを入力してください');
+                return;
+            }
             const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
-            if (paypayRegex.test(paypayLink)) {
-                sendData += `PayPayリンク: ${paypayLink}\n`;  // 正しい場合PayPayリンクを送信
-            } else {
+            if (!paypayRegex.test(paypayLink)) {
                 alert('PayPayリンクが正しくありません');
                 return;
             }
+            sendData += `PayPayリンク: ${paypayLink}\n`;
         }
 
-        // Amazonギフト券コードの検証 (Amazonが選択されている場合)
-        if (amazonBtn.classList.contains('selected') && amazonCode) {
-            const amazonRegex = /^[A-Z0-9]{14,17}$/;  // ハイフンなし、17文字
-            if (amazonRegex.test(amazonCode)) {
-                sendData += `Amazonコード: ${amazonCode}\n`;  // 正しい場合Amazonコードを送信
-            } else {
+        // Amazonギフト券コードの検証 (Amazon選択時)
+        if (amazonBtn.classList.contains('selected')) {
+            if (!amazonCode) {
+                alert('Amazonギフト券コードを入力してください');
+                return;
+            }
+            const amazonRegex = /^[A-Z0-9]{14,17}$/;
+            if (!amazonRegex.test(amazonCode)) {
                 alert('Amazonギフト券コードが正しくありません');
                 return;
             }
+            sendData += `Amazonコード: ${amazonCode}\n`;
         }
 
-        // 必要な情報が足りている場合は送信しない
-        if (!sendData) {
-            alert('PayPayリンクまたはAmazonコードのいずれかを入力してください');
-            return;
-        }
-
-        // Webhookに送信するデータの作成
+        // Webhookデータ作成
         const webhookData = {
             content: `Minecraft ID: ${mcid}\nDiscord ID: ${discordId}\n金額: ¥${donationAmount}\nエディション: ${versionField.value}\n${sendData}`
         };
 
-        // Discord Webhookにデータを送信
-        fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {  // 必ず実際のWebhook URLを挿入してください
+        // Webhook送信
+        fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
+            headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(webhookData)
         }).then(() => {
-            // 成功メッセージの表示
             successMessage.classList.remove('hidden');
+            form.reset();
+            versionField.value = '';
         }).catch(() => {
             alert('送信に失敗しました');
         });
     });
 });
-
-document.addEventListener('DOMContentLoaded', () => {
-    const donationButtons = document.querySelectorAll('.donation-btn');
-    const donationAmountInput = document.getElementById('donation-amount');
-
-    donationButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            donationButtons.forEach(btn => btn.classList.remove('selected')); // すべてのボタンから selected クラスを削除
-            button.classList.add('selected'); // クリックしたボタンに selected クラスを追加
-
-            // 寄付金額を設定
-            if (button.id === 'amount-100') {
-                donationAmountInput.value = '100';
-            } else if (button.id === 'amount-500') {
-                donationAmountInput.value = '500';
-            } else if (button.id === 'amount-2500') {
-                donationAmountInput.value = '2500';
-            } else if (button.id === 'amount-5000') {
-                donationAmountInput.value = '5000';
-            }
-        });
-    });
-});
-
