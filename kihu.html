@@ -4,236 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>寄付サイト</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-    <style>
-        /* ====== 全体スタイル ====== */
-        body {
-            font-family: 'Poppins', Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background: linear-gradient(to right, #43cea2, #185a9d);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
-        .container {
-            width: 600px;
-            margin: 20px;
-            padding: 40px;
-            background: #ffffff;
-            border-radius: 25px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
-            text-align: center;
-            animation: fadeIn 1s ease-in-out;
-        }
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        h1 {
-            color: #2c786c;
-            font-size: 2.8em;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin: 15px 0 8px;
-            font-weight: bold;
-            color: #444;
-            font-size: 1.1em;
-        }
-        input, select {
-            width: 80%;
-            padding: 12px;
-            margin-bottom: 20px;
-            border: 2px solid #b2dfdb;
-            border-radius: 8px;
-            font-size: 1em;
-            transition: border 0.3s ease;
-        }
-        input:focus, select:focus {
-            border-color: #26a69a;
-            outline: none;
-        }
-
-        /* ====== バージョン選択セクション ====== */
-        .version-options {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        .version-options button {
-            margin: 0 10px;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1em;
-            transition: all 0.2s ease;
-        }
-        .version-options button#java-btn {
-            background-color: #ff8f00;
-            color: white;
-        }
-        .version-options button#bedrock-btn {
-            background-color: #0288d1;
-            color: white;
-        }
-        .version-options button.selected {
-            transform: scale(1.1);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        }
-
-        /* ====== 寄付金額 ====== */
-        .donation-amount {
-            margin: 20px 0;
-        }
-        .donation-amount input {
-            text-align: center;
-            font-size: 1.2em;
-        }
-
-        /* ====== 寄付方法選択 ====== */
-        .payment-options {
-            display: flex;
-            justify-content: center;
-            margin: 20px 0;
-        }
-        .payment-options button {
-            margin: 0 10px;
-            padding: 12px 24px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            font-size: 1em;
-            transition: all 0.2s ease;
-        }
-        .payment-options button#amazon-btn {
-            background-color: #fbc02d;
-            color: white;
-        }
-        .payment-options button#paypay-btn {
-            background-color: #e57373;
-            color: white;
-        }
-        .payment-options button.selected {
-            transform: scale(1.1);
-        }
-
-        /* ====== 送信ボタン ====== */
-        button[type="submit"] {
-            padding: 14px 60px;
-            background: linear-gradient(to right, #43cea2, #185a9d);
-            color: white;
-            border: none;
-            border-radius: 30px;
-            font-size: 1.2em;
-            cursor: pointer;
-            transition: transform 0.3s ease;
-        }
-        button[type="submit"]:hover {
-            transform: scale(1.05);
-        }
-
-        /* ====== 成功メッセージ ====== */
-        #success-message {
-            margin-top: 30px;
-            font-size: 1.3em;
-            color: #388e3c;
-        }
-    </style>
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const javaBtn = document.getElementById('java-btn');
-            const bedrockBtn = document.getElementById('bedrock-btn');
-            const amazonBtn = document.getElementById('amazon-btn');
-            const paypayBtn = document.getElementById('paypay-btn');
-            const form = document.getElementById('donation-form');
-            const successMessage = document.getElementById('success-message');
-            const versionField = document.getElementById('version');
-            const amountField = document.getElementById('donation-amount');
-
-            let selectedPaymentMethod = ''; // 初期状態では未選択
-
-            // Minecraftバージョンの選択
-            javaBtn.addEventListener('click', () => {
-                versionField.value = 'Java版';
-                javaBtn.classList.add('selected');
-                bedrockBtn.classList.remove('selected');
-            });
-
-            bedrockBtn.addEventListener('click', () => {
-                versionField.value = '統合版';
-                bedrockBtn.classList.add('selected');
-                javaBtn.classList.remove('selected');
-            });
-
-            // 寄付方法の選択
-            amazonBtn.addEventListener('click', () => {
-                selectedPaymentMethod = 'Amazonギフト券';
-                amazonBtn.classList.add('selected');
-                paypayBtn.classList.remove('selected');
-            });
-
-            paypayBtn.addEventListener('click', () => {
-                selectedPaymentMethod = 'PayPay';
-                paypayBtn.classList.add('selected');
-                amazonBtn.classList.remove('selected');
-            });
-
-            // フォーム送信時の検証
-            form.addEventListener('submit', (e) => {
-                e.preventDefault();
-
-                const mcid = document.getElementById('mcid').value.trim();
-                const amount = amountField.value.trim();
-
-                if (!mcid) {
-                    alert('Minecraft IDを入力してください。');
-                    return;
-                }
-
-                if (!amount || isNaN(amount) || amount <= 0) {
-                    alert('有効な寄付金額を入力してください。');
-                    return;
-                }
-
-                if (!selectedPaymentMethod) {
-                    alert('寄付方法を選択してください。');
-                    return;
-                }
-
-                // Webhookに送信
-                fetch('https://discord.com/api/webhooks/1321477762338521179/YEvfJJo8opXHNbR4VHLlYEKRLpM1GtOEvKk9YNvZrAGj_l4ehUdkqx8h30bdu4j4d-BK', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        content: `Minecraft ID: ${mcid}\n寄付金額: ${amount}円\n寄付方法: ${selectedPaymentMethod}\nバージョン: ${versionField.value}`
-                    })
-                })
-                .then(response => {
-                    if (response.ok) {
-                        successMessage.classList.remove('hidden');
-                    } else {
-                        alert('送信中にエラーが発生しました。再試行してください。');
-                    }
-                })
-                .catch(() => {
-                    alert('送信に失敗しました。ネットワーク接続を確認してください。');
-                });
-            });
-        });
-    </script>
+    <link href="kihu.css" rel="stylesheet">
+    <script defer src="kihu.js"></script>
 </head>
 <body>
     <div class="container">
         <h1>寄付サイト</h1>
         <form id="donation-form">
+            <!-- Minecraftバージョン選択 -->
             <label>Minecraftバージョンを選択:</label>
             <div class="version-options">
                 <button type="button" id="java-btn">Java版</button>
@@ -241,20 +19,34 @@
             </div>
             <input type="hidden" id="version" value="Java版">
             
+            <!-- Minecraft ID入力 -->
             <label for="mcid">Minecraft ID:</label>
             <input type="text" id="mcid" placeholder="Minecraft IDを入力" required>
 
+            <!-- 寄付金額入力 -->
             <label for="donation-amount">寄付金額:</label>
             <input type="number" id="donation-amount" placeholder="金額を入力 (JPY)" required>
 
+            <!-- 寄付方法選択 -->
             <label>寄付方法:</label>
             <div class="payment-options">
                 <button type="button" id="amazon-btn">Amazonギフト券</button>
                 <button type="button" id="paypay-btn">PayPay</button>
             </div>
 
+            <!-- コード入力欄 -->
+            <label for="code-input">コード:</label>
+            <input type="text" id="code-input" placeholder="コードを入力">
+
+            <!-- PayPayリンク入力欄 -->
+            <label for="paypay-link">PayPayリンク:</label>
+            <input type="url" id="paypay-link" placeholder="PayPayリンクを入力">
+
+            <!-- 送信ボタン -->
             <button type="submit">送信</button>
         </form>
+
+        <!-- 成功メッセージ -->
         <div id="success-message" class="hidden">
             ✅ 送金が確認されました！ありがとうございます！
         </div>
