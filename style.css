@@ -307,7 +307,7 @@ footer p {
 }
 
 @media (max-width: 768px) {
-  /* 既存のスタイルを維持 */
+  /* 基本設定 */
   body {
     display: flex;
     flex-direction: column;
@@ -317,128 +317,158 @@ footer p {
     width: 100%;
     background-color: #f0f0f0;
   }
-  /* ナビゲーション全体を完全に非表示に */
-  nav {
-    display: none; /* ナビゲーションバーを非表示に */
+
+  /* タブボタン */
+  .tab-buttons {
+    flex-direction: column; /* ボタンを縦並びに */
+    margin-bottom: 10px;
+  }
+
+  .tab-button {
+    font-size: 1.2em; /* ボタンの文字サイズを少し大きく */
+    padding: 15px;
+    border-bottom: 2px solid transparent;
+  }
+
+  /* コンテンツ */
+  .tab-content {
+    padding: 15px;
+    margin-top: 10px;
   }
 
   /* メニューボタン */
   .menu-button {
-    position: fixed; /* メニューボタンを固定 */
-    top: 20px; /* 上端から少し離す */
-    left: 20px; /* 左端から少し離す */
+    position: fixed;
+    top: 20px;
+    left: 20px;
     background-color: #4caf50;
     color: white;
     padding: 10px;
     font-size: 1.5em;
     border: none;
     cursor: pointer;
-    z-index: 1001; /* メニューボタンを上に配置 */
+    z-index: 1001;
   }
 
-  /* メニューを表示する */
+  /* メニュー開閉 */
   .menu-open nav {
-    display: flex; /* メニューを表示する */
-  }
-}
-
-main {
-    animation-delay: 1s;
-    animation-name: zoomIn;
-}
-
-@keyframes zoomIn {
-    from {
-        transform: scale(0.8);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-footer {
-    animation-delay: 2s;
-    animation-name: fadeIn;
-}
-
-.online-container {
-    margin-top: 20px;
-    text-align: center;
-}
-
-#online-users-title {
-    font-size: 1.8em;
-    color: #33691e;
-    font-family: 'Potta One', cursive;
-}
-
-#online-users {
-    font-size: 2.5em;
-    color: #8bc34a;
-    font-family: 'Potta One', cursive;
-}
-
-.player {
     display: flex;
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 100%;
+    background-color: #4caf50;
     flex-direction: column;
     align-items: center;
-    margin: 20px;
-    border: 2px solid #4caf50; /* 明るいけど濃い緑の枠 */
-    border-radius: 15px; /* 丸みを帯びた角 */
-    padding: 10px;
-    transition: transform 0.3s ease-in-out;
-    background-color: #e8f5e9; /* 背景色を淡い緑に */
-    width: 180px; /* 全プレイヤー同じ幅 */
-    height: 180px; /* 全プレイヤー同じ高さ（少し短く） */
-}
+    padding: 10px 0;
+    z-index: 1000;
+  }
 
-.player img {
-    width: 100px; /* 全プレイヤー同じ画像幅 */
-    height: 100px; /* 全プレイヤー同じ画像高さ */
-    border-radius: 50%;
-    margin-top: 13px;
-}
-
-.player p {
-    font-size: 1.3em;
-    margin-top: 18px;
-    color: #333;
-    font-family: 'Potta One', cursive; /* 可愛いフォント */
-}
-
-.player .version {
-    font-size: 0.8em;
-    color: #999;
-}
-
-.player:hover {
-    transform: scale(1.1);
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes bounceIn {
-    from {
-        transform: scale(0.5);
-        opacity: 0;
-    }
-    to {
-        transform: scale(1);
-        opacity: 1;
-    }
-}
-
-.player {
-    animation: fadeIn 1s, bounceIn 0.5s;
-}
-
-#online-players {
+  nav ul {
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
     display: flex;
-    flex-wrap: wrap; /* 横方向に並べて、折り返しも考慮 */
-    justify-content: center; /* 中央揃え */
+    align-items: center;
+  }
+
+  nav ul li {
+    margin: 10px 0; /* アイテム間の間隔を調整 */
+  }
+
+  nav ul li a {
+    font-size: 1.1em; /* リンクの文字サイズ */
+    padding: 12px;
+    width: 100%;
+    text-align: center;
+    border-radius: 8px;
+  }
+
+  nav ul li a .icon {
+    font-size: 1.3em;
+    margin-bottom: 5px;
+  }
+
+  nav ul li a .item-name {
+    font-size: 1em;
+  }
+
+  /* メインコンテンツ */
+  main {
+    padding: 20px;
+    animation-delay: 1s;
+    animation-name: zoomIn;
+  }
+
+  /* フィーチャー */
+  .features h3, .features p {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+  }
+
+  .features-images {
+    flex-direction: column; /* 画像を縦並びに */
+    align-items: center;
+  }
+
+  .feature-image-card {
+    width: 80%; /* 画像カードの幅を広く */
+    margin: 10px 0;
+  }
+
+  /* メソッド */
+  .method {
+    flex-direction: column; /* カードを縦並びに */
+    margin-top: 20px;
+  }
+
+  .method-card {
+    width: 90%; /* カードの幅を広く */
+    margin: 10px 0;
+  }
+
+  .method-title {
+    font-size: 1.3em;
+  }
+
+  /* オンラインユーザー */
+  .online-container {
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  #online-users-title {
+    font-size: 1.5em;
+  }
+
+  #online-users {
+    font-size: 2em;
+    color: #8bc34a;
+  }
+
+  #online-players {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .player {
+    width: 120px;
+    height: 120px;
+    margin: 10px;
+    padding: 10px;
+  }
+
+  .player img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .player p {
+    font-size: 1em;
+  }
+
+  footer {
+    padding: 20px;
+    font-size: 1em;
+  }
 }
