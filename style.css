@@ -6,24 +6,15 @@ body {
   overflow-x: hidden;
 }
 
-/* サーバー紹介とステータス全体 */
+/* server-info セクション */
 .server-info {
-    padding: 40px 20px;
-    background-color: #f1f1f1;
-    text-align: center;
-    margin-top: 50px;
-}
-
-/* イントロセクション */
-.intro {
     position: relative;
-    height: 100vh;  /* ビューポートの高さに合わせる */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
+    height: 100vh; /* ビューポートの高さに合わせる */
+    overflow: hidden; /* 画像がはみ出さないように */
 }
 
-/* 画像を画面全体に表示する */
+/* 画像のスタイル */
 .intro-image {
     position: absolute;
     top: 0;
@@ -36,102 +27,65 @@ body {
 .intro-image img {
     width: 100%;
     height: 100%;
-    object-fit: cover;  /* 画像が画面いっぱいに表示されるように */
-    z-index: -1;  /* 画像の背面にテキストを表示 */
+    object-fit: cover; /* 画像をビューポートに合わせてフィットさせる */
+    z-index: -1; /* 画像を背面に配置 */
 }
 
-
-.intro-text {
-    max-width: 600px;
-    font-family: 'Potta One', cursive;
+/* ステータスを画像の上に配置 */
+.status-container {
     position: absolute;
-    z-index: 1; /* 画像の上にテキストを表示 */
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
-    color: #fff;
-    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5); /* 文字に影をつけて視認性をアップ */
-}
-
-.intro-text h2 {
-    font-size: 3em;
-    margin-bottom: 20px;
-}
-
-.intro-text p {
-    font-size: 1.5em;
-}
-
-/* ステータスセクション */
-.status-container {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    margin-top: 50px;
+    transform: translate(-50%, -50%); /* 真ん中に配置 */
+    text-align: center;
+    z-index: 1000; /* ステータスを前面に */
 }
 
 .status-item {
-    background-color: #ffffff;
-    border-radius: 15px;
-    padding: 20px;
-    width: 220px;
-    text-align: center;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-.status-item:hover {
-    transform: scale(1.05);
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    color: #fff;
 }
 
 .status-title {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 1.4em;
     font-weight: bold;
-    color: #33691e;
-    margin-bottom: 10px;
-}
-
-.status-title i {
-    font-size: 1.6em;
-    margin-right: 10px;
+    font-size: 1.5em;
 }
 
 .status-number {
-    font-size: 2.2em;
-    font-weight: bold;
-    color: #558b2f;
+    font-size: 2.5em;
+    color: #8bc34a;
 }
 
-/* Minecraft専用のスタイル */
-.minecraft-status {
-    background-color: #e8f5e9;
-}
-
-.discord-status {
-    background-color: #7289da;
+/* サーバー紹介テキスト */
+.intro-text {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
     color: white;
+    font-size: 1.5em;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明の背景 */
+    padding: 15px;
+    border-radius: 10px;
+    z-index: 1000; /* サーバー紹介を前面に */
 }
 
-.discord-status .status-title {
-    color: white;
+.intro-text h2 {
+    font-size: 2em;
+    margin-bottom: 15px;
 }
 
-.discord-status .status-number {
-    color: white;
+.intro-text p {
+    font-size: 1.2em;
 }
 
-/* アイコン表示のためのスタイル */
-.icon-minecraft::before {
-    content: '\f15b';
-    font-family: 'FontAwesome';
-}
-
-.icon-discord::before {
-    content: '\f392';
-    font-family: 'FontAwesome';
+/* イントロのセクションとその他のコンテンツ */
+.intro {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
 }
 
 
@@ -545,18 +499,18 @@ footer p {
     display: flex; /* メニューを表示 */
   }
 
-  /* メニューボタン */
+  /* メニューボタンを画像の上に重ねる */
   .menu-button {
-    position: fixed;
-    top: 20px;
-    left: 20px;
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    font-size: 1.5em;
-    border: none;
-    cursor: pointer;
-    z-index: 1002;
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      background-color: #4caf50;
+      color: white;
+      padding: 10px;
+      font-size: 1.5em;
+      border: none;
+      cursor: pointer;
+      z-index: 1000; /* メニューボタンを前面に */
   }
 
   /* タブボタン */
