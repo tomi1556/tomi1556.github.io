@@ -1,3 +1,15 @@
+async function fetchMinecraftStatus() {
+    try {
+        const response = await fetch('https://api.mcstatus.io/v2/status/java/stellamc.jp:25565');
+        const data = await response.json();
+        document.getElementById('minecraft-status-number').textContent = data.players.online || 'N/A';
+    } catch (error) {
+        console.error('Minecraftステータスの取得に失敗:', error);
+        document.getElementById('minecraft-status-number').textContent = 'N/A';
+    }
+}
+
+
 // メニューボタンのクリックイベント
 const menuButton = document.querySelector('.menu-button');
 const body = document.querySelector('body');
