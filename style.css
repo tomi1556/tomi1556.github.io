@@ -307,44 +307,39 @@ footer p {
 }
 
 @media (max-width: 768px) {
-    nav ul {
-        flex-direction: column;
-    }
-    nav ul li {
-        margin: 10px 0;
-    }
-    .method {
-        flex-direction: column;
-        align-items: center;
-    }
-    .method-card {
-        width: 90%;
-    }
-}
+  /* 既存のスタイルを維持 */
+  body {
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #f0f0f0;
+  }
+  /* ナビゲーション全体を完全に非表示に */
+  nav {
+    display: none; /* ナビゲーションバーを非表示に */
+  }
 
-nav, main, footer {
-    opacity: 0;
-    animation: fadeIn 1.5s ease-out forwards;
-}
+  /* メニューボタン */
+  .menu-button {
+    position: fixed; /* メニューボタンを固定 */
+    top: 20px; /* 上端から少し離す */
+    left: 20px; /* 左端から少し離す */
+    background-color: #4caf50;
+    color: white;
+    padding: 10px;
+    font-size: 1.5em;
+    border: none;
+    cursor: pointer;
+    z-index: 1001; /* メニューボタンを上に配置 */
+  }
 
-@keyframes fadeIn {
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-nav {
-    animation-delay: 1s;
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(-100%);
-    }
-    to {
-        transform: translateX(0);
-    }
+  /* メニューを表示する */
+  .menu-open nav {
+    display: flex; /* メニューを表示する */
+  }
 }
 
 main {
@@ -446,41 +441,4 @@ footer {
     display: flex;
     flex-wrap: wrap; /* 横方向に並べて、折り返しも考慮 */
     justify-content: center; /* 中央揃え */
-}
-
-@media (max-width: 768px) {
-  /* 既存のスタイルを維持 */
-  body {
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background-color: #f0f0f0;
-  }
-
-  /* ナビゲーション全体を完全に非表示に */
-  nav {
-    display: none; /* ナビゲーションバーを非表示に */
-  }
-
-  /* メニューボタン */
-  .menu-button {
-    position: fixed; /* メニューボタンを固定 */
-    top: 20px; /* 上端から少し離す */
-    left: 20px; /* 左端から少し離す */
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    font-size: 1.5em;
-    border: none;
-    cursor: pointer;
-    z-index: 1001; /* メニューボタンを上に配置 */
-  }
-
-  /* メニューを表示する */
-  .menu-open nav {
-    display: flex; /* メニューを表示する */
-  }
 }
