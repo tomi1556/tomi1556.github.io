@@ -306,6 +306,86 @@ footer p {
     margin: 0;
 }
 
+.online-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+#online-users-title {
+    font-size: 1.8em;
+    color: #33691e;
+    font-family: 'Potta One', cursive;
+}
+
+#online-users {
+    font-size: 2.5em;
+    color: #8bc34a;
+    font-family: 'Potta One', cursive;
+}
+
+.player {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 20px;
+    border: 2px solid #4caf50; /* 明るいけど濃い緑の枠 */
+    border-radius: 15px; /* 丸みを帯びた角 */
+    padding: 10px;
+    transition: transform 0.3s ease-in-out;
+    background-color: #e8f5e9; /* 背景色を淡い緑に */
+    width: 180px; /* 全プレイヤー同じ幅 */
+    height: 180px; /* 全プレイヤー同じ高さ（少し短く） */
+}
+
+.player img {
+    width: 100px; /* 全プレイヤー同じ画像幅 */
+    height: 100px; /* 全プレイヤー同じ画像高さ */
+    border-radius: 50%;
+    margin-top: 13px;
+}
+
+.player p {
+    font-size: 1.3em;
+    margin-top: 18px;
+    color: #333;
+    font-family: 'Potta One', cursive; /* 可愛いフォント */
+}
+
+.player .version {
+    font-size: 0.8em;
+    color: #999;
+}
+
+.player:hover {
+    transform: scale(1.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes bounceIn {
+    from {
+        transform: scale(0.5);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.player {
+    animation: fadeIn 1s, bounceIn 0.5s;
+}
+
+#online-players {
+    display: flex;
+    flex-wrap: wrap; /* 横方向に並べて、折り返しも考慮 */
+    justify-content: center; /* 中央揃え */
+}
+
 @media (max-width: 768px) {
 
   /* ナビゲーション（非表示にした状態） */
