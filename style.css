@@ -307,16 +307,6 @@ footer p {
 }
 
 @media (max-width: 768px) {
-  /* 基本設定 */
-  body {
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    background-color: #f0f0f0;
-  }
 
   /* ナビゲーション（非表示にした状態） */
   nav {
@@ -362,13 +352,6 @@ footer p {
     font-size: 1.2em; /* ボタンの文字サイズを少し大きく */
     padding: 15px;
     border-bottom: 2px solid transparent;
-  }
-
-  /* メインコンテンツ */
-  main {
-    padding: 20px;
-    animation-delay: 1s;
-    animation-name: zoomIn;
   }
 
   /* フィーチャー */
