@@ -14,35 +14,35 @@
     <link rel="stylesheet" href="path/to/your/style.css" />
 </head>
 <body>
-    <section class="status-container">
-        <!-- Minecraft サーバー -->
-        <div class="status-card">
-            <h2 class="status-title">Minecraft サーバー</h2>
-            <div class="status-info">
-                <img src="minecraft-icon.png" alt="Minecraft Icon" class="status-icon">
-                <span id="minecraft-online" class="status-number">0</span>
-                <p>オンライン人数</p>
+    <section class="server-info">
+        <div class="intro">
+            <div class="intro-image">
+                <img src="server-image.jpg" alt="サーバー画像" />
+            </div>
+            <div class="intro-text">
+                <h2>サーバー紹介</h2>
+                <p>私たちのマイクラサーバーへようこそ！楽しいアクティビティやイベントが盛りだくさん。仲間と一緒に冒険しよう！</p>
             </div>
         </div>
 
-        <!-- Discord サーバー -->
-        <div class="status-card">
-            <h2 class="status-title">Discord サーバー</h2>
-            <div class="status-info">
-                <img src="discord-icon.png" alt="Discord Icon" class="status-icon">
-                <span id="discord-online" class="status-number">0</span>
-                <p>オンライン人数</p>
+        <div class="status-container">
+            <div class="status-item minecraft-status">
+                <div class="status-title">
+                    <i class="icon-minecraft"></i> <!-- Minecraftアイコン -->
+                    <span>マイクラオンライン</span>
+                </div>
+                <div class="status-number" id="minecraft-status-number">10</div> <!-- マイクラオンライン人数 -->
+            </div>
+            <div class="status-item discord-status">
+                <div class="status-title">
+                    <i class="icon-discord"></i> <!-- Discordアイコン -->
+                    <span>Discordオンライン</span>
+                </div>
+                <div class="status-number" id="discord-status-number">15</div> <!-- Discordオンライン人数 -->
             </div>
         </div>
     </section>
 
-    <section class="server-intro">
-        <h2 class="intro-title">サーバー紹介</h2>
-        <div class="intro-content">
-            <p class="intro-text">このMinecraftサーバーは、冒険と協力を楽しむための場所です。Discordサーバーでは、メンバー同士の交流も活発に行われています。</p>
-            <img src="server-image.jpg" alt="サーバー画像" class="intro-image">
-        </div>
-    </section>
     <button class="menu-button" onclick="toggleMenu()">☰</button>
     <nav>
         <ul>
