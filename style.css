@@ -30,20 +30,46 @@ body {
     z-index: -1;
 }
 
-.status {
+/* サーバー紹介テキスト */
+.intro-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    z-index: 2;
+}
+
+.intro-text h2 {
+    font-size: 2.5em;
+    margin-bottom: 20px;
+    font-family: 'Potta One', cursive;
+}
+
+.intro-text p {
+    font-size: 1.5em;
+    font-family: 'Nunito Sans', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+}
+
+/* ステータスのスタイル */
+.status-container {
     display: flex;
     justify-content: space-evenly;
     position: absolute;
     top: 20px;
     width: 100%;
-    z-index: 2;
+    z-index: 3;
 }
 
 .status-item {
-    background-color: rgba(0, 0, 0, 0.6);
+    background-color: rgba(0, 0, 0, 0.7); /* 背景を少し透過 */
     border-radius: 10px;
     padding: 20px;
-    width: 150px;
+    width: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -51,21 +77,24 @@ body {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.status-icon img {
-    width: 50px;
-    height: 50px;
+.status-title {
+    font-size: 1.3em;
+    font-family: 'Nunito Sans', sans-serif;
+    color: #fff;
     margin-bottom: 10px;
 }
 
-.status-text h2 {
-    font-size: 1.5em;
-    margin-bottom: 5px;
-    font-family: 'Potta One', cursive;
+.status-number {
+    font-size: 2em;
+    color: #ffcc00;
 }
 
-.status-text p {
-    font-size: 1.3em;
-    font-family: 'Potta One', cursive;
+/* アイコンのスタイル */
+.icon-minecraft,
+.icon-discord {
+    font-size: 40px;
+    color: #fff;
+    margin-bottom: 10px;
 }
 
 /* サーバー紹介 */
