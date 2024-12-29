@@ -1,6 +1,6 @@
 async function fetchMinecraftStatus() {
     try {
-        const response = await fetch('https://api.mcstatus.io/v2/status/java/stellamc.jp:25565');
+        const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
         const data = await response.json();
         document.getElementById('minecraft-status-number').textContent = data.players.online || 'N/A';
     } catch (error) {
