@@ -31,23 +31,6 @@ tabButtons.forEach(button => {
 });
 
 
-const swiper = new Swiper('.swiper-container', {
-  loop: true, // 無限ループを有効にする
-  autoplay: {
-    delay: 4000, // スライドを自動的に切り替える時間（ミリ秒）
-    disableOnInteraction: false, // ユーザー操作後も自動再生を続ける
-  },
-  pagination: {
-    el: '.swiper-pagination',
-    clickable: true, // ドットナビゲーションをクリック可能にする
-  },
-  slidesPerView: 'auto', // 各スライドの幅を自動的に調整
-  spaceBetween: 0, // スライド間の隙間を調整
-  navigation: false,
-  speed: 800, // スライドの移動速度を800ミリ秒に設定
-});
-
-
 async function fetchOnlineUsers() {
     try {
         const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
