@@ -6,6 +6,109 @@ body {
   overflow-x: hidden;
 }
 
+/* ステータス全体のコンテナ */
+.status-container {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 40px;
+    padding: 20px;
+    gap: 20px;
+}
+
+/* 各カードのデザイン */
+.status-card {
+    background-color: #4caf50; /* サーバーに合った緑色 */
+    border-radius: 15px;
+    padding: 20px;
+    width: 250px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+/* ホバー時にカードが少し拡大 */
+.status-card:hover {
+    transform: scale(1.05);
+}
+
+/* タイトル */
+.status-title {
+    font-size: 1.6em;
+    color: white;
+    margin-bottom: 20px;
+    font-family: 'Potta One', cursive;
+}
+
+/* オンライン人数 */
+.status-info {
+    font-size: 2.5em;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 10px;
+    font-family: 'Potta One', cursive;
+}
+
+/* 数字のスタイル */
+.status-number {
+    font-size: 3em;
+    color: #ffeb3b; /* 数字の色を黄色に */
+}
+
+/* アイコンのスタイル */
+.status-icon {
+    width: 40px;
+    height: 40px;
+    margin-right: 15px;
+    vertical-align: middle;
+}
+
+/* 下の説明文 */
+.status-info p {
+    font-size: 1.1em;
+    color: #fff;
+    margin-top: 5px;
+}
+
+/* サーバー紹介セクション */
+.server-intro {
+    background-color: #f1f8e9;  /* 淡い緑色背景 */
+    padding: 40px 20px;
+    text-align: center;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 60px;
+}
+
+/* サーバー紹介タイトル */
+.intro-title {
+    font-size: 2em;
+    color: #33691e;
+    font-family: 'Potta One', cursive;
+    margin-bottom: 20px;
+}
+
+/* サーバー紹介内容 */
+.intro-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.intro-text {
+    font-size: 1.2em;
+    color: #558b2f;
+    max-width: 500px;
+    font-family: 'Potta One', cursive;
+}
+
+.intro-image {
+    max-width: 400px;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
 /* 全体のスタイル */
 .tabs {
   max-width: 600px;
