@@ -16,31 +16,30 @@ body {
 
 /* イントロセクション */
 .intro {
+    position: relative;
+    height: 100vh;  /* ビューポートの高さに合わせる */
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 40px;
-    margin-bottom: 50px;
 }
 
 /* 画像を画面全体に表示する */
 .intro-image {
-    position: relative;
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 100vh; /* ビューポートの高さに合わせる */
+    height: 100%;
     overflow: hidden;
 }
 
 .intro-image img {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
     width: 100%;
     height: 100%;
-    object-fit: cover; /* 画像が縦横比を保って埋め尽くすように */
-    z-index: -1; /* テキストが画像の上に重なるように */
+    object-fit: cover;  /* 画像が画面いっぱいに表示されるように */
+    z-index: -1;  /* 画像の背面にテキストを表示 */
 }
+
 
 .intro-text {
     max-width: 600px;
