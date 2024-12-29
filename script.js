@@ -1,3 +1,8 @@
+document.querySelector('.menu-button').addEventListener('click', function() {
+  document.body.classList.toggle('menu-open');
+});
+
+
 const fadeInElements = document.querySelectorAll(".fade-in");
 
 const observer = new IntersectionObserver(entries => {
