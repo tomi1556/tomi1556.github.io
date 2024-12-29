@@ -405,22 +405,6 @@ footer p {
     justify-content: center;
   }
 
-  .player {
-    width: 120px;
-    height: 120px;
-    margin: 10px;
-    padding: 10px;
-  }
-
-  .player img {
-    width: 80px;
-    height: 80px;
-  }
-
-  .player p {
-    font-size: 1em;
-  }
-
   footer {
     padding: 20px;
     font-size: 1em;
