@@ -55,37 +55,46 @@ body {
     line-height: 1.6;
 }
 
-/* ステータスのスタイル */
+/* ステータス部分（右下に配置） */
 .status-container {
-    display: flex;
-    justify-content: space-evenly;
     position: absolute;
-    top: 20px;
-    width: 100%;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
     z-index: 3;
 }
 
+/* 各ステータスカードのスタイル */
 .status-item {
-    background-color: rgba(0, 0, 0, 0.7); /* 背景を少し透過 */
-    border-radius: 10px;
-    padding: 20px;
+    background-color: rgba(0, 0, 0, 0.6); /* 背景を少し透過 */
+    border-radius: 15px;
+    padding: 15px;
     width: 180px;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+    transition: transform 0.3s ease;
 }
 
+.status-item:hover {
+    transform: scale(1.05);
+}
+
+/* タイトル */
 .status-title {
-    font-size: 1.3em;
+    font-size: 1.1em;
     font-family: 'Nunito Sans', sans-serif;
     color: #fff;
     margin-bottom: 10px;
 }
 
+/* ステータス人数 */
 .status-number {
-    font-size: 2em;
+    font-size: 2.2em;
     color: #ffcc00;
 }
 
@@ -97,41 +106,6 @@ body {
     margin-bottom: 10px;
 }
 
-/* サーバー紹介 */
-.server-description {
-    background-color: rgba(0, 0, 0, 0.7);
-    padding: 30px;
-    border-radius: 20px;
-    margin-top: 150px;
-    width: 80%;
-    max-width: 900px;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-}
-
-.server-description h1 {
-    font-size: 3em;
-    font-family: 'Potta One', cursive;
-    margin-bottom: 20px;
-    color: #ffcc00;
-}
-
-.server-description p {
-    font-size: 1.4em;
-    line-height: 1.8;
-    color: white;
-    font-family: 'Potta One', cursive;
-    margin: 0 auto;
-    max-width: 800px;
-    white-space: nowrap; /* 改行を防ぐ */
-    overflow: hidden;
-    text-overflow: ellipsis; /* 長すぎるテキストを省略 */
-}
-
-.server-description p:hover {
-    white-space: normal; /* ホバー時にテキストが改行されるように */
-}
 
 
 /* 全体のスタイル */
