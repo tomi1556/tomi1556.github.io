@@ -6,107 +6,115 @@ body {
   overflow-x: hidden;
 }
 
-/* ステータス全体のコンテナ */
-.status-container {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 40px;
-    padding: 20px;
-    gap: 20px;
-}
-
-/* 各カードのデザイン */
-.status-card {
-    background-color: #4caf50; /* サーバーに合った緑色 */
-    border-radius: 15px;
-    padding: 20px;
-    width: 250px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease;
-}
-
-/* ホバー時にカードが少し拡大 */
-.status-card:hover {
-    transform: scale(1.05);
-}
-
-/* タイトル */
-.status-title {
-    font-size: 1.6em;
-    color: white;
-    margin-bottom: 20px;
-    font-family: 'Potta One', cursive;
-}
-
-/* オンライン人数 */
-.status-info {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: white;
-    margin-bottom: 10px;
-    font-family: 'Potta One', cursive;
-}
-
-/* 数字のスタイル */
-.status-number {
-    font-size: 3em;
-    color: #ffeb3b; /* 数字の色を黄色に */
-}
-
-/* アイコンのスタイル */
-.status-icon {
-    width: 40px;
-    height: 40px;
-    margin-right: 15px;
-    vertical-align: middle;
-}
-
-/* 下の説明文 */
-.status-info p {
-    font-size: 1.1em;
-    color: #fff;
-    margin-top: 5px;
-}
-
-/* サーバー紹介セクション */
-.server-intro {
-    background-color: #f1f8e9;  /* 淡い緑色背景 */
+/* サーバー紹介とステータス全体 */
+.server-info {
     padding: 40px 20px;
+    background-color: #f1f1f1;
     text-align: center;
-    border-radius: 15px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    margin-top: 60px;
+    margin-top: 50px;
 }
 
-/* サーバー紹介タイトル */
-.intro-title {
-    font-size: 2em;
-    color: #33691e;
-    font-family: 'Potta One', cursive;
-    margin-bottom: 20px;
-}
-
-/* サーバー紹介内容 */
-.intro-content {
+/* イントロセクション */
+.intro {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 30px;
-    flex-wrap: wrap;
+    gap: 40px;
+    margin-bottom: 50px;
+}
+
+.intro-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 .intro-text {
-    font-size: 1.2em;
-    color: #558b2f;
-    max-width: 500px;
+    max-width: 600px;
     font-family: 'Potta One', cursive;
 }
 
-.intro-image {
-    max-width: 400px;
+.intro-text h2 {
+    font-size: 2.5em;
+    color: #33691e;
+    margin-bottom: 20px;
+}
+
+.intro-text p {
+    font-size: 1.3em;
+    color: #558b2f;
+}
+
+/* ステータスセクション */
+.status-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.status-item {
+    background-color: #ffffff;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 220px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+.status-item:hover {
+    transform: scale(1.05);
+}
+
+.status-title {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.4em;
+    font-weight: bold;
+    color: #33691e;
+    margin-bottom: 10px;
+}
+
+.status-title i {
+    font-size: 1.6em;
+    margin-right: 10px;
+}
+
+.status-number {
+    font-size: 2.2em;
+    font-weight: bold;
+    color: #558b2f;
+}
+
+/* Minecraft専用のスタイル */
+.minecraft-status {
+    background-color: #e8f5e9;
+}
+
+.discord-status {
+    background-color: #7289da;
+    color: white;
+}
+
+.discord-status .status-title {
+    color: white;
+}
+
+.discord-status .status-number {
+    color: white;
+}
+
+/* アイコン表示のためのスタイル */
+.icon-minecraft::before {
+    content: '\f15b';
+    font-family: 'FontAwesome';
+}
+
+.icon-discord::before {
+    content: '\f392';
+    font-family: 'FontAwesome';
 }
 
 /* 全体のスタイル */
@@ -491,23 +499,12 @@ footer p {
 
 @media (max-width: 768px) {
   
+    .intro {
+        flex-direction: column;
+    }
     .status-container {
         flex-direction: column;
-        align-items: center;
-    }
-
-    .intro-content {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .intro-text {
-        text-align: center;
-        margin-bottom: 20px;
-    }
-
-    .intro-image {
-        max-width: 80%;
+        gap: 20px;
     }
   /* ナビゲーション（非表示にした状態） */
   nav {
