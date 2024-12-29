@@ -14,7 +14,6 @@
     <link rel="stylesheet" href="path/to/your/style.css" />
 </head>
 <body>
-<body>
     <section class="server-info">
         <div class="intro">
             <div class="intro-image">
@@ -26,24 +25,25 @@
             </div>
         </div>
 
+        <!-- ステータス表示（右下に配置） -->
         <div class="status-container">
             <div class="status-item minecraft-status">
                 <div class="status-title">
                     <i class="icon-minecraft"></i> <!-- Minecraftアイコン -->
                     <span>マイクラオンライン</span>
                 </div>
-                <div class="status-number" id="minecraft-status-number">10</div> <!-- マイクラオンライン人数 -->
+                <div class="status-number" id="minecraft-status-number">0</div> <!-- 本当のマイクラオンライン人数 -->
             </div>
             <div class="status-item discord-status">
                 <div class="status-title">
                     <i class="icon-discord"></i> <!-- Discordアイコン -->
                     <span>Discordオンライン</span>
                 </div>
-                <div class="status-number" id="discord-status-number">15</div> <!-- Discordオンライン人数 -->
+                <div class="status-number" id="discord-status-number">0</div> <!-- 本当のDiscordオンライン人数 -->
             </div>
         </div>
     </section>
-
+    
     <button class="menu-button" onclick="toggleMenu()">☰</button>
     <nav>
         <ul>
