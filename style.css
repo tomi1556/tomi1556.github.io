@@ -99,8 +99,7 @@ body {
 }
 
 /* アイコンのスタイル */
-.icon-minecraft,
-.icon-discord {
+.icon-minecraft {
     font-size: 40px;
     color: #fff;
     margin-bottom: 10px;
