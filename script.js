@@ -10,6 +10,11 @@ async function fetchMinecraftStatus() {
 }
 
 
+// ページ読み込み時と一定間隔ごとに実行
+document.addEventListener('DOMContentLoaded', fetchDiscordStatus);
+setInterval(fetchDiscordStatus, 60000); // 1分ごとに更新
+
+
 // メニューボタンのクリックイベント
 const menuButton = document.querySelector('.menu-button');
 const body = document.querySelector('body');
