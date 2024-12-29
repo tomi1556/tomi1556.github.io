@@ -406,8 +406,6 @@ footer p {
     .intro-image {
         max-width: 80%;
     }
-}
-
   /* ナビゲーション（非表示にした状態） */
   nav {
     display: none; /* デフォルトでは非表示 */
