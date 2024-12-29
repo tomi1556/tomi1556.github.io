@@ -318,22 +318,24 @@ footer p {
     background-color: #f0f0f0;
   }
 
-  /* タブボタン */
-  .tab-buttons {
-    flex-direction: column; /* ボタンを縦並びに */
-    margin-bottom: 10px;
+  /* ナビゲーション（非表示にした状態） */
+  nav {
+    display: none; /* デフォルトでは非表示 */
+    position: absolute;
+    top: 60px; /* メニューボタンの下に表示 */
+    left: 20px; /* 左端に配置 */
+    background-color: #4caf50;
+    width: 200px;
+    padding: 10px 0;
+    border-radius: 8px;
+    z-index: 1001;
+    flex-direction: column;
+    align-items: flex-start;
   }
 
-  .tab-button {
-    font-size: 1.2em; /* ボタンの文字サイズを少し大きく */
-    padding: 15px;
-    border-bottom: 2px solid transparent;
-  }
-
-  /* コンテンツ */
-  .tab-content {
-    padding: 15px;
-    margin-top: 10px;
+  /* メニュー表示時 */
+  .menu-open nav {
+    display: flex; /* メニューを表示 */
   }
 
   /* メニューボタン */
@@ -347,50 +349,19 @@ footer p {
     font-size: 1.5em;
     border: none;
     cursor: pointer;
-    z-index: 1001;
+    z-index: 1002;
   }
 
-  /* メニュー開閉 */
-  .menu-open nav {
-    display: flex;
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 100%;
-    background-color: #4caf50;
-    flex-direction: column;
-    align-items: center;
-    padding: 10px 0;
-    z-index: 1000;
+  /* タブボタン */
+  .tab-buttons {
+    flex-direction: column; /* ボタンを縦並びに */
+    margin-bottom: 10px;
   }
 
-  nav ul {
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    align-items: center;
-  }
-
-  nav ul li {
-    margin: 10px 0; /* アイテム間の間隔を調整 */
-  }
-
-  nav ul li a {
-    font-size: 1.1em; /* リンクの文字サイズ */
-    padding: 12px;
-    width: 100%;
-    text-align: center;
-    border-radius: 8px;
-  }
-
-  nav ul li a .icon {
-    font-size: 1.3em;
-    margin-bottom: 5px;
-  }
-
-  nav ul li a .item-name {
-    font-size: 1em;
+  .tab-button {
+    font-size: 1.2em; /* ボタンの文字サイズを少し大きく */
+    padding: 15px;
+    border-bottom: 2px solid transparent;
   }
 
   /* メインコンテンツ */
