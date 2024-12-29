@@ -449,10 +449,10 @@ footer {
 }
 
 @media (max-width: 768px) {
-  /* その他のスタイル */
+  /* 既存のスタイルを維持 */
   body {
     display: flex;
-    flex-direction: column; /* メインコンテンツを縦に並べる */
+    flex-direction: column;
     overflow-x: hidden;
     margin: 0;
     padding: 0;
@@ -460,22 +460,14 @@ footer {
     background-color: #f0f0f0;
   }
 
-  /* ナビゲーションメニューを隠す */
-  nav ul {
-    display: none; /* メニューを隠す */
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  /* メニューアイテムの間隔 */
-  nav ul li {
-    margin: 10px 0;
+  /* ナビゲーション全体を完全に非表示に */
+  nav {
+    display: none; /* ナビゲーションバーを非表示に */
   }
 
   /* メニューボタン */
   .menu-button {
-    position: fixed; /* 画面に固定 */
+    position: fixed; /* メニューボタンを固定 */
     top: 20px; /* 上端から少し離す */
     left: 20px; /* 左端から少し離す */
     background-color: #4caf50;
@@ -488,7 +480,7 @@ footer {
   }
 
   /* メニューを表示する */
-  .menu-open nav ul {
-    display: flex; /* メニューを表示 */
+  .menu-open nav {
+    display: flex; /* メニューを表示する */
   }
 }
