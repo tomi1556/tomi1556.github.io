@@ -1,6 +1,12 @@
-document.querySelector('.menu-button').addEventListener('click', function() {
-  document.body.classList.toggle('menu-open');
+// メニューボタンのクリックイベント
+const menuButton = document.querySelector('.menu-button');
+const body = document.querySelector('body');
+
+// メニューボタンをクリックしたときにメニューを表示・非表示に切り替え
+menuButton.addEventListener('click', function() {
+    body.classList.toggle('menu-open');
 });
+
 
 
 const fadeInElements = document.querySelectorAll(".fade-in");
