@@ -9,7 +9,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-
 async function fetchMinecraftStatus() {
     try {
         const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
@@ -19,7 +18,7 @@ async function fetchMinecraftStatus() {
 
         // オンライン人数を表示
         const onlineUsers = document.getElementById('online-users');
-        const onlinePlayersCount = data.players?.online || 0;
+        const onlinePlayersCount = data.players?.now || 0;
         onlineUsers.textContent = onlinePlayersCount;
 
         // オンラインプレイヤーリストを表示
@@ -27,16 +26,16 @@ async function fetchMinecraftStatus() {
         onlinePlayers.innerHTML = '';
 
         // プレイヤーリストが存在するか確認
-        if (data.players && Array.isArray(data.players.list)) {
-            console.log('オンラインプレイヤーリスト:', data.players.list); // プレイヤーリストの確認
-            data.players.list.forEach(player => {
+        if (data.players && Array.isArray(data.players.sample)) {
+            console.log('オンラインプレイヤーリスト:', data.players.sample); // プレイヤーリストの確認
+            data.players.sample.forEach(player => {
                 const playerDiv = document.createElement('div');
                 playerDiv.className = 'player';
 
                 const playerImg = document.createElement('img');
-                const avatarUrl = `https://mc-heads.net/avatar/${player}/100`;
+                const avatarUrl = `https://mc-heads.net/avatar/${player.name}/100`;
                 playerImg.src = avatarUrl;
-                playerImg.alt = `${player}のアバター`;
+                playerImg.alt = `${player.name}のアバター`;
 
                 // 画像が存在しない場合、フォールバック
                 playerImg.onerror = () => {
@@ -44,13 +43,13 @@ async function fetchMinecraftStatus() {
                 };
 
                 const playerId = document.createElement('p');
-                playerId.textContent = player || '不明なプレイヤー';
+                playerId.textContent = player.name || '不明なプレイヤー';
 
                 const badge = document.createElement('div');
                 badge.className = 'badge';
 
                 // Bedrockプレイヤー判定（名前の先頭が`.`の場合）
-                if (player.startsWith('.')) {
+                if (player.name.startsWith('.')) {
                     playerDiv.classList.add('bedrock-player');
                     badge.textContent = 'Bedrock';
                 } else {
