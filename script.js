@@ -53,7 +53,6 @@ document.addEventListener('DOMContentLoaded', () => {
     fetchDiscordStatus();
 });
 setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
-setInterval(fetchDiscordStatus, 60000); // 1分ごとに更新
 
 // ====== ✅ メニューボタンのクリックイベント ======
 const menuButton = document.querySelector('.menu-button');
@@ -78,23 +77,6 @@ const observer = new IntersectionObserver(entries => {
 
 fadeInElements.forEach(el => observer.observe(el));
 
-// ====== ✅ タブ切り替え機能 ======
-const tabButtons = document.querySelectorAll('.tab-button');
-const tabPanes = document.querySelectorAll('.tab-pane');
-
-tabButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        // すべてのボタンから"active"クラスを削除
-        tabButtons.forEach(btn => btn.classList.remove('active'));
-        // クリックしたボタンに"active"クラスを追加
-        button.classList.add('active');
-        
-        // すべてのタブコンテンツから"active"クラスを削除
-        tabPanes.forEach(pane => pane.classList.remove('active'));
-        // 選択したタブのコンテンツを表示
-        document.getElementById(button.getAttribute('data-tab')).classList.add('active');
-    });
-});
 
 // ====== ✅ コピー機能 ======
 function copyToClipboard(address, button) {
