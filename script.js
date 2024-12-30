@@ -28,14 +28,20 @@ async function fetchMinecraftStatus() {
         onlinePlayers.innerHTML = '';
 
         // プレイヤーリストが存在するか確認
-        if (data.players && data.players.list && Array.isArray(data.players.list)) {
+        if (data.players?.list && Array.isArray(data.players.list)) {
             data.players.list.forEach(player => {
                 const playerDiv = document.createElement('div');
                 playerDiv.className = 'player';
 
                 const playerImg = document.createElement('img');
-                playerImg.src = `https://mc-heads.net/avatar/${player}/100`;
+                const avatarUrl = `https://mc-heads.net/avatar/${player}/100`;
+                playerImg.src = avatarUrl;
                 playerImg.alt = `${player}のアバター`;
+
+                // 画像が存在しない場合、フォールバック
+                playerImg.onerror = () => {
+                    playerImg.src = 'https://mc-heads.net/avatar/Default/100'; // デフォルト画像にフォールバック
+                };
 
                 const playerId = document.createElement('p');
                 playerId.textContent = player || '不明なプレイヤー';
@@ -70,6 +76,7 @@ async function fetchMinecraftStatus() {
 // 初回取得と定期更新
 fetchMinecraftStatus();
 setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
+
 
 
 // ====== ✅ メニューボタンのクリックイベント ======
