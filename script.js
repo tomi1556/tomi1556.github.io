@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 async function fetchMinecraftStatus() {
     try {
-        const response = await fetch('https://api.mcsrvstat.us/2/stellamc.jp');
+        const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
         const data = await response.json();
 
         console.log('APIレスポンス:', data); // APIレスポンスを確認
