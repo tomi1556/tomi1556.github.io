@@ -11,68 +11,54 @@
     <div class="loader">
         <h1>Loading...</h1>
     </div>
-    
+
     <header>
         <h1>マインクラフト サーバーガイド</h1>
-        <nav>
-            <ul>
-                <li><a href="#beginner">初心者向け</a></li>
-                <li><a href="#rules">サーバー規約</a></li>
-                <li><a href="#donation">寄付について</a></li>
-                <li><a href="#basic">基本操作</a></li>
-                <li><a href="#build">建築テクニック</a></li>
-                <li><a href="#survival">サバイバル攻略</a></li>
-                <li><a href="#redstone">レッドストーン回路</a></li>
-            </ul>
-        </nav>
+        <p>最高のサーバー体験をガイドします！</p>
     </header>
-    
+
     <main>
-        <section id="hero">
-            <h2>サーバーの世界へようこそ！</h2>
-            <p>最高のマインクラフトサーバー体験を始めよう。</p>
-            <button onclick="scrollToSection('beginner')">さっそく始める</button>
-        </section>
-        
-        <section id="beginner" class="guide-section fade-in">
-            <h3>🌱 初心者向けの説明</h3>
-            <p>サーバーへの参加方法や基本的なマナー、最初にやるべきことを解説します。</p>
-        </section>
-        
-        <section id="rules" class="guide-section fade-in">
-            <h3>📜 サーバー規約</h3>
-            <p>サーバーを安全で楽しい場所にするためのルールや禁止事項をご確認ください。</p>
-        </section>
-        
-        <section id="donation" class="guide-section fade-in">
-            <h3>💎 寄付について</h3>
-            <p>サーバー運営をサポートするための寄付方法や特典についてご案内します。</p>
-        </section>
-        
-        <section id="basic" class="guide-section fade-in">
-            <h3>🛠️ 基本操作</h3>
-            <p>マインクラフトを始めるための基本的な操作やコツを学びましょう。</p>
-        </section>
-        
-        <section id="build" class="guide-section fade-in">
-            <h3>🏠 建築テクニック</h3>
-            <p>美しい建築物を作るためのヒントやアイデアを紹介します。</p>
-        </section>
-        
-        <section id="survival" class="guide-section fade-in">
-            <h3>🛡️ サバイバル攻略</h3>
-            <p>生き残るためのテクニックや戦略を伝授します。</p>
-        </section>
-        
-        <section id="redstone" class="guide-section fade-in">
-            <h3>🔌 レッドストーン回路</h3>
-            <p>レッドストーンを使った便利な装置や回路を解説します。</p>
+        <section id="guide">
+            <div class="guide-card" onclick="toggleSection('beginner')">
+                <h3>🌱 初心者向けの説明</h3>
+            </div>
+            <div id="beginner" class="guide-content">
+                <h4>🌱 初心者向けの説明</h4>
+                <p>サーバーへの参加が初めてでも大丈夫！サーバーの入り方、基本的なマナーや最初にやるべきことを詳しく解説します。</p>
+                <p>これを読めば迷わずスタートできます！</p>
+            </div>
+
+            <div class="guide-card" onclick="toggleSection('rules')">
+                <h3>📜 サーバー規約</h3>
+            </div>
+            <div id="rules" class="guide-content">
+                <h4>📜 サーバー規約</h4>
+                <p>安全で楽しいサーバー運営のために、ルールをしっかり確認しましょう。禁止事項やペナルティも詳しく説明します。</p>
+            </div>
+
+            <div class="guide-card" onclick="toggleSection('donation')">
+                <h3>💎 寄付について</h3>
+            </div>
+            <div id="donation" class="guide-content">
+                <h4>💎 寄付について</h4>
+                <p>サーバー運営は皆さんのサポートによって成り立っています。寄付の特典や方法についてご案内します。</p>
+            </div>
+
+            <div class="guide-card" onclick="toggleSection('basic')">
+                <h3>🛠️ 基本操作</h3>
+            </div>
+            <div id="basic" class="guide-content">
+                <h4>🛠️ 基本操作</h4>
+                <p>マインクラフト初心者でも安心！基本操作や便利なコマンド、初歩的な建築方法を解説します。</p>
+            </div>
         </section>
     </main>
-    
+
     <footer>
         <p>&copy; 2024 マインクラフト サーバーガイド. All Rights Reserved.</p>
     </footer>
+
+    <!-- スクリプトは最後に読み込む -->
     <script defer src="gaido.js"></script>
 </body>
 </html>
