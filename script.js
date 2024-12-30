@@ -50,7 +50,7 @@ async function fetchMinecraftStatus() {
                 // Bedrockプレイヤー判定（名前の先頭が`.`の場合）
                 if (player.name.startsWith('.')) {
                     playerDiv.classList.add('bedrock-player');
-                    badge.textContent = 'Bedrock';
+                    badge.textContent = '統合版';
                 } else {
                     playerDiv.classList.add('java-player');
                     badge.textContent = 'Java';
