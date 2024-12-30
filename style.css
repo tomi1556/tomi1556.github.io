@@ -111,7 +111,7 @@ nav.mobile-nav {
 /* ✅ メニュー表示時 */
 nav.mobile-nav.open {
     transform: translateX(0);
-    width: 150px; /* ←ここを調整（例: 150px）*/
+    width: 80px; /* ←ここを調整（例: 150px）*/
     display: flex;
 }
 
