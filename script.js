@@ -46,15 +46,9 @@ async function fetchMinecraftStatus() {
         }
     } catch (error) {
         console.error('Minecraftステータスの取得に失敗:', error);
-        document.getElementById('minecraft-status-number').textContent = 'N/A';
         document.getElementById('online-users').textContent = 'N/A';
     }
 }
-
-// 初回取得と定期更新
-fetchMinecraftStatus();
-setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
-
 
 // ====== ✅ ページ読み込み時と定期実行 ======
 document.addEventListener('DOMContentLoaded', () => {
