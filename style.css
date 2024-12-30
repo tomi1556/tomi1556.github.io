@@ -418,8 +418,12 @@ footer p {
 
 @media (max-width: 768px) {
   
-    .intro {
-        flex-direction: column;
+    .intro-text h2 {
+        font-size: 1.8em;
+    }
+
+    .intro-text p {
+        font-size: 0.9em;
     }
     .status-container {
         flex-direction: column;
@@ -457,18 +461,6 @@ footer p {
       border: none;
       cursor: pointer;
       z-index: 1000; /* メニューボタンを前面に */
-  }
-
-  /* タブボタン */
-  .tab-buttons {
-    flex-direction: column; /* ボタンを縦並びに */
-    margin-bottom: 10px;
-  }
-
-  .tab-button {
-    font-size: 1.2em; /* ボタンの文字サイズを少し大きく */
-    padding: 15px;
-    border-bottom: 2px solid transparent;
   }
 
   /* フィーチャー */
