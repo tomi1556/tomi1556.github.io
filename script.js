@@ -10,7 +10,6 @@ async function fetchMinecraftStatus() {
         const onlinePlayersCount = data.players?.online || data.players?.now || 'N/A';
         
         // 両方の要素に人数を表示
-        document.getElementById('minecraft-status-number').textContent = onlinePlayersCount;
         document.getElementById('online-users').textContent = onlinePlayersCount;
 
         // オンラインプレイヤーリストを表示
