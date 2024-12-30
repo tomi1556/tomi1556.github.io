@@ -387,8 +387,14 @@ footer p {
         gap: 20px;
     }
 
+    .method-title {
+        font-size: 1.6em;
+        color: #558b2f;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
     .method-card p {
-        font-size: 0.8em;
+        font-size: 0.7em;
     }
   
   /* ナビゲーション（非表示にした状態） */
