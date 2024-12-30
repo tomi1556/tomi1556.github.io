@@ -7,7 +7,7 @@ menuButton.addEventListener('click', () => {
 });
 
 
-// ====== ✅ Minecraftステータス取得 ======
+// ✅ Minecraftステータス取得
 async function fetchMinecraftStatus() {
     try {
         const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
@@ -17,24 +17,25 @@ async function fetchMinecraftStatus() {
 
         // オンライン人数を取得
         const onlinePlayersCount = data.players?.online || data.players?.now || 'N/A';
-        
-        // 両方の要素に人数を表示
         document.getElementById('online-users').textContent = onlinePlayersCount;
 
         // オンラインプレイヤーリストを表示
         const onlinePlayers = document.getElementById('online-players');
-        onlinePlayers.innerHTML = '';
+        onlinePlayers.innerHTML = ''; // プレイヤーリストをリセット
 
-        if (data.players && onlinePlayersCount > 0 && data.players.sample) {
+        if (data.players && onlinePlayersCount > 0 && data.players.sample && data.players.sample.length > 0) {
             data.players.sample.forEach(player => {
                 const playerDiv = document.createElement('div');
                 playerDiv.className = 'player';
 
+                // プレイヤーの顔画像
                 const playerImg = document.createElement('img');
                 playerImg.src = `https://mc-heads.net/avatar/${player.id}/100`;
+                playerImg.alt = `${player.name}のアバター`;
 
+                // プレイヤー名
                 const playerId = document.createElement('p');
-                playerId.textContent = player.name;
+                playerId.textContent = player.name || '不明なプレイヤー';
 
                 playerDiv.appendChild(playerImg);
                 playerDiv.appendChild(playerId);
@@ -46,6 +47,7 @@ async function fetchMinecraftStatus() {
     } catch (error) {
         console.error('Minecraftステータスの取得に失敗:', error);
         document.getElementById('online-users').textContent = 'N/A';
+        document.getElementById('online-players').textContent = 'データを取得できませんでした。';
     }
 }
 
@@ -54,6 +56,7 @@ fetchMinecraftStatus();
 
 // 1分ごとにMinecraftステータスを更新
 setInterval(fetchMinecraftStatus, 60000); // 60000ミリ秒 = 1分
+
 
 
 // ====== ✅ ページ読み込み時と定期実行 ======
