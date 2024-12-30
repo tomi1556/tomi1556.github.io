@@ -32,17 +32,7 @@ async function fetchMinecraftStatus() {
                 playerDiv.className = 'player';
 
                 const playerImg = document.createElement('img');
-                let avatarUrl = '';
-
-                // プレイヤーのスキンを取得するためのAPI
-                const skinUrl = await getPlayerSkinUrl(player.name);
-
-                if (skinUrl) {
-                    avatarUrl = skinUrl; // スキンURLを設定
-                } else {
-                    avatarUrl = 'https://mc-heads.net/avatar/Default/100'; // デフォルト画像にフォールバック
-                }
-
+                const avatarUrl = `https://mc-heads.net/avatar/${player.name}/100`;
                 playerImg.src = avatarUrl;
                 playerImg.alt = `${player.name}のアバター`;
 
@@ -82,37 +72,10 @@ async function fetchMinecraftStatus() {
     }
 }
 
-// プレイヤー名からスキンURLを取得する関数
-async function getPlayerSkinUrl(playerName) {
-    try {
-        // プレイヤー名からUUIDを取得
-        const uuidResponse = await fetch(`https://api.mojang.com/users/profiles/minecraft/${playerName}`);
-        const uuidData = await uuidResponse.json();
-        
-        if (uuidData && uuidData.id) {
-            // UUIDが取得できた場合、スキンURLを取得
-            const skinResponse = await fetch(`https://sessionserver.mojang.com/session/minecraft/profile/${uuidData.id}`);
-            const skinData = await skinResponse.json();
-
-            if (skinData && skinData.properties) {
-                // スキンデータを抽出
-                const textureData = skinData.properties.find(prop => prop.name === 'textures');
-                if (textureData && textureData.value) {
-                    const decodedTexture = JSON.parse(atob(textureData.value)); // base64デコード
-                    return decodedTexture.textures.SKIN.url; // スキン画像のURL
-                }
-            }
-        }
-        return null;
-    } catch (error) {
-        console.error('スキンURLの取得に失敗:', error);
-        return null;
-    }
-}
-
 // 初回取得と定期更新
 fetchMinecraftStatus();
 setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
+
 
 
 
