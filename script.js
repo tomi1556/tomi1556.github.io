@@ -1,13 +1,13 @@
-// ✅ モバイルナビゲーションの動作
 document.addEventListener('DOMContentLoaded', () => {
     const menuButton = document.getElementById('menu-button');
     const mobileNav = document.getElementById('mobile-nav');
 
-    // メニューボタンのクリックでメニューを開閉
     menuButton.addEventListener('click', () => {
-        mobileNav.classList.toggle('open'); // 'open' クラスをトグル
+        mobileNav.classList.toggle('open'); // 'open'クラスをトグル
+        console.log('メニュー状態:', mobileNav.classList.contains('open') ? '開いた' : '閉じた');
     });
 });
+
 
 
 
