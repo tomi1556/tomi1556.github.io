@@ -7,34 +7,34 @@ menuButton.addEventListener('click', () => {
 });
 
 
-// ✅ Minecraftオンラインプレイヤー取得
+// ✅ Minecraftオンラインプレイヤー取得 (api.mcsrvstat.us版)
 async function fetchMinecraftStatus() {
     try {
-        const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
+        const response = await fetch('https://api.mcsrvstat.us/2/stellamc.jp');
         const data = await response.json();
 
         console.log(data); // APIレスポンスをコンソールに出力して確認
 
         // オンライン人数を表示
         const onlineUsers = document.getElementById('online-users');
-        const onlinePlayersCount = data.players?.online || data.players?.now || 0; // 人数を取得
+        const onlinePlayersCount = data.players?.online || 0; // 人数を取得
         onlineUsers.textContent = onlinePlayersCount; // 人数を表示
 
         // オンラインプレイヤーリストを表示
         const onlinePlayers = document.getElementById('online-players');
         onlinePlayers.innerHTML = ''; // リストをリセット
 
-        if (data.players && onlinePlayersCount > 0 && data.players.sample) {
-            data.players.sample.forEach(player => {
+        if (data.players && onlinePlayersCount > 0 && data.players.list) {
+            data.players.list.forEach(player => {
                 const playerDiv = document.createElement('div');
                 playerDiv.className = 'player';
 
                 const playerImg = document.createElement('img');
-                playerImg.src = `https://mc-heads.net/avatar/${player.id}/100`;
-                playerImg.alt = `${player.name}のアバター`;
+                playerImg.src = `https://mc-heads.net/avatar/${player}/100`;
+                playerImg.alt = `${player}のアバター`;
 
                 const playerId = document.createElement('p');
-                playerId.textContent = player.name || '不明なプレイヤー';
+                playerId.textContent = player || '不明なプレイヤー';
 
                 playerDiv.appendChild(playerImg);
                 playerDiv.appendChild(playerId);
@@ -53,14 +53,6 @@ async function fetchMinecraftStatus() {
 // 初回取得と定期更新
 fetchMinecraftStatus();
 setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
-
-
-// 初期読み込み時に呼び出し
-fetchMinecraftStatus();
-
-// 1分ごとにMinecraftステータスを更新
-setInterval(fetchMinecraftStatus, 60000); // 60000ミリ秒 = 1分
-
 
 
 // ====== ✅ ページ読み込み時と定期実行 ======
