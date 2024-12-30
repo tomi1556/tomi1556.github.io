@@ -419,11 +419,11 @@ footer p {
 @media (max-width: 768px) {
   
     .intro-text h2 {
-        font-size: 1.8em;
+        font-size: 1.7em;
     }
 
     .intro-text p {
-        font-size: 0.9em;
+        font-size: 1.2em;
     }
     .status-container {
         flex-direction: column;
