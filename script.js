@@ -38,18 +38,23 @@ async function fetchMinecraftStatus() {
                 playerImg.alt = `${player}のアバター`;
 
                 const playerId = document.createElement('p');
+                playerId.textContent = player || '不明なプレイヤー';
+
+                const badge = document.createElement('div');
+                badge.className = 'badge';
 
                 // Geyserプレイヤーを判定（名前の先頭が.の場合）
                 if (player.startsWith('.')) {
-                    playerId.textContent = `[Bedrock] ${player}`;
-                    playerDiv.classList.add('bedrock-player'); // 統合版スタイル追加
+                    playerDiv.classList.add('bedrock-player');
+                    badge.textContent = 'Bedrock';
                 } else {
-                    playerId.textContent = `[Java] ${player}`;
-                    playerDiv.classList.add('java-player'); // Java版スタイル追加
+                    playerDiv.classList.add('java-player');
+                    badge.textContent = 'Java';
                 }
 
                 playerDiv.appendChild(playerImg);
                 playerDiv.appendChild(playerId);
+                playerDiv.appendChild(badge);
                 onlinePlayers.appendChild(playerDiv);
             });
         } else {
@@ -65,6 +70,7 @@ async function fetchMinecraftStatus() {
 // 初回取得と定期更新
 fetchMinecraftStatus();
 setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
+
 
 
 
