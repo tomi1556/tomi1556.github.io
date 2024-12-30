@@ -10,7 +10,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-
 async function fetchMinecraftStatus() {
     try {
         const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
@@ -28,7 +27,8 @@ async function fetchMinecraftStatus() {
         onlinePlayers.innerHTML = '';
 
         // プレイヤーリストが存在するか確認
-        if (data.players?.list && Array.isArray(data.players.list)) {
+        if (data.players && Array.isArray(data.players.list)) {
+            console.log('オンラインプレイヤーリスト:', data.players.list); // プレイヤーリストの確認
             data.players.list.forEach(player => {
                 const playerDiv = document.createElement('div');
                 playerDiv.className = 'player';
@@ -64,6 +64,7 @@ async function fetchMinecraftStatus() {
                 onlinePlayers.appendChild(playerDiv);
             });
         } else {
+            console.log('プレイヤーリストが存在しないか、空です');
             onlinePlayers.textContent = 'オンラインプレイヤーの詳細情報がありません';
         }
     } catch (error) {
@@ -76,6 +77,7 @@ async function fetchMinecraftStatus() {
 // 初回取得と定期更新
 fetchMinecraftStatus();
 setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
+
 
 
 
