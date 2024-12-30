@@ -140,6 +140,13 @@ nav ul li a .item-name {
     text-align: center; /* テキストを中央揃え */
 }
 
+.menu-button {
+    display: none; /* PCではメニューボタン非表示 */
+}
+
+.mobile-nav {
+  　display: none; /* PCではモバイルメニュー非表示 */
+}
 
 
 
