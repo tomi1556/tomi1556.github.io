@@ -1,10 +1,14 @@
-// JavaScriptでメニューの開閉を制御
-const menuButton = document.querySelector('.menu-button');
-const mobileNav = document.querySelector('.mobile-nav');
+// ✅ モバイルナビゲーションの動作
+document.addEventListener('DOMContentLoaded', () => {
+    const menuButton = document.getElementById('menu-button');
+    const mobileNav = document.getElementById('mobile-nav');
 
-menuButton.addEventListener('click', () => {
-    mobileNav.classList.toggle('open');
+    // メニューボタンのクリックでメニューを開閉
+    menuButton.addEventListener('click', () => {
+        mobileNav.classList.toggle('open'); // 'open' クラスをトグル
+    });
 });
+
 
 
 // ✅ Minecraftオンラインプレイヤー取得 (api.mcsrvstat.us版)
