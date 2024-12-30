@@ -50,6 +50,13 @@ async function fetchMinecraftStatus() {
     }
 }
 
+// 初期読み込み時に呼び出し
+fetchMinecraftStatus();
+
+// 1分ごとにMinecraftステータスを更新
+setInterval(fetchMinecraftStatus, 60000); // 60000ミリ秒 = 1分
+
+
 // ====== ✅ ページ読み込み時と定期実行 ======
 document.addEventListener('DOMContentLoaded', () => {
     fetchMinecraftStatus();
