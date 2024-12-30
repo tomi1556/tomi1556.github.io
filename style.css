@@ -338,6 +338,7 @@ footer p {
     font-family: 'Potta One', cursive;
 }
 
+/* ✅ 共通スタイル（元のスタイルはそのまま維持） */
 .player {
     display: flex;
     flex-direction: column;
@@ -350,6 +351,7 @@ footer p {
     background-color: #e8f5e9; /* 背景色を淡い緑に */
     width: 180px; /* 全プレイヤー同じ幅 */
     height: 180px; /* 全プレイヤー同じ高さ（少し短く） */
+    animation: fadeIn 1s, bounceIn 0.5s;
 }
 
 .player img {
@@ -374,6 +376,57 @@ footer p {
 .player:hover {
     transform: scale(1.1);
 }
+
+/* ✅ Java版プレイヤー */
+.player.java-player {
+    border: 2px solid #4caf50; /* 緑の枠 */
+    background-color: #e8f5e9; /* 淡い緑 */
+}
+
+.player.java-player p {
+    color: #2e7d32; /* 深緑のテキスト */
+}
+
+/* ✅ Bedrock版プレイヤー */
+.player.bedrock-player {
+    border: 2px solid #2196f3; /* 青の枠 */
+    background-color: #e3f2fd; /* 淡い青 */
+}
+
+.player.bedrock-player p {
+    color: #1565c0; /* 深青のテキスト */
+}
+
+/* ✅ オンラインリスト全体のスタイル */
+#online-players {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* ✅ Java版とBedrock版のバッジ */
+.player .badge {
+    font-size: 0.8em;
+    font-weight: bold;
+    margin-top: 5px;
+    padding: 2px 8px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+}
+
+/* Java版バッジ */
+.player.java-player .badge {
+    background-color: #388e3c; /* 濃い緑 */
+}
+
+/* Bedrock版バッジ */
+.player.bedrock-player .badge {
+    background-color: #1976d2; /* 濃い青 */
+}
+
 
 @keyframes fadeIn {
     from { opacity: 0; }
