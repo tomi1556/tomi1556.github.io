@@ -15,11 +15,16 @@ async function fetchMinecraftStatus() {
 
         console.log(data); // APIレスポンスをコンソールに出力して確認
 
+        // オンライン人数を表示
+        const onlineUsers = document.getElementById('online-users');
+        const onlinePlayersCount = data.players?.online || data.players?.now || 0; // 人数を取得
+        onlineUsers.textContent = onlinePlayersCount; // 人数を表示
+
         // オンラインプレイヤーリストを表示
         const onlinePlayers = document.getElementById('online-players');
         onlinePlayers.innerHTML = ''; // リストをリセット
 
-        if (data.players && data.players.online > 0 && data.players.sample) {
+        if (data.players && onlinePlayersCount > 0 && data.players.sample) {
             data.players.sample.forEach(player => {
                 const playerDiv = document.createElement('div');
                 playerDiv.className = 'player';
@@ -40,6 +45,7 @@ async function fetchMinecraftStatus() {
         }
     } catch (error) {
         console.error('Minecraftステータスの取得に失敗:', error);
+        document.getElementById('online-users').textContent = 'N/A';
         document.getElementById('online-players').textContent = 'データを取得できませんでした。';
     }
 }
