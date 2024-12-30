@@ -4,8 +4,8 @@ body, html {
     padding: 0;
     font-family: 'Arial', sans-serif;
     scroll-behavior: smooth;
-    background: linear-gradient(to bottom, #1e3c72, #2a5298);
-    color: #fff;
+    background-color: #ffffff;
+    color: #333;
     overflow-x: hidden;
 }
 
@@ -27,33 +27,43 @@ body, html {
 /* ヘッダー */
 header {
     text-align: center;
-    padding: 50px 0;
-    background: linear-gradient(135deg, #6a11cb, #2575fc);
-    animation: slideDown 1s ease-out;
+    padding: 60px 0;
+    background: linear-gradient(135deg, #32CD32, #228B22);
+    animation: fadeIn 1s ease-out;
+}
+
+/* ヘッダータイトル */
+header h1 {
+    font-size: 3em;
+    font-weight: bold;
+    color: white;
+    animation: popIn 1s ease-out;
 }
 
 /* カード */
 .guide-card {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 15px;
     margin: 20px auto;
-    padding: 20px;
+    padding: 25px;
     max-width: 600px;
     text-align: center;
     cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s, box-shadow 0.3s, background 0.3s;
+    position: relative;
+    overflow: hidden;
 }
 
 .guide-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-    background: rgba(255, 255, 255, 0.3);
+    transform: translateY(-15px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
+    background: rgba(255, 255, 255, 1);
 }
 
 /* アイコン */
 .icon {
-    font-size: 40px;
+    font-size: 45px;
     margin-bottom: 15px;
     transition: transform 0.3s;
 }
@@ -68,17 +78,22 @@ header {
     margin: 20px auto;
     max-width: 800px;
     padding: 30px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(50, 205, 50, 0.2);
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     animation: slideUp 0.5s ease-out;
 }
 
+/* コンテンツヘッダー */
 .guide-content h4 {
     text-align: center;
     margin-top: 0;
+    font-size: 2em;
+    color: #228B22;
+    font-weight: bold;
 }
 
+/* テキスト */
 .guide-content p {
     line-height: 1.8;
     font-size: 1.1em;
@@ -93,7 +108,7 @@ header {
     }
 }
 
-@keyframes slideDown {
+@keyframes fadeIn {
     from {
         opacity: 0;
         transform: translateY(-20px);
@@ -104,10 +119,21 @@ header {
     }
 }
 
+@keyframes popIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
 @keyframes slideUp {
     from {
         opacity: 0;
-        transform: translateY(20px);
+        transform: translateY(30px);
     }
     to {
         opacity: 1;
@@ -118,12 +144,12 @@ header {
 /* レスポンシブデザイン */
 @media (max-width: 768px) {
     header h1 {
-        font-size: 2em;
+        font-size: 2.5em;
     }
 
     .guide-card {
         width: 90%;
-        margin: 10px auto;
+        margin: 15px auto;
         padding: 20px;
     }
 
@@ -142,11 +168,11 @@ header {
     .guide-card {
         width: 70%;
         margin: 20px auto;
-        padding: 30px;
+        padding: 25px;
     }
 
     .guide-content {
         width: 70%;
-        padding: 40px;
+        padding: 35px;
     }
 }
