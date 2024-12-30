@@ -1,70 +1,13 @@
+// ====== ✅ Minecraftステータス取得 ======
 async function fetchMinecraftStatus() {
     try {
         const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
         const data = await response.json();
+
+        // Minecraftオンライン人数を表示
         document.getElementById('minecraft-status-number').textContent = data.players.online || 'N/A';
-    } catch (error) {
-        console.error('Minecraftステータスの取得に失敗:', error);
-        document.getElementById('minecraft-status-number').textContent = 'N/A';
-    }
-}
 
-
-// ページ読み込み時と一定間隔ごとに実行
-document.addEventListener('DOMContentLoaded', fetchDiscordStatus);
-setInterval(fetchDiscordStatus, 60000); // 1分ごとに更新
-
-
-// メニューボタンのクリックイベント
-const menuButton = document.querySelector('.menu-button');
-const body = document.querySelector('body');
-
-// メニューボタンをクリックしたときにメニューを表示・非表示に切り替え
-menuButton.addEventListener('click', function() {
-    body.classList.toggle('menu-open');
-});
-
-
-
-const fadeInElements = document.querySelectorAll(".fade-in");
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add("visible");
-      observer.unobserve(entry.target); // 一度だけアニメーションを適用する場合
-    }
-  });
-});
-
-fadeInElements.forEach(el => observer.observe(el));
-
-
-// タブの切り替え機能
-const tabButtons = document.querySelectorAll('.tab-button');
-const tabPanes = document.querySelectorAll('.tab-pane');
-
-tabButtons.forEach(button => {
-  button.addEventListener('click', () => {
-    // すべてのボタンから"active"クラスを削除
-    tabButtons.forEach(btn => btn.classList.remove('active'));
-    // クリックしたボタンに"active"クラスを追加
-    button.classList.add('active');
-    
-    // すべてのタブコンテンツから"active"クラスを削除
-    tabPanes.forEach(pane => pane.classList.remove('active'));
-    // 選択したタブのコンテンツを表示
-    document.getElementById(button.getAttribute('data-tab')).classList.add('active');
-  });
-});
-
-
-async function fetchOnlineUsers() {
-    try {
-        const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
-        const data = await response.json();
-        document.getElementById('online-users').textContent = data.players.now;
-
+        // オンラインプレイヤーリストを表示
         const onlinePlayers = document.getElementById('online-players');
         onlinePlayers.innerHTML = '';
 
@@ -84,18 +27,64 @@ async function fetchOnlineUsers() {
                 onlinePlayers.appendChild(playerDiv);
             });
         } else {
-            onlinePlayers.textContent = '　';
+            onlinePlayers.textContent = 'オンラインプレイヤーはいません';
         }
     } catch (error) {
-        console.error('エラー:', error);
-        document.getElementById('online-players').textContent = 'オンラインのユーザー数を取得できませんでした';
+        console.error('Minecraftステータスの取得に失敗:', error);
+        document.getElementById('minecraft-status-number').textContent = 'N/A';
     }
 }
 
-fetchOnlineUsers();
-setInterval(fetchOnlineUsers, 60000);
+// ====== ✅ ページ読み込み時と定期実行 ======
+document.addEventListener('DOMContentLoaded', () => {
+    fetchMinecraftStatus();
+    fetchDiscordStatus();
+});
+setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
+setInterval(fetchDiscordStatus, 60000); // 1分ごとに更新
 
+// ====== ✅ メニューボタンのクリックイベント ======
+const menuButton = document.querySelector('.menu-button');
+const body = document.querySelector('body');
 
+menuButton.addEventListener('click', function() {
+    body.classList.toggle('menu-open');
+    document.querySelector('nav').classList.toggle('menu-open');
+});
+
+// ====== ✅ フェードイン要素の監視 ======
+const fadeInElements = document.querySelectorAll(".fade-in");
+
+const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target); // 一度だけアニメーションを適用
+        }
+    });
+});
+
+fadeInElements.forEach(el => observer.observe(el));
+
+// ====== ✅ タブ切り替え機能 ======
+const tabButtons = document.querySelectorAll('.tab-button');
+const tabPanes = document.querySelectorAll('.tab-pane');
+
+tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // すべてのボタンから"active"クラスを削除
+        tabButtons.forEach(btn => btn.classList.remove('active'));
+        // クリックしたボタンに"active"クラスを追加
+        button.classList.add('active');
+        
+        // すべてのタブコンテンツから"active"クラスを削除
+        tabPanes.forEach(pane => pane.classList.remove('active'));
+        // 選択したタブのコンテンツを表示
+        document.getElementById(button.getAttribute('data-tab')).classList.add('active');
+    });
+});
+
+// ====== ✅ コピー機能 ======
 function copyToClipboard(address, button) {
     navigator.clipboard.writeText(address).then(() => {
         button.textContent = '完了！';
@@ -114,9 +103,3 @@ function copyToClipboard(address, button) {
         }, 2000);
     });
 }
-
-document.querySelector('.menu-button').addEventListener('click', function() {
-    const nav = document.querySelector('nav');
-    nav.classList.toggle('menu-open');
-});
-
