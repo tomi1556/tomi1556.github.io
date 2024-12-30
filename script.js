@@ -8,7 +8,10 @@ async function fetchMinecraftStatus() {
 
         // オンライン人数を取得
         const onlinePlayersCount = data.players?.online || data.players?.now || 'N/A';
+        
+        // 両方の要素に人数を表示
         document.getElementById('minecraft-status-number').textContent = onlinePlayersCount;
+        document.getElementById('online-users').textContent = onlinePlayersCount;
 
         // オンラインプレイヤーリストを表示
         const onlinePlayers = document.getElementById('online-players');
@@ -35,6 +38,7 @@ async function fetchMinecraftStatus() {
     } catch (error) {
         console.error('Minecraftステータスの取得に失敗:', error);
         document.getElementById('minecraft-status-number').textContent = 'N/A';
+        document.getElementById('online-users').textContent = 'N/A';
     }
 }
 
