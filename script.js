@@ -11,24 +11,24 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// ✅ Geyser(Bedrock)経由のプレイヤーを識別
 async function fetchMinecraftStatus() {
     try {
         const response = await fetch('https://api.mcsrvstat.us/2/stellamc.jp');
         const data = await response.json();
 
-        console.log(data); // APIレスポンスをコンソールに出力して確認
+        console.log('APIレスポンス:', data); // APIレスポンスを確認
 
         // オンライン人数を表示
         const onlineUsers = document.getElementById('online-users');
-        const onlinePlayersCount = data.players?.online || 0; // 人数を取得
-        onlineUsers.textContent = onlinePlayersCount; // 人数を表示
+        const onlinePlayersCount = data.players?.online || 0;
+        onlineUsers.textContent = onlinePlayersCount;
 
         // オンラインプレイヤーリストを表示
         const onlinePlayers = document.getElementById('online-players');
-        onlinePlayers.innerHTML = ''; // リストをリセット
+        onlinePlayers.innerHTML = '';
 
-        if (data.players && onlinePlayersCount > 0 && data.players.list) {
+        // プレイヤーリストが存在するか確認
+        if (data.players && data.players.list && Array.isArray(data.players.list)) {
             data.players.list.forEach(player => {
                 const playerDiv = document.createElement('div');
                 playerDiv.className = 'player';
@@ -43,7 +43,7 @@ async function fetchMinecraftStatus() {
                 const badge = document.createElement('div');
                 badge.className = 'badge';
 
-                // Geyserプレイヤーを判定（名前の先頭が.の場合）
+                // Bedrockプレイヤー判定（名前の先頭が`.`の場合）
                 if (player.startsWith('.')) {
                     playerDiv.classList.add('bedrock-player');
                     badge.textContent = 'Bedrock';
@@ -58,7 +58,7 @@ async function fetchMinecraftStatus() {
                 onlinePlayers.appendChild(playerDiv);
             });
         } else {
-            onlinePlayers.textContent = 'オンラインプレイヤーはいません';
+            onlinePlayers.textContent = 'オンラインプレイヤーの詳細情報がありません';
         }
     } catch (error) {
         console.error('Minecraftステータスの取得に失敗:', error);
@@ -71,15 +71,6 @@ async function fetchMinecraftStatus() {
 fetchMinecraftStatus();
 setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
 
-
-
-
-// ====== ✅ ページ読み込み時と定期実行 ======
-document.addEventListener('DOMContentLoaded', () => {
-    fetchMinecraftStatus();
-    fetchDiscordStatus();
-});
-setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
 
 // ====== ✅ メニューボタンのクリックイベント ======
 const menuButton = document.querySelector('.menu-button');
