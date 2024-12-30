@@ -386,6 +386,11 @@ footer p {
         flex-direction: column;
         gap: 20px;
     }
+
+.method-card p {
+    font-size: 0.8em;
+}
+  
   /* ナビゲーション（非表示にした状態） */
   nav {
       display: none; /* デフォルトでは非表示 */
