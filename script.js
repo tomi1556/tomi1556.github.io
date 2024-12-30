@@ -7,7 +7,7 @@ menuButton.addEventListener('click', () => {
 });
 
 
-// ✅ Minecraftステータス取得
+// ✅ Minecraftオンラインプレイヤー取得
 async function fetchMinecraftStatus() {
     try {
         const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
@@ -15,25 +15,19 @@ async function fetchMinecraftStatus() {
 
         console.log(data); // APIレスポンスをコンソールに出力して確認
 
-        // オンライン人数を取得
-        const onlinePlayersCount = data.players?.online || data.players?.now || 'N/A';
-        document.getElementById('online-users').textContent = onlinePlayersCount;
-
         // オンラインプレイヤーリストを表示
         const onlinePlayers = document.getElementById('online-players');
-        onlinePlayers.innerHTML = ''; // プレイヤーリストをリセット
+        onlinePlayers.innerHTML = ''; // リストをリセット
 
-        if (data.players && onlinePlayersCount > 0 && data.players.sample && data.players.sample.length > 0) {
+        if (data.players && data.players.online > 0 && data.players.sample) {
             data.players.sample.forEach(player => {
                 const playerDiv = document.createElement('div');
                 playerDiv.className = 'player';
 
-                // プレイヤーの顔画像
                 const playerImg = document.createElement('img');
                 playerImg.src = `https://mc-heads.net/avatar/${player.id}/100`;
                 playerImg.alt = `${player.name}のアバター`;
 
-                // プレイヤー名
                 const playerId = document.createElement('p');
                 playerId.textContent = player.name || '不明なプレイヤー';
 
@@ -46,10 +40,14 @@ async function fetchMinecraftStatus() {
         }
     } catch (error) {
         console.error('Minecraftステータスの取得に失敗:', error);
-        document.getElementById('online-users').textContent = 'N/A';
         document.getElementById('online-players').textContent = 'データを取得できませんでした。';
     }
 }
+
+// 初回取得と定期更新
+fetchMinecraftStatus();
+setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
+
 
 // 初期読み込み時に呼び出し
 fetchMinecraftStatus();
