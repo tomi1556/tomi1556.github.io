@@ -388,21 +388,21 @@ footer p {
     }
   /* ナビゲーション（非表示にした状態） */
   nav {
-    display: none; /* デフォルトでは非表示 */
-    position: absolute;
-    top: 60px; /* メニューボタンの下に表示 */
-    left: 20px; /* 左端に配置 */
-    background-color: #4caf50;
-    width: 200px;
-    padding: 10px 0;
-    border-radius: 8px;
-    z-index: 1001;
-    flex-direction: column;
-    align-items: flex-start;
+      display: none; /* デフォルトでは非表示 */
+      position: absolute;
+      top: 60px; /* メニューボタンの下に表示 */
+      left: 20px; /* 左端に配置 */
+      background-color: #4caf50;
+      width: 200px;
+      padding: 10px 0;
+      border-radius: 8px;
+      z-index: 1001;
+      flex-direction: column;
+      align-items: flex-start;
   }
 
-  /* メニューボタン */
   .menu-button {
+      display: block; /* モバイル時に表示 */
       position: fixed;
       top: 10px;
       right: 10px;
