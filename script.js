@@ -1,10 +1,9 @@
-// 📱 スマホメニュー開閉
+// JavaScriptでメニューの開閉を制御
 const menuButton = document.querySelector('.menu-button');
 const mobileNav = document.querySelector('.mobile-nav');
 
-// メニューボタンをクリックした時の動作
 menuButton.addEventListener('click', () => {
-    mobileNav.classList.toggle('open'); // openクラスをトグル
+    mobileNav.classList.toggle('open');
 });
 
 
