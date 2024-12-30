@@ -214,6 +214,22 @@ header h1 {
     color: #333;
 }
 
+footer {
+    background-color: #4caf50;
+    color: #ffffff;
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.9em;
+    border-top: 5px solid #4caf50;
+    opacity: 0;
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 1.5s;
+}
+
+footer p {
+    margin: 0;
+}
+
 /* アニメーション */
 @keyframes fadeOut {
     to {
@@ -299,11 +315,6 @@ header h1 {
 
     #section-content {
         width: 90%;
-    }
-
-    footer {
-        text-align: center;
-        padding: 20px;
     }
 }
 
