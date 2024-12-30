@@ -33,7 +33,17 @@ async function fetchMinecraftStatus() {
                 playerDiv.className = 'player';
 
                 const playerImg = document.createElement('img');
-                const avatarUrl = `https://mc-heads.net/avatar/${player.name}/100`;
+                let avatarUrl = '';
+
+                // Bedrockプレイヤー（統合版）の判定
+                if (player.name.startsWith('.')) {
+                    // 統合版のスキンURL
+                    avatarUrl = `https://mc-heads.net/head/${player.name.substring(1)}/100`;
+                } else {
+                    // Java版のスキンURL
+                    avatarUrl = `https://mc-heads.net/avatar/${player.name}/100`;
+                }
+
                 playerImg.src = avatarUrl;
                 playerImg.alt = `${player.name}のアバター`;
 
@@ -51,7 +61,7 @@ async function fetchMinecraftStatus() {
                 // Bedrockプレイヤー判定（名前の先頭が`.`の場合）
                 if (player.name.startsWith('.')) {
                     playerDiv.classList.add('bedrock-player');
-                    badge.textContent = '統合版';
+                    badge.textContent = 'Bedrock';
                 } else {
                     playerDiv.classList.add('java-player');
                     badge.textContent = 'Java';
