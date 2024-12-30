@@ -451,7 +451,7 @@ footer p {
 
   /* メニューボタンを画像の上に重ねる */
   .menu-button {
-      position: absolute;
+   　 position: fixed; /* 常に右上に固定 */
       top: 20px;
       left: 20px;
       background-color: #4caf50;
