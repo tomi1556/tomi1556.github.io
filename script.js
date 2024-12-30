@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// ✅ Minecraftオンラインプレイヤー取得 (api.mcsrvstat.us版)
+// ✅ Geyser(Bedrock)経由のプレイヤーを識別
 async function fetchMinecraftStatus() {
     try {
         const response = await fetch('https://api.mcsrvstat.us/2/stellamc.jp');
@@ -38,7 +38,15 @@ async function fetchMinecraftStatus() {
                 playerImg.alt = `${player}のアバター`;
 
                 const playerId = document.createElement('p');
-                playerId.textContent = player || '不明なプレイヤー';
+
+                // Geyserプレイヤーを判定（名前の先頭が.の場合）
+                if (player.startsWith('.')) {
+                    playerId.textContent = `[Bedrock] ${player}`;
+                    playerDiv.classList.add('bedrock-player'); // 統合版スタイル追加
+                } else {
+                    playerId.textContent = `[Java] ${player}`;
+                    playerDiv.classList.add('java-player'); // Java版スタイル追加
+                }
 
                 playerDiv.appendChild(playerImg);
                 playerDiv.appendChild(playerId);
@@ -57,6 +65,7 @@ async function fetchMinecraftStatus() {
 // 初回取得と定期更新
 fetchMinecraftStatus();
 setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
+
 
 
 // ====== ✅ ページ読み込み時と定期実行 ======
