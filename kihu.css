@@ -143,7 +143,7 @@ button[type="submit"] {
     background-color: #0abf5a;
     color: #fff;
     font-weight: bold;
-    border: 2px solid #1C6E42;
+    border: 2px solid #0abf5a;
     transform: scale(1.05); /* 選択時の拡大アニメーション */
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* 選択時にシャドウを強化 */
 }
