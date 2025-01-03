@@ -27,38 +27,28 @@ async function fetchMinecraftStatus() {
         // プレイヤーリストが存在するか確認
         if (data.players && Array.isArray(data.players.sample)) {
             console.log('オンラインプレイヤーリスト:', data.players.sample); // プレイヤーリストの確認
+            
+            const bedrockPlayers = [];
+            const javaPlayers = [];
+
+            // プレイヤーを分類
             data.players.sample.forEach(player => {
-                const playerDiv = document.createElement('div');
-                playerDiv.className = 'player';
-
-                const playerImg = document.createElement('img');
-                const avatarUrl = `https://mc-heads.net/avatar/${player.name}/100`;
-                playerImg.src = avatarUrl;
-                playerImg.alt = `${player.name}のアバター`;
-
-                // 画像が存在しない場合、フォールバック
-                playerImg.onerror = () => {
-                    playerImg.src = 'https://mc-heads.net/avatar/Default/100'; // デフォルト画像にフォールバック
-                };
-
-                const playerId = document.createElement('p');
-                playerId.textContent = player.name || '不明なプレイヤー';
-
-                const badge = document.createElement('div');
-                badge.className = 'badge';
-
-                // Bedrockプレイヤー判定（名前の先頭が`.`の場合）
                 if (player.name.startsWith('.')) {
-                    playerDiv.classList.add('bedrock-player');
-                    badge.textContent = '統合版';
+                    bedrockPlayers.push(player);
                 } else {
-                    playerDiv.classList.add('java-player');
-                    badge.textContent = 'Java';
+                    javaPlayers.push(player);
                 }
+            });
 
-                playerDiv.appendChild(playerImg);
-                playerDiv.appendChild(playerId);
-                playerDiv.appendChild(badge);
+            // 統合版プレイヤーを表示
+            bedrockPlayers.forEach(player => {
+                const playerDiv = createPlayerElement(player, '統合版', 'bedrock-player');
+                onlinePlayers.appendChild(playerDiv);
+            });
+
+            // Java版プレイヤーを表示
+            javaPlayers.forEach(player => {
+                const playerDiv = createPlayerElement(player, 'Java', 'java-player');
                 onlinePlayers.appendChild(playerDiv);
             });
         } else {
@@ -70,6 +60,34 @@ async function fetchMinecraftStatus() {
         document.getElementById('online-users').textContent = 'N/A';
         document.getElementById('online-players').textContent = 'データを取得できませんでした。';
     }
+}
+
+function createPlayerElement(player, badgeText, className) {
+    const playerDiv = document.createElement('div');
+    playerDiv.className = `player ${className}`;
+
+    const playerImg = document.createElement('img');
+    const avatarUrl = `https://mc-heads.net/avatar/${player.name}/100`;
+    playerImg.src = avatarUrl;
+    playerImg.alt = `${player.name}のアバター`;
+
+    // 画像が存在しない場合、フォールバック
+    playerImg.onerror = () => {
+        playerImg.src = 'https://mc-heads.net/avatar/Default/100';
+    };
+
+    const playerId = document.createElement('p');
+    playerId.textContent = player.name || '不明なプレイヤー';
+
+    const badge = document.createElement('div');
+    badge.className = 'badge';
+    badge.textContent = badgeText;
+
+    playerDiv.appendChild(playerImg);
+    playerDiv.appendChild(playerId);
+    playerDiv.appendChild(badge);
+
+    return playerDiv;
 }
 
 // 初回取得と定期更新
