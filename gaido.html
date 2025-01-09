@@ -1,24 +1,19 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <title>マインクラフト サーバーガイド</title>
+    <title>すてらサーバー ガイドページ</title>
     <link rel="stylesheet" href="gaido.css">
 </head>
 <body>
-    <div class="loader">
-        <h1>Loading...</h1>
-    </div>
-    <header>
-        <h1>マインクラフト サーバーガイド</h1>
-        <p>最適なサーバー体験をあなたに！</p>
+    <header class="header">
+        <h1 class="title">すてらサーバー ガイド</h1>
     </header>
-    <!-- ✅ メニューボタン -->
+<!-- :white_check_mark: メニューボタン -->
     <button id="menu-button" class="menu-button">☰</button>
 
-    <!-- ✅ モバイルナビゲーションメニュー -->
+    <!-- :white_check_mark: モバイルナビゲーションメニュー -->
     <nav id="mobile-nav" class="mobile-nav">
         <ul>
             <li><a href="index.html"><i class="fa-solid fa-home"></i> ホーム</a></li>
@@ -55,38 +50,47 @@
             </li>
         </ul>
     </nav>
-    <main>
-        <section id="guide">
-            <div class="guide-container">
-                <a href="beginner_guide.html" class="guide-card">
-                    <div class="icon">🌱</div>
-                    <h3>初心者向けの説明</h3>
-                </a>
-                <a href="server_rules.html" class="guide-card">
-                    <div class="icon">📜</div>
-                    <h3>サーバー規約</h3>
-                </a>
-                <a href="donation_info.html" class="guide-card">
-                    <div class="icon">💎</div>
-                    <h3>寄付について</h3>
-                </a>
-                <a href="basic_operations.html" class="guide-card">
-                    <div class="icon">🛠️</div>
-                    <h3>基本操作</h3>
-                </a>
+    <main class="main">
+        <section class="card" id="rules">
+            <div class="icon">
+                <img src="icons/rules-icon.svg" alt="サーバー規約">
             </div>
+            <h2>サーバー規約</h2>
+            <p>サーバーでのルールやマナーを確認してください。</p>
+            <a href="rules.html" class="btn">詳しく見る</a>
+        </section>
 
-            <div id="section-content" class="guide-content">
-                <h4 id="section-title">説明を選んでください</h4>
-                <p id="section-description">項目をクリックすると、説明がここに表示されます。</p>
+        <section class="card" id="donations">
+            <div class="icon">
+                <img src="icons/donation-icon.svg" alt="寄付説明">
             </div>
+            <h2>寄付説明</h2>
+            <p>サーバー運営を支援する方法について。</p>
+            <a href="donations.html" class="btn">詳しく見る</a>
+        </section>
+
+        <section class="card" id="basics">
+            <div class="icon">
+                <img src="icons/basics-icon.svg" alt="基本操作">
+            </div>
+            <h2>基本操作</h2>
+            <p>ゲームの基本操作とサーバーの使い方。</p>
+            <a href="basics.html" class="btn">詳しく見る</a>
+        </section>
+
+        <section class="card" id="commands">
+            <div class="icon">
+                <img src="icons/commands-icon.svg" alt="コマンド">
+            </div>
+            <h2>コマンド</h2>
+            <p>便利なコマンドの一覧。</p>
+            <a href="commands.html" class="btn">詳しく見る</a>
         </section>
     </main>
 
-    <footer>
-        <p>&copy; 2024 マインクラフト サーバーガイド. All Rights Reserved.</p>
+    <footer class="footer">
+        <p>&copy; 2025 すてらサーバー</p>
     </footer>
-
     <script defer src="gaido.js"></script>
 </body>
 </html>
