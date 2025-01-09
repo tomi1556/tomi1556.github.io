@@ -1,16 +1,4 @@
-/* 基本設定 */
-body, html {
-    position: relative;
-    min-height: 100vh; /* 最低でもビューポートの高さ分確保 */
-    margin: 0;
-    padding: 0;
-    font-family: 'Arial', sans-serif;
-    scroll-behavior: smooth;
-    background-color: #ffffff;
-    color: #333;
-    overflow-x: hidden;
-}
-
+/* gaido.css */
 /* ✅ PC用ナビゲーション */
 nav {
     background-color: #4caf50;
@@ -113,109 +101,6 @@ nav ul li a .item-name {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* ロード画面 */
-.loader {
-    background: #000;
-    color: #fff;
-    font-size: 24px;
-    position: fixed;
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
-    animation: fadeOut 1.5s forwards;
-}
-
-/* ヘッダー */
-header {
-    text-align: center;
-    padding: 60px 0;
-    background: linear-gradient(135deg, #32CD32, #228B22);
-    animation: fadeIn 1s ease-out;
-}
-
-/* ヘッダータイトル */
-header h1 {
-    font-size: 3em;
-    font-weight: bold;
-    color: white;
-    animation: popIn 1s ease-out;
-}
-
-/* カードの配置 */
-.guide-container {
-    display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    margin: 50px 0;
-    animation: fadeInCards 1s ease-out;
-}
-
-.guide-card {
-    background: rgba(255, 255, 255, 0.9);
-    border-radius: 15px;
-    padding: 30px;
-    text-align: center;
-    cursor: pointer;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s, box-shadow 0.3s;
-    position: relative;
-    width: 220px;
-    margin: 20px;
-    overflow: hidden;
-}
-
-.guide-card:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.25);
-    background: rgba(255, 255, 255, 1);
-}
-
-/* アイコン */
-.icon {
-    font-size: 50px;
-    margin-bottom: 15px;
-    transition: transform 0.3s;
-}
-
-.guide-card:hover .icon {
-    transform: rotate(360deg);
-}
-
-/* 説明コンテンツ */
-#section-content {
-    margin-top: 50px;
-    text-align: center;
-    padding: 30px;
-    background: rgba(50, 205, 50, 0.1);
-    border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-    width: 80%;
-    max-width: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    display: none;
-    animation: slideIn 0.5s ease-out;
-}
-
-/* 説明タイトル */
-#section-title {
-    font-size: 2.5em;
-    font-weight: bold;
-    color: #228B22;
-    margin-bottom: 20px;
-}
-
-/* 説明文 */
-#section-description {
-    line-height: 1.8;
-    font-size: 1.3em;
-    margin-bottom: 10px;
-    color: #333;
-}
-
 footer {
     background-color: #4caf50;
     color: #ffffff;
@@ -288,48 +173,81 @@ footer p {
     }
 }
 
-/* レスポンシブデザイン */
-@media (max-width: 768px) {
-    nav {
-        display: none; /* PC用ナビゲーションを非表示 */
-    }
-
-    .menu-button {
-        display: block; /* メニューボタンを表示 */
-    }
-
-    nav.mobile-nav {
-        display: none; /* 初期では非表示 */
-    }
-
-    nav.mobile-nav.open {
-        display: flex;
-    }
-
-    header h1 {
-        font-size: 2.5em;
-    }
-
-    .guide-container {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .guide-card {
-        width: 90%;
-    }
-
-    #section-content {
-        width: 90%;
-    }
+body {
+    margin: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f0fff4;
+    color: #333;
 }
 
-@media (min-width: 769px) {
-    .guide-card {
-        width: 220px;
-    }
+.header {
+    background-color: #006400;
+    color: white;
+    text-align: center;
+    padding: 1.5rem 0;
+}
 
-    #section-content {
-        width: 60%;
-    }
+.title {
+    margin: 0;
+    font-size: 2.5rem;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+    padding: 2rem;
+}
+
+.card {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s, box-shadow 0.3s;
+    text-align: center;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+.icon img {
+    width: 80px;
+    height: 80px;
+    margin-top: 1rem;
+}
+
+.card h2 {
+    color: #006400;
+    margin: 1rem 0 0.5rem;
+}
+
+.card p {
+    margin: 0.5rem 1rem 1rem;
+    color: #555;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #32cd32;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #228b22;
+}
+
+.footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #006400;
+    color: white;
+    font-size: 0.9rem;
 }
