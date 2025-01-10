@@ -150,52 +150,54 @@ document.addEventListener('DOMContentLoaded', () => {
         // 寄付プラン名を取得
         const selectedPlanName = donationPlans[selectedDonationPlan];
 
-        // Webhookデータ作成
-        const webhookData = {
-            embeds: [{
-                title: "🎁 新しい寄付がありました！",
-                color: 5763719, // 緑色
-                fields: [
-                    { name: "🆔 Minecraft ID", value: mcid, inline: true },
-                    { name: "💬 Discord ID", value: discordId, inline: true },
-                    { name: "🎮 エディション", value: versionField.value, inline: true },
-                    { name: "💵 寄付プラン", value: selectedPlanName, inline: true },
-                    ...(paypayBtn.classList.contains('selected') ? [{
-                        name: "🔗 PayPayリンク", value: paypayLink
-                    }] : []),
-                    ...(amazonBtn.classList.contains('selected') ? [{
-                        name: "🎟️ Amazonギフト券コード", value: amazonCode
-                    }] : [])
-                ],
-                footer: { text: "🎉 ご支援ありがとうございます！" },
-                timestamp: new Date().toISOString()
-            }]
-        };
+// Expressを使用した例
+const express = require('express');
+const fetch = require('node-fetch');
+const app = express();
+const PORT = 3000;
 
-        // GitHub Actionsをトリガー
-        triggerGitHubActions(webhookData);
+// シークレット（Webhook URL）を環境変数に設定しておく
+const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
+
+app.use(express.json());
+
+app.post('/send-webhook', (req, res) => {
+  const { mcid, discordId, version, planName, paypayLink, amazonCode } = req.body;
+
+  // Webhookデータ作成
+  const webhookData = {
+    embeds: [{
+      title: "🎁 新しい寄付がありました！",
+      color: 5763719, // 緑色
+      fields: [
+        { name: "🆔 Minecraft ID", value: mcid, inline: true },
+        { name: "💬 Discord ID", value: discordId, inline: true },
+        { name: "🎮 エディション", value: version, inline: true },
+        { name: "💵 寄付プラン", value: planName, inline: true },
+        ...(paypayLink ? [{ name: "🔗 PayPayリンク", value: paypayLink }] : []),
+        ...(amazonCode ? [{ name: "🎟️ Amazonギフト券コード", value: amazonCode }] : [])
+      ],
+      footer: { text: "🎉 ご支援ありがとうございます！" },
+      timestamp: new Date().toISOString()
+    }]
+  };
+
+  // Webhook送信
+  fetch(DISCORD_WEBHOOK_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(webhookData)
+  })
+    .then(response => response.json())
+    .then(data => {
+      res.status(200).json({ success: true, data });
+    })
+    .catch(error => {
+      res.status(500).json({ success: false, error: error.message });
     });
 });
 
-// GitHub Actionsをトリガーする関数
-function triggerGitHubActions(webhookData) {
-    const GITHUB_TOKEN = process.env.GITHUB_TOKEN;  // GitHubのアクセストークンはシークレット環境変数から取得
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
 
-    fetch('https://api.github.com/repos/tomi1556/your-repo/actions/workflows/send-webhook.yml/dispatches', {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${GITHUB_TOKEN}`,  // GitHubのアクセストークン
-            'Accept': 'application/vnd.github.v3+json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            "ref": "main",  // 使用するブランチを指定（例: mainブランチ）
-            "inputs": {
-                "webhookData": JSON.stringify(webhookData)  // WebhookデータをGitHub Actionsに渡す
-            }
-        })
-    })
-    .then(response => response.json())
-    .then(data => console.log(data))
-    .catch(error => console.error('Error:', error));
-}
