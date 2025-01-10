@@ -25,6 +25,53 @@ document.addEventListener('DOMContentLoaded', () => {
         'amount-5000': 'プレミアム'
     };
 
+    // === 初期設定 ===
+    versionField.value = ''; // エディションは未選択状態
+    javaBtn.classList.remove('selected');
+    bedrockBtn.classList.remove('selected');
+    amazonSection.classList.remove('hidden');
+    paypaySection.classList.add('hidden');
+    amazonBtn.classList.add('selected');
+
+    // === エディション選択 ===
+    javaBtn.addEventListener('click', () => {
+        versionField.value = 'Java版';
+        javaBtn.classList.add('selected');
+        bedrockBtn.classList.remove('selected');
+    });
+
+    bedrockBtn.addEventListener('click', () => {
+        versionField.value = '統合版';
+        bedrockBtn.classList.add('selected');
+        javaBtn.classList.remove('selected');
+    });
+
+    // === 寄付方法選択 ===
+    paypayBtn.addEventListener('click', () => {
+        paypaySection.classList.remove('hidden');
+        amazonSection.classList.add('hidden');
+        paypayBtn.classList.add('selected');
+        amazonBtn.classList.remove('selected');
+    });
+
+    amazonBtn.addEventListener('click', () => {
+        amazonSection.classList.remove('hidden');
+        paypaySection.classList.add('hidden');
+        amazonBtn.classList.add('selected');
+        paypayBtn.classList.remove('selected');
+    });
+
+    // === 寄付プラン選択 ===
+    donationButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            donationButtons.forEach(btn => btn.classList.remove('selected')); // 全てのボタンから selected を削除
+            button.classList.add('selected'); // クリックしたボタンを選択状態に
+
+            // 寄付プランを設定
+            selectedDonationPlan = button.id;
+        });
+    });
+
     // === フォーム送信 ===
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -62,6 +109,47 @@ document.addEventListener('DOMContentLoaded', () => {
             return;
         }
 
+        // PayPayリンクの検証 (PayPay選択時)
+        if (paypayBtn.classList.contains('selected')) {
+            if (!paypayLink) {
+                errorMessage.textContent = 'PayPayリンクを入力してください。リンクの形式が間違っていないか確認してください。';
+                errorMessage.classList.remove('hidden');
+                errorMessage.classList.add('show-error');
+                successMessage.classList.add('hidden');
+                return;
+            }
+            const paypayRegex = /^https:\/\/pay\.paypay\.ne\.jp\/.+/;
+            if (!paypayRegex.test(paypayLink)) {
+                errorMessage.textContent = 'PayPayリンクが正しくありません。';
+                errorMessage.classList.remove('hidden');
+                errorMessage.classList.add('show-error');
+                successMessage.classList.add('hidden');
+                return;
+            }
+        }
+
+        // Amazonギフト券コードの検証 (Amazon選択時)
+        if (amazonBtn.classList.contains('selected')) {
+            if (!amazonCode) {
+                errorMessage.textContent = 'Amazonギフト券コードを入力してください。';
+                errorMessage.classList.remove('hidden');
+                errorMessage.classList.add('show-error');
+                successMessage.classList.add('hidden');
+                return;
+            }
+            const amazonRegex = /^[A-Z0-9]{14,17}$/;
+            if (!amazonRegex.test(amazonCode)) {
+                errorMessage.textContent = 'Amazonギフト券コードが正しくありません。';
+                errorMessage.classList.remove('hidden');
+                errorMessage.classList.add('show-error');
+                successMessage.classList.add('hidden');
+                return;
+            }
+        }
+
+        // 寄付プラン名を取得
+        const selectedPlanName = donationPlans[selectedDonationPlan];
+
         // Webhookデータ作成
         const webhookData = {
             embeds: [{
@@ -91,10 +179,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // GitHub Actionsをトリガーする関数
 function triggerGitHubActions(webhookData) {
+    const GITHUB_TOKEN = process.env.GITHUB_TOKEN;  // GitHubのアクセストークンはシークレット環境変数から取得
+
     fetch('https://api.github.com/repos/tomi1556/your-repo/actions/workflows/send-webhook.yml/dispatches', {
         method: 'POST',
         headers: {
-            'Authorization': `Bearer ${process.env.GITHUB_TOKEN}`,  // GitHubのアクセストークンはシークレット環境変数から取得
+            'Authorization': `Bearer ${GITHUB_TOKEN}`,  // GitHubのアクセストークン
             'Accept': 'application/vnd.github.v3+json',
             'Content-Type': 'application/json'
         },
