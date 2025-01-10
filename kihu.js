@@ -173,7 +173,7 @@ const webhookData = {
 };
 
 // ZapierのWebhook URLにデータを送信
-fetch('https://hooks.zapier.com/hooks/catch/21267420/2zkf8fb/', {
+fetch('https://webhook.site/d8bb1b81-e108-4e3a-a71a-4f249efe6c79', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
