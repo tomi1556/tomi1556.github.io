@@ -179,7 +179,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // GitHub Actionsをトリガーする関数
 function triggerGitHubActions(webhookData) {
-    fetch('https://api.github.com/repos/your-username/your-repo/actions/workflows/send-webhook.yml/dispatches', {
+    fetch('https://api.github.com/repos/tomi1556/your-repo/actions/workflows/send-webhook.yml/dispatches', {
         method: 'POST',
         headers: {
             'Authorization': 'Bearer YOUR_GITHUB_TOKEN',  // GitHubのアクセストークン
