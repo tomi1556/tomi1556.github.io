@@ -150,19 +150,50 @@ document.addEventListener('DOMContentLoaded', () => {
         // 寄付プラン名を取得
         const selectedPlanName = donationPlans[selectedDonationPlan];
 
-    // サーバーにデータを送信
-    fetch('/send-webhook', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(webhookData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        console.log('Webhook送信成功', data);
-    })
-    .catch(error => {
-        console.error('Webhook送信失敗', error);
+        // Webhookデータ作成
+        const webhookData = {
+            embeds: [{
+                title: "🎁 新しい寄付がありました！",
+                color: 5763719, // 緑色
+                fields: [
+                    { name: "🆔 Minecraft ID", value: mcid, inline: true },
+                    { name: "💬 Discord ID", value: discordId, inline: true },
+                    { name: "🎮 エディション", value: versionField.value, inline: true },
+                    { name: "💵 寄付プラン", value: selectedPlanName, inline: true },
+                    ...(paypayBtn.classList.contains('selected') ? [{
+                        name: "🔗 PayPayリンク", value: paypayLink
+                    }] : []),
+                    ...(amazonBtn.classList.contains('selected') ? [{
+                        name: "🎟️ Amazonギフト券コード", value: amazonCode
+                    }] : [])
+                ],
+                footer: { text: "🎉 ご支援ありがとうございます！" },
+                timestamp: new Date().toISOString()
+            }]
+        };
+
+        // サーバーにデータを送信
+        fetch('/send-webhook', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(webhookData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Webhook送信成功', data);
+            successMessage.textContent = '送信成功！';
+            successMessage.classList.remove('hidden');
+            successMessage.classList.add('show-success');
+            errorMessage.classList.add('hidden');
+        })
+        .catch(error => {
+            console.error('Webhook送信失敗', error);
+            errorMessage.textContent = '送信失敗しました。後で再度お試しください。';
+            errorMessage.classList.remove('hidden');
+            errorMessage.classList.add('show-error');
+            successMessage.classList.add('hidden');
+        });
     });
 });
