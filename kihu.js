@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // === Webhook送信 ===
-        fetch('https://woolen-adorable-papyrus.glitch.me', {
+        fetch('https://stone-weak-flood.glitch.me', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(webhookData)
