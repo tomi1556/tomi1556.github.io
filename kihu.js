@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // === Webhook送信 ===
-        fetch('https://discord.com/api/webhooks/1326472243571851335/Dju-LtKyNjfJ4t4INRkkPMwkyx44J-WYmFyBC3JsFHEmoQNlToosz06nz890LGPQuZ8D', {
+        fetch('https://woolen-adorable-papyrus.glitch.me', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(webhookData)
