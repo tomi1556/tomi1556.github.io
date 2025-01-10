@@ -150,44 +150,52 @@ document.addEventListener('DOMContentLoaded', () => {
         // 寄付プラン名を取得
         const selectedPlanName = donationPlans[selectedDonationPlan];
 
-        // === Webhookデータ作成 ===
-        const webhookData = {
-            embeds: [{
-                title: "🎁 新しい寄付がありました！",
-                color: 5763719, // 緑色
-                fields: [
-                    { name: "🆔 Minecraft ID", value: mcid, inline: true },
-                    { name: "💬 Discord ID", value: discordId, inline: true },
-                    { name: "🎮 エディション", value: versionField.value, inline: true },
-                    { name: "💵 寄付プラン", value: selectedPlanName, inline: true },
-                    ...(paypayBtn.classList.contains('selected') ? [{
-                        name: "🔗 PayPayリンク", value: paypayLink
-                    }] : []),
-                    ...(amazonBtn.classList.contains('selected') ? [{
-                        name: "🎟️ Amazonギフト券コード", value: amazonCode
-                    }] : [])
-                ],
-                footer: { text: "🎉 ご支援ありがとうございます！" },
-                timestamp: new Date().toISOString()
-            }]
-        };
 
-        // === Webhook送信 ===
-        fetch('https://stone-weak-flood.glitch.me', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(webhookData)
-        }).then(() => {
-            // 成功メッセージの表示
-            successMessage.textContent = '送金が確認されました！ありがとうございます！';
-            successMessage.classList.remove('hidden');
-            successMessage.classList.add('show-success');  // アニメーション追加
-            errorMessage.classList.add('hidden');
-            form.reset();
-            versionField.value = '';  // フォームのリセット
-            selectedDonationPlan = null; // 寄付プランのリセット
-        }).catch(() => {
-            alert('送信に失敗しました');
-        });
-    });
+// GitHub Actionsをトリガーする関数
+function triggerGitHubActions(webhookData) {
+    fetch('https://api.github.com/repos/your-username/your-repo/actions/workflows/send-webhook.yml/dispatches', {
+        method: 'POST',
+        headers: {
+            'Authorization': 'Bearer YOUR_GITHUB_TOKEN',  // GitHubのアクセストークン
+            'Accept': 'application/vnd.github.v3+json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            "ref": "main",  // 使用するブランチを指定（例: mainブランチ）
+            "inputs": {
+                "webhookData": JSON.stringify(webhookData)  // WebhookデータをGitHub Actionsに渡す
+            }
+        })
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.error('Error:', error));
+}
+
+// イベント（例: ボタンのクリックなど）でGitHub Actionsをトリガー
+document.getElementById('triggerButton').addEventListener('click', function() {
+    const webhookData = {
+        embeds: [{
+            title: "🎁 新しい寄付がありました！",
+            color: 5763719, // 緑色
+            fields: [
+                { name: "🆔 Minecraft ID", value: mcid, inline: true },
+                { name: "💬 Discord ID", value: discordId, inline: true },
+                { name: "🎮 エディション", value: versionField.value, inline: true },
+                { name: "💵 寄付プラン", value: selectedPlanName, inline: true },
+                ...(paypayBtn.classList.contains('selected') ? [{
+                    name: "🔗 PayPayリンク", value: paypayLink
+                }] : []),
+                ...(amazonBtn.classList.contains('selected') ? [{
+                    name: "🎟️ Amazonギフト券コード", value: amazonCode
+                }] : [])
+            ],
+            footer: { text: "🎉 ご支援ありがとうございます！" },
+            timestamp: new Date().toISOString()
+        }]
+    };
+
+    // GitHub Actionsをトリガー
+    triggerGitHubActions(webhookData);
 });
+
