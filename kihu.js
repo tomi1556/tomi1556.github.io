@@ -173,7 +173,7 @@ const webhookData = {
 };
 
 // ZapierのWebhook URLにデータを送信
-fetch('https://webhook.site/d8bb1b81-e108-4e3a-a71a-4f249efe6c79', {
+fetch('https://discord.com/api/webhooks/1327163439214235752/o4y_-xIkEjUDPfgjGtM157Z0ruBxwveodFfq0MczjKL7e3veMZvelanb7AQSlHXLMrrz', {
     method: 'POST',
     headers: {
         'Content-Type': 'application/json'
