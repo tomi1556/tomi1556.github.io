@@ -1,20 +1,37 @@
-name: Send Discord Webhook
+name: Send Webhook
 
 on:
-  workflow_dispatch:  # 手動トリガー（GitHub Pagesから呼び出し）
+  push:
+    branches:
+      - main  # mainブランチにpushされた時にトリガーされる
 
 jobs:
   send-webhook:
     runs-on: ubuntu-latest
-    
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
 
-      - name: Send Webhook to Discord
-        run: |
-          curl -X POST -H "Content-Type: application/json" \
-          -d '{"content": "新しい寄付がありました！"}' \
-          ${{ secrets.DISCORD_WEBHOOK_URL }}
-        env:
-          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Send Discord Webhook
+      run: |
+        curl -X POST ${{ secrets.DISCORD_WEBHOOK_URL }} \
+        -H "Content-Type: application/json" \
+        -d '{
+          "embeds": [
+            {
+              "title": "🎁 新しい寄付がありました！",
+              "color": 5763719,
+              "fields": [
+                {"name": "🆔 Minecraft ID", "value": "${{ secrets.MC_ID }}", "inline": true},
+                {"name": "💬 Discord ID", "value": "${{ secrets.DISCORD_ID }}", "inline": true},
+                {"name": "🎮 エディション", "value": "${{ secrets.VERSION }}", "inline": true},
+                {"name": "💵 寄付プラン", "value": "${{ secrets.PLAN_NAME }}", "inline": true}
+              ],
+              "footer": {
+                "text": "🎉 ご支援ありがとうございます！"
+              },
+              "timestamp": "'$(date --utc +%FT%TZ)'"
+            }
+          ]
+        }'
