@@ -1,0 +1,20 @@
+name: Send Discord Webhook
+
+on:
+  workflow_dispatch:  # 手動トリガー（GitHub Pagesから呼び出し）
+
+jobs:
+  send-webhook:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Send Webhook to Discord
+        run: |
+          curl -X POST -H "Content-Type: application/json" \
+          -d '{"content": "新しい寄付がありました！"}' \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
