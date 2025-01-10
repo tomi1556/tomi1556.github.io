@@ -150,6 +150,32 @@ document.addEventListener('DOMContentLoaded', () => {
         // 寄付プラン名を取得
         const selectedPlanName = donationPlans[selectedDonationPlan];
 
+        // Webhookデータ作成
+        const webhookData = {
+            embeds: [{
+                title: "🎁 新しい寄付がありました！",
+                color: 5763719, // 緑色
+                fields: [
+                    { name: "🆔 Minecraft ID", value: mcid, inline: true },
+                    { name: "💬 Discord ID", value: discordId, inline: true },
+                    { name: "🎮 エディション", value: versionField.value, inline: true },
+                    { name: "💵 寄付プラン", value: selectedPlanName, inline: true },
+                    ...(paypayBtn.classList.contains('selected') ? [{
+                        name: "🔗 PayPayリンク", value: paypayLink
+                    }] : []),
+                    ...(amazonBtn.classList.contains('selected') ? [{
+                        name: "🎟️ Amazonギフト券コード", value: amazonCode
+                    }] : [])
+                ],
+                footer: { text: "🎉 ご支援ありがとうございます！" },
+                timestamp: new Date().toISOString()
+            }]
+        };
+
+        // GitHub Actionsをトリガー
+        triggerGitHubActions(webhookData);
+    });
+});
 
 // GitHub Actionsをトリガーする関数
 function triggerGitHubActions(webhookData) {
@@ -171,31 +197,3 @@ function triggerGitHubActions(webhookData) {
     .then(data => console.log(data))
     .catch(error => console.error('Error:', error));
 }
-
-// イベント（例: ボタンのクリックなど）でGitHub Actionsをトリガー
-document.getElementById('triggerButton').addEventListener('click', function() {
-    const webhookData = {
-        embeds: [{
-            title: "🎁 新しい寄付がありました！",
-            color: 5763719, // 緑色
-            fields: [
-                { name: "🆔 Minecraft ID", value: mcid, inline: true },
-                { name: "💬 Discord ID", value: discordId, inline: true },
-                { name: "🎮 エディション", value: versionField.value, inline: true },
-                { name: "💵 寄付プラン", value: selectedPlanName, inline: true },
-                ...(paypayBtn.classList.contains('selected') ? [{
-                    name: "🔗 PayPayリンク", value: paypayLink
-                }] : []),
-                ...(amazonBtn.classList.contains('selected') ? [{
-                    name: "🎟️ Amazonギフト券コード", value: amazonCode
-                }] : [])
-            ],
-            footer: { text: "🎉 ご支援ありがとうございます！" },
-            timestamp: new Date().toISOString()
-        }]
-    };
-
-    // GitHub Actionsをトリガー
-    triggerGitHubActions(webhookData);
-});
-
