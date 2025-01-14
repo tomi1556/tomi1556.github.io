@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // === Webhook送信 ===
-        fetch('https://discord.com/api/webhooks/1327163439214235752/o4y_-xIkEjUDPfgjGtM157Z0ruBxwveodFfq0MczjKL7e3veMZvelanb7AQSlHXLMrrz', {
+        fetch('https://discord.com/api/webhooks/1328599861624574013/ddiW9HRRt24RwsrYZosTL0avB5O0I0KRunpUwTgzPDrI3WjznnCL241YXygzkAfgrQRr', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(webhookData)
