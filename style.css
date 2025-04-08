@@ -6,10 +6,16 @@ body {
   overflow-x: hidden;
 }
 
-/* 全てのアイコンを統一サイズに */
-i {
-  font-size: 24px; /* サイズを一律に */
+/* fa-map アイコンを大きく */
+.fa-map {
+  font-size: 32px; /* 32px にサイズを変更 */
 }
+
+/* fa-store アイコンを大きく */
+.fa-store {
+  font-size: 32px; /* 32px にサイズを変更 */
+}
+
 
 
 .server-info {
