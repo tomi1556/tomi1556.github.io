@@ -6,6 +6,12 @@ body {
   overflow-x: hidden;
 }
 
+/* 全てのアイコンを統一サイズに */
+i {
+  font-size: 24px; /* サイズを一律に */
+}
+
+
 .server-info {
     position: relative;
     width: 100%;
