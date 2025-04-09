@@ -6,7 +6,7 @@ body {
   overflow-x: hidden;
 }
 
-fa-book {
+.fa-book {
   font-size: 18px; /* 32px にサイズを変更 */
   margin-bottom: 6px; /* 下に8pxの余白を追加 */
 }
