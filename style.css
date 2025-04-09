@@ -8,13 +8,13 @@ body {
 
 /* fa-map アイコンを大きく */
 .fa-map {
-  font-size: 20px; /* 32px にサイズを変更 */
+  font-size: 18px; /* 32px にサイズを変更 */
   margin-bottom: 6px; /* 下に8pxの余白を追加 */
 }
 
 /* fa-shopping-bag アイコンを大きくし、下に少し余白を追加 */
 .fa-shopping-cart {
-  font-size: 20px; /* アイコンのサイズを大きく */
+  font-size: 18px; /* アイコンのサイズを大きく */
   margin-bottom: 6px; /* 下に8pxの余白を追加 */
 }
 
