@@ -17,6 +17,7 @@
       --white: #ffffff;
       --bg: #f0fdf4;
       --text: #1f2937;
+      --card-gap: 1rem;
     }
 
     * {
@@ -39,6 +40,7 @@
       background-color: var(--green-dark);
       color: var(--white);
       padding: 1rem;
+      flex-shrink: 0;
     }
 
     nav ul {
@@ -58,41 +60,43 @@
     }
 
     .container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: var(--card-gap);
+      padding: 1rem 2rem 1rem 1rem;
       flex: 1;
-      padding: 1rem;
     }
 
     section {
       background-color: var(--white);
       border-radius: 1rem;
       padding: 1.25rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.07);
+      transition: transform 0.2s ease;
+    }
+
+    section:hover {
+      transform: translateY(-3px);
     }
 
     section.rules {
-      border: 2px solid var(--green);
-      border-left: 10px solid var(--green-dark);
+      border-left: 6px solid var(--green-dark);
     }
 
     section.ban {
-      border: 2px solid var(--red);
-      border-left: 10px solid var(--red-dark);
+      border-left: 6px solid var(--red-dark);
     }
 
     section.join {
-      border: 2px solid var(--blue);
-      border-left: 10px solid var(--blue-dark);
+      border-left: 6px solid var(--blue-dark);
     }
 
     section.load {
-      border: 2px solid var(--yellow);
-      border-left: 10px solid var(--yellow-dark);
+      border-left: 6px solid var(--yellow-dark);
     }
 
     section.chat {
-      border: 2px solid var(--green);
-      border-left: 10px solid var(--green-dark);
+      border-left: 6px solid var(--green);
     }
 
     h2 {
@@ -177,6 +181,7 @@
       }
 
       .container {
+        display: block;
         padding: 0.75rem;
       }
     }
