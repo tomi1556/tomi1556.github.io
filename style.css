@@ -27,7 +27,7 @@ body {
 /* アイコンを囲む要素のクリックエリア調整 */
 .icon-container {
   text-align: center; /* アイコンを中央揃え */
-  margin-top: 500px; /* アイコンとnavの間に余白を追加 */
+  margin-top: 460px; /* アイコンとnavの間に余白を追加 */
 }
 
 .server-info {
