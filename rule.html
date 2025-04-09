@@ -336,28 +336,15 @@ nav ul li a .item-name {
 
     <!-- メニュー開閉スクリプト -->
     <script>
-// ====== ✅ メニューボタンのクリックイベント ======
-    const menuButton = document.querySelector('.menu-button');
-    const body = document.querySelector('body');
+      document.addEventListener('DOMContentLoaded', () => {
+          const menuButton = document.getElementById('menu-button');
+          const mobileNav = document.getElementById('mobile-nav');
 
-    menuButton.addEventListener('click', function() {
-        body.classList.toggle('menu-open');
-        document.querySelector('nav').classList.toggle('menu-open');
-    });
-
-// ====== ✅ フェードイン要素の監視 ======
-    const fadeInElements = document.querySelectorAll(".fade-in");
-
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add("visible");
-                observer.unobserve(entry.target); // 一度だけアニメーションを適用
-            }
-        });
-    });
-
-    fadeInElements.forEach(el => observer.observe(el));
+          menuButton.addEventListener('click', () => {
+              mobileNav.classList.toggle('open'); // 'open'クラスをトグル
+              console.log('メニュー状態:', mobileNav.classList.contains('open') ? '開いた' : '閉じた');
+          });
+      });
     </script>
   <div class="container">
     <!-- サーバー規約 -->
