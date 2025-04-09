@@ -228,6 +228,46 @@
         margin-left: 0;
       }
     }
+@media (max-width: 768px) {
+  
+    .intro-text h2 {
+        font-size: 1.5em;
+    }
+
+    .intro-text p {
+        font-size: 0.8em;
+    }
+    .status-container {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .method-title {
+        font-size: 1.6em;
+        color: #558b2f;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+    .method-card p {
+        font-size: 0.7em;
+    }
+  
+    nav {
+        display: none; /* PC用ナビゲーションを非表示 */
+    }
+
+    .menu-button {
+        display: block; /* メニューボタンを表示 */
+    }
+
+    nav.mobile-nav {
+        display: none; /* 初期では非表示 */
+    }
+
+    nav.mobile-nav.open {
+        display: flex;
+    }
+
   </style>
 </head>
 <body>
