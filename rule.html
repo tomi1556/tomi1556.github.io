@@ -37,8 +37,8 @@
     }
 
     /* アイコンスタイル */
-    .fa-book, .fa-map, .fa-shopping-cart, .fa-discord {
-      font-size: 32px; /* アイコンのサイズを統一 */
+    .fa-book, .fa-ban, .fa-wand, .fa-chalkboard, .fa-volume-up {
+      font-size: 18px; /* アイコンのサイズを18pxに変更 */
       margin-bottom: 8px;
     }
 
@@ -308,53 +308,68 @@
     </nav>
 
     <div class="container">
-        <!-- セクション -->
+        <!-- セクション：サーバー規約 -->
         <section class="rules">
-            <h2>サーバー規約</h2>
+            <h2>📗 サーバー規約について</h2>
             <ul>
-                <li>1. ルールを守ってください。</li>
-                <li>2. 他のプレイヤーを尊重してください。</li>
-                <li>3. チートを使用しないでください。</li>
+                <li>✅ 運営の指示に従ってください</li>
+                <li>✅ 運営判断で処罰する場合もあります</li>
+                <li>✅ 禁止行為を行うと処罰が行われます</li>
             </ul>
         </section>
 
+        <!-- セクション：禁止行為 -->
         <section class="ban">
-            <h2>禁止事項</h2>
+            <h2>📕 禁止行為とされていること</h2>
             <ul>
-                <li>1. 他のプレイヤーの土地を無断で侵害すること。</li>
-                <li>2. サーバーを攻撃する行為。</li>
+                <li>🚫 迷惑行為</li>
+                <li>🚫 不正行為</li>
+                <li>🚫 宣伝行為</li>
+                <li>🚫 相手を不快にする行為</li>
+                <li>🚫 サーバーを攻撃する行為</li>
             </ul>
         </section>
 
+        <!-- セクション：サーバー参加ルール -->
         <section class="join">
-            <h2>参加方法</h2>
+            <h2>🪄 サーバー参加ルール</h2>
             <ul>
-                <li>1. サーバーに接続する。</li>
-                <li>2. チャットを活用してコミュニケーションを取る。</li>
+                <li>🚀 アクセスを繰り返さないこと</li>
+                <li>🚀 不公平なMODの禁止</li>
+                <li>🚀 マクロ・ツール・自動操作の禁止</li>
+                <li>🚀 サブ垢は1アカウントまで</li>
+                <li>🚀 サーバー内AFK回避の禁止</li>
             </ul>
         </section>
 
+        <!-- セクション：サーバー負荷ルール -->
         <section class="load">
-            <h2>サーバーに負荷をかけない</h2>
+            <h2>⛏️ サーバー負荷ルール</h2>
             <ul>
-                <li>1. 高負荷のコマンドやアクションは避けてください。</li>
+                <li>📖 長時間チャンク読み込みの禁止</li>
+                <li>📖 MOBの大量使用の禁止</li>
+                <li>📖 大きい負荷がかかる装置の禁止</li>
             </ul>
         </section>
 
+        <!-- セクション：チャットルール -->
         <section class="chat">
-            <h2>チャットルール</h2>
+            <h2>🔊 チャットルール</h2>
             <ul>
-                <li>1. 他のプレイヤーに迷惑をかける発言は禁止です。</li>
-                <li>2. 誹謗中傷や不快な言葉を使用しないでください。</li>
+                <li>💬 あいさつマナー</li>
+                <li>💬 迷惑なチャットの禁止</li>
+                <li>💬 チャットでの会話等ルール</li>
             </ul>
         </section>
     </div>
 
     <script>
-      document.getElementById("menu-button").addEventListener("click", function() {
+        const menuButton = document.getElementById("menu-button");
         const mobileNav = document.getElementById("mobile-nav");
-        mobileNav.classList.toggle("open");
-      });
+
+        menuButton.addEventListener("click", () => {
+            mobileNav.classList.toggle("open");
+        });
     </script>
 </body>
 </html>
