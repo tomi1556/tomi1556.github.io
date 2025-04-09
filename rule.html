@@ -15,7 +15,7 @@
       --yellow: #facc15;
       --yellow-dark: #ca8a04;
       --white: #ffffff;
-      --bg: #f0fdf4;
+      --bg: #f9fafb;
       --text: #1f2937;
     }
 
@@ -27,29 +27,34 @@
       font-family: 'Segoe UI', sans-serif;
       background-color: var(--bg);
       color: var(--text);
-      line-height: 1.6;
+      line-height: 1.4;
       margin: 0;
       padding: 0;
       display: flex;
       flex-wrap: wrap;
       min-height: 100vh;
+      justify-content: center;
     }
 
     nav {
-      width: 200px;
+      width: 100%;
       background-color: var(--green-dark);
       color: var(--white);
-      padding: 1rem;
+      padding: 0.75rem;
+      text-align: center;
     }
 
     nav ul {
       list-style: none;
       padding: 0;
       margin: 0;
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
     }
 
     nav li {
-      margin-bottom: 1rem;
+      font-size: 1rem;
     }
 
     nav a {
@@ -59,83 +64,58 @@
     }
 
     .container {
-      flex: 1;
-      padding: 1rem;
+      width: 90%;
+      max-width: 1000px;
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 1rem;
+      margin-top: 2rem;
     }
 
     section {
       background-color: var(--white);
-      border-radius: 1rem;
-      padding: 1.25rem;
-      margin-bottom: 1.5rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+      border-radius: 0.75rem;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      border-left: 8px solid;
     }
 
     section.rules {
-      border: 2px solid var(--green);
-      border-left: 10px solid var(--green-dark);
+      border-left-color: var(--green-dark);
     }
 
     section.ban {
-      border: 2px solid var(--red);
-      border-left: 10px solid var(--red-dark);
+      border-left-color: var(--red-dark);
     }
 
     section.join {
-      border: 2px solid var(--blue);
-      border-left: 10px solid var(--blue-dark);
+      border-left-color: var(--blue-dark);
     }
 
     section.load {
-      border: 2px solid var(--yellow);
-      border-left: 10px solid var(--yellow-dark);
+      border-left-color: var(--yellow-dark);
     }
 
     section.chat {
-      border: 2px solid var(--green);
-      border-left: 10px solid var(--green-dark);
+      border-left-color: var(--green-dark);
     }
 
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.2rem;
       margin-bottom: 1rem;
-    }
-
-    .rules h2 {
-      color: var(--green-dark);
-    }
-
-    .ban h2 {
-      color: var(--red-dark);
-    }
-
-    .join h2 {
-      color: var(--blue-dark);
-    }
-
-    .load h2 {
-      color: var(--yellow-dark);
-    }
-
-    .chat h2 {
-      color: var(--green-dark);
+      color: var(--text);
     }
 
     ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
+      padding-left: 1rem;
     }
 
     li {
-      background-color: #f9f9f9;
-      border-radius: 0.5rem;
-      padding: 0.75rem;
+      font-size: 0.95rem;
       margin-bottom: 0.75rem;
-      border-left: 6px solid var(--green);
+      line-height: 1.5;
+      padding-left: 0.5rem;
+      border-left: 4px solid var(--green);
     }
 
     .ban li {
@@ -167,22 +147,12 @@
       }
 
       nav {
-        width: 100%;
-        display: flex;
-        justify-content: center;
-        background-color: var(--green-dark);
-      }
-
-      nav ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
+        padding: 1rem;
       }
 
       .container {
-        padding: 0.75rem;
         grid-template-columns: 1fr;
+        margin-top: 1rem;
       }
     }
   </style>
