@@ -18,11 +18,17 @@ body {
   margin-bottom: 6px; /* 下に8pxの余白を追加 */
 }
 
-/* Discordアイコンを大きくし、下に少し余白を追加 */
+/* Discordアイコンのスタイル */
 .fa-discord {
   font-size: 18px; /* アイコンのサイズを大きく */
-  margin-bottom: 6px; /* 下に8pxの余白を追加 */
-  margin-top: 200px; /* navの下に余白を追加して配置 */
+  margin-bottom: 6px; /* 下に余白を追加 */
+  margin-top: 20px; /* navの下に余白を追加 */
+}
+
+/* アイコンを囲む要素のクリックエリア調整 */
+.icon-container {
+  text-align: center; /* アイコンを中央揃え */
+  margin-top: 20px; /* アイコンとnavの間に余白を追加 */
 }
 
 .server-info {
