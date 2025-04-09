@@ -8,6 +8,12 @@
     :root {
       --green: #22c55e;
       --green-dark: #16a34a;
+      --red: #ef4444;
+      --red-dark: #b91c1c;
+      --blue: #3b82f6;
+      --blue-dark: #1d4ed8;
+      --yellow: #facc15;
+      --yellow-dark: #ca8a04;
       --white: #ffffff;
       --bg: #f0fdf4;
       --text: #1f2937;
@@ -23,27 +29,94 @@
       color: var(--text);
       line-height: 1.6;
       margin: 0;
+      padding: 0;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    nav {
+      width: 200px;
+      background-color: var(--green-dark);
+      color: var(--white);
       padding: 1rem;
     }
 
+    nav ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav li {
+      margin-bottom: 1rem;
+    }
+
+    nav a {
+      color: var(--white);
+      text-decoration: none;
+      font-weight: bold;
+    }
+
     .container {
-      max-width: 800px;
-      margin: auto;
+      flex: 1;
+      padding: 1rem;
     }
 
     section {
       background-color: var(--white);
-      border: 2px solid var(--green);
-      border-left: 10px solid var(--green-dark);
       border-radius: 1rem;
       padding: 1.25rem;
       margin-bottom: 1.5rem;
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     }
 
+    section.rules {
+      border: 2px solid var(--green);
+      border-left: 10px solid var(--green-dark);
+    }
+
+    section.ban {
+      border: 2px solid var(--red);
+      border-left: 10px solid var(--red-dark);
+    }
+
+    section.join {
+      border: 2px solid var(--blue);
+      border-left: 10px solid var(--blue-dark);
+    }
+
+    section.load {
+      border: 2px solid var(--yellow);
+      border-left: 10px solid var(--yellow-dark);
+    }
+
+    section.chat {
+      border: 2px solid var(--green);
+      border-left: 10px solid var(--green-dark);
+    }
+
     h2 {
       font-size: 1.5rem;
       margin-bottom: 1rem;
+    }
+
+    .rules h2 {
+      color: var(--green-dark);
+    }
+
+    .ban h2 {
+      color: var(--red-dark);
+    }
+
+    .join h2 {
+      color: var(--blue-dark);
+    }
+
+    .load h2 {
+      color: var(--yellow-dark);
+    }
+
+    .chat h2 {
       color: var(--green-dark);
     }
 
@@ -61,6 +134,22 @@
       border-left: 6px solid var(--green);
     }
 
+    .ban li {
+      border-left-color: var(--red);
+    }
+
+    .join li {
+      border-left-color: var(--blue);
+    }
+
+    .load li {
+      border-left-color: var(--yellow);
+    }
+
+    .chat li {
+      border-left-color: var(--green);
+    }
+
     .note {
       display: block;
       font-size: 0.85rem;
@@ -68,22 +157,27 @@
       margin-top: 0.25rem;
     }
 
-    @media (max-width: 600px) {
+    @media (max-width: 768px) {
       body {
-        padding: 0.5rem;
+        flex-direction: column;
       }
 
-      section {
-        padding: 1rem;
+      nav {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        background-color: var(--green-dark);
       }
 
-      h2 {
-        font-size: 1.25rem;
+      nav ul {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 1rem;
       }
 
-      li {
-        font-size: 0.95rem;
-        padding: 0.6rem;
+      .container {
+        padding: 0.75rem;
       }
     }
   </style>
@@ -94,8 +188,17 @@
   </script>
 </head>
 <body>
+  <nav>
+    <ul>
+      <li><a href="#rules">📗 規約</a></li>
+      <li><a href="#ban">📕 禁止事項</a></li>
+      <li><a href="#join">🪄 参加</a></li>
+      <li><a href="#load">⛏️ 負荷</a></li>
+      <li><a href="#chat">🔊 チャット</a></li>
+    </ul>
+  </nav>
   <div class="container">
-    <section>
+    <section id="rules" class="rules">
       <h2>📗 サーバー規約について</h2>
       <ul>
         <li>✅ 運営の指示に従ってください</li>
@@ -104,7 +207,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="ban" class="ban">
       <h2>📕 禁止行為とされていること</h2>
       <ul>
         <li>🚫 迷惑行為</li>
@@ -115,7 +218,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="join" class="join">
       <h2>🪄 サーバー参加ルール</h2>
       <ul>
         <li>🚀 アクセスを繰り返さないこと<span class="note">バグ・回線落ちなどはOK。サーバーに無駄な負荷がかかるため。</span></li>
@@ -126,7 +229,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="load" class="load">
       <h2>⛏️ サーバー負荷ルール</h2>
       <ul>
         <li>📖 長時間チャンク読み込みの禁止<span class="note">目的ありのチャンク読み込みはOK。長時間は目安5分以上。</span></li>
@@ -135,7 +238,7 @@
       </ul>
     </section>
 
-    <section>
+    <section id="chat" class="chat">
       <h2>🔊 チャットルール</h2>
       <ul>
         <li>💬 あいさつマナー<span class="note">あいさつはきちんと返しましょう。自分からもあいさつをしよう。</span></li>
