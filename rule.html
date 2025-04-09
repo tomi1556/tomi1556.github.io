@@ -36,23 +36,19 @@
       min-height: 100vh;
     }
 
-    /* アイコンスタイル */
     .fa-book, .fa-ban, .fa-wand, .fa-chalkboard, .fa-volume-up {
-      font-size: 18px; /* アイコンのサイズを18pxに変更 */
+      font-size: 18px;
       margin-bottom: 8px;
     }
 
-    /* アイコンを囲む要素のスタイル */
     .icon-container {
       text-align: center;
       margin-top: 40px;
     }
 
-    /* PC用ナビゲーション */
     nav {
       background-color: #4caf50;
       padding: 10px 0;
-      box-shadow: none;
       position: fixed;
       width: 80px;
       top: 0;
@@ -65,29 +61,6 @@
       justify-content: flex-start;
     }
 
-    /* スマホ用ナビゲーション */
-    nav.mobile-nav {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 60%;
-      height: 100%;
-      background-color: rgba(0, 0, 0, 0.9);
-      z-index: 1001;
-      flex-direction: column;
-      align-items: flex-start;
-      padding: 20px;
-      transition: transform 0.3s ease-in-out;
-      transform: translateX(-100%);
-    }
-
-    nav.mobile-nav.open {
-      transform: translateX(0);
-      display: flex;
-    }
-
-    /* リストのスタイル */
     nav ul {
       list-style: none;
       padding: 0;
@@ -131,23 +104,6 @@
       text-align: center;
     }
 
-    /* メニューボタン */
-    .menu-button {
-      display: none;
-      position: fixed;
-      top: 10px;
-      right: 10px;
-      background-color: #4caf50;
-      color: white;
-      padding: 10px;
-      font-size: 1.5em;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      z-index: 1002;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    }
-
     .container {
       max-width: 900px;
       margin-left: 220px;
@@ -162,7 +118,6 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     }
 
-    /* セクションごとのスタイル */
     section.rules {
       border: 2px solid var(--green);
       border-left: 10px solid var(--green-dark);
@@ -274,102 +229,62 @@
       }
     }
   </style>
-  <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      console.log("サーバー規約ページが読み込まれました。");
-    });
-  </script>
 </head>
 <body>
-    <!-- メニューボタン -->
-    <button id="menu-button" class="menu-button">☰</button>
+  <div class="container">
+    <!-- サーバー規約 -->
+    <section class="rules">
+      <h2><i class="fa-solid fa-book"></i> 📗 サーバー規約について</h2>
+      <ul>
+        <li>✅ 運営の指示に従ってください</li>
+        <li>✅ 運営判断で処罰する場合もあります</li>
+        <li>✅ 禁止行為を行うと処罰が行われます</li>
+      </ul>
+    </section>
 
-    <!-- モバイルナビゲーションメニュー -->
-    <nav id="mobile-nav" class="mobile-nav">
-        <ul>
-            <li><a href="index.html"><i class="fa-solid fa-home"></i> ホーム</a></li>
-            <li><a href="https://discord.com/channels/1180864993214873750/1350659087519453255/1351068625783754822" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-user-friends"></i> ガイド</a></li>
-            <li><a href="http://stellamc.jp:2470/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-map"></i> まっぷ</a></li>
-            <li><a href="https://stella.store.playerlands.com/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shopping-cart"></i> Shop</a></li>
-            <li><a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i> Discord</a></li>
-        </ul>
-    </nav>
+    <!-- 禁止行為 -->
+    <section class="ban">
+      <h2><i class="fa-solid fa-ban"></i> 📕 禁止行為とされていること</h2>
+      <ul>
+        <li>🚫 迷惑行為</li>
+        <li>🚫 不正行為</li>
+        <li>🚫 宣伝行為</li>
+        <li>🚫 相手を不快にする行為</li>
+        <li>🚫 サーバーを攻撃する行為</li>
+      </ul>
+    </section>
 
-    <!-- PCナビゲーション -->
-    <nav>
-        <ul>
-            <li><a href="index.html"><i class="fas fa-home"></i><span class="item-name">ホーム</span></a></li>
-            <li><a href="rule.html"><i class="fa-solid fa-book"></i><span class="item-name">ルール</span></a></li>
-            <li><a href="https://discord.com/channels/1180864993214873750/1350659087519453255/1351068625783754822" target="_blank" rel="noopener noreferrer"><i class="fas fa-user-friends"></i><span class="item-name">ガイド</span></a></li>
-            <li><a href="http://stellamc.jp:2470/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-map"></i><span class="item-name">まっぷ</span></a></li>
-            <li><a href="https://stella.store.playerlands.com/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shopping-cart"></i><span class="item-name">Shop</span></a></li>
-            <li><a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord"></i><span class="item-name">Discord</span></a></li>
-        </ul>
-    </nav>
+    <!-- サーバー参加ルール -->
+    <section class="join">
+      <h2><i class="fa-solid fa-wand"></i> 🪄 サーバー参加ルール</h2>
+      <ul>
+        <li>🚀 アクセスを繰り返さないこと<br><span class="note">バグ・回線落ちなどはOK サーバーに無駄な負荷がかかるため</span></li>
+        <li>🚀 不公平なMODの禁止<br><span class="note">軽量化やレシピ・MAP・空腹はOK 不安なMODは質問してください</span></li>
+        <li>🚀 マクロ・ツール・自動操作の禁止<br><span class="note">使用できない機種と不平が生じるため 種類によっては負荷がかかるため</span></li>
+        <li>🚀 サブ垢は1アカウントまで<br><span class="note">別の人がプレイするなどはOK サーバーに無駄な負荷がかかるため</span></li>
+        <li>🚀 サーバー内AFK回避の禁止<br><span class="note">AFK設定している意味がなくなるため 自動再接続もAFK回避とみなします</span></li>
+      </ul>
+    </section>
 
-    <div class="container">
-        <!-- セクション：サーバー規約 -->
-        <section class="rules">
-            <h2>📗 サーバー規約について</h2>
-            <ul>
-                <li>✅ 運営の指示に従ってください</li>
-                <li>✅ 運営判断で処罰する場合もあります</li>
-                <li>✅ 禁止行為を行うと処罰が行われます</li>
-            </ul>
-        </section>
+    <!-- サーバー負荷ルール -->
+    <section class="load">
+      <h2><i class="fa-solid fa-chalkboard"></i> ⛏️ サーバー負荷ルール</h2>
+      <ul>
+        <li>📖 長時間チャンク読み込みの禁止<br><span class="note">目的ありのチャンク読み込みはOK 長時間は目安5分以上</span></li>
+        <li>📖 MOBの大量使用の禁止<br><span class="note">大量のMOBがいるところに放置 大量の確保・捕獲等 大量の目安は10体以上</span></li>
+        <li>📖 大きい負荷がかかる装置の禁止<br><span class="note">一度に大量の演算処理が必要な装置 常に稼働・処理する装置 トラップに長時間放置など 初期リス付近での装置は禁止</span></li>
+      </ul>
+    </section>
 
-        <!-- セクション：禁止行為 -->
-        <section class="ban">
-            <h2>📕 禁止行為とされていること</h2>
-            <ul>
-                <li>🚫 迷惑行為</li>
-                <li>🚫 不正行為</li>
-                <li>🚫 宣伝行為</li>
-                <li>🚫 相手を不快にする行為</li>
-                <li>🚫 サーバーを攻撃する行為</li>
-            </ul>
-        </section>
-
-        <!-- セクション：サーバー参加ルール -->
-        <section class="join">
-            <h2>🪄 サーバー参加ルール</h2>
-            <ul>
-                <li>🚀 アクセスを繰り返さないこと</li>
-                <li>🚀 不公平なMODの禁止</li>
-                <li>🚀 マクロ・ツール・自動操作の禁止</li>
-                <li>🚀 サブ垢は1アカウントまで</li>
-                <li>🚀 サーバー内AFK回避の禁止</li>
-            </ul>
-        </section>
-
-        <!-- セクション：サーバー負荷ルール -->
-        <section class="load">
-            <h2>⛏️ サーバー負荷ルール</h2>
-            <ul>
-                <li>📖 長時間チャンク読み込みの禁止</li>
-                <li>📖 MOBの大量使用の禁止</li>
-                <li>📖 大きい負荷がかかる装置の禁止</li>
-            </ul>
-        </section>
-
-        <!-- セクション：チャットルール -->
-        <section class="chat">
-            <h2>🔊 チャットルール</h2>
-            <ul>
-                <li>💬 あいさつマナー</li>
-                <li>💬 迷惑なチャットの禁止</li>
-                <li>💬 チャットでの会話等ルール</li>
-            </ul>
-        </section>
-    </div>
-
-    <script>
-        const menuButton = document.getElementById("menu-button");
-        const mobileNav = document.getElementById("mobile-nav");
-
-        menuButton.addEventListener("click", () => {
-            mobileNav.classList.toggle("open");
-        });
-    </script>
+    <!-- チャットルール -->
+    <section class="chat">
+      <h2><i class="fa-solid fa-volume-up"></i> 🔊 チャットルール</h2>
+      <ul>
+        <li>💬 あいさつマナー<br><span class="note">あいさつはきちんと返しましょう 自分からもあいさつをしよう</span></li>
+        <li>💬 迷惑なチャットの禁止<br><span class="note">同じ文字を何個も並べる(例：aaaa) スパム行為やクレクレ行為など 暴言や不満などの不快なチャット</span></li>
+        <li>💬 チャットでの会話等ルール<br><span class="note">身内ノリ等は/tellや/chのみ 公開チャットでは適切なチャットで 過度な独り言などはご遠慮ください</span></li>
+      </ul>
+    </section>
+  </div>
 </body>
 </html>
