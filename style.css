@@ -13,7 +13,7 @@ body {
 }
 
 /* fa-shopping-bag アイコンを大きくし、下に少し余白を追加 */
-.fa-box {
+.fa-shopping-cart {
   font-size: 16px; /* アイコンのサイズを大きく */
   margin-bottom: 6px; /* 下に8pxの余白を追加 */
 }
