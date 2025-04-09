@@ -32,7 +32,7 @@ fa-book {
 /* アイコンを囲む要素のクリックエリア調整 */
 .icon-container {
   text-align: center; /* アイコンを中央揃え */
-  margin-top: 440px; /* アイコンとnavの間に余白を追加 */
+  margin-top: 430px; /* アイコンとnavの間に余白を追加 */
 }
 
 .server-info {
