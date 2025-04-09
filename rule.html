@@ -5,41 +5,86 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>サーバー規約 | Minecraft Server</title>
   <style>
+    :root {
+      --green: #22c55e;
+      --green-dark: #16a34a;
+      --white: #ffffff;
+      --bg: #f0fdf4;
+      --text: #1f2937;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f0fdf4;
-      color: #1f2937;
+      background-color: var(--bg);
+      color: var(--text);
       line-height: 1.6;
-      padding: 1.5rem;
+      margin: 0;
+      padding: 1rem;
     }
-    h2 {
-      font-size: 1.75rem;
-      margin-top: 2rem;
-      margin-bottom: 1rem;
+
+    .container {
+      max-width: 800px;
+      margin: auto;
     }
-    ul {
-      padding-left: 1.25rem;
-    }
-    li {
-      margin-bottom: 0.5rem;
-    }
+
     section {
-      background-color: #ffffff;
+      background-color: var(--white);
+      border: 2px solid var(--green);
+      border-left: 10px solid var(--green-dark);
       border-radius: 1rem;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      padding: 1.25rem;
+      margin-bottom: 1.5rem;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
     }
-    .text-green { color: #15803d; }
-    .text-red { color: #dc2626; }
-    .text-purple { color: #7c3aed; }
-    .text-yellow { color: #ca8a04; }
-    .text-blue { color: #2563eb; }
+
+    h2 {
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: var(--green-dark);
+    }
+
+    ul {
+      list-style: none;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    li {
+      background-color: #f9f9f9;
+      border-radius: 0.5rem;
+      padding: 0.75rem;
+      margin-bottom: 0.75rem;
+      border-left: 6px solid var(--green);
+    }
+
     .note {
       display: block;
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       color: #6b7280;
       margin-top: 0.25rem;
+    }
+
+    @media (max-width: 600px) {
+      body {
+        padding: 0.5rem;
+      }
+
+      section {
+        padding: 1rem;
+      }
+
+      h2 {
+        font-size: 1.25rem;
+      }
+
+      li {
+        font-size: 0.95rem;
+        padding: 0.6rem;
+      }
     }
   </style>
   <script>
@@ -50,9 +95,8 @@
 </head>
 <body>
   <div class="container">
-    <!-- サーバー規約 -->
     <section>
-      <h2 class="text-green">📗 サーバー規約について</h2>
+      <h2>📗 サーバー規約について</h2>
       <ul>
         <li>✅ 運営の指示に従ってください</li>
         <li>✅ 運営判断で処罰する場合もあります</li>
@@ -60,9 +104,8 @@
       </ul>
     </section>
 
-    <!-- 禁止行為 -->
     <section>
-      <h2 class="text-red">📕 禁止行為とされていること</h2>
+      <h2>📕 禁止行為とされていること</h2>
       <ul>
         <li>🚫 迷惑行為</li>
         <li>🚫 不正行為</li>
@@ -72,9 +115,8 @@
       </ul>
     </section>
 
-    <!-- 参加ルール -->
     <section>
-      <h2 class="text-purple">🪄 サーバー参加ルール</h2>
+      <h2>🪄 サーバー参加ルール</h2>
       <ul>
         <li>🚀 アクセスを繰り返さないこと<span class="note">バグ・回線落ちなどはOK。サーバーに無駄な負荷がかかるため。</span></li>
         <li>🚀 不公平なMODの禁止<span class="note">軽量化やレシピ・MAP・空腹はOK。不安なMODは質問してください。</span></li>
@@ -84,9 +126,8 @@
       </ul>
     </section>
 
-    <!-- 負荷ルール -->
     <section>
-      <h2 class="text-yellow">⛏️ サーバー負荷ルール</h2>
+      <h2>⛏️ サーバー負荷ルール</h2>
       <ul>
         <li>📖 長時間チャンク読み込みの禁止<span class="note">目的ありのチャンク読み込みはOK。長時間は目安5分以上。</span></li>
         <li>📖 MOBの大量使用の禁止<span class="note">大量のMOBがいるところに放置、大量の確保・捕獲等（目安は10体以上）。</span></li>
@@ -94,9 +135,8 @@
       </ul>
     </section>
 
-    <!-- チャットルール -->
     <section>
-      <h2 class="text-blue">🔊 チャットルール</h2>
+      <h2>🔊 チャットルール</h2>
       <ul>
         <li>💬 あいさつマナー<span class="note">あいさつはきちんと返しましょう。自分からもあいさつをしよう。</span></li>
         <li>💬 迷惑なチャットの禁止<span class="note">同じ文字の連打（例：aaaa）、スパム、クレクレ、暴言、不満など。</span></li>
