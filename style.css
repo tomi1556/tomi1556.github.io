@@ -22,7 +22,7 @@ body {
 .fa-discord {
   font-size: 18px; /* アイコンのサイズを大きく */
   margin-bottom: 6px; /* 下に8pxの余白を追加 */
-  margin-top: 20px; /* navの下に余白を追加して配置 */
+  margin-top: 200px; /* navの下に余白を追加して配置 */
 }
 
 .server-info {
