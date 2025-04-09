@@ -22,7 +22,6 @@ body {
 .fa-discord {
   font-size: 18px; /* アイコンのサイズを大きく */
   margin-bottom: 6px; /* 下に余白を追加 */
-  margin-top: 20px; /* navの下に余白を追加 */
 }
 
 /* アイコンを囲む要素のクリックエリア調整 */
