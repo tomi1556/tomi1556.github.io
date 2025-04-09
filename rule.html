@@ -260,30 +260,21 @@ nav ul li a .item-name {
       }
 
       nav {
-        width: 100%;
-        height: auto;
-        position: relative;
-      }
-
-      nav ul {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 1rem;
-      }
-
-      .container {
-        padding: 0.75rem;
-        margin-left: 0;
-      }
-
-      nav.mobile-nav {
-        display: none;
+          display: none; /* PC用ナビゲーションを非表示 */
       }
 
       .menu-button {
-        display: block;
+          display: block; /* メニューボタンを表示 */
       }
+
+      nav.mobile-nav {
+          display: none; /* 初期では非表示 */
+      }
+
+      nav.mobile-nav.open {
+          display: flex;
+      }
+
     }
   </style>
 </head>
