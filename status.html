@@ -51,7 +51,6 @@
       background-color: var(--bar-bg);
       border-radius: 10px;
       margin-bottom: 1rem;
-      position: relative;
       display: flex;
       justify-content: flex-start;
       align-items: center;
@@ -98,7 +97,6 @@
 
     <!-- 進行状況バー -->
     <div id="progress-container">
-      <!-- 進行状況のセグメント（細かく区切る） -->
       <div id="progress-bar" class="progress-segment"></div>
     </div>
 
@@ -129,7 +127,7 @@
           if (isOnline === 1) {
             const uptimePercentage = 100;  // サーバーがオンラインなら100%
             progressBar.style.width = `${uptimePercentage}%`;
-            progressBar.style.backgroundColor = `linear-gradient(to right, #66bb6a 0%, #4caf50 100%)`; // 緑色グラデーション
+            progressBar.style.backgroundColor = `#66bb6a`; // 緑色
             statusMessage.textContent = `プレイヤー数: ${playerCount}`;
             statusMessage.classList.remove('error');
           } else {
