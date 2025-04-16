@@ -55,6 +55,7 @@
       display: flex;
       justify-content: flex-start;
       align-items: center;
+      overflow: hidden;
     }
 
     .progress-segment {
@@ -97,6 +98,7 @@
 
     <!-- 進行状況バー -->
     <div id="progress-container">
+      <!-- 進行状況のセグメント（細かく区切る） -->
       <div id="progress-bar" class="progress-segment"></div>
     </div>
 
@@ -112,7 +114,7 @@
     const interval = 5 * 60 * 1000;
     let nextUpdate = Date.now() + interval;
 
-    // 進行状況バーの更新
+    // サーバーステータスを取得して進行状況バーを更新
     function updateProgressBar() {
       fetch("https://api.mcstatus.io/v2/status/java/stellamc.jp")
         .then(res => res.json())
@@ -120,174 +122,13 @@
           const isOnline = data.online ? 1 : 0;
           const playerCount = data.players.online;
 
-          // 進行バーの幅（細かく区切る）
+          // 進行状況バーの幅（細かく区切る）
           const progressBar = document.getElementById('progress-bar');
           const statusMessage = document.getElementById('status-message');
 
           if (isOnline === 1) {
-            progressBar.style.width = '100%'; // オンライン時はバーが満杯
-            progressBar.style.backgroundColor = `linear-gradient(to right, #66bb6a 0%, #4caf50 100%)`; // 緑色グラデーション
-            statusMessage.textContent = `プレイヤー数: ${playerCount}`;
-            statusMessage.classList.remove('error');
-          } else {
-            progressBar.style.width = '0%'; // オフライン時はバーが消える
-            progressBar.style.backgroundColor = '#f44336'; // 赤色
-            statusMessage.textContent = 'サーバーはオフラインです';
-            statusMessage.classList.add('error');
-          }
-        })
-        .catch(err => {
-          console.error('取得エラー:', err);
-          document.getElementById('status-message').textContent = 'サーバー情報の取得に失敗しました。';
-          document.getElementById('status-message').classList.add('error');
-        });
-
-      nextUpdate = Date.now() + interval;
-    }
-
-    // カウントダウン表示
-    function updateCountdown() {
-      const now = Date.now();
-      let remaining = Math.max(0, nextUpdate - now);
-      const minutes = Math.floor(remaining / 60000);
-      const seconds = Math.floor((remaining % 60000) / 1000);
-      document.getElementById('countdown').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
-    }
-
-    updateProgressBar(); // 初回
-    setInterval(updateProgressBar, interval);
-    setInterval(updateCountdown, 1000); // 毎秒更新
-  </script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Stellaサーバーステータス</title>
-  <style>
-    :root {
-      --green: #66bb6a;
-      --bg: #fff;
-      --panel: #f4f4f4;
-      --text: #121212;
-      --muted: #888;
-      --bar-bg: #e0e0e0;
-      --highlight: #4caf50;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      justify-content: center;
-    }
-
-    .container {
-      background-color: var(--panel);
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 0 24px rgba(0,0,0,0.1);
-      max-width: 90%;
-      width: 700px;
-    }
-
-    h1 {
-      text-align: center;
-      color: var(--green);
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      font-size: 1.8rem;
-    }
-
-    #progress-container {
-      width: 100%;
-      height: 30px;
-      background-color: var(--bar-bg);
-      border-radius: 10px;
-      margin-bottom: 1rem;
-      position: relative;
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-    }
-
-    .progress-segment {
-      height: 100%;
-      border-radius: 10px;
-      transition: width 0.3s ease;
-    }
-
-    #timer {
-      margin-top: 1.5rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    #status-message {
-      color: var(--muted);
-      text-align: center;
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-
-    .error {
-      color: #f44336;
-    }
-
-    @media (max-width: 500px) {
-      h1 {
-        font-size: 1.3rem;
-      }
-      #timer {
-        font-size: 0.85rem;
-      }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <h1>🟢 Stellaサーバー稼働状況</h1>
-
-    <!-- 進行状況バー -->
-    <div id="progress-container">
-      <div id="progress-bar" class="progress-segment"></div>
-    </div>
-
-    <!-- タイマー表示 -->
-    <div id="timer">次の更新まで: <span id="countdown">--:--</span></div>
-
-    <!-- サーバーエラーメッセージ -->
-    <div id="status-message"></div>
-  </div>
-
-  <script>
-    // 更新間隔（ミリ秒）
-    const interval = 5 * 60 * 1000;
-    let nextUpdate = Date.now() + interval;
-
-    // 進行状況バーの更新
-    function updateProgressBar() {
-      fetch("https://api.mcstatus.io/v2/status/java/stellamc.jp")
-        .then(res => res.json())
-        .then(data => {
-          const isOnline = data.online ? 1 : 0;
-          const playerCount = data.players.online;
-
-          // 進行バーの幅（細かく区切る）
-          const progressBar = document.getElementById('progress-bar');
-          const statusMessage = document.getElementById('status-message');
-
-          if (isOnline === 1) {
-            progressBar.style.width = '100%'; // オンライン時はバーが満杯
+            const uptimePercentage = 100;  // サーバーがオンラインなら100%
+            progressBar.style.width = `${uptimePercentage}%`;
             progressBar.style.backgroundColor = `linear-gradient(to right, #66bb6a 0%, #4caf50 100%)`; // 緑色グラデーション
             statusMessage.textContent = `プレイヤー数: ${playerCount}`;
             statusMessage.classList.remove('error');
