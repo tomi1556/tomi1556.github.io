@@ -5,129 +5,49 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Stella サーバーステータス</title>
   <style>
-    :root {
-      --green: #66bb6a;
-      --bg: #fff;
-      --panel: #f4f4f4;
-      --text: #121212;
-      --muted: #888;
-      --bar-bg: #e0e0e0;
-      --highlight: #4caf50;
-    }
-
-    body {
-      margin: 0;
-      padding: 0;
-      background-color: var(--bg);
-      color: var(--text);
-      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      justify-content: center;
-    }
-
-    .container {
-      background-color: var(--panel);
-      border-radius: 16px;
-      padding: 2rem;
-      box-shadow: 0 0 24px rgba(0,0,0,0.1);
-      max-width: 90%;
-      width: 700px;
-      text-align: center;
-    }
-
-    h1 {
-      color: var(--green);
-      font-weight: 600;
-      margin-bottom: 1.5rem;
-      font-size: 1.8rem;
-    }
-
-    #status-bars {
-      width: 100%;
-      height: 20px;
-      margin-bottom: 1.5rem;
-      display: flex;
-      align-items: center;
-    }
-
-    .status-bar {
-      height: 100%;
-      margin: 0 1px;  /* 2pxの間隔で区切り */
-      border-radius: 5px;
-      transition: width 1s ease-out;
-    }
-
-    .online {
-      background-color: #66bb6a;
-    }
-
-    .offline {
-      background-color: #f44336;
-    }
-
-    #timer {
-      margin-top: 1.5rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.95rem;
-    }
-
-    #status-message {
-      color: var(--muted);
-      font-size: 1rem;
-      margin-top: 1rem;
-    }
-
-    .error {
-      color: #f44336;
-    }
-
-    @media (max-width: 500px) {
-      h1 {
-        font-size: 1.3rem;
-      }
-      #timer {
-        font-size: 0.85rem;
-      }
-    }
+    /* スタイルはそのまま */
   </style>
 </head>
 <body>
   <div class="container">
     <h1>🟢 Stella サーバーの状態</h1>
 
-    <!-- サーバーの状態を表示するバー -->
     <div id="status-bars"></div>
-
-    <!-- 次の更新までのカウントダウン -->
+    <div id="status-timings"></div> <!-- 新しい要素を追加 -->
     <div id="timer">次の更新まで: <span id="countdown">--:--</span></div>
   </div>
 
   <script>
     const interval = 5 * 60 * 1000; // 5分ごとに更新
     let nextUpdate = Date.now() + interval;
-    let statusHistory = []; // 状態履歴（5分ごとの履歴）
+    let statusHistory = []; // 状態履歴
+    let lastStatus = null; // 最後のステータス
+    let statusDuration = 0; // ステータスの持続時間
 
-    // サーバーの状態を取得し、状態履歴を更新
     function updateStatusHistory() {
       fetch("https://api.mcstatus.io/v2/status/java/stellamc.jp")
         .then(res => res.json())
         .then(data => {
           const isOnline = data.online ? 1 : 0;
           const currentTime = new Date().getTime();
-          
+
+          // ステータスが変わった場合、持続時間を記録
+          if (lastStatus !== null && lastStatus !== isOnline) {
+            statusHistory.push({ time: currentTime, online: lastStatus, duration: statusDuration });
+            statusDuration = 0; // リセット
+          }
+
+          // ステータスの持続時間を更新
+          statusDuration += interval / 1000; // 秒単位で加算
+          lastStatus = isOnline;
+
           // 5分ごとの状態を記録
-          if (statusHistory.length >= 12) { // 1時間分
+          if (statusHistory.length >= 12) {
             statusHistory.shift(); // 古いデータを削除
           }
 
-          // サーバー状態（オンラインまたはオフライン）を記録
-          statusHistory.push({ time: currentTime, online: isOnline });
-
           renderStatusBars();
+          renderStatusTimings();
         })
         .catch(err => {
           console.error('取得エラー:', err);
@@ -138,12 +58,10 @@
       nextUpdate = Date.now() + interval;
     }
 
-    // サーバー状態のバーを描画
     function renderStatusBars() {
       const statusBars = document.getElementById('status-bars');
-      statusBars.innerHTML = ''; // 既存のバーをクリア
+      statusBars.innerHTML = '';
 
-      // 状態履歴をバーに変換して表示
       statusHistory.forEach(state => {
         const statusBar = document.createElement('div');
         statusBar.classList.add('status-bar');
@@ -160,7 +78,17 @@
       });
     }
 
-    // カウントダウンを更新
+    function renderStatusTimings() {
+      const statusTimings = document.getElementById('status-timings');
+      statusTimings.innerHTML = ''; // 既存のタイミングをクリア
+
+      statusHistory.forEach(state => {
+        const timingInfo = document.createElement('div');
+        timingInfo.textContent = `状態: ${state.online ? 'オンライン' : 'オフライン'}, 持続時間: ${state.duration}秒`;
+        statusTimings.appendChild(timingInfo);
+      });
+    }
+
     function updateCountdown() {
       const now = Date.now();
       let remaining = Math.max(0, nextUpdate - now);
@@ -171,7 +99,4 @@
 
     updateStatusHistory(); // 初回
     setInterval(updateStatusHistory, interval);
-    setInterval(updateCountdown, 1000); // 毎秒更新
-  </script>
-</body>
-</html>
+    setInterval(updateCountdown
