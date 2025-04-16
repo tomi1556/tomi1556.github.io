@@ -8,10 +8,10 @@
   <style>
     :root {
       --green: #66bb6a;
-      --bg: #121212;
-      --panel: #1e1e1e;
-      --text: #f1f1f1;
-      --muted: #aaa;
+      --bg: #fff;
+      --panel: #f4f4f4;
+      --text: #121212;
+      --muted: #888;
     }
 
     body {
@@ -29,9 +29,9 @@
 
     .container {
       background-color: var(--panel);
-      border-radius: 20px;
+      border-radius: 16px;
       padding: 2rem;
-      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+      box-shadow: 0 0 24px rgba(0,0,0,0.1);
       max-width: 90%;
       width: 700px;
     }
@@ -44,9 +44,19 @@
       font-size: 1.8rem;
     }
 
-    canvas {
-      width: 100% !important;
-      height: auto !important;
+    #progress-container {
+      width: 100%;
+      height: 30px;
+      background-color: #e0e0e0;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+    }
+
+    #progress-bar {
+      height: 100%;
+      background-color: var(--green);
+      border-radius: 10px;
+      transition: width 0.3s ease;
     }
 
     #timer {
@@ -58,7 +68,7 @@
 
     @media (max-width: 500px) {
       h1 {
-        font-size: 1.4rem;
+        font-size: 1.3rem;
       }
       #timer {
         font-size: 0.85rem;
@@ -69,84 +79,31 @@
 <body>
   <div class="container">
     <h1>🟢 Stellaサーバー稼働状況</h1>
-    <canvas id="uptimeChart"></canvas>
+
+    <!-- 進行状況バー -->
+    <div id="progress-container">
+      <div id="progress-bar"></div>
+    </div>
+
+    <!-- タイマー表示 -->
     <div id="timer">次の更新まで: <span id="countdown">--:--</span></div>
   </div>
 
   <script>
-    const ctx = document.getElementById('uptimeChart').getContext('2d');
-    const labels = [];
-    const uptimeData = [];
-    const chart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: labels,
-        datasets: [{
-          label: 'ステータス',
-          data: uptimeData,
-          borderColor: '#66bb6a',
-          backgroundColor: 'rgba(102, 187, 106, 0.15)',
-          pointRadius: 4,
-          pointHoverRadius: 6,
-          borderWidth: 2,
-          tension: 0.4,
-          fill: true,
-        }]
-      },
-      options: {
-        responsive: true,
-        animation: {
-          duration: 800,
-          easing: 'easeOutQuart'
-        },
-        scales: {
-          x: {
-            ticks: { color: '#aaa' },
-            grid: { color: '#2a2a2a' }
-          },
-          y: {
-            min: 0,
-            max: 1,
-            ticks: {
-              stepSize: 1,
-              callback: v => v === 1 ? '🟢 オンライン' : '🔴 オフライン',
-              color: '#aaa'
-            },
-            grid: { color: '#2a2a2a' }
-          }
-        },
-        plugins: {
-          legend: { display: false },
-          tooltip: {
-            callbacks: {
-              label: ctx => ctx.raw === 1 ? "オンライン" : "オフライン"
-            }
-          }
-        }
-      }
-    });
-
     // 更新間隔（ミリ秒）
     const interval = 5 * 60 * 1000;
     let nextUpdate = Date.now() + interval;
 
-    function fetchStatus() {
+    // 進行状況バーを更新
+    function updateProgressBar() {
       fetch("https://api.mcstatus.io/v2/status/java/stellamc.jp")
         .then(res => res.json())
         .then(data => {
-          const now = new Date();
-          const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
           const isOnline = data.online ? 1 : 0;
 
-          labels.push(time);
-          uptimeData.push(isOnline);
-
-          if (labels.length > 24) {
-            labels.shift();
-            uptimeData.shift();
-          }
-
-          chart.update();
+          // 進行状況バーの幅を設定
+          const progressBar = document.getElementById('progress-bar');
+          progressBar.style.width = isOnline === 1 ? '100%' : '0%';
         })
         .catch(err => {
           console.error('取得エラー:', err);
@@ -164,8 +121,8 @@
       document.getElementById('countdown').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
     }
 
-    fetchStatus(); // 初回
-    setInterval(fetchStatus, interval);
+    updateProgressBar(); // 初回
+    setInterval(updateProgressBar, interval);
     setInterval(updateCountdown, 1000); // 毎秒更新
   </script>
 </body>
