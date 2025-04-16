@@ -2,110 +2,171 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Stella Server Status</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Stella Server Uptime</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <style>
+    :root {
+      --green: #66bb6a;
+      --bg: #121212;
+      --panel: #1e1e1e;
+      --text: #f1f1f1;
+      --muted: #aaa;
+    }
+
     body {
       margin: 0;
       padding: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to bottom, #d4fcd4, #ffffff);
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      justify-content: center;
       min-height: 100vh;
+      justify-content: center;
     }
 
-    .card {
-      background: white;
-      border-radius: 1rem;
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    .container {
+      background-color: var(--panel);
+      border-radius: 20px;
       padding: 2rem;
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
+      box-shadow: 0 0 30px rgba(0, 0, 0, 0.4);
+      max-width: 90%;
+      width: 700px;
     }
 
     h1 {
-      color: #2e7d32;
+      text-align: center;
+      color: var(--green);
+      font-weight: 600;
+      margin-bottom: 1.5rem;
       font-size: 1.8rem;
-      margin-bottom: 1rem;
     }
 
-    .status {
-      font-size: 1.2rem;
-      font-weight: bold;
-      margin: 0.5rem 0;
+    canvas {
+      width: 100% !important;
+      height: auto !important;
     }
 
-    .status.online {
-      color: #43a047;
-    }
-
-    .status.offline {
-      color: #e53935;
-    }
-
-    .info {
-      color: #555;
+    #timer {
+      margin-top: 1.5rem;
+      text-align: center;
+      color: var(--muted);
       font-size: 0.95rem;
-      margin: 0.3rem 0;
     }
 
-    .loader {
-      border: 4px solid #eee;
-      border-top: 4px solid #43a047;
-      border-radius: 50%;
-      width: 32px;
-      height: 32px;
-      animation: spin 1s linear infinite;
-      margin: 0 auto 1rem auto;
-    }
-
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    @media (max-width: 500px) {
+      h1 {
+        font-size: 1.4rem;
+      }
+      #timer {
+        font-size: 0.85rem;
+      }
     }
   </style>
 </head>
 <body>
-  <div class="card">
-    <h1>Stella Server Status</h1>
-    <div id="loader" class="loader"></div>
-    <div id="content" style="display: none;">
-      <div id="status" class="status"></div>
-      <div id="motd" class="info"></div>
-      <div id="players" class="info"></div>
-      <div id="ping" class="info"></div>
-    </div>
+  <div class="container">
+    <h1>🟢 Stellaサーバー稼働状況</h1>
+    <canvas id="uptimeChart"></canvas>
+    <div id="timer">次の更新まで: <span id="countdown">--:--</span></div>
   </div>
 
   <script>
-    fetch("https://api.mcstatus.io/v2/status/java/stellamc.jp")
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("content").style.display = "block";
-
-        const statusEl = document.getElementById("status");
-        if (data.online) {
-          statusEl.textContent = "🟢 Online";
-          statusEl.classList.add("online");
-          document.getElementById("motd").textContent = "MOTD: " + data.motd.clean.join(" ");
-          document.getElementById("players").textContent = `Players: ${data.players.online} / ${data.players.max}`;
-          document.getElementById("ping").textContent = `Ping: ${data.latency}ms`;
-        } else {
-          statusEl.textContent = "🔴 Offline";
-          statusEl.classList.add("offline");
+    const ctx = document.getElementById('uptimeChart').getContext('2d');
+    const labels = [];
+    const uptimeData = [];
+    const chart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'ステータス',
+          data: uptimeData,
+          borderColor: '#66bb6a',
+          backgroundColor: 'rgba(102, 187, 106, 0.15)',
+          pointRadius: 4,
+          pointHoverRadius: 6,
+          borderWidth: 2,
+          tension: 0.4,
+          fill: true,
+        }]
+      },
+      options: {
+        responsive: true,
+        animation: {
+          duration: 800,
+          easing: 'easeOutQuart'
+        },
+        scales: {
+          x: {
+            ticks: { color: '#aaa' },
+            grid: { color: '#2a2a2a' }
+          },
+          y: {
+            min: 0,
+            max: 1,
+            ticks: {
+              stepSize: 1,
+              callback: v => v === 1 ? '🟢 オンライン' : '🔴 オフライン',
+              color: '#aaa'
+            },
+            grid: { color: '#2a2a2a' }
+          }
+        },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => ctx.raw === 1 ? "オンライン" : "オフライン"
+            }
+          }
         }
-      })
-      .catch(error => {
-        document.getElementById("loader").style.display = "none";
-        document.getElementById("content").style.display = "block";
-        document.getElementById("status").textContent = "⚠️ エラーが発生しました";
-        document.getElementById("status").classList.add("offline");
-        console.error(error);
-      });
+      }
+    });
+
+    // 更新間隔（ミリ秒）
+    const interval = 5 * 60 * 1000;
+    let nextUpdate = Date.now() + interval;
+
+    function fetchStatus() {
+      fetch("https://api.mcstatus.io/v2/status/java/stellamc.jp")
+        .then(res => res.json())
+        .then(data => {
+          const now = new Date();
+          const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+          const isOnline = data.online ? 1 : 0;
+
+          labels.push(time);
+          uptimeData.push(isOnline);
+
+          if (labels.length > 24) {
+            labels.shift();
+            uptimeData.shift();
+          }
+
+          chart.update();
+        })
+        .catch(err => {
+          console.error('取得エラー:', err);
+        });
+
+      nextUpdate = Date.now() + interval;
+    }
+
+    // カウントダウン表示
+    function updateCountdown() {
+      const now = Date.now();
+      let remaining = Math.max(0, nextUpdate - now);
+      const minutes = Math.floor(remaining / 60000);
+      const seconds = Math.floor((remaining % 60000) / 1000);
+      document.getElementById('countdown').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
+    }
+
+    fetchStatus(); // 初回
+    setInterval(fetchStatus, interval);
+    setInterval(updateCountdown, 1000); // 毎秒更新
   </script>
 </body>
 </html>
