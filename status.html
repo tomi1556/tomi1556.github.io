@@ -13,6 +13,8 @@
       --muted: #888;
       --bar-bg: #e0e0e0;
       --highlight: #4caf50;
+      --accent: #333;
+      --primary: #4caf50;
     }
 
     body {
@@ -34,25 +36,41 @@
       padding: 2rem;
       box-shadow: 0 0 24px rgba(0, 0, 0, 0.1);
       max-width: 90%;
-      width: 700px;
-      text-align: center;
+      width: 800px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
     }
 
     h1 {
-      color: var(--green);
+      color: var(--primary);
       font-weight: 600;
       margin-bottom: 1.5rem;
       font-size: 1.8rem;
+      text-align: center;
+    }
+
+    .left-panel {
+      flex: 1;
+      max-width: 300px;
+      text-align: left;
+    }
+
+    .right-panel {
+      flex: 2;
+      width: 100%;
     }
 
     #status-bars {
       width: 100%;
       height: 50px;
-      margin-bottom: 1.5rem;
+      margin-top: 20px;
       display: flex;
       flex-direction: row;
       justify-content: flex-start;
       gap: 1px;
+      position: relative;
     }
 
     .status-bar {
@@ -71,6 +89,15 @@
       background-color: #f44336;
     }
 
+    .status-bar-text {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 0.75rem;
+      color: #fff;
+    }
+
     #timer {
       margin-top: 1.5rem;
       color: var(--muted);
@@ -81,10 +108,6 @@
       color: var(--muted);
       font-size: 1rem;
       margin-top: 1rem;
-    }
-
-    .error {
-      color: #f44336;
     }
 
     .highlighted {
@@ -123,13 +146,21 @@
 </head>
 <body>
   <div class="container">
-    <h1>🟢 Stella サーバーの状態</h1>
+    <div class="left-panel">
+      <h1>🟢 Stella サーバーの状態</h1>
+      <div id="server-info">
+        <p><strong>サーバー名:</strong> StellaMC</p>
+        <p><strong>IP:</strong> stellamc.jp</p>
+        <p><strong>ポート:</strong> 2424</p>
+        <p><strong>現在のステータス:</strong> <span id="status-online">読み込み中...</span></p>
+      </div>
+      <div id="status-message"></div>
+      <div id="timer">次の更新まで: <span id="countdown">--:--</span></div>
+    </div>
 
-    <!-- サーバーの状態を表示するバー -->
-    <div id="status-bars"></div>
-
-    <!-- 次の更新までのカウントダウン -->
-    <div id="timer">次の更新まで: <span id="countdown">--:--</span></div>
+    <div class="right-panel">
+      <div id="status-bars"></div>
+    </div>
   </div>
 
   <script>
@@ -153,6 +184,7 @@
           // サーバー状態（オンラインまたはオフライン）を記録
           statusHistory.push({ time: currentTime, online: isOnline });
 
+          document.getElementById('status-online').textContent = isOnline ? "オンライン" : "オフライン";
           renderStatusBars();
         })
         .catch(err => {
@@ -199,6 +231,12 @@
         statusBar.addEventListener('mouseleave', () => {
           statusBar.classList.remove('highlighted');
         });
+
+        // 時間表示
+        const timeLabel = document.createElement('div');
+        timeLabel.classList.add('status-bar-text');
+        timeLabel.textContent = new Date(state.time).toLocaleTimeString();
+        statusBar.appendChild(timeLabel);
 
         statusBars.appendChild(statusBar);
       }
