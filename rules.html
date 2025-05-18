@@ -20,7 +20,7 @@
             <nav class="main-nav" id="main-navigation">
                 <ul>
                     <li><a href="index.html">ホーム</a></li>
-                    <li><a href="rules.html" class="active">ルール</a></li> {/* このページがアクティブなことを示す */}
+                    <li><a href="rules.html" class="active">ルール</a></li>
                     <li><a href="support.html">支援</a></li>
                     <li><a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer">WebMap</a></li>
                 </ul>
@@ -56,7 +56,7 @@
 
                 <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.2s">
                     <h2 class="section-heading-styled"><i class="fas fa-gavel"></i>禁止行為</h2>
-                    <p class="section-description">以下の行為は、サーバーの健全な運営とコミュニティ維持のため、固く禁止されています。</p>
+                    <p class="section-description">以下の行為は、サーバーの健全な運営とコミュニティ維持のため、固く禁止されています。詳細は各項目をご確認ください。</p>
 
                     <div class="rules-category">
                         <h3 class="rules-category-title"><i class="fas fa-comments"></i>迷惑行為 (Harassment & Nuisance)</h3>
@@ -121,30 +121,30 @@
                     すべてのプレイヤーがStellaMCで楽しい時間を過ごせるよう、ご協力をお願いいたします。<br>
                     ルールに関してご不明な点がある場合は、遠慮なく運営スタッフにお尋ねください。
                 </p>
-            </div>
-        </article>
+            </article>
+        </div>
     </main>
 
     <footer>
-        {/* ... footerは前回と同じ ... */}
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> StellaMC. All Rights Reserved.</p>
+            <p class="small-text">Minecraft is a trademark of Mojang Synergies AB. This server is not affiliated with Mojang Synergies AB.</p>
+        </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script>
-        // JavaScriptは前回提供のものをベースに、エラーがあれば修正
+        // index.html と同じJavaScriptコードをこちらにも配置
         document.addEventListener('DOMContentLoaded', () => {
             const hamburger = document.querySelector('.hamburger-menu');
             const nav = document.querySelector('.main-nav');
-            if (hamburger && nav) { // 要素が存在するか確認
+            if (hamburger && nav) {
                 const navLinks = nav.querySelectorAll('a');
-
                 hamburger.addEventListener('click', () => {
                     const isActive = hamburger.classList.toggle('active');
                     nav.classList.toggle('active');
                     hamburger.setAttribute('aria-expanded', isActive);
                     document.body.classList.toggle('no-scroll', isActive);
                 });
-
                 navLinks.forEach(link => {
                     link.addEventListener('click', () => {
                         if (nav.classList.contains('active')) {
@@ -158,53 +158,23 @@
             }
 
             const header = document.querySelector('header');
-            if (header) { // 要素が存在するか確認
+            if (header) {
                  window.addEventListener('scroll', () => {
-                    if (window.scrollY > 30) { // スクロール量が30pxを超えたら
+                    if (window.scrollY > 30) {
                         header.classList.add('scrolled');
                     } else {
                         header.classList.remove('scrolled');
                     }
-                    // Hero Parallax
-                    const heroBg = document.querySelector('#hero .hero-background-image');
-                    if (heroBg) {
-                        heroBg.style.transform = `translateY(${window.pageYOffset * 0.3}px) scale(1.1)`; // Y方向の動きを少し強調
-                    }
                 });
             }
-
 
             const currentYearEl = document.getElementById('current-year');
             if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
 
-            if (typeof ClipboardJS !== 'undefined') { // ClipboardJSが読み込まれているか確認
-                const clipboard = new ClipboardJS('.copy-action-btn');
-                const toast = document.getElementById('copy-toast');
-
-                clipboard.on('success', function(e) {
-                    if (toast) {
-                        toast.textContent = `${e.trigger.ariaLabel.replace('をコピー', '')} をコピー！`;
-                        toast.className = 'copy-toast show success'; // クラスで制御
-                        setTimeout(() => {
-                            toast.className = 'copy-toast';
-                        }, 2200);
-                    }
-                    e.clearSelection();
-                });
-
-                clipboard.on('error', function(e) {
-                    if (toast) {
-                        toast.textContent = 'コピー失敗 :(';
-                        toast.className = 'copy-toast show error';
-                        setTimeout(() => {
-                            toast.className = 'copy-toast';
-                        }, 2200);
-                    }
-                });
-            }
+            // このページではClipboard.jsは不要なため初期化コードは削除
 
             const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
-            if (animatedElements.length > 0 && typeof IntersectionObserver !== 'undefined') { // IntersectionObserverが使えるか確認
+             if (animatedElements.length > 0 && typeof IntersectionObserver !== 'undefined') {
                 const observer = new IntersectionObserver((entries, observerInstance) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
@@ -215,17 +185,23 @@
                             observerInstance.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+                }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
 
                 animatedElements.forEach(el => {
                     if (el.classList.contains('animate-on-load')) {
                         const animationType = el.dataset.animation || 'fadeInUpCustom';
                         const animationDelay = el.dataset.animationDelay || '0s';
                         el.style.animationDelay = animationDelay;
-                         // 描画タイミングを考慮してわずかに遅延させる
-                        setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * 1000 + 50);
+                        setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * 1000 + 20);
                     } else {
-                        observer.observe(el);
+                        if (el.getBoundingClientRect().top < window.innerHeight && el.getBoundingClientRect().bottom > 0) {
+                             const animationType = el.dataset.animation || 'fadeInUpCustom';
+                             const animationDelay = el.dataset.animationDelay || '0s';
+                             el.style.animationDelay = animationDelay;
+                             setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * 1000 + 20);
+                        } else {
+                            observer.observe(el);
+                        }
                     }
                 });
             }
