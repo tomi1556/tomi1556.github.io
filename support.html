@@ -5,136 +5,202 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サーバー支援 - StellaMC</title>
     <link rel="stylesheet" href="stella.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" class="logo-link">
+            <a href="index.html" class="logo-link" aria-label="StellaMC ホームへ">
                 <img src="logo.png" alt="StellaMC ロゴ" id="logo-img">
             </a>
-            <nav class="main-nav">
+            <nav class="main-nav" id="main-navigation">
                 <ul>
-                    <li><a href="stella.html">ホーム</a></li>
-                    <li><a href="rules.html">ルール</a></li>
-                    <li><a href="support.html">支援</a></li>
-                    <li><a href="http://stellamc.jp:6903/" target="_blank">WebMap</a></li>
+                    <li><a href="index.html" class="nav-link-item">ホーム</a></li>
+                    <li><a href="rules.html" class="nav-link-item">ルール</a></li>
+                    <li><a href="support.html" class="active nav-link-item">支援</a></li>
+                    <li><a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="nav-link-item">WebMap</a></li>
+                    <li><a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="nav-link-item nav-discord-link"><i class="fab fa-discord"></i> Discord</a></li>
                 </ul>
             </nav>
-            <button class="hamburger-menu" aria-label="メニューを開く" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="hamburger-menu" aria-label="メニューを開閉する" aria-expanded="false" aria-controls="main-navigation">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
             </button>
         </div>
     </header>
 
-    <main class="page-content">
-        <section class="container content-section">
-            <h1 class="page-title"><i class="fas fa-heart"></i> サーバー支援（寄付）について</h1>
-            <p class="page-intro">StellaMCの運営は、皆様の温かいご支援によって支えられています。サーバーの維持・発展のために、ご協力いただけますと幸いです。</p>
-
-            <div class="support-section">
-                <h2><i class="fas fa-server"></i> 寄付の必要性</h2>
-                <p>サーバーの安定稼働には、サーバーレンタル費用、プラグインやツールの導入・維持費用など、多くのコストがかかります。運営チームは学生が中心であるため、これらの費用を継続的に賄うことは容易ではありません。皆様からのご寄付は、サーバーの品質向上や長期的な運営に直接繋がります。</p>
+    <main class="page-content-container">
+        <div class="container">
+            <div class="page-header animate-on-load" data-animation="fadeInUpCustom">
+                <h1 class="page-main-title">サーバー支援（寄付）のお願い</h1>
+                <p class="page-intro">
+                    StellaMCの運営は、プレイヤーの皆様からの温かいご支援によって支えられています。<br>
+                    サーバーの維持・発展、そしてより良いコミュニティ体験の提供のために、ご協力いただけますと幸いです。
+                </p>
             </div>
 
-            <div class="support-section">
-                <h2><i class="fas fa-credit-card"></i> 対応している支払い方法</h2>
-                <p>現在、以下の支払い方法に対応しています。</p>
-                <ul class="payment-methods">
-                    <li><a href="https://www.amazon.co.jp/Amazon%E3%82%AE%E3%83%95%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89-1_JP_Email-E%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%97-%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AB%E3%82%82%E9%80%81%E4%BF%A1%E5%8F%AF-Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF/dp/B004N3APGO/ref=sr_1_1?m=AN1VRQENFRJN5&sr=8-1" target="_blank" class="external-link"><i class="fab fa-amazon"></i> Amazonギフト券</a></li>
-                    <li><a href="https://paypay.ne.jp/help/c0189/" target="_blank" class="external-link"><i class="fas fa-mobile-alt"></i> PayPay</a></li>
-                </ul>
-            </div>
+            <article class="support-article"> {/* rules-article と同様のラッパー */}
+                <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">
+                    <h2 class="section-heading-styled"><i class="fas fa-hand-holding-heart"></i> 寄付の必要性</h2>
+                    <p class="section-description">
+                        StellaMCサーバーの安定した運営には、高性能なサーバースペックの維持、独自プラグインの開発・導入、<br>
+                        そして定期的なメンテナンスなど、多くの費用と労力が必要となります。<br>
+                        運営チームは学生が中心であり、これらの費用を継続的に賄うことは大きな挑戦です。<br>
+                        皆様からのご寄付は、サーバーの品質向上、新しいコンテンツの追加、そして何よりも<br>
+                        StellaMCが長期的に皆様の「居場所」であり続けるための大切な力となります。
+                    </p>
+                </section>
 
-            <div class="support-section">
-                <h2><i class="fas fa-hand-holding-usd"></i> 寄付方法</h2>
-                <p>寄付の手順や受付窓口については、StellaMC公式Discordサーバー内の専用チャンネル <a href="https://discord.com/channels/1180864993214873750/1180911747180286033" target="_blank" class="discord-link"><i class="fab fa-discord"></i> #寄付受付</a>（チャンネル名はご確認ください）にて詳細をご案内しております。まずはお気軽にDiscordサーバーへご参加ください。</p>
-            </div>
-
-            <div class="support-section">
-                <h2><i class="fas fa-exclamation-triangle"></i> 注意点</h2>
-                <ul class="notice-list">
-                    <li>寄付は任意であり、寄付をしなくてもサーバーの基本的な機能は全て快適にプレイ可能です。</li>
-                    <li>当サーバーはPay to Win（支払うことでゲームプレイ上有利になる）要素を導入しません。寄付特典は主に利便性向上や感謝を示すものです。</li>
-                    <li>特典の内容は、サーバー運営の都合により変更される場合があります。あらかじめご了承ください。</li>
-                    <li>一度いただいた寄付については、原則として返金対応は承っておりません。</li>
-                </ul>
-            </div>
-
-            <div class="support-section">
-                <h2><i class="fas fa-link"></i> 特典受け取りに必要なこと</h2>
-                <p>寄付特典をスムーズにお受け取りいただくため、DiscordアカウントとMinecraftアカウントの連携をお願いしています。連携方法については、<a href="https://discord.com/channels/1180864993214873750/1372869964482220032/1372869970219765801" target="_blank" class="discord-link">Discord内の案内</a>をご確認ください。</p>
-            </div>
-
-            <div class="support-section benefits-section">
-                <h2><i class="fas fa-gift"></i> 寄付特典</h2>
-                <p class="benefits-intro">ご支援いただいた方へ、感謝のしるしとして以下の特典をご用意しています。</p>
-                <p><strong>共通コマンド:</strong> 所持品一括売却コマンド <code>/s</code></p>
-                <p><strong>プレミアム機能:</strong> プレミアムのバイト/クエスト機能</p>
-                <p><strong>すてら鯖内限定特典:</strong>一斉売却/プレミアム機能/即時TP</p>
-
-                <div class="benefit-tiers">
-                    <div class="benefit-tier">
-                        <h3><i class="fas fa-star"></i> Patron <span class="price">(¥500以上)</span></h3>
-                        <ul class="benefit-list">
-                            <li><i class="fas fa-check"></i> 特別な称号 (Patron)</li>
-                            <li><i class="fas fa-check"></i> 所持品一括売却コマンド</li>
-                            <li><i class="fas fa-check"></i> Discord支援者限定ロール付与</li>
-                            <li><i class="fas fa-check"></i> プレミアム機能利用可能</li>
-                            <li><i class="fas fa-check"></i> 専用サポート/要望チャンネルへのアクセス</li>
-                            <li><i class="fas fa-hourglass-half"></i> <strong> すてら鯖内限定特典:</strong> 1ヶ月の有効期限</li>
-                            <li><i class="fas fa-infinity"></i> <strong>通常特典:</strong> 無期限</li>
-                        </ul>
+                <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.2s">
+                    <h2 class="section-heading-styled"><i class="fas fa-credit-card"></i> 対応支払い方法</h2>
+                    <p class="section-description">現在、以下の支払い方法によるご支援を受け付けております。</p>
+                    <div class="payment-methods-container">
+                        <div class="payment-method">
+                            <i class="fab fa-amazon payment-icon"></i>
+                            <h4>Amazonギフト券</h4>
+                            <p>Eメールタイプでの送付をお願いしております。詳細はDiscordにてお問い合わせください。</p>
+                            <a href="https://www.amazon.co.jp/Amazon%E3%82%AE%E3%83%95%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89-1_JP_Email-E%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%97-%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AB%E3%82%82%E9%80%81%E4%BF%A1%E5%8F%AF-Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF/dp/B004N3APGO/" target="_blank" rel="noopener noreferrer" class="btn btn-small">Amazonで見る</a>
+                        </div>
+                        <div class="payment-method">
+                             <i class="fa-solid fa-yen-sign payment-icon"></i> {/* PayPayの公式アイコンはSVG等で用意が必要なため汎用アイコンで代替 */}
+                            <h4>PayPay</h4>
+                            <p>PayPay IDを通じた送金が可能です。IDはDiscordにてご案内いたします。</p>
+                            <a href="https://paypay.ne.jp/" target="_blank" rel="noopener noreferrer" class="btn btn-small">PayPay公式サイト</a>
+                        </div>
                     </div>
+                </section>
 
-                    <div class="benefit-tier">
-                        <h3><i class="fas fa-gem"></i> Patron+ <span class="price">(¥2500以上)</span></h3>
-                        <ul class="benefit-list">
-                            <li><i class="fas fa-check"></i> 特別な称号 (Patron+)</li>
-                            <li><i class="fas fa-check"></i> 所持品一括売却コマンド</li>
-                            <li><i class="fas fa-check"></i> Discord支援者限定ロール付与</li>
-                            <li><i class="fas fa-check"></i> 即時テレポート機能利用可能</li>
-                            <li><i class="fas fa-check"></i> プレミアム機能利用可能</li>
-                            <li><i class="fas fa-check"></i> 専用サポート/要望チャンネルへのアクセス</li>
-                            <li> <i class="fas fa-infinity"></i> <strong>すてら鯖内限定特典:</strong> 無期限</li>
-                            <li><i class="fas fa-infinity"></i> <strong>通常特典:</strong> 無期限</li>
-                        </ul>
-                         <p class="tier-note">Patron+はPatronの特典をすべて含みます。</p>
+                <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.3s">
+                    <h2 class="section-heading-styled"><i class="fas fa-gifts"></i> 寄付特典について</h2>
+                    <p class="section-description">
+                        ご支援いただいた皆様へ感謝の気持ちを込めて、ささやかながら特典をご用意しております。<br>
+                        これらの特典はゲームプレイを有利にするものではなく、あくまで感謝のしるしです。
+                    </p>
+                    <div class="benefit-tiers-container">
+                        <div class="benefit-tier">
+                            <div class="benefit-tier-header patron">
+                                <i class="fas fa-star"></i> Patron
+                                <span>(¥500 以上)</span>
+                            </div>
+                            <ul class="info-list-styled">
+                                <li><span class="list-icon"><i class="fas fa-check"></i></span>特別な称号 (ゲーム内&Discord)</li>
+                                <li><span class="list-icon"><i class="fas fa-check"></i></span>所持物一斉売却コマンド (<code>/s</code>)</li>
+                                <li><span class="list-icon"><i class="fas fa-check"></i></span>Discord支援者限定ロール</li>
+                                <li><span class="list-icon"><i class="fas fa-check"></i></span>プレミアム機能 (バイト/クエスト等)</li>
+                                <li><span class="list-icon"><i class="fas fa-check"></i></span>専用サポート/要望チャンネルアクセス</li>
+                                <li><span class="list-icon"><i class="fas fa-hourglass-half"></i></span><strong>すてら鯖内特典:</strong> 1ヶ月有効</li>
+                                <li><span class="list-icon"><i class="fas fa-infinity"></i></span><strong>通常特典:</strong> 無期限</li>
+                            </ul>
+                        </div>
+                        <div class="benefit-tier">
+                            <div class="benefit-tier-header patron-plus">
+                                <i class="fas fa-gem"></i> Patron+
+                                <span>(¥2500 以上)</span>
+                            </div>
+                            <ul class="info-list-styled">
+                                <li><span class="list-icon"><i class="fas fa-check"></i></span>Patronの全特典</li>
+                                <li><span class="list-icon"><i class="fas fa-check"></i></span>即時テレポート機能</li>
+                                <li><span class="list-icon"><i class="fas fa-infinity"></i></span><strong>すてら鯖内特典:</strong> 無期限</li>
+                                <li><span class="list-icon"><i class="fas fa-infinity"></i></span><strong>通常特典:</strong> 無期限</li>
+                            </ul>
+                        </div>
                     </div>
-                </div>
-            </div>
-             <p class="support-closing">皆様の温かいご支援が、StellaMCをより良いサーバーへと成長させます。心より感謝申し上げます。</p>
-        </section>
+                     <p class="section-description" style="margin-top: 1.5em; font-size: 0.9rem;">
+                        <strong>寄付方法・注意点:</strong><br>
+                        寄付をご希望の方は、StellaMC公式Discordサーバー内の <a href="https://discord.com/channels/1180864993214873750/1180911747180286033" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">#寄付受付チャンネル</a>（仮称）をご確認いただくか、運営スタッフまでお気軽にお声がけください。<br>
+                        寄付は任意です。寄付をしなくても快適にプレイできます。特典内容は変更される場合があり、寄付の返金は致しかねます。
+                    </p>
+                </section>
+
+                <p class="page-closing animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.4s">
+                    皆様の温かいご支援が、StellaMCをより豊かで楽しいサーバーへと成長させる原動力です。<br>
+                    心より感謝申し上げます。
+                </p>
+            </article>
+        </div>
     </main>
 
     <footer>
         <div class="container">
             <p>&copy; <span id="current-year"></span> StellaMC. All Rights Reserved.</p>
-            <p class="small-text">Minecraftは Mojang Synergies AB の商標です。当サーバーは Mojang Synergies AB とは関係ありません。</p>
+            <p class="small-text">Minecraft is a trademark of Mojang Synergies AB. This server is not affiliated with Mojang Synergies AB.</p>
         </div>
     </footer>
-     <script>
-        // ハンバーガーメニュー (index.htmlと同じもの)
-        const hamburger = document.querySelector('.hamburger-menu');
-        const nav = document.querySelector('.main-nav');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            nav.classList.toggle('active');
-            const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
-            hamburger.setAttribute('aria-expanded', !expanded);
-        });
-         window.addEventListener('scroll', () => {
+
+    <script>
+        // index.html と同じJavaScriptコード（ClipboardJS初期化を除く）
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const nav = document.querySelector('.main-nav');
+            if (hamburger && nav) {
+                const navLinks = nav.querySelectorAll('a.nav-link-item');
+                hamburger.addEventListener('click', () => {
+                    const isActive = hamburger.classList.toggle('active');
+                    nav.classList.toggle('active');
+                    hamburger.setAttribute('aria-expanded', isActive);
+                    document.body.classList.toggle('no-scroll', isActive);
+                });
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (nav.classList.contains('active')) {
+                            hamburger.classList.remove('active');
+                            nav.classList.remove('active');
+                            hamburger.setAttribute('aria-expanded', 'false');
+                            document.body.classList.remove('no-scroll');
+                        }
+                    });
+                });
+            }
+
             const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            if (header) {
+                 window.addEventListener('scroll', () => {
+                    if (window.scrollY > 25) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                });
+            }
+
+            const currentYearEl = document.getElementById('current-year');
+            if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
+
+            const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
+             if (animatedElements.length > 0 && typeof IntersectionObserver !== 'undefined') {
+                const observer = new IntersectionObserver((entries, observerInstance) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const animationType = entry.target.dataset.animation || 'fadeInUpCustom';
+                            const animationDelay = entry.target.dataset.animationDelay || '0s';
+                            entry.target.style.animationDelay = animationDelay;
+                            entry.target.classList.add(animationType, 'is-visible');
+                            observerInstance.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: "0px 0px -25px 0px" });
+
+                animatedElements.forEach(el => {
+                    const rect = el.getBoundingClientRect();
+                    const isInitiallyVisible = rect.top < window.innerHeight && rect.bottom >= 0;
+                    const delayMultiplier = el.classList.contains('animate-on-load') ? 1000 : 0;
+
+                    if (el.classList.contains('animate-on-load') || isInitiallyVisible) {
+                        const animationType = el.dataset.animation || 'fadeInUpCustom';
+                        const animationDelay = el.dataset.animationDelay || '0s';
+                        el.style.animationDelay = animationDelay;
+                        setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * delayMultiplier + 10);
+                    } else {
+                        observer.observe(el);
+                    }
+                });
             }
         });
-        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
