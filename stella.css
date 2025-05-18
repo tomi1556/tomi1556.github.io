@@ -1,0 +1,440 @@
+/* 基本スタイル */
+body {
+    font-family: 'Noto Sans JP', 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4; /* 少し明るい背景色 */
+    color: #333;
+    line-height: 1.6;
+}
+
+.container {
+    width: 80%;
+    margin: auto;
+    overflow: hidden;
+    padding: 0 20px;
+}
+
+/* ヘッダー */
+header {
+    background: #333; /* ダークな背景でモダンに */
+    color: #fff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    min-height: 70px;
+    border-bottom: #0779e4 3px solid; /* サーバーのテーマカラーなどに合わせる */
+    position: fixed; /* ヘッダーを固定 */
+    width: 100%;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+header .logo {
+    float: left;
+    margin-top: 5px; /* 微調整 */
+}
+
+header .logo img {
+    height: 50px; /* ロゴの高さ調整 */
+}
+
+header nav {
+    float: right;
+    margin-top: 15px; /* 文字の垂直位置調整 */
+}
+
+header nav ul {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+header nav ul li {
+    display: inline;
+    margin-left: 25px;
+}
+
+header nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+header nav ul li a:hover {
+    color: #0779e4; /* ホバー時の色 */
+}
+
+/* ヒーローセクション */
+#hero {
+    /* images/hero-background.jpg にサーバーの魅力的な背景画像を指定 */
+    background: url('images/hero-background.jpg') no-repeat center center/cover;
+    height: 100vh; /*画面の高さいっぱいに表示 */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: #fff;
+    padding-top: 70px; /* 固定ヘッダー分を考慮 */
+}
+
+#hero .hero-content {
+    background: rgba(0, 0, 0, 0.6); /* 文字を読みやすくするための半透明背景 */
+    padding: 40px;
+    border-radius: 10px;
+}
+
+#hero h1 {
+    font-size: 3.5em; /* 大きめの見出し */
+    margin-bottom: 20px;
+    font-weight: 700;
+}
+
+#hero p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+.btn {
+    display: inline-block;
+    background: #0779e4; /* メインのボタンカラー */
+    color: #fff;
+    padding: 12px 25px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn:hover {
+    background: #0056b3; /* ホバー時のボタンカラー */
+    transform: translateY(-2px);
+}
+
+/* コンテンツセクション共通スタイル */
+.content-section {
+    padding: 80px 0; /* 上下に十分な余白 */
+    text-align: center;
+    border-bottom: 1px solid #ddd; /* セクション間の区切り */
+}
+.content-section:last-child {
+    border-bottom: none;
+}
+.content-section h2 {
+    font-size: 2.5em;
+    margin-bottom: 40px;
+    color: #333;
+}
+
+/* Aboutセクション（StellaMCの魅力） */
+#about .features {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap; /*画面幅に応じて折り返す */
+    gap: 20px; /* 要素間のスペース */
+}
+
+#about .feature {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    width: calc(25% - 20px); /* 4カラム、gapを考慮 */
+    min-width: 250px; /* 最小幅 */
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#about .feature:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+}
+.feature-icon {
+    width: 50px; /* アイコンサイズ */
+    height: 50px;
+    margin-bottom: 15px;
+    /* アイコン画像: 各魅力に対応したシンプルなSVGアイコンやPNG画像を推奨します。
+       例: 多彩なコンテンツ -> 宝箱、安心 -> 盾、いつでも繋がる -> 時計や家、サポート -> 吹き出しや工具箱 */
+}
+#about .feature h3 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #0779e4;
+}
+
+/* 参加方法セクション */
+#join .join-info {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+    text-align: left;
+}
+
+#join .join-java, #join .join-bedrock {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    width: calc(50% - 40px);
+    min-width: 300px;
+}
+
+#join h3 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 15px;
+    border-bottom: 2px solid #0779e4;
+    padding-bottom: 5px;
+}
+
+#join code {
+    background: #eee;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 1.1em;
+}
+.join-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 5px;
+    margin-top: 15px;
+    border: 1px solid #ddd;
+    /* 画像指示: Java版/統合版の参加方法を示すスクリーンショットなど。
+       例: サーバーアドレス入力画面、フレンド追加画面など。*/
+}
+
+
+/* ルールセクション */
+#rules .rules-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px;
+    text-align: left;
+    margin-bottom: 30px;
+}
+
+#rules .rules-general, #rules .rules-forbidden {
+    background: #fff;
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.05);
+    width: calc(50% - 40px);
+    min-width: 300px;
+}
+
+#rules h3 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+    color: #333;
+}
+#rules h3 .icon {
+    margin-right: 10px;
+    font-size: 1.2em; /* アイコンサイズ調整 */
+}
+#rules ul {
+    list-style: none;
+    padding: 0;
+}
+#rules ul li {
+    margin-bottom: 10px;
+    font-size: 1.1em;
+}
+#rules ul li .icon {
+    margin-right: 8px;
+}
+.icon.check { color: green; }
+.icon.no-entry { color: red; }
+
+.rules-visual {
+    max-width: 60%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    /* 画像指示: ルールを守って楽しく遊んでいるプレイヤーの集合写真や、サーバーの平和な風景など。*/
+}
+
+
+/* ギャラリーセクション */
+#gameplay-gallery .gallery {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px; /* 画像間のスペース */
+}
+
+#gameplay-gallery .gallery img {
+    width: 300px; /* 画像の幅を固定 */
+    height: 200px; /* 画像の高さを固定 */
+    object-fit: cover; /* アスペクト比を維持しつつトリミング */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+#gameplay-gallery .gallery img:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+/* WebMapセクション */
+.webmap-preview {
+    max-width: 70%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 25px;
+    border: 1px solid #ddd;
+    /* 画像指示: WebMapの実際のスクリーンショット、特に見どころのあるエリアを写したもの。*/
+}
+
+/* 支援セクション */
+#support .support-info {
+    text-align: left;
+    max-width: 800px;
+    margin: 0 auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+#support h3 {
+    font-size: 1.8em;
+    color: #0779e4;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+#support h4 {
+    font-size: 1.4em;
+    color: #333;
+    margin-top: 15px;
+    margin-bottom: 8px;
+}
+#support p, #support ul {
+    margin-bottom: 15px;
+}
+#support ul {
+    padding-left: 20px;
+}
+#support ul li {
+    margin-bottom: 8px;
+}
+#support code {
+    background: #eee;
+    padding: 2px 5px;
+    border-radius: 3px;
+}
+.patron-benefits {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.patron-tier {
+    background-color: #f9f9f9;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 8px;
+    width: calc(50% - 20px); /* 2カラム、gapを考慮 */
+    min-width: 280px;
+    box-sizing: border-box;
+}
+.patron-tier h4 {
+    color: #0779e4;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+.support-image {
+    max-width: 50%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 20px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #ddd;
+    /* 画像指示: 支援者への感謝を示すような画像、または特典アイテムのイメージなど。*/
+}
+
+/* Discordセクション */
+.discord-section {
+    background-color: #7289DA; /* Discordのブランドカラー */
+    color: #fff;
+}
+.discord-section h2 {
+    color: #fff;
+}
+.discord-btn {
+    background: #fff;
+    color: #7289DA;
+    padding: 15px 30px;
+    font-size: 1.2em;
+    margin-top: 10px;
+}
+.discord-btn:hover {
+    background: #f0f0f0;
+}
+.discord-preview {
+    max-width: 60%;
+    height: auto;
+    border-radius: 8px;
+    margin-top: 25px;
+    border: 2px solid #fff; /* 白い枠線で強調 */
+    /* 画像指示: Discordサーバーのアクティブなチャンネルのスクリーンショットや、ウェルカムメッセージなど。*/
+}
+
+
+/* フッター */
+footer {
+    background: #222; /* ヘッダーより少し暗い色 */
+    color: #bbb;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 0; /* 上のセクションのborder-bottomがあるので不要 */
+}
+footer p {
+    margin: 5px 0;
+    font-size: 0.9em;
+}
+
+/* レスポンシブ対応 (簡易的な例) */
+@media(max-width: 768px) {
+    header .logo, header nav {
+        float: none;
+        text-align: center;
+        width: 100%;
+    }
+    header nav ul li {
+        display: block;
+        margin: 10px 0;
+    }
+    #hero h1 {
+        font-size: 2.5em;
+    }
+    #hero p {
+        font-size: 1.2em;
+    }
+    .container {
+        width: 95%;
+    }
+    #about .feature {
+        width: calc(50% - 20px); /* スマホでは2カラム */
+    }
+    #join .join-java, #join .join-bedrock,
+    #rules .rules-general, #rules .rules-forbidden,
+    .patron-tier {
+        width: 100%; /* スマホでは1カラム */
+        margin-bottom: 20px;
+    }
+    #about .feature, .patron-tier { /* 最小幅の調整 */
+        min-width: unset;
+        width: calc(100% - 20px);
+    }
+}
+
+@media(max-width: 480px) {
+    #about .feature {
+        width: 100%; /* さらに小さい画面では1カラム */
+    }
+}
