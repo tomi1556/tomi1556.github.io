@@ -1,433 +1,122 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <title>サーバー規約 | Minecraft Server</title>
-  <style>
-    :root {
-      --green: #22c55e;
-      --green-dark: #16a34a;
-      --red: #ef4444;
-      --red-dark: #b91c1c;
-      --blue: #3b82f6;
-      --blue-dark: #1d4ed8;
-      --yellow: #facc15;
-      --yellow-dark: #ca8a04;
-      --white: #ffffff;
-      --bg: #f0fdf4;
-      --text: #1f2937;
-    }
-
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background-color: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      margin: 0;
-      padding: 0;
-      display: flex;
-      justify-content: center;
-      min-height: 100vh;
-    }
-
-.fa-book {
-  font-size: 18px; /* 32px にサイズを変更 */
-  margin-bottom: 6px; /* 下に8pxの余白を追加 */
-}
-
-/* fa-map アイコンを大きく */
-.fa-map {
-  font-size: 18px; /* 32px にサイズを変更 */
-  margin-bottom: 6px; /* 下に8pxの余白を追加 */
-}
-
-/* fa-shopping-bag アイコンを大きくし、下に少し余白を追加 */
-.fa-shopping-cart {
-  font-size: 18px; /* アイコンのサイズを大きく */
-  margin-bottom: 6px; /* 下に8pxの余白を追加 */
-}
-
-/* Discordアイコンのスタイル */
-.fa-discord {
-  font-size: 18px; /* アイコンのサイズを大きく */
-  margin-bottom: 6px; /* 下に余白を追加 */
-}
-
-/* ✅ PC用ナビゲーション */
-nav {
-    background-color: #4caf50;
-    padding: 10px 0;
-    box-shadow: none;
-    position: fixed;
-    width: 80px;
-    top: 0;
-    bottom: 0;
-    left: 0px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-}
-
-/* ✅ スマホ用ナビゲーション（初期非表示） */
-nav.mobile-nav {
-    display: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 60%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.9);
-    z-index: 1001;
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 20px;
-    transition: transform 0.3s ease-in-out;
-    transform: translateX(-100%);
-}
-
-/* ✅ メニュー表示時 */
-nav.mobile-nav.open {
-    transform: translateX(0);
-    width: 60px; /* ←ここを調整（例: 150px）*/
-    display: flex;
-}
-
-/* ✅ リストのスタイル */
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-nav ul li {
-    margin: 15px 0;
-}
-
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 0.8em;
-    font-weight: bold;
-    width: 60px;
-    height: 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, transform 0.2s;
-    border-radius: 8px;
-}
-
-nav ul li a:hover {
-    background-color: #66bb6a;
-    transform: scale(1.1);
-}
-
-nav ul li a .icon {
-    font-size: 1.3em;
-    margin-bottom: 8px;
-}
-
-nav ul li a .item-name {
-    font-size: 0.9em;
-    text-align: center;
-}
-
-/* ✅ メニューボタン */
-.menu-button {
-    display: none; /* PCでは非表示 */
-    position: fixed;
-    top: 10px;
-    right: 10px;
-    background-color: #4caf50;
-    color: white;
-    padding: 10px;
-    font-size: 1.5em;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    z-index: 1002;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-    .container {
-      max-width: 900px;
-      margin-left: 220px;
-      padding: 1rem;
-    }
-
-    section {
-      background-color: var(--white);
-      border-radius: 1rem;
-      padding: 1.25rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
-    }
-
-    section.rules {
-      border: 2px solid var(--green);
-      border-left: 10px solid var(--green-dark);
-    }
-
-    section.ban {
-      border: 2px solid var(--red);
-      border-left: 10px solid var(--red-dark);
-    }
-
-    section.join {
-      border: 2px solid var(--blue);
-      border-left: 10px solid var(--blue-dark);
-    }
-
-    section.load {
-      border: 2px solid var(--yellow);
-      border-left: 10px solid var(--yellow-dark);
-    }
-
-    section.chat {
-      border: 2px solid var(--green);
-      border-left: 10px solid var(--green-dark);
-    }
-
-    h2 {
-      font-size: 1.5rem;
-      margin-bottom: 1rem;
-    }
-
-    .rules h2 {
-      color: var(--green-dark);
-    }
-
-    .ban h2 {
-      color: var(--red-dark);
-    }
-
-    .join h2 {
-      color: var(--blue-dark);
-    }
-
-    .load h2 {
-      color: var(--yellow-dark);
-    }
-
-    .chat h2 {
-      color: var(--green-dark);
-    }
-
-    ul {
-      list-style: none;
-      padding-left: 0;
-      margin: 0;
-    }
-
-    .ban li {
-      border-left-color: var(--red);
-    }
-
-    .join li {
-      border-left-color: var(--blue);
-    }
-
-    .load li {
-      border-left-color: var(--yellow);
-    }
-
-    .chat li {
-      border-left-color: var(--green);
-    }
-
-    .note {
-      display: block;
-      font-size: 0.85rem;
-      color: #6b7280;
-      margin-top: 0.25rem;
-    }
-
-    @media (max-width: 768px) {
-      body {
-        font-size: 14px;
-        padding: 0 10px;
-      }
-
-      .container {
-        padding: 0.5rem;
-        width: 100%;
-      }
-
-      section {
-        padding: 1rem;
-      }
-
-      h1, h2, h3 {
-        font-size: 1.25rem;
-      }
-
-      .rule-list {
-        padding-left: 1rem;
-        list-style-type: disc;
-      }
-
-      .rule-list li {
-        margin-bottom: 0.75rem;
-      }
-    
-      .rule-title {
-        font-size: 1.5rem;
-        margin-bottom: 1rem;
-      }
-
-      nav {
-          display: none; /* PC用ナビゲーションを非表示 */
-      }
-
-      .menu-button {
-          display: block; /* メニューボタンを表示 */
-      }
-
-      nav.mobile-nav {
-          display: none; /* 初期では非表示 */
-      }
-
-      nav.mobile-nav.open {
-          display: flex;
-      }
-
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>サーバールール - StellaMC</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-    <!-- ✅ メニューボタン -->
-    <button id="menu-button" class="menu-button">☰</button>
+    <header>
+        <div class="container">
+            <a href="index.html" class="logo-link">
+                <img src="images/logo.png" alt="StellaMC ロゴ" id="logo-img">
+            </a>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html#hero">ホーム</a></li>
+                    <li><a href="index.html#features">サーバーの魅力</a></li>
+                    <li><a href="index.html#join">参加方法</a></li>
+                    <li><a href="rules.html">ルール</a></li>
+                    <li><a href="support.html">支援</a></li>
+                    <li><a href="http://stellamc.jp:6903/" target="_blank">WebMap</a></li>
+                </ul>
+            </nav>
+            <button class="hamburger-menu" aria-label="メニューを開く" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
 
-    <!-- ✅ モバイルナビゲーションメニュー -->
-    <nav id="mobile-nav" class="mobile-nav">
-        <ul>
-            <li><a href="index.html"><i class="fa-solid fa-home"></i> ホーム</a></li>
-            <li><a href="rule.html"><i class="fa-solid fa-book rule-icon"></i> ルール</a></li>
-            <li><a href="https://discord.com/channels/1180864993214873750/1350659087519453255/1351068625783754822" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-user-friends icon"></i> ガイド</a></li>
-            <li><a href="http://stellamc.jp:2470/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-map map-icon"></i> まっぷ</a></li>
-            <li><a href="https://stella.store.playerlands.com/" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-shopping-cart cart-icon"></i> Shop</a></li>
-            <li><a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-discord discord-icon"></i> Discord</a></li>
-        </ul>
-    </nav>
-    <nav>
-        <ul>
-            <li>
-                <a href="index.html">
-                    <i class="fas fa-home icon"></i> <!-- Font Awesomeの家のアイコン -->
-                    <span class="item-name">ホーム</span>
-                </a>
-            </li>
-            <li>
-                <a href="rule.html">
-                    <i class="fa-solid fa-book rule-icon"></i> <!-- Font Awesomeの友達のアイコン -->
-                    <span class="item-name">ルール</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://discord.com/channels/1180864993214873750/1350659087519453255/1351068625783754822" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-user-friends icon"></i> <!-- Font Awesomeの友達のアイコン -->
-                    <span class="item-name">ガイド</span>
-                </a>
-            </li>
-            <li>
-                <a href="http://stellamc.jp:2470/" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-map map-icon"></i> <!-- Font Awesomeの情報のアイコン -->
-                    <span class="item-name">まっぷ</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://stella.store.playerlands.com/" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-solid fa-shopping-cart cart-icon"></i> <!-- Font Awesomeのショッピングカートのアイコン -->
-                    <span class="item-name">Shop</span>
-                </a>
-            </li>
-            <li>
-                <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer">
-                    <i class="fa-brands fa-discord discord-icon"></i> <!-- Discordのアイコン -->
-                    <span class="item-name">Discord</span>
-                </a>
-            </li>
-        </ul>
-    </nav>
+    <main class="page-content">
+        <section class="container content-section">
+            <h1 class="page-title"><i class="fas fa-book"></i> サーバールール</h1>
+            <p class="page-intro">StellaMCを皆が楽しく安全にプレイできるよう、以下のルールを守ってください。ルール違反が確認された場合、運営の判断により処罰が行われることがあります。</p>
 
-    <!-- メニュー開閉スクリプト -->
+            <div class="rules-section">
+                <h2><i class="fas fa-check-circle rule-icon-general"></i> サーバー規約</h2>
+                <ul class="rule-list">
+                    <li>運営の指示には必ず従ってください。</li>
+                    <li>運営チームは、状況に応じて独自の判断で処罰を行う権利を有します。</li>
+                    <li>本規約に記載されている禁止行為を行った場合、警告、一時的な利用制限、または永久的な追放などの処罰が科せられます。</li>
+                    <li>ルールは予告なく変更される場合があります。定期的にご確認ください。</li>
+                </ul>
+            </div>
+
+            <div class="rules-section">
+                <h2><i class="fas fa-times-circle rule-icon-forbidden"></i> 禁止行為</h2>
+                <p>以下の行為は固く禁止されています。</p>
+                <ul class="rule-list forbidden-list">
+                    <li><strong>迷惑行為:</strong>
+                        <ul>
+                            <li>他プレイヤーへの暴言、誹謗中傷、脅迫、ストーキング行為。</li>
+                            <li>過度なスパム行為（チャット、看板など）。</li>
+                            <li>他人の建築物や所有物の破壊、窃盗（明確に許可されている場合を除く）。</li>
+                            <li>サーバーや他のプレイヤーのプレイを意図的に妨害する行為全般。</li>
+                        </ul>
+                    </li>
+                    <li><strong>不正行為:</strong>
+                        <ul>
+                            <li>チートクライアント、ハックツール、不正なMODの使用。</li>
+                            <li>Xray、Fly Hack、Kill Auraなどの使用。</li>
+                            <li>サーバーのバグや脆弱性を悪用する行為。発見した場合は速やかに運営に報告してください。</li>
+                            <li>アカウントの共有、売買、譲渡。</li>
+                        </ul>
+                    </li>
+                    <li><strong>宣伝行為:</strong>
+                        <ul>
+                            <li>他のMinecraftサーバー、ウェブサイト、商品、サービス等の無許可な宣伝。</li>
+                            <li>StellaMCと無関係なDiscordサーバーへの招待。</li>
+                        </ul>
+                    </li>
+                    <li><strong>相手を不快にする行為:</strong>
+                        <ul>
+                            <li>差別的発言（人種、性別、宗教、性的指向などに関するもの）。</li>
+                            <li>わいせつな表現、不適切なスキンや建築物。</li>
+                            <li>個人情報の聞き出しや公開。</li>
+                        </ul>
+                    </li>
+                    <li><strong>サーバーへの攻撃行為:</strong>
+                        <ul>
+                            <li>DDoS攻撃、サーバークラッシュを狙った行為。</li>
+                            <li>サーバーリソースを過度に消費させる行為（意図的なラグマシンの設置など）。</li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <p class="rules-closing">ルールを守り、StellaMCでの素晴らしい体験を共に築きましょう！</p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> StellaMC. All Rights Reserved.</p>
+             <p class="small-text">Minecraftは Mojang Synergies AB の商標です。当サーバーは Mojang Synergies AB とは関係ありません。</p>
+        </div>
+    </footer>
     <script>
-      document.addEventListener('DOMContentLoaded', () => {
-          const menuButton = document.getElementById('menu-button');
-          const mobileNav = document.getElementById('mobile-nav');
-
-          menuButton.addEventListener('click', () => {
-              mobileNav.classList.toggle('open'); // 'open'クラスをトグル
-              console.log('メニュー状態:', mobileNav.classList.contains('open') ? '開いた' : '閉じた');
-          });
-      });
+        // ハンバーガーメニュー (index.htmlと同じもの)
+        const hamburger = document.querySelector('.hamburger-menu');
+        const nav = document.querySelector('.main-nav');
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
+            hamburger.setAttribute('aria-expanded', !expanded);
+        });
+         window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
-  <div class="container">
-    <!-- サーバー規約 -->
-    <section class="rules">
-      <h2>📗 サーバー規約について</h2>
-      <ul>
-        <li>✅ 運営の指示に従ってください</li>
-        <li>✅ 運営判断で処罰する場合もあります</li>
-        <li>✅ 禁止行為を行うと処罰が行われます</li>
-      </ul>
-    </section>
-
-    <!-- 禁止行為 -->
-    <section class="ban">
-      <h2>📕 禁止行為とされていること</h2>
-      <ul>
-        <li>🚫 迷惑行為</li>
-        <li>🚫 不正行為</li>
-        <li>🚫 宣伝行為</li>
-        <li>🚫 相手を不快にする行為</li>
-        <li>🚫 サーバーを攻撃する行為</li>
-      </ul>
-    </section>
-
-    <!-- サーバー参加ルール -->
-    <section class="join">
-      <h2>🪄 サーバー参加ルール</h2>
-      <ul>
-        <li>🚀 アクセスを繰り返さないこと<br><span class="note">バグ・回線落ちなどはOK サーバーに無駄な負荷がかかるため</span></li>
-        <li>🚀 不公平なMODの禁止<br><span class="note">軽量化やレシピ・MAP・空腹はOK 不安なMODは質問してください</span></li>
-        <li>🚀 マクロ・ツール・自動操作の禁止<br><span class="note">使用できない機種と不平が生じるため 種類によっては負荷がかかるため</span></li>
-        <li>🚀 サブ垢は1アカウントまで<br><span class="note">別の人がプレイするなどはOK サーバーに無駄な負荷がかかるため</span></li>
-        <li>🚀 サーバー内AFK回避の禁止<br><span class="note">AFK設定している意味がなくなるため 自動再接続もAFK回避とみなします</span></li>
-      </ul>
-    </section>
-
-    <!-- サーバー負荷ルール -->
-    <section class="load">
-      <h2>⛏️ サーバー負荷ルール</h2>
-      <ul>
-        <li>📖 長時間チャンク読み込みの禁止<br><span class="note">目的ありのチャンク読み込みはOK 長時間は目安5分以上</span></li>
-        <li>📖 MOBの大量使用の禁止<br><span class="note">大量のMOBがいるところに放置 大量の確保・捕獲等 大量の目安は10体以上</span></li>
-        <li>📖 大きい負荷がかかる装置の禁止<br><span class="note">一度に大量の演算処理が必要な装置 常に稼働・処理する装置 トラップに長時間放置など 初期リス付近での装置は禁止</span></li>
-      </ul>
-    </section>
-
-    <!-- チャットルール -->
-    <section class="chat">
-      <h2>🔊 チャットルール</h2>
-      <ul>
-        <li>💬 あいさつマナー<br><span class="note">あいさつはきちんと返しましょう 自分からもあいさつをしよう</span></li>
-        <li>💬 迷惑なチャットの禁止<br><span class="note">同じ文字を何個も並べる(例：aaaa) スパム行為やクレクレ行為など 暴言や不満などの不快なチャット</span></li>
-        <li>💬 チャットでの会話等ルール<br><span class="note">身内ノリ等は/tellや/chのみ 公開チャットでは適切なチャットで 過度な独り言などはご遠慮ください</span></li>
-      </ul>
-    </section>
-  </div>
 </body>
 </html>
