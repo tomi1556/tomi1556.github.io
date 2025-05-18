@@ -1,14 +1,14 @@
 /* stella.css */
 /* --- グローバル設定 & リセット改善 --- */
 :root {
-    --primary-color: #6C63FF;
-    --secondary-color: #48D1CC;
-    --accent-color: #FFD05A;
-    --dark-bg: #181A21;
-    --medium-dark-bg: #20232F;
-    --light-bg: #2A2E40;
-    --text-color: #EAEAEA;
-    --text-muted: #B0B5C8;
+    --primary-color: #6C63FF;  /* より鮮やかでモダンなパープルブルー */
+    --secondary-color: #48D1CC; /* ターコイズ */
+    --accent-color: #FFD05A;   /* 少し彩度を上げたイエロー */
+    --dark-bg: #181A21;        /* さらに少しダークに */
+    --medium-dark-bg: #20232F; /* カードやセクション背景 */
+    --light-bg: #2A2E40;       /* ホバー時や明るめの要素 */
+    --text-color: #EAEAEA;     /* メインテキスト */
+    --text-muted: #B0B5C8;   /* 抑えたテキスト */
     --border-color: #353A4E;
     --glass-bg: rgba(30, 32, 41, 0.8); /* ガラスの透明度調整 */
     --font-primary: 'Poppins', 'Noto Sans JP', sans-serif;
@@ -23,6 +23,7 @@
     --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-slow: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
 
+    /* RGB値をCSS変数として定義 */
     --rgb-primary-color: 108, 99, 255;
     --rgb-secondary-color: 72, 209, 204;
     --rgb-accent-color: 255, 208, 90;
@@ -42,6 +43,7 @@ img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: var(--secondary-color); transition: color var(--transition-fast), opacity var(--transition-fast); }
 a:hover { color: var(--accent-color); opacity: 0.9; }
 
+/* 基本テキスト色と表示状態の担保 */
 h1, h2, h3, h4, h5, h6, p, span, li, code, .subtitle, .section-subtitle, .small-text, label, input, button, a,
 .page-main-title, .page-intro, .section-heading-styled, .rules-category-title, .section-description, .page-closing,
 .section-title-compact {
@@ -52,7 +54,7 @@ h1, h2, h3, h4, h5, h6, p, span, li, code, .subtitle, .section-subtitle, .small-
 h1 { color: #FFF; }
 h2, .section-title { color: var(--text-color); }
 h3, .rules-category-title, .join-box-title, .section-title-compact { color: var(--text-color); }
-p, .section-subtitle, li, .section-description, .preview-card p { color: var(--text-muted); } /* preview-card p追加 */
+p, .section-subtitle, li, .section-description, .preview-card p { color: var(--text-muted); }
 code { color: var(--accent-color); }
 
 h1 { font-size: clamp(2.4em, 6vw, 4.2em); letter-spacing: -0.02em; font-weight: 800; }
@@ -103,9 +105,9 @@ header .container { display: flex; justify-content: space-between; align-items: 
 header.scrolled #logo-img { filter: none; }
 
 .main-nav ul { list-style: none; display: flex; align-items: center; }
-.main-nav ul li { margin-left: 28px; } /* 間隔調整 */
-.main-nav ul li a.nav-link-item { /* 通常のナビリンク */
-    color: #FFF; font-weight: 500; font-size: 0.95rem; padding: 12px 8px; /* パディング調整 */
+.main-nav ul li { margin-left: 28px; }
+.main-nav ul li a.nav-link-item {
+    color: #FFF; font-weight: 500; font-size: 0.95rem; padding: 12px 8px;
     position: relative; letter-spacing: 0.7px;
     text-shadow: 0 1px 6px rgba(0,0,0,0.5);
     transition: color var(--transition-fast), text-shadow var(--transition-fast), opacity var(--transition-fast);
@@ -115,7 +117,7 @@ header.scrolled #logo-img { filter: none; }
 header.scrolled .main-nav ul li a.nav-link-item { color: var(--text-color); text-shadow: none; opacity: 0.9; }
 header.scrolled .main-nav ul li a.nav-link-item:hover, header.scrolled .main-nav ul li a.nav-link-item.active { color: var(--accent-color); opacity: 1;}
 .main-nav ul li a.nav-link-item::after {
-    content: ''; position: absolute; bottom: 4px; /* 位置調整 */
+    content: ''; position: absolute; bottom: 4px;
     left: 50%; transform: translateX(-50%);
     width: 0; height: 2.5px; background-color: var(--accent-color);
     border-radius: 1.5px; transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
@@ -124,26 +126,27 @@ header.scrolled .main-nav ul li a.nav-link-item:hover, header.scrolled .main-nav
 .main-nav ul li a.nav-link-item.active { color: var(--accent-color); font-weight: 600; }
 header.scrolled .main-nav ul li a.nav-link-item.active { color: var(--accent-color); }
 
-/* ナビゲーションのDiscordリンク特別スタイル */
-.nav-discord-link {
+.nav-discord-link { /* ナビのDiscordリンク専用スタイル */
     display: inline-flex; align-items: center;
-    padding: 8px 15px !important; /* 他のリンクより少し目立たせる */
-    background-color: rgba(var(--rgb-primary-color), 0.15);
-    border: 1px solid rgba(var(--rgb-primary-color), 0.5);
+    padding: 8px 15px !important; /* !importantで他のスタイルを上書き */
+    background-color: rgba(var(--rgb-primary-color), 0.1);
+    border: 1px solid rgba(var(--rgb-primary-color), 0.4);
     border-radius: var(--border-radius-md);
-    color: var(--primary-color) !important; /* 通常時もプライマリカラー */
+    color: var(--primary-color) !important;
     text-shadow: none !important; opacity: 1 !important;
+    font-weight: 600; /* 少し太く */
+    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast);
 }
 .nav-discord-link:hover {
     background-color: var(--primary-color);
     color: #FFF !important;
     border-color: var(--primary-color);
-    box-shadow: 0 0 15px rgba(var(--rgb-primary-color), 0.4);
+    box-shadow: 0 0 18px rgba(var(--rgb-primary-color), 0.5);
 }
 .nav-discord-link i { margin-right: 8px; font-size: 1.1em; }
-header.scrolled .nav-discord-link { /* スクロール時もスタイル維持 */
-    background-color: rgba(var(--rgb-primary-color), 0.2);
-    border-color: rgba(var(--rgb-primary-color), 0.6);
+header.scrolled .nav-discord-link {
+    background-color: rgba(var(--rgb-primary-color), 0.15);
+    border-color: rgba(var(--rgb-primary-color), 0.5);
     color: var(--primary-color) !important;
 }
 header.scrolled .nav-discord-link:hover {
@@ -188,7 +191,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .btn-primary:hover { transform: translateY(-3px) scale(1.035); box-shadow: var(--shadow-strong); }
 .btn-secondary { background-color: var(--medium-dark-bg); color: var(--secondary-color); border: 2px solid var(--secondary-color); }
 .btn-secondary:hover { background-color: var(--secondary-color); color: var(--dark-bg); transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(var(--rgb-secondary-color), 0.35); }
-.btn-discord { /* このクラスはヒーローセクションのボタン用 */
+.btn-discord { /* ヒーローセクションのDiscordボタン用 */
     background-color: #5865F2; color: #fff; border: 2px solid transparent;
 }
 .btn-discord:hover { background-color: #FFF; color: #5865F2; border-color: #5865F2; transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.35); }
@@ -201,7 +204,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 }
 .hero-background-image {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: url('header.png') no-repeat center center/cover; /* 背景画像変更！ */
+    background: url('header.png') no-repeat center center/cover; /* 背景画像指定！ */
     z-index: 1; transform: scale(1.1);
     transition: transform 0.3s ease-out;
 }
@@ -224,15 +227,15 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
     gap: 30px;
     grid-template-columns: 1fr; /* モバイルデフォルト */
 }
-@media (min-width: 600px) { /* 小さめのタブレットから2カラム */
+@media (min-width: 600px) {
     .features-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (min-width: 992px) { /* PCで4カラム */
-    .features-grid { grid-template-columns: repeat(4, 1fr); }
+@media (min-width: 992px) {
+    .features-grid { grid-template-columns: repeat(4, 1fr); } /* PCで4カラム */
 }
 .feature-card {
     background: var(--medium-dark-bg);
-    padding: 30px 25px; border-radius: var(--border-radius-lg); text-align: center;
+    padding: 35px 30px; border-radius: var(--border-radius-lg); text-align: center;
     transition: transform var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-normal);
     border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center;
     box-shadow: var(--shadow-medium); position: relative; overflow: hidden;
@@ -391,7 +394,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     margin-left: auto; margin-right: auto;
     line-height: 1.75;
 }
-.rules-article, .support-article { /* support.htmlにも適用できるように */
+.rules-article, .support-article {
     max-width: 880px;
     margin: 0 auto;
 }
@@ -465,81 +468,211 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 .payment-methods-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
-    margin-top: 20px;
+    gap: 30px;
+    margin: 25px 0;
 }
 .payment-method {
     background-color: var(--light-bg);
-    padding: 25px;
+    padding: 30px;
     border-radius: var(--border-radius-md);
     text-align: center;
     border: 1px solid var(--border-color);
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.payment-method:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-medium);
 }
 .payment-method .payment-icon {
-    font-size: 3em;
+    font-size: 3.2em;
     color: var(--primary-color);
-    margin-bottom: 15px;
+    margin-bottom: 18px;
+    line-height: 1;
 }
 .payment-method h4 {
-    font-size: 1.3em;
+    font-size: 1.35em;
     color: var(--text-color);
-    margin-bottom: 10px;
+    margin-bottom: 12px;
 }
 .payment-method p {
     font-size: 0.9rem;
     color: var(--text-muted);
-    margin-bottom: 20px;
-    min-height: 50px; /* 説明文の高さある程度揃える */
+    margin-bottom: 25px;
+    flex-grow: 1;
+    min-height: 55px;
 }
-.btn-small { /* 支払い方法のボタンなど */
-    padding: 8px 18px;
-    font-size: 0.85rem;
+.btn-small {
+    padding: 9px 20px;
+    font-size: 0.9rem;
+    margin-top: auto;
 }
+
+.common-benefits {
+    background-color: var(--light-bg);
+    padding: 20px 30px;
+    border-radius: var(--border-radius-md);
+    margin: 30px 0;
+    border: 1px dashed var(--border-color);
+}
+.common-benefits h4 {
+    font-size: 1.3em;
+    color: var(--accent-color);
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+}
+.common-benefits h4 i {
+    margin-right: 10px;
+    font-size: 0.9em;
+}
+.simple-list li {
+    margin-bottom: 8px !important;
+    font-size: 0.95rem !important;
+}
+.simple-list .list-icon i {
+    color: var(--accent-color) !important;
+    font-size: 0.8em !important;
+}
+
 
 .benefit-tiers-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 30px;
+    grid-template-columns: 1fr; /* スマホは1カラム */
+    gap: 35px;
     margin-top: 25px;
 }
-.benefit-tier {
-    background-color: var(--light-bg);
-    padding: 30px;
-    border-radius: var(--border-radius-md);
-    border-left: 5px solid; /* tierごとの色 */
+@media (min-width: 768px) {
+    .benefit-tiers-container {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    }
 }
+
+.benefit-tier {
+    background: linear-gradient(145deg, var(--medium-dark-bg), var(--light-bg));
+    padding: 30px;
+    border-radius: var(--border-radius-lg);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-medium);
+    display: flex;
+    flex-direction: column;
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+.benefit-tier:hover {
+    transform: translateY(-10px) scale(1.02);
+    box-shadow: var(--shadow-strong);
+}
+
 .benefit-tier-header {
     display: flex;
     align-items: center;
-    font-size: 1.5em;
+    margin-bottom: 25px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+.benefit-tier-header .tier-icon {
+    font-size: 2.8em;
+    margin-right: 18px;
+    line-height: 1;
+    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+}
+.benefit-tier.patron .tier-icon { color: var(--primary-color); }
+.benefit-tier.patron-plus .tier-icon { color: var(--accent-color); }
+
+.tier-name-price h3 {
+    font-size: 1.7em;
     font-weight: 700;
-    margin-bottom: 20px;
     color: var(--text-color);
+    margin-bottom: 2px;
 }
-.benefit-tier-header i {
-    margin-right: 12px;
-    font-size: 1.2em;
-}
-.benefit-tier-header span { /* 金額 */
-    font-size: 0.7em;
+.tier-name-price .tier-price {
+    font-size: 0.9em;
     font-weight: 500;
     color: var(--text-muted);
-    margin-left: auto;
-    background-color: var(--medium-dark-bg);
-    padding: 3px 8px;
+    background-color: var(--dark-bg);
+    padding: 4px 10px;
     border-radius: var(--border-radius-sm);
+    display: inline-block;
 }
-.benefit-tier.patron { border-left-color: var(--primary-color); }
-.benefit-tier.patron .benefit-tier-header i { color: var(--primary-color); }
-.benefit-tier.patron-plus { border-left-color: var(--accent-color); }
-.benefit-tier.patron-plus .benefit-tier-header i { color: var(--accent-color); }
+
+.benefit-detail-list {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 25px;
+    flex-grow: 1;
+}
+.benefit-detail-list li {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 12px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+}
+.benefit-detail-list .list-bullet {
+    width: 22px;
+    flex-shrink: 0;
+    margin-right: 10px;
+    color: var(--secondary-color);
+    font-size: 0.9em;
+    padding-top: 3px;
+}
+
+.tier-duration-info {
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1px dashed var(--border-color);
+}
+.tier-duration-info p {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+}
+.tier-duration-info p:last-child { margin-bottom: 0; }
+.tier-duration-info .server-icon,
+.tier-duration-info .global-icon {
+    margin-right: 8px;
+    color: var(--primary-color);
+    font-size: 1em;
+}
+.tier-duration-info .global-icon { color: var(--secondary-color); }
+.tier-duration-info .duration {
+    display: inline-flex;
+    align-items: center;
+    margin-left: 5px;
+    font-weight: 500;
+    color: var(--text-color);
+}
+.tier-duration-info .duration-icon {
+    margin-right: 5px;
+    color: var(--accent-color);
+    font-size: 0.9em;
+}
+
+.inline-link {
+    color: var(--accent-color);
+    text-decoration: underline;
+    font-weight: 500;
+}
+.inline-link:hover {
+    color: var(--secondary-color);
+    text-decoration: none;
+}
+
+.br-sp { display: none; }
+@media (max-width: 576px) {
+    .br-sp { display: block; }
+}
 
 
 /* --- レスポンシブ対応微調整 --- */
 @media (max-width: 1024px) {
     .hero-text-content { max-width: 70%; padding-right: 5%; }
     .features-grid {
-        /* タブレットで2カラム (CSS Gridのauto-fitで対応されているはずだが明示) */
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 25px;
     }
@@ -561,7 +694,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     .main-nav ul li { margin-left: 0; width: 100%;}
     .main-nav ul li a.nav-link-item { padding: 15px 30px; font-size: 1.05rem; display:block; border-bottom: 1px solid var(--border-color); }
     .main-nav ul li:last-child a.nav-link-item { border-bottom: none; }
-    .nav-discord-link { border-radius: 0 !important; border: none !important; background-color: transparent !important;} /* スマホメニュー内では通常リンク風に */
+    .nav-discord-link { border-radius: 0 !important; border: none !important; background-color: transparent !important;}
     .nav-discord-link:hover { background-color: var(--light-bg) !important; color: var(--accent-color) !important;}
 
 
@@ -593,6 +726,11 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     .page-section { padding: 30px 20px; }
     .section-heading-styled { font-size: clamp(1.5em, 3.5vw, 1.9em); }
     .rules-category-title { font-size: clamp(1.2em, 2.7vw, 1.5em); }
+
+    .benefit-tiers-container { grid-template-columns: 1fr; }
+    .benefit-tier { padding: 25px; }
+    .benefit-tier-header .tier-icon { font-size: 2.5em; margin-right: 15px;}
+    .tier-name-price h3 { font-size: 1.5em;}
 }
 
 @media (max-width: 480px) {
