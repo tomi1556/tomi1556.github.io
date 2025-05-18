@@ -4,22 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StellaMC - あなたの冒険が始まる場所</title>
-    <link rel="stylesheet" href="stella.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-</head>
+    <link rel="stylesheet" href="stella.css"> <!- stellamc.css から style.css に変更 ->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"> </head>
 <body>
     <header>
         <div class="container">
-            <a href="stella.html" class="logo-link">
-                <img src="logo.png" alt="StellaMC ロゴ" id="logo-img">
+            <a href="index.html" class="logo-link"> <img src="images/logo.png" alt="StellaMC ロゴ" id="logo-img">
             </a>
             <nav class="main-nav">
                 <ul>
-                    <li><a href="stella.html">ホーム</a></li>
-                    <li><a href="rules.html">ルール</a></li>
+                    <li><a href="index.html">ホーム</a></li> <li><a href="rules.html">ルール</a></li>
                     <li><a href="support.html">支援</a></li>
-                    <li><a href="http://stellamc.jp:6903/" target="_blank">WebMap</a></li>
+                    <li><a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer">WebMap</a></li>
                 </ul>
             </nav>
             <button class="hamburger-menu" aria-label="メニューを開く" aria-expanded="false">
@@ -35,13 +32,13 @@
             <div class="hero-overlay"></div>
             <div class="hero-content container">
                 <h1>StellaMC</h1>
-                <p class="subtitle">居心地の良い生活サーバーを。</p>
+                <p class="subtitle">居心地の良い、あなたのもう一つの生活サーバー。</p>
                 <div class="hero-buttons">
                     <a href="#join" class="btn btn-primary">
-                        <i class="fa fa-rocket"> 今すぐ参加
+                        <i class="fa-solid fa-rocket btn-icon-left"></i>今すぐ参加
                     </a>
-                    <a href="https://discord.gg/jurMJk7gqa" target="_blank" class="btn btn-secondary">
-                        <i class="fab fa-discord"></i> 　Discord
+                    <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                        <i class="fab fa-discord btn-icon-left"></i>Discordへ
                     </a>
                 </div>
             </div>
@@ -51,32 +48,24 @@
             <h2>StellaMCの魅力</h2>
             <div class="features-grid">
                 <div class="feature-card">
-                    <img src="icon-feature1.png" alt="多彩なコンテンツ" class="feature-icon">
+                    <div class="feature-icon-wrapper"><i class="fas fa-cubes fa-2x"></i></div>
                     <h3>多彩なコンテンツ</h3>
-                    <p>独自のシステムで、</p>
-                    <p>常に新しい発見と楽しさを</p>
-                    <p>提供します。</p>
+                    <p>独自の経済やクエスト、定期イベントで飽きさせない楽しさを提供します。</p>
                 </div>
                 <div class="feature-card">
-                    <img src="icon-feature2.png" alt="高いコミュニティ意識" class="feature-icon">
+                    <div class="feature-icon-wrapper"><i class="fas fa-users fa-2x"></i></div>
                     <h3>高いコミュニティ意識</h3>
-                    <p>プレイヤー同士が尊重しあい、</p>
-                    <p>居心地の良い居場所を</p>
-                    <p>作り上げていきます。
+                    <p>プレイヤー同士が尊重しあい、安心して楽しめる温かい雰囲気です。</p>
                 </div>
                 <div class="feature-card">
-                    <img src="icon-feature3.png" alt="いつでも繋がる居場所" class="feature-icon">
+                    <div class="feature-icon-wrapper"><i class="fas fa-clock fa-2x"></i></div>
                     <h3>24時間いつでも繋がる</h3>
-                    <p>サーバーは常時稼働で、</p>
-                    <p>安定した快適な環境を
-                    <p>いつでも誰とでも遊べます。</p>
+                    <p>常時稼働の安定した環境で、好きな時に仲間と冒険できます。</p>
                 </div>
                 <div class="feature-card">
-                    <img src="icon-feature4.png" alt="迅速で丁寧な運営サポート" class="feature-icon">
+                    <div class="feature-icon-wrapper"><i class="fas fa-headset fa-2x"></i></div>
                     <h3>迅速で丁寧なサポート</h3>
-                    <p>困ったことがあれば、運営が</p>
-                    <p>丁寧に対応させていただくので</p>
-                    <p>お気軽にお声がけください。</p>
+                    <p>運営が親身に対応。困ったことがあればお気軽にお声がけください。</p>
                 </div>
             </div>
         </section>
@@ -85,28 +74,52 @@
             <h2>サーバーへの参加方法</h2>
             <div class="join-methods">
                 <div class="join-card">
-                    <h3><i class="fas fa-desktop"></i> Java版</h3>
-                    <p>サーバーアドレス:</p>
-                    <code class="server-address" onclick="copyToClipboard('stellamc.jp')">stellamc.jp <i class="far fa-copy"></i></code>
+                    <div class="join-platform">
+                        <i class="fas fa-desktop platform-icon"></i>
+                        <h4>Java版</h4>
+                    </div>
+                    <p class="join-label">サーバーアドレス:</p>
+                    <div class="address-copy-group">
+                        <code class="server-address">stellamc.jp</code>
+                        <button class="copy-btn" onclick="copyToClipboard('stellamc.jp', 'java-copy-feedback')" aria-label="Java版アドレスをコピー">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
                     <p class="copy-feedback" id="java-copy-feedback"></p>
                 </div>
+
                 <div class="join-card">
-                    <h3><i class="fas fa-mobile-alt"></i> 統合版 (Bedrock)</h3>
-                    <p>サーバーアドレス:</p>
-                    <code class="server-address" onclick="copyToClipboard('stellamc.jp')">stellamc.jp <i class="far fa-copy"></i></code>
-                    <p>ポート:</p>
-                    <code class="server-address" onclick="copyToClipboard('6911')">6911 <i class="far fa-copy"></i></code>
-                    <p class="copy-feedback" id="bedrock-copy-feedback"></p>
-                    <p class="small-text">フレンド追加ID: <code>stellamc9211</code></p>
+                    <div class="join-platform">
+                         <i class="fas fa-mobile-alt platform-icon"></i>
+                        <h4>統合版 (Bedrock)</h4>
+                    </div>
+                    <p class="join-label">サーバーアドレス:</p>
+                    <div class="address-copy-group">
+                        <code class="server-address">stellamc.jp</code>
+                        <button class="copy-btn" onclick="copyToClipboard('stellamc.jp', 'bedrock-addr-feedback')" aria-label="統合版アドレスをコピー">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="copy-feedback" id="bedrock-addr-feedback"></p>
+
+                    <p class="join-label">ポート:</p>
+                    <div class="address-copy-group">
+                        <code class="server-address">6911</code>
+                        <button class="copy-btn" onclick="copyToClipboard('6911', 'bedrock-port-feedback')" aria-label="統合版ポートをコピー">
+                            <i class="far fa-copy"></i>
+                        </button>
+                    </div>
+                    <p class="copy-feedback" id="bedrock-port-feedback"></p>
+                    <p class="small-text join-note">フレンド追加ID: <code>stellamc9211</code></p>
                 </div>
             </div>
-             </section>
+        </section>
 
         <section id="rules-preview" class="container content-section alt-bg">
             <h2>サーバールール</h2>
-            <p>みんなが快適に楽しめるように、いくつかのルールを設けています。<br>詳細はルールページをご確認ください。</p>
+            <p>快適なプレイのため、ルールのご確認をお願いします。</p>
             <div class="rules-highlights">
-                <span class="rule-highlight"><i class="fas fa-check-circle"></i> 運営の指示に従う</span>
+                <span class="rule-highlight"><i class="fas fa-check-circle"></i> 運営指示厳守</span>
                 <span class="rule-highlight"><i class="fas fa-times-circle"></i> 迷惑行為禁止</span>
                 <span class="rule-highlight"><i class="fas fa-gavel"></i> 不正行為禁止</span>
             </div>
@@ -115,23 +128,23 @@
 
         <section id="support-preview" class="container content-section">
             <h2>サーバー支援について</h2>
-            <p>StellaMCの運営は、皆様の温かいご支援によって支えられています。<br>ご興味のある方は、支援ページをご覧ください。</p>
+            <p>皆様のご支援がサーバー運営の力になります。</p>
             <a href="support.html" class="btn btn-primary">支援の詳細を見る</a>
-             </section>
+        </section>
 
         <section id="webmap-promo" class="container content-section alt-bg">
             <h2><i class="fas fa-map-marked-alt"></i> WebMapで世界を探検！</h2>
-            <p>サーバーの広大な世界をブラウザからリアルタイムでチェックできます。</p>
-            <a href="http://stellamc.jp:6903/" target="_blank" class="btn btn-secondary">WebMapを開く</a>
-            </section>
+            <p>サーバーの広大な世界をブラウザからリアルタイムでチェック。</p>
+            <a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">WebMapを開く</a>
+        </section>
 
         <section id="discord-promo" class="container content-section discord-bg">
             <div class="discord-content">
                 <h2><i class="fab fa-discord"></i> コミュニティに参加しよう！</h2>
-                <p>最新情報、イベント告知、プレイヤー同士の交流はStellaMC公式Discordサーバー</p>
-                <a href="https://discord.gg/jurMJk7gqa" target="_blank" class="btn btn-discord">Discordに参加する</i></a>
+                <p>最新情報、イベント告知、プレイヤー交流は公式Discordサーバーで！</p>
+                <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-discord">Discordに参加する</a>
             </div>
-             </section>
+        </section>
     </main>
 
     <footer>
@@ -146,16 +159,15 @@
         const hamburger = document.querySelector('.hamburger-menu');
         const nav = document.querySelector('.main-nav');
         hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
+            const isActive = hamburger.classList.toggle('active');
             nav.classList.toggle('active');
-            const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
-            hamburger.setAttribute('aria-expanded', !expanded);
+            hamburger.setAttribute('aria-expanded', isActive);
         });
 
         // ヘッダー背景変化
         window.addEventListener('scroll', () => {
             const header = document.querySelector('header');
-            if (window.scrollY > 50) {
+            if (window.scrollY > 30) { // 少し低い位置で変化
                 header.classList.add('scrolled');
             } else {
                 header.classList.remove('scrolled');
@@ -168,32 +180,25 @@
                 const feedbackElement = document.getElementById(feedbackElementId);
                 if(feedbackElement){
                     feedbackElement.textContent = 'コピーしました！';
-                    setTimeout(() => { feedbackElement.textContent = ''; }, 2000);
+                    feedbackElement.style.opacity = '1';
+                    setTimeout(() => {
+                        feedbackElement.style.opacity = '0';
+                        setTimeout(() => { feedbackElement.textContent = ''; }, 300); // フェードアウト後クリア
+                    }, 1500);
                 }
             }).catch(err => {
                 console.error('コピーに失敗しました: ', err);
                 const feedbackElement = document.getElementById(feedbackElementId);
                 if(feedbackElement){
                     feedbackElement.textContent = 'コピー失敗';
-                     setTimeout(() => { feedbackElement.textContent = ''; }, 2000);
+                    feedbackElement.style.opacity = '1';
+                    setTimeout(() => {
+                        feedbackElement.style.opacity = '0';
+                        setTimeout(() => { feedbackElement.textContent = ''; }, 300);
+                    }, 1500);
                 }
             });
         }
-        // Java版用
-        const javaAddressElement = document.querySelector('#join .join-card:nth-child(1) .server-address');
-        if(javaAddressElement){
-            javaAddressElement.addEventListener('click', () => copyToClipboard('stellamc.jp', 'java-copy-feedback'));
-        }
-        // 統合版用
-        const bedrockAddressElement = document.querySelector('#join .join-card:nth-child(2) .server-address:nth-child(2)'); // アドレス用
-        if(bedrockAddressElement){
-           bedrockAddressElement.addEventListener('click', () => copyToClipboard('stellamc.jp', 'bedrock-copy-feedback'));
-        }
-        const bedrockPortElement = document.querySelector('#join .join-card:nth-child(2) .server-address:nth-child(4)'); // ポート用
-        if(bedrockPortElement){
-            bedrockPortElement.addEventListener('click', () => copyToClipboard('6911', 'bedrock-copy-feedback'));
-        }
-
 
         // フッターに現在の年を表示
         document.getElementById('current-year').textContent = new Date().getFullYear();
