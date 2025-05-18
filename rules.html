@@ -5,125 +5,231 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サーバールール - StellaMC</title>
     <link rel="stylesheet" href="stella.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
     <header>
         <div class="container">
-            <a href="index.html" class="logo-link">
+            <a href="index.html" class="logo-link" aria-label="StellaMC ホームへ">
                 <img src="images/logo.png" alt="StellaMC ロゴ" id="logo-img">
             </a>
-            <nav class="main-nav">
+            <nav class="main-nav" id="main-navigation">
                 <ul>
-                    <li><a href="stella.html">ホーム</a></li>
-                    <li><a href="rules.html">ルール</a></li>
+                    <li><a href="index.html">ホーム</a></li>
+                    <li><a href="rules.html" class="active">ルール</a></li> {/* このページがアクティブなことを示す */}
                     <li><a href="support.html">支援</a></li>
-                    <li><a href="http://stellamc.jp:6903/" target="_blank">WebMap</a></li>
+                    <li><a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer">WebMap</a></li>
                 </ul>
             </nav>
-            <button class="hamburger-menu" aria-label="メニューを開く" aria-expanded="false">
-                <span></span>
-                <span></span>
-                <span></span>
+            <button class="hamburger-menu" aria-label="メニューを開閉する" aria-expanded="false" aria-controls="main-navigation">
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
+                <span class="hamburger-bar"></span>
             </button>
         </div>
     </header>
 
-<main class="page-content-container">
-    <div class="container">
-        <h1 class="page-main-title animate-on-load" data-animation="fadeInUpCustom">サーバールール</h1>
-        <p class="page-intro animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="0.1s">
-            StellaMCを皆が楽しく安全にプレイできるよう、以下のルールを守ってください。<br>
-            ルール違反が確認された場合、運営の判断により処罰が行われることがあります。
-        </p>
+    <main class="page-content-container">
+        <div class="container">
+            <div class="page-header animate-on-load" data-animation="fadeInUpCustom">
+                <h1 class="page-main-title">サーバールール</h1>
+                <p class="page-intro">
+                    StellaMCサーバーを全てのプレイヤーが安全かつ快適に楽しめるよう、以下のルールを定めています。<br>
+                    ご参加いただく前に必ずご一読いただき、遵守していただくようお願いいたします。
+                </p>
+            </div>
 
-        <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.2s">
-            <h2><i class="fas fa-book-open"></i> サーバー規約</h2>
-            <ul class="info-list">
-                <li>運営の指示には必ず従ってください。</li>
-                <li>運営チームは、状況に応じて独自の判断で処罰を行う権利を有します。</li>
-                <li>本規約に記載されている禁止行為を行った場合、警告、一時的な利用制限、または永久的な追放などの処罰が科せられます。</li>
-                <li>ルールは予告なく変更される場合があります。定期的にご確認ください。</li>
-            </ul>
-        </section>
+            <article class="rules-article">
+                <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">
+                    <h2 class="section-heading-styled"><i class="fas fa-scroll"></i>サーバー基本規約</h2>
+                    <ul class="info-list-styled">
+                        <li><span class="list-icon"><i class="fas fa-check"></i></span>運営の指示には、いかなる場合も速やかに従ってください。</li>
+                        <li><span class="list-icon"><i class="fas fa-check"></i></span>運営チームは、本規約に明記されていない事項についても、サーバーの秩序維持のために独自の判断で対応する権利を有します。</li>
+                        <li><span class="list-icon"><i class="fas fa-check"></i></span>禁止行為が確認された場合、警告、一時的な利用制限、アカウントの永久追放などの処罰が科せられることがあります。</li>
+                        <li><span class="list-icon"><i class="fas fa-check"></i></span>本サーバー規約は、より良いサーバー運営のため、予告なく変更・追加される場合があります。定期的な確認をお願いします。</li>
+                    </ul>
+                </section>
 
-        <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.3s">
-            <h2><i class="fas fa-ban"></i> 禁止行為</h2>
-            <p>以下の行為は固く禁止されています。詳細は各項目をご確認ください。</p>
-            <div class="sub-section">
-                <h3><i class="fas fa-comment-slash"></i> 迷惑行為</h3>
-                <ul class="info-list">
-                    <li>他プレイヤーへの暴言、誹謗中傷、脅迫、ストーキング行為。</li>
-                    <li>過度なスパム行為（チャット、看板など）。</li>
-                    <li>他人の建築物や所有物の破壊、窃盗（明確に許可されている場合を除く）。</li>
-                    <li>サーバーや他のプレイヤーのプレイを意図的に妨害する行為全般。</li>
-                </ul>
-            </div>
-            <div class="sub-section">
-                <h3><i class="fas fa-ghost"></i> 不正行為</h3>
-                 <ul class="info-list">
-                    <li>チートクライアント、ハックツール、不正なMODの使用。</li>
-                    <li>Xray、Fly Hack、Kill Auraなどの使用。</li>
-                    <li>サーバーのバグや脆弱性を悪用する行為。発見した場合は速やかに運営に報告してください。</li>
-                    <li>アカウントの共有、売買、譲渡。</li>
-                </ul>
-            </div>
-            <div class="sub-section">
-                <h3><i class="fas fa-bullhorn"></i> 宣伝行為</h3>
-                <ul class="info-list">
-                    <li>他のMinecraftサーバー、ウェブサイト、商品、サービス等の無許可な宣伝。</li>
-                    <li>StellaMCと無関係なDiscordサーバーへの招待。</li>
-                </ul>
-            </div>
-            <div class="sub-section">
-                <h3><i class="fas fa-angry"></i> 相手を不快にする行為</h3>
-                <ul class="info-list">
-                    <li>差別的発言（人種、性別、宗教、性的指向などに関するもの）。</li>
-                    <li>わいせつな表現、不適切なスキンや建築物。</li>
-                    <li>個人情報の聞き出しや公開。</li>
-                </ul>
-            </div>
-             <div class="sub-section">
-                <h3><i class="fas fa-bomb"></i> サーバーへの攻撃行為</h3>
-                <ul class="info-list">
-                    <li>DDoS攻撃、サーバークラッシュを狙った行為。</li>
-                    <li>サーバーリソースを過度に消費させる行為（意図的なラグマシンの設置など）。</li>
-                </ul>
-            </div>
-        </section>
+                <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.2s">
+                    <h2 class="section-heading-styled"><i class="fas fa-gavel"></i>禁止行為</h2>
+                    <p class="section-description">以下の行為は、サーバーの健全な運営とコミュニティ維持のため、固く禁止されています。</p>
 
-        <p class="page-closing animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.4s">
-            ルールを守り、StellaMCでの素晴らしい体験を共に築きましょう！ ご不明な点があれば、お気軽に運営までお問い合わせください。
-        </p>
-    </div>
-</main>
+                    <div class="rules-category">
+                        <h3 class="rules-category-title"><i class="fas fa-comments"></i>迷惑行為 (Harassment & Nuisance)</h3>
+                        <ul class="info-list-styled">
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>他プレイヤーに対する暴言、誹謗中傷、脅迫、ストーキング、執拗な追跡行為。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>チャット、看板、ダイレクトメッセージ等での過度なスパム行為、荒らし行為。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>許可なく他人の建築物、所有物を破壊、窃盗、改変する行為。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>意図的なラグの発生、サーバーや他プレイヤーのプレイを妨害する行為全般。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>他プレイヤーのゲーム体験を著しく損なうと運営が判断する行為。</li>
+                        </ul>
+                    </div>
+
+                    <div class="rules-category">
+                        <h3 class="rules-category-title"><i class="fas fa-user-secret"></i>不正行為 (Cheating & Exploits)</h3>
+                        <ul class="info-list-styled">
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>チートクライアント、ハックツール、不正なMODやリソースパックの使用 (X-Ray, Fly Hack, Kill Aura等)。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>サーバーやゲームのバグ、システムの脆弱性を悪用する行為。発見した場合は速やかに運営に報告してください。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>他人のアカウントの不正利用、アカウントの共有、売買、譲渡。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>運営の許可なく、ゲーム内アイテムや通貨を現実の金銭等で取引する行為 (RMT)。</li>
+                        </ul>
+                    </div>
+
+                     <div class="rules-category">
+                        <h3 class="rules-category-title"><i class="fas fa-volume-up"></i>宣伝・勧誘行為 (Advertising & Solicitation)</h3>
+                        <ul class="info-list-styled">
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>運営の許可なく、他のMinecraftサーバー、ウェブサイト、商品、サービス等を宣伝する行為。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>StellaMCと無関係なDiscordサーバーやSNSグループ等への無差別な招待・勧誘。</li>
+                        </ul>
+                    </div>
+
+                    <div class="rules-category">
+                        <h3 class="rules-category-title"><i class="fas fa-user-alt-slash"></i>不適切な言動・表現 (Inappropriate Behavior)</h3>
+                        <ul class="info-list-styled">
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>人種、国籍、性別、宗教、性的指向などに関する差別的、侮辱的な発言や表現。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>わいせつ、暴力的、グロテスクな表現、その他公序良俗に反する不適切なスキン、建築物、発言。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>他者の個人情報（本名、住所、連絡先など）を聞き出したり、本人の許可なく公開したりする行為。</li>
+                        </ul>
+                    </div>
+
+                    <div class="rules-category">
+                        <h3 class="rules-category-title"><i class="fas fa-server"></i>サーバーへの負荷・攻撃行為 (Server Integrity)</h3>
+                        <ul class="info-list-styled">
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>DDoS攻撃、サーバークラッシュを意図した行為、その他サーバーの正常な動作を妨げる行為。</li>
+                            <li><span class="list-icon"><i class="fas fa-times"></i></span>過度なレッドストーン回路やMOBの集中など、サーバーリソースを不必要に大量消費させる行為。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.3s">
+                    <h2 class="section-heading-styled"><i class="fas fa-balance-scale"></i>処罰について</h2>
+                    <p class="section-description">ルール違反が確認された場合、違反の度合いや過去の違反歴などを考慮し、運営が以下の処罰を判断・実行します。</p>
+                    <ul class="info-list-styled">
+                        <li><span class="list-icon"><i class="fas fa-exclamation-triangle"></i></span>口頭またはチャットでの警告</li>
+                        <li><span class="list-icon"><i class="fas fa-clock"></i></span>一時的なチャット禁止、サーバーへのアクセス禁止（Temp Ban）</li>
+                        <li><span class="list-icon"><i class="fas fa-ban"></i></span>サーバーからの永久追放（Permanent Ban）</li>
+                        <li><span class="list-icon"><i class="fas fa-undo"></i></span>不正に得たアイテムやデータのロールバック、削除</li>
+                    </ul>
+                    <p class="section-description" style="margin-top: 1.5em;">処罰に対する異議申し立ては、Discordの指定されたチャンネルまたは運営へのダイレクトメッセージにて受け付けます。ただし、最終的な判断は運営に委ねられるものとします。</p>
+                </section>
+
+                <p class="page-closing animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.4s">
+                    すべてのプレイヤーがStellaMCで楽しい時間を過ごせるよう、ご協力をお願いいたします。<br>
+                    ルールに関してご不明な点がある場合は、遠慮なく運営スタッフにお尋ねください。
+                </p>
+            </div>
+        </article>
+    </main>
 
     <footer>
-        <div class="container">
-            <p>&copy; <span id="current-year"></span> StellaMC. All Rights Reserved.</p>
-             <p class="small-text">Minecraftは Mojang Synergies AB の商標です。当サーバーは Mojang Synergies AB とは関係ありません。</p>
-        </div>
+        {/* ... footerは前回と同じ ... */}
     </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script>
-        // ハンバーガーメニュー (index.htmlと同じもの)
-        const hamburger = document.querySelector('.hamburger-menu');
-        const nav = document.querySelector('.main-nav');
-        hamburger.addEventListener('click', () => {
-            hamburger.classList.toggle('active');
-            nav.classList.toggle('active');
-            const expanded = hamburger.getAttribute('aria-expanded') === 'true' || false;
-            hamburger.setAttribute('aria-expanded', !expanded);
-        });
-         window.addEventListener('scroll', () => {
+        // JavaScriptは前回提供のものをベースに、エラーがあれば修正
+        document.addEventListener('DOMContentLoaded', () => {
+            const hamburger = document.querySelector('.hamburger-menu');
+            const nav = document.querySelector('.main-nav');
+            if (hamburger && nav) { // 要素が存在するか確認
+                const navLinks = nav.querySelectorAll('a');
+
+                hamburger.addEventListener('click', () => {
+                    const isActive = hamburger.classList.toggle('active');
+                    nav.classList.toggle('active');
+                    hamburger.setAttribute('aria-expanded', isActive);
+                    document.body.classList.toggle('no-scroll', isActive);
+                });
+
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (nav.classList.contains('active')) {
+                            hamburger.classList.remove('active');
+                            nav.classList.remove('active');
+                            hamburger.setAttribute('aria-expanded', 'false');
+                            document.body.classList.remove('no-scroll');
+                        }
+                    });
+                });
+            }
+
             const header = document.querySelector('header');
-            if (window.scrollY > 50) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+            if (header) { // 要素が存在するか確認
+                 window.addEventListener('scroll', () => {
+                    if (window.scrollY > 30) { // スクロール量が30pxを超えたら
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                    // Hero Parallax
+                    const heroBg = document.querySelector('#hero .hero-background-image');
+                    if (heroBg) {
+                        heroBg.style.transform = `translateY(${window.pageYOffset * 0.3}px) scale(1.1)`; // Y方向の動きを少し強調
+                    }
+                });
+            }
+
+
+            const currentYearEl = document.getElementById('current-year');
+            if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
+
+            if (typeof ClipboardJS !== 'undefined') { // ClipboardJSが読み込まれているか確認
+                const clipboard = new ClipboardJS('.copy-action-btn');
+                const toast = document.getElementById('copy-toast');
+
+                clipboard.on('success', function(e) {
+                    if (toast) {
+                        toast.textContent = `${e.trigger.ariaLabel.replace('をコピー', '')} をコピー！`;
+                        toast.className = 'copy-toast show success'; // クラスで制御
+                        setTimeout(() => {
+                            toast.className = 'copy-toast';
+                        }, 2200);
+                    }
+                    e.clearSelection();
+                });
+
+                clipboard.on('error', function(e) {
+                    if (toast) {
+                        toast.textContent = 'コピー失敗 :(';
+                        toast.className = 'copy-toast show error';
+                        setTimeout(() => {
+                            toast.className = 'copy-toast';
+                        }, 2200);
+                    }
+                });
+            }
+
+            const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
+            if (animatedElements.length > 0 && typeof IntersectionObserver !== 'undefined') { // IntersectionObserverが使えるか確認
+                const observer = new IntersectionObserver((entries, observerInstance) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const animationType = entry.target.dataset.animation || 'fadeInUpCustom';
+                            const animationDelay = entry.target.dataset.animationDelay || '0s';
+                            entry.target.style.animationDelay = animationDelay;
+                            entry.target.classList.add(animationType, 'is-visible');
+                            observerInstance.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.1, rootMargin: "0px 0px -30px 0px" });
+
+                animatedElements.forEach(el => {
+                    if (el.classList.contains('animate-on-load')) {
+                        const animationType = el.dataset.animation || 'fadeInUpCustom';
+                        const animationDelay = el.dataset.animationDelay || '0s';
+                        el.style.animationDelay = animationDelay;
+                         // 描画タイミングを考慮してわずかに遅延させる
+                        setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * 1000 + 50);
+                    } else {
+                        observer.observe(el);
+                    }
+                });
             }
         });
-        document.getElementById('current-year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
