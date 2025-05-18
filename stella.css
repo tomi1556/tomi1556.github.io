@@ -3,17 +3,17 @@
 :root {
     --primary-color: #6C63FF;
     --secondary-color: #48D1CC;
-    --accent-color: #FFD05A; /* 少し彩度を上げたイエロー */
-    --dark-bg: #181A21;        /* さらに少しダークに */
+    --accent-color: #FFD05A;
+    --dark-bg: #181A21;
     --medium-dark-bg: #20232F;
     --light-bg: #2A2E40;
-    --text-color: #EDEDF0;
-    --text-muted: #AAB0C2;
+    --text-color: #EAEAEA;
+    --text-muted: #B0B5C8;
     --border-color: #353A4E;
-    --glass-bg: rgba(30, 32, 41, 0.75); /* ガラスの透明度調整 */
+    --glass-bg: rgba(30, 32, 41, 0.8); /* ガラスの透明度調整 */
     --font-primary: 'Poppins', 'Noto Sans JP', sans-serif;
     --font-secondary: 'Noto Sans JP', sans-serif;
-    --shadow-soft: 0 7px 22px rgba(0,0,0,0.2); /* 影を調整 */
+    --shadow-soft: 0 7px 22px rgba(0,0,0,0.2);
     --shadow-medium: 0 12px 38px rgba(0,0,0,0.25);
     --shadow-strong: 0 18px 55px rgba(0,0,0,0.3);
     --border-radius-sm: 8px;
@@ -52,7 +52,7 @@ h1, h2, h3, h4, h5, h6, p, span, li, code, .subtitle, .section-subtitle, .small-
 h1 { color: #FFF; }
 h2, .section-title { color: var(--text-color); }
 h3, .rules-category-title, .join-box-title, .section-title-compact { color: var(--text-color); }
-p, .section-subtitle, li, .section-description { color: var(--text-muted); }
+p, .section-subtitle, li, .section-description, .preview-card p { color: var(--text-muted); } /* preview-card p追加 */
 code { color: var(--accent-color); }
 
 h1 { font-size: clamp(2.4em, 6vw, 4.2em); letter-spacing: -0.02em; font-weight: 800; }
@@ -94,8 +94,8 @@ header {
     transition: background-color var(--transition-normal), box-shadow var(--transition-normal), padding var(--transition-normal);
 }
 header.scrolled {
-    background-color: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); /* ブラー強化 */
-    box-shadow: 0 5px 25px rgba(0,0,0,0.3); padding: 10px 0; /* 影強化 */
+    background-color: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
+    box-shadow: 0 5px 25px rgba(0,0,0,0.3); padding: 10px 0;
 }
 header .container { display: flex; justify-content: space-between; align-items: center; }
 #logo-img { height: 38px; transition: transform var(--transition-fast), filter var(--transition-fast); filter: drop-shadow(0 3px 7px rgba(0,0,0,0.4)); }
@@ -103,32 +103,53 @@ header .container { display: flex; justify-content: space-between; align-items: 
 header.scrolled #logo-img { filter: none; }
 
 .main-nav ul { list-style: none; display: flex; align-items: center; }
-.main-nav ul li { margin-left: 32px; } /* 間隔調整 */
-.main-nav ul li a {
-    color: #FFF; font-weight: 500; font-size: 0.95rem; padding: 12px 10px; /* パディング調整 */
-    position: relative; letter-spacing: 0.8px; /* 文字間隔を少し広げる */
+.main-nav ul li { margin-left: 28px; } /* 間隔調整 */
+.main-nav ul li a.nav-link-item { /* 通常のナビリンク */
+    color: #FFF; font-weight: 500; font-size: 0.95rem; padding: 12px 8px; /* パディング調整 */
+    position: relative; letter-spacing: 0.7px;
     text-shadow: 0 1px 6px rgba(0,0,0,0.5);
     transition: color var(--transition-fast), text-shadow var(--transition-fast), opacity var(--transition-fast);
-    opacity: 0.95;
+    opacity: 0.9;
 }
-.main-nav ul li a:hover, .main-nav ul li a.active { opacity: 1; }
-header.scrolled .main-nav ul li a { color: var(--text-color); text-shadow: none; opacity: 0.9; }
-header.scrolled .main-nav ul li a:hover, header.scrolled .main-nav ul li a.active { color: var(--accent-color); opacity: 1;}
-.main-nav ul li a::after { /* 下線アニメーション */
-    content: ''; position: absolute; bottom: 5px; /* 位置調整 */
+.main-nav ul li a.nav-link-item:hover, .main-nav ul li a.nav-link-item.active { opacity: 1; }
+header.scrolled .main-nav ul li a.nav-link-item { color: var(--text-color); text-shadow: none; opacity: 0.9; }
+header.scrolled .main-nav ul li a.nav-link-item:hover, header.scrolled .main-nav ul li a.nav-link-item.active { color: var(--accent-color); opacity: 1;}
+.main-nav ul li a.nav-link-item::after {
+    content: ''; position: absolute; bottom: 4px; /* 位置調整 */
     left: 50%; transform: translateX(-50%);
     width: 0; height: 2.5px; background-color: var(--accent-color);
     border-radius: 1.5px; transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.main-nav ul li a:hover::after, .main-nav ul li a.active::after { width: 80%; }
-.main-nav ul li a.active { color: var(--accent-color); font-weight: 600; }
-header.scrolled .main-nav ul li a.active { color: var(--accent-color); }
+.main-nav ul li a.nav-link-item:hover::after, .main-nav ul li a.nav-link-item.active::after { width: 70%; }
+.main-nav ul li a.nav-link-item.active { color: var(--accent-color); font-weight: 600; }
+header.scrolled .main-nav ul li a.nav-link-item.active { color: var(--accent-color); }
 
-/* ナビゲーションのDiscordリンク */
-.nav-discord-link i { margin-right: 6px; font-size: 1.05em; position: relative; top: 1px;}
+/* ナビゲーションのDiscordリンク特別スタイル */
 .nav-discord-link {
-    /* Discordリンクを目立たせる場合、特別なスタイルを追加できます */
-    /* 例: padding: 8px 15px; border: 1px solid var(--accent-color); border-radius: var(--border-radius-sm); */
+    display: inline-flex; align-items: center;
+    padding: 8px 15px !important; /* 他のリンクより少し目立たせる */
+    background-color: rgba(var(--rgb-primary-color), 0.15);
+    border: 1px solid rgba(var(--rgb-primary-color), 0.5);
+    border-radius: var(--border-radius-md);
+    color: var(--primary-color) !important; /* 通常時もプライマリカラー */
+    text-shadow: none !important; opacity: 1 !important;
+}
+.nav-discord-link:hover {
+    background-color: var(--primary-color);
+    color: #FFF !important;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 15px rgba(var(--rgb-primary-color), 0.4);
+}
+.nav-discord-link i { margin-right: 8px; font-size: 1.1em; }
+header.scrolled .nav-discord-link { /* スクロール時もスタイル維持 */
+    background-color: rgba(var(--rgb-primary-color), 0.2);
+    border-color: rgba(var(--rgb-primary-color), 0.6);
+    color: var(--primary-color) !important;
+}
+header.scrolled .nav-discord-link:hover {
+    background-color: var(--primary-color);
+    color: #FFF !important;
+    border-color: var(--primary-color);
 }
 
 
@@ -167,7 +188,9 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .btn-primary:hover { transform: translateY(-3px) scale(1.035); box-shadow: var(--shadow-strong); }
 .btn-secondary { background-color: var(--medium-dark-bg); color: var(--secondary-color); border: 2px solid var(--secondary-color); }
 .btn-secondary:hover { background-color: var(--secondary-color); color: var(--dark-bg); transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(var(--rgb-secondary-color), 0.35); }
-.btn-discord { background-color: #5865F2; color: #fff; border: 2px solid transparent; }
+.btn-discord { /* このクラスはヒーローセクションのボタン用 */
+    background-color: #5865F2; color: #fff; border: 2px solid transparent;
+}
 .btn-discord:hover { background-color: #FFF; color: #5865F2; border-color: #5865F2; transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.35); }
 
 
@@ -178,16 +201,16 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 }
 .hero-background-image {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: url('header.png') no-repeat center center/cover; /* 背景画像変更 */
+    background: url('header.png') no-repeat center center/cover; /* 背景画像変更！ */
     z-index: 1; transform: scale(1.1);
     transition: transform 0.3s ease-out;
 }
-.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(24,27,33,0.95) 15%, rgba(24,27,33,0.8) 45%, rgba(24,27,33,0.25) 75%, transparent 100%); z-index: 2; } /* オーバーレイ調整 */
+.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(24,27,33,0.95) 15%, rgba(24,27,33,0.8) 45%, rgba(24,27,33,0.25) 75%, transparent 100%); z-index: 2; }
 .hero-content-wrapper { position: relative; z-index: 3; display: flex; justify-content: flex-end; width: 100%; height: 100%; align-items: center; }
-.hero-text-content { text-align: right; max-width: 55%; padding-right: 6%; /* 右寄せと幅調整 */ }
+.hero-text-content { text-align: right; max-width: 55%; padding-right: 6%; }
 #hero h1 { color: #FFF; text-shadow: 0 5px 25px rgba(0,0,0,0.65); margin-bottom: 0.4em; }
-#hero .subtitle { color: var(--text-muted); font-size: clamp(1.1rem, 2.6vw, 1.4rem); margin-bottom: 2.8em; text-shadow: 0 2px 10px rgba(0,0,0,0.4); font-weight: 400; max-width: 550px; float: right; /* 右寄せ内でさらに右に */ clear: both; }
-.hero-buttons { display: flex; gap: 20px; justify-content: flex-end; flex-wrap: wrap; clear: both; /* subtitleのfloat回り込み解除 */ }
+#hero .subtitle { color: var(--text-muted); font-size: clamp(1.1rem, 2.6vw, 1.4rem); margin-bottom: 2.8em; text-shadow: 0 2px 10px rgba(0,0,0,0.4); font-weight: 400; max-width: 550px; float: right; clear: both; }
+.hero-buttons { display: flex; gap: 20px; justify-content: flex-end; flex-wrap: wrap; clear: both; }
 .hero-buttons .btn { min-width: 190px; padding: 14px 30px; font-size: 1rem; }
 
 
@@ -199,9 +222,9 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .features-grid {
     display: grid;
     gap: 30px;
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* モバイルデフォルト */
 }
-@media (min-width: 576px) {
+@media (min-width: 600px) { /* 小さめのタブレットから2カラム */
     .features-grid { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 992px) { /* PCで4カラム */
@@ -209,7 +232,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 }
 .feature-card {
     background: var(--medium-dark-bg);
-    padding: 35px 30px; border-radius: var(--border-radius-lg); text-align: center;
+    padding: 30px 25px; border-radius: var(--border-radius-lg); text-align: center;
     transition: transform var(--transition-normal), box-shadow var(--transition-normal), background-color var(--transition-normal);
     border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center;
     box-shadow: var(--shadow-medium); position: relative; overflow: hidden;
@@ -234,7 +257,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .feature-card:hover .feature-icon-wrapper { transform: scale(1.12) rotate(8deg); box-shadow: 0 10px 25px rgba(var(--rgb-primary-color),0.45); }
 .feature-icon-wrapper i { font-size: 2.7em; }
 .feature-card h3 { color: var(--text-color); font-size: 1.35em; margin-bottom: 12px; font-weight: 600; }
-.feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; flex-grow: 1; max-width: 280px; margin-left:auto; margin-right: auto; } /* pタグの最大幅と中央揃え */
+.feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; flex-grow: 1; max-width: 280px; margin-left:auto; margin-right: auto; }
 
 
 /* --- Preview Sections Wrapper (Rules & Support on Index) --- */
@@ -248,7 +271,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
     .preview-sections-wrapper { grid-template-columns: 1fr 1fr; gap: 35px; }
 }
 .preview-card {
-    background-color: var(--medium-dark-bg); /* 変数使用 */
+    background-color: var(--medium-dark-bg);
     padding: 35px 30px; border-radius: var(--border-radius-lg);
     box-shadow: var(--shadow-medium); text-align: center;
     border: 1px solid var(--border-color);
@@ -271,10 +294,12 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 }
 .rule-highlight:hover { transform: scale(1.05); background-color: var(--dark-bg); }
 .rule-highlight i { margin-right: 10px; font-size: 1.1em; }
+.rule-highlight .fa-user-shield { color: var(--primary-color); }
+.rule-highlight .fa-handshake-slash { color: var(--accent-color); }
+.rule-highlight .fa-user-secret { color: #E07A5F; }
 
 
 /* --- Join (参加方法) セクション --- */
-/* (前回と同様のスタイル) */
 #join { padding: 80px 0 100px 0; }
 .join-container { display: flex; flex-wrap: wrap; gap: 35px; justify-content: center; align-items: stretch; }
 .join-box {
@@ -330,17 +355,13 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 
 
 /* --- WebMap Promo ボタン中央揃え --- */
-#webmap-promo .container { /* container に text-align:center を適用 */
+#webmap-promo .container {
     text-align: center;
 }
 #webmap-promo .btn {
     margin-top: 20px;
-    display: inline-block; /* text-align:center を有効にするため */
+    display: inline-block;
 }
-
-/* --- Discord Promo Section (削除したのでスタイルも不要) --- */
-/* #discord-promo, .discord-bg etc. のスタイルは削除またはコメントアウト */
-
 
 /* --- Footer --- */
 footer { background-color: var(--dark-bg); border-top: 1px solid var(--border-color); padding: 45px 0; text-align: center; }
@@ -370,7 +391,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     margin-left: auto; margin-right: auto;
     line-height: 1.75;
 }
-.rules-article {
+.rules-article, .support-article { /* support.htmlにも適用できるように */
     max-width: 880px;
     margin: 0 auto;
 }
@@ -440,11 +461,86 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     line-height: 1.8;
 }
 
+/* Support Page Specific Styles */
+.payment-methods-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    margin-top: 20px;
+}
+.payment-method {
+    background-color: var(--light-bg);
+    padding: 25px;
+    border-radius: var(--border-radius-md);
+    text-align: center;
+    border: 1px solid var(--border-color);
+}
+.payment-method .payment-icon {
+    font-size: 3em;
+    color: var(--primary-color);
+    margin-bottom: 15px;
+}
+.payment-method h4 {
+    font-size: 1.3em;
+    color: var(--text-color);
+    margin-bottom: 10px;
+}
+.payment-method p {
+    font-size: 0.9rem;
+    color: var(--text-muted);
+    margin-bottom: 20px;
+    min-height: 50px; /* 説明文の高さある程度揃える */
+}
+.btn-small { /* 支払い方法のボタンなど */
+    padding: 8px 18px;
+    font-size: 0.85rem;
+}
+
+.benefit-tiers-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 30px;
+    margin-top: 25px;
+}
+.benefit-tier {
+    background-color: var(--light-bg);
+    padding: 30px;
+    border-radius: var(--border-radius-md);
+    border-left: 5px solid; /* tierごとの色 */
+}
+.benefit-tier-header {
+    display: flex;
+    align-items: center;
+    font-size: 1.5em;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+.benefit-tier-header i {
+    margin-right: 12px;
+    font-size: 1.2em;
+}
+.benefit-tier-header span { /* 金額 */
+    font-size: 0.7em;
+    font-weight: 500;
+    color: var(--text-muted);
+    margin-left: auto;
+    background-color: var(--medium-dark-bg);
+    padding: 3px 8px;
+    border-radius: var(--border-radius-sm);
+}
+.benefit-tier.patron { border-left-color: var(--primary-color); }
+.benefit-tier.patron .benefit-tier-header i { color: var(--primary-color); }
+.benefit-tier.patron-plus { border-left-color: var(--accent-color); }
+.benefit-tier.patron-plus .benefit-tier-header i { color: var(--accent-color); }
+
+
 /* --- レスポンシブ対応微調整 --- */
 @media (max-width: 1024px) {
     .hero-text-content { max-width: 70%; padding-right: 5%; }
     .features-grid {
-        grid-template-columns: repeat(2, 1fr);
+        /* タブレットで2カラム (CSS Gridのauto-fitで対応されているはずだが明示) */
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 25px;
     }
     .preview-sections-wrapper {
@@ -462,9 +558,11 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
         border-right: 1px solid var(--border-color);
     }
     .main-nav.active { left: 0; }
-    .main-nav ul li { margin-left: 0; width: 100%;} /* スマホメニュー項目は横幅いっぱい */
-    .main-nav ul li a { padding: 15px 30px; font-size: 1.05rem; display:block; border-bottom: 1px solid var(--border-color); } /* blockにしてクリック範囲を広げる */
-    .main-nav ul li:last-child a { border-bottom: none; }
+    .main-nav ul li { margin-left: 0; width: 100%;}
+    .main-nav ul li a.nav-link-item { padding: 15px 30px; font-size: 1.05rem; display:block; border-bottom: 1px solid var(--border-color); }
+    .main-nav ul li:last-child a.nav-link-item { border-bottom: none; }
+    .nav-discord-link { border-radius: 0 !important; border: none !important; background-color: transparent !important;} /* スマホメニュー内では通常リンク風に */
+    .nav-discord-link:hover { background-color: var(--light-bg) !important; color: var(--accent-color) !important;}
 
 
     #hero { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; text-align: center; }
@@ -485,7 +583,6 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 
     .join-box { padding: 30px 25px; max-width: calc(100% - 10px); }
     .join-box-title { font-size: 1.5em; margin-bottom: 22px;}
-    /* .platform-icon-new は削除されたようなのでコメントアウト */
 
     .preview-sections-wrapper { padding: 15px 0; }
     .preview-card { padding: 30px 25px; }
