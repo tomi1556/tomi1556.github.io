@@ -44,7 +44,7 @@
                 </p>
             </div>
 
-            <article class="support-article"> {/* rules-article と同様のラッパー */}
+            <article class="support-article">
                 <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">
                     <h2 class="section-heading-styled"><i class="fas fa-hand-holding-heart"></i> 寄付の必要性</h2>
                     <p class="section-description">
@@ -67,7 +67,7 @@
                             <a href="https://www.amazon.co.jp/Amazon%E3%82%AE%E3%83%95%E3%83%88%E3%82%AB%E3%83%BC%E3%83%89-1_JP_Email-E%E3%83%A1%E3%83%BC%E3%83%AB%E3%82%BF%E3%82%A4%E3%83%97-%E3%83%86%E3%82%AD%E3%82%B9%E3%83%88%E3%83%A1%E3%83%83%E3%82%BB%E3%83%BC%E3%82%B8%E3%81%AB%E3%82%82%E9%80%81%E4%BF%A1%E5%8F%AF-Amazon%E3%83%99%E3%83%BC%E3%82%B7%E3%83%83%E3%82%AF/dp/B004N3APGO/" target="_blank" rel="noopener noreferrer" class="btn btn-small">Amazonで見る</a>
                         </div>
                         <div class="payment-method">
-                             <i class="fa-solid fa-yen-sign payment-icon"></i> {/* PayPayの公式アイコンはSVG等で用意が必要なため汎用アイコンで代替 */}
+                             <i class="fa-solid fa-yen-sign payment-icon"></i>
                             <h4>PayPay</h4>
                             <p>PayPay IDを通じた送金が可能です。IDはDiscordにてご案内いたします。</p>
                             <a href="https://paypay.ne.jp/" target="_blank" rel="noopener noreferrer" class="btn btn-small">PayPay公式サイト</a>
@@ -75,45 +75,70 @@
                     </div>
                 </section>
 
-                <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.3s">
-                    <h2 class="section-heading-styled"><i class="fas fa-gifts"></i> 寄付特典について</h2>
+                <section id="benefits-section" class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.3s">
+                    <h2 class="section-heading-styled"><i class="fas fa-gifts"></i> 寄付特典</h2>
                     <p class="section-description">
-                        ご支援いただいた皆様へ感謝の気持ちを込めて、ささやかながら特典をご用意しております。<br>
-                        これらの特典はゲームプレイを有利にするものではなく、あくまで感謝のしるしです。
+                        ご支援いただいた皆様へ感謝のしるしとして、以下の特典をご用意しています。<br>
+                        これらの特典はゲームプレイを有利にするものではなく、主に利便性向上や感謝を示すものです。
                     </p>
+                    <div class="common-benefits">
+                        <h4><i class="fas fa-star-of-life"></i> 共通特典</h4>
+                        <ul class="info-list-styled simple-list">
+                            <li><span class="list-icon"><i class="fas fa-arrow-right"></i></span>所持品一斉売却コマンド: <code>/s</code></li>
+                            <li><span class="list-icon"><i class="fas fa-arrow-right"></i></span>プレミアム機能アクセス: バイト/クエスト機能など</li>
+                        </ul>
+                    </div>
+
                     <div class="benefit-tiers-container">
-                        <div class="benefit-tier">
-                            <div class="benefit-tier-header patron">
-                                <i class="fas fa-star"></i> Patron
-                                <span>(¥500 以上)</span>
+                        <div class="benefit-tier patron">
+                            <div class="benefit-tier-header">
+                                <i class="fas fa-star tier-icon"></i>
+                                <div class="tier-name-price">
+                                    <h3>Patron</h3>
+                                    <span class="tier-price">(¥500 以上)</span>
+                                </div>
                             </div>
-                            <ul class="info-list-styled">
-                                <li><span class="list-icon"><i class="fas fa-check"></i></span>特別な称号 (ゲーム内&Discord)</li>
-                                <li><span class="list-icon"><i class="fas fa-check"></i></span>所持物一斉売却コマンド (<code>/s</code>)</li>
-                                <li><span class="list-icon"><i class="fas fa-check"></i></span>Discord支援者限定ロール</li>
-                                <li><span class="list-icon"><i class="fas fa-check"></i></span>プレミアム機能 (バイト/クエスト等)</li>
-                                <li><span class="list-icon"><i class="fas fa-check"></i></span>専用サポート/要望チャンネルアクセス</li>
-                                <li><span class="list-icon"><i class="fas fa-hourglass-half"></i></span><strong>すてら鯖内特典:</strong> 1ヶ月有効</li>
-                                <li><span class="list-icon"><i class="fas fa-infinity"></i></span><strong>通常特典:</strong> 無期限</li>
+                            <ul class="benefit-detail-list">
+                                <li><i class="fas fa-medal list-bullet"></i>特別な称号が付与されます</li>
+                                <li><i class="fas fa-comments-dollar list-bullet"></i>所持物一斉売却が使えます (共通)</li>
+                                <li><i class="fab fa-discord list-bullet"></i>Discordで支援者ロールがつきます</li>
+                                <li><i class="fas fa-briefcase list-bullet"></i>プレミアム機能を使用できます (共通)</li>
+                                <li><i class="fas fa-headset list-bullet"></i>専用のサポート/要望が行えます</li>
                             </ul>
+                            <div class="tier-duration-info">
+                                <p><i class="fas fa-server server-icon"></i> <strong>すてら鯖内限定特典:</strong> <span class="duration"><i class="fas fa-clock duration-icon"></i> 1ヶ月有効</span></p>
+                                <p><i class="fas fa-globe-asia global-icon"></i> <strong>通常特典:</strong> <span class="duration"><i class="fas fa-infinity duration-icon"></i> 無期限</span></p>
+                            </div>
                         </div>
-                        <div class="benefit-tier">
-                            <div class="benefit-tier-header patron-plus">
-                                <i class="fas fa-gem"></i> Patron+
-                                <span>(¥2500 以上)</span>
+
+                        <div class="benefit-tier patron-plus">
+                            <div class="benefit-tier-header">
+                                <i class="fas fa-gem tier-icon"></i>
+                                <div class="tier-name-price">
+                                    <h3>Patron+</h3>
+                                    <span class="tier-price">(¥2500 以上)</span>
+                                </div>
                             </div>
-                            <ul class="info-list-styled">
-                                <li><span class="list-icon"><i class="fas fa-check"></i></span>Patronの全特典</li>
-                                <li><span class="list-icon"><i class="fas fa-check"></i></span>即時テレポート機能</li>
-                                <li><span class="list-icon"><i class="fas fa-infinity"></i></span><strong>すてら鯖内特典:</strong> 無期限</li>
-                                <li><span class="list-icon"><i class="fas fa-infinity"></i></span><strong>通常特典:</strong> 無期限</li>
+                            <ul class="benefit-detail-list">
+                                <li><i class="fas fa-medal list-bullet"></i>特別な称号が付与されます (より豪華)</li>
+                                <li><i class="fas fa-comments-dollar list-bullet"></i>所持物一斉売却が使えます (共通)</li>
+                                <li><i class="fab fa-discord list-bullet"></i>Discordで支援者ロールがつきます (上位)</li>
+                                <li><i class="fas fa-briefcase list-bullet"></i>プレミアム機能を使用できます (共通)</li>
+                                <li><i class="fas fa-headset list-bullet"></i>専用のサポート/要望が行えます (優先対応)</li>
+                                <li><i class="fas fa-paper-plane list-bullet"></i>即時テレポートを使用できます</li>
                             </ul>
+                            <div class="tier-duration-info">
+                                <p><i class="fas fa-server server-icon"></i> <strong>すてら鯖内限定特典:</strong> <span class="duration"><i class="fas fa-infinity duration-icon"></i> 無期限</span></p>
+                                <p><i class="fas fa-globe-asia global-icon"></i> <strong>通常特典:</strong> <span class="duration"><i class="fas fa-infinity duration-icon"></i> 無期限</span></p>
+                            </div>
                         </div>
                     </div>
-                     <p class="section-description" style="margin-top: 1.5em; font-size: 0.9rem;">
-                        <strong>寄付方法・注意点:</strong><br>
-                        寄付をご希望の方は、StellaMC公式Discordサーバー内の <a href="https://discord.com/channels/1180864993214873750/1180911747180286033" target="_blank" rel="noopener noreferrer" style="text-decoration: underline;">#寄付受付チャンネル</a>（仮称）をご確認いただくか、運営スタッフまでお気軽にお声がけください。<br>
-                        寄付は任意です。寄付をしなくても快適にプレイできます。特典内容は変更される場合があり、寄付の返金は致しかねます。
+
+                     <p class="section-description" style="margin-top: 2.5em; font-size: 0.9rem; text-align:center;">
+                        <strong><i class="fas fa-info-circle"></i> 寄付方法・連携・注意点</strong><br>
+                        寄付をご希望の方は、StellaMC公式Discordサーバー内の<br class="br-sp"> <a href="https://discord.com/channels/1180864993214873750/1180911747180286033" target="_blank" rel="noopener noreferrer" class="inline-link">#寄付受付チャンネル</a>（仮称）をご確認ください。<br>
+                        特典受け取りには <a href="https://discord.com/channels/1180864993214873750/1372869964482220032/1372869970219765801" target="_blank" rel="noopener noreferrer" class="inline-link">Discordアカウントとの連携</a> が必要です。<br>
+                        寄付は任意であり、Pay to Winにはなりません。特典内容は変更される場合があり、寄付の返金は致しかねます。
                     </p>
                 </section>
 
@@ -183,18 +208,18 @@
                             observerInstance.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.15, rootMargin: "0px 0px -25px 0px" });
+                }, { threshold: 0.1, rootMargin: "0px 0px -10px 0px" }); // threshold調整
 
                 animatedElements.forEach(el => {
                     const rect = el.getBoundingClientRect();
                     const isInitiallyVisible = rect.top < window.innerHeight && rect.bottom >= 0;
-                    const delayMultiplier = el.classList.contains('animate-on-load') ? 1000 : 0;
+                     const delayMultiplier = el.classList.contains('animate-on-load') ? 1000 : 0;
 
                     if (el.classList.contains('animate-on-load') || isInitiallyVisible) {
                         const animationType = el.dataset.animation || 'fadeInUpCustom';
                         const animationDelay = el.dataset.animationDelay || '0s';
                         el.style.animationDelay = animationDelay;
-                        setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * delayMultiplier + 10);
+                        setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * delayMultiplier + 5); // 遅延を極々短く
                     } else {
                         observer.observe(el);
                     }
