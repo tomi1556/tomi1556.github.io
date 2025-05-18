@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>StellaMC - あなたの冒険が始まる場所</title>
-    <link rel="stylesheet" href="stella.css">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
@@ -17,7 +17,7 @@
             <a href="index.html" class="logo-link" aria-label="StellaMC ホームへ">
                 <img src="images/logo.png" alt="StellaMC ロゴ" id="logo-img">
             </a>
-            <nav class="main-nav">
+            <nav class="main-nav" id="main-navigation">
                 <ul>
                     <li><a href="index.html">ホーム</a></li>
                     <li><a href="rules.html">ルール</a></li>
@@ -35,41 +35,43 @@
 
     <main>
         <section id="hero">
-            <div class="hero-background-image"></div> {/* パララックス用 */}
+            <div class="hero-background-image"></div>
             <div class="hero-overlay"></div>
-            <div class="hero-content container">
-                <h1 class="animate-on-load" data-animation="fadeInUp" data-animation-delay="0.2s">StellaMC</h1>
-                <p class="subtitle animate-on-load" data-animation="fadeInUp" data-animation-delay="0.4s">心安らぐ、あなたのもう一つの居場所。</p>
-                <div class="hero-buttons animate-on-load" data-animation="fadeInUp" data-animation-delay="0.6s">
-                    <a href="#join" class="btn btn-primary">
-                        <i class="fa-solid fa-compass btn-icon-left"></i>今すぐ冒険へ
-                    </a>
-                    <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
-                        <i class="fab fa-discord btn-icon-left"></i>Discordコミュニティ
-                    </a>
+            <div class="hero-content-wrapper container"> {/* 右寄せ用ラッパー */}
+                <div class="hero-text-content animate-on-load" data-animation="fadeInRightCustom" data-animation-delay="0.1s">
+                    <h1>StellaMC</h1>
+                    <p class="subtitle">心安らぐ、あなたのもう一つの居場所。</p>
+                    <div class="hero-buttons">
+                        <a href="#join" class="btn btn-primary">
+                            <i class="fa-solid fa-compass btn-icon-left"></i>今すぐ冒険へ
+                        </a>
+                        <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">
+                            <i class="fab fa-discord btn-icon-left"></i>Discord
+                        </a>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section id="features" class="container content-section">
-            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">StellaMCの魅力</h2>
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUpCustom">StellaMCの魅力</h2>
             <div class="features-grid">
-                <div class="feature-card animate-on-scroll" data-animation="zoomIn" data-animation-delay="0.1s">
+                <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.1s">
                     <div class="feature-icon-wrapper"><i class="fas fa-cubes"></i></div>
                     <h3>多彩なコンテンツ</h3>
-                    <p>独自の経済システム、豊富なクエスト、定期イベントで飽きさせません。</p>
+                    <p>経済やクエスト、定期イベントで飽きさせない楽しさを毎日提供します。</p>
                 </div>
-                <div class="feature-card animate-on-scroll" data-animation="zoomIn" data-animation-delay="0.2s">
+                <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.2s">
                     <div class="feature-icon-wrapper"><i class="fas fa-users-gear"></i></div>
                     <h3>温かいコミュニティ</h3>
-                    <p>プレイヤー同士が尊重しあい、初心者も安心して楽しめる環境です。</p>
+                    <p>プレイヤー同士が尊重しあい、初心者も安心して楽しめる温かい雰囲気です。</p>
                 </div>
-                <div class="feature-card animate-on-scroll" data-animation="zoomIn" data-animation-delay="0.3s">
+                <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.3s">
                     <div class="feature-icon-wrapper"><i class="fas fa-server"></i></div>
                     <h3>24時間安定稼働</h3>
-                    <p>高性能サーバーで常時安定。いつでも仲間と快適にプレイできます。</p>
+                    <p>高性能サーバーで常時安定。いつでも仲間と快適にプレイに没頭できます。</p>
                 </div>
-                <div class="feature-card animate-on-scroll" data-animation="zoomIn" data-animation-delay="0.4s">
+                <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.4s">
                     <div class="feature-icon-wrapper"><i class="fas fa-shield-heart"></i></div>
                     <h3>安心の運営サポート</h3>
                     <p>経験豊富な運営が迅速・丁寧に対応。あなたのサーバーライフを守ります。</p>
@@ -79,79 +81,72 @@
 
         <section id="join" class="content-section alt-bg">
             <div class="container">
-                <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">サーバーへの参加方法</h2>
-                <p class="section-subtitle animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.1s">簡単ステップで、すぐにStellaMCの世界へ！</p>
-                <div class="join-wrapper">
-                    <div class="join-card-new java animate-on-scroll" data-animation="fadeInLeft" data-animation-delay="0.2s">
-                        <div class="join-card-new-header">
-                            <i class="fab fa-java platform-icon-new"></i>
-                            <h3>Java版</h3>
-                        </div>
-                        <div class="join-card-new-body">
-                            <p>サーバーアドレス:</p>
-                            <div class="address-group">
-                                <input type="text" value="stellamc.jp" readonly id="java-address" aria-label="Java版サーバーアドレス">
-                                <button class="copy-button-new" data-clipboard-target="#java-address" aria-label="Java版アドレスをコピー">
-                                    <i class="far fa-copy"></i> <span class="copy-tooltip">コピー</span>
-                                </button>
+                <h2 class="section-title animate-on-scroll" data-animation="fadeInUpCustom">サーバーへの参加方法</h2>
+                <p class="section-subtitle animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">簡単ステップで、すぐにStellaMCの世界へ！</p>
+                <div class="join-container">
+                    <div class="join-box java animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.2s">
+                        <div class="join-box-icon"><i class="fab fa-java"></i></div>
+                        <h3 class="join-box-title">Java版</h3>
+                        <div class="join-info-item">
+                            <span class="join-info-label">アドレス:</span>
+                            <div class="copy-wrapper">
+                                <input type="text" value="stellamc.jp" id="java-addr-input" readonly aria-label="Java版サーバーアドレス">
+                                <button class="copy-action-btn" data-clipboard-target="#java-addr-input" aria-label="Java版アドレスをコピー"><i class="far fa-copy"></i></button>
                             </div>
                         </div>
                     </div>
 
-                    <div class="join-card-new bedrock animate-on-scroll" data-animation="fadeInRight" data-animation-delay="0.3s">
-                        <div class="join-card-new-header">
-                            <i class="fab fa-microsoft platform-icon-new"></i> {/* 統合版はMS傘下なので */}
-                            <h3>統合版 (Bedrock)</h3>
-                        </div>
-                        <div class="join-card-new-body">
-                            <p>サーバーアドレス:</p>
-                            <div class="address-group">
-                                <input type="text" value="stellamc.jp" readonly id="bedrock-address" aria-label="統合版サーバーアドレス">
-                                <button class="copy-button-new" data-clipboard-target="#bedrock-address" aria-label="統合版アドレスをコピー">
-                                    <i class="far fa-copy"></i> <span class="copy-tooltip">コピー</span>
-                                </button>
+                    <div class="join-box bedrock animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.35s">
+                        <div class="join-box-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                        <h3 class="join-box-title">統合版 (Bedrock)</h3>
+                        <div class="join-info-item">
+                            <span class="join-info-label">アドレス:</span>
+                            <div class="copy-wrapper">
+                                <input type="text" value="stellamc.jp" id="bedrock-addr-input" readonly aria-label="統合版サーバーアドレス">
+                                <button class="copy-action-btn" data-clipboard-target="#bedrock-addr-input" aria-label="統合版アドレスをコピー"><i class="far fa-copy"></i></button>
                             </div>
-                            <p>ポート:</p>
-                            <div class="address-group">
-                                <input type="text" value="6911" readonly id="bedrock-port" aria-label="統合版ポート">
-                                <button class="copy-button-new" data-clipboard-target="#bedrock-port" aria-label="統合版ポートをコピー">
-                                    <i class="far fa-copy"></i> <span class="copy-tooltip">コピー</span>
-                                </button>
-                            </div>
-                            <p class="join-note-new">フレンド追加ID: <code>stellamc9211</code></p>
                         </div>
+                        <div class="join-info-item">
+                            <span class="join-info-label">ポート:</span>
+                            <div class="copy-wrapper">
+                                <input type="text" value="6911" id="bedrock-port-input" readonly aria-label="統合版ポート">
+                                <button class="copy-action-btn" data-clipboard-target="#bedrock-port-input" aria-label="統合版ポートをコピー"><i class="far fa-copy"></i></button>
+                            </div>
+                        </div>
+                        <p class="join-box-note">フレンドID: <code>stellamc9211</code></p>
                     </div>
                 </div>
+                <div id="copy-toast" class="copy-toast" role="alert" aria-live="assertive">コピーしました！</div>
             </div>
         </section>
 
         <section id="rules-preview" class="container content-section">
-            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">サーバールール</h2>
-            <p class="section-subtitle animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.1s">みんなで楽しく遊ぶために、大切な約束事。</p>
-            <div class="rules-highlights animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.2s">
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUpCustom">サーバールール</h2>
+            <p class="section-subtitle animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">みんなで楽しく遊ぶために、大切な約束事。</p>
+            <div class="rules-highlights animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.2s">
                 <span class="rule-highlight"><i class="fas fa-user-shield"></i> 運営指示厳守</span>
                 <span class="rule-highlight"><i class="fas fa-handshake-slash"></i> 迷惑行為禁止</span>
                 <span class="rule-highlight"><i class="fas fa-user-secret"></i> 不正行為禁止</span>
             </div>
-            <div class="animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.3s">
+            <div class="animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.3s">
                 <a href="rules.html" class="btn btn-secondary">ルール詳細はこちら</a>
             </div>
         </section>
 
         <section id="support-preview" class="content-section alt-bg">
             <div class="container">
-                <h2 class="section-title animate-on-scroll" data-animation="fadeInUp">サーバー支援のお願い</h2>
-                <p class="section-subtitle animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.1s">皆様の温かいサポートが、サーバーを未来へ繋ぎます。</p>
-                <div class="animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.2s">
+                <h2 class="section-title animate-on-scroll" data-animation="fadeInUpCustom">サーバー支援のお願い</h2>
+                <p class="section-subtitle animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">皆様の温かいサポートが、サーバーを未来へ繋ぎます。</p>
+                <div class="animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.2s">
                      <a href="support.html" class="btn btn-primary">ご支援の詳細について</a>
                 </div>
             </div>
         </section>
 
         <section id="webmap-promo" class="container content-section">
-            <h2 class="section-title animate-on-scroll" data-animation="fadeInUp"><i class="fas fa-map-location-dot"></i> WebMapで世界を探検！</h2>
-            <p class="section-subtitle animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.1s">広大なサーバーの世界を、ブラウザからリアルタイムでチェック。</p>
-            <div class="animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.2s">
+            <h2 class="section-title animate-on-scroll" data-animation="fadeInUpCustom"><i class="fas fa-map-location-dot"></i> WebMapで世界を探検！</h2>
+            <p class="section-subtitle animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">広大なサーバーの世界を、ブラウザからリアルタイムでチェック。</p>
+            <div class="animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.2s">
                 <a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">WebMapを開く</a>
             </div>
         </section>
@@ -159,12 +154,12 @@
         <section id="discord-promo" class="content-section discord-bg">
             <div class="container">
                 <div class="discord-content">
-                    <div class="animate-on-scroll" data-animation="bounceIn">
+                    <div class="animate-on-scroll" data-animation="bounceInCustom">
                         <i class="fab fa-discord discord-promo-main-icon"></i>
                     </div>
-                    <h2 class="animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.1s">コミュニティに参加しよう！</h2>
-                    <p class="animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.2s">最新情報、イベント告知、プレイヤー交流は公式Discordサーバーで！</p>
-                    <div class="animate-on-scroll" data-animation="fadeInUp" data-animation-delay="0.3s">
+                    <h2 class="animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">コミュニティに参加しよう！</h2>
+                    <p class="animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.2s">最新情報、イベント告知、プレイヤー交流は公式Discordサーバーで！</p>
+                    <div class="animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.3s">
                         <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-discord">Discordへ参加する</a>
                     </div>
                 </div>
@@ -179,98 +174,127 @@
         </div>
     </footer>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script> {/* Clipboard.js を追加 */}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script>
-        // ハンバーガーメニュー
-        const hamburger = document.querySelector('.hamburger-menu');
-        const nav = document.querySelector('.main-nav');
-        const navLinks = nav.querySelectorAll('a'); // メニュー内のリンクを取得
+        document.addEventListener('DOMContentLoaded', () => {
+            // Hamburger Menu
+            const hamburger = document.querySelector('.hamburger-menu');
+            const nav = document.querySelector('.main-nav');
+            const navLinks = nav.querySelectorAll('a');
 
-        hamburger.addEventListener('click', () => {
-            const isActive = hamburger.classList.toggle('active');
-            nav.classList.toggle('active');
-            hamburger.setAttribute('aria-expanded', isActive);
-            document.body.classList.toggle('no-scroll', isActive); // メニュー表示時背景スクロール禁止
-        });
-
-        // メニュー内のリンククリックでメニューを閉じる (スマホ用)
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                if (nav.classList.contains('active')) {
-                    hamburger.classList.remove('active');
-                    nav.classList.remove('active');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    document.body.classList.remove('no-scroll');
-                }
+            hamburger.addEventListener('click', () => {
+                const isActive = hamburger.classList.toggle('active');
+                nav.classList.toggle('active');
+                hamburger.setAttribute('aria-expanded', isActive);
+                document.body.classList.toggle('no-scroll', isActive);
             });
-        });
 
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    // ページ内リンクの場合はスムーズスクロール後に閉じる
+                    if (link.getAttribute('href').startsWith('#') && document.body.classList.contains('no-scroll')) {
+                         //スムーズスクロールを妨げないように少し遅延させるか、遷移完了イベントを待つ
+                         //ここでは単純に閉じる
+                    }
+                    if (nav.classList.contains('active')) {
+                        hamburger.classList.remove('active');
+                        nav.classList.remove('active');
+                        hamburger.setAttribute('aria-expanded', 'false');
+                        document.body.classList.remove('no-scroll');
+                    }
+                });
+            });
 
-        // ヘッダー背景変化
-        window.addEventListener('scroll', () => {
+            // Header Scroll Effect
             const header = document.querySelector('header');
-            if (window.scrollY > 20) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
-            }
-        });
+            const heroSection = document.getElementById('hero');
+            let lastScrollTop = 0;
 
-        // フッターに現在の年を表示
-        document.getElementById('current-year').textContent = new Date().getFullYear();
+            window.addEventListener('scroll', () => {
+                let scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                if (scrollTop > 30) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
 
-        // Clipboard.js 初期化
-        const clipboard = new ClipboardJS('.copy-button-new');
-        clipboard.on('success', function(e) {
-            const tooltip = e.trigger.querySelector('.copy-tooltip');
-            if (tooltip) {
-                tooltip.textContent = 'コピー完了!';
-                tooltip.classList.add('copied');
-                setTimeout(() => {
-                    tooltip.textContent = 'コピー';
-                    tooltip.classList.remove('copied');
-                }, 1500);
-            }
-            e.clearSelection();
-        });
-        clipboard.on('error', function(e) {
-            const tooltip = e.trigger.querySelector('.copy-tooltip');
-             if (tooltip) {
-                tooltip.textContent = '失敗 :(';
-                setTimeout(() => {
-                    tooltip.textContent = 'コピー';
-                }, 1500);
-            }
-        });
+                // Hero Parallax (Simple version)
+                if (heroSection) {
+                    const heroBg = heroSection.querySelector('.hero-background-image');
+                    if (heroBg) {
+                         // スクロール量に応じて背景を少し動かす。Y方向のみ
+                        heroBg.style.transform = `translateY(${scrollTop * 0.2}px) scale(1.1)`;
+                    }
+                }
+                lastScrollTop = scrollTop <= 0 ? 0 : scrollTop; // For Mobile or negative scrolling
+            }, false);
 
-        // スクロールアニメーション
-        const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const animationType = entry.target.dataset.animation || 'fadeInUp';
-                    const animationDelay = entry.target.dataset.animationDelay || '0s';
-                    entry.target.style.animationDelay = animationDelay;
-                    entry.target.classList.add(animationType);
-                    observer.unobserve(entry.target); // 一度表示されたら監視を解除
+            // Footer Year
+            document.getElementById('current-year').textContent = new Date().getFullYear();
+
+            // Clipboard.js Initialization
+            const clipboard = new ClipboardJS('.copy-action-btn');
+            const toast = document.getElementById('copy-toast');
+
+            clipboard.on('success', function(e) {
+                if (toast) {
+                    toast.textContent = `${e.trigger.ariaLabel.replace('をコピー', '')} をコピーしました！`;
+                    toast.classList.add('show');
+                    setTimeout(() => {
+                        toast.classList.remove('show');
+                    }, 2000);
+                }
+                e.clearSelection();
+            });
+
+            clipboard.on('error', function(e) {
+                 if (toast) {
+                    toast.textContent = 'コピーに失敗しました :(';
+                    toast.classList.add('show', 'error');
+                     setTimeout(() => {
+                        toast.classList.remove('show', 'error');
+                    }, 2000);
                 }
             });
-        }, {
-            threshold: 0.1 // 要素が10%見えたら発火
-        });
 
-        animatedElements.forEach(el => {
-            if (el.classList.contains('animate-on-load')) { // ページロード時アニメーション
-                 const animationType = el.dataset.animation || 'fadeInUp';
-                 const animationDelay = el.dataset.animationDelay || '0s';
-                 el.style.animationDelay = animationDelay;
-                 el.classList.add(animationType);
-            } else { // スクロールアニメーション
-                observer.observe(el);
-            }
-        });
+            // Scroll Animations
+            const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
+            const createObserver = (isLoadAnimation) => {
+                return new IntersectionObserver((entries, observerInstance) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting || isLoadAnimation) {
+                            const animationType = entry.target.dataset.animation || 'fadeInUpCustom';
+                            const animationDelay = entry.target.dataset.animationDelay || '0s';
+                            entry.target.style.animationDelay = animationDelay;
+                            entry.target.classList.add(animationType, 'is-visible'); // is-visibleで初期非表示を解除
+                            if (!isLoadAnimation) {
+                                observerInstance.unobserve(entry.target);
+                            }
+                        }
+                    });
+                }, {
+                    threshold: 0.1, // 要素が10%見えたら
+                    rootMargin: "0px 0px -50px 0px" // 画面下部50px手前で発火しやすく
+                });
+            };
 
+            const scrollObserver = createObserver(false);
+            
+            animatedElements.forEach(el => {
+                if (el.classList.contains('animate-on-load')) {
+                    // ページロード時アニメーションは即時実行または僅かな遅延で
+                    const animationType = el.dataset.animation || 'fadeInUpCustom';
+                    const animationDelay = el.dataset.animationDelay || '0s';
+                    el.style.animationDelay = animationDelay;
+                    // setTimeout(() => { // 少し遅らせて描画を確実にする場合
+                        el.classList.add(animationType, 'is-visible');
+                    // }, parseFloat(animationDelay) * 1000 + 50); // 遅延時間 + わずかなバッファ
+                } else {
+                    scrollObserver.observe(el);
+                }
+            });
+        });
     </script>
 </body>
 </html>
