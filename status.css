@@ -30,7 +30,7 @@
 }
 
 .status-indicator-wrapper {
-    margin-bottom: 25px;
+    margin-bottom: 20px; /* 少し詰める */
     min-height: 40px;
     display: flex;
     justify-content: center;
@@ -64,13 +64,13 @@
     100% { transform: scale(0.85); opacity: 0.7; }
 }
 
-.server-main-connection-info { margin-bottom: 25px; }
+.server-main-connection-info { margin-bottom: 20px; min-height: 40px; /* IP削除したので高さ確保 */ }
 .server-main-connection-info p {
-    font-size: 1rem; color: var(--text-muted); margin-bottom: 10px;
+    font-size: 1rem; color: var(--text-muted); margin-bottom: 8px; /* 少し詰める */
     display: flex; align-items: center; justify-content: center; gap: 10px;
 }
 .server-main-connection-info p i { color: var(--primary-color); font-size: 1.2em; width: 20px; text-align: center; }
-/* ポート表示用のcodeタグは削除されたので、スタイルは不要 */
+
 
 .total-players {
     font-size: 1.3rem; font-weight: 700; color: var(--text-color);
@@ -93,8 +93,8 @@
 }
 .individual-server-section {
     flex: 1 1 320px;
-    min-width: 300px;
-    display: flex;
+    min-width: 300px; /* Firefoxなどでのflex-basisの挙動を安定させる */
+    display: flex; /* 子要素(.server-card-content-wrapper)がflex-grow:1で伸びるように */
     flex-direction: column;
 }
 .server-card-content-wrapper {
@@ -105,7 +105,7 @@
     padding: 25px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 1; /* ★重要：高さを揃える */
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
     position: relative;
     overflow: hidden;
@@ -131,19 +131,24 @@
     width: 64px; height: 64px; border-radius: var(--border-radius-md);
     background-color: var(--light-bg); border: 2px dashed var(--border-color);
     display: flex; align-items: center; justify-content: center;
-    /* Placeholder icon (optional) */
-    /* &::after { content: '\f128'; font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 2em; color: var(--border-color); opacity: 0.5; } */
+    transition: opacity 0.3s ease;
+}
+.server-icon-placeholder::after { /* Placeholder icon (optional) */
+     content: '\f128'; /* question mark */
+     font-family: "Font Awesome 6 Free"; font-weight: 900; font-size: 1.8em; color: var(--border-color); opacity: 0.5;
 }
 .server-icon {
     width: 64px; height: 64px; border-radius: var(--border-radius-md);
     box-shadow: 0 5px 12px rgba(0,0,0,0.25);
     border: 2px solid var(--border-color);
     object-fit: contain;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background-color: var(--light-bg); /* Fallback if image fails */
+    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    opacity: 0; /* 初期は透明、JSで表示 */
 }
-/* .server-icon.loading-bg はJavaScriptで display:none を制御するのでCSS側は不要 */
-.individual-server-section:hover .server-icon:not([src=""]) { /* 画像が読み込まれていればホバーエフェクト */
+.server-icon.loaded { /* JSで画像読み込み後に付与 */
+    opacity: 1;
+}
+.individual-server-section:hover .server-icon.loaded {
     transform: scale(1.12) rotate(4deg);
     box-shadow: 0 8px 18px rgba(0,0,0,0.35);
 }
@@ -161,10 +166,10 @@
 .status-card {
     background-color: var(--light-bg); border-radius: var(--border-radius-md); padding: 20px;
     border: 1px solid var(--border-color);
-    display: flex; flex-direction: column; flex-grow: 1;
+    display: flex; flex-direction: column; flex-grow: 1; /* 重要：高さを揃える */
 }
 .status-card-header {
-    display: flex; justify-content: flex-start; /* インジケーターを左寄せ */
+    display: flex; justify-content: flex-start;
     align-items: center;
     margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);
     min-height: 30px;
@@ -174,7 +179,7 @@
 .player-list-heading {
     font-size: 1rem; color: var(--text-color); margin-bottom: 12px; font-weight: 500;
     border-top: 1px dashed var(--border-color); padding-top: 15px;
-    text-align: left; /* 左寄せ */
+    text-align: left;
 }
 
 .player-list-container {
@@ -182,23 +187,23 @@
     border-radius: var(--border-radius-sm);
     padding: 10px;
     margin-bottom: 15px;
-    flex-grow: 1;
-    min-height: 110px;
+    flex-grow: 1; /* 重要：このコンテナが残りのスペースを埋める */
+    min-height: 126px; /* 初期表示2行分の高さを最低限確保 (40px avatar + 8px name + 4px margin)*2 + padding */
     position: relative;
     display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
+    flex-direction: column; /* グリッドとボタンを縦に */
+    /* justify-content: flex-start; はデフォルトなので不要 */
 }
 .player-list-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
     gap: 8px;
-    max-height: 126px;
+    max-height: 126px; /* 初期表示は2行分程度 */
     overflow: hidden;
     transition: max-height 0.4s ease-in-out;
 }
 .player-list-container.expanded .player-list-grid {
-    max-height: 300px;
+    max-height: 300px; /* 十分な高さに展開 */
     overflow-y: auto;
 }
 
@@ -211,8 +216,8 @@
 .player-avatar {
     width: 40px; text-align: center;
     transition: transform var(--transition-fast), box-shadow var(--transition-fast);
-    /* animation: popIn 0.35s ease-out backwards; popInはJSで is-visible を使って制御 */
-    opacity: 0; /* 初期状態は透明、JSで is-visible を追加して表示 */
+    /* animation: popIn 0.35s ease-out backwards; JSで is-visible 制御 */
+    opacity: 0; /* 初期状態は透明 */
     transform: scale(0.8) translateY(10px); /* アニメーションの初期transform */
     border-radius: var(--border-radius-sm);
     background-color: var(--medium-dark-bg);
@@ -223,8 +228,8 @@
     opacity: 1;
     transform: scale(1) translateY(0);
     transition-property: opacity, transform;
-    transition-duration: 0.4s; /* 少しゆっくりめのアニメーション */
-    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1); /* EaseOutCubic */
+    transition-duration: 0.4s;
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 
 
@@ -278,14 +283,14 @@
     cursor: not-allowed;
 }
 
-/* プレイヤーがいない/エラー時のメッセージ */
-.no-players-message { /* メッセージ表示しないのでコメントアウト or 削除 */
+.no-players-message { /* 表示しないので削除 */
     /* display: none !important; */
 }
 .error-message {
     text-align: center; color: #E07A5F; font-style: italic;
     font-size: 0.9rem; padding: 15px 10px;
-    flex-grow: 1; display: flex; align-items: center; justify-content: center;
+    flex-grow: 1; display: none; /* 初期非表示、JSで表示 */
+    align-items: center; justify-content: center;
     min-height: 50px;
 }
 
