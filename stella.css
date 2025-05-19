@@ -2,56 +2,98 @@
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
-    --primary-color: #6C63FF;
-    --secondary-color: #48D1CC;
-    --accent-color: #FFD05A;
-    --dark-bg: #181A21;
-    --medium-dark-bg: #20232F;
-    --light-bg: #2A2E40;
-    --text-color: #EAEAEA;
-    --text-muted: #B0B5C8;
-    --border-color: #353A4E;
-    --glass-bg: rgba(30, 32, 41, 0.8);
-    --font-primary: 'Poppins', 'Noto Sans JP', sans-serif;
-    --font-secondary: 'Noto Sans JP', sans-serif;
-    --shadow-soft: 0 7px 22px rgba(0,0,0,0.2);
-    --shadow-medium: 0 12px 38px rgba(0,0,0,0.25);
-    --shadow-strong: 0 18px 55px rgba(0,0,0,0.3);
-    --border-radius-sm: 8px;
-    --border-radius-md: 16px;
-    --border-radius-lg: 24px;
-    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    --primary-color: #6C63FF;  /* メインのアクセントカラー (パープルブルー) */
+    --secondary-color: #48D1CC; /* サブのアクセントカラー (ターコイズ) */
+    --accent-color: #FFD05A;   /* 強調したい部分のアクセント (イエロー) */
+    --dark-bg: #181A21;        /* サイト全体の基本背景色 (ダーク) */
+    --medium-dark-bg: #20232F; /* カードやセクションの背景色 */
+    --light-bg: #2A2E40;       /* ホバー時や少し明るい要素の背景 */
+    --text-color: #EAEAEA;     /* 基本的なテキストの色 (明るい) */
+    --text-muted: #B0B5C8;   /* やや抑えめのテキストの色 */
+    --border-color: #353A4E;   /* 枠線の色 */
+    --glass-bg: rgba(30, 32, 41, 0.8); /* ヘッダーなどの半透明背景 */
+    --font-primary: 'Poppins', 'Noto Sans JP', sans-serif; /* プライマリフォント */
+    --font-secondary: 'Noto Sans JP', sans-serif;    /* セカンダリフォント */
+    --shadow-soft: 0 7px 22px rgba(0,0,0,0.2);     /* ソフトな影 */
+    --shadow-medium: 0 12px 38px rgba(0,0,0,0.25);  /* 通常の影 */
+    --shadow-strong: 0 18px 55px rgba(0,0,0,0.3);   /* 強い影 */
+    --border-radius-sm: 8px;   /* 小さな角丸 */
+    --border-radius-md: 16px;  /* 通常の角丸 */
+    --border-radius-lg: 24px;  /* 大きな角丸 */
+    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);   /* 速いトランジション */
+    --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* 通常のトランジション */
+    --transition-slow: 0.7s cubic-bezier(0.4, 0, 0.2, 1);   /* 遅いトランジション */
 
+    /* RGB値をCSS変数として定義 (rgbaで使用するため) */
     --rgb-primary-color: 108, 99, 255;
     --rgb-secondary-color: 72, 209, 204;
     --rgb-accent-color: 255, 208, 90;
 }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-html { scroll-behavior: smooth; font-size: 100%; }
-body {
-    font-family: var(--font-primary); background-color: var(--dark-bg); color: var(--text-color);
-    line-height: 1.75; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden; position: relative;
-    opacity: 1 !important; /* 強制的に表示 */
-    visibility: visible !important; /* 強制的に表示 */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
-body.no-scroll { overflow-y: hidden; }
 
-.container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-img { max-width: 100%; height: auto; display: block; }
-a { text-decoration: none; color: var(--secondary-color); transition: color var(--transition-fast), opacity var(--transition-fast); }
-a:hover { color: var(--accent-color); opacity: 0.9; }
+html {
+    scroll-behavior: smooth;
+    font-size: 100%;
+}
 
-/* 基本テキスト色と表示状態の担保 */
+body {
+    font-family: var(--font-primary);
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+    position: relative;
+    opacity: 1 !important; /* 強制表示 (デバッグ用、問題なければ削除) */
+    visibility: visible !important; /* 強制表示 (デバッグ用、問題なければ削除) */
+}
+body.no-scroll {
+    overflow-y: hidden;
+}
+
+main { /* main要素も強制表示 */
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+a {
+    text-decoration: none;
+    color: var(--secondary-color);
+    transition: color var(--transition-fast), opacity var(--transition-fast);
+}
+a:hover {
+    color: var(--accent-color);
+    opacity: 0.9;
+}
+
+/* 基本テキストスタイル */
 h1, h2, h3, h4, h5, h6, p, span, li, code, .subtitle, .section-subtitle, .small-text, label, input, button, a,
 .page-main-title, .page-intro, .section-heading-styled, .rules-category-title, .section-description, .page-closing,
 .section-title-compact {
     color: var(--text-color);
-    opacity: 1; /* デフォルトで不透明に */
-    visibility: visible; /* デフォルトで見えるように */
+    opacity: 1;
+    visibility: visible;
 }
 h1 { color: #FFF; }
 h2, .section-title { color: var(--text-color); }
@@ -65,24 +107,33 @@ h1 { font-size: clamp(2.4em, 6vw, 4.2em); letter-spacing: -0.02em; font-weight: 
 h3 { font-size: clamp(1.2em, 3vw, 1.6em); font-weight: 600; }
 h4 { font-size: clamp(1.05em, 2.6vw, 1.2em); font-weight: 500; }
 
-/* --- アニメーションクラス (初期状態の変更) --- */
+
+/* --- アニメーションクラス --- */
 .animate-on-scroll, .animate-on-load {
+    /* デバッグのため初期非表示をコメントアウト、JSで制御できているか確認後戻す */
+    opacity: 1 !important;
+    visibility: visible !important;
+    transform: none !important;
+    /*
     opacity: 0;
-    visibility: hidden; /* 初期状態は完全に隠す */
-    transition-property: opacity, transform, visibility; /* visibilityもトランジション対象に */
+    visibility: hidden;
+    transition-property: opacity, transform, visibility;
     transition-duration: var(--transition-normal);
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    */
 }
 .animate-on-scroll.is-visible, .animate-on-load.is-visible {
     opacity: 1 !important;
     transform: none !important;
-    visibility: visible !important; /* is-visibleで確実に表示 */
+    visibility: visible !important;
 }
+/* 個々のアニメーション用transform */
 .fadeInUpCustom { transform: translateY(45px); }
 .fadeInRightCustom { transform: translateX(55px); }
 .fadeInLeftCustom { transform: translateX(-55px); }
 .zoomInCustom { transform: scale(0.88); }
 .bounceInCustom { transform: scale(0.5); }
+
 @keyframes bounceInAnimation {
   0% { opacity: 0; transform: scale3d(.3, .3, .3); visibility: hidden;}
   60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); visibility: visible;}
@@ -92,7 +143,7 @@ h4 { font-size: clamp(1.05em, 2.6vw, 1.2em); font-weight: 500; }
 .animate-on-scroll.bounceInCustom.is-visible,
 .animate-on-load.bounceInCustom.is-visible {
     animation-name: bounceInAnimation; animation-duration: 0.9s; animation-fill-mode: forwards;
-    visibility: visible !important; /* アニメーション開始時に表示 */
+    visibility: visible !important;
 }
 
 
@@ -163,7 +214,6 @@ header.scrolled .nav-discord-link:hover {
     border-color: var(--primary-color);
 }
 
-
 .hamburger-menu { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1002; margin-left: auto; position: relative; width: 30px; height: 30px;}
 .hamburger-bar {
     display: block; width: 26px; height: 2.5px; background-color: #FFF;
@@ -199,20 +249,21 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .btn-primary:hover { transform: translateY(-3px) scale(1.035); box-shadow: var(--shadow-strong); }
 .btn-secondary { background-color: var(--medium-dark-bg); color: var(--secondary-color); border: 2px solid var(--secondary-color); }
 .btn-secondary:hover { background-color: var(--secondary-color); color: var(--dark-bg); transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(var(--rgb-secondary-color), 0.35); }
-.btn-discord {
+/* .btn-discord はヒーローセクション用、ナビゲーション用は .nav-discord-link */
+.hero-buttons .btn-discord { /* ヒーローセクションのDiscordボタン */
     background-color: #5865F2; color: #fff; border: 2px solid transparent;
 }
-.btn-discord:hover { background-color: #FFF; color: #5865F2; border-color: #5865F2; transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.35); }
+.hero-buttons .btn-discord:hover { background-color: #FFF; color: #5865F2; border-color: #5865F2; transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.35); }
 
 
-/* --- ヒーローセクション --- */
+/* --- ヒーローセクション (index.html) --- */
 #hero {
     height: 100vh; min-height: 600px; position: relative; display: flex;
     align-items: center; padding-top: 0; overflow: hidden; color: #FFF;
 }
 .hero-background-image {
     position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-    background: url('header.png') no-repeat center center/cover;
+    background: url('header.png') no-repeat center center/cover; /* 画像パスをフォルダなしに */
     z-index: 1; transform: scale(1.1);
     transition: transform 0.3s ease-out;
 }
@@ -225,11 +276,11 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .hero-buttons .btn { min-width: 190px; padding: 14px 30px; font-size: 1rem; }
 
 
-/* --- コンテンツセクション共通 --- */
+/* --- コンテンツセクション共通 (index.html) --- */
 .content-section { padding: 90px 0; position: relative; }
 .content-section.alt-bg { background-color: var(--medium-dark-bg); }
 
-/* --- Features (魅力) セクション --- */
+/* --- Features (魅力) セクション (index.html) --- */
 .features-grid {
     display: grid;
     gap: 30px;
@@ -271,7 +322,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .feature-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.65; flex-grow: 1; max-width: 280px; margin-left:auto; margin-right: auto; }
 
 
-/* --- Preview Sections Wrapper (Rules & Support on Index) --- */
+/* --- Preview Sections Wrapper (Rules & Support on Index) (index.html) --- */
 .preview-sections-wrapper {
     display: grid;
     grid-template-columns: 1fr;
@@ -310,7 +361,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .rule-highlight .fa-user-secret { color: #E07A5F; }
 
 
-/* --- Join (参加方法) セクション --- */
+/* --- Join (参加方法) セクション (index.html) --- */
 #join { padding: 80px 0 100px 0; }
 .join-container { display: flex; flex-wrap: wrap; gap: 35px; justify-content: center; align-items: stretch; }
 .join-box {
@@ -365,7 +416,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .copy-toast.error { background-color: #D08770; color: #FFF; }
 
 
-/* --- WebMap Promo ボタン中央揃え --- */
+/* --- WebMap Promo (index.html) --- */
 #webmap-promo .container {
     text-align: center;
 }
@@ -377,6 +428,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 /* --- Footer --- */
 footer { background-color: var(--dark-bg); border-top: 1px solid var(--border-color); padding: 45px 0; text-align: center; }
 footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
+
 
 /* --- ルール・支援ページ専用スタイル --- */
 .page-content-container {
@@ -520,24 +572,26 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 
 .common-benefits {
     background-color: var(--light-bg);
-    padding: 20px 30px;
+    padding: 25px 30px;
     border-radius: var(--border-radius-md);
-    margin: 30px 0;
+    margin: 35px 0;
     border: 1px dashed var(--border-color);
 }
 .common-benefits h4 {
-    font-size: 1.3em;
+    font-size: 1.35em;
     color: var(--accent-color);
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 10px;
 }
 .common-benefits h4 i {
-    margin-right: 10px;
+    margin-right: 12px;
     font-size: 0.9em;
 }
 .simple-list li {
-    margin-bottom: 8px !important;
+    margin-bottom: 10px !important;
     font-size: 0.95rem !important;
 }
 .simple-list .list-icon i {
@@ -550,17 +604,17 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     display: grid;
     grid-template-columns: 1fr;
     gap: 35px;
-    margin-top: 25px;
+    margin-top: 30px;
 }
 @media (min-width: 768px) {
     .benefit-tiers-container {
-        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        grid-template-columns: repeat(auto-fit, minmax(330px, 1fr));
     }
 }
 
 .benefit-tier {
     background: linear-gradient(145deg, var(--medium-dark-bg), var(--light-bg));
-    padding: 30px;
+    padding: 30px 35px;
     border-radius: var(--border-radius-lg);
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow-medium);
@@ -577,30 +631,34 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     display: flex;
     align-items: center;
     margin-bottom: 25px;
-    padding-bottom: 15px;
+    padding-bottom: 18px;
     border-bottom: 1px solid var(--border-color);
 }
 .benefit-tier-header .tier-icon {
-    font-size: 2.8em;
-    margin-right: 18px;
+    font-size: 3em;
+    margin-right: 20px;
     line-height: 1;
-    filter: drop-shadow(0 3px 5px rgba(0,0,0,0.3));
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
+    transition: transform 0.3s ease;
+}
+.benefit-tier:hover .benefit-tier-header .tier-icon {
+    transform: rotate(-5deg) scale(1.1);
 }
 .benefit-tier.patron .tier-icon { color: var(--primary-color); }
 .benefit-tier.patron-plus .tier-icon { color: var(--accent-color); }
 
 .tier-name-price h3 {
-    font-size: 1.7em;
+    font-size: 1.8em;
     font-weight: 700;
     color: var(--text-color);
-    margin-bottom: 2px;
+    margin-bottom: 4px;
 }
 .tier-name-price .tier-price {
-    font-size: 0.9em;
+    font-size: 0.95em;
     font-weight: 500;
     color: var(--text-muted);
     background-color: var(--dark-bg);
-    padding: 4px 10px;
+    padding: 5px 12px;
     border-radius: var(--border-radius-sm);
     display: inline-block;
 }
@@ -613,62 +671,66 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 }
 .benefit-detail-list li {
     display: flex;
-    align-items: flex-start;
-    margin-bottom: 12px;
+    align-items: center;
+    margin-bottom: 14px;
     font-size: 0.95rem;
     color: var(--text-muted);
-    line-height: 1.6;
+    line-height: 1.65;
 }
 .benefit-detail-list .list-bullet {
-    width: 22px;
+    width: 24px;
     flex-shrink: 0;
-    margin-right: 10px;
+    margin-right: 12px;
     color: var(--secondary-color);
-    font-size: 0.9em;
-    padding-top: 3px;
+    font-size: 1em;
+    text-align: center;
 }
 
 .tier-duration-info {
     margin-top: auto;
     padding-top: 20px;
     border-top: 1px dashed var(--border-color);
+    font-size: 0.9rem;
 }
 .tier-duration-info p {
-    font-size: 0.85rem;
     color: var(--text-muted);
-    margin-bottom: 8px;
+    margin-bottom: 10px;
     display: flex;
     align-items: center;
 }
 .tier-duration-info p:last-child { margin-bottom: 0; }
-.tier-duration-info .server-icon,
-.tier-duration-info .global-icon {
-    margin-right: 8px;
-    color: var(--primary-color);
-    font-size: 1em;
+/* tier-duration-info 内のテキストとアイコンの左揃えを調整 */
+.tier-duration-info p .fas, .tier-duration-info p .fab { /* アイコン全般 */
+    width: 22px; /* アイコンのためのスペース */
+    text-align: center;
+    margin-right: 10px;
+    font-size: 1.1em;
 }
+.tier-duration-info .server-icon { color: var(--primary-color); }
 .tier-duration-info .global-icon { color: var(--secondary-color); }
 .tier-duration-info .duration {
     display: inline-flex;
     align-items: center;
-    margin-left: 5px;
+    margin-left: 8px;
     font-weight: 500;
     color: var(--text-color);
 }
 .tier-duration-info .duration-icon {
-    margin-right: 5px;
+    margin-right: 6px;
     color: var(--accent-color);
-    font-size: 0.9em;
+    font-size: 0.95em;
 }
 
 .inline-link {
     color: var(--accent-color);
-    text-decoration: underline;
+    text-decoration: none;
+    border-bottom: 1px dotted var(--accent-color);
     font-weight: 500;
+    transition: color var(--transition-fast), border-bottom-color var(--transition-fast);
 }
 .inline-link:hover {
     color: var(--secondary-color);
-    text-decoration: none;
+    border-bottom-color: var(--secondary-color);
 }
 
 .br-sp { display: none; }
@@ -677,7 +739,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 }
 
 
-/* --- レスポンシブ対応 (スマートフォン ナビゲーション修正) --- */
+/* --- レスポンシブ対応 --- */
 @media (max-width: 1024px) {
     .hero-text-content { max-width: 70%; padding-right: 5%; }
     .features-grid {
@@ -691,104 +753,36 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 
 @media (max-width: 768px) {
     .main-nav {
-        position: fixed;
-        top: 0;
-        left: -100%; /* 初期状態は画面外（左） */
-        width: 80%;
-        max-width: 300px;
-        height: 100vh;
-        background-color: var(--dark-bg);
-        padding-top: 70px; /* ヘッダーの高さなどを考慮 */
-        box-shadow: 5px 0 20px rgba(0,0,0,0.3);
-        transition: left 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-        z-index: 1001; /* ヘッダー(1000)より手前、ハンバーガー(1002)より後ろ */
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
+        position: fixed; top: 0; left: -100%; width: 100%; max-width: 300px; height: 100vh;
+        background-color: var(--dark-bg); padding-top: 75px; box-shadow: 8px 0 25px rgba(0,0,0,0.3);
+        transition: left var(--transition-normal); z-index: 1001; overflow-y: auto;
+        display: flex; flex-direction: column;
     }
-    .main-nav.active {
-        left: 0; /* アクティブ時に画面内に表示 */
-    }
-    .main-nav ul {
-        flex-direction: column;
-        width: 100%;
-        padding: 20px 0;
-    }
-    .main-nav ul li {
-        margin-left: 0;
-        width: 100%;
-    }
+    .main-nav.active { left: 0; }
+    .main-nav ul li { margin-left: 0; width: 100%;}
     .main-nav ul li a.nav-link-item {
-        display: block;
-        padding: 16px 30px;
-        font-size: 1.1rem;
-        color: var(--text-color);
-        text-shadow: none;
-        border-bottom: 1px solid var(--border-color);
-        opacity: 1;
-        transition: background-color var(--transition-fast), color var(--transition-fast);
+        padding: 15px 30px; font-size: 1.05rem; display:block;
+        border-bottom: 1px solid var(--border-color); color: var(--text-color);
+        text-shadow: none; opacity: 1;
     }
-     /* 最後の通常リンクアイテムのボーダーを消す（Discordリンクが続く場合があるため） */
-    .main-nav ul li:not(:last-child) > a.nav-link-item {
-        /* border-bottom: 1px solid var(--border-color); */
-    }
-    /* Discordリンクが最後でない場合、その前の通常リンクのボーダーは維持 */
-    .main-nav ul li:has(+ li > a.nav-discord-link) > a.nav-link-item {
-         border-bottom: 1px solid var(--border-color);
-    }
-     /* Discordリンクの直前の通常リンクのボーダーは消す */
-    .main-nav ul li > a.nav-link-item:not(.nav-discord-link) + a.nav-discord-link,
-    .main-nav ul li > a.nav-link-item.active + a.nav-discord-link {
-        /* このセレクタは意図通りではない可能性 */
-    }
-    .main-nav ul li:last-child > a.nav-link-item { /* 通常リンクが最後の場合 */
-        border-bottom: none;
-    }
+    .main-nav ul li:last-child > a.nav-link-item { border-bottom: none; }
+    .main-nav ul li:has(+ li > a.nav-discord-link) > a.nav-link-item { border-bottom: 1px solid var(--border-color); }
+    .main-nav ul li a.nav-link-item.active { color: var(--accent-color); background-color: var(--medium-dark-bg); }
+    .main-nav ul li a.nav-link-item:hover { background-color: var(--medium-dark-bg); color: var(--accent-color); }
+    .main-nav ul li a.nav-link-item::after { display: none; }
 
-
-    .main-nav ul li a.nav-link-item::after {
-        display: none;
-    }
-    .main-nav ul li a.nav-link-item:hover,
-    .main-nav ul li a.nav-link-item.active {
-        background-color: var(--medium-dark-bg);
-        color: var(--accent-color);
-    }
-
-    /* スマホメニュー内のDiscordリンクのスタイル調整 */
     .main-nav ul li a.nav-discord-link {
-        display: flex !important;
-        align-items: center;
-        padding: 16px 30px !important;
-        background-color: transparent !important;
-        border: none !important;
-        color: var(--text-color) !important;
-        font-weight: 500 !important;
-        font-size: 1.1rem !important;
-        text-shadow: none !important;
-        border-bottom: 1px solid var(--border-color); /* 他の項目と合わせる */
-        opacity: 1 !important;
-        text-align: left;
+        display: flex !important; align-items: center;
+        padding: 15px 30px !important; background-color: transparent !important;
+        border: none !important; color: var(--text-color) !important;
+        font-weight: 500 !important; font-size: 1.05rem !important;
+        text-shadow: none !important; border-bottom: 1px solid var(--border-color);
+        opacity: 1 !important; text-align: left;
     }
-    /* Discordリンクがメニューの最後の項目の場合、下のボーダーを消す */
-    .main-nav ul li:last-child > a.nav-discord-link {
-        border-bottom: none;
-    }
-
-    .main-nav ul li a.nav-discord-link:hover {
-        background-color: var(--medium-dark-bg) !important;
-        color: var(--accent-color) !important;
-    }
-    .main-nav ul li a.nav-discord-link i {
-        margin-right: 12px;
-        color: var(--primary-color);
-        font-size: 1.1em;
-        transition: color var(--transition-fast);
-    }
-    .main-nav ul li a.nav-discord-link:hover i {
-        color: var(--accent-color);
-    }
-
+    .main-nav ul li:last-child > a.nav-discord-link { border-bottom: none; }
+    .main-nav ul li a.nav-discord-link:hover { background-color: var(--medium-dark-bg) !important; color: var(--accent-color) !important; }
+    .main-nav ul li a.nav-discord-link i { color: var(--primary-color); transition: color var(--transition-fast); }
+    .main-nav ul li a.nav-discord-link:hover i { color: var(--accent-color); }
 
     .hamburger-menu { display: block; }
 
@@ -798,9 +792,24 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 
     .features-grid { grid-template-columns: 1fr; }
     .preview-sections-wrapper { grid-template-columns: 1fr; }
-    .join-box { max-width: calc(100% - 20px); }
 
-    .page-content-container { padding-top: 80px; }
+    .page-content-container { padding-top: 90px; padding-bottom: 60px;}
+    .page-main-title { font-size: clamp(1.8em, 5.2vw, 2.7em); margin-bottom: 0.8em; }
+    .page-intro { font-size: clamp(0.9rem, 2.5vw, 1.1rem); }
+    .page-section { padding: 30px 20px; }
+    .section-heading-styled { font-size: clamp(1.5em, 3.5vw, 1.9em); }
+    .rules-category-title { font-size: clamp(1.2em, 2.7vw, 1.5em); }
+
+    /* Support Page スマホ */
+    .payment-methods-container { grid-template-columns: 1fr; }
+    .benefit-tiers-container { grid-template-columns: 1fr; }
+    .benefit-tier { padding: 25px; }
+    .benefit-tier-header { flex-direction: column; align-items: flex-start; gap: 10px;}
+    .benefit-tier-header .tier-icon { font-size: 2.5em; margin-right: 0; margin-bottom: 5px;}
+    .tier-name-price h3 { font-size: 1.5em;}
+    .tier-name-price .tier-price { font-size: 0.85em; padding: 3px 8px;}
+    .tier-duration-info p { flex-direction: column; align-items: flex-start; gap: 5px;}
+    .tier-duration-info .duration { margin-left: 0;}
 }
 
 @media (max-width: 480px) {
@@ -817,353 +826,11 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     .main-nav ul li a.nav-link-item { padding: 14px 25px; font-size: 1rem; }
     .main-nav ul li a.nav-discord-link { padding: 14px 25px !important; font-size: 1rem !important;}
 
-
     .feature-card p { font-size: 0.88rem; }
-    .join-box { padding: 25px 20px; }
-    .copy-wrapper input[type="text"], .copy-action-btn { padding: 11px 13px; font-size: 0.95em; }
-    .join-box-note { font-size: 0.88rem; }
-    .copy-toast { padding: 12px 22px; font-size: 0.95rem; width: calc(100% - 30px); max-width: 280px;}
-}
-/* stella.css */
-/* (前回の :root, グローバルスタイル, ヘッダー, ボタン, ヒーロー, Features, Preview, Join, Footer, Rules/Supportページ共通スタイル などは基本的に維持) */
-/* ... 前回のCSSコード ... */
 
-/* --- Status Page Specific Styles --- */
-.icon-header {
-    margin-right: 12px;
-    color: var(--primary-color);
-    font-size: 0.9em;
-}
-
-.status-section {
-    margin-bottom: 45px;
-}
-.status-section:last-of-type {
-    margin-bottom: 20px;
-}
-
-.overall-status-card {
-    padding: 30px 25px;
-    background: linear-gradient(145deg, var(--medium-dark-bg), var(--light-bg));
-    border-radius: var(--border-radius-lg);
-    border: 1px solid var(--border-color);
-    text-align: center;
-    box-shadow: var(--shadow-medium);
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-}
-.overall-status-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-strong);
-}
-
-.status-indicator-wrapper {
-    margin-bottom: 20px; /* 少し詰める */
-    min-height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.status-indicator {
-    display: inline-flex; align-items: center; padding: 10px 22px;
-    border-radius: var(--border-radius-md); font-weight: 600;
-    font-size: 1.15rem; box-shadow: var(--shadow-soft);
-    transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.status-indicator.online { background-color: var(--secondary-color); color: var(--dark-bg); }
-.status-indicator.offline { background-color: #E85C5C; color: #FFF; }
-.status-indicator.loading { background-color: var(--light-bg); color: var(--text-muted); }
-
-.status-indicator.small { font-size: 0.9rem; padding: 7px 14px; margin-bottom: 0; }
-
-.pulse-dot {
-    width: 10px; height: 10px; border-radius: 50%; margin-left: 10px;
-    animation: pulseAnimation 1.5s infinite ease-in-out;
-}
-.status-indicator.online .pulse-dot { background-color: #FFF; }
-.status-indicator.offline .pulse-dot { background-color: #ECEFF4; animation: none; opacity: 0.6;}
-.status-indicator.loading .pulse-dot { background-color: var(--text-muted); animation: pulseAnimation 1.5s infinite ease-in-out 0.5s; }
-
-@keyframes pulseAnimation {
-    0% { transform: scale(0.85); opacity: 0.7; }
-    50% { transform: scale(1.15); opacity: 1; }
-    100% { transform: scale(0.85); opacity: 0.7; }
-}
-
-.server-main-connection-info {
-    margin-bottom: 20px; /* 上下の間隔を調整 */
-    min-height: 40px; /* テキストがなくても高さをある程度確保 */
-}
-.server-main-connection-info p {
-    font-size: 1rem; color: var(--text-muted); margin-bottom: 8px;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-}
-.server-main-connection-info p i { color: var(--primary-color); font-size: 1.2em; width: 20px; text-align: center; }
-
-
-.total-players {
-    font-size: 1.3rem; font-weight: 700; color: var(--text-color);
-    display: flex; align-items: center; justify-content: center;
-    margin-top: 10px;
-}
-.total-players i { margin-right: 12px; color: var(--accent-color); font-size: 1.4em; }
-.player-count.animated-number {
-    color: var(--secondary-color); font-weight: 800; font-size: 1.1em;
-    min-width: 35px; display: inline-block; text-align: right;
-    transition: color 0.5s ease;
-}
-
-.server-cards-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 35px;
-    align-items: stretch;
-}
-.individual-server-section {
-    flex: 1 1 320px;
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
-}
-.server-card-content-wrapper {
-    background-color: var(--medium-dark-bg);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-medium);
-    border: 1px solid var(--border-color);
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-    position: relative;
-    overflow: hidden;
-}
-.individual-server-section:hover .server-card-content-wrapper {
-    transform: translateY(-8px) scale(1.015);
-    box-shadow: var(--shadow-strong);
-}
-.server-card-content-wrapper::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 7px;
-    border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
-    opacity: 0.85; transition: width var(--transition-fast), opacity var(--transition-fast);
-}
-.individual-server-section:hover .server-card-content-wrapper::before { width: 10px; opacity: 1; }
-#sutera-server-status .server-card-content-wrapper::before { background: var(--primary-color); }
-#vanilla-server-status .server-card-content-wrapper::before { background: var(--secondary-color); }
-
-.server-icon-container {
-    display: flex; justify-content: center; align-items: center;
-    margin-bottom: 18px; height: 70px;
-}
-.server-icon-placeholder {
-    width: 64px; height: 64px; border-radius: var(--border-radius-md);
-    background-color: var(--light-bg); border: 2px dashed var(--border-color);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--border-color); font-size: 1.5em; font-weight: bold;
-    transition: opacity 0.3s ease;
-}
-.server-icon {
-    width: 64px; height: 64px; border-radius: var(--border-radius-md);
-    box-shadow: 0 5px 12px rgba(0,0,0,0.25);
-    border: 2px solid var(--border-color);
-    object-fit: contain;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-    opacity: 0; /* JSで .loaded をつけて表示 */
-}
-.server-icon.loaded {
-    opacity: 1;
-}
-.individual-server-section:hover .server-icon.loaded {
-    transform: scale(1.12) rotate(4deg);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.35);
-}
-
-.server-name-title {
-    font-size: clamp(1.3em, 3vw, 1.7em);
-    color: var(--text-color); text-align: center; margin-bottom: 20px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-}
-.server-title-icon { margin-right: 10px; font-size: 0.9em; opacity: 0.9; }
-#sutera-server-status .server-title-icon { color: var(--primary-color); }
-#vanilla-server-status .server-title-icon { color: var(--secondary-color); }
-
-
-.status-card {
-    background-color: var(--light-bg); border-radius: var(--border-radius-md); padding: 20px;
-    border: 1px solid var(--border-color);
-    display: flex; flex-direction: column; flex-grow: 1;
-}
-.status-card-header {
-    display: flex; justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);
-    min-height: 30px;
-}
-
-.server-player-info { margin-bottom: 15px; font-size: 0.95rem; color: var(--text-muted); text-align: left; }
-.player-list-heading { /* 「オンラインプレイヤー:」のスタイル */
-    font-size: 1rem; color: var(--text-color); margin-bottom: 12px; font-weight: 500;
-    border-top: 1px dashed var(--border-color); padding-top: 15px;
-    text-align: left;
-}
-
-.player-list-container {
-    background-color: var(--dark-bg);
-    border-radius: var(--border-radius-sm);
-    padding: 10px;
-    margin-bottom: 15px;
-    flex-grow: 1;
-    min-height: 130px; /* プレイヤー0人でも高さを確保 (スケルトンやメッセージ表示のため) */
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* コンテンツが少ない場合は上から詰める */
-}
-.player-list-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
-    gap: 8px;
-    max-height: 126px; /* 初期表示は2行分程度 (40px avatar + ~14px name + 8px gap) * 2 */
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out;
-}
-.player-list-container.expanded .player-list-grid {
-    max-height: 300px; /* 十分な高さに展開 */
-    overflow-y: auto;
-}
-/* プレイヤーがいない場合のインラインメッセージ (JSで表示する場合) */
-.empty-player-list-message {
-    text-align: center;
-    color: var(--text-muted);
-    font-style: italic;
-    font-size: 0.9em;
-    padding: 20px 10px; /* 中央に表示されるように調整 */
-    flex-grow: 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-
-.player-list-grid::-webkit-scrollbar { width: 8px; }
-.player-list-grid::-webkit-scrollbar-track { background: var(--light-bg); border-radius: 4px; }
-.player-list-grid::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-.player-list-grid::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
-
-
-.player-avatar {
-    width: 40px; text-align: center;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity 0.3s ease-out; /* opacityもトランジション対象に */
-    opacity: 0; /* 初期は透明、JSで is-visible を付与して表示 */
-    transform: scale(0.8) translateY(10px);
-    border-radius: var(--border-radius-sm);
-    background-color: var(--medium-dark-bg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    position: relative;
-}
-.player-avatar.is-visible { /* JSで付与 */
-    opacity: 1;
-    transform: scale(1) translateY(0);
-}
-
-
-.player-avatar:hover { transform: scale(1.18) translateY(-3px); z-index: 10; box-shadow: var(--shadow-medium); }
-.player-avatar img {
-    width: 100%; height: 40px; object-fit: cover; display: block;
-    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
-    background-color: var(--light-bg);
-}
-.player-avatar .player-name {
-    display: block; font-size: 0.65rem; color: var(--text-muted);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    padding: 4px 2px;
-    border-top: 1px solid var(--border-color);
-}
-
-.player-type-badge {
-    position: absolute; top: 1px; right: 1px; font-size: 0.6rem;
-    padding: 2px 4px; border-radius: 4px; color: #FFF; line-height: 1;
-    background-color: rgba(0,0,0,0.65);
-    box-shadow: 0 0 4px rgba(0,0,0,0.6);
-    display: flex; align-items: center;
-    opacity: 0.9;
-}
-.player-type-badge.java i { color: var(--primary-color); }
-.player-type-badge.bedrock i { color: var(--secondary-color); }
-.player-type-badge i { font-size: 0.85em; }
-
-.btn-view-more {
-    display: block;
-    width: calc(100% - 20px);
-    margin: 10px auto 0 auto;
-    padding: 9px 15px;
-    font-size: 0.88rem;
-    background-color: var(--light-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-muted);
-    border-radius: var(--border-radius-sm);
-    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-}
-.btn-view-more:hover {
-    background-color: var(--primary-color);
-    color: #FFF;
-    border-color: var(--primary-color);
-    transform: scale(1.02);
-}
-.btn-view-more:disabled {
-    background-color: var(--dark-bg);
-    color: var(--text-muted);
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.error-message {
-    text-align: center; color: #E07A5F; font-style: italic;
-    font-size: 0.9rem; padding: 15px 10px;
-    flex-grow: 1; display: none; /* 初期非表示、JSで表示 */
-    align-items: center; justify-content: center;
-    min-height: 50px;
-}
-
-.player-avatar-skeleton {
-    width: 40px; height: 54px;
-    background: linear-gradient(90deg, var(--light-bg) 25%, var(--medium-dark-bg) 50%, var(--light-bg) 75%);
-    background-size: 200% 100%;
-    border-radius: var(--border-radius-sm);
-    animation: skeletonLoadingFull 1.5s infinite linear;
-}
-@keyframes skeletonLoadingFull {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
-
-/* --- レスポンシブ調整 for Status Page --- */
-@media (max-width: 768px) {
-    .overall-status-card { padding: 25px; }
-    .status-indicator { font-size: 1rem; padding: 8px 16px; }
-    .server-main-connection-info p { flex-direction: column; align-items: center; font-size: 0.95rem;}
-    .server-main-connection-info p i { margin-bottom: 6px; }
-    .total-players { font-size: 1.15rem; }
-
-    .server-cards-wrapper { grid-template-columns: 1fr; gap: 25px; }
-    .individual-server-section { margin-bottom: 25px; }
-    .server-card-content-wrapper { padding: 20px; }
-    .status-card { padding: 15px; min-height: auto; }
-    .status-card-header { flex-direction: column; gap: 10px; margin-bottom: 12px; }
-    .player-list-container { min-height: 90px; }
-    .player-list-grid { grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px; max-height: 114px; }
-    .player-avatar { width: 38px; }
-    .player-avatar img { height: 38px; }
-    .player-avatar .player-name { font-size: 0.6rem; }
-    .player-type-badge { font-size: 0.5rem; }
-    .btn-view-more { width: calc(100% - 10px); margin-top: 8px;}
-}
-
-@media (max-width: 480px) {
-    .status-section { padding: 15px; margin-bottom: 30px;}
-    .server-name-title { font-size: clamp(1.1em, 2.6vw, 1.4em); }
-    .player-list-container { padding: 8px;}
+    /* Support Page スマホ最小 */
+    .page-section { padding: 25px 15px; }
+    .payment-method { padding: 25px;}
+    .benefit-tier { padding: 20px;}
+    .benefit-detail-list li { font-size: 0.9rem;}
 }
