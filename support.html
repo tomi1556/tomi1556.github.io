@@ -156,18 +156,101 @@
         </div>
     </footer>
 
-    <script>
-        // index.html と同じ共通JavaScript
+<script>
         document.addEventListener('DOMContentLoaded', () => {
+            // --- Hamburger Menu ---
             const hamburger = document.querySelector('.hamburger-menu');
             const nav = document.querySelector('.main-nav');
-            if (hamburger && nav) { /* ... (省略) ... */ }
+
+            if (hamburger && nav) {
+                const navLinks = nav.querySelectorAll('a.nav-link'); // スマホメニュー内の通常リンク
+
+                hamburger.addEventListener('click', () => {
+                    const isActive = hamburger.classList.toggle('active');
+                    nav.classList.toggle('active');
+                    hamburger.setAttribute('aria-expanded', isActive);
+                    document.body.classList.toggle('no-scroll', isActive); // 背景スクロール禁止
+                });
+
+                // スマホメニュー内のリンクをクリックしたらメニューを閉じる
+                navLinks.forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (nav.classList.contains('active')) {
+                            hamburger.classList.remove('active');
+                            nav.classList.remove('active');
+                            hamburger.setAttribute('aria-expanded', 'false');
+                            document.body.classList.remove('no-scroll');
+                        }
+                    });
+                });
+            } else {
+                if (!hamburger) console.warn("Hamburger menu button not found.");
+                if (!nav) console.warn("Main navigation element not found.");
+            }
+
+            // --- Header Scroll Effect ---
             const header = document.querySelector('header');
-            if (header) { /* ... (省略) ... */ }
+            if (header) {
+                 window.addEventListener('scroll', () => {
+                    if (window.scrollY > 20) { // スクロール量が20pxを超えたら
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+                    // index.html 専用のヒーロー背景パララックスはここでは不要
+                });
+            } else {
+                console.warn("Header element not found.");
+            }
+
+            // --- Footer Year ---
             const currentYearEl = document.getElementById('current-year');
-            if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
+            if (currentYearEl) {
+                currentYearEl.textContent = new Date().getFullYear();
+            } else {
+                console.warn("Element with ID 'current-year' not found for footer.");
+            }
+
+            // --- Scroll Animations ---
             const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
-            if (animatedElements.length > 0 && typeof IntersectionObserver !== 'undefined') { /* ... (省略) ... */ }
+            if (animatedElements.length > 0 && typeof IntersectionObserver !== 'undefined') {
+                const observer = new IntersectionObserver((entries, observerInstance) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const animationType = entry.target.dataset.animation || 'fadeInUpCustom';
+                            const animationDelay = entry.target.dataset.animationDelay || '0s';
+                            entry.target.style.animationDelay = animationDelay;
+                            entry.target.classList.add(animationType, 'is-visible');
+                            observerInstance.unobserve(entry.target); // 一度表示されたら監視を解除
+                        }
+                    });
+                }, {
+                    threshold: 0.1, // 要素が10%見えたら
+                    rootMargin: "0px 0px -20px 0px" // 画面下部20px手前でトリガーしやすく
+                });
+
+                animatedElements.forEach(el => {
+                    // 初期状態で画面内に表示されている要素もアニメーション対象とする
+                    const rect = el.getBoundingClientRect();
+                    const isInitiallyVisible = el.classList.contains('animate-on-load') ||
+                                               (rect.top < window.innerHeight && rect.bottom >= 0 && rect.left < window.innerWidth && rect.right >=0);
+
+                    if (isInitiallyVisible) {
+                        const animationType = el.dataset.animation || 'fadeInUpCustom';
+                        const animationDelay = el.dataset.animationDelay || '0s';
+                        el.style.animationDelay = animationDelay;
+                        // 描画タイミングを考慮し、わずかな遅延後にクラスを付与
+                        setTimeout(() => {
+                            el.classList.add(animationType, 'is-visible');
+                        }, parseFloat(animationDelay.replace('s','')) * 1000 + 50); // アニメーションディレイ + 50ms
+                    } else {
+                        observer.observe(el);
+                    }
+                });
+            } else {
+                if (animatedElements.length === 0) console.warn("No elements found with '.animate-on-scroll' or '.animate-on-load' classes.");
+                if (typeof IntersectionObserver === 'undefined') console.warn("IntersectionObserver API is not supported in this browser.");
+            }
         });
     </script>
 </body>
