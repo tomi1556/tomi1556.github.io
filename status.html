@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サーバー稼働状況 - StellaMC</title>
-    <link rel="stylesheet" href="stella.css">
-    <link rel="stylesheet" href="status.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="stella.css"> <link rel="stylesheet" href="status.css"> <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -42,7 +40,7 @@
                 <h1 class="page-main-title"><i class="fas fa-broadcast-tower icon-header"></i>サーバー稼働状況</h1>
                 <p class="page-intro">
                     StellaMCの現在のサーバー状況やオンラインプレイヤーをリアルタイムで確認できます。<br>
-                    データは数分ごとに更新される場合があります。
+                    データは数分ごとに更新される場合があります。 (このテキストは表示されていますか？)
                 </p>
             </div>
 
@@ -79,7 +77,7 @@
                             <div class="server-player-info">
                                 <p>プレイヤー数: <span class="player-count animated-number" id="sutera-player-count" data-target="0" data-current-value="0">0</span> / <span id="sutera-max-players">-</span></p>
                             </div>
-                            <h4 class="player-list-heading">オンラインプレイヤー:</h4>
+                            <h4 class="player-list-heading">オンラインプレイヤー</h4>
                             <div class="player-list-container">
                                 <div class="player-list-grid" id="sutera-player-list">
                                     </div>
@@ -104,7 +102,7 @@
                             <div class="server-player-info">
                                 <p>プレイヤー数: <span class="player-count animated-number" id="vanilla-player-count" data-target="0" data-current-value="0">0</span> / <span id="vanilla-max-players">-</span></p>
                             </div>
-                            <h4 class="player-list-heading">オンラインプレイヤー:</h4>
+                            <h4 class="player-list-heading">オンラインプレイヤー</h4>
                             <div class="player-list-container">
                                 <div class="player-list-grid" id="vanilla-player-list">
                                     </div>
@@ -131,7 +129,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- 共通ヘッダー・アニメーション処理 ---
+            // --- 共通ヘッダー・アニメーション処理 (変更なし) ---
             const hamburger = document.querySelector('.hamburger-menu');
             const nav = document.querySelector('.main-nav');
             if (hamburger && nav) {
@@ -201,15 +199,15 @@
                 { id: 'sutera', address: 'stellamc.jp:6908', name: 'すてら鯖', initialSkeletons: 8 },
                 { id: 'vanilla', address: 'stellamc.jp:6910', name: 'バニラ鯖', initialSkeletons: 8 }
             ];
-            const INITIAL_PLAYERS_TO_SHOW = 12;
-            let serversData = {};
+            const INITIAL_PLAYERS_TO_SHOW = 12; // 初期表示するプレイヤー数
+            let serversData = {}; // 各サーバーの最新データをキャッシュ
 
             function createPlayerAvatarElement(player) {
                 const playerName = (typeof player === 'string' ? player : player.name) || 'UnknownPlayer';
                 const playerIdentifier = (typeof player === 'object' && player.uuid) ? player.uuid : playerName;
 
                 const playerDiv = document.createElement('div');
-                playerDiv.classList.add('player-avatar'); // アニメーションはCSS側で .is-visible を見て制御 (.popIn)
+                playerDiv.classList.add('player-avatar');
 
                 const isBedrock = playerName.startsWith('.');
                 playerDiv.classList.toggle('bedrock-player', isBedrock);
@@ -243,13 +241,13 @@
                 typeBadge.appendChild(typeIcon);
                 playerDiv.appendChild(typeBadge);
 
-                // DOMに追加された後、少し遅れてアニメーションクラスを付与
-                setTimeout(() => playerDiv.classList.add('popIn', 'is-visible'), 10);
+                // アニメーションのために遅延して表示クラスを付与
+                setTimeout(() => playerDiv.classList.add('popIn', 'is-visible'), Math.random() * 200 + 50); // ランダムな遅延
                 return playerDiv;
             }
 
             function displayPlayers(playerListEl, players, serverIdPrefix) {
-                if (!playerListEl) { console.error(`Player list element not found for ${serverIdPrefix}`); return; }
+                if (!playerListEl) { console.error(`Player list element for ${serverIdPrefix} not found.`); return; }
                 playerListEl.innerHTML = '';
 
                 const viewMoreBtn = document.getElementById(`${serverIdPrefix}-view-more-btn`);
@@ -258,7 +256,8 @@
 
                 if (!players || players.length === 0) {
                     if (viewMoreBtn) viewMoreBtn.style.display = 'none';
-                    playerListEl.innerHTML = '<p class="empty-player-list-message"></p>';
+                    // 「現在オンラインのプレイヤーはいません」メッセージは表示しない方針
+                    playerListEl.innerHTML = '<p class="empty-player-list-message">オンラインプレイヤーなし</p>';
                     return;
                 }
 
@@ -281,12 +280,12 @@
                         viewMoreBtn.disabled = false;
                         viewMoreBtn.dataset.state = "more";
                         viewMoreBtn.onclick = function() {
-                            const container = playerListEl.parentElement;
+                            const container = playerListEl.parentElement; // .player-list-container
                             if (viewMoreBtn.dataset.state === "more") {
                                 playerListEl.querySelectorAll('.hidden-player-item').forEach((p,idx) => {
                                     p.style.display = 'block';
                                     p.classList.remove('hidden-player-item');
-                                    p.classList.remove('popIn', 'is-visible');
+                                    p.classList.remove('popIn', 'is-visible'); // アニメーション再トリガーのため
                                     setTimeout(() => p.classList.add('popIn', 'is-visible'), 20 * idx + 10);
                                 });
                                 container.classList.add('expanded');
@@ -322,7 +321,7 @@
             }
 
             function showLoadingSkeletons(playerListEl, count) {
-                if (!playerListEl) { console.warn("showLoadingSkeletons: playerListEl not found"); return; }
+                if (!playerListEl) return;
                 playerListEl.innerHTML = '';
                 for (let i = 0; i < count; i++) {
                     const skeleton = document.createElement('div');
@@ -333,7 +332,7 @@
 
             async function fetchServerStatus(serverConfig) {
                 const { id: serverIdPrefix, address, initialSkeletons } = serverConfig;
-                console.log(`[${serverIdPrefix}] Fetching status for ${address}...`);
+                console.log(`[${serverIdPrefix}] Initiating fetch for ${address}`);
                 const elements = {
                     indicator: document.getElementById(`${serverIdPrefix}-status-indicator`),
                     playerCount: document.getElementById(`${serverIdPrefix}-player-count`),
@@ -345,92 +344,89 @@
                     errorMessage: document.getElementById(`${serverIdPrefix}-error-message`),
                 };
 
-                // 各要素の存在チェック
+                // 各要素の存在チェックを強化
+                let allElementsExist = true;
                 for (const key in elements) {
                     if (!elements[key]) {
-                        console.warn(`[${serverIdPrefix}] Element missing: ${key} (ID: ${serverIdPrefix}-${key.replace(/([A-Z])/g, '-$1').toLowerCase()})`);
+                        console.error(`[${serverIdPrefix}] CRITICAL: Element missing in HTML: ${key} (Expected ID: ${serverIdPrefix}-${key.replace(/([A-Z])/g, '-$1').toLowerCase()})`);
+                        allElementsExist = false;
                     }
+                }
+                if (!allElementsExist) {
+                     console.error(`[${serverIdPrefix}] Aborting fetch due to missing critical HTML elements.`);
+                     if (elements.indicator) { // インジケーターだけでもエラー表示試行
+                        elements.indicator.className = 'status-indicator offline small';
+                        elements.indicator.querySelector('span').textContent = 'ページエラー';
+                        if(elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').className = 'pulse-dot';
+                     }
+                     serversData[serverIdPrefix] = { online: false, players: { online: 0 }, error: true, errorMessage: "HTML要素不足" };
+                     updateOverallStatus();
+                     return; // 要素がなければ処理中断
                 }
 
-                // 初期ローディング表示 (要素が存在する場合のみ操作)
-                if (elements.indicator) {
-                    elements.indicator.className = 'status-indicator loading small';
-                    elements.indicator.querySelector('span').textContent = '確認中';
-                    if (elements.indicator.querySelector('.pulse-dot')) {
-                        elements.indicator.querySelector('.pulse-dot').className = 'pulse-dot loading';
-                    }
-                }
+
+                elements.indicator.className = 'status-indicator loading small';
+                elements.indicator.querySelector('span').textContent = '確認中';
+                elements.indicator.querySelector('.pulse-dot').className = 'pulse-dot loading';
                 showLoadingSkeletons(elements.playerList, initialSkeletons);
-                if (elements.serverIcon) elements.serverIcon.style.display = 'none';
-                if (elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'flex';
-                if (elements.errorMessage) elements.errorMessage.style.display = 'none';
-
+                elements.serverIcon.style.display = 'none';
+                elements.iconPlaceholder.style.display = 'flex';
+                elements.errorMessage.style.display = 'none';
 
                 try {
                     const response = await fetch(`${API_BASE_URL}${address}`);
-                    console.log(`[${serverIdPrefix}] Response status: ${response.status} for ${address}`);
+                    console.log(`[${serverIdPrefix}] Response status: ${response.status}`);
                     if (!response.ok) {
-                        const errorText = await response.text();
-                        throw new Error(`Network error for ${address}: ${response.status} ${response.statusText} - ${errorText}`);
+                        let errorData = { status: response.status, statusText: response.statusText };
+                        try { errorData.body = await response.text(); } catch (e) {}
+                        console.error(`[${serverIdPrefix}] Network error:`, errorData);
+                        throw new Error(`Network error: ${response.status}`);
                     }
                     const data = await response.json();
-                    console.log(`[${serverIdPrefix}] Data for ${address}:`, data);
-                    serversData[serverIdPrefix] = data; // データを保存
+                    console.log(`[${serverIdPrefix}] Data received:`, data);
+                    serversData[serverIdPrefix] = data;
 
-                    if (elements.indicator) {
-                        elements.indicator.classList.remove('loading');
-                        if (elements.indicator.querySelector('.pulse-dot')) {
-                            elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
-                        }
-                    }
-                    if (elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'none';
-                    if (elements.serverIcon) {
-                        elements.serverIcon.style.display = 'block';
-                        elements.serverIcon.src = data.icon ? data.icon : `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`;
-                        elements.serverIcon.onerror = function() { this.style.display='none'; if(elements.iconPlaceholder) elements.iconPlaceholder.style.display='flex'; };
-                        elements.serverIcon.classList.add('loaded');
-                    }
+                    elements.indicator.classList.remove('loading');
+                    elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
+                    elements.iconPlaceholder.style.display = 'none';
+                    elements.serverIcon.style.display = 'block';
+                    elements.serverIcon.src = data.icon ? data.icon : `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`;
+                    elements.serverIcon.onerror = function() { this.style.display='none'; elements.iconPlaceholder.style.display='flex'; };
+                    elements.serverIcon.classList.add('loaded');
+
 
                     if (data.online) {
-                        if (elements.indicator) {
-                            elements.indicator.classList.add('online');
-                            elements.indicator.classList.remove('offline');
-                            elements.indicator.querySelector('span').textContent = 'オンライン';
-                        }
+                        elements.indicator.classList.add('online');
+                        elements.indicator.classList.remove('offline');
+                        elements.indicator.querySelector('span').textContent = 'オンライン';
 
                         const currentPlayers = data.players && data.players.online !== undefined ? data.players.online : 0;
                         const maxP = data.players && data.players.max !== undefined ? data.players.max : '-';
                         animatePlayerCount(elements.playerCount, currentPlayers);
-                        if (elements.maxPlayers) elements.maxPlayers.textContent = maxP;
-
+                        elements.maxPlayers.textContent = maxP;
                         displayPlayers(elements.playerList, data.players ? data.players.list : [], serverIdPrefix);
-
                     } else {
-                        if (elements.indicator) {
-                            elements.indicator.classList.add('offline');
-                            elements.indicator.classList.remove('online');
-                            elements.indicator.querySelector('span').textContent = 'オフライン';
-                        }
-                        if (elements.serverIcon) elements.serverIcon.src = `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`;
+                        elements.indicator.classList.add('offline');
+                        elements.indicator.classList.remove('online');
+                        elements.indicator.querySelector('span').textContent = 'オフライン';
+                        elements.serverIcon.src = `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`;
                         animatePlayerCount(elements.playerCount, 0);
-                        if (elements.maxPlayers) elements.maxPlayers.textContent = '-';
+                        elements.maxPlayers.textContent = '-';
                         displayPlayers(elements.playerList, [], serverIdPrefix);
                     }
                 } catch (error) {
-                    console.error(`[${serverIdPrefix}] Fetch error for ${address}:`, error);
-                    if (elements.indicator) {
-                        elements.indicator.classList.remove('loading');
-                        if (elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
-                        elements.indicator.classList.add('offline');
-                        elements.indicator.classList.remove('online');
-                        elements.indicator.querySelector('span').textContent = '取得失敗';
-                    }
-                    if (elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'none';
-                    if (elements.serverIcon) {elements.serverIcon.style.display = 'block'; elements.serverIcon.src = `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`; }
+                    console.error(`[${serverIdPrefix}] Final catch error for ${address}:`, error);
+                    elements.indicator.classList.remove('loading');
+                    if (elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
+                    elements.indicator.classList.add('offline');
+                    elements.indicator.classList.remove('online');
+                    elements.indicator.querySelector('span').textContent = '取得失敗';
+                    elements.iconPlaceholder.style.display = 'none';
+                    elements.serverIcon.style.display = 'block'; elements.serverIcon.src = `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`;
                     if (elements.playerList) elements.playerList.innerHTML = '';
-                    if (elements.errorMessage) elements.errorMessage.style.display = 'block';
+                    elements.errorMessage.style.display = 'block';
                     if (elements.viewMoreBtn) elements.viewMoreBtn.style.display = 'none';
-                    serversData[serverIdPrefix] = { online: false, players: { online: 0 }, error: true };
+                    serversData[serverIdPrefix] = { online: false, players: { online: 0 }, error: true, errorMessage: error.message };
                 } finally {
                     updateOverallStatus();
                 }
@@ -481,18 +477,18 @@
 
                 if (overallIndicator) {
                     overallIndicator.classList.remove('loading', 'online', 'offline');
-                    if(overallIndicator.querySelector('.pulse-dot')) overallIndicator.querySelector('.pulse-dot').classList.remove('loading');
+                    const pulseDot = overallIndicator.querySelector('.pulse-dot');
+                    if(pulseDot) pulseDot.classList.remove('loading');
                     if(overallErrorMsg) overallErrorMsg.style.display = 'none';
 
-
-                    if (!allFetched && !anyOnline && Object.keys(serversData).length < SERVERS.length) { // まだ全サーバーの結果が揃っていない場合
+                    if (!allFetched && Object.keys(serversData).length < SERVERS.length) {
                         overallIndicator.classList.add('loading');
                         overallIndicator.querySelector('span').textContent = '確認中...';
-                        if(overallIndicator.querySelector('.pulse-dot')) overallIndicator.querySelector('.pulse-dot').classList.add('loading');
+                        if(pulseDot) pulseDot.classList.add('loading');
                     } else if (anyOnline) {
                         overallIndicator.classList.add('online');
                         overallIndicator.querySelector('span').textContent = 'オンライン';
-                    } else { // 全データ取得済み or エラーありでオンラインなし
+                    } else {
                         overallIndicator.classList.add('offline');
                         overallIndicator.querySelector('span').textContent = anyError ? '一部取得失敗' : 'オフライン';
                         if(overallErrorMsg && anyError && !anyOnline) overallErrorMsg.style.display = 'block';
@@ -507,10 +503,8 @@
                 });
             }
 
-            // 初回ロード
             loadAllServerStatus();
-            // 定期更新
-            setInterval(loadAllServerStatus, 60000); // 60秒ごと
+            setInterval(loadAllServerStatus, 60000);
         });
     </script>
 </body>
