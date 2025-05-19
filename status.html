@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サーバー稼働状況 - StellaMC</title>
-    <link rel="stylesheet" href="stella.css">
-    <link rel="stylesheet" href="status.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="stella.css"> <link rel="stylesheet" href="status.css"> <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
@@ -41,7 +39,7 @@
             <div class="page-header animate-on-load" data-animation="fadeInUpCustom">
                 <h1 class="page-main-title"><i class="fas fa-broadcast-tower icon-header"></i>サーバー稼働状況</h1>
                 <p class="page-intro">
-                    StellaMCの現在のサーバー状況をリアルタイムで確認できます。<br>
+                    StellaMCの現在のサーバー状況やオンラインプレイヤーをリアルタイムで確認できます。<br>
                     データは数分ごとに更新される場合があります。
                 </p>
             </div>
@@ -91,7 +89,7 @@
                              <div class="server-icon-placeholder" id="vanilla-icon-placeholder" style="display:flex;"><i class="fas fa-spinner fa-spin"></i></div>
                             <img src="" alt="バニラ鯖 アイコン" class="server-icon" id="vanilla-server-icon" style="display:none;">
                         </div>
-                        <h3 class="server-name-title"><i class="fas fa-seedling server-title-icon"></i>バニラ鯖</h3> {/* アイコン変更例 */}
+                        <h3 class="server-name-title"><i class="fas fa-seedling server-title-icon"></i>バニラ鯖</h3> {/* アイコンを fa-seedling に変更 */}
                         <div class="status-card">
                             <div class="status-card-header">
                                 <div class="status-indicator loading small" id="vanilla-status-indicator"><span>確認中</span><div class="pulse-dot loading"></div></div>
@@ -119,6 +117,7 @@
     </footer>
 
     <script>
+        // JavaScriptは前回提供のものからプレイヤーリスト関連を削除
         document.addEventListener('DOMContentLoaded', () => {
             // --- 共通ヘッダー・アニメーション処理 ---
             const hamburger = document.querySelector('.hamburger-menu');
@@ -190,7 +189,7 @@
                 { id: 'sutera', address: 'stellamc.jp:6908', name: 'すてら鯖' },
                 { id: 'vanilla', address: 'stellamc.jp:6910', name: 'バニラ鯖' }
             ];
-            let serversData = {};
+            let serversData = {}; // 各サーバーの最新データをキャッシュ
 
             async function fetchServerStatus(serverConfig) {
                 const { id: serverIdPrefix, address } = serverConfig;
@@ -208,82 +207,85 @@
                 for (const key in elements) {
                     if (!elements[key]) {
                         console.warn(`[${serverIdPrefix}] HTML Element missing for status display: ${key}`);
-                        allElementsPresent = false; // 続行するが、一部表示が欠ける可能性
+                        allElementsPresent = false;
                     }
                 }
-
-                if (elements.indicator) {
-                    elements.indicator.className = 'status-indicator loading small';
-                    if(elements.indicator.querySelector('span')) elements.indicator.querySelector('span').textContent = '確認中';
-                    if(elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').className = 'pulse-dot loading';
+                if (!allElementsPresent) {
+                     console.error(`[${serverIdPrefix}] Aborting fetch due to missing critical HTML elements for server card.`);
+                     if (elements.indicator) {
+                        elements.indicator.className = 'status-indicator offline small';
+                        if(elements.indicator.querySelector('span')) elements.indicator.querySelector('span').textContent = 'ページエラー';
+                        if(elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').className = 'pulse-dot';
+                     }
+                     serversData[serverIdPrefix] = { online: false, players: { online: 0 }, error: true, errorMessage: "HTML要素不足" };
+                     updateOverallStatus();
+                     return;
                 }
-                if (elements.serverIcon) elements.serverIcon.style.display = 'none';
-                if (elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'flex';
-                if (elements.errorMessage) elements.errorMessage.style.display = 'none';
+
+                // 初期ローディング表示
+                elements.indicator.className = 'status-indicator loading small';
+                elements.indicator.querySelector('span').textContent = '確認中';
+                elements.indicator.querySelector('.pulse-dot').className = 'pulse-dot loading';
+                elements.serverIcon.style.display = 'none';
+                elements.iconPlaceholder.style.display = 'flex'; // Placeholderを表示
+                elements.errorMessage.style.display = 'none';
 
 
                 try {
                     const response = await fetch(`${API_BASE_URL}${address}`);
                     console.log(`[${serverIdPrefix}] Response for ${address} - Status: ${response.status}`);
                     if (!response.ok) {
-                        let errorBody = "Unknown error during fetch.";
-                        try { errorBody = await response.text(); } catch (e) { console.warn(`[${serverIdPrefix}] Could not get error body text`); }
-                        console.error(`[${serverIdPrefix}] Network error details: ${errorBody.substring(0, 200)}...`);
-                        throw new Error(`Network error: ${response.status} ${response.statusText}`);
+                        let errorBodyText = "Unknown fetch error";
+                        try { errorBodyText = await response.text(); } catch (e) { /* ignore */ }
+                        throw new Error(`Network error: ${response.status} ${response.statusText}. Body: ${errorBodyText.substring(0,100)}`);
                     }
                     const data = await response.json();
                     console.log(`[${serverIdPrefix}] Data received for ${address}:`, data);
                     if (typeof data !== 'object' || data === null) {
                         throw new Error('Invalid JSON response from API');
                     }
-                    serversData[serverIdPrefix] = data; // データを保存
+                    serversData[serverIdPrefix] = data;
 
-                    if (elements.indicator) {
-                        elements.indicator.classList.remove('loading');
-                        if(elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
-                    }
-                    if (elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'none';
-                    if (elements.serverIcon) {
-                        elements.serverIcon.style.display = 'block';
-                        elements.serverIcon.src = data.icon ? data.icon : `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`;
-                        elements.serverIcon.onerror = function() { this.style.display='none'; if(elements.iconPlaceholder) elements.iconPlaceholder.style.display='flex'; };
-                        elements.serverIcon.classList.add('loaded');
-                    }
+                    elements.indicator.classList.remove('loading');
+                    elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
+                    elements.iconPlaceholder.style.display = 'none'; // Placeholderを隠す
+                    elements.serverIcon.style.display = 'block'; // アイコン表示
+                    elements.serverIcon.src = data.icon ? data.icon : `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`; // デフォルトまたはAPIからのアイコン
+                    elements.serverIcon.onerror = function() { this.style.display='none'; elements.iconPlaceholder.style.display='flex'; }; // アイコン読み込み失敗時
+                    elements.serverIcon.classList.add('loaded');
+
 
                     if (data.online) {
-                        if (elements.indicator) {
-                            elements.indicator.classList.add('online');
-                            elements.indicator.classList.remove('offline');
-                            if(elements.indicator.querySelector('span')) elements.indicator.querySelector('span').textContent = 'オンライン';
-                        }
+                        elements.indicator.classList.add('online');
+                        elements.indicator.classList.remove('offline');
+                        elements.indicator.querySelector('span').textContent = 'オンライン';
+
                         const currentPlayers = (data.players && typeof data.players.online === 'number') ? data.players.online : 0;
                         const maxP = (data.players && typeof data.players.max === 'number') ? data.players.max : '-';
                         animatePlayerCount(elements.playerCount, currentPlayers);
-                        if (elements.maxPlayers) elements.maxPlayers.textContent = maxP;
+                        elements.maxPlayers.textContent = maxP;
                         // プレイヤーリスト表示は削除
                     } else {
-                        if (elements.indicator) {
-                            elements.indicator.classList.add('offline');
-                            elements.indicator.classList.remove('online');
-                            if(elements.indicator.querySelector('span')) elements.indicator.querySelector('span').textContent = 'オフライン';
-                        }
-                        if (elements.serverIcon) elements.serverIcon.src = `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`;
+                        elements.indicator.classList.add('offline');
+                        elements.indicator.classList.remove('online');
+                        elements.indicator.querySelector('span').textContent = 'オフライン';
+                        elements.serverIcon.src = `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`; // オフラインでもアイコン取得試行
                         animatePlayerCount(elements.playerCount, 0);
-                        if (elements.maxPlayers) elements.maxPlayers.textContent = '-';
+                        elements.maxPlayers.textContent = '-';
                         // プレイヤーリスト表示は削除
                     }
                 } catch (error) {
                     console.error(`[${serverIdPrefix}] Final catch error for ${address}:`, error);
-                    if (elements.indicator) {
-                        elements.indicator.classList.remove('loading');
-                        if (elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
-                        elements.indicator.classList.add('offline');
-                        elements.indicator.classList.remove('online');
-                        if(elements.indicator.querySelector('span')) elements.indicator.querySelector('span').textContent = '取得失敗';
-                    }
-                    if (elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'none';
-                    if (elements.serverIcon) {elements.serverIcon.style.display = 'block'; elements.serverIcon.src = `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`; }
-                    if (elements.errorMessage) {elements.errorMessage.textContent = `情報取得エラー`; elements.errorMessage.style.display = 'block';}
+                    elements.indicator.classList.remove('loading');
+                    if (elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
+                    elements.indicator.classList.add('offline');
+                    elements.indicator.classList.remove('online');
+                    elements.indicator.querySelector('span').textContent = '取得失敗';
+                    elements.iconPlaceholder.style.display = 'none'; // エラー時はPlaceholderも隠し、アイコン表示試行
+                    elements.serverIcon.style.display = 'block'; elements.serverIcon.src = `https://api.mcsrvstat.us/icon/${address.split(':')[0]}`;
+
+                    elements.errorMessage.textContent = `情報取得エラー`; // シンプルなエラーメッセージ
+                    elements.errorMessage.style.display = 'block';
                     serversData[serverIdPrefix] = { online: false, players: { online: 0 }, error: true, errorMessage: error.message };
                 } finally {
                     updateOverallStatus();
@@ -315,7 +317,7 @@
             function updateOverallStatus() {
                 let currentTotalOnline = 0;
                 let anyOnline = false;
-                let allFetched = SERVERS.every(server => serversData[server.id] !== undefined);
+                let allFetchedAndNoError = SERVERS.every(server => serversData[server.id] && !serversData[server.id].error);
                 let anyError = SERVERS.some(server => serversData[server.id] && serversData[server.id].error);
 
                 SERVERS.forEach(server => {
@@ -339,14 +341,14 @@
                     if(pulseDot) pulseDot.classList.remove('loading');
                     if(overallErrorMsg) overallErrorMsg.style.display = 'none';
 
-                    if (!allFetched && Object.keys(serversData).length < SERVERS.length) {
+                    if (Object.keys(serversData).length < SERVERS.length && !anyError) { // まだ全サーバーの結果が揃っていない (エラーなし)
                         overallIndicator.classList.add('loading');
                         if(overallIndicator.querySelector('span')) overallIndicator.querySelector('span').textContent = '確認中...';
                         if(pulseDot) pulseDot.classList.add('loading');
                     } else if (anyOnline) {
                         overallIndicator.classList.add('online');
                         if(overallIndicator.querySelector('span')) overallIndicator.querySelector('span').textContent = 'オンライン';
-                    } else {
+                    } else { // 全データ取得済み or エラーありでオンラインなし
                         overallIndicator.classList.add('offline');
                         if(overallIndicator.querySelector('span')) overallIndicator.querySelector('span').textContent = anyError ? '一部取得失敗' : 'オフライン';
                         if(overallErrorMsg && anyError && !anyOnline) overallErrorMsg.style.display = 'block';
@@ -361,8 +363,10 @@
                 });
             }
 
+            // 初回ロード
             loadAllServerStatus();
-            setInterval(loadAllServerStatus, 60000);
+            // 定期更新
+            setInterval(loadAllServerStatus, 60000); // 60秒ごと
         });
     </script>
 </body>
