@@ -2,27 +2,27 @@
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
-    --primary-color: #6C63FF;
-    --secondary-color: #48D1CC;
-    --accent-color: #FFD05A;
-    --dark-bg: #181A21;
-    --medium-dark-bg: #20232F;
-    --light-bg: #2A2E40;
-    --text-color: #EAEAEA;
-    --text-muted: #B0B5C8;
-    --border-color: #353A4E;
-    --glass-bg: rgba(30, 32, 41, 0.8);
-    --font-primary: 'Poppins', 'Noto Sans JP', sans-serif;
-    --font-secondary: 'Noto Sans JP', sans-serif;
-    --shadow-soft: 0 7px 22px rgba(0,0,0,0.2);
-    --shadow-medium: 0 12px 38px rgba(0,0,0,0.25);
-    --shadow-strong: 0 18px 55px rgba(0,0,0,0.3);
-    --border-radius-sm: 8px;
-    --border-radius-md: 16px;
-    --border-radius-lg: 24px;
-    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-slow: 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    --primary-color: #6C63FF;  /* メインのアクセントカラー (パープルブルー) */
+    --secondary-color: #48D1CC; /* サブのアクセントカラー (ターコイズ) */
+    --accent-color: #FFD05A;   /* 強調したい部分のアクセント (イエロー) */
+    --dark-bg: #181A21;        /* サイト全体の基本背景色 (ダーク) */
+    --medium-dark-bg: #20232F; /* カードやセクションの背景色 */
+    --light-bg: #2A2E40;       /* ホバー時や少し明るい要素の背景 */
+    --text-color: #EAEAEA;     /* 基本的なテキストの色 (明るい) */
+    --text-muted: #B0B5C8;   /* やや抑えめのテキストの色 */
+    --border-color: #353A4E;   /* 枠線の色 */
+    --glass-bg: rgba(30, 32, 41, 0.8); /* ヘッダーなどの半透明背景 */
+    --font-primary: 'Poppins', 'Noto Sans JP', sans-serif; /* プライマリフォント */
+    --font-secondary: 'Noto Sans JP', sans-serif;    /* セカンダリフォント */
+    --shadow-soft: 0 7px 22px rgba(0,0,0,0.2);     /* ソフトな影 */
+    --shadow-medium: 0 12px 38px rgba(0,0,0,0.25);  /* 通常の影 */
+    --shadow-strong: 0 18px 55px rgba(0,0,0,0.3);   /* 強い影 */
+    --border-radius-sm: 8px;   /* 小さな角丸 */
+    --border-radius-md: 16px;  /* 通常の角丸 */
+    --border-radius-lg: 24px;  /* 大きな角丸 */
+    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);   /* 速いトランジション */
+    --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* 通常のトランジション */
+    --transition-slow: 0.7s cubic-bezier(0.4, 0, 0.2, 1);   /* 遅いトランジション */
 
     --rgb-primary-color: 108, 99, 255;
     --rgb-secondary-color: 72, 209, 204;
@@ -35,29 +35,26 @@ body {
     font-family: var(--font-primary); background-color: var(--dark-bg); color: var(--text-color);
     line-height: 1.75; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
     overflow-x: hidden; position: relative;
-    opacity: 1 !important; /* 表示問題デバッグ用 */
-    visibility: visible !important; /* 表示問題デバッグ用 */
+    /* デバッグ用 強制表示スタイルは削除 */
 }
 body.no-scroll { overflow-y: hidden; }
 
-main {
-    display: block !important;
-    opacity: 1 !important;
-    visibility: visible !important;
+main { /* main要素の表示をデフォルトに戻す */
+    display: block;
 }
-
 
 .container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 img { max-width: 100%; height: auto; display: block; }
 a { text-decoration: none; color: var(--secondary-color); transition: color var(--transition-fast), opacity var(--transition-fast); }
 a:hover { color: var(--accent-color); opacity: 0.9; }
 
+/* 基本テキストスタイル */
 h1, h2, h3, h4, h5, h6, p, span, li, code, .subtitle, .section-subtitle, .small-text, label, input, button, a,
 .page-main-title, .page-intro, .section-heading-styled, .rules-category-title, .section-description, .page-closing,
 .section-title-compact {
     color: var(--text-color);
-    opacity: 1;
-    visibility: visible;
+    opacity: 1; /* デフォルトで表示 */
+    visibility: visible; /* デフォルトで表示 */
 }
 h1 { color: #FFF; }
 h2, .section-title { color: var(--text-color); }
@@ -71,24 +68,23 @@ h1 { font-size: clamp(2.4em, 6vw, 4.2em); letter-spacing: -0.02em; font-weight: 
 h3 { font-size: clamp(1.2em, 3vw, 1.6em); font-weight: 600; }
 h4 { font-size: clamp(1.05em, 2.6vw, 1.2em); font-weight: 500; }
 
-/* --- アニメーションクラス (初期状態をJSで制御するため、CSSでの初期非表示は緩める) --- */
+/* --- アニメーションクラス --- */
 .animate-on-scroll, .animate-on-load {
-    opacity: 0; /* 初期は透明のまま、JSで is-visible 付与を待つ */
-    visibility: hidden; /* JSで is-visible 付与を待つ */
+    opacity: 0; /* 初期状態は透明 */
+    visibility: hidden; /* 初期状態は隠す */
     transition-property: opacity, transform, visibility;
-    transition-duration: var(--transition-normal);
-    transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    transition-duration: var(--transition-slow); /* 少しゆっくりしたアニメーション */
+    transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); /* easeInOutQuad */
 }
 .animate-on-scroll.is-visible, .animate-on-load.is-visible {
     opacity: 1 !important;
     transform: none !important;
     visibility: visible !important;
 }
-/* 各アニメーションの初期transform */
-.fadeInUpCustom { transform: translateY(45px); }
-.fadeInRightCustom { transform: translateX(55px); }
-.fadeInLeftCustom { transform: translateX(-55px); }
-.zoomInCustom { transform: scale(0.88); }
+.fadeInUpCustom { transform: translateY(50px); } /* 少し大きめの移動 */
+.fadeInRightCustom { transform: translateX(60px); }
+.fadeInLeftCustom { transform: translateX(-60px); }
+.zoomInCustom { transform: scale(0.85); }
 .popIn { /* status.htmlのプレイヤーアバター用 */
     opacity: 0;
     transform: scale(0.5) translateY(10px);
@@ -96,9 +92,8 @@ h4 { font-size: clamp(1.05em, 2.6vw, 1.2em); font-weight: 500; }
 .popIn.is-visible {
     opacity: 1;
     transform: scale(1) translateY(0);
-    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+    transition: opacity 0.35s ease-out, transform 0.35s ease-out;
 }
-
 .bounceInCustom { transform: scale(0.5); }
 @keyframes bounceInAnimation {
   0% { opacity: 0; transform: scale3d(.3, .3, .3); visibility: hidden;}
@@ -120,8 +115,8 @@ header {
     transition: background-color var(--transition-normal), box-shadow var(--transition-normal), padding var(--transition-normal);
 }
 header.scrolled {
-    background-color: var(--glass-bg); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-    box-shadow: 0 5px 25px rgba(0,0,0,0.3); padding: 10px 0;
+    background-color: var(--glass-bg); backdrop-filter: blur(18px); -webkit-backdrop-filter: blur(18px);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.3); padding: 10px 0;
 }
 header .container { display: flex; justify-content: space-between; align-items: center; }
 #logo-img { height: 38px; transition: transform var(--transition-fast), filter var(--transition-fast); filter: drop-shadow(0 3px 7px rgba(0,0,0,0.4)); }
@@ -129,36 +124,39 @@ header .container { display: flex; justify-content: space-between; align-items: 
 header.scrolled #logo-img { filter: none; }
 
 .main-nav ul { list-style: none; display: flex; align-items: center; margin:0; padding:0; }
-.main-nav ul li { margin-left: 28px; }
-.main-nav ul li a.nav-link { /* .nav-link-item から .nav-link に変更 */
-    color: #FFF; font-weight: 500; font-size: 0.95rem; padding: 12px 8px;
+.main-nav ul li { margin-left: 25px; } /* PCナビリンクの間隔 */
+.main-nav ul li a.nav-link {
+    color: #FFF; font-weight: 500; font-size: 0.95rem; padding: 12px 10px; /* パディング調整 */
     position: relative; letter-spacing: 0.7px;
     text-shadow: 0 1px 6px rgba(0,0,0,0.5);
     transition: color var(--transition-fast), text-shadow var(--transition-fast), opacity var(--transition-fast);
-    opacity: 0.9;
+    opacity: 0.95;
 }
-.main-nav ul li a.nav-link:hover, .main-nav ul li a.nav-link.active { opacity: 1; }
+.main-nav ul li a.nav-link:hover, .main-nav ul li a.nav-link.active { opacity: 1; color: var(--accent-color); }
 header.scrolled .main-nav ul li a.nav-link { color: var(--text-color); text-shadow: none; opacity: 0.9; }
 header.scrolled .main-nav ul li a.nav-link:hover, header.scrolled .main-nav ul li a.nav-link.active { color: var(--accent-color); opacity: 1;}
-.main-nav ul li a.nav-link::after {
-    content: ''; position: absolute; bottom: 4px;
-    left: 50%; transform: translateX(-50%);
-    width: 0; height: 2.5px; background-color: var(--accent-color);
-    border-radius: 1.5px; transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+.main-nav ul li a.nav-link::after { /* 下線アニメーション */
+    content: ''; position: absolute; bottom: 2px;
+    left: 50%; transform: translateX(-50%) scaleX(0);
+    width: 70%; height: 2.5px; background-color: var(--accent-color);
+    border-radius: 1.5px;
+    transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+    transform-origin: center;
 }
-.main-nav ul li a.nav-link:hover::after, .main-nav ul li a.nav-link.active::after { width: 70%; }
-.main-nav ul li a.nav-link.active { color: var(--accent-color); font-weight: 600; }
+.main-nav ul li a.nav-link:hover::after, .main-nav ul li a.nav-link.active::after { transform: translateX(-50%) scaleX(1); }
+.main-nav ul li a.nav-link.active { font-weight: 600; } /* アクティブ時の太字 */
 header.scrolled .main-nav ul li a.nav-link.active { color: var(--accent-color); }
 
+/* ナビゲーションのDiscordリンク */
 .nav-discord-link {
     display: inline-flex; align-items: center;
-    padding: 8px 15px !important;
-    background-color: rgba(var(--rgb-primary-color), 0.1);
-    border: 1px solid rgba(var(--rgb-primary-color), 0.4);
+    padding: 7px 14px !important; /* 通常リンクより少しコンパクトに */
+    background-color: transparent;
+    border: 1.5px solid rgba(255,255,255,0.6); /* 初期は白い枠線 */
     border-radius: var(--border-radius-md);
-    color: var(--primary-color) !important;
+    color: #FFF !important; /* 初期は白い文字 */
     text-shadow: none !important; opacity: 1 !important;
-    font-weight: 600;
+    font-weight: 500; /* 通常リンクと合わせる */
     transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
 }
 .nav-discord-link:hover {
@@ -168,10 +166,9 @@ header.scrolled .main-nav ul li a.nav-link.active { color: var(--accent-color); 
     box-shadow: 0 0 18px rgba(var(--rgb-primary-color), 0.5);
     transform: scale(1.05);
 }
-.nav-discord-link i { margin-right: 8px; font-size: 1.1em; }
+.nav-discord-link i { margin-right: 7px; font-size: 1em; }
 header.scrolled .nav-discord-link {
-    background-color: rgba(var(--rgb-primary-color), 0.15);
-    border-color: rgba(var(--rgb-primary-color), 0.5);
+    border-color: rgba(var(--rgb-primary-color), 0.7);
     color: var(--primary-color) !important;
 }
 header.scrolled .nav-discord-link:hover {
@@ -216,7 +213,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .btn-primary:hover { transform: translateY(-3px) scale(1.035); box-shadow: var(--shadow-strong); }
 .btn-secondary { background-color: var(--medium-dark-bg); color: var(--secondary-color); border: 2px solid var(--secondary-color); }
 .btn-secondary:hover { background-color: var(--secondary-color); color: var(--dark-bg); transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(var(--rgb-secondary-color), 0.35); }
-.hero-buttons .btn-discord {
+.hero-buttons .btn-discord { /* ヒーローセクションのDiscordボタン */
     background-color: #5865F2; color: #fff; border: 2px solid transparent;
 }
 .hero-buttons .btn-discord:hover { background-color: #FFF; color: #5865F2; border-color: #5865F2; transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.35); }
@@ -383,12 +380,12 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 
 
 /* --- WebMap Promo (index.html) --- */
-#webmap-promo .container { /* .container に text-align:center を適用 */
+#webmap-promo .container {
     text-align: center;
 }
 #webmap-promo .btn {
     margin-top: 20px;
-    display: inline-block; /* text-align:center を有効にするため */
+    display: inline-block;
 }
 
 /* --- Footer --- */
@@ -662,20 +659,22 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     color: var(--text-muted);
     margin-bottom: 10px;
     display: flex;
-    /* align-items: center; は削除して左揃えに */
-    align-items: flex-start; /* アイコンとテキストの上端を揃える */
+    align-items: center; /* アイコンとテキストを垂直中央揃え */
+    /* justify-content: space-between; は削除して左寄せベースに */
 }
 .tier-duration-info p:last-child { margin-bottom: 0; }
-.tier-duration-info p .fas, .tier-duration-info p .fab {
+.tier-duration-info p > i:first-child { /* サーバーアイコン or グローバルアイコン */
     width: 22px;
-    text-align: left; /* 左揃え */
-    margin-right: 8px; /* テキストとの間隔調整 */
+    text-align: left; /* 左寄せ */
+    margin-right: 8px;
     font-size: 1.1em;
-    padding-top: 2px; /* テキストとの垂直位置調整 */
 }
+.tier-duration-info p > span:first-of-type { /* 「すてら鯖内限定特典:」や「通常特典:」のテキスト */
+    margin-right: auto; /* これで右側の期間情報を右端にプッシュ */
+}
+
 .tier-duration-info .server-icon { color: var(--primary-color); }
 .tier-duration-info .global-icon { color: var(--secondary-color); }
-.tier-duration-info .duration-spacer { display: none; } /* 不要なので削除 */
 .tier-duration-info .duration {
     display: inline-flex;
     align-items: center;
@@ -701,8 +700,10 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 }
 
 .br-sp { display: none; }
-@media (max-width: 576px) {
+.br-pc { display: block; } /* PC用改行クラス */
+@media (max-width: 768px) { /* スマホではPC用改行を消し、SP用を表示 */
     .br-sp { display: block; }
+    .br-pc { display: none; }
 }
 
 
@@ -720,34 +721,43 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 
 @media (max-width: 768px) {
     .main-nav {
-        position: fixed; top: 0; left: -100%; width: 100%; max-width: 300px; height: 100vh;
-        background-color: var(--dark-bg); padding-top: 75px; box-shadow: 8px 0 25px rgba(0,0,0,0.3);
-        transition: left var(--transition-normal); z-index: 1001; overflow-y: auto;
-        display: flex; flex-direction: column;
+        position: fixed; top: 0; left: -100%; width: 100%; max-width: 280px; /* 幅調整 */
+        height: 100vh; background-color: var(--dark-bg); padding-top: 70px; /* padding調整 */
+        box-shadow: 6px 0 22px rgba(0,0,0,0.3); transition: left var(--transition-normal);
+        z-index: 1001; overflow-y: auto; display: flex; flex-direction: column;
     }
     .main-nav.active { left: 0; }
     .main-nav ul li { margin-left: 0; width: 100%;}
     .main-nav ul li a.nav-link {
-        padding: 15px 30px; font-size: 1.05rem; display:block;
+        padding: 14px 25px; font-size: 1rem; display:block; /* padding, font-size調整 */
         border-bottom: 1px solid var(--border-color); color: var(--text-color);
         text-shadow: none; opacity: 1;
     }
-    .main-nav ul li:last-child > a.nav-link { border-bottom: none; }
-    .main-nav ul li:has(+ li > a.nav-discord-link) > a.nav-link { border-bottom: 1px solid var(--border-color); }
+    /* 最後のliのaの下線を消す */
+    .main-nav ul li:last-child > a.nav-link {
+        border-bottom: none;
+    }
+    /* Discordリンクが最後でなく、その前が通常リンクの場合、通常リンクの下線は維持 */
+     .main-nav ul li:has(+ li > a.nav-discord-link) > a.nav-link {
+         border-bottom: 1px solid var(--border-color);
+    }
+
     .main-nav ul li a.nav-link.active { color: var(--accent-color); background-color: var(--medium-dark-bg); }
     .main-nav ul li a.nav-link:hover { background-color: var(--medium-dark-bg); color: var(--accent-color); }
     .main-nav ul li a.nav-link::after { display: none; }
 
-    .main-nav ul li a.nav-discord-link { /* スマホメニュー内Discordリンク */
+    .main-nav ul li a.nav-discord-link {
         display: flex !important; align-items: center;
-        padding: 15px 30px !important; background-color: transparent !important;
+        padding: 14px 25px !important; background-color: transparent !important;
         border: none !important; color: var(--text-color) !important;
-        font-weight: 500 !important; font-size: 1.05rem !important;
+        font-weight: 500 !important; font-size: 1rem !important;
         text-shadow: none !important;
-        border-bottom: 1px solid var(--border-color); /* 他の項目と合わせる */
+        /* Discordリンクも最後の項目でなければ下線をつける */
+        border-bottom: 1px solid var(--border-color);
         opacity: 1 !important; text-align: left;
     }
     .main-nav ul li:last-child > a.nav-discord-link { border-bottom: none; }
+
     .main-nav ul li a.nav-discord-link:hover { background-color: var(--medium-dark-bg) !important; color: var(--accent-color) !important; }
     .main-nav ul li a.nav-discord-link i { color: var(--primary-color); transition: color var(--transition-fast); }
     .main-nav ul li a.nav-discord-link:hover i { color: var(--accent-color); }
@@ -777,10 +787,10 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     .tier-name-price h3 { font-size: 1.5em;}
     .tier-name-price .tier-price { font-size: 0.85em; padding: 3px 8px;}
     .tier-duration-info p {
-        flex-direction: column; /* スマホでは期間情報を縦積みに変更 */
+        flex-direction: column; /* スマホでは期間情報も縦積みに変更 */
         align-items: flex-start;
-        gap: 3px; /* 項目間の隙間 */
-        margin-bottom: 12px; /* 各p要素の下マージン */
+        gap: 5px;
+        margin-bottom: 12px;
     }
     .tier-duration-info p:last-child { margin-bottom: 0; }
     .tier-duration-info .duration { margin-left: 0; }
@@ -796,9 +806,9 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     .btn { padding: 12px 22px; font-size: 0.9rem; }
     .hero-buttons .btn { width: 90%; max-width: 270px; }
 
-    .main-nav { max-width: 260px; padding-top: 65px;}
-    .main-nav ul li a.nav-link { padding: 14px 25px; font-size: 1rem; }
-    .main-nav ul li a.nav-discord-link { padding: 14px 25px !important; font-size: 1rem !important;}
+    .main-nav { max-width: 240px; padding-top: 60px;}
+    .main-nav ul li a.nav-link { padding: 12px 20px; font-size: 0.95rem; }
+    .main-nav ul li a.nav-discord-link { padding: 12px 20px !important; font-size: 0.95rem !important;}
 
     .feature-card p { font-size: 0.88rem; }
 
