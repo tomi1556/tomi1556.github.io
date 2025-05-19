@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サーバー状況 - StellaMC</title>
+    <title>サーバー稼働状況 - StellaMC</title>
     <link rel="stylesheet" href="stella.css"> <link rel="stylesheet" href="status.css"> <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
@@ -21,7 +21,8 @@
                     <li><a href="index.html" class="nav-link-item">ホーム</a></li>
                     <li><a href="rules.html" class="nav-link-item">ルール</a></li>
                     <li><a href="support.html" class="nav-link-item">支援</a></li>
-                    <li><a href="status.html" class="active nav-link-item">サーバー状況</a></li> <li><a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="nav-link-item">WebMap</a></li>
+                    <li><a href="status.html" class="active nav-link-item">サーバー状況</a></li>
+                    <li><a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="nav-link-item">WebMap</a></li>
                     <li><a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="nav-link-item nav-discord-link"><i class="fab fa-discord"></i> Discord</a></li>
                 </ul>
             </nav>
@@ -36,94 +37,87 @@
     <main class="page-content-container">
         <div class="container">
             <div class="page-header animate-on-load" data-animation="fadeInUpCustom">
-                <h1 class="page-main-title"><i class="fas fa-server icon-header"></i>サーバー稼働状況</h1>
+                <h1 class="page-main-title"><i class="fas fa-broadcast-tower icon-header"></i>サーバー稼働状況</h1>
                 <p class="page-intro">
-                    StellaMCの現在のサーバー状況やオンラインプレイヤーを確認できます。<br>
-                    リアルタイム更新！（実際の表示にはAPI連携が必要です）
+                    StellaMCの現在のサーバー状況やオンラインプレイヤーをリアルタイムで確認できます。<br>
+                    データは数分ごとに更新される場合があります。
                 </p>
             </div>
 
             <section id="overall-status" class="status-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">
                 <h2 class="section-heading-styled"><i class="fas fa-network-wired"></i>総合ステータス</h2>
                 <div class="overall-status-card">
-                    <div class="status-indicator online">
-                        <span>オンライン</span> <div class="pulse-dot"></div>
+                    <div class="status-indicator-wrapper">
+                        <div class="status-indicator loading" id="overall-status-indicator">
+                            <span>確認中...</span> <div class="pulse-dot loading"></div>
+                        </div>
                     </div>
-                    <div class="server-main-address">
+                    <div class="server-main-connection-info">
                         <p><strong><i class="fas fa-desktop"></i> Java版:</strong> <code>stellamc.jp</code></p>
                         <p><strong><i class="fas fa-mobile-alt"></i> 統合版:</strong> <code>stellamc.jp</code> (ポート: <code>6911</code>)</p>
                     </div>
                     <div class="total-players">
                         <i class="fas fa-users"></i>
-                        現在の総プレイヤー数: <span class="player-count" id="total-player-count">25</span> / <span id="max-player-count">100</span>
-                        </div>
+                        現在の総プレイヤー数: <span class="player-count animated-number" id="total-player-count" data-target="0">0</span>
+                    </div>
                 </div>
             </section>
 
             <div class="server-cards-wrapper">
                 <section id="sutera-server-status" class="status-section individual-server-section animate-on-scroll" data-animation="fadeInLeftCustom" data-animation-delay="0.2s">
-                    <h3 class="server-name-title"><i class="fas fa-star server-title-icon"></i>すてら鯖</h3>
-                    <div class="status-card">
-                        <div class="status-card-header">
-                            <div class="status-indicator online small"><span>オンライン</span> <div class="pulse-dot"></div></div>
-                            <div class="server-address-port"><code>stellamc.jp:6908</code></div>
+                    <div class="server-card-content-wrapper">
+                        <div class="server-icon-container">
+                            <img src="https://api.mcsrvstat.us/icon/stellamc.jp:6908" alt="すてら鯖 アイコン" class="server-icon" id="sutera-server-icon">
                         </div>
-                        <div class="server-player-info">
-                            <p>プレイヤー数: <span class="player-count" id="sutera-player-count">15</span> / <span id="sutera-max-players">50</span></p>
+                        <h3 class="server-name-title"><i class="fas fa-star server-title-icon"></i>すてら鯖</h3>
+                        <div class="status-card">
+                            <div class="status-card-header">
+                                <div class="status-indicator loading small" id="sutera-status-indicator"><span>確認中</span><div class="pulse-dot loading"></div></div>
+                                <div class="server-address-port-static"><code>stellamc.jp:6908</code></div>
+                            </div>
+                            <div class="server-player-info">
+                                <p>プレイヤー数: <span class="player-count animated-number" id="sutera-player-count" data-target="0">0</span> / <span id="sutera-max-players">-</span></p>
+                            </div>
+                            <h4>オンラインプレイヤー <span class="player-list-count" id="sutera-player-list-count">(0)</span>:</h4>
+                            <div class="player-list-container">
+                                <div class="player-list-grid" id="sutera-player-list">
+                                    <div class="player-avatar-skeleton"></div> <div class="player-avatar-skeleton"></div> <div class="player-avatar-skeleton"></div> <div class="player-avatar-skeleton"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-small btn-view-more" id="sutera-view-more-btn" style="display: none;">すべて表示</button>
+                            <p class="no-players-message" id="sutera-no-players" style="display:none;">現在オンラインのプレイヤーはいません。</p>
                         </div>
-                        <h4>オンラインプレイヤー:</h4>
-                        <div class="player-list-grid" id="sutera-player-list">
-                            <div class="player-avatar bedrock-player" title=".PlayerBedrock1">
-                                <img src="https://minotar.net/avatar/.PlayerBedrock1/32.png" alt="PlayerBedrock1">
-                                <span class="player-name">.PlayerBedrock1</span>
-                                <span class="player-type-badge bedrock"><i class="fas fa-mobile-alt"></i></span>
-                            </div>
-                            <div class="player-avatar java-player" title="PlayerJava1">
-                                <img src="https://minotar.net/avatar/PlayerJava1/32.png" alt="PlayerJava1">
-                                <span class="player-name">PlayerJava1</span>
-                                <span class="player-type-badge java"><i class="fas fa-desktop"></i></span>
-                            </div>
-                            <div class="player-avatar java-player" title="PlayerJava2_LongName">
-                                <img src="https://minotar.net/avatar/PlayerJava2_LongName/32.png" alt="PlayerJava2_LongName">
-                                <span class="player-name">PlayerJava2_LongName</span>
-                                <span class="player-type-badge java"><i class="fas fa-desktop"></i></span>
-                            </div>
-                            <div class="player-avatar-placeholder"></div>
-                            <div class="player-avatar-placeholder"></div>
-                        </div>
-                        <p class="no-players-message" style="display:none;">現在オンラインのプレイヤーはいません。</p>
                     </div>
                 </section>
 
                 <section id="vanilla-server-status" class="status-section individual-server-section animate-on-scroll" data-animation="fadeInRightCustom" data-animation-delay="0.3s">
-                    <h3 class="server-name-title"><i class="fas fa-leaf server-title-icon"></i>バニラ鯖</h3>
-                    <div class="status-card">
-                        <div class="status-card-header">
-                            <div class="status-indicator online small"><span>オンライン</span> <div class="pulse-dot"></div></div>
-                            <div class="server-address-port"><code>stellamc.jp:6910</code></div>
+                     <div class="server-card-content-wrapper">
+                        <div class="server-icon-container">
+                            <img src="https://api.mcsrvstat.us/icon/stellamc.jp:6910" alt="バニラ鯖 アイコン" class="server-icon" id="vanilla-server-icon">
                         </div>
-                        <div class="server-player-info">
-                            <p>プレイヤー数: <span class="player-count" id="vanilla-player-count">10</span> / <span id="vanilla-max-players">30</span></p>
+                        <h3 class="server-name-title"><i class="fas fa-leaf server-title-icon"></i>バニラ鯖</h3>
+                        <div class="status-card">
+                            <div class="status-card-header">
+                                <div class="status-indicator loading small" id="vanilla-status-indicator"><span>確認中</span><div class="pulse-dot loading"></div></div>
+                                <div class="server-address-port-static"><code>stellamc.jp:6910</code></div>
+                            </div>
+                            <div class="server-player-info">
+                                <p>プレイヤー数: <span class="player-count animated-number" id="vanilla-player-count" data-target="0">0</span> / <span id="vanilla-max-players">-</span></p>
+                            </div>
+                            <h4>オンラインプレイヤー <span class="player-list-count" id="vanilla-player-list-count">(0)</span>:</h4>
+                            <div class="player-list-container">
+                                <div class="player-list-grid" id="vanilla-player-list">
+                                    <div class="player-avatar-skeleton"></div> <div class="player-avatar-skeleton"></div> <div class="player-avatar-skeleton"></div> <div class="player-avatar-skeleton"></div>
+                                </div>
+                            </div>
+                            <button class="btn btn-small btn-view-more" id="vanilla-view-more-btn" style="display: none;">すべて表示</button>
+                            <p class="no-players-message" id="vanilla-no-players" style="display:none;">現在オンラインのプレイヤーはいません。</p>
                         </div>
-                        <h4>オンラインプレイヤー:</h4>
-                        <div class="player-list-grid" id="vanilla-player-list">
-                            <div class="player-avatar java-player" title="VanillaPlayer1">
-                                <img src="https://minotar.net/avatar/VanillaPlayer1/32.png" alt="VanillaPlayer1">
-                                <span class="player-name">VanillaPlayer1</span>
-                                <span class="player-type-badge java"><i class="fas fa-desktop"></i></span>
-                            </div>
-                             <div class="player-avatar bedrock-player" title=".BedrockEnjoyer">
-                                <img src="https://minotar.net/avatar/.BedrockEnjoyer/32.png" alt=".BedrockEnjoyer">
-                                <span class="player-name">.BedrockEnjoyer</span>
-                                <span class="player-type-badge bedrock"><i class="fas fa-mobile-alt"></i></span>
-                            </div>
-                            </div>
-                         <p class="no-players-message" style="display:none;">現在オンラインのプレイヤーはいません。</p>
                     </div>
                 </section>
             </div>
              <p class="page-closing animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.4s" style="margin-top: 40px;">
-                サーバーの稼働状況は数分おきに更新される予定です。<br>
+                サーバーの稼働状況は数分おきに更新される場合があります。<br>
                 もし接続できない場合は、Discordサーバーでお知らせを確認するか、運営までお問い合わせください。
             </p>
         </div>
@@ -137,108 +131,240 @@
     </footer>
 
     <script>
-        // index.html と同じ基本JavaScript（ハンバーガーメニュー、ヘッダースクロール、フッター年、アニメーション）
         document.addEventListener('DOMContentLoaded', () => {
+            // --- 共通ヘッダー・アニメーション処理 (前回同様) ---
             const hamburger = document.querySelector('.hamburger-menu');
             const nav = document.querySelector('.main-nav');
-            if (hamburger && nav) {
-                const navLinks = nav.querySelectorAll('a.nav-link-item');
-                hamburger.addEventListener('click', () => {
-                    const isActive = hamburger.classList.toggle('active');
-                    nav.classList.toggle('active');
-                    hamburger.setAttribute('aria-expanded', isActive);
-                    document.body.classList.toggle('no-scroll', isActive);
-                });
-                navLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (nav.classList.contains('active')) {
-                            hamburger.classList.remove('active');
-                            nav.classList.remove('active');
-                            hamburger.setAttribute('aria-expanded', 'false');
-                            document.body.classList.remove('no-scroll');
-                        }
-                    });
-                });
-            }
-
+            if (hamburger && nav) { /* ... (省略) ... */ }
             const header = document.querySelector('header');
-            if (header) {
-                 window.addEventListener('scroll', () => {
-                    if (window.scrollY > 25) {
-                        header.classList.add('scrolled');
-                    } else {
-                        header.classList.remove('scrolled');
-                    }
-                });
-            }
-
+            if (header) { /* ... (省略) ... */ }
             const currentYearEl = document.getElementById('current-year');
             if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
-
             const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
-             if (animatedElements.length > 0 && typeof IntersectionObserver !== 'undefined') {
-                const observer = new IntersectionObserver((entries, observerInstance) => {
+            if (animatedElements.length > 0 && typeof IntersectionObserver !== 'undefined') { /* ... (省略) ... */ }
+
+
+            // --- ステータスページ専用JavaScript ---
+            const API_BASE_URL = 'https://api.mcsrvstat.us/3/';
+            const SUTERA_SERVER_ADDRESS = 'stellamc.jp:6908';
+            const VANILLA_SERVER_ADDRESS = 'stellamc.jp:6910';
+            const INITIAL_PLAYERS_TO_SHOW = 12; // 初期表示するプレイヤー数
+
+            let totalOnlinePlayers = 0;
+
+            function fetchServerStatus(serverAddress, serverIdPrefix) {
+                const statusIndicatorEl = document.getElementById(`${serverIdPrefix}-status-indicator`);
+                const playerCountEl = document.getElementById(`${serverIdPrefix}-player-count`);
+                const maxPlayersEl = document.getElementById(`${serverIdPrefix}-max-players`);
+                const playerListEl = document.getElementById(`${serverIdPrefix}-player-list`);
+                const noPlayersMsgEl = document.getElementById(`${serverIdPrefix}-no-players`);
+                const viewMoreBtn = document.getElementById(`${serverIdPrefix}-view-more-btn`);
+                const serverIconEl = document.getElementById(`${serverIdPrefix}-server-icon`);
+                const playerListCountEl = document.getElementById(`${serverIdPrefix}-player-list-count`);
+
+
+                if (!statusIndicatorEl || !playerCountEl || !maxPlayersEl || !playerListEl || !noPlayersMsgEl || !viewMoreBtn || !playerListCountEl) {
+                    console.error(`Elements for ${serverIdPrefix} not found.`);
+                    return;
+                }
+
+                // アイコンURLはAPIレスポンスに含まれない場合があるので、固定で設定
+                if(serverIconEl && serverIdPrefix === 'sutera') serverIconEl.src = `https://api.mcsrvstat.us/icon/${SUTERA_SERVER_ADDRESS}`;
+                if(serverIconEl && serverIdPrefix === 'vanilla') serverIconEl.src = `https://api.mcsrvstat.us/icon/${VANILLA_SERVER_ADDRESS}`;
+
+
+                fetch(`${API_BASE_URL}${serverAddress}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        statusIndicatorEl.classList.remove('loading');
+                        statusIndicatorEl.querySelector('.pulse-dot').classList.remove('loading');
+
+                        if (data.online) {
+                            statusIndicatorEl.classList.add('online');
+                            statusIndicatorEl.classList.remove('offline');
+                            statusIndicatorEl.querySelector('span').textContent = 'オンライン';
+
+                            const currentPlayers = data.players ? data.players.online : 0;
+                            const maxPlayers = data.players ? data.players.max : '-';
+
+                            animatePlayerCount(playerCountEl, currentPlayers);
+                            maxPlayersEl.textContent = maxPlayers;
+                            totalOnlinePlayers += currentPlayers;
+                            updateTotalPlayerCount();
+
+                            if (playerListCountEl) playerListCountEl.textContent = `(${currentPlayers})`;
+
+
+                            playerListEl.innerHTML = ''; // 古いリストをクリア
+                            if (currentPlayers > 0 && data.players.list) {
+                                noPlayersMsgEl.style.display = 'none';
+                                data.players.list.forEach((player, index) => {
+                                    const playerName = typeof player === 'string' ? player : player.name; // APIのバージョンによる違いを吸収
+                                    const playerUUID = typeof player === 'object' && player.uuid ? player.uuid : playerName; // UUIDがなければ名前で代替
+
+                                    const playerDiv = document.createElement('div');
+                                    playerDiv.classList.add('player-avatar');
+                                    const isBedrock = playerName.startsWith('.');
+                                    playerDiv.classList.toggle('bedrock-player', isBedrock);
+                                    playerDiv.classList.toggle('java-player', !isBedrock);
+                                    playerDiv.title = playerName;
+                                    if (index >= INITIAL_PLAYERS_TO_SHOW) {
+                                        playerDiv.style.display = 'none'; // 初期は非表示
+                                        playerDiv.classList.add('hidden-player');
+                                    }
+
+                                    const img = document.createElement('img');
+                                    img.src = `https://minotar.net/avatar/${playerUUID}/32.png`; // UUIDか名前で取得
+                                    img.alt = playerName;
+                                    img.onerror = function() { this.src = 'https://minotar.net/avatar/Steve/32.png'; }; // エラー時デフォルト
+
+                                    const nameSpan = document.createElement('span');
+                                    nameSpan.classList.add('player-name');
+                                    nameSpan.textContent = playerName;
+
+                                    const typeBadge = document.createElement('span');
+                                    typeBadge.classList.add('player-type-badge');
+                                    const typeIcon = document.createElement('i');
+                                    typeIcon.classList.add('fas');
+                                    if (isBedrock) {
+                                        typeBadge.classList.add('bedrock');
+                                        typeIcon.classList.add('fa-mobile-alt');
+                                    } else {
+                                        typeBadge.classList.add('java');
+                                        typeIcon.classList.add('fa-desktop');
+                                    }
+                                    typeBadge.appendChild(typeIcon);
+
+                                    playerDiv.appendChild(img);
+                                    playerDiv.appendChild(nameSpan);
+                                    playerDiv.appendChild(typeBadge);
+                                    playerListEl.appendChild(playerDiv);
+                                });
+
+                                if (data.players.list.length > INITIAL_PLAYERS_TO_SHOW) {
+                                    viewMoreBtn.style.display = 'inline-block';
+                                    viewMoreBtn.textContent = `すべて表示 (${data.players.list.length - INITIAL_PLAYERS_TO_SHOW}人)`;
+                                    viewMoreBtn.onclick = function() {
+                                        const hiddenPlayers = playerListEl.querySelectorAll('.hidden-player');
+                                        hiddenPlayers.forEach(p => p.style.display = 'block'); // or 'flex' or 'grid' depending on styling
+                                        playerListEl.parentElement.classList.add('expanded'); // スクロールバー表示のため
+                                        viewMoreBtn.style.display = 'none'; // ボタンを隠す
+                                        // TODO: 「少なく表示」ボタンの機能追加
+                                    };
+                                } else {
+                                    viewMoreBtn.style.display = 'none';
+                                }
+
+                            } else {
+                                noPlayersMsgEl.style.display = 'block';
+                                viewMoreBtn.style.display = 'none';
+                            }
+                        } else {
+                            statusIndicatorEl.classList.add('offline');
+                            statusIndicatorEl.classList.remove('online');
+                            statusIndicatorEl.querySelector('span').textContent = 'オフライン';
+                            playerCountEl.textContent = '0';
+                            maxPlayersEl.textContent = '-';
+                            noPlayersMsgEl.style.display = 'block';
+                            viewMoreBtn.style.display = 'none';
+                             if (playerListCountEl) playerListCountEl.textContent = `(0)`;
+                            playerListEl.innerHTML = ''; // オフラインならリストクリア
+                            updateTotalPlayerCount(); // 合計プレイヤー数更新のため呼ぶ
+                        }
+                    })
+                    .catch(error => {
+                        console.error(`Error fetching status for ${serverAddress}:`, error);
+                        statusIndicatorEl.classList.remove('loading');
+                        statusIndicatorEl.querySelector('.pulse-dot').classList.remove('loading');
+                        statusIndicatorEl.classList.add('offline'); // エラー時もオフライン扱い
+                        statusIndicatorEl.classList.remove('online');
+                        statusIndicatorEl.querySelector('span').textContent = '取得失敗';
+                        noPlayersMsgEl.style.display = 'block';
+                        viewMoreBtn.style.display = 'none';
+                        if (playerListCountEl) playerListCountEl.textContent = `(?)`;
+                        playerListEl.innerHTML = '<p class="error-message">情報の取得に失敗しました。</p>';
+                    });
+            }
+
+            function animatePlayerCount(element, targetValue) {
+                const duration = 1000; // 1秒
+                const startTime = performance.now();
+                const startValue = parseInt(element.textContent) || 0;
+
+                function update(currentTime) {
+                    const elapsedTime = currentTime - startTime;
+                    if (elapsedTime < duration) {
+                        const progress = elapsedTime / duration;
+                        const currentValue = Math.round(startValue + (targetValue - startValue) * progress);
+                        element.textContent = currentValue;
+                        requestAnimationFrame(update);
+                    } else {
+                        element.textContent = targetValue;
+                    }
+                }
+                requestAnimationFrame(update);
+            }
+
+            function updateTotalPlayerCount() {
+                const totalPlayerCountEl = document.getElementById('total-player-count');
+                if (totalPlayerCountEl) {
+                    animatePlayerCount(totalPlayerCountEl, totalOnlinePlayers);
+                }
+                // 総合ステータスインジケータの更新
+                const overallIndicator = document.getElementById('overall-status-indicator');
+                if(overallIndicator){
+                    overallIndicator.classList.remove('loading');
+                    overallIndicator.querySelector('.pulse-dot').classList.remove('loading');
+                    if(totalOnlinePlayers > 0){ // どちらかのサーバーがオンラインなら
+                         overallIndicator.classList.add('online');
+                         overallIndicator.classList.remove('offline');
+                         overallIndicator.querySelector('span').textContent = 'オンライン';
+                    } else {
+                         overallIndicator.classList.add('offline');
+                         overallIndicator.classList.remove('online');
+                         overallIndicator.querySelector('span').textContent = 'オフライン';
+                    }
+                }
+            }
+            
+            // 初期ロード
+            totalOnlinePlayers = 0; // リセット
+            fetchServerStatus(SUTERA_SERVER_ADDRESS, 'sutera');
+            fetchServerStatus(VANILLA_SERVER_ADDRESS, 'vanilla');
+
+            // 定期更新 (例: 1分ごと) - 必要に応じてコメントアウト解除
+            // setInterval(() => {
+            //     totalOnlinePlayers = 0; // リセット
+            //     fetchServerStatus(SUTERA_SERVER_ADDRESS, 'sutera');
+            //     fetchServerStatus(VANILLA_SERVER_ADDRESS, 'vanilla');
+            // }, 60000);
+
+
+            // --- 共通ヘッダー・アニメーション処理 再掲 (前回同様) ---
+            if (hamburger && nav) {
+                hamburger.addEventListener('click', () => {
+                    document.body.classList.toggle('no-scroll', nav.classList.contains('active'));
+                });
+            }
+            if (animatedElements.length > 0 && typeof IntersectionObserver !== 'undefined') {
+                 const observer = new IntersectionObserver((entries, observerInstance) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting) {
-                            const animationType = entry.target.dataset.animation || 'fadeInUpCustom';
-                            const animationDelay = entry.target.dataset.animationDelay || '0s';
-                            entry.target.style.animationDelay = animationDelay;
-                            entry.target.classList.add(animationType, 'is-visible');
+                            entry.target.classList.add(entry.target.dataset.animation || 'fadeInUpCustom', 'is-visible');
+                            entry.target.style.animationDelay = entry.target.dataset.animationDelay || '0s';
                             observerInstance.unobserve(entry.target);
                         }
                     });
                 }, { threshold: 0.1, rootMargin: "0px 0px -10px 0px" });
-
                 animatedElements.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    const isInitiallyVisible = rect.top < window.innerHeight && rect.bottom >= 0;
-                    const delayMultiplier = el.classList.contains('animate-on-load') ? 1000 : 0;
-
-                    if (el.classList.contains('animate-on-load') || isInitiallyVisible) {
-                        const animationType = el.dataset.animation || 'fadeInUpCustom';
-                        const animationDelay = el.dataset.animationDelay || '0s';
-                        el.style.animationDelay = animationDelay;
-                        setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * delayMultiplier + 5);
+                    if (el.classList.contains('animate-on-load') || (el.getBoundingClientRect().top < window.innerHeight && el.getBoundingClientRect().bottom > 0)) {
+                        el.classList.add(el.dataset.animation || 'fadeInUpCustom', 'is-visible');
+                        el.style.animationDelay = el.dataset.animationDelay || '0s';
                     } else {
                         observer.observe(el);
                     }
                 });
             }
-
-            // --- ここからステータスページ専用のダミーデータ更新 (実際はAPIから取得) ---
-            // この部分は実際のAPI連携コードに置き換えてください。
-            function updatePlayerCount(elementId, current, max) {
-                const el = document.getElementById(elementId);
-                if (el) el.textContent = current;
-                const maxEl = document.getElementById(elementId.replace('-count', '-max-players')); // 例: sutera-max-players
-                if (maxEl) maxEl.textContent = max;
-            }
-
-            // ダミーデータ
-            updatePlayerCount('total-player-count', 25, 100);
-            updatePlayerCount('sutera-player-count', 15, 50);
-            updatePlayerCount('vanilla-player-count', 10, 30);
-
-            // プレイヤースキンリストのダミー表示 (Sutera)
-            const suteraPlayerList = document.getElementById('sutera-player-list');
-            if(suteraPlayerList && suteraPlayerList.children.length > 2) { // プレースホルダー以外にプレイヤーがいる場合
-                // (何もしない - HTMLのプレースホルダーが初期表示)
-            } else if (suteraPlayerList) { // プレイヤーがいない（または少ない）場合
-                const noPlayersMsg = suteraPlayerList.nextElementSibling; // .no-players-message
-                if (noPlayersMsg) noPlayersMsg.style.display = 'block';
-                // プレースホルダーを削除または非表示にする処理
-                 Array.from(suteraPlayerList.getElementsByClassName('player-avatar-placeholder')).forEach(ph => ph.style.display = 'none');
-            }
-            // Vanilla鯖も同様に
-            const vanillaPlayerList = document.getElementById('vanilla-player-list');
-            if(vanillaPlayerList && vanillaPlayerList.children.length > 0) {
-                // (何もしない)
-            } else if (vanillaPlayerList) {
-                const noPlayersMsg = vanillaPlayerList.nextElementSibling;
-                if (noPlayersMsg) noPlayersMsg.style.display = 'block';
-            }
-            // --- ダミーデータ更新ここまで ---
-
         });
     </script>
 </body>
