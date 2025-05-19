@@ -135,7 +135,7 @@
 
             <section id="support-preview" class="preview-card">
                 <h2 class="section-title-compact">サーバー支援について</h2>
-                <p>皆様の温かいご支援がサーバー運営と<br>今後の発展への大きな力となります。<br>ご理解とご協力に心より感謝申し上げます。</p>
+                <p>皆様のご支援がサーバー運営と<br>今後の発展への大きな力となります。<br>ご理解とご協力に心より感謝申し上げます。</p>
                 <a href="support.html" class="btn btn-primary">ご支援の詳細について</a>
             </section>
         </div>
@@ -158,15 +158,14 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script>
-        // 共通JavaScript (前回提供のものとほぼ同じ)
         document.addEventListener('DOMContentLoaded', () => {
             const hamburger = document.querySelector('.hamburger-menu');
             const nav = document.querySelector('.main-nav');
             if (hamburger && nav) {
-                const navLinks = nav.querySelectorAll('a.nav-link'); // .nav-link-item から .nav-link に変更
+                const navLinks = nav.querySelectorAll('a.nav-link');
                 hamburger.addEventListener('click', () => {
                     const isActive = hamburger.classList.toggle('active');
-                    nav.classList.toggle('active');
+                    nav.classList.toggle('active'); // JSでactiveクラスをトグル
                     hamburger.setAttribute('aria-expanded', isActive);
                     document.body.classList.toggle('no-scroll', isActive);
                 });
@@ -202,8 +201,8 @@
 
             if (typeof ClipboardJS !== 'undefined') {
                 const clipboard = new ClipboardJS('.copy-action-btn');
-                const toast = document.getElementById('copy-toast'); // index.htmlにこのIDの要素があるか確認
-                if (toast) { // toast要素が存在する場合のみリスナーを設定
+                const toast = document.getElementById('copy-toast');
+                if (toast) {
                     clipboard.on('success', function(e) {
                         toast.textContent = `${e.trigger.ariaLabel.replace('をコピー', '')} をコピー！`;
                         toast.className = 'copy-toast show success';
@@ -235,6 +234,7 @@
                 animatedElements.forEach(el => {
                     const rect = el.getBoundingClientRect();
                     const isInitiallyVisible = el.classList.contains('animate-on-load') || (rect.top < window.innerHeight && rect.bottom >= 0);
+
                     if (isInitiallyVisible) {
                         const animationType = el.dataset.animation || 'fadeInUpCustom';
                         const animationDelay = el.dataset.animationDelay || '0s';
