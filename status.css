@@ -1,0 +1,298 @@
+/* status.css */
+
+/* --- Status Page Specific Styles --- */
+.icon-header {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+.status-section {
+    margin-bottom: 45px;
+    padding: 25px;
+    background-color: var(--medium-dark-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-medium);
+}
+.status-section:last-child {
+    margin-bottom: 0;
+}
+
+.status-section .section-heading-styled { /* 既存のスタイルを流用・調整 */
+    font-size: clamp(1.5em, 3.5vw, 2em); /* 少し小さめに */
+    text-align: left; /* 左寄せ */
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+}
+.status-section .section-heading-styled i {
+    font-size: 0.9em;
+}
+
+.overall-status-card {
+    padding: 25px;
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius-md);
+    border: 1px solid var(--border-color);
+    text-align: center;
+}
+
+.status-indicator {
+    display: inline-flex; /* 横並び */
+    align-items: center;
+    padding: 8px 18px;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow-soft);
+}
+.status-indicator.online {
+    background-color: var(--secondary-color);
+    color: var(--dark-bg);
+}
+.status-indicator.offline {
+    background-color: #E07A5F; /* オフライン時の色 (Nord Orange風) */
+    color: #FFF;
+}
+.status-indicator.small { /* 個別サーバー用 */
+    font-size: 0.9rem;
+    padding: 6px 12px;
+    margin-bottom: 0;
+}
+
+.pulse-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: currentColor; /* 親要素の文字色に合わせる */
+    margin-left: 10px;
+    animation: pulseAnimation 1.5s infinite ease-in-out;
+}
+.status-indicator.online .pulse-dot { background-color: #FFF; /* オンライン時は白 */ }
+.status-indicator.offline .pulse-dot { background-color: #ECEFF4; animation: none; opacity: 0.7;} /* オフライン時は点滅なし */
+
+
+@keyframes pulseAnimation {
+    0% { transform: scale(0.8); opacity: 0.7; }
+    50% { transform: scale(1.2); opacity: 1; }
+    100% { transform: scale(0.8); opacity: 0.7; }
+}
+
+.server-main-address {
+    margin-bottom: 20px;
+}
+.server-main-address p {
+    font-size: 1rem;
+    color: var(--text-muted);
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center; /* 中央揃え */
+}
+.server-main-address p i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+.server-main-address code {
+    font-size: 1.05em;
+    padding: 4px 8px;
+}
+
+.total-players {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--text-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.total-players i {
+    margin-right: 10px;
+    color: var(--accent-color);
+    font-size: 1.3em;
+}
+.player-count {
+    color: var(--secondary-color);
+    font-weight: 700;
+    font-size: 1.1em; /* 少し大きく */
+}
+
+.server-cards-wrapper {
+    display: grid;
+    grid-template-columns: 1fr; /* スマホデフォルト */
+    gap: 30px;
+    margin-top: 30px;
+}
+@media (min-width: 768px) { /* タブレット以上で2カラム */
+    .server-cards-wrapper {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.individual-server-section .section-heading-styled { /* 個別サーバーセクションの見出しは不要なので隠すかスタイル調整 */
+   /* display: none; */ /* もしセクションタイトルが不要なら */
+}
+.server-name-title { /* h3 */
+    font-size: clamp(1.4em, 3.2vw, 1.8em);
+    color: var(--text-color);
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.server-title-icon {
+    margin-right: 10px;
+    font-size: 0.9em;
+    opacity: 0.9;
+}
+#sutera-server-status .server-title-icon { color: var(--primary-color); }
+#vanilla-server-status .server-title-icon { color: var(--secondary-color); }
+
+
+.status-card {
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius-md);
+    padding: 20px;
+    border: 1px solid var(--border-color);
+    min-height: 300px; /* カードの最小高さを設定 */
+    display: flex;
+    flex-direction: column;
+}
+.status-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border-color);
+}
+.server-address-port code {
+    font-size: 0.9rem;
+    background-color: var(--dark-bg);
+}
+.server-player-info {
+    margin-bottom: 15px;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+.status-card h4 { /* オンラインプレイヤー見出し */
+    font-size: 1rem;
+    color: var(--text-color);
+    margin-bottom: 12px;
+    font-weight: 500;
+    border-top: 1px dashed var(--border-color);
+    padding-top: 15px;
+}
+
+.player-list-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); /* スキンサイズに合わせて調整 */
+    gap: 10px;
+    flex-grow: 1; /* 残りのスペースを埋める */
+    align-content: flex-start; /* 上から配置 */
+    max-height: 200px; /* プレイヤーが多い場合にスクロールバーを出すための最大高さ */
+    overflow-y: auto; /* スクロールバー表示 */
+    padding: 5px;
+    background-color: var(--dark-bg); /* スクロールエリアの背景 */
+    border-radius: var(--border-radius-sm);
+}
+/* スクロールバーのスタイル (任意) */
+.player-list-grid::-webkit-scrollbar { width: 8px; }
+.player-list-grid::-webkit-scrollbar-track { background: var(--light-bg); border-radius: 4px; }
+.player-list-grid::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+.player-list-grid::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
+
+
+.player-avatar {
+    width: 48px; /* スキン表示サイズ */
+    height: auto; /* 名前表示のためauto */
+    border-radius: var(--border-radius-sm);
+    overflow: hidden; /* 名前のoverflowのため */
+    position: relative;
+    text-align: center;
+    transition: transform var(--transition-fast);
+}
+.player-avatar:hover {
+    transform: scale(1.1);
+}
+.player-avatar img {
+    width: 100%;
+    height: 48px; /* スキンの縦サイズ固定 */
+    object-fit: contain; /* 顔部分を維持 */
+    display: block;
+    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+}
+.player-avatar .player-name {
+    display: block;
+    font-size: 0.7rem; /* 小さめ */
+    color: var(--text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 3px 2px;
+    background-color: rgba(var(--rgb-dark-bg), 0.7);
+    border-top: 1px solid var(--border-color);
+}
+
+.player-type-badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    font-size: 0.6rem;
+    padding: 1px 3px;
+    border-radius: 3px;
+    color: #FFF;
+    line-height: 1;
+}
+.player-type-badge.java { background-color: var(--primary-color); }
+.player-type-badge.bedrock { background-color: var(--secondary-color); color: var(--dark-bg);}
+.player-type-badge i { font-size: 0.9em; }
+
+/* プレイヤーがいない場合のメッセージ */
+.no-players-message {
+    text-align: center;
+    color: var(--text-muted);
+    font-style: italic;
+    margin-top: 20px;
+    font-size: 0.9rem;
+}
+
+/* スケルトンローディング風プレースホルダー (任意) */
+.player-avatar-placeholder {
+    width: 48px;
+    height: 60px; /* 名前部分も含む高さ */
+    background-color: var(--light-bg);
+    border-radius: var(--border-radius-sm);
+    animation: skeletonLoading 1.5s infinite ease-in-out;
+}
+@keyframes skeletonLoading {
+    0% { opacity: 0.6; }
+    50% { opacity: 0.3; }
+    100% { opacity: 0.6; }
+}
+
+
+/* --- レスポンシブ調整 for Status Page --- */
+@media (max-width: 768px) {
+    .overall-status-card { padding: 20px; }
+    .status-indicator { font-size: 1rem; padding: 7px 15px; }
+    .server-main-address p { flex-direction: column; align-items: center; font-size: 0.95rem;}
+    .server-main-address p i { margin-bottom: 5px; }
+    .total-players { font-size: 1.1rem; }
+
+    .server-cards-wrapper { grid-template-columns: 1fr; } /* スマホでは1カラム */
+    .status-card { padding: 15px; min-height: 250px; }
+    .status-card-header { flex-direction: column; gap: 8px; margin-bottom: 12px; }
+    .player-list-grid { grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 8px; max-height: 150px; }
+    .player-avatar { width: 40px; }
+    .player-avatar img { height: 40px; }
+    .player-avatar .player-name { font-size: 0.65rem; }
+    .player-type-badge { font-size: 0.55rem; top: 1px; right: 1px;}
+}
+
+@media (max-width: 480px) {
+    .status-section { padding: 20px; }
+    .overall-status-card code { font-size: 0.9em; }
+    .server-name-title { font-size: clamp(1.2em, 2.8vw, 1.5em); }
+}
