@@ -19,12 +19,12 @@
             </a>
             <nav class="main-nav" id="main-navigation">
                 <ul>
-                    <li><a href="index.html" class="active nav-link-item">ホーム</a></li>
-                    <li><a href="rules.html" class="nav-link-item">ルール</a></li>
-                    <li><a href="support.html" class="nav-link-item">支援</a></li>
-                    <li><a href="status.html" class="nav-link-item">サーバー状況</a></li>
-                    <li><a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="nav-link-item">WebMap</a></li>
-                    <li><a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="nav-link-item nav-discord-link"><i class="fab fa-discord"></i> Discord</a></li>
+                    <li><a href="index.html" class="nav-link active">ホーム</a></li>
+                    <li><a href="rules.html" class="nav-link">ルール</a></li>
+                    <li><a href="support.html" class="nav-link">支援</a></li>
+                    <li><a href="status.html" class="nav-link">サーバー状況</a></li>
+                    <li><a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="nav-link">WebMap</a></li>
+                    <li><a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="nav-link nav-discord-link"><i class="fab fa-discord"></i> Discord</a></li>
                 </ul>
             </nav>
             <button class="hamburger-menu" aria-label="メニューを開閉する" aria-expanded="false" aria-controls="main-navigation">
@@ -37,7 +37,8 @@
 
     <main>
         <section id="hero">
-            <div class="hero-background-image"></div> <div class="hero-overlay"></div>
+            <div class="hero-background-image"></div>
+            <div class="hero-overlay"></div>
             <div class="hero-content-wrapper container">
                 <div class="hero-text-content animate-on-load" data-animation="fadeInRightCustom" data-animation-delay="0.2s">
                     <h1>StellaMC</h1>
@@ -60,7 +61,7 @@
                 <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.1s">
                     <div class="feature-icon-wrapper"><i class="fas fa-cubes"></i></div>
                     <h3>多彩なコンテンツ</h3>
-                    <p>独自の経済システムや豊富な追加要素、頻繁な更新で飽きさせません。</p>
+                    <p>独自の経済システムや豊富なクエスト、定期イベントで飽きさせません。</p>
                 </div>
                 <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.2s">
                     <div class="feature-icon-wrapper"><i class="fas fa-users-gear"></i></div>
@@ -96,7 +97,6 @@
                             </div>
                         </div>
                     </div>
-
                     <div class="join-box bedrock animate-on-scroll" data-animation="fadeInRightCustom" data-animation-delay="0.2s">
                         <div class="join-box-icon"><i class="fas fa-mobile-screen-button"></i></div>
                         <h3 class="join-box-title">統合版 (Bedrock)</h3>
@@ -124,7 +124,7 @@
         <div class="preview-sections-wrapper container animate-on-scroll" data-animation="fadeInUpCustom">
             <section id="rules-preview" class="preview-card">
                 <h2 class="section-title-compact">サーバールール</h2>
-                <p>快適なプレイのため、ルールのご確認をお願いします。皆で守りましょう！</p>
+                <p>快適なプレイのため、ルールのご確認をお願いします。<br>皆で守って楽しいサーバーに！</p>
                 <div class="rules-highlights">
                     <span class="rule-highlight"><i class="fas fa-user-shield"></i> 運営指示厳守</span>
                     <span class="rule-highlight"><i class="fas fa-handshake-slash"></i> 迷惑行為禁止</span>
@@ -135,7 +135,7 @@
 
             <section id="support-preview" class="preview-card">
                 <h2 class="section-title-compact">サーバー支援について</h2>
-                <p>皆様の温かいご支援が、サーバー運営と今後の発展への大きな力となります。</p>
+                <p>皆様の温かいご支援がサーバー運営と<br>今後の発展への大きな力となります。<br>ご理解とご協力に心より感謝申し上げます。</p>
                 <a href="support.html" class="btn btn-primary">ご支援の詳細について</a>
             </section>
         </div>
@@ -152,17 +152,18 @@
     <footer>
         <div class="container">
             <p>&copy; <span id="current-year"></span> StellaMC. All Rights Reserved.</p>
-            <p class="small-text">Minecraft は Mojang Synergies AB の商標です。本サーバーは Mojang Synergies AB とは一切関係ありません。</p>
+            <p class="small-text">Minecraft is a trademark of Mojang Synergies AB. This server is not affiliated with Mojang Synergies AB.</p>
         </div>
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js"></script>
     <script>
+        // 共通JavaScript (前回提供のものとほぼ同じ)
         document.addEventListener('DOMContentLoaded', () => {
             const hamburger = document.querySelector('.hamburger-menu');
             const nav = document.querySelector('.main-nav');
             if (hamburger && nav) {
-                const navLinks = nav.querySelectorAll('a.nav-link-item'); // 通常リンクのみ対象
+                const navLinks = nav.querySelectorAll('a.nav-link'); // .nav-link-item から .nav-link に変更
                 hamburger.addEventListener('click', () => {
                     const isActive = hamburger.classList.toggle('active');
                     nav.classList.toggle('active');
@@ -184,14 +185,14 @@
             const header = document.querySelector('header');
             if (header) {
                  window.addEventListener('scroll', () => {
-                    if (window.scrollY > 20) { // スクロール検知を敏感に
+                    if (window.scrollY > 20) {
                         header.classList.add('scrolled');
                     } else {
                         header.classList.remove('scrolled');
                     }
                     const heroBg = document.querySelector('#hero .hero-background-image');
                     if (heroBg) {
-                        heroBg.style.transform = `translateY(${Math.min(window.pageYOffset * 0.2, 120)}px) scale(1.1)`; // パララックス効果調整
+                        heroBg.style.transform = `translateY(${Math.min(window.pageYOffset * 0.25, 150)}px) scale(1.1)`;
                     }
                 });
             }
@@ -201,22 +202,20 @@
 
             if (typeof ClipboardJS !== 'undefined') {
                 const clipboard = new ClipboardJS('.copy-action-btn');
-                const toast = document.getElementById('copy-toast');
-                clipboard.on('success', function(e) {
-                    if (toast) {
+                const toast = document.getElementById('copy-toast'); // index.htmlにこのIDの要素があるか確認
+                if (toast) { // toast要素が存在する場合のみリスナーを設定
+                    clipboard.on('success', function(e) {
                         toast.textContent = `${e.trigger.ariaLabel.replace('をコピー', '')} をコピー！`;
                         toast.className = 'copy-toast show success';
                         setTimeout(() => { toast.className = 'copy-toast'; }, 1800);
-                    }
-                    e.clearSelection();
-                });
-                clipboard.on('error', function(e) {
-                    if (toast) {
+                        e.clearSelection();
+                    });
+                    clipboard.on('error', function(e) {
                         toast.textContent = 'コピー失敗 :(';
                         toast.className = 'copy-toast show error';
                         setTimeout(() => { toast.className = 'copy-toast'; }, 1800);
-                    }
-                });
+                    });
+                }
             }
 
             const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
@@ -231,18 +230,16 @@
                             observerInstance.unobserve(entry.target);
                         }
                     });
-                }, { threshold: 0.1, rootMargin: "0px 0px -15px 0px" }); // rootMargin微調整
+                }, { threshold: 0.1, rootMargin: "0px 0px -20px 0px" });
 
                 animatedElements.forEach(el => {
                     const rect = el.getBoundingClientRect();
-                    const isInitiallyVisible = rect.top < window.innerHeight && rect.bottom >= 0;
-                    const delayMultiplier = el.classList.contains('animate-on-load') ? 1000 : 0; // ロード時アニメーションは即時性を優先
-
-                    if (el.classList.contains('animate-on-load') || isInitiallyVisible) {
+                    const isInitiallyVisible = el.classList.contains('animate-on-load') || (rect.top < window.innerHeight && rect.bottom >= 0);
+                    if (isInitiallyVisible) {
                         const animationType = el.dataset.animation || 'fadeInUpCustom';
                         const animationDelay = el.dataset.animationDelay || '0s';
                         el.style.animationDelay = animationDelay;
-                        setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * delayMultiplier + (el.classList.contains('animate-on-load') ? 50 : 10));
+                        setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * 1000 + 50);
                     } else {
                         observer.observe(el);
                     }
