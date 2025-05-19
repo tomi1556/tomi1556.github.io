@@ -65,10 +65,9 @@
 
 .server-main-connection-info {
     margin-bottom: 20px;
-    min-height: 10px; /* テキスト削除したのでマージン確保程度 */
+    min-height: 10px; /* テキスト削除したので、ほぼマージン確保のみ */
 }
-/* .server-main-connection-info p はHTMLから削除 */
-
+/* .server-main-connection-info p はHTMLからテキスト削除済み */
 
 .total-players {
     font-size: 1.25rem;
@@ -81,20 +80,20 @@
     gap: 10px;
 }
 .total-players-icon {
-    margin-right: 0; /* gapで調整 */
+    margin-right: 0;
     font-size: 1.5em;
     color: var(--accent-color);
     line-height: 1;
 }
 .total-players-text {
     display: flex;
-    align-items: baseline;
+    align-items: baseline; /* テキストと数字のベースラインを揃える */
     gap: 6px;
 }
 .player-count.animated-number {
     color: var(--secondary-color);
-    font-weight: 700; /* 少し戻す */
-    font-size: 1.2em;
+    font-weight: 700;
+    font-size: 1.2em; /* 相対的に少し大きく */
     min-width: 30px;
     display: inline-block;
     text-align: right;
@@ -106,12 +105,12 @@
     flex-wrap: wrap;
     gap: 30px;
     margin-top: 35px;
-    align-items: stretch;
+    align-items: stretch; /* ★カードの高さを揃える */
 }
 .individual-server-section {
-    flex: 1 1 320px;
-    min-width: 300px;
-    display: flex;
+    flex: 1 1 320px; /* grow, shrink, basis */
+    min-width: 300px; /* 最小幅 */
+    display: flex; /* 中の .server-card-content-wrapper が伸びるように */
     flex-direction: column;
 }
 .server-card-content-wrapper {
@@ -122,7 +121,7 @@
     padding: 25px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1;
+    flex-grow: 1; /* ★親に対して伸びる */
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
     position: relative;
     overflow: hidden;
@@ -151,19 +150,14 @@
     color: var(--border-color); font-size: 1.8em; font-weight: bold;
     transition: opacity 0.3s ease;
 }
-/* バニラ鯖アイコンをFontAwesomeで代替 (もし画像がない場合) */
-#vanilla-icon-placeholder::after {
-    content: '\f4d8'; /* fas fa-seedling (苗木) */
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    opacity: 0.6;
+.server-icon-placeholder i { /* Font Awesome アイコン用 */
+    animation: subtleSpin 2s linear infinite;
 }
-#sutera-icon-placeholder::after {
-    content: '\f005'; /* fas fa-star */
-    font-family: "Font Awesome 6 Free";
-    font-weight: 900;
-    opacity: 0.6;
+@keyframes subtleSpin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
+
 .server-icon {
     width: 64px; height: 64px; border-radius: var(--border-radius-md);
     box-shadow: 0 5px 12px rgba(0,0,0,0.25);
@@ -185,13 +179,15 @@
 }
 .server-title-icon { margin-right: 10px; font-size: 0.9em; opacity: 0.9; }
 #sutera-server-status .server-title-icon { color: var(--primary-color); }
-#vanilla-server-status .server-title-icon { color: var(--secondary-color); } /* バニラ鯖アイコンに合わせた色 */
+#vanilla-server-status .server-title-icon { color: var(--secondary-color); }
 
 
 .status-card {
     background-color: var(--light-bg); border-radius: var(--border-radius-md); padding: 20px;
     border: 1px solid var(--border-color);
-    display: flex; flex-direction: column; flex-grow: 1;
+    display: flex; flex-direction: column; flex-grow: 1; /* ★重要：高さを揃える */
+    /* プレイヤーリスト削除に伴い、この要素の高さは主にプレイヤー数表示で決まる */
+    min-height: 100px; /* 最小高さを確保 */
 }
 .status-card-header {
     display: flex; justify-content: flex-start;
@@ -200,147 +196,31 @@
     min-height: 30px;
 }
 
-.server-player-info { margin-bottom: 15px; font-size: 0.95rem; color: var(--text-muted); text-align: left; }
-.player-list-heading {
-    font-size: 1rem; color: var(--text-color); margin-bottom: 12px; font-weight: 500;
-    border-top: 1px dashed var(--border-color); padding-top: 15px;
-    text-align: left;
+.server-player-info { margin-bottom: 0; font-size: 0.95rem; color: var(--text-muted); text-align: left; flex-grow: 1; display:flex; align-items: center; justify-content: center;} /* 中央揃え */
+.player-list-heading { /* HTMLから削除したので不要 */
+   /* display: none; */
 }
 
-.player-list-container {
-    background-color: var(--dark-bg);
-    border-radius: var(--border-radius-sm);
-    padding: 10px;
-    margin-bottom: 15px;
-    flex-grow: 1;
-    min-height: 130px; /* ★カードの高さ揃えのキー */
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; /* プレイヤーリストがない場合も上寄せ */
+.player-list-container { /* HTMLから削除したので不要 */
+    /* display: none; */
 }
-.player-list-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
-    gap: 10px; /* 少し広げる */
-    max-height: 130px; /* min-heightと合わせるか、少し小さく */
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out;
-    width: 100%;
+.btn-view-more { /* HTMLから削除したので不要 */
+    /* display: none !important; */
 }
-.player-list-container.expanded .player-list-grid {
-    max-height: 350px;
-    overflow-y: auto;
+.empty-player-list-message { /* HTMLから削除したので不要 */
+   /* display: none !important; */
 }
-.empty-player-list-message {
-    text-align: center; color: var(--text-muted); font-style: italic;
-    font-size: 0.9em; padding: 10px;
-    flex-grow: 1; display: flex; align-items: center; justify-content: center;
-    width: 100%;
-    min-height: 50px; /* メッセージにも高さを確保してコンテナが潰れないように */
+.player-avatar-skeleton { /* HTMLから削除したので不要 */
+    /* display: none !important; */
 }
 
 
-.player-list-grid::-webkit-scrollbar { width: 8px; }
-.player-list-grid::-webkit-scrollbar-track { background: var(--light-bg); border-radius: 4px; }
-.player-list-grid::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-.player-list-grid::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
-
-
-.player-avatar {
-    width: 42px; /* アバターサイズ */
-    text-align: center;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity 0.3s ease-out;
-    opacity: 0;
-    transform: scale(0.8) translateY(10px);
-    border-radius: var(--border-radius-sm);
-    background-color: var(--medium-dark-bg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-.player-avatar.is-visible {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-}
-
-.player-avatar:hover { transform: scale(1.18) translateY(-3px); z-index: 10; box-shadow: var(--shadow-medium); }
-.player-avatar img {
-    width: 42px; /* アイコンサイズに合わせる */
-    height: 42px;
-    object-fit: contain;
-    display: block;
-    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
-    background-color: var(--light-bg);
-}
-.player-avatar .player-name {
-    display: block; font-size: 0.6rem;
-    color: var(--text-muted);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    padding: 3px 2px;
-    border-top: 1px solid var(--border-color);
-    width: 100%;
-    line-height: 1.2;
-    max-width: 40px; /* 確実にellipsisを効かせる */
-}
-
-.player-type-badge {
-    position: absolute; top: 2px; right: 2px; font-size: 0.55rem;
-    padding: 1px 3px; border-radius: 3px; color: #FFF; line-height: 1;
-    background-color: rgba(0,0,0,0.7);
-    box-shadow: 0 0 3px rgba(0,0,0,0.6);
-    display: flex; align-items: center;
-    opacity: 0.95;
-}
-.player-type-badge.java i { color: var(--primary-color); }
-.player-type-badge.bedrock i { color: var(--secondary-color); }
-.player-type-badge i { font-size: 0.8em; }
-
-.btn-view-more {
-    display: block;
-    width: calc(100% - 20px);
-    margin: 15px auto 5px auto;
-    padding: 9px 15px;
-    font-size: 0.88rem;
-    background-color: var(--light-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-muted);
-    border-radius: var(--border-radius-sm);
-    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-}
-.btn-view-more:hover {
-    background-color: var(--primary-color);
-    color: #FFF;
-    border-color: var(--primary-color);
-    transform: scale(1.02);
-}
-.btn-view-more:disabled {
-    background-color: var(--dark-bg);
-    color: var(--text-muted);
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.error-message {
+.error-message { /* エラーメッセージのスタイル */
     text-align: center; color: #E07A5F; font-style: italic;
     font-size: 0.9rem; padding: 15px 10px;
-    flex-grow: 1; display: none;
+    flex-grow: 1; display: none; /* 初期非表示、JSで表示 */
     align-items: center; justify-content: center;
     min-height: 50px;
-}
-
-.player-avatar-skeleton {
-    width: 40px; height: 54px;
-    background: linear-gradient(90deg, var(--light-bg) 25%, var(--medium-dark-bg) 50%, var(--light-bg) 75%);
-    background-size: 200% 100%;
-    border-radius: var(--border-radius-sm);
-    animation: skeletonLoadingFull 1.5s infinite linear;
-}
-@keyframes skeletonLoadingFull {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
 }
 
 
@@ -348,26 +228,16 @@
 @media (max-width: 768px) {
     .overall-status-card { padding: 25px; }
     .status-indicator { font-size: 1rem; padding: 8px 16px; }
-    .server-main-connection-info p { flex-direction: column; align-items: center; font-size: 0.95rem;}
-    .server-main-connection-info p i { margin-bottom: 6px; }
     .total-players { font-size: 1.15rem; }
 
     .server-cards-wrapper { grid-template-columns: 1fr; gap: 25px; }
     .individual-server-section { margin-bottom: 25px; }
     .server-card-content-wrapper { padding: 20px; }
-    .status-card { padding: 15px; min-height: auto; }
+    .status-card { padding: 15px; min-height: 80px; } /* スマホでの最小高さ調整 */
     .status-card-header { flex-direction: column; gap: 10px; margin-bottom: 12px; }
-    .player-list-container { min-height: 90px; }
-    .player-list-grid { grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px; max-height: 114px; }
-    .player-avatar { width: 38px; }
-    .player-avatar img { height: 38px; }
-    .player-avatar .player-name { font-size: 0.6rem; }
-    .player-type-badge { font-size: 0.5rem; }
-    .btn-view-more { width: calc(100% - 10px); margin-top: 8px;}
 }
 
 @media (max-width: 480px) {
     .status-section { padding: 15px; margin-bottom: 30px;}
     .server-name-title { font-size: clamp(1.1em, 2.6vw, 1.4em); }
-    .player-list-container { padding: 8px;}
 }
