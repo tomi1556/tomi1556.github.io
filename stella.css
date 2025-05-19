@@ -40,10 +40,10 @@ body {
 }
 body.no-scroll { overflow-y: hidden; }
 
-main { /* main要素も表示されるように */
-    display: block !important; /* 表示問題デバッグ用 */
-    opacity: 1 !important; /* 表示問題デバッグ用 */
-    visibility: visible !important; /* 表示問題デバッグ用 */
+main {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 
@@ -71,10 +71,10 @@ h1 { font-size: clamp(2.4em, 6vw, 4.2em); letter-spacing: -0.02em; font-weight: 
 h3 { font-size: clamp(1.2em, 3vw, 1.6em); font-weight: 600; }
 h4 { font-size: clamp(1.05em, 2.6vw, 1.2em); font-weight: 500; }
 
-/* --- アニメーションクラス --- */
+/* --- アニメーションクラス (初期状態をJSで制御するため、CSSでの初期非表示は緩める) --- */
 .animate-on-scroll, .animate-on-load {
-    opacity: 0; /* JSで is-visible を付与するまで非表示 */
-    visibility: hidden;
+    opacity: 0; /* 初期は透明のまま、JSで is-visible 付与を待つ */
+    visibility: hidden; /* JSで is-visible 付与を待つ */
     transition-property: opacity, transform, visibility;
     transition-duration: var(--transition-normal);
     transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -84,11 +84,22 @@ h4 { font-size: clamp(1.05em, 2.6vw, 1.2em); font-weight: 500; }
     transform: none !important;
     visibility: visible !important;
 }
+/* 各アニメーションの初期transform */
 .fadeInUpCustom { transform: translateY(45px); }
 .fadeInRightCustom { transform: translateX(55px); }
 .fadeInLeftCustom { transform: translateX(-55px); }
 .zoomInCustom { transform: scale(0.88); }
-.bounceInCustom { transform: scale(0.5); } /* キーフレームアニメーションで詳細制御 */
+.popIn { /* status.htmlのプレイヤーアバター用 */
+    opacity: 0;
+    transform: scale(0.5) translateY(10px);
+}
+.popIn.is-visible {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    transition: opacity 0.3s ease-out, transform 0.3s ease-out;
+}
+
+.bounceInCustom { transform: scale(0.5); }
 @keyframes bounceInAnimation {
   0% { opacity: 0; transform: scale3d(.3, .3, .3); visibility: hidden;}
   60% { opacity: 1; transform: scale3d(1.03, 1.03, 1.03); visibility: visible;}
@@ -119,25 +130,25 @@ header.scrolled #logo-img { filter: none; }
 
 .main-nav ul { list-style: none; display: flex; align-items: center; margin:0; padding:0; }
 .main-nav ul li { margin-left: 28px; }
-.main-nav ul li a.nav-link-item {
+.main-nav ul li a.nav-link { /* .nav-link-item から .nav-link に変更 */
     color: #FFF; font-weight: 500; font-size: 0.95rem; padding: 12px 8px;
     position: relative; letter-spacing: 0.7px;
     text-shadow: 0 1px 6px rgba(0,0,0,0.5);
     transition: color var(--transition-fast), text-shadow var(--transition-fast), opacity var(--transition-fast);
     opacity: 0.9;
 }
-.main-nav ul li a.nav-link-item:hover, .main-nav ul li a.nav-link-item.active { opacity: 1; }
-header.scrolled .main-nav ul li a.nav-link-item { color: var(--text-color); text-shadow: none; opacity: 0.9; }
-header.scrolled .main-nav ul li a.nav-link-item:hover, header.scrolled .main-nav ul li a.nav-link-item.active { color: var(--accent-color); opacity: 1;}
-.main-nav ul li a.nav-link-item::after {
+.main-nav ul li a.nav-link:hover, .main-nav ul li a.nav-link.active { opacity: 1; }
+header.scrolled .main-nav ul li a.nav-link { color: var(--text-color); text-shadow: none; opacity: 0.9; }
+header.scrolled .main-nav ul li a.nav-link:hover, header.scrolled .main-nav ul li a.nav-link.active { color: var(--accent-color); opacity: 1;}
+.main-nav ul li a.nav-link::after {
     content: ''; position: absolute; bottom: 4px;
     left: 50%; transform: translateX(-50%);
     width: 0; height: 2.5px; background-color: var(--accent-color);
     border-radius: 1.5px; transition: width 0.4s cubic-bezier(0.19, 1, 0.22, 1);
 }
-.main-nav ul li a.nav-link-item:hover::after, .main-nav ul li a.nav-link-item.active::after { width: 70%; }
-.main-nav ul li a.nav-link-item.active { color: var(--accent-color); font-weight: 600; }
-header.scrolled .main-nav ul li a.nav-link-item.active { color: var(--accent-color); }
+.main-nav ul li a.nav-link:hover::after, .main-nav ul li a.nav-link.active::after { width: 70%; }
+.main-nav ul li a.nav-link.active { color: var(--accent-color); font-weight: 600; }
+header.scrolled .main-nav ul li a.nav-link.active { color: var(--accent-color); }
 
 .nav-discord-link {
     display: inline-flex; align-items: center;
@@ -205,7 +216,7 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 .btn-primary:hover { transform: translateY(-3px) scale(1.035); box-shadow: var(--shadow-strong); }
 .btn-secondary { background-color: var(--medium-dark-bg); color: var(--secondary-color); border: 2px solid var(--secondary-color); }
 .btn-secondary:hover { background-color: var(--secondary-color); color: var(--dark-bg); transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(var(--rgb-secondary-color), 0.35); }
-.hero-buttons .btn-discord { /* ヒーローセクションのDiscordボタン */
+.hero-buttons .btn-discord {
     background-color: #5865F2; color: #fff; border: 2px solid transparent;
 }
 .hero-buttons .btn-discord:hover { background-color: #FFF; color: #5865F2; border-color: #5865F2; transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(88, 101, 242, 0.35); }
@@ -372,12 +383,12 @@ header.scrolled .hamburger-bar { background-color: var(--text-color); }
 
 
 /* --- WebMap Promo (index.html) --- */
-#webmap-promo .container {
+#webmap-promo .container { /* .container に text-align:center を適用 */
     text-align: center;
 }
 #webmap-promo .btn {
     margin-top: 20px;
-    display: inline-block;
+    display: inline-block; /* text-align:center を有効にするため */
 }
 
 /* --- Footer --- */
@@ -389,7 +400,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 .page-content-container {
     padding-top: 110px;
     padding-bottom: 90px;
-    min-height: calc(100vh - 110px - 92px); /* ヘッダーとフッターの仮高さを考慮 */
+    min-height: calc(100vh - 110px - 92px);
 }
 .page-header {
     text-align: center;
@@ -409,7 +420,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     margin-left: auto; margin-right: auto;
     line-height: 1.75;
 }
-.rules-article, .support-article { /* support.htmlにも適用 */
+.rules-article, .support-article {
     max-width: 880px;
     margin: 0 auto;
 }
@@ -436,9 +447,9 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     line-height: 1.8;
     margin-bottom: 20px;
 }
-.rules-category { margin-bottom: 30px; } /* rules.html用 */
+.rules-category { margin-bottom: 30px; }
 .rules-category:last-child { margin-bottom: 0; }
-.rules-category-title { /* rules.html用 */
+.rules-category-title {
     font-size: clamp(1.25em, 2.8vw, 1.6em);
     color: var(--text-color);
     margin-bottom: 18px;
@@ -651,32 +662,31 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     color: var(--text-muted);
     margin-bottom: 10px;
     display: flex;
-    align-items: center;
+    /* align-items: center; は削除して左揃えに */
+    align-items: flex-start; /* アイコンとテキストの上端を揃える */
 }
 .tier-duration-info p:last-child { margin-bottom: 0; }
-.tier-duration-info .server-icon,
-.tier-duration-info .global-icon,
-.tier-duration-info .duration-icon {
-    width: 22px; /* アイコンとテキストの縦揃えのため幅固定 */
-    text-align: center;
-    margin-right: 10px;
+.tier-duration-info p .fas, .tier-duration-info p .fab {
+    width: 22px;
+    text-align: left; /* 左揃え */
+    margin-right: 8px; /* テキストとの間隔調整 */
     font-size: 1.1em;
+    padding-top: 2px; /* テキストとの垂直位置調整 */
 }
 .tier-duration-info .server-icon { color: var(--primary-color); }
 .tier-duration-info .global-icon { color: var(--secondary-color); }
+.tier-duration-info .duration-spacer { display: none; } /* 不要なので削除 */
 .tier-duration-info .duration {
     display: inline-flex;
     align-items: center;
-    /* margin-left: 0;  p要素の display:flex で管理 */
     font-weight: 500;
     color: var(--text-color);
 }
-.tier-duration-info .duration-icon { color: var(--accent-color); font-size: 0.95em; margin-right: 6px;}
-.tier-duration-info .duration-spacer { /* ラベルと期間の間のスペース */
-    flex-grow: 1; /* 残りのスペースを埋める (右寄せ効果) */
-    min-width: 10px;
+.tier-duration-info .duration-icon {
+    margin-right: 6px;
+    color: var(--accent-color);
+    font-size: 0.95em;
 }
-
 
 .inline-link {
     color: var(--accent-color);
@@ -717,22 +727,18 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     }
     .main-nav.active { left: 0; }
     .main-nav ul li { margin-left: 0; width: 100%;}
-    .main-nav ul li a.nav-link-item {
+    .main-nav ul li a.nav-link {
         padding: 15px 30px; font-size: 1.05rem; display:block;
         border-bottom: 1px solid var(--border-color); color: var(--text-color);
         text-shadow: none; opacity: 1;
     }
-    .main-nav ul li:last-child > a.nav-link-item {
-        border-bottom: none; /* 通常リンクが最後の場合 */
-    }
-     .main-nav ul li:has(+ li > a.nav-discord-link) > a.nav-link-item {
-         border-bottom: 1px solid var(--border-color); /* Discordの直前は線あり */
-    }
-    .main-nav ul li a.nav-link-item.active { color: var(--accent-color); background-color: var(--medium-dark-bg); }
-    .main-nav ul li a.nav-link-item:hover { background-color: var(--medium-dark-bg); color: var(--accent-color); }
-    .main-nav ul li a.nav-link-item::after { display: none; }
+    .main-nav ul li:last-child > a.nav-link { border-bottom: none; }
+    .main-nav ul li:has(+ li > a.nav-discord-link) > a.nav-link { border-bottom: 1px solid var(--border-color); }
+    .main-nav ul li a.nav-link.active { color: var(--accent-color); background-color: var(--medium-dark-bg); }
+    .main-nav ul li a.nav-link:hover { background-color: var(--medium-dark-bg); color: var(--accent-color); }
+    .main-nav ul li a.nav-link::after { display: none; }
 
-    .main-nav ul li a.nav-discord-link {
+    .main-nav ul li a.nav-discord-link { /* スマホメニュー内Discordリンク */
         display: flex !important; align-items: center;
         padding: 15px 30px !important; background-color: transparent !important;
         border: none !important; color: var(--text-color) !important;
@@ -741,7 +747,7 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
         border-bottom: 1px solid var(--border-color); /* 他の項目と合わせる */
         opacity: 1 !important; text-align: left;
     }
-    .main-nav ul li:last-child > a.nav-discord-link { border-bottom: none; } /* Discordが最後なら線なし */
+    .main-nav ul li:last-child > a.nav-discord-link { border-bottom: none; }
     .main-nav ul li a.nav-discord-link:hover { background-color: var(--medium-dark-bg) !important; color: var(--accent-color) !important; }
     .main-nav ul li a.nav-discord-link i { color: var(--primary-color); transition: color var(--transition-fast); }
     .main-nav ul li a.nav-discord-link:hover i { color: var(--accent-color); }
@@ -771,13 +777,13 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     .tier-name-price h3 { font-size: 1.5em;}
     .tier-name-price .tier-price { font-size: 0.85em; padding: 3px 8px;}
     .tier-duration-info p {
-        flex-direction: row; /* スマホでも特典期間は横並びを維持 */
-        align-items: center;
-        gap: 0; /* スペーサーで調整 */
-        justify-content: space-between; /* ラベルと期間を両端に */
+        flex-direction: column; /* スマホでは期間情報を縦積みに変更 */
+        align-items: flex-start;
+        gap: 3px; /* 項目間の隙間 */
+        margin-bottom: 12px; /* 各p要素の下マージン */
     }
-    .tier-duration-info .duration { margin-left: 0;}
-    .tier-duration-info .duration-spacer { display: none; } /* スマホではスペーサー不要 */
+    .tier-duration-info p:last-child { margin-bottom: 0; }
+    .tier-duration-info .duration { margin-left: 0; }
 }
 
 @media (max-width: 480px) {
@@ -791,474 +797,12 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     .hero-buttons .btn { width: 90%; max-width: 270px; }
 
     .main-nav { max-width: 260px; padding-top: 65px;}
-    .main-nav ul li a.nav-link-item { padding: 14px 25px; font-size: 1rem; }
+    .main-nav ul li a.nav-link { padding: 14px 25px; font-size: 1rem; }
     .main-nav ul li a.nav-discord-link { padding: 14px 25px !important; font-size: 1rem !important;}
 
     .feature-card p { font-size: 0.88rem; }
 
     /* Support Page スマホ最小 */
-    .page-section { padding: 25px 15px; }
-    .payment-method { padding: 25px;}
-    .benefit-tier { padding: 20px;}
-    .benefit-detail-list li { font-size: 0.9rem;}
-    .tier-duration-info p {
-        /* さらに小さい画面では改行も許容、ただし現状は横並び維持 */
-    }
-}
-
-/* status.css からのスタイルをここにマージ（または status.html で別途読み込む） */
-/* 以下は status.css の内容です */
-
-.icon-header { /* status.html用 */
-    margin-right: 12px;
-    color: var(--primary-color);
-    font-size: 0.9em;
-}
-
-.status-section { /* status.html用 */
-    margin-bottom: 45px;
-}
-.status-section:last-of-type {
-    margin-bottom: 20px;
-}
-
-.overall-status-card {
-    padding: 30px 25px;
-    background: linear-gradient(145deg, var(--medium-dark-bg), var(--light-bg));
-    border-radius: var(--border-radius-lg);
-    border: 1px solid var(--border-color);
-    text-align: center;
-    box-shadow: var(--shadow-medium);
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-}
-.overall-status-card:hover {
-    transform: translateY(-5px);
-    box-shadow: var(--shadow-strong);
-}
-
-.status-indicator-wrapper {
-    margin-bottom: 20px;
-    min-height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-.status-indicator {
-    display: inline-flex; align-items: center; padding: 10px 22px;
-    border-radius: var(--border-radius-md); font-weight: 600;
-    font-size: 1.15rem; box-shadow: var(--shadow-soft);
-    transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast);
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-.status-indicator.online { background-color: var(--secondary-color); color: var(--dark-bg); }
-.status-indicator.offline { background-color: #E85C5C; color: #FFF; }
-.status-indicator.loading { background-color: var(--light-bg); color: var(--text-muted); }
-
-.status-indicator.small { font-size: 0.9rem; padding: 7px 14px; margin-bottom: 0; }
-
-.pulse-dot {
-    width: 10px; height: 10px; border-radius: 50%; margin-left: 10px;
-    animation: pulseAnimation 1.5s infinite ease-in-out;
-}
-.status-indicator.online .pulse-dot { background-color: #FFF; }
-.status-indicator.offline .pulse-dot { background-color: #ECEFF4; animation: none; opacity: 0.6;}
-.status-indicator.loading .pulse-dot { background-color: var(--text-muted); animation: pulseAnimation 1.5s infinite ease-in-out 0.5s; }
-
-@keyframes pulseAnimation {
-    0% { transform: scale(0.85); opacity: 0.7; }
-    50% { transform: scale(1.15); opacity: 1; }
-    100% { transform: scale(0.85); opacity: 0.7; }
-}
-
-.server-main-connection-info {
-    margin-bottom: 20px;
-    min-height: 20px; /* ラベル削除後も高さをある程度確保 */
-}
-.server-main-connection-info p { /* status.htmlのこの部分は空のはず */
-    font-size: 1rem; color: var(--text-muted); margin-bottom: 8px;
-    display: flex; align-items: center; justify-content: center; gap: 10px;
-}
-.server-main-connection-info p i { color: var(--primary-color); font-size: 1.2em; width: 20px; text-align: center; }
-
-
-.total-players {
-    font-size: 1.3rem; font-weight: 700; color: var(--text-color);
-    display: flex; align-items: center; justify-content: center;
-    margin-top: 10px;
-}
-.total-players-icon {
-    margin-right: 10px;
-    font-size: 1.5em; /* アイコンサイズ調整 */
-    color: var(--accent-color);
-    line-height: 1; /* 他のテキストと垂直中央揃えしやすく */
-}
-.total-players-text {
-    display: flex;
-    align-items: baseline; /* テキストと数字のベースラインを揃える */
-    gap: 8px;
-}
-.player-count.animated-number {
-    color: var(--secondary-color); font-weight: 800; font-size: 1.2em; /* 数字を少し大きく */
-    min-width: 35px; display: inline-block; text-align: right;
-    transition: color 0.5s ease;
-}
-
-.server-cards-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 30px;
-    margin-top: 35px;
-    align-items: stretch;
-}
-.individual-server-section {
-    flex: 1 1 320px;
-    min-width: 300px;
-    display: flex;
-    flex-direction: column;
-}
-.server-card-content-wrapper {
-    background-color: var(--medium-dark-bg);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-medium);
-    border: 1px solid var(--border-color);
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-    position: relative;
-    overflow: hidden;
-}
-.individual-server-section:hover .server-card-content-wrapper {
-    transform: translateY(-8px) scale(1.015);
-    box-shadow: var(--shadow-strong);
-}
-.server-card-content-wrapper::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 7px;
-    border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
-    opacity: 0.85; transition: width var(--transition-fast), opacity var(--transition-fast);
-}
-.individual-server-section:hover .server-card-content-wrapper::before { width: 10px; opacity: 1; }
-#sutera-server-status .server-card-content-wrapper::before { background: var(--primary-color); }
-#vanilla-server-status .server-card-content-wrapper::before { background: var(--secondary-color); }
-
-.server-icon-container {
-    display: flex; justify-content: center; align-items: center;
-    margin-bottom: 18px; height: 70px;
-}
-.server-icon-placeholder {
-    width: 64px; height: 64px; border-radius: var(--border-radius-md);
-    background-color: var(--light-bg); border: 2px dashed var(--border-color);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--border-color); font-size: 1.8em; font-weight: bold;
-    transition: opacity 0.3s ease;
-}
-.server-icon {
-    width: 64px; height: 64px; border-radius: var(--border-radius-md);
-    box-shadow: 0 5px 12px rgba(0,0,0,0.25);
-    border: 2px solid var(--border-color);
-    object-fit: contain;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
-    opacity: 0;
-}
-.server-icon.loaded { opacity: 1; }
-.individual-server-section:hover .server-icon.loaded {
-    transform: scale(1.12) rotate(4deg);
-    box-shadow: 0 8px 18px rgba(0,0,0,0.35);
-}
-
-.server-name-title {
-    font-size: clamp(1.3em, 3vw, 1.7em);
-    color: var(--text-color); text-align: center; margin-bottom: 20px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-}
-.server-title-icon { margin-right: 10px; font-size: 0.9em; opacity: 0.9; }
-#sutera-server-status .server-title-icon { color: var(--primary-color); }
-#vanilla-server-status .server-title-icon { color: var(--secondary-color); }
-
-
-.status-card {
-    background-color: var(--light-bg); border-radius: var(--border-radius-md); padding: 20px;
-    border: 1px solid var(--border-color);
-    display: flex; flex-direction: column; flex-grow: 1;
-}
-.status-card-header {
-    display: flex; justify-content: flex-start;
-    align-items: center;
-    margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);
-    min-height: 30px;
-}
-
-.server-player-info { margin-bottom: 15px; font-size: 0.95rem; color: var(--text-muted); text-align: left; }
-.player-list-heading { /* 「オンラインプレイヤー:」 */
-    font-size: 1rem; color: var(--text-color); margin-bottom: 12px; font-weight: 500;
-    border-top: 1px dashed var(--border-color); padding-top: 15px;
-    text-align: left;
-}
-
-.player-list-container {
-    background-color: var(--dark-bg);
-    border-radius: var(--border-radius-sm);
-    padding: 10px;
-    margin-bottom: 15px;
-    flex-grow: 1; /* このコンテナが残りのスペースを埋める */
-    min-height: 130px; /* ★重要: プレイヤーリストエリアの最小高さを確保 */
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-}
-.player-list-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); /* アバターサイズに合わせる */
-    gap: 8px;
-    max-height: 130px; /* (42px avatar + 14px name + 8px gap) * 2行 = 約128px。padding考慮 */
-    overflow: hidden;
-    transition: max-height 0.4s ease-in-out;
-    width: 100%; /* 幅いっぱいに広がるように */
-}
-.player-list-container.expanded .player-list-grid {
-    max-height: 350px; /* 十分な高さに展開 */
-    overflow-y: auto;
-}
-.empty-player-list-message { /* JSでプレイヤーがいない場合に挿入 */
-    text-align: center; color: var(--text-muted); font-style: italic;
-    font-size: 0.9em; padding: 10px;
-    flex-grow: 1; display: flex; align-items: center; justify-content: center;
-    width: 100%; /* 幅をコンテナいっぱいに */
-}
-
-.player-list-grid::-webkit-scrollbar { width: 8px; }
-.player-list-grid::-webkit-scrollbar-track { background: var(--light-bg); border-radius: 4px; }
-.player-list-grid::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
-.player-list-grid::-webkit-scrollbar-thumb:hover { background: var(--primary-color); }
-
-
-.player-avatar {
-    width: 42px; /* アイコンサイズ */
-    text-align: center;
-    transition: transform var(--transition-fast), box-shadow var(--transition-fast), opacity 0.3s ease-out;
-    opacity: 0;
-    transform: scale(0.8) translateY(10px);
-    border-radius: var(--border-radius-sm);
-    background-color: var(--medium-dark-bg);
-    box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-    position: relative;
-    display: flex; /* アイコンと名前を縦に */
-    flex-direction: column;
-    align-items: center; /* 中央揃え */
-}
-.player-avatar.is-visible {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-}
-
-.player-avatar:hover { transform: scale(1.18) translateY(-3px); z-index: 10; box-shadow: var(--shadow-medium); }
-.player-avatar img {
-    width: 42px; /* アイコンサイズに合わせる */
-    height: 42px;
-    object-fit: contain; /* helmなのでcontainが良い */
-    display: block;
-    border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
-    background-color: var(--light-bg);
-}
-.player-avatar .player-name {
-    display: block; font-size: 0.6rem; /* MCIDのフォントサイズを小さく */
-    color: var(--text-muted);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    padding: 3px 2px; /* パディング調整 */
-    border-top: 1px solid var(--border-color);
-    width: 100%; /* 名前部分の幅をアバターに合わせる */
-    line-height: 1.3; /* 行間調整 */
-}
-
-.player-type-badge {
-    position: absolute; top: 2px; right: 2px; /* 位置調整 */
-    font-size: 0.55rem; /* バッジのフォントサイズ */
-    padding: 1px 3px; border-radius: 3px; color: #FFF; line-height: 1;
-    background-color: rgba(0,0,0,0.7); /* 背景を少し濃く */
-    box-shadow: 0 0 3px rgba(0,0,0,0.5);
-    display: flex; align-items: center;
-    opacity: 0.95;
-}
-.player-type-badge.java i { color: var(--primary-color); }
-.player-type-badge.bedrock i { color: var(--secondary-color); }
-.player-type-badge i { font-size: 0.8em; } /* アイコンサイズ調整 */
-
-.btn-view-more {
-    display: block;
-    width: calc(100% - 20px);
-    margin: 15px auto 5px auto; /* 上マージン調整 */
-    padding: 9px 15px;
-    font-size: 0.88rem;
-    background-color: var(--light-bg);
-    border: 1px solid var(--border-color);
-    color: var(--text-muted);
-    border-radius: var(--border-radius-sm);
-    transition: background-color var(--transition-fast), color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast);
-}
-.btn-view-more:hover {
-    background-color: var(--primary-color);
-    color: #FFF;
-    border-color: var(--primary-color);
-    transform: scale(1.02);
-}
-.btn-view-more:disabled {
-    background-color: var(--dark-bg);
-    color: var(--text-muted);
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.error-message {
-    text-align: center; color: #E07A5F; font-style: italic;
-    font-size: 0.9rem; padding: 15px 10px;
-    flex-grow: 1; display: none;
-    align-items: center; justify-content: center;
-    min-height: 50px;
-}
-
-.player-avatar-skeleton {
-    width: 40px; height: 54px;
-    background: linear-gradient(90deg, var(--light-bg) 25%, var(--medium-dark-bg) 50%, var(--light-bg) 75%);
-    background-size: 200% 100%;
-    border-radius: var(--border-radius-sm);
-    animation: skeletonLoadingFull 1.5s infinite linear;
-}
-@keyframes skeletonLoadingFull {
-    0% { background-position: 200% 0; }
-    100% { background-position: -200% 0; }
-}
-
-
-/* --- レスポンシブ調整 --- */
-@media (max-width: 1024px) {
-    .hero-text-content { max-width: 70%; padding-right: 5%; }
-    .features-grid {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 25px;
-    }
-    .preview-sections-wrapper {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .main-nav {
-        top: 0; left: -100%; width: 100%; max-width: 300px; height: 100vh;
-        background-color: var(--dark-bg);
-        padding-top: 75px; box-shadow: 8px 0 25px rgba(0,0,0,0.3);
-        transition: left var(--transition-normal);
-        position: fixed;
-        border-right: 1px solid var(--border-color);
-        z-index: 1001;
-        overflow-y: auto;
-        display: flex;
-        flex-direction: column;
-    }
-    .main-nav.active { left: 0; }
-    .main-nav ul li { margin-left: 0; width: 100%;}
-    .main-nav ul li a.nav-link-item {
-        padding: 15px 30px; font-size: 1.05rem; display:block;
-        border-bottom: 1px solid var(--border-color);
-        color: var(--text-color);
-        text-shadow: none; opacity: 1;
-    }
-    .main-nav ul li:last-child > a.nav-link-item { border-bottom: none; }
-    .main-nav ul li:has(+ li > a.nav-discord-link) > a.nav-link-item { border-bottom: 1px solid var(--border-color); }
-    .main-nav ul li a.nav-link-item.active { color: var(--accent-color); background-color: var(--medium-dark-bg); }
-    .main-nav ul li a.nav-link-item:hover { background-color: var(--medium-dark-bg); color: var(--accent-color); }
-    .main-nav ul li a.nav-link-item::after { display: none; }
-
-    .main-nav ul li a.nav-discord-link {
-        display: flex !important; align-items: center;
-        padding: 15px 30px !important; background-color: transparent !important;
-        border: none !important; color: var(--text-color) !important;
-        font-weight: 500 !important; font-size: 1.05rem !important;
-        text-shadow: none !important;
-        border-bottom: 1px solid var(--border-color);
-        opacity: 1 !important; text-align: left;
-    }
-    .main-nav ul li:last-child > a.nav-discord-link { border-bottom: none; }
-    .main-nav ul li a.nav-discord-link:hover { background-color: var(--medium-dark-bg) !important; color: var(--accent-color) !important; }
-    .main-nav ul li a.nav-discord-link i { color: var(--primary-color); transition: color var(--transition-fast); }
-    .main-nav ul li a.nav-discord-link:hover i { color: var(--accent-color); }
-
-    .hamburger-menu { display: block; }
-
-    #hero { min-height: 100vh; }
-    .hero-content-wrapper { padding: 0 15px; }
-    .hero-text-content { max-width: 100%; }
-
-    .features-grid { grid-template-columns: 1fr; }
-    .preview-sections-wrapper { grid-template-columns: 1fr; }
-
-    /* status.html用 スマホ */
-    .overall-status-card { padding: 25px; }
-    .status-indicator { font-size: 1rem; padding: 8px 16px; }
-    .server-main-connection-info p { flex-direction: column; align-items: center; font-size: 0.95rem;}
-    .server-main-connection-info p i { margin-bottom: 6px; }
-    .total-players { font-size: 1.15rem; }
-    .server-cards-wrapper { grid-template-columns: 1fr; gap: 25px; }
-    .individual-server-section { margin-bottom: 25px; }
-    .server-card-content-wrapper { padding: 20px; }
-    .status-card { padding: 15px; min-height: auto; }
-    .status-card-header { flex-direction: column; gap: 10px; margin-bottom: 12px; }
-    .player-list-container { min-height: 90px; }
-    .player-list-grid { grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px; max-height: 114px; }
-    .player-avatar { width: 38px; }
-    .player-avatar img { height: 38px; }
-    .player-avatar .player-name { font-size: 0.6rem; }
-    .player-type-badge { font-size: 0.5rem; }
-    .btn-view-more { width: calc(100% - 10px); margin-top: 8px;}
-
-    /* rules.html / support.html用 スマホ */
-    .page-content-container { padding-top: 90px; padding-bottom: 60px;}
-    .page-main-title { font-size: clamp(1.8em, 5.2vw, 2.7em); margin-bottom: 0.8em; }
-    .page-intro { font-size: clamp(0.9rem, 2.5vw, 1.1rem); }
-    .page-section { padding: 30px 20px; }
-    .section-heading-styled { font-size: clamp(1.5em, 3.5vw, 1.9em); }
-    .rules-category-title { font-size: clamp(1.2em, 2.7vw, 1.5em); }
-    .payment-methods-container { grid-template-columns: 1fr; }
-    .benefit-tiers-container { grid-template-columns: 1fr; }
-    .benefit-tier { padding: 25px; }
-    .benefit-tier-header { flex-direction: column; align-items: flex-start; gap: 10px;}
-    .benefit-tier-header .tier-icon { font-size: 2.5em; margin-right: 0; margin-bottom: 5px;}
-    .tier-name-price h3 { font-size: 1.5em;}
-    .tier-name-price .tier-price { font-size: 0.85em; padding: 3px 8px;}
-    .tier-duration-info p { flex-direction: row; align-items: center; gap: 0; justify-content: space-between; }
-    .tier-duration-info .duration { margin-left: 0;}
-    .tier-duration-info .duration-spacer { display: none; }
-}
-
-@media (max-width: 480px) {
-    body { font-size: 14px; line-height: 1.7; }
-    .container { padding: 0 12px; }
-    h1 { font-size: clamp(2rem, 8vw, 2.7rem); }
-    .section-title, h2 { font-size: clamp(1.5rem, 6vw, 2.2rem); }
-    .section-subtitle { font-size: clamp(0.85rem, 3.5vw, 1rem); }
-
-    .btn { padding: 12px 22px; font-size: 0.9rem; }
-    .hero-buttons .btn { width: 90%; max-width: 270px; }
-
-    .main-nav { max-width: 260px; padding-top: 65px;}
-    .main-nav ul li a.nav-link-item { padding: 14px 25px; font-size: 1rem; }
-    .main-nav ul li a.nav-discord-link { padding: 14px 25px !important; font-size: 1rem !important;}
-
-    .feature-card p { font-size: 0.88rem; }
-
-    /* status.html用 スマホ最小 */
-    .status-section { padding: 15px; margin-bottom: 30px;}
-    .server-name-title { font-size: clamp(1.1em, 2.6vw, 1.4em); }
-    .player-list-container { padding: 8px;}
-    .join-box { padding: 25px 20px; }
-    .copy-wrapper input[type="text"], .copy-action-btn { padding: 11px 13px; font-size: 0.95em; }
-    .join-box-note { font-size: 0.88rem; }
-    .copy-toast { padding: 12px 22px; font-size: 0.95rem; width: calc(100% - 30px); max-width: 280px;}
-
-
-    /* support.html用 スマホ最小 */
     .page-section { padding: 25px 15px; }
     .payment-method { padding: 25px;}
     .benefit-tier { padding: 20px;}
