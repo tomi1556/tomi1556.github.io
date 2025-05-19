@@ -1,295 +1,365 @@
 /* status.css */
 
-/* :root { */
-/*     --primary-color: #4A90E2;  */
-/*     --secondary-color: #50E3C2; */
-/*     --accent-color: #F5A623; */
-/*     --text-color: #EAEAEA; */
-/*     --text-muted: #A0A0A0; */
-/*     --dark-bg: #222831; */
-/*     --medium-dark-bg: #2D343E; */
-/*     --light-bg: #39424E; */
-/*     --border-color: rgba(255, 255, 255, 0.12); */
-/*     --very-light-border-color: rgba(255, 255, 255, 0.08); */
-/*     --success-color: #50E3C2;  */
-/*     --danger-color: #E85C5C;  */
-/*     --warning-color: #F5A623; */
+/* :root で定義されている変数は前回のものをベースに微調整 */
+:root {
+    /* ... (前回の :root 定義を参照・適宜更新) ... */
+    --blur-intensity: 10px; /* ブラー強度を少し上げる */
+    --card-padding: 28px; /* カードの共通パディング */
 
-/*     --border-radius-sm: 4px; */
-/*     --border-radius-md: 8px; */
-/*     --border-radius-lg: 12px; */
+    /* サイズ問題対策用：各セクションの最小高さを定義 */
+    --server-icon-section-height: 70px; /* アイコンコンテナの高さ */
+    --server-title-section-min-height: 50px; /* タイトル部分の最小高さ (テキスト量で変動許容) */
+    --status-card-header-height: 45px; /* ステータスカードヘッダーの高さ */
+    --status-card-info-min-height: 65px; /* プレイヤー情報/エラーメッセージ部分の最小高さ */
 
-/*     --shadow-soft: 0 2px 5px rgba(0,0,0,0.15); */
-/*     --shadow-medium: 0 6px 18px rgba(0,0,0,0.18); */
-/*     --shadow-strong: 0 10px 30px rgba(0,0,0,0.22); */
+    /* RGB値の変数 (stella.css またはここに定義) */
+    --primary-rgb: 0, 169, 255;   /* --primary-color のRGB値 */
+    --secondary-rgb: 58, 255, 208; /* --secondary-color のRGB値 */
+    --accent-rgb: 255, 184, 0;   /* --accent-color のRGB値 */
+    --danger-rgb: 255, 77, 77;    /* --danger-color のRGB値 */
+    --success-rgb: var(--secondary-rgb); /* --success-color のRGB値 (secondaryと同じ場合) */
+    --text-muted-rgb: 176,176,176; /* --text-muted のRGB値 */
+}
 
-/*     --transition-fast: 0.2s ease-out; */
-/*     --transition-normal: 0.3s ease-out; */
-/* } */
+body {
+    font-family: var(--font-primary);
+    background: linear-gradient(145deg, var(--dark-bg-gradient-start, #1A2238), var(--dark-bg-gradient-end, #28324B) 150%) fixed; /* グラデーション調整 */
+    color: var(--text-color);
+    overflow-x: hidden;
+}
 
-.icon-header {
+.page-content-container { /* メインコンテンツエリアの左右マージン調整など */
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+}
+
+.page-header .page-main-title { /* タイトルを少し大きく、目立たせる */
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.page-header .page-intro {
+    font-size: clamp(0.95rem, 2vw, 1.05rem);
+    color: var(--text-muted);
+}
+
+
+.icon-header { /* Font Awesomeアイコン全般に適用できるスタイル */
     margin-right: 12px;
     color: var(--primary-color);
-    font-size: 0.9em;
+    font-size: 0.9em; /* 親要素に対する相対サイズ */
+    text-shadow: 0 0 8px rgba(var(--primary-rgb), 0.7); /* 発光効果 */
 }
 
 .status-section {
-    margin-bottom: 50px; /* 少し広げてゆとりを */
+    margin-bottom: 60px;
 }
 .status-section:last-of-type {
-    margin-bottom: 25px;
+    margin-bottom: 30px;
 }
 
-.overall-status-card {
-    padding: 30px 35px;
-    background: linear-gradient(145deg, var(--medium-dark-bg), var(--light-bg) 70%); /* グラデーション調整 */
-    border-radius: var(--border-radius-lg);
-    border: 1px solid var(--border-color);
-    text-align: center;
-    box-shadow: var(--shadow-medium);
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+/* --- Glassmorphism Card Style (共通) --- */
+.overall-status-card,
+.server-card-content-wrapper {
+    background: linear-gradient(135deg, rgba(var(--glass-bg-rgb, 35, 45, 60), 0.6), rgba(var(--glass-bg-rgb, 35, 45, 60), 0.4)); /* グラデーション背景 */
+    backdrop-filter: blur(var(--blur-intensity));
+    -webkit-backdrop-filter: blur(var(--blur-intensity));
+    border: 1px solid var(--glass-border, rgba(255,255,255,0.15));
+    border-radius: var(--border-radius-lg, 16px);
+    box-shadow: var(--shadow-medium, 0 8px 24px rgba(0,0,0,0.25));
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal), background var(--transition-normal), border-color var(--transition-fast);
+    position: relative; /* ::before, ::after のため */
 }
-.overall-status-card:hover {
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-strong);
+.overall-status-card::before,
+.server-card-content-wrapper::before { /* カード上部のハイライトライン (オプション) */
+    content: "";
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(var(--glass-highlight-rgb, 255,255,255),0.5), transparent); /* stella.css で --glass-highlight-rgb を定義 */
+    opacity: 0.7;
+    transition: opacity var(--transition-normal);
+}
+
+.overall-status-card:hover,
+.individual-server-section:hover .server-card-content-wrapper {
+    transform: translateY(-12px) scale(1.03); /* ホバー効果を少し強く */
+    box-shadow: var(--shadow-strong, 0 12px 36px rgba(0,0,0,0.3)),
+                0 0 40px rgba(var(--primary-rgb), 0.2); /* プライマリカラーのグローを追加 */
+    background: linear-gradient(135deg, rgba(var(--glass-bg-light-rgb, 45, 55, 70), 0.7), rgba(var(--glass-bg-light-rgb, 45, 55, 70), 0.5));
+    border-color: var(--glass-highlight, rgba(255,255,255,0.3));
+}
+.overall-status-card:hover::before,
+.individual-server-section:hover .server-card-content-wrapper::before {
+    opacity: 1;
+}
+
+
+.overall-status-card {
+    padding: var(--card-padding);
+    text-align: center;
 }
 
 .status-indicator-wrapper {
-    margin-bottom: 25px;
-    min-height: 42px; /* 微調整 */
+    margin-bottom: 30px;
+    min-height: 48px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .status-indicator {
-    display: inline-flex; align-items: center; padding: 10px 24px; /* パディング調整 */
-    border-radius: var(--border-radius-md); font-weight: 600;
-    font-size: 1.1rem;
-    box-shadow: var(--shadow-soft);
-    transition: background-color var(--transition-fast), color var(--transition-fast), opacity var(--transition-fast), transform var(--transition-fast);
+    display: inline-flex; align-items: center; padding: 12px 30px; /* パディング調整 */
+    border-radius: var(--border-radius-md); font-weight: 700;
+    font-size: 1.2rem; /* 少し大きく */
+    background: transparent; /* ベースは透明 */
+    border: 2px solid; /* ボーダーで状態を示す */
+    color: var(--text-muted); /* デフォルトカラー */
+    box-shadow: none;
+    transition: all var(--transition-fast); /* all でまとめてトランジション */
     text-transform: uppercase;
-    letter-spacing: 0.6px; /* 文字間隔調整 */
+    letter-spacing: 1px; /* 文字間を広めに */
 }
 .status-indicator:hover {
-    transform: translateY(-2px) scale(1.02); /* ホバーエフェクト追加 */
+    transform: translateY(-4px) scale(1.05); /* ホバー効果調整 */
+    filter: brightness(1.2);
 }
-.status-indicator.online { background-color: var(--success-color, #50E3C2); color: var(--dark-bg, #222831); }
-.status-indicator.offline { background-color: var(--danger-color, #E85C5C); color: #FFF; }
-.status-indicator.loading { background-color: var(--light-bg); color: var(--text-muted); }
 
-.status-indicator.small {
-    font-size: 0.875rem; /* 微調整 */
-    padding: 8px 16px;
-    margin-bottom: 0;
-    letter-spacing: 0.4px;
+.status-indicator.online {
+    border-color: var(--success-color, #3EFFD0);
+    color: var(--success-color, #3EFFD0);
+    text-shadow: 0 0 10px rgba(var(--success-rgb), 0.8);
+    box-shadow: 0 0 15px rgba(var(--success-rgb), 0.3), inset 0 0 10px rgba(var(--success-rgb), 0.1);
+}
+.status-indicator.offline {
+    border-color: var(--danger-color, #FF4D4D);
+    color: var(--danger-color, #FF4D4D);
+    text-shadow: 0 0 10px rgba(var(--danger-rgb), 0.8);
+    box-shadow: 0 0 15px rgba(var(--danger-rgb), 0.3), inset 0 0 10px rgba(var(--danger-rgb), 0.1);
+}
+.status-indicator.loading {
+    border-color: var(--text-muted, #B0B0B0);
+    color: var(--text-muted, #B0B0B0);
+    /* ローディング時はアニメーションを追加しても良い */
+}
+
+.status-indicator.small { /* 個別サーバーカード内のステータス表示 */
+    font-size: 0.95rem;
+    padding: 9px 20px;
+    letter-spacing: 0.6px;
+    border-width: 1.5px;
 }
 
 .pulse-dot {
-    width: 9px; height: 9px;
-    border-radius: 50%; margin-left: 10px;
-    animation: pulseAnimation 1.6s infinite ease-in-out; /* アニメーション速度調整 */
+    width: 10px; height: 10px; border-radius: 50%; margin-left: 14px;
+    animation: pulseColorAnimation 1.5s infinite ease-in-out;
 }
-.status-indicator.online .pulse-dot { background-color: rgba(0,0,0,0.5); } /* オンライン時のドット色変更 */
-.status-indicator.offline .pulse-dot { background-color: #D8DEE9; animation: none; opacity: 0.5;}
-.status-indicator.loading .pulse-dot { background-color: var(--text-muted); animation: pulseAnimation 1.6s infinite ease-in-out 0.5s; }
+.status-indicator.online .pulse-dot { background-color: var(--success-color); box-shadow: 0 0 10px 3px var(--success-color); }
+.status-indicator.offline .pulse-dot { background-color: var(--danger-color); box-shadow: 0 0 10px 3px var(--danger-color); animation: none; opacity: 0.7;}
+.status-indicator.loading .pulse-dot { background-color: var(--text-muted); box-shadow: 0 0 8px 2px var(--text-muted); }
 
-@keyframes pulseAnimation {
-    0%, 100% { transform: scale(0.9); opacity: 0.65; }
-    50% { transform: scale(1.1); opacity: 1; }
-}
+/* @keyframes pulseColorAnimation は前回のままでも良いでしょう */
+
 
 .total-players {
-    font-size: 1.2rem;
+    font-size: 1.3rem; /* 少し大きく */
     font-weight: 500;
     color: var(--text-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 18px; /* 微調整 */
-    gap: 12px;
+    margin-top: 25px;
+    gap: 16px;
 }
 .total-players-icon {
-    margin-right: 0;
-    font-size: 1.6em;
-    color: var(--accent-color, #F5A623);
+    font-size: 1.8em; /* アイコンサイズ調整 */
+    color: var(--accent-color);
+    filter: drop-shadow(0 0 8px var(--accent-color));
     line-height: 1;
 }
-.total-players-text {
-    display: flex;
-    align-items: baseline;
-    gap: 8px;
-}
 .player-count.animated-number {
-    color: var(--secondary-color, #50E3C2);
+    color: var(--secondary-color);
     font-weight: 700;
-    font-size: 1.25em;
-    min-width: 32px; /* 微調整 */
-    display: inline-block;
-    text-align: right;
-    transition: color 0.5s ease;
+    font-size: 1.35em; /* 数字を強調 */
+    filter: drop-shadow(0 0 6px var(--secondary-color));
 }
 
 .server-cards-wrapper {
     display: flex;
     flex-wrap: wrap;
-    gap: 30px; /* gapを維持、または35px */
-    margin-top: 40px;
-    align-items: stretch; /* これがカードの高さを揃えるキー */
+    gap: 35px; /* カード間の隙間 */
+    margin-top: 50px;
+    align-items: stretch; /* 高さを揃える */
 }
 .individual-server-section {
-    flex: 1 1 320px; /* 最小幅と成長率を維持 */
-    min-width: 300px;
-    display: flex; /* これも重要 */
-    flex-direction: column; /* これも重要 */
+    flex: 1 1 340px; /* ベース幅を少し調整 */
+    min-width: 320px;
+    display: flex; /* 内部要素をflexで管理 */
+    flex-direction: column; /* 縦積み */
 }
 .server-card-content-wrapper {
-    background-color: var(--medium-dark-bg);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-medium);
-    border: 1px solid var(--border-color);
-    padding: 25px; /* パディングを維持 */
+    padding: var(--card-padding);
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* 親の高さに追従するために重要 */
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
-    position: relative;
-    overflow: hidden;
+    flex-grow: 1; /* 親の高さに合わせる */
 }
-.individual-server-section:hover .server-card-content-wrapper {
-    transform: translateY(-8px) scale(1.01); /* ホバー時のスケールを少し控えめに */
-    box-shadow: var(--shadow-strong);
-}
-.server-card-content-wrapper::before {
-    content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 6px; /* 少し細く */
+/* 左側のアクセントラインのデザイン変更 */
+.server-card-content-wrapper > .accent-line { /* HTML側に <div class="accent-line"></div> を追加想定 */
+    position: absolute; left: 0; top: 0; bottom: 0; width: 7px;
     border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
-    opacity: 0.9;
-    transition: width var(--transition-fast), opacity var(--transition-fast);
+    opacity: 0.7;
+    transition: width var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast);
+    z-index: 0; /* 他のコンテンツより後ろ */
 }
-.individual-server-section:hover .server-card-content-wrapper::before { width: 9px; opacity: 1; }
-#sutera-server-status .server-card-content-wrapper::before { background: var(--primary-color); }
-#vanilla-server-status .server-card-content-wrapper::before { background: var(--secondary-color); }
+.individual-server-section:hover .server-card-content-wrapper > .accent-line {
+    width: 10px; opacity: 1;
+    box-shadow: 0 0 15px currentColor; /* 現在の色で光る */
+}
+#sutera-server-status .accent-line { background: var(--primary-color); color: var(--primary-color); }
+#vanilla-server-status .accent-line { background: var(--secondary-color); color: var(--secondary-color); }
+/* もしHTML変更不可なら ::before で対応。その場合z-indexに注意 */
+
 
 .server-icon-container {
     display: flex; justify-content: center; align-items: center;
-    margin-bottom: 20px;
-    height: 70px;
+    margin-bottom: 25px;
+    height: var(--server-icon-section-height); /* ★サイズ対策 */
 }
 .server-icon-placeholder {
     width: 64px; height: 64px; border-radius: var(--border-radius-md);
-    background-color: rgba(0,0,0,0.1); /* プレースホルダー背景を少し変更 */
-    border: 1px solid var(--very-light-border-color, rgba(255,255,255,0.08)); /* ボーダーを細く、実線に */
+    background-color: rgba(0,0,0,0.25);
+    border: 1.5px dashed var(--glass-border);
     display: flex; align-items: center; justify-content: center;
-    color: var(--text-muted);
-    font-size: 1.8em;
-    transition: opacity 0.3s ease, border-color 0.3s ease;
+    color: var(--text-muted); font-size: 2em; /* アイコンサイズ調整 */
 }
 .server-icon-placeholder i {
-    animation: subtleSpin 2.2s linear infinite; /* スピン速度調整 */
-    opacity: 0.65;
+    animation: subtleSpin 1.8s linear infinite; opacity: 0.75; /* アニメーション調整 */
 }
-/* @keyframes subtleSpin は既存のままでもOK */
 
 .server-icon {
     width: 64px; height: 64px; border-radius: var(--border-radius-md);
-    box-shadow: 0 5px 12px rgba(0,0,0,0.2); /* 影調整 */
-    border: 1px solid var(--very-light-border-color, rgba(255,255,255,0.08)); /* ボーダー調整 */
+    box-shadow: 0 0 18px rgba(0,0,0,0.45), inset 0 0 6px rgba(var(--glass-highlight-rgb,255,255,255),0.15);
+    border: 1.5px solid var(--glass-highlight, rgba(255,255,255,0.3));
     object-fit: contain;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, opacity 0.3s ease;
+    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* トランジション調整 */
     opacity: 0;
 }
-.server-icon.loaded { opacity: 1; }
+.server-icon.loaded { opacity: 1; transform: scale(1); }
 .individual-server-section:hover .server-icon.loaded {
-    transform: scale(1.1) rotate(2deg); /* 回転を少し控えめに */
-    box-shadow: 0 7px 18px rgba(0,0,0,0.3);
+    transform: scale(1.2) rotate(5deg); /* ホバー時の動きを大きく */
+    box-shadow: 0 0 30px rgba(0,0,0,0.6), inset 0 0 10px rgba(var(--glass-highlight-rgb,255,255,255),0.25);
 }
 
 .server-name-title {
-    font-size: clamp(1.25em, 3vw, 1.65em); /* フォントサイズ微調整 */
-    color: var(--text-color); text-align: center; margin-bottom: 22px; font-weight: 600;
+    font-size: clamp(1.35rem, 3.5vw, 1.8rem); /* フォントサイズ調整 */
+    color: var(--text-color); text-align: center; margin-bottom: 28px; font-weight: 600;
     display: flex; align-items: center; justify-content: center;
-    line-height: 1.3; /* 行間調整 */
+    line-height: 1.4;
+    text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    min-height: var(--server-title-section-min-height); /* ★サイズ対策 */
 }
-.server-title-icon { margin-right: 10px; font-size: 0.9em; opacity: 0.88; }
-#sutera-server-status .server-title-icon { color: var(--primary-color); }
-#vanilla-server-status .server-title-icon { color: var(--secondary-color); }
+.server-title-icon {
+    margin-right: 14px; font-size: 1em; /* アイコンサイズ調整 */
+    opacity: 0.95;
+    filter: drop-shadow(0 0 6px currentColor); /* アイコン自身の色の影 */
+}
+
 
 .status-card {
-    background-color: var(--light-bg);
-    /* background-color: rgba(0,0,0,0.05); */ /* より透明感のある背景にする場合 */
-    border-radius: var(--border-radius-md); padding: 18px; /* パディング微調整 */
-    border: 1px solid var(--very-light-border-color, rgba(255,255,255,0.08));
-    display: flex; flex-direction: column; flex-grow: 1; /* 高さ揃えのキー */
-    min-height: 110px; /* 最小高さを少し調整、必要に応じて */
+    background-color: rgba(0,0,0,0.2); /* カード内カード背景を少し濃く */
+    border-radius: var(--border-radius-md); padding: 20px; /* パディング調整 */
+    border: 1px solid var(--glass-border);
+    display: flex; flex-direction: column; flex-grow: 1; /* ★サイズ対策のキー */
+    /* min-height は内部要素で制御するため、ここでは必須ではないかも */
 }
 .status-card-header {
     display: flex; justify-content: flex-start;
     align-items: center;
-    margin-bottom: 12px; /* 微調整 */
-    padding-bottom: 10px; /* 微調整 */
-    border-bottom: 1px solid var(--very-light-border-color, rgba(255,255,255,0.08));
-    min-height: 28px; /* 微調整 */
+    margin-bottom: 18px; padding-bottom: 15px; /* マージン、パディング調整 */
+    border-bottom: 1px solid var(--glass-border);
+    height: var(--status-card-header-height); /* ★サイズ対策 */
+    flex-shrink: 0; /* 縮まないように */
 }
 
-/* プレイヤー情報とエラーメッセージの領域の高さを安定させる */
-.server-player-info, .error-message {
-    flex-grow: 1; /* この領域が残りのスペースを埋める */
+/* --- サイズ問題への集中的な対策 --- */
+.server-status-details-wrapper { /* HTMLにこのラッパーを追加することを強く推奨 */
+    flex-grow: 1; /* 残りのスペースを全て使う */
     display: flex;
-    align-items: center; /* 内容を垂直中央に */
-    justify-content: center; /* 内容を水平中央に */
-    padding: 10px 0; /* 上下の余白 */
+    flex-direction: column; /* エラーと情報を縦に並べるなら */
+    align-items: center;
+    justify-content: center; /* 内容を中央寄せ */
+    min-height: var(--status-card-info-min-height); /* ★最重要: この高さを確保 */
+    padding: 10px 5px;
+    width: 100%;
+}
+/* HTML変更不可の場合の代替 (ただし、ラッパーの方が制御しやすい) */
+.server-player-info,
+.error-message {
+    /* flex-grow: 1;  ラッパーを使う場合は不要 */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: var(--status-card-info-min-height); /* ★重要: どちらも同じ最小高さを確保 */
+    padding: 12px 5px; /* パディング調整 */
+    text-align: center;
 }
 
 .server-player-info {
-    font-size: 0.95rem; color: var(--text-muted); text-align: center; /* 中央揃え推奨 */
-    /* margin-bottom: 0; /* 削除済みなのでコメントのまま */
+    font-size: 1rem; color: var(--text-muted);
 }
+.server-player-info .player-count {
+    font-weight: 600;
+    color: var(--text-color);
+    font-size: 1.1em; /* プレイヤー数を少し大きく */
+}
+.server-player-info .max-players-label {
+    font-size: 0.9em;
+    opacity: 0.8;
+}
+
 
 .error-message {
-    /* display:none; はJavaScriptで制御 */
-    text-align: center; color: var(--danger-color, #E07A5F); font-style: italic;
-    font-size: 0.9rem; padding: 10px; /* パディング調整 */
-    /* min-height: 50px; /* 削除または調整。flex-growで高さを確保 */
-    /* background-color: rgba(224, 122, 95, 0.05); */ /* 薄いエラー背景 */
-    border-radius: var(--border-radius-sm);
+    color: var(--danger-color); font-style: italic;
+    font-size: 0.95rem;
+    text-shadow: 0 0 6px rgba(var(--danger-rgb),0.6);
 }
 
 
-/* --- レスポンシブ調整 for Status Page --- */
-@media (max-width: 768px) {
-    .overall-status-card { padding: 25px 20px; }
-    .status-indicator { font-size: 1rem; padding: 8px 15px; } /* パディング調整 */
-    .total-players { font-size: 1.125rem; }
-
-    .server-cards-wrapper { gap: 25px; }
+/* --- レスポンシブ調整 --- */
+@media (max-width: 992px) { /* タブレットサイズでの調整 */
     .individual-server-section {
-        /* flex-basis: 100%; */ /* 1列にする場合はコメント解除、現状は flex-wrap で対応 */
-        margin-bottom: 25px;
+        flex-basis: calc(50% - (var(--gap, 35px) / 2)); /* 2カラムレイアウト */
     }
-    .server-card-content-wrapper { padding: 20px; }
-    .status-card { padding: 15px; min-height: 100px; }
-    .status-card-header {
-        /* flex-direction: column; */ /* 元のままでよければコメント */
-        /* gap: 10px; */
-        margin-bottom: 12px;
+}
+
+@media (max-width: 768px) {
+    :root { /* スマホではブラーを弱めるなど */
+        /* --blur-intensity: 5px; */
+        --card-padding: 20px;
     }
+    .overall-status-card { padding: var(--card-padding); }
+    .status-indicator { font-size: 1.1rem; padding: 10px 25px; }
+    .total-players { font-size: 1.2rem; }
+
+    .individual-server-section {
+        flex-basis: 100%; /* スマホでは1カラム */
+    }
+    .server-card-content-wrapper { padding: var(--card-padding); }
+    .status-card { padding: 18px; }
+    .server-player-info, .error-message { min-height: calc(var(--status-card-info-min-height) - 10px); font-size: 0.95rem; }
 }
 
 @media (max-width: 480px) {
-    .page-header .page-main-title { font-size: 1.8rem; } /* タイトルサイズ調整 */
-    .page-header .page-intro { font-size: 0.9rem; } /* 説明文サイズ調整 */
+    .page-header .page-main-title { font-size: 1.8rem; }
+    .page-header .page-intro { font-size: 0.9rem; }
 
-    .status-section { /* 全体パディングは .container で制御されている想定 */
-         margin-bottom: 35px;
-    }
-    .overall-status-card { padding: 20px 15px; }
-    .status-indicator { font-size: 0.95rem; padding: 7px 12px;}
-    .total-players-icon { font-size: 1.5em; }
-    .total-players-text { font-size: 1rem; gap: 5px;}
-    .player-count.animated-number { font-size: 1.15em; }
+    .status-indicator { font-size: 0.9rem; padding: 8px 18px; letter-spacing: 0.8px; }
+    .total-players-icon { font-size: 1.6em; }
+    .total-players-text { font-size: 1rem; gap: 8px;}
 
-    .server-name-title { font-size: clamp(1.15em, 4vw, 1.35em); }
-    .server-card-content-wrapper { padding: 18px; } /* スマホでのパディング */
-    .status-card { padding: 12px; min-height: 95px; } /* スマホでの最小高さ */
-    .status-indicator.small { font-size: 0.8rem; padding: 6px 10px; }
-    .server-player-info, .error-message { font-size: 0.85rem; padding: 8px 0;}
+    .server-name-title { font-size: clamp(1.25rem, 4.5vw, 1.5rem); }
+    .server-title-icon { margin-right: 10px; }
+    .status-card { padding: 15px; }
+    .status-indicator.small { font-size: 0.85rem; padding: 7px 15px; }
+    .server-player-info, .error-message { min-height: calc(var(--status-card-info-min-height) - 15px); font-size: 0.9rem; padding: 10px 5px;}
 }
