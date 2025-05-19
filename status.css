@@ -2,73 +2,60 @@
 
 /* --- Status Page Specific Styles --- */
 .icon-header {
-    margin-right: 10px;
+    margin-right: 12px; /* 少し間隔を調整 */
     color: var(--primary-color);
+    font-size: 0.9em; /* タイトルに対して少し小さく */
 }
 
 .status-section {
-    margin-bottom: 45px;
-    padding: 25px;
-    background-color: var(--medium-dark-bg);
-    border-radius: var(--border-radius-lg);
-    box-shadow: var(--shadow-medium);
+    margin-bottom: 50px; /* セクション間の余白 */
+    /* background-color, border-radius, box-shadow はページ共通スタイル(.page-section)を流用する場合は不要 */
 }
-.status-section:last-child {
-    margin-bottom: 0;
+.status-section:last-of-type { /* 最後のstatus-sectionは下マージン小さめ or なし */
+    margin-bottom: 20px;
 }
 
-.status-section .section-heading-styled { /* 既存のスタイルを流用・調整 */
-    font-size: clamp(1.5em, 3.5vw, 2em); /* 少し小さめに */
-    text-align: left; /* 左寄せ */
-    margin-bottom: 20px;
-    padding-bottom: 12px;
-}
-.status-section .section-heading-styled i {
-    font-size: 0.9em;
-}
+/* .status-section .section-heading-styled は stella.css のものを流用 */
 
 .overall-status-card {
-    padding: 25px;
-    background-color: var(--light-bg);
-    border-radius: var(--border-radius-md);
+    padding: 30px;
+    background: linear-gradient(145deg, var(--medium-dark-bg), var(--light-bg));
+    border-radius: var(--border-radius-lg);
     border: 1px solid var(--border-color);
     text-align: center;
+    box-shadow: var(--shadow-medium);
 }
-
+.status-indicator-wrapper {
+    margin-bottom: 25px;
+}
 .status-indicator {
-    display: inline-flex; /* 横並び */
+    display: inline-flex;
     align-items: center;
-    padding: 8px 18px;
-    border-radius: var(--border-radius-sm);
+    padding: 10px 22px; /* 少し大きく */
+    border-radius: var(--border-radius-md); /* 角丸調整 */
     font-weight: 600;
-    font-size: 1.1rem;
-    margin-bottom: 20px;
+    font-size: 1.15rem;
     box-shadow: var(--shadow-soft);
+    transition: background-color var(--transition-fast), color var(--transition-fast);
 }
-.status-indicator.online {
-    background-color: var(--secondary-color);
-    color: var(--dark-bg);
-}
-.status-indicator.offline {
-    background-color: #E07A5F; /* オフライン時の色 (Nord Orange風) */
-    color: #FFF;
-}
+.status-indicator.online { background-color: var(--secondary-color); color: var(--dark-bg); }
+.status-indicator.offline { background-color: #E07A5F; color: #FFF; }
+.status-indicator.loading { background-color: var(--light-bg); color: var(--text-muted); }
+
 .status-indicator.small { /* 個別サーバー用 */
-    font-size: 0.9rem;
-    padding: 6px 12px;
+    font-size: 0.95rem;
+    padding: 7px 14px;
     margin-bottom: 0;
 }
 
 .pulse-dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: currentColor; /* 親要素の文字色に合わせる */
-    margin-left: 10px;
+    width: 12px; height: 12px; border-radius: 50%;
+    margin-left: 12px;
     animation: pulseAnimation 1.5s infinite ease-in-out;
 }
-.status-indicator.online .pulse-dot { background-color: #FFF; /* オンライン時は白 */ }
-.status-indicator.offline .pulse-dot { background-color: #ECEFF4; animation: none; opacity: 0.7;} /* オフライン時は点滅なし */
+.status-indicator.online .pulse-dot { background-color: #FFF; }
+.status-indicator.offline .pulse-dot { background-color: #ECEFF4; animation: none; opacity: 0.7;}
+.status-indicator.loading .pulse-dot { background-color: var(--text-muted); animation: pulseAnimation 1.5s infinite ease-in-out 0.5s; } /* ローディング中も点滅 */
 
 
 @keyframes pulseAnimation {
@@ -77,127 +64,129 @@
     100% { transform: scale(0.8); opacity: 0.7; }
 }
 
-.server-main-address {
-    margin-bottom: 20px;
+.server-main-connection-info { /* 総合ステータスの接続情報 */
+    margin-bottom: 25px;
 }
-.server-main-address p {
-    font-size: 1rem;
-    color: var(--text-muted);
-    margin-bottom: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center; /* 中央揃え */
+.server-main-connection-info p {
+    font-size: 1rem; color: var(--text-muted); margin-bottom: 10px;
+    display: flex; align-items: center; justify-content: center;
+    gap: 8px; /* アイコンとテキストの間隔 */
 }
-.server-main-address p i {
-    margin-right: 8px;
-    color: var(--primary-color);
-}
-.server-main-address code {
-    font-size: 1.05em;
-    padding: 4px 8px;
-}
+.server-main-connection-info p i { color: var(--primary-color); font-size: 1.1em; }
+.server-main-connection-info code { font-size: 1em; padding: 5px 10px; }
 
 .total-players {
-    font-size: 1.2rem;
-    font-weight: 600;
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1.3rem; font-weight: 700; color: var(--text-color);
+    display: flex; align-items: center; justify-content: center;
 }
-.total-players i {
-    margin-right: 10px;
-    color: var(--accent-color);
-    font-size: 1.3em;
-}
-.player-count {
-    color: var(--secondary-color);
-    font-weight: 700;
-    font-size: 1.1em; /* 少し大きく */
+.total-players i { margin-right: 12px; color: var(--accent-color); font-size: 1.4em; }
+.player-count.animated-number { /* カウントアップアニメーション用 */
+    color: var(--secondary-color); font-weight: 800; font-size: 1.1em;
+    min-width: 30px; /* 数字が変動しても幅をある程度保つ */
+    display: inline-block; text-align: right;
 }
 
 .server-cards-wrapper {
     display: grid;
     grid-template-columns: 1fr; /* スマホデフォルト */
-    gap: 30px;
-    margin-top: 30px;
+    gap: 35px; /* カード間の隙間 */
+    margin-top: 35px;
 }
-@media (min-width: 768px) { /* タブレット以上で2カラム */
-    .server-cards-wrapper {
-        grid-template-columns: 1fr 1fr;
-    }
+@media (min-width: 768px) {
+    .server-cards-wrapper { grid-template-columns: 1fr 1fr; } /* タブレット以上で2カラム */
 }
 
-.individual-server-section .section-heading-styled { /* 個別サーバーセクションの見出しは不要なので隠すかスタイル調整 */
-   /* display: none; */ /* もしセクションタイトルが不要なら */
+.individual-server-section {
+    background-color: transparent; /* 背景は status-card で制御 */
+    padding: 0; /* status-card にパディングを移す */
+    box-shadow: none;
+    border: none;
+    display: flex; /* カードの高さを揃えるため */
+    flex-direction: column;
 }
-.server-name-title { /* h3 */
-    font-size: clamp(1.4em, 3.2vw, 1.8em);
-    color: var(--text-color);
-    text-align: center;
-    margin-bottom: 20px;
-    font-weight: 600;
+.server-card-content-wrapper { /* アイコンとカード本体をまとめる */
+    background-color: var(--medium-dark-bg);
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-medium);
+    border: 1px solid var(--border-color);
+    padding: 25px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    flex-grow: 1; /* 高さを揃えるため */
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+.individual-server-section:hover .server-card-content-wrapper {
+    transform: translateY(-8px);
+    box-shadow: var(--shadow-strong);
+}
+
+.server-icon-container {
+    display: flex;
     justify-content: center;
+    margin-bottom: 15px;
 }
-.server-title-icon {
-    margin-right: 10px;
-    font-size: 0.9em;
-    opacity: 0.9;
+.server-icon {
+    width: 64px; /* faviconサイズ */
+    height: 64px;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-soft);
+    background-color: var(--light-bg); /* 画像読み込み失敗時用 */
+    border: 1px solid var(--border-color);
 }
+
+.server-name-title {
+    font-size: clamp(1.3em, 3vw, 1.7em);
+    color: var(--text-color); text-align: center; margin-bottom: 20px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center;
+}
+.server-title-icon { margin-right: 10px; font-size: 0.9em; opacity: 0.9; }
 #sutera-server-status .server-title-icon { color: var(--primary-color); }
 #vanilla-server-status .server-title-icon { color: var(--secondary-color); }
 
 
 .status-card {
-    background-color: var(--light-bg);
-    border-radius: var(--border-radius-md);
-    padding: 20px;
+    background-color: var(--light-bg); border-radius: var(--border-radius-md); padding: 20px;
     border: 1px solid var(--border-color);
-    min-height: 300px; /* カードの最小高さを設定 */
-    display: flex;
-    flex-direction: column;
+    display: flex; flex-direction: column; flex-grow: 1; /* 高さを揃えるため */
 }
 .status-card-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--border-color);
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);
 }
-.server-address-port code {
-    font-size: 0.9rem;
-    background-color: var(--dark-bg);
+.server-address-port-static code { /* IPは直接書かないのでクラス名変更 */
+    font-size: 0.9rem; background-color: var(--dark-bg);
 }
-.server-player-info {
-    margin-bottom: 15px;
-    font-size: 0.95rem;
-    color: var(--text-muted);
+.server-player-info { margin-bottom: 15px; font-size: 0.95rem; color: var(--text-muted); }
+.status-card h4 {
+    font-size: 1rem; color: var(--text-color); margin-bottom: 12px; font-weight: 500;
+    border-top: 1px dashed var(--border-color); padding-top: 15px;
+    display: flex; justify-content: space-between; align-items: center;
 }
-.status-card h4 { /* オンラインプレイヤー見出し */
-    font-size: 1rem;
-    color: var(--text-color);
-    margin-bottom: 12px;
-    font-weight: 500;
-    border-top: 1px dashed var(--border-color);
-    padding-top: 15px;
-}
+.player-list-count { font-size: 0.85em; color: var(--text-muted); font-weight: 400;}
 
+.player-list-container {
+    background-color: var(--dark-bg);
+    border-radius: var(--border-radius-sm);
+    padding: 10px;
+    margin-bottom: 15px;
+    flex-grow: 1; /* このコンテナが余白を埋める */
+    min-height: 100px; /* 最小高さを設定して空でも形を保つ */
+    position: relative; /* ボタンの位置基準 */
+}
 .player-list-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(48px, 1fr)); /* スキンサイズに合わせて調整 */
-    gap: 10px;
-    flex-grow: 1; /* 残りのスペースを埋める */
-    align-content: flex-start; /* 上から配置 */
-    max-height: 200px; /* プレイヤーが多い場合にスクロールバーを出すための最大高さ */
-    overflow-y: auto; /* スクロールバー表示 */
-    padding: 5px;
-    background-color: var(--dark-bg); /* スクロールエリアの背景 */
-    border-radius: var(--border-radius-sm);
+    grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); /* スキンサイズ調整 */
+    gap: 8px; /* スキン間の隙間 */
+    max-height: 138px; /* 初期表示は3行分程度 (42pxスキン + 8pxギャップ) * 3 */
+    overflow: hidden; /* 初期は隠す */
+    transition: max-height 0.4s ease-in-out;
 }
-/* スクロールバーのスタイル (任意) */
+.player-list-container.expanded .player-list-grid {
+    max-height: 400px; /* 十分な高さに展開 */
+    overflow-y: auto; /* スクロール表示 */
+}
+
+/* スクロールバーのスタイル */
 .player-list-grid::-webkit-scrollbar { width: 8px; }
 .player-list-grid::-webkit-scrollbar-track { background: var(--light-bg); border-radius: 4px; }
 .player-list-grid::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
@@ -205,94 +194,102 @@
 
 
 .player-avatar {
-    width: 48px; /* スキン表示サイズ */
-    height: auto; /* 名前表示のためauto */
-    border-radius: var(--border-radius-sm);
-    overflow: hidden; /* 名前のoverflowのため */
-    position: relative;
+    width: 42px; /* スキン表示サイズ */
     text-align: center;
     transition: transform var(--transition-fast);
+    animation: popIn 0.3s ease-out backwards; /* プレイヤー表示アニメーション */
 }
-.player-avatar:hover {
-    transform: scale(1.1);
+@keyframes popIn {
+    from { opacity: 0; transform: scale(0.5); }
+    to { opacity: 1; transform: scale(1); }
 }
+
+.player-avatar:hover { transform: scale(1.15); z-index: 10; } /* ホバーで少し手前に拡大 */
 .player-avatar img {
-    width: 100%;
-    height: 48px; /* スキンの縦サイズ固定 */
-    object-fit: contain; /* 顔部分を維持 */
-    display: block;
+    width: 100%; height: 42px; object-fit: contain; display: block;
     border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
+    background-color: var(--light-bg); /* 画像読み込み中/失敗時の背景 */
 }
 .player-avatar .player-name {
-    display: block;
-    font-size: 0.7rem; /* 小さめ */
-    color: var(--text-muted);
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    padding: 3px 2px;
-    background-color: rgba(var(--rgb-dark-bg), 0.7);
+    display: block; font-size: 0.65rem; color: var(--text-muted);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+    padding: 4px 2px; background-color: rgba(var(--rgb-dark-bg), 0.8);
     border-top: 1px solid var(--border-color);
+    border-radius: 0 0 var(--border-radius-sm) var(--border-radius-sm);
 }
 
 .player-type-badge {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    font-size: 0.6rem;
-    padding: 1px 3px;
-    border-radius: 3px;
-    color: #FFF;
-    line-height: 1;
+    position: absolute; top: 1px; right: 1px; font-size: 0.55rem;
+    padding: 1px 3px; border-radius: 3px; color: #FFF; line-height: 1;
+    background-color: rgba(0,0,0,0.5); /* 半透明背景 */
 }
-.player-type-badge.java { background-color: var(--primary-color); }
+.player-type-badge.java { /* background-color: var(--primary-color); */ } /* Javaはデフォルトでバッジなしも可 */
 .player-type-badge.bedrock { background-color: var(--secondary-color); color: var(--dark-bg);}
 .player-type-badge i { font-size: 0.9em; }
 
-/* プレイヤーがいない場合のメッセージ */
-.no-players-message {
-    text-align: center;
+.btn-view-more {
+    display: block;
+    width: calc(100% - 20px); /* 左右に少し余白 */
+    margin: 10px auto 0 auto;
+    padding: 8px 15px;
+    font-size: 0.85rem;
+    background-color: var(--light-bg);
+    border: 1px solid var(--border-color);
     color: var(--text-muted);
-    font-style: italic;
-    margin-top: 20px;
-    font-size: 0.9rem;
+}
+.btn-view-more:hover {
+    background-color: var(--primary-color);
+    color: #FFF;
+    border-color: var(--primary-color);
 }
 
-/* スケルトンローディング風プレースホルダー (任意) */
-.player-avatar-placeholder {
-    width: 48px;
-    height: 60px; /* 名前部分も含む高さ */
-    background-color: var(--light-bg);
-    border-radius: var(--border-radius-sm);
-    animation: skeletonLoading 1.5s infinite ease-in-out;
+.no-players-message {
+    text-align: center; color: var(--text-muted); font-style: italic;
+    margin-top: 20px; font-size: 0.9rem;
+    padding: 10px;
 }
-@keyframes skeletonLoading {
-    0% { opacity: 0.6; }
-    50% { opacity: 0.3; }
-    100% { opacity: 0.6; }
+.error-message { /* APIエラー時 */
+    color: #E07A5F; font-style: italic; text-align: center; padding: 10px;
+}
+
+/* スケルトンローディング風プレースホルダー */
+.player-avatar-skeleton {
+    width: 42px; height: 56px; /* 画像 + 名前部分の高さ */
+    background: linear-gradient(90deg, var(--light-bg) 25%, var(--medium-dark-bg) 50%, var(--light-bg) 75%);
+    background-size: 200% 100%;
+    border-radius: var(--border-radius-sm);
+    animation: skeletonLoadingFull 1.5s infinite linear;
+}
+@keyframes skeletonLoadingFull {
+    0% { background-position: 200% 0; }
+    100% { background-position: -200% 0; }
 }
 
 
 /* --- レスポンシブ調整 for Status Page --- */
 @media (max-width: 768px) {
-    .overall-status-card { padding: 20px; }
-    .status-indicator { font-size: 1rem; padding: 7px 15px; }
-    .server-main-address p { flex-direction: column; align-items: center; font-size: 0.95rem;}
-    .server-main-address p i { margin-bottom: 5px; }
-    .total-players { font-size: 1.1rem; }
+    .overall-status-card { padding: 25px; }
+    .status-indicator { font-size: 1rem; padding: 8px 16px; }
+    .server-main-connection-info p { flex-direction: column; align-items: center; font-size: 0.95rem;}
+    .server-main-connection-info p i { margin-bottom: 6px; }
+    .total-players { font-size: 1.15rem; }
 
-    .server-cards-wrapper { grid-template-columns: 1fr; } /* スマホでは1カラム */
-    .status-card { padding: 15px; min-height: 250px; }
-    .status-card-header { flex-direction: column; gap: 8px; margin-bottom: 12px; }
-    .player-list-grid { grid-template-columns: repeat(auto-fill, minmax(40px, 1fr)); gap: 8px; max-height: 150px; }
-    .player-avatar { width: 40px; }
-    .player-avatar img { height: 40px; }
-    .player-avatar .player-name { font-size: 0.65rem; }
-    .player-type-badge { font-size: 0.55rem; top: 1px; right: 1px;}
+    .server-cards-wrapper { grid-template-columns: 1fr; }
+    .individual-server-section { margin-bottom: 35px; }
+    .server-card-content-wrapper { padding: 20px; }
+    .status-card { padding: 15px; min-height: 280px; }
+    .status-card-header { flex-direction: column; gap: 10px; margin-bottom: 12px; }
+    .player-list-grid { grid-template-columns: repeat(auto-fill, minmax(38px, 1fr)); gap: 6px; max-height: 120px; } /* スキンサイズ縮小 */
+    .player-avatar { width: 38px; }
+    .player-avatar img { height: 38px; }
+    .player-avatar .player-name { font-size: 0.6rem; }
+    .player-type-badge { font-size: 0.5rem; }
+    .btn-view-more { width: calc(100% - 10px); margin-top: 8px;}
 }
 
 @media (max-width: 480px) {
-    .status-section { padding: 20px; }
-    .overall-status-card code { font-size: 0.9em; }
-    .server-name-title { font-size: clamp(1.2em, 2.8vw, 1.5em); }
+    .status-section { padding: 15px; margin-bottom: 30px;} /* 全体的にパディング縮小 */
+    .overall-status-card code { font-size: 0.85em; }
+    .server-name-title { font-size: clamp(1.1em, 2.6vw, 1.4em); }
+    .player-list-container { padding: 8px;}
 }
