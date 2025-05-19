@@ -65,9 +65,8 @@
 
 .server-main-connection-info {
     margin-bottom: 20px;
-    min-height: 10px; /* テキスト削除したので、ほぼマージン確保のみ */
+    min-height: 10px; /* テキスト削除したのでマージン確保程度 */
 }
-/* .server-main-connection-info p はHTMLからテキスト削除済み */
 
 .total-players {
     font-size: 1.25rem;
@@ -87,13 +86,13 @@
 }
 .total-players-text {
     display: flex;
-    align-items: baseline; /* テキストと数字のベースラインを揃える */
+    align-items: baseline;
     gap: 6px;
 }
 .player-count.animated-number {
     color: var(--secondary-color);
     font-weight: 700;
-    font-size: 1.2em; /* 相対的に少し大きく */
+    font-size: 1.2em;
     min-width: 30px;
     display: inline-block;
     text-align: right;
@@ -105,12 +104,12 @@
     flex-wrap: wrap;
     gap: 30px;
     margin-top: 35px;
-    align-items: stretch; /* ★カードの高さを揃える */
+    align-items: stretch;
 }
 .individual-server-section {
-    flex: 1 1 320px; /* grow, shrink, basis */
-    min-width: 300px; /* 最小幅 */
-    display: flex; /* 中の .server-card-content-wrapper が伸びるように */
+    flex: 1 1 320px;
+    min-width: 300px;
+    display: flex;
     flex-direction: column;
 }
 .server-card-content-wrapper {
@@ -121,7 +120,7 @@
     padding: 25px;
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* ★親に対して伸びる */
+    flex-grow: 1;
     transition: transform var(--transition-normal), box-shadow var(--transition-normal);
     position: relative;
     overflow: hidden;
@@ -152,6 +151,7 @@
 }
 .server-icon-placeholder i { /* Font Awesome アイコン用 */
     animation: subtleSpin 2s linear infinite;
+    opacity: 0.7;
 }
 @keyframes subtleSpin {
     from { transform: rotate(0deg); }
@@ -185,9 +185,8 @@
 .status-card {
     background-color: var(--light-bg); border-radius: var(--border-radius-md); padding: 20px;
     border: 1px solid var(--border-color);
-    display: flex; flex-direction: column; flex-grow: 1; /* ★重要：高さを揃える */
-    /* プレイヤーリスト削除に伴い、この要素の高さは主にプレイヤー数表示で決まる */
-    min-height: 100px; /* 最小高さを確保 */
+    display: flex; flex-direction: column; flex-grow: 1;
+    min-height: 120px; /* プレイヤーリスト削除後のカードの最小高さを確保 */
 }
 .status-card-header {
     display: flex; justify-content: flex-start;
@@ -196,29 +195,32 @@
     min-height: 30px;
 }
 
-.server-player-info { margin-bottom: 0; font-size: 0.95rem; color: var(--text-muted); text-align: left; flex-grow: 1; display:flex; align-items: center; justify-content: center;} /* 中央揃え */
-.player-list-heading { /* HTMLから削除したので不要 */
-   /* display: none; */
+.server-player-info {
+    margin-bottom: 0; /* プレイヤーリスト削除したのでマージン不要 */
+    font-size: 0.95rem; color: var(--text-muted); text-align: left;
+    flex-grow: 1; /* 残りのスペースを埋めるように */
+    display: flex;
+    align-items: center; /* 垂直中央揃え */
+    justify-content: center; /* 水平中央揃え */
 }
 
-.player-list-container { /* HTMLから削除したので不要 */
-    /* display: none; */
-}
-.btn-view-more { /* HTMLから削除したので不要 */
-    /* display: none !important; */
-}
-.empty-player-list-message { /* HTMLから削除したので不要 */
-   /* display: none !important; */
-}
-.player-avatar-skeleton { /* HTMLから削除したので不要 */
-    /* display: none !important; */
-}
+/* プレイヤーリスト関連のスタイルは削除またはコメントアウト */
+/*
+.player-list-heading { ... }
+.player-list-container { ... }
+.player-list-grid { ... }
+.empty-player-list-message { ... }
+.player-avatar { ... }
+.player-name { ... }
+.player-type-badge { ... }
+.btn-view-more { ... }
+.player-avatar-skeleton { ... }
+*/
 
-
-.error-message { /* エラーメッセージのスタイル */
+.error-message {
     text-align: center; color: #E07A5F; font-style: italic;
     font-size: 0.9rem; padding: 15px 10px;
-    flex-grow: 1; display: none; /* 初期非表示、JSで表示 */
+    flex-grow: 1; display: none;
     align-items: center; justify-content: center;
     min-height: 50px;
 }
@@ -233,7 +235,7 @@
     .server-cards-wrapper { grid-template-columns: 1fr; gap: 25px; }
     .individual-server-section { margin-bottom: 25px; }
     .server-card-content-wrapper { padding: 20px; }
-    .status-card { padding: 15px; min-height: 80px; } /* スマホでの最小高さ調整 */
+    .status-card { padding: 15px; min-height: 100px; } /* スマホでの最小高さ調整 */
     .status-card-header { flex-direction: column; gap: 10px; margin-bottom: 12px; }
 }
 
