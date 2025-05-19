@@ -1,5 +1,4 @@
 /* status.css */
-/* (stella.css から基本的な変数やスタイルを継承している前提) */
 
 /* --- Status Page Specific Styles --- */
 .icon-header {
@@ -66,23 +65,25 @@
 
 .server-main-connection-info {
     margin-bottom: 20px;
-    min-height: 10px; /* テキスト削除したので、ほぼマージン確保のみ */
+    min-height: 10px; /* テキスト削除したのでマージン確保程度 */
 }
-/* .server-main-connection-info p はHTMLから削除されたのでスタイル不要 */
+/* .server-main-connection-info p はHTMLから削除 */
+
 
 .total-players {
-    font-size: 1.25rem; /* 少し調整 */
-    font-weight: 600; /* 少し細く */
+    font-size: 1.25rem;
+    font-weight: 600;
     color: var(--text-color);
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 15px; /* 上との間隔 */
-    gap: 10px; /* アイコンとテキストの間隔 */
+    margin-top: 15px;
+    gap: 10px;
 }
-.total-players-icon i {
+.total-players-icon {
+    margin-right: 0; /* gapで調整 */
+    font-size: 1.5em;
     color: var(--accent-color);
-    font-size: 1.6em; /* アイコンサイズ調整 */
     line-height: 1;
 }
 .total-players-text {
@@ -92,8 +93,8 @@
 }
 .player-count.animated-number {
     color: var(--secondary-color);
-    font-weight: 700; /* 少し細く */
-    font-size: 1.2em; /* 相対的に少し大きく */
+    font-weight: 700; /* 少し戻す */
+    font-size: 1.2em;
     min-width: 30px;
     display: inline-block;
     text-align: right;
@@ -150,6 +151,19 @@
     color: var(--border-color); font-size: 1.8em; font-weight: bold;
     transition: opacity 0.3s ease;
 }
+/* バニラ鯖アイコンをFontAwesomeで代替 (もし画像がない場合) */
+#vanilla-icon-placeholder::after {
+    content: '\f4d8'; /* fas fa-seedling (苗木) */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    opacity: 0.6;
+}
+#sutera-icon-placeholder::after {
+    content: '\f005'; /* fas fa-star */
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    opacity: 0.6;
+}
 .server-icon {
     width: 64px; height: 64px; border-radius: var(--border-radius-md);
     box-shadow: 0 5px 12px rgba(0,0,0,0.25);
@@ -171,7 +185,7 @@
 }
 .server-title-icon { margin-right: 10px; font-size: 0.9em; opacity: 0.9; }
 #sutera-server-status .server-title-icon { color: var(--primary-color); }
-#vanilla-server-status .server-title-icon { color: var(--secondary-color); }
+#vanilla-server-status .server-title-icon { color: var(--secondary-color); } /* バニラ鯖アイコンに合わせた色 */
 
 
 .status-card {
@@ -180,14 +194,14 @@
     display: flex; flex-direction: column; flex-grow: 1;
 }
 .status-card-header {
-    display: flex; justify-content: flex-start; /* インジケーターを左に */
+    display: flex; justify-content: flex-start;
     align-items: center;
     margin-bottom: 15px; padding-bottom: 12px; border-bottom: 1px solid var(--border-color);
-    min-height: 30px; /* インジケーターの高さ確保 */
+    min-height: 30px;
 }
 
 .server-player-info { margin-bottom: 15px; font-size: 0.95rem; color: var(--text-muted); text-align: left; }
-.player-list-heading { /* 「オンラインプレイヤー」 */
+.player-list-heading {
     font-size: 1rem; color: var(--text-color); margin-bottom: 12px; font-weight: 500;
     border-top: 1px dashed var(--border-color); padding-top: 15px;
     text-align: left;
@@ -199,31 +213,31 @@
     padding: 10px;
     margin-bottom: 15px;
     flex-grow: 1;
-    min-height: 130px; /* ★カードの高さ揃えのキー: プレイヤーリストエリアの最小高さを設定 */
+    min-height: 130px; /* ★カードの高さ揃えのキー */
     position: relative;
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* メッセージやグリッドを上から配置 */
+    justify-content: flex-start; /* プレイヤーリストがない場合も上寄せ */
 }
 .player-list-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(42px, 1fr)); /* アバターサイズを少し大きく */
-    gap: 10px; /* アバター間の隙間を少し広げる */
-    max-height: 130px; /* 初期表示は2行強程度 (42px avatar + 14px name + 10px gap) * 2 */
+    grid-template-columns: repeat(auto-fill, minmax(42px, 1fr));
+    gap: 10px; /* 少し広げる */
+    max-height: 130px; /* min-heightと合わせるか、少し小さく */
     overflow: hidden;
     transition: max-height 0.4s ease-in-out;
     width: 100%;
 }
 .player-list-container.expanded .player-list-grid {
-    max-height: 350px; /* 展開時の最大高さを増やす */
+    max-height: 350px;
     overflow-y: auto;
 }
-.empty-player-list-message { /* JSでプレイヤーがいない場合に挿入 */
+.empty-player-list-message {
     text-align: center; color: var(--text-muted); font-style: italic;
     font-size: 0.9em; padding: 10px;
     flex-grow: 1; display: flex; align-items: center; justify-content: center;
     width: 100%;
-    min-height: 50px; /* メッセージ自体にも高さを確保 */
+    min-height: 50px; /* メッセージにも高さを確保してコンテナが潰れないように */
 }
 
 
@@ -254,40 +268,40 @@
 
 .player-avatar:hover { transform: scale(1.18) translateY(-3px); z-index: 10; box-shadow: var(--shadow-medium); }
 .player-avatar img {
-    width: 42px; /* アバター画像サイズ */
+    width: 42px; /* アイコンサイズに合わせる */
     height: 42px;
-    object-fit: contain; /* helmなのでcontain */
+    object-fit: contain;
     display: block;
     border-radius: var(--border-radius-sm) var(--border-radius-sm) 0 0;
     background-color: var(--light-bg);
 }
 .player-avatar .player-name {
-    display: block; font-size: 0.6rem; /* MCIDのフォントサイズをかなり小さく */
+    display: block; font-size: 0.6rem;
     color: var(--text-muted);
     white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
     padding: 3px 2px;
     border-top: 1px solid var(--border-color);
-    width: 100%; /* アバター幅に合わせる */
-    line-height: 1.2; /* 行間を詰める */
-    max-width: 40px; /* text-overflowを効きやすくするため */
+    width: 100%;
+    line-height: 1.2;
+    max-width: 40px; /* 確実にellipsisを効かせる */
 }
 
 .player-type-badge {
     position: absolute; top: 2px; right: 2px; font-size: 0.55rem;
     padding: 1px 3px; border-radius: 3px; color: #FFF; line-height: 1;
-    background-color: rgba(0,0,0,0.7); /* 背景を少し濃く */
+    background-color: rgba(0,0,0,0.7);
     box-shadow: 0 0 3px rgba(0,0,0,0.6);
     display: flex; align-items: center;
-    opacity: 0.95; /* 少し透明度 */
+    opacity: 0.95;
 }
 .player-type-badge.java i { color: var(--primary-color); }
 .player-type-badge.bedrock i { color: var(--secondary-color); }
-.player-type-badge i { font-size: 0.8em; } /* アイコンサイズ調整 */
+.player-type-badge i { font-size: 0.8em; }
 
 .btn-view-more {
     display: block;
     width: calc(100% - 20px);
-    margin: 15px auto 5px auto; /* 上マージン調整 */
+    margin: 15px auto 5px auto;
     padding: 9px 15px;
     font-size: 0.88rem;
     background-color: var(--light-bg);
