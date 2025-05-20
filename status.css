@@ -74,7 +74,7 @@ body {
 }
 
 .page-content-container {
-    padding-top: calc(50px + 2rem); /* ヘッダー高さを仮に50pxとして調整 */
+    padding-top: calc(50px + 2rem); /* ヘッダーの高さを仮に50pxとして調整 */
     padding-bottom: 3rem;
     position: relative;
     z-index: 1;
@@ -411,7 +411,7 @@ body {
         border: 1px solid var(--glass-border-color); /* 単純なボーダーに */
         top:0; bottom:0; left:0; right:0;
         opacity: 0.7;
-        z-index: -1; /* コンテンツの背景よりは後ろだが、カード背景よりは手前か同じレベル */
+        z-index: -1;
     }
     .individual-server-section:hover .server-card-content-wrapper::before,
     .overall-status-card:hover::before {
