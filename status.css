@@ -1,98 +1,91 @@
 /* status.css */
 
-/* :root で定義されている変数は前回のものをベースに微調整 */
 :root {
-    /* ... (前回の :root 定義を参照・適宜更新) ... */
-    --blur-intensity: 10px; /* ブラー強度を少し上げる */
-    --card-padding: 28px; /* カードの共通パディング */
+    /* ... (既存のカラー変数など) ... */
+    --blur-intensity-pc: 6px; /* PCのブラー強度を少し下げる */
+    --blur-intensity-mobile: 0px; /* スマホではブラーをオフに */
+    --card-padding: 25px; /* カードパディングを少し調整 */
 
-    /* サイズ問題対策用：各セクションの最小高さを定義 */
-    --server-icon-section-height: 70px; /* アイコンコンテナの高さ */
-    --server-title-section-min-height: 50px; /* タイトル部分の最小高さ (テキスト量で変動許容) */
-    --status-card-header-height: 45px; /* ステータスカードヘッダーの高さ */
-    --status-card-info-min-height: 65px; /* プレイヤー情報/エラーメッセージ部分の最小高さ */
+    /* サイズ対策用：各セクションの高さ (PC基準) */
+    --server-icon-section-height-pc: 65px;
+    --server-title-section-height-pc: 52px; /* 例: 1.4 line-height * 1.6rem (approx font-size) * 2 lines */
+    --status-card-header-height-pc: 42px;
+    --status-card-info-min-height-pc: 60px; /* 最小高さを維持 */
 
-    /* RGB値の変数 (stella.css またはここに定義) */
-    --primary-rgb: 0, 169, 255;   /* --primary-color のRGB値 */
-    --secondary-rgb: 58, 255, 208; /* --secondary-color のRGB値 */
-    --accent-rgb: 255, 184, 0;   /* --accent-color のRGB値 */
-    --danger-rgb: 255, 77, 77;    /* --danger-color のRGB値 */
-    --success-rgb: var(--secondary-rgb); /* --success-color のRGB値 (secondaryと同じ場合) */
-    --text-muted-rgb: 176,176,176; /* --text-muted のRGB値 */
+    /* スマホ用高さ */
+    --server-icon-section-height-mobile: 60px;
+    --server-title-section-height-mobile: auto; /* スマホではタイトル高さを自動に */
+    --server-title-section-min-height-mobile: 48px; /* ただし最小高さは確保 */
+    --status-card-header-height-mobile: 40px;
+    --status-card-info-min-height-mobile: 55px;
+
+    /* シャドウをさらに控えめに */
+    --shadow-soft: 0 2px 6px rgba(0,0,0,0.12);
+    --shadow-medium: 0 5px 15px rgba(0,0,0,0.18);
+    --shadow-strong: 0 8px 25px rgba(0,0,0,0.22);
+
+    /* トランジションをシンプルに */
+    --transition-fast: 0.2s ease-out;
+    --transition-normal: 0.3s ease-out;
 }
 
 body {
     font-family: var(--font-primary);
-    background: linear-gradient(145deg, var(--dark-bg-gradient-start, #1A2238), var(--dark-bg-gradient-end, #28324B) 150%) fixed; /* グラデーション調整 */
+    background: var(--dark-bg-main, #121828);
     color: var(--text-color);
     overflow-x: hidden;
 }
+.page-background-gradient {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(145deg, var(--dark-bg-gradient-start, #1A2238), var(--dark-bg-gradient-end, #28324B)); /* シンプルなグラデーション */
+    z-index: -1;
+    /* opacity: 0.7; パフォーマンスのため、透明度は1でも良いかも */
+}
 
-.page-content-container { /* メインコンテンツエリアの左右マージン調整など */
-    padding-top: 2rem;
+.page-content-container {
+    padding-top: calc(50px + 2rem); /* ★ヘッダーの高さ(仮に50px) + 余白 で調整 */
     padding-bottom: 3rem;
+    position: relative;
+    z-index: 1;
 }
 
-.page-header .page-main-title { /* タイトルを少し大きく、目立たせる */
-    font-size: clamp(2rem, 5vw, 2.8rem);
-    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-}
-.page-header .page-intro {
-    font-size: clamp(0.95rem, 2vw, 1.05rem);
-    color: var(--text-muted);
+.page-header { /* ページタイトルセクションのマージン調整 */
+    margin-bottom: 40px; /* 総合ステータスとの間隔 */
 }
 
 
-.icon-header { /* Font Awesomeアイコン全般に適用できるスタイル */
-    margin-right: 12px;
-    color: var(--primary-color);
-    font-size: 0.9em; /* 親要素に対する相対サイズ */
-    text-shadow: 0 0 8px rgba(var(--primary-rgb), 0.7); /* 発光効果 */
-}
-
-.status-section {
-    margin-bottom: 60px;
-}
-.status-section:last-of-type {
-    margin-bottom: 30px;
-}
-
-/* --- Glassmorphism Card Style (共通) --- */
+/* --- Glassmorphism Card Style (パフォーマンス改善) --- */
 .overall-status-card,
 .server-card-content-wrapper {
-    background: linear-gradient(135deg, rgba(var(--glass-bg-rgb, 35, 45, 60), 0.6), rgba(var(--glass-bg-rgb, 35, 45, 60), 0.4)); /* グラデーション背景 */
-    backdrop-filter: blur(var(--blur-intensity));
-    -webkit-backdrop-filter: blur(var(--blur-intensity));
-    border: 1px solid var(--glass-border, rgba(255,255,255,0.15));
+    background: rgba(var(--glass-bg-rgb, 35, 45, 60), 0.7); /* 透明度調整 */
+    /* backdrop-filter: blur(var(--blur-intensity-pc)); */ /* PCでも重い場合はコメントアウト */
+    /* -webkit-backdrop-filter: blur(var(--blur-intensity-pc)); */
+    border: 1px solid var(--glass-border, rgba(255,255,255,0.12));
     border-radius: var(--border-radius-lg, 16px);
-    box-shadow: var(--shadow-medium, 0 8px 24px rgba(0,0,0,0.25));
-    transition: transform var(--transition-normal), box-shadow var(--transition-normal), background var(--transition-normal), border-color var(--transition-fast);
-    position: relative; /* ::before, ::after のため */
+    box-shadow: var(--shadow-medium);
+    transition: transform var(--transition-normal), box-shadow var(--transition-normal), background var(--transition-fast);
+    position: relative;
 }
+/* カード上部ハイライトは削除または非常にシンプルに（パフォーマンスのため） */
 .overall-status-card::before,
-.server-card-content-wrapper::before { /* カード上部のハイライトライン (オプション) */
-    content: "";
+.server-card-content-wrapper::before {
+    display: none; /* パフォーマンスのため一旦非表示 */
+    /* content: "";
     position: absolute;
-    top: 0; left: 0; right: 0;
+    top: 0; left: 5%; right: 5%;
     height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(var(--glass-highlight-rgb, 255,255,255),0.5), transparent); /* stella.css で --glass-highlight-rgb を定義 */
-    opacity: 0.7;
-    transition: opacity var(--transition-normal);
+    background: linear-gradient(90deg, transparent, rgba(var(--glass-highlight-rgb, 255,255,255),0.3), transparent);
+    opacity: 0.5; */
 }
 
 .overall-status-card:hover,
 .individual-server-section:hover .server-card-content-wrapper {
-    transform: translateY(-12px) scale(1.03); /* ホバー効果を少し強く */
-    box-shadow: var(--shadow-strong, 0 12px 36px rgba(0,0,0,0.3)),
-                0 0 40px rgba(var(--primary-rgb), 0.2); /* プライマリカラーのグローを追加 */
-    background: linear-gradient(135deg, rgba(var(--glass-bg-light-rgb, 45, 55, 70), 0.7), rgba(var(--glass-bg-light-rgb, 45, 55, 70), 0.5));
-    border-color: var(--glass-highlight, rgba(255,255,255,0.3));
+    transform: translateY(-8px) scale(1.02); /* ホバー効果を少し控えめに */
+    box-shadow: var(--shadow-strong); /* グロー効果は削除または大幅に軽減 */
+    background: rgba(var(--glass-bg-light-rgb, 45, 55, 70), 0.8);
+    /* border-color: var(--glass-highlight, rgba(255,255,255,0.25)); */ /* ホバー時のボーダー変更も負荷の可能性 */
 }
-.overall-status-card:hover::before,
-.individual-server-section:hover .server-card-content-wrapper::before {
-    opacity: 1;
-}
-
 
 .overall-status-card {
     padding: var(--card-padding);
@@ -100,266 +93,248 @@ body {
 }
 
 .status-indicator-wrapper {
-    margin-bottom: 30px;
-    min-height: 48px;
+    margin-bottom: 25px; /* 微調整 */
+    min-height: 45px;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 .status-indicator {
-    display: inline-flex; align-items: center; padding: 12px 30px; /* パディング調整 */
-    border-radius: var(--border-radius-md); font-weight: 700;
-    font-size: 1.2rem; /* 少し大きく */
-    background: transparent; /* ベースは透明 */
-    border: 2px solid; /* ボーダーで状態を示す */
-    color: var(--text-muted); /* デフォルトカラー */
+    display: inline-flex; align-items: center; padding: 10px 25px; /* パディング調整 */
+    border-radius: var(--border-radius-md); font-weight: 600; /* 太さを戻す */
+    font-size: 1.15rem; /* 微調整 */
+    background: transparent;
+    border: 1.5px solid; /* ボーダー幅調整 */
+    color: var(--text-muted);
     box-shadow: none;
-    transition: all var(--transition-fast); /* all でまとめてトランジション */
+    transition: color var(--transition-fast), border-color var(--transition-fast), transform var(--transition-fast), filter var(--transition-fast);
     text-transform: uppercase;
-    letter-spacing: 1px; /* 文字間を広めに */
+    letter-spacing: 0.8px; /* 微調整 */
 }
 .status-indicator:hover {
-    transform: translateY(-4px) scale(1.05); /* ホバー効果調整 */
-    filter: brightness(1.2);
+    transform: translateY(-3px) scale(1.03);
+    filter: brightness(1.15); /* 少し明るく */
 }
 
 .status-indicator.online {
     border-color: var(--success-color, #3EFFD0);
     color: var(--success-color, #3EFFD0);
-    text-shadow: 0 0 10px rgba(var(--success-rgb), 0.8);
-    box-shadow: 0 0 15px rgba(var(--success-rgb), 0.3), inset 0 0 10px rgba(var(--success-rgb), 0.1);
+    text-shadow: 0 0 8px rgba(var(--success-rgb), 0.6); /* シャドウの透明度調整 */
+    /* box-shadow: 0 0 12px rgba(var(--success-rgb), 0.25), inset 0 0 8px rgba(var(--success-rgb), 0.1); */ /* 負荷高ければ削除 */
 }
 .status-indicator.offline {
     border-color: var(--danger-color, #FF4D4D);
     color: var(--danger-color, #FF4D4D);
-    text-shadow: 0 0 10px rgba(var(--danger-rgb), 0.8);
-    box-shadow: 0 0 15px rgba(var(--danger-rgb), 0.3), inset 0 0 10px rgba(var(--danger-rgb), 0.1);
+    text-shadow: 0 0 8px rgba(var(--danger-rgb), 0.6);
+    /* box-shadow: 0 0 12px rgba(var(--danger-rgb), 0.25), inset 0 0 8px rgba(var(--danger-rgb), 0.1); */
 }
 .status-indicator.loading {
     border-color: var(--text-muted, #B0B0B0);
     color: var(--text-muted, #B0B0B0);
-    /* ローディング時はアニメーションを追加しても良い */
 }
 
-.status-indicator.small { /* 個別サーバーカード内のステータス表示 */
-    font-size: 0.95rem;
-    padding: 9px 20px;
-    letter-spacing: 0.6px;
-    border-width: 1.5px;
+.status-indicator.small {
+    font-size: 0.9rem; /* 微調整 */
+    padding: 8px 18px; /* パディング調整 */
+    letter-spacing: 0.5px;
 }
 
+/* --- パルスドット復活 --- */
 .pulse-dot {
-    width: 10px; height: 10px; border-radius: 50%; margin-left: 14px;
-    animation: pulseColorAnimation 1.5s infinite ease-in-out;
+    width: 9px; /* サイズ微調整 */
+    height: 9px;
+    border-radius: 50%;
+    margin-left: 10px; /* 間隔微調整 */
+    display: inline-block; /* ★明示的に表示 */
+    vertical-align: middle;
+    animation: pulseColorAnimation 1.6s infinite ease-in-out;
 }
-.status-indicator.online .pulse-dot { background-color: var(--success-color); box-shadow: 0 0 10px 3px var(--success-color); }
-.status-indicator.offline .pulse-dot { background-color: var(--danger-color); box-shadow: 0 0 10px 3px var(--danger-color); animation: none; opacity: 0.7;}
-.status-indicator.loading .pulse-dot { background-color: var(--text-muted); box-shadow: 0 0 8px 2px var(--text-muted); }
-
-/* @keyframes pulseColorAnimation は前回のままでも良いでしょう */
-
+.status-indicator.online .pulse-dot {
+    background-color: var(--success-color);
+    box-shadow: 0 0 7px 2px var(--success-color); /* 影を少し調整 */
+}
+.status-indicator.offline .pulse-dot {
+    background-color: var(--danger-color);
+    box-shadow: 0 0 7px 2px var(--danger-color);
+    animation: none; opacity: 0.7; /* ちらつき防止のため opacity を少し上げる */
+}
+.status-indicator.loading .pulse-dot {
+    background-color: var(--text-muted);
+    box-shadow: 0 0 6px 1px var(--text-muted);
+}
+/* @keyframes pulseColorAnimation は既存のままで良い想定 */
 
 .total-players {
-    font-size: 1.3rem; /* 少し大きく */
-    font-weight: 500;
-    color: var(--text-color);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 25px;
-    gap: 16px;
+    /* ... (既存スタイル微調整) ... */
+    font-size: 1.25rem;
+    margin-top: 20px;
+    gap: 14px;
 }
 .total-players-icon {
-    font-size: 1.8em; /* アイコンサイズ調整 */
-    color: var(--accent-color);
-    filter: drop-shadow(0 0 8px var(--accent-color));
-    line-height: 1;
+    font-size: 1.7em;
+    /* filter: drop-shadow(0 0 6px var(--accent-color)); パフォーマンスのため削除も検討 */
 }
 .player-count.animated-number {
-    color: var(--secondary-color);
-    font-weight: 700;
-    font-size: 1.35em; /* 数字を強調 */
-    filter: drop-shadow(0 0 6px var(--secondary-color));
+    font-size: 1.3em;
+    /* filter: drop-shadow(0 0 5px var(--secondary-color)); パフォーマンスのため削除も検討 */
 }
 
 .server-cards-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 35px; /* カード間の隙間 */
-    margin-top: 50px;
-    align-items: stretch; /* 高さを揃える */
+    /* ... (既存スタイル) ... */
+    gap: 30px; /* ギャップ調整 */
+    margin-top: 45px;
 }
 .individual-server-section {
-    flex: 1 1 340px; /* ベース幅を少し調整 */
-    min-width: 320px;
-    display: flex; /* 内部要素をflexで管理 */
-    flex-direction: column; /* 縦積み */
+    flex: 1 1 330px; /* ベース幅調整 */
+    min-width: 310px;
+    display: flex;
+    flex-direction: column;
 }
 .server-card-content-wrapper {
     padding: var(--card-padding);
     display: flex;
     flex-direction: column;
-    flex-grow: 1; /* 親の高さに合わせる */
+    flex-grow: 1;
 }
-/* 左側のアクセントラインのデザイン変更 */
-.server-card-content-wrapper > .accent-line { /* HTML側に <div class="accent-line"></div> を追加想定 */
-    position: absolute; left: 0; top: 0; bottom: 0; width: 7px;
-    border-radius: var(--border-radius-lg) 0 0 var(--border-radius-lg);
-    opacity: 0.7;
-    transition: width var(--transition-fast), opacity var(--transition-fast), box-shadow var(--transition-fast);
-    z-index: 0; /* 他のコンテンツより後ろ */
+/* 左側アクセントラインはパフォーマンス影響少ないので維持、ただしbox-shadowは削除も検討 */
+.server-card-content-wrapper > .accent-line { /* HTMLに <div class="accent-line"></div> がある前提 */
+    /* ... (既存スタイル) ... */
+    opacity: 0.6;
+    box-shadow: none; /* ホバー時の影を削除 */
 }
 .individual-server-section:hover .server-card-content-wrapper > .accent-line {
-    width: 10px; opacity: 1;
-    box-shadow: 0 0 15px currentColor; /* 現在の色で光る */
+    width: 9px; opacity: 0.8;
+    /* box-shadow: 0 0 10px currentColor; パフォーマンスのため削除 */
 }
-#sutera-server-status .accent-line { background: var(--primary-color); color: var(--primary-color); }
-#vanilla-server-status .accent-line { background: var(--secondary-color); color: var(--secondary-color); }
-/* もしHTML変更不可なら ::before で対応。その場合z-indexに注意 */
 
 
 .server-icon-container {
     display: flex; justify-content: center; align-items: center;
-    margin-bottom: 25px;
-    height: var(--server-icon-section-height); /* ★サイズ対策 */
+    margin-bottom: 18px; /* 間隔調整 */
+    height: var(--server-icon-section-height-pc);
+    flex-shrink: 0;
 }
 .server-icon-placeholder {
-    width: 64px; height: 64px; border-radius: var(--border-radius-md);
-    background-color: rgba(0,0,0,0.25);
-    border: 1.5px dashed var(--glass-border);
-    display: flex; align-items: center; justify-content: center;
-    color: var(--text-muted); font-size: 2em; /* アイコンサイズ調整 */
+    width: 60px; height: 60px; /* サイズ微調整 */
+    /* ... (既存スタイル) ... */
 }
-.server-icon-placeholder i {
-    animation: subtleSpin 1.8s linear infinite; opacity: 0.75; /* アニメーション調整 */
-}
-
 .server-icon {
-    width: 64px; height: 64px; border-radius: var(--border-radius-md);
-    box-shadow: 0 0 18px rgba(0,0,0,0.45), inset 0 0 6px rgba(var(--glass-highlight-rgb,255,255,255),0.15);
-    border: 1.5px solid var(--glass-highlight, rgba(255,255,255,0.3));
-    object-fit: contain;
-    transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* トランジション調整 */
-    opacity: 0;
+    width: 60px; height: 60px; /* サイズ微調整 */
+    box-shadow: 0 0 12px rgba(0,0,0,0.35), inset 0 0 4px rgba(var(--glass-highlight-rgb,255,255,255),0.1); /* 影調整 */
+    /* ... (既存スタイル) ... */
 }
-.server-icon.loaded { opacity: 1; transform: scale(1); }
 .individual-server-section:hover .server-icon.loaded {
-    transform: scale(1.2) rotate(5deg); /* ホバー時の動きを大きく */
-    box-shadow: 0 0 30px rgba(0,0,0,0.6), inset 0 0 10px rgba(var(--glass-highlight-rgb,255,255,255),0.25);
+    transform: scale(1.15) rotate(4deg); /* ホバー効果微調整 */
+    /* box-shadow: ... 影は控えめに */
 }
 
+/* --- PCでのカード高さ揃え対策 --- */
 .server-name-title {
-    font-size: clamp(1.35rem, 3.5vw, 1.8rem); /* フォントサイズ調整 */
-    color: var(--text-color); text-align: center; margin-bottom: 28px; font-weight: 600;
-    display: flex; align-items: center; justify-content: center;
-    line-height: 1.4;
-    text-shadow: 0 2px 5px rgba(0,0,0,0.4);
-    min-height: var(--server-title-section-min-height); /* ★サイズ対策 */
+    font-size: clamp(1.3rem, 3.2vw, 1.7rem); /* フォントサイズ調整 */
+    color: var(--text-color); text-align: center; margin-bottom: 20px; font-weight: 600;
+    display: flex; flex-direction: column; /* 縦並びにしてアイコンとテキストを中央揃えしやすく */
+    align-items: center; justify-content: center;
+    line-height: 1.35; /* 行間調整 */
+    text-shadow: 0 1px 4px rgba(0,0,0,0.35);
+    height: var(--server-title-section-height-pc); /* ★PCでは高さを固定 */
+    overflow: hidden; /* はみ出したテキストは隠す */
+    flex-shrink: 0;
 }
-.server-title-icon {
-    margin-right: 14px; font-size: 1em; /* アイコンサイズ調整 */
-    opacity: 0.95;
-    filter: drop-shadow(0 0 6px currentColor); /* アイコン自身の色の影 */
+.server-name-title > i.server-title-icon { /* アイコンとテキストの間にマージン */
+    margin-bottom: 4px;
+    font-size: 0.9em; /* テキストに対する相対サイズ */
+}
+.server-name-title > span { /* サーバー名テキスト部分 */
+    display: block; /* 必要なら */
+    max-width: 100%;
+    /* 2行以上になる場合の省略表示 (オプション) */
+    /* display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis; */
 }
 
 
 .status-card {
-    background-color: rgba(0,0,0,0.2); /* カード内カード背景を少し濃く */
-    border-radius: var(--border-radius-md); padding: 20px; /* パディング調整 */
+    background-color: rgba(0,0,0,0.18); /* 背景微調整 */
+    border-radius: var(--border-radius-md); padding: 18px;
     border: 1px solid var(--glass-border);
-    display: flex; flex-direction: column; flex-grow: 1; /* ★サイズ対策のキー */
-    /* min-height は内部要素で制御するため、ここでは必須ではないかも */
+    display: flex; flex-direction: column; flex-grow: 1;
 }
 .status-card-header {
     display: flex; justify-content: flex-start;
     align-items: center;
-    margin-bottom: 18px; padding-bottom: 15px; /* マージン、パディング調整 */
+    margin-bottom: 12px; padding-bottom: 10px;
     border-bottom: 1px solid var(--glass-border);
-    height: var(--status-card-header-height); /* ★サイズ対策 */
-    flex-shrink: 0; /* 縮まないように */
+    height: var(--status-card-header-height-pc);
+    flex-shrink: 0;
 }
 
-/* --- サイズ問題への集中的な対策 --- */
-.server-status-details-wrapper { /* HTMLにこのラッパーを追加することを強く推奨 */
-    flex-grow: 1; /* 残りのスペースを全て使う */
+.server-status-details-wrapper { /* HTMLにラッパーがある前提 */
+    flex-grow: 1;
     display: flex;
-    flex-direction: column; /* エラーと情報を縦に並べるなら */
     align-items: center;
-    justify-content: center; /* 内容を中央寄せ */
-    min-height: var(--status-card-info-min-height); /* ★最重要: この高さを確保 */
-    padding: 10px 5px;
+    justify-content: center;
+    min-height: var(--status-card-info-min-height-pc);
+    padding: 8px 0;
     width: 100%;
+    flex-shrink: 0; /* 高さ固定のため */
 }
-/* HTML変更不可の場合の代替 (ただし、ラッパーの方が制御しやすい) */
+/* ラッパーがない場合 */
 .server-player-info,
 .error-message {
-    /* flex-grow: 1;  ラッパーを使う場合は不要 */
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
-    min-height: var(--status-card-info-min-height); /* ★重要: どちらも同じ最小高さを確保 */
-    padding: 12px 5px; /* パディング調整 */
+    min-height: var(--status-card-info-min-height-pc); /* ★PCでの最小高さをCSS変数で管理 */
+    padding: 10px 5px;
     text-align: center;
 }
 
 .server-player-info {
-    font-size: 1rem; color: var(--text-muted);
+    font-size: 0.95rem; /* フォントサイズ微調整 */
 }
-.server-player-info .player-count {
-    font-weight: 600;
-    color: var(--text-color);
-    font-size: 1.1em; /* プレイヤー数を少し大きく */
-}
-.server-player-info .max-players-label {
-    font-size: 0.9em;
-    opacity: 0.8;
-}
-
-
 .error-message {
-    color: var(--danger-color); font-style: italic;
-    font-size: 0.95rem;
-    text-shadow: 0 0 6px rgba(var(--danger-rgb),0.6);
+    font-size: 0.9rem; /* フォントサイズ微調整 */
 }
 
 
 /* --- レスポンシブ調整 --- */
-@media (max-width: 992px) { /* タブレットサイズでの調整 */
-    .individual-server-section {
-        flex-basis: calc(50% - (var(--gap, 35px) / 2)); /* 2カラムレイアウト */
-    }
+@media (max-width: 992px) { /* タブレット (992pxは一般的なブレークポイント) */
+    /* PCと同じ高さ変数を流用するか、タブレット専用変数を定義 */
+    .server-icon-container { height: var(--server-icon-section-height-pc); }
+    .server-name-title { height: var(--server-title-section-height-pc); } /* タブレットでも固定高さを試す */
+    .status-card-header { height: var(--status-card-header-height-pc); }
+    .server-status-details-wrapper, .server-player-info, .error-message { min-height: var(--status-card-info-min-height-pc); }
 }
 
-@media (max-width: 768px) {
-    :root { /* スマホではブラーを弱めるなど */
-        /* --blur-intensity: 5px; */
-        --card-padding: 20px;
+@media (max-width: 768px) { /* スマホ */
+    .overall-status-card,
+    .server-card-content-wrapper {
+        /* スマホではブラーをオフ (前回提案通り) */
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
     }
-    .overall-status-card { padding: var(--card-padding); }
-    .status-indicator { font-size: 1.1rem; padding: 10px 25px; }
-    .total-players { font-size: 1.2rem; }
-
-    .individual-server-section {
-        flex-basis: 100%; /* スマホでは1カラム */
+    .page-content-container {
+        padding-top: calc(50px + 1.5rem); /* スマホでのタイトル位置調整 */
     }
-    .server-card-content-wrapper { padding: var(--card-padding); }
-    .status-card { padding: 18px; }
-    .server-player-info, .error-message { min-height: calc(var(--status-card-info-min-height) - 10px); font-size: 0.95rem; }
-}
 
-@media (max-width: 480px) {
-    .page-header .page-main-title { font-size: 1.8rem; }
-    .page-header .page-intro { font-size: 0.9rem; }
-
-    .status-indicator { font-size: 0.9rem; padding: 8px 18px; letter-spacing: 0.8px; }
-    .total-players-icon { font-size: 1.6em; }
-    .total-players-text { font-size: 1rem; gap: 8px;}
-
-    .server-name-title { font-size: clamp(1.25rem, 4.5vw, 1.5rem); }
-    .server-title-icon { margin-right: 10px; }
-    .status-card { padding: 15px; }
+    .server-icon-container { height: var(--server-icon-section-height-mobile); margin-bottom: 12px; }
+    .server-name-title {
+        height: var(--server-title-section-height-mobile); /* スマホでは自動高さ */
+        min-height: var(--server-title-section-min-height-mobile); /* 最小高さは確保 */
+        margin-bottom: 15px; /* 間隔調整 */
+        font-size: clamp(1.15rem, 3.8vw, 1.35rem); /* フォントサイズ調整 */
+    }
+    .status-card-header { height: var(--status-card-header-height-mobile); margin-bottom: 10px; padding-bottom: 8px;}
+    .server-status-details-wrapper, .server-player-info, .error-message {
+        min-height: var(--status-card-info-min-height-mobile);
+        font-size: 0.85rem; /* フォントサイズ調整 */
+    }
     .status-indicator.small { font-size: 0.85rem; padding: 7px 15px; }
-    .server-player-info, .error-message { min-height: calc(var(--status-card-info-min-height) - 15px); font-size: 0.9rem; padding: 10px 5px;}
 }
+
+/* 480px以下の調整は前回提案を参考に、上記変数を使って微調整してください */
