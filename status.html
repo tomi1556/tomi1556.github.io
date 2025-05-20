@@ -11,7 +11,8 @@
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div class="page-background-gradient"></div> <header>
+    <div class="page-background-gradient"></div>
+    <header>
         <div class="container">
             <a href="index.html" class="logo-link" aria-label="StellaMC ホームへ">
                 <img src="logo.png" alt="StellaMC ロゴ" id="logo-img">
@@ -66,15 +67,20 @@
             <div class="server-cards-wrapper">
                 <section id="sutera-server-status" class="status-section individual-server-section animate-on-scroll" data-animation="fadeInLeftCustom" data-animation-delay="0.2s">
                     <div class="server-card-content-wrapper">
-                        <div class="accent-line"></div> <h3 class="server-name-title">
-                            <i class="fas fa-star server-title-icon"></i>
+                        <div class="accent-line" style="color: var(--primary-color);"></div>
+                        <div class="server-icon-container"> <div class="server-icon-placeholder" id="sutera-icon-placeholder" style="display:flex;"><i class="fas fa-spinner fa-spin"></i></div>
+                            <img src="" alt="すてら鯖 アイコン" class="server-icon" id="sutera-server-icon" style="display:none;">
+                        </div>
+                        <h3 class="server-name-title">
                             <span>すてら鯖</span>
                         </h3>
                         <div class="status-card">
                             <div class="status-card-header">
                                 <div class="status-indicator loading small" id="sutera-status-indicator"><span>確認中</span><div class="pulse-dot loading"></div></div>
                             </div>
-                            <div class="server-status-details-wrapper"> <div class="server-player-info" id="sutera-player-info-content" style="display: block;"> <p>プレイヤー数: <span class="player-count animated-number" id="sutera-player-count" data-target="0" data-current-value="0">0</span> / <span id="sutera-max-players">-</span></p>
+                            <div class="server-status-details-wrapper">
+                                <div class="server-player-info" id="sutera-player-info-content" style="display: block;">
+                                    <p>プレイヤー数: <span class="player-count animated-number" id="sutera-player-count" data-target="0" data-current-value="0">0</span> / <span id="sutera-max-players">-</span></p>
                                 </div>
                                 <p class="error-message" id="sutera-error-message" style="display:none;">情報取得エラー</p>
                             </div>
@@ -84,15 +90,20 @@
 
                 <section id="vanilla-server-status" class="status-section individual-server-section animate-on-scroll" data-animation="fadeInRightCustom" data-animation-delay="0.3s">
                      <div class="server-card-content-wrapper">
-                        <div class="accent-line"></div> <h3 class="server-name-title">
-                            <i class="fas fa-seedling server-title-icon"></i>
+                        <div class="accent-line" style="color: var(--secondary-color);"></div>
+                        <div class="server-icon-container"> <div class="server-icon-placeholder" id="vanilla-icon-placeholder" style="display:flex;"><i class="fas fa-spinner fa-spin"></i></div>
+                            <img src="" alt="バニラ鯖 アイコン" class="server-icon" id="vanilla-server-icon" style="display:none;">
+                        </div>
+                        <h3 class="server-name-title">
                             <span>バニラ鯖</span>
                         </h3>
                         <div class="status-card">
                             <div class="status-card-header">
                                 <div class="status-indicator loading small" id="vanilla-status-indicator"><span>確認中</span><div class="pulse-dot loading"></div></div>
                             </div>
-                            <div class="server-status-details-wrapper"> <div class="server-player-info" id="vanilla-player-info-content" style="display: block;"> <p>プレイヤー数: <span class="player-count animated-number" id="vanilla-player-count" data-target="0" data-current-value="0">0</span> / <span id="vanilla-max-players">-</span></p>
+                            <div class="server-status-details-wrapper">
+                                <div class="server-player-info" id="vanilla-player-info-content" style="display: block;">
+                                     <p>プレイヤー数: <span class="player-count animated-number" id="vanilla-player-count" data-target="0" data-current-value="0">0</span> / <span id="vanilla-max-players">-</span></p>
                                 </div>
                                 <p class="error-message" id="vanilla-error-message" style="display:none;">情報取得エラー</p>
                             </div>
@@ -116,7 +127,7 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- 共通ヘッダー・アニメーション処理 ---
+            // --- 共通ヘッダー・アニメーション処理 (変更なし) ---
             const hamburger = document.querySelector('.hamburger-menu');
             const nav = document.querySelector('.main-nav');
             if (hamburger && nav) {
@@ -186,7 +197,7 @@
                 { id: 'sutera', address: 'stellamc.jp:6908', name: 'すてら鯖' },
                 { id: 'vanilla', address: 'stellamc.jp:6910', name: 'バニラ鯖' }
             ];
-            let serversData = {}; // 各サーバーの最新データをキャッシュ
+            let serversData = {};
 
             async function fetchServerStatus(serverConfig) {
                 const { id: serverIdPrefix, address } = serverConfig;
@@ -195,19 +206,25 @@
                     indicator: document.getElementById(`${serverIdPrefix}-status-indicator`),
                     playerCount: document.getElementById(`${serverIdPrefix}-player-count`),
                     maxPlayers: document.getElementById(`${serverIdPrefix}-max-players`),
-                    // serverIcon: document.getElementById(`${serverIdPrefix}-server-icon`), // 削除
-                    // iconPlaceholder: document.getElementById(`${serverIdPrefix}-icon-placeholder`), // 削除
+                    serverIcon: document.getElementById(`${serverIdPrefix}-server-icon`), // ★復活
+                    iconPlaceholder: document.getElementById(`${serverIdPrefix}-icon-placeholder`), // ★復活
                     errorMessage: document.getElementById(`${serverIdPrefix}-error-message`),
-                    playerInfoContent: document.getElementById(`${serverIdPrefix}-player-info-content`) // プレイヤー情報表示エリア
+                    playerInfoContent: document.getElementById(`${serverIdPrefix}-player-info-content`)
                 };
 
                 let allElementsPresent = true;
                 for (const key in elements) {
-                    if (!elements[key]) {
-                        console.warn(`[${serverIdPrefix}] HTML Element missing for status display: ${key}`);
-                        allElementsPresent = false;
+                    if (!elements[key] && key !== 'serverIcon' && key !== 'iconPlaceholder' && key !== 'errorMessage' && key !== 'playerInfoContent') { // serverIconなどは必須ではない場合がある
+                        if (!elements[key]) {
+                             console.warn(`[${serverIdPrefix}] HTML Element missing for status display: ${key}`);
+                             allElementsPresent = false; // 主要な要素がなければエラー
+                        }
                     }
                 }
+                if (!elements.indicator || !elements.playerCount || !elements.maxPlayers) { // 必須要素チェック
+                    allElementsPresent = false;
+                }
+
                 if (!allElementsPresent) {
                      console.error(`[${serverIdPrefix}] Aborting fetch due to missing critical HTML elements for server card.`);
                      if (elements.indicator) {
@@ -220,32 +237,38 @@
                      return;
                 }
 
-                // 初期ローディング表示 (アイコン関連は削除)
                 elements.indicator.className = 'status-indicator loading small';
                 elements.indicator.querySelector('span').textContent = '確認中';
                 elements.indicator.querySelector('.pulse-dot').className = 'pulse-dot loading';
-                elements.errorMessage.style.display = 'none';
-                if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'block'; // プレイヤー情報表示をデフォルトに
+                if(elements.errorMessage) elements.errorMessage.style.display = 'none';
+                if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'block';
+                if(elements.serverIcon) elements.serverIcon.style.display = 'none'; // ★追加
+                if(elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'flex'; // ★追加
 
 
                 try {
                     const response = await fetch(`${API_BASE_URL}${address}`);
-                    console.log(`[${serverIdPrefix}] Response for ${address} - Status: ${response.status}`);
                     if (!response.ok) {
-                        let errorBodyText = "Unknown fetch error";
-                        try { errorBodyText = await response.text(); } catch (e) { /* ignore */ }
-                        throw new Error(`Network error: ${response.status} ${response.statusText}. Body: ${errorBodyText.substring(0,100)}`);
+                        throw new Error(`Network error: ${response.status} ${response.statusText}`);
                     }
                     const data = await response.json();
-                    console.log(`[${serverIdPrefix}] Data received for ${address}:`, data);
-                    if (typeof data !== 'object' || data === null) {
-                        throw new Error('Invalid JSON response from API');
-                    }
                     serversData[serverIdPrefix] = data;
 
                     elements.indicator.classList.remove('loading');
                     elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
-                    // アイコン関連処理は削除
+
+                    // ★サーバーアイコン処理復活
+                    if (elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'none';
+                    if (elements.serverIcon) {
+                        elements.serverIcon.style.display = 'block';
+                        elements.serverIcon.src = data.icon ? data.icon : `https://eu.mc-api.net/v3/server/favicon/${address.split(':')[0]}`; // フォールバック変更
+                        elements.serverIcon.onerror = function() {
+                            this.style.display = 'none';
+                            if (elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'flex';
+                        };
+                        elements.serverIcon.classList.add('loaded');
+                    }
+
 
                     if (data.online) {
                         elements.indicator.classList.add('online');
@@ -257,28 +280,33 @@
                         animatePlayerCount(elements.playerCount, currentPlayers);
                         elements.maxPlayers.textContent = maxP;
                         if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'block';
-                        elements.errorMessage.style.display = 'none';
+                        if(elements.errorMessage) elements.errorMessage.style.display = 'none';
                     } else {
                         elements.indicator.classList.add('offline');
                         elements.indicator.classList.remove('online');
                         elements.indicator.querySelector('span').textContent = 'オフライン';
                         animatePlayerCount(elements.playerCount, 0);
                         elements.maxPlayers.textContent = '-';
-                        if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'block'; // オフラインでもプレイヤー数0で表示
-                        elements.errorMessage.style.display = 'none'; // エラーではないのでエラーメッセージは隠す
+                        // オフラインでもアイコン取得試行 (上記で処理済み)
+                        if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'block';
+                        if(elements.errorMessage) elements.errorMessage.style.display = 'none';
                     }
                 } catch (error) {
-                    console.error(`[${serverIdPrefix}] Final catch error for ${address}:`, error);
+                    console.error(`[${serverIdPrefix}] Error for ${address}:`, error);
                     elements.indicator.classList.remove('loading');
                     if (elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
-                    elements.indicator.classList.add('offline'); // APIエラー時はオフライン扱い、または専用の「取得失敗」表示
+                    elements.indicator.classList.add('offline');
                     elements.indicator.classList.remove('online');
                     elements.indicator.querySelector('span').textContent = '取得失敗';
-                    // アイコン関連処理は削除
 
-                    elements.errorMessage.textContent = `情報取得エラー`;
-                    elements.errorMessage.style.display = 'block';
-                    if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'none'; // エラー時はプレイヤー情報隠す
+                    if(elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'flex'; // ★エラー時プレースホルダー表示
+                    if(elements.serverIcon) elements.serverIcon.style.display = 'none'; // ★エラー時アイコン非表示
+
+                    if(elements.errorMessage) {
+                        elements.errorMessage.textContent = `情報取得エラー`;
+                        elements.errorMessage.style.display = 'block';
+                    }
+                    if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'none';
                     serversData[serverIdPrefix] = { online: false, players: { online: 0 }, error: true, errorMessage: error.message };
                 } finally {
                     updateOverallStatus();
@@ -287,7 +315,7 @@
 
             function animatePlayerCount(element, targetValue) {
                 if (!element) return;
-                const duration = 1200;
+                const duration = 1000; // 少し短く
                 const startTime = performance.now();
                 const startValue = parseInt(element.dataset.currentValue) || 0;
                 element.dataset.currentValue = targetValue;
@@ -296,7 +324,7 @@
                     const elapsedTime = currentTime - startTime;
                     if (elapsedTime < duration) {
                         const progress = Math.min(elapsedTime / duration, 1);
-                        const easeOutQuint = 1 - Math.pow(1 - progress, 5);
+                        const easeOutQuint = 1 - Math.pow(1 - progress, 4); // easing調整
                         const currentValue = Math.round(startValue + (targetValue - startValue) * easeOutQuint);
                         element.textContent = currentValue;
                         requestAnimationFrame(update);
@@ -308,6 +336,7 @@
             }
 
             function updateOverallStatus() {
+                // ... (この関数は変更なしでOK)
                 let currentTotalOnline = 0;
                 let anyOnline = false;
                 let allFetchedAndNoError = SERVERS.every(server => serversData[server.id] && !serversData[server.id].error);
@@ -353,10 +382,6 @@
                         }
                     }
                 }
-                 // カードの高さ揃えJS (必要に応じて有効化)
-                // if (Object.keys(serversData).length === SERVERS.length) {
-                //    adjustCardHeightsIfNeeded();
-                // }
             }
 
             function loadAllServerStatus() {
@@ -366,14 +391,10 @@
                 });
             }
 
-            // PCでのみカード高さを揃える関数 (必要に応じて)
-            // function adjustCardHeightsIfNeeded() { /* ...前回のコード参照... */ }
-            // window.addEventListener('resize', () => { /* ...前回のコード参照... */ });
-
             // 初回ロード
             loadAllServerStatus();
             // 定期更新
-            setInterval(loadAllServerStatus, 60000); // 60秒ごと
+            setInterval(loadAllServerStatus, 60000);
         });
     </script>
 </body>
