@@ -5,57 +5,27 @@ document.addEventListener('DOMContentLoaded', function() {
         once: true,
     });
 
-    // Particles.js Initialization
+    // Interactive Particles.js Initialization
     particlesJS("particles-js", {
       "particles": {
-        "number": {
-          "value": 80,
-          "density": {
-            "enable": true,
-            "value_area": 800
-          }
-        },
-        "color": {
-          "value": "#ffffff"
-        },
-        "shape": {
-          "type": "star",
-          "stroke": {
-            "width": 0,
-            "color": "#000000"
-          },
-        },
-        "opacity": {
-          "value": 0.5,
-          "random": true,
-        },
-        "size": {
-          "value": 3,
-          "random": true,
-        },
-        "line_linked": {
-          "enable": false,
-        },
-        "move": {
-          "enable": true,
-          "speed": 0.5,
-          "direction": "none",
-          "random": true,
-          "straight": false,
-          "out_mode": "out",
-          "bounce": false,
-        }
+        "number": { "value": 80, "density": { "enable": true, "value_area": 800 }},
+        "color": { "value": "#ffffff" },
+        "shape": { "type": "star" },
+        "opacity": { "value": 0.5, "random": true },
+        "size": { "value": 3, "random": true },
+        "line_linked": { "enable": false },
+        "move": { "enable": true, "speed": 0.5, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
       },
       "interactivity": {
         "detect_on": "canvas",
         "events": {
-          "onhover": {
-            "enable": false,
-          },
-          "onclick": {
-            "enable": false,
-          },
+          "onhover": { "enable": true, "mode": "repulse" },
+          "onclick": { "enable": true, "mode": "push" },
           "resize": true
+        },
+        "modes": {
+          "repulse": { "distance": 100, "duration": 0.4 },
+          "push": { "particles_nb": 4 }
         }
       },
       "retina_detect": true
@@ -101,27 +71,65 @@ document.addEventListener('DOMContentLoaded', function() {
         closeTermsBtn.addEventListener('click', () => closeModal(termsModal));
     }
 
-    // Close modal if background is clicked
     window.addEventListener('click', (e) => {
         if (e.target === applyModal) closeModal(applyModal);
         if (e.target === termsModal) closeModal(termsModal);
     });
 
-    // --- Form Logic ---
+    // --- Dynamic Form Logic ---
+    const planSelect = document.getElementById('plan');
     const conceptText = document.getElementById('concept-text');
     const charCounter = document.getElementById('char-counter');
-    const minLength = 200;
+    const paypayField = document.getElementById('paypay-field');
 
-    if (conceptText && charCounter) {
-        conceptText.addEventListener('input', () => {
-            const currentLength = conceptText.value.length;
-            charCounter.textContent = `${currentLength} / ${minLength}`;
-            if (currentLength >= minLength) {
-                charCounter.style.color = '#25fc75'; // Green
+    function updateFormByPlan() {
+        const selectedPlan = planSelect.value;
+        const minLength = 100;
+
+        if (paypayField) {
+            if (selectedPlan === '8G Creator Plan') {
+                paypayField.style.display = 'block';
+                paypayField.querySelector('input').required = true;
             } else {
+                paypayField.style.display = 'none';
+                paypayField.querySelector('input').required = false;
+            }
+        }
+
+        if (conceptText && charCounter) {
+            if (selectedPlan === 'Friend Plan') {
+                conceptText.required = true;
+                conceptText.removeAttribute('minlength');
+                charCounter.textContent = '文字数制限なし';
                 charCounter.style.color = '#aaa';
+            } else if (selectedPlan) {
+                conceptText.required = true;
+                conceptText.setAttribute('minlength', minLength);
+                const currentLength = conceptText.value.length;
+                charCounter.textContent = `${currentLength} / ${minLength} 文字以上`;
+                charCounter.style.color = currentLength >= minLength ? '#25fc75' : '#aaa';
+            } else {
+                conceptText.removeAttribute('minlength');
+                conceptText.required = false;
+                charCounter.textContent = '';
+            }
+        }
+    }
+
+    if (conceptText) {
+        conceptText.addEventListener('input', () => {
+            if (planSelect.value !== 'Friend Plan' && planSelect.value) {
+                const minLength = 100;
+                const currentLength = conceptText.value.length;
+                charCounter.textContent = `${currentLength} / ${minLength} 文字以上`;
+                charCounter.style.color = currentLength >= minLength ? '#25fc75' : '#aaa';
             }
         });
+    }
+    
+    if (planSelect) {
+        planSelect.addEventListener('change', updateFormByPlan);
+        updateFormByPlan();
     }
     
     // --- Load Terms and Conditions ---
