@@ -22,17 +22,33 @@
     </header>
 
     <main>
-        <section id="plans" class="container">
-            <div class="availability-status" data-aos="fade-up">
-                <h2>募集状況</h2>
-                <p>現在、全プログラム合計で <span id="slot-count">3</span> 枠のサーバーを貸出可能です。</p>
-                <div class="slots">
-                    <div class="slot available"></div>
-                    <div class="slot available"></div>
-                    <div class="slot available"></div>
+        <section id="status" class="container">
+            <h2 data-aos="fade-up">現在の募集状況</h2>
+            <div class="status-container">
+                <div class="status-block" data-aos="fade-up">
+                    <h3><i class="fa-solid fa-users"></i> Friend Program</h3>
+                    <p>現在、<span id="friend-slot-count">3</span> 枠のサーバーを貸出可能です。</p>
+                    <div class="slots">
+                        <div class="slot available"></div>
+                        <div class="slot available"></div>
+                        <div class="slot available"></div>
+                    </div>
+                </div>
+                <div class="status-block" data-aos="fade-up" data-aos-delay="100">
+                    <h3><i class="fa-solid fa-lightbulb"></i> Creator Program</h3>
+                    <p>現在、<span id="creator-slot-count">5</span> 枠のサーバーを貸出可能です。</p>
+                    <div class="slots">
+                        <div class="slot available"></div>
+                        <div class="slot available"></div>
+                        <div class="slot available"></div>
+                        <div class="slot available"></div>
+                        <div class="slot available"></div>
+                    </div>
                 </div>
             </div>
+        </section>
 
+        <section id="plans" class="container">
             <div class="program-category" data-aos="fade-up">
                 <div class="program-header">
                     <i class="fa-solid fa-users"></i>
@@ -46,6 +62,7 @@
                             <p class="spec">4GB Memory / 2 Core CPU</p>
                         </div>
                         <div class="card-body">
+                            <p class="initial-cost">初期費用 ¥0</p>
                             <p class="price">無料<span>/初回最大1ヶ月</span></p>
                             <p class="description">推奨人数：～5名</p>
                             <p class="extension-fee">延長：月額 ¥550</p>
@@ -67,6 +84,7 @@
                             <p class="spec">4GB Memory / 2 Core CPU</p>
                         </div>
                         <div class="card-body">
+                            <p class="initial-cost">初期費用 ¥0</p>
                             <p class="price">完全無料</p>
                             <p class="description">コミュニティ貢献を前提としたプラン。継続的な活動が無料延長の条件となります。</p>
                              <p class="extension-fee">&nbsp;</p>
@@ -78,6 +96,7 @@
                             <p class="spec">8GB Memory / 4 Core CPU</p>
                         </div>
                         <div class="card-body">
+                            <p class="initial-cost">初期費用 ¥0</p>
                             <p class="price">¥690<span>/月</span></p>
                             <p class="description">MODや大規模企画を実現するための最上位プラン。最高の環境で創造性を発揮できます。</p>
                             <p class="extension-fee">&nbsp;</p>
@@ -85,6 +104,16 @@
                     </div>
                 </div>
             </div>
+        </section>
+
+        <section id="disclaimers" class="container">
+            <h4>ご利用にあたっての注意事項</h4>
+            <ul>
+                <li>サーバーのご用意には、申請の承認後、数日程度お時間をいただく場合がございます。</li>
+                <li>ディスク容量に厳密な制限は設けておりませんが、常識の範囲を大幅に超える使用が確認された場合、制限させていただくことがあります。</li>
+                <li>サーバーへの負荷についてもルールはございませんが、意図的な高負荷行為や、他の利用者に影響を及ぼすほどの負荷が継続する場合、利用を制限させていただくことがあります。</li>
+                <li>各プランの延長は自動更新ではありません。指定期間内に更新手続きが行われなかった場合、サーバーは停止され、その後予告なくサーバーデータは完全に削除されますのでご注意ください。</li>
+            </ul>
         </section>
     </main>
 
@@ -102,9 +131,8 @@
             <h2>サーバー創造 申請フォーム</h2>
             <form id="apply-form" action="https://formspree.io/f/mblyvkkq" method="POST">
                 <div class="form-group">
-                    <label for="plan">希望プラン</label>
                     <select id="plan" name="plan" required>
-                        <option value="">選択してください</option>
+                        <option value="">希望プランを選択...</option>
                         <optgroup label="Friend Program">
                             <option value="Friend Plan">Friend Plan (初回無料/延長¥550)</option>
                         </optgroup>
@@ -114,18 +142,22 @@
                         </optgroup>
                     </select>
                 </div>
-                 <div class="form-group">
+                 <div class="form-group floating">
+                    <input type="text" id="mcid" name="mcid" placeholder=" " required>
                     <label for="mcid">Minecraft ID (MCID)</label>
-                    <input type="text" id="mcid" name="mcid" required>
                 </div>
-                <div class="form-group">
+                <div class="form-group floating">
+                    <input type="text" id="discord-id" name="discord_id" placeholder=" " required>
                     <label for="discord-id">連絡用Discord ID</label>
-                    <input type="text" id="discord-id" name="discord_id" placeholder="例: gemini_google" required>
                 </div>
-                <div class="form-group">
-                    <label for="concept-text">サーバーコンセプト (200文字以上)</label>
-                    <textarea id="concept-text" name="concept" rows="6" required minlength="200" placeholder="Creator Programを選択した方は、既存サーバーにない独自のアイデアやコミュニティへの貢献計画を具体的に記述してください。"></textarea>
-                    <div id="char-counter">0 / 200</div>
+                <div id="paypay-field" class="form-group floating" style="display: none;">
+                    <input type="url" id="paypay-link" name="paypay_link" placeholder=" ">
+                    <label for="paypay-link">PayPay送金リンク (月額費用請求用)</label>
+                </div>
+                <div class="form-group floating">
+                    <textarea id="concept-text" name="concept" rows="6" placeholder=" " required></textarea>
+                    <label for="concept-text">サーバーコンセプト</label>
+                    <div id="char-counter"></div>
                 </div>
                 <div class="form-group terms-check">
                     <input type="checkbox" id="terms-agree" name="terms_agree" required>
@@ -139,8 +171,7 @@
     <div id="terms-modal" class="modal-wrapper">
         <div class="modal-content">
             <button id="close-terms-btn" class="close-button">&times;</button>
-            <div id="terms-content">
-                </div>
+            <div id="terms-content"></div>
         </div>
     </div>
 
