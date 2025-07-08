@@ -1,0 +1,278 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Poppins:wght@700&display=swap');
+
+:root {
+    --primary-color: #6a11cb;
+    --secondary-color: #2575fc;
+    --dark-bg: #0f0c29;
+    --text-color: #e0e0e0;
+    --card-bg: #1e1b4b;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- Particles.js Background --- */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--dark-bg);
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--white);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(106, 17, 203, 0.7);
+    margin-bottom: 1rem;
+    transition: text-shadow 0.3s ease;
+}
+.logo:hover {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 35px rgba(37, 117, 252, 0.9);
+}
+
+.tagline {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.cta-button {
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--white);
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    padding: 15px 30px;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(37, 117, 252, 0.5);
+}
+.cta-button i {
+    margin-right: 10px;
+}
+
+/* --- General Content --- */
+main {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to bottom, transparent, var(--dark-bg) 200px);
+}
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 5rem 2rem;
+}
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
+    margin-bottom: 3rem;
+    color: var(--white);
+}
+
+/* --- Plan Section --- */
+.plan-cards {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+.card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    width: 320px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(37, 117, 252, 0.3);
+}
+.card-header {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    padding: 1.5rem;
+    text-align: center;
+}
+.card-header h3 {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+.card-header .spec {
+    color: rgba(255, 255, 255, 0.8);
+}
+.card-body {
+    padding: 2rem;
+    text-align: center;
+}
+.price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+.price span {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+.description {
+    margin-bottom: 2rem;
+}
+.btn {
+    display: inline-block;
+    text-decoration: none;
+    color: var(--white);
+    background-color: var(--secondary-color);
+    padding: 10px 25px;
+    border-radius: 25px;
+    font-weight: 700;
+    transition: background-color 0.3s ease;
+}
+.btn:hover {
+    background-color: var(--primary-color);
+}
+
+/* --- Features Section --- */
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    text-align: center;
+}
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: var(--secondary-color);
+    transition: transform 0.3s ease;
+}
+.feature-item:hover .feature-icon {
+    transform: scale(1.2);
+    color: var(--primary-color);
+}
+.feature-item h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+    color: var(--white);
+}
+
+/* --- Flow/Timeline Section --- */
+.timeline {
+    position: relative;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.timeline::after {
+    content: '';
+    position: absolute;
+    width: 4px;
+    background: linear-gradient(to bottom, var(--primary-color), var(--secondary-color));
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -2px;
+    border-radius: 2px;
+}
+.timeline-item {
+    padding: 10px 40px;
+    position: relative;
+    width: 50%;
+}
+.timeline-item:nth-child(odd) {
+    left: 0;
+    text-align: right;
+}
+.timeline-item:nth-child(even) {
+    left: 50%;
+    text-align: left;
+}
+.timeline-content {
+    padding: 20px 30px;
+    background: var(--card-bg);
+    border-radius: 8px;
+    position: relative;
+}
+.timeline-icon {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    font-size: 1.5rem;
+    text-align: center;
+    background: var(--dark-bg);
+    color: var(--secondary-color);
+    border: 3px solid var(--secondary-color);
+    border-radius: 50%;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1;
+}
+.timeline-item:nth-child(odd) .timeline-icon {
+    right: -25px;
+}
+.timeline-item:nth-child(even) .timeline-icon {
+    left: -25px;
+}
+
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+.footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* --- Responsive Design --- */
+@media(max-width: 768px) {
+    .logo { font-size: 3rem; }
+    .tagline { font-size: 1.2rem; }
+    
+    .timeline::after { left: 25px; }
+    .timeline-item { width: 100%; padding-left: 70px; padding-right: 25px; }
+    .timeline-item:nth-child(even) { left: 0; }
+    .timeline-item:nth-child(odd) { text-align: left; }
+    .timeline-item:nth-child(even) { text-align: left; }
+    .timeline-icon { left: 0; }
+}
