@@ -88,18 +88,16 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Progress Bar Update Function
     function updateProgressBars() {
-        // Friend Program
         const friendAvailable = parseInt(document.getElementById('friend-slots-available').textContent);
-        const friendTotal = parseInt(document.getElementById('friend-slots-total').textContent);
+        const friendTotal = 3;
         const friendProgress = document.getElementById('friend-progress');
         if (friendProgress && friendTotal > 0) {
             const friendPercentage = (friendAvailable / friendTotal) * 100;
             friendProgress.style.width = friendPercentage + '%';
         }
 
-        // Creator Program
         const creatorAvailable = parseInt(document.getElementById('creator-slots-available').textContent);
-        const creatorTotal = parseInt(document.getElementById('creator-slots-total').textContent);
+        const creatorTotal = 5;
         const creatorProgress = document.getElementById('creator-progress');
         if (creatorProgress && creatorTotal > 0) {
             const creatorPercentage = (creatorAvailable / creatorTotal) * 100;
