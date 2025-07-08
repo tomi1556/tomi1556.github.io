@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     function openModal(modal) { if (modal) modal.classList.add('is-visible'); }
     function closeModal(modal) { if (modal) modal.classList.remove('is-visible'); }
-    if (openModalBtn) openModalBtn.addEventListener('click', () => openModal(applyModal));
+    if (openModalBtn) openModalBtn.addEventListener('click', () => { openModal(applyModal); });
     if (closeModalBtn) closeModalBtn.addEventListener('click', () => closeModal(applyModal));
     if (openTermsBtn) openTermsBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(termsModal); });
     if (openTermsInFormBtn) openTermsInFormBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(termsModal); });
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const radius = ring.r.baseVal.value;
         const circumference = 2 * Math.PI * radius;
         ring.style.strokeDasharray = `${circumference} ${circumference}`;
-        const offset = circumference - percent * circumference;
+        const offset = circumference - (percent * circumference);
         ring.style.strokeDashoffset = offset;
     }
     
@@ -60,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const form = document.getElementById('apply-form');
     const steps = [...form.querySelectorAll('.form-step')];
     const stepperItems = [...form.querySelectorAll('.step')];
+    const stepLines = [...form.querySelectorAll('.step-line')];
     const nextButtons = [...form.querySelectorAll('.next-btn')];
     const backButtons = [...form.querySelectorAll('.back-btn')];
     const planSelectCards = [...form.querySelectorAll('.plan-select-card')];
@@ -76,9 +77,13 @@ document.addEventListener('DOMContentLoaded', function() {
     let currentStep = 1;
 
     const updateFormState = () => {
-        steps.forEach(step => step.classList.toggle('active', parseInt(step.dataset.step) === currentStep));
-        stepperItems.forEach((step, index) => step.classList.toggle('active', index < currentStep));
-        validateStep();
+        steps.forEach(step => {
+            step.classList.toggle('active', parseInt(step.dataset.step) === currentStep);
+        });
+        stepperItems.forEach((step, index) => {
+            step.classList.toggle('active', index < currentStep);
+        });
+        validateStep(currentStep);
     };
 
     nextButtons.forEach(button => {
@@ -104,8 +109,8 @@ document.addEventListener('DOMContentLoaded', function() {
             planSelectCards.forEach(c => c.classList.remove('selected'));
             card.classList.add('selected');
             planInput.value = card.dataset.plan;
-            validateStep();
             updateDynamicFields();
+            validateStep(1);
         });
     });
 
@@ -124,30 +129,33 @@ document.addEventListener('DOMContentLoaded', function() {
             conceptText.setAttribute('minlength', minLength);
             const currentLength = conceptText.value.length;
             charCounter.textContent = `${currentLength} / ${minLength} 文字以上`;
-            charCounter.style.color = currentLength >= minLength ? '#25fc75' : '#aaa';
         }
     }
     
-    function validateStep() {
+    function validateStep(stepNumber) {
         let isValid = false;
-        if (currentStep === 1) {
+        const nextBtn = steps[stepNumber - 1].querySelector('.next-btn');
+        
+        if (stepNumber === 1) {
             isValid = planInput.value !== '';
-        } else if (currentStep === 2) {
+        } else if (stepNumber === 2) {
             isValid = mcidInput.value.trim() !== '' && discordInput.value.trim() !== '';
             if (paypayInput.required) {
-                isValid = isValid && paypayInput.value.trim() !== '';
+                isValid = isValid && paypayInput.value.trim() !== '' && paypayInput.checkValidity();
             }
-        } else if (currentStep === 3) {
+        } else if (stepNumber === 3) {
             const minLength = conceptText.hasAttribute('minlength') ? parseInt(conceptText.getAttribute('minlength')) : 0;
             isValid = conceptText.value.length >= minLength && termsAgree.checked;
+            if(submitButton) submitButton.disabled = !isValid;
         }
-        
-        const nextBtn = steps[currentStep - 1].querySelector('.next-btn');
+
         if (nextBtn) nextBtn.disabled = !isValid;
-        if (submitButton) submitButton.disabled = !isValid;
     }
 
-    form.addEventListener('input', validateStep);
+    [mcidInput, discordInput, paypayInput, conceptText, termsAgree].forEach(input => {
+        input.addEventListener('input', () => validateStep(currentStep));
+        input.addEventListener('change', () => validateStep(currentStep));
+    });
     
     // Load Terms and Conditions
     const termsContent = document.getElementById('terms-content');
