@@ -29,22 +29,22 @@
         <section id="status" class="container">
             <h2 data-aos="fade-up">現在の募集状況</h2>
             <div class="status-container">
-                <div class="status-block" data-aos="fade-up">
+                <div class="status-panel" data-aos="zoom-in-up">
                     <div class="status-header">
                         <h3><i class="fa-solid fa-users"></i> Friend Program</h3>
                         <div class="status-counter">
-                            <span id="friend-slots-available">3</span> / <span id="friend-slots-total">3</span>
+                            <span id="friend-slots-available">3</span> / 3
                         </div>
                     </div>
                     <div class="progress-bar">
                         <div id="friend-progress" class="progress-bar-fill"></div>
                     </div>
                 </div>
-                <div class="status-block" data-aos="fade-up" data-aos-delay="100">
+                <div class="status-panel" data-aos="zoom-in-up" data-aos-delay="100">
                     <div class="status-header">
                         <h3><i class="fa-solid fa-lightbulb"></i> Creator Program</h3>
                         <div class="status-counter">
-                            <span id="creator-slots-available">5</span> / <span id="creator-slots-total">5</span>
+                            <span id="creator-slots-available">5</span> / 5
                         </div>
                     </div>
                     <div class="progress-bar">
@@ -56,11 +56,6 @@
 
         <section id="plans" class="container">
             <div class="program-category" data-aos="fade-up">
-                <div class="program-header">
-                    <i class="fa-solid fa-users"></i>
-                    <h3>Friend Program</h3>
-                </div>
-                <p class="program-description">気の合う仲間と、Minecraftの世界を心ゆくまで楽しむためのプログラムです。<br>難しい条件はありません。純粋な冒険の場を提供します。</p>
                 <div class="plan-cards">
                     <div class="card">
                         <div class="card-header">
@@ -71,9 +66,11 @@
                             <p class="initial-cost">初期費用 ¥0</p>
                             <p class="price">無料<span>/初回最大1ヶ月</span></p>
                             <p class="description">推奨人数：～5名</p>
-                            <p class="extension-fee">延長：月額 ¥550</p>
-                            <div class="payment-method">
-                                <i class="fa-brands fa-paypal"></i> PayPay支払いのみ
+                            <div class="card-footer">
+                                <p class="extension-fee">延長：月額 ¥550</p>
+                                <div class="payment-tag">
+                                    <i class="fa-solid fa-qrcode"></i> PayPayのみ
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -81,11 +78,6 @@
             </div>
 
             <div class="program-category" data-aos="fade-up" data-aos-delay="200">
-                <div class="program-header">
-                    <i class="fa-solid fa-lightbulb"></i>
-                    <h3>Creator Program</h3>
-                </div>
-                 <p class="program-description">StellaMCの未来を共に創る、情熱あるクリエイターのためのプログラムです。<br>ユニークな企画やコミュニティへの貢献を期待します。あなたのアイデアを厳正に審査します。</p>
                 <div class="plan-cards">
                     <div class="card">
                         <div class="card-header premium">
@@ -95,7 +87,9 @@
                         <div class="card-body">
                             <p class="initial-cost">初期費用 ¥0</p><p class="price">完全無料</p>
                             <p class="description">コミュニティ貢献を前提としたプラン。継続的な活動が無料延長の条件となります。</p>
-                             <p class="extension-fee">&nbsp;</p>
+                            <div class="card-footer">
+                                <p class="extension-fee">&nbsp;</p>
+                            </div>
                         </div>
                     </div>
                     <div class="card">
@@ -107,16 +101,18 @@
                             <p class="initial-cost">初期費用 ¥0</p>
                             <p class="price">¥690<span>/月</span></p>
                             <p class="description">MODや大規模企画を実現するための最上位プラン。最高の環境で創造性を発揮できます。</p>
-                            <p class="extension-fee">&nbsp;</p>
-                            <div class="payment-method">
-                                <i class="fa-brands fa-paypal"></i> PayPay支払いのみ
+                            <div class="card-footer">
+                                <p class="extension-fee">&nbsp;</p>
+                                <div class="payment-tag">
+                                    <i class="fa-solid fa-qrcode"></i> PayPayのみ
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </section>
-        
+
         <section id="disclaimers" class="container">
             <h2 data-aos="fade-up">ご利用にあたって</h2>
             <div class="disclaimer-grid">
@@ -159,7 +155,7 @@
             <form id="apply-form" action="https://formspree.io/f/mblyvkkq" method="POST">
                 <div class="form-group">
                     <select id="plan" name="plan" required>
-                        <option value="">希望プランを選択...</option>
+                        <option value="" disabled selected>希望プランを選択...</option>
                         <optgroup label="Friend Program">
                             <option value="Friend Plan">Friend Plan (初回無料/延長¥550)</option>
                         </optgroup>
@@ -170,21 +166,21 @@
                     </select>
                 </div>
                  <div class="form-group floating">
-                    <input type="text" id="mcid" name="mcid" placeholder=" " required>
-                    <label for="mcid">Minecraft ID (MCID)</label>
+                    <input type="text" id="mcid" name="mcid" class="form-input" placeholder=" " required>
+                    <label for="mcid" class="form-label">Minecraft ID (MCID)</label>
                 </div>
                 <div class="form-group floating">
-                    <input type="text" id="discord-id" name="discord_id" placeholder=" " required>
-                    <label for="discord-id">連絡用Discord ID</label>
+                    <input type="text" id="discord-id" name="discord_id" class="form-input" placeholder=" " required>
+                    <label for="discord-id" class="form-label">連絡用Discord ID</label>
                 </div>
                 <div id="paypay-field" class="form-group floating" style="display: none;">
-                    <input type="url" id="paypay-link" name="paypay_link" placeholder=" ">
-                    <label for="paypay-link">PayPay送金リンク</label>
+                    <input type="url" id="paypay-link" name="paypay_link" class="form-input" placeholder=" ">
+                    <label for="paypay-link" class="form-label">PayPay送金リンク</label>
                     <p class="form-note">月額料金のお支払いリクエスト（請求）をお送りするために使用します。</p>
                 </div>
                 <div class="form-group floating">
-                    <textarea id="concept-text" name="concept" rows="6" placeholder=" " required></textarea>
-                    <label for="concept-text">サーバーコンセプト</label>
+                    <textarea id="concept-text" name="concept" rows="6" class="form-input" placeholder=" " required></textarea>
+                    <label for="concept-text" class="form-label">サーバーコンセプト</label>
                     <div id="char-counter"></div>
                 </div>
                 <div class="form-group terms-check">
