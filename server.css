@@ -7,6 +7,7 @@
     --text-color: #e0e0e0;
     --card-bg: #1e1b4b;
     --white: #ffffff;
+    --glow-color: rgba(37, 117, 252, 0.7);
 }
 
 * {
@@ -23,7 +24,6 @@ body {
     overflow-x: hidden;
 }
 
-/* --- Particles.js Background --- */
 #particles-js {
     position: fixed;
     width: 100%;
@@ -32,7 +32,6 @@ body {
     background-color: var(--dark-bg);
 }
 
-/* --- Hero Section --- */
 .hero {
     height: 100vh;
     display: flex;
@@ -87,7 +86,6 @@ body {
     margin-right: 10px;
 }
 
-/* --- General Content --- */
 main {
     position: relative;
     z-index: 1;
@@ -96,7 +94,10 @@ main {
 .container {
     max-width: 1100px;
     margin: auto;
-    padding: 5rem 2rem;
+    padding: 3rem 2rem;
+}
+.container#plans {
+    padding-top: 0;
 }
 h2 {
     font-family: 'Poppins', sans-serif;
@@ -106,26 +107,44 @@ h2 {
     color: var(--white);
 }
 
-/* --- Availability Status --- */
-.availability-status {
+/* --- Status Section --- */
+.status-container {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.status-block {
+    background: rgba(30, 27, 75, 0.5);
+    padding: 1.5rem 2rem;
+    border-radius: 10px;
     text-align: center;
-    margin-bottom: 4rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    flex: 1;
+    min-width: 300px;
 }
-.availability-status h2 {
+.status-block h3 {
+    font-size: 1.5rem;
+    color: var(--white);
     margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
 }
-.availability-status p {
-    font-size: 1.2rem;
+.status-block p {
+    font-size: 1rem;
+    color: var(--text-color);
     margin-bottom: 1.5rem;
 }
 .slots {
     display: flex;
     justify-content: center;
-    gap: 15px;
+    gap: 10px;
 }
 .slot {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     border-radius: 50%;
     background-color: rgba(255, 255, 255, 0.2);
     transition: all 0.3s ease;
@@ -140,10 +159,9 @@ h2 {
     background-color: rgba(30, 27, 75, 0.5);
     padding: 2.5rem;
     border-radius: 15px;
-    margin-bottom: 4rem;
+    margin-top: 4rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 .program-header {
     display: flex;
     align-items: center;
@@ -151,19 +169,16 @@ h2 {
     gap: 1rem;
     margin-bottom: 1rem;
 }
-
 .program-header i {
     font-size: 2rem;
     color: var(--secondary-color);
 }
-
 .program-header h3 {
     font-family: 'Poppins', sans-serif;
     font-size: 2.2rem;
     color: var(--white);
     margin: 0;
 }
-
 .program-description {
     text-align: center;
     max-width: 800px;
@@ -187,10 +202,31 @@ h2 {
     border: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+.card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 16px;
+    border: 2px solid transparent;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color)) border-box;
+    -webkit-mask: linear-gradient(#fff 0 0) padding-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: destination-out;
+    mask-composite: exclude;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.card:hover::before {
+    opacity: 1;
 }
 .card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 10px 30px rgba(37, 117, 252, 0.3);
+    box-shadow: 0 0 25px var(--glow-color);
 }
 .card-header {
     background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
@@ -216,11 +252,17 @@ h2 {
     flex-direction: column;
     justify-content: space-between;
 }
+.initial-cost {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #f7b733;
+    margin-bottom: 0.5rem;
+}
 .price {
     font-size: 2.5rem;
     font-weight: 700;
     color: var(--white);
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 }
 .price span {
     font-size: 1rem;
@@ -234,6 +276,41 @@ h2 {
     font-size: 0.9rem;
     font-weight: bold;
     color: #f7b733;
+}
+
+/* --- Disclaimers Section --- */
+#disclaimers {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    max-width: 800px;
+    background: rgba(0,0,0,0.2);
+    border-radius: 10px;
+}
+#disclaimers h4 {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    color: #ccc;
+}
+#disclaimers ul {
+    list-style: none;
+    padding-left: 0;
+}
+#disclaimers ul li {
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+#disclaimers ul li::before {
+    content: '\f071';
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    color: #f7b733;
+    position: absolute;
+    left: 0;
+    top: 2px;
 }
 
 /* --- Footer --- */
@@ -255,7 +332,7 @@ footer {
     color: var(--secondary-color);
 }
 
-/* --- Modal --- */
+/* --- Modal & Form --- */
 .modal-wrapper {
     position: fixed;
     top: 0;
@@ -304,15 +381,20 @@ footer {
     text-align: center;
     margin-bottom: 2rem;
 }
-
-/* --- Form --- */
 .form-group {
     margin-bottom: 1.5rem;
 }
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: bold;
+.form-group.floating {
+    position: relative;
+    margin-top: 1.5rem;
+}
+.form-group.floating label {
+    position: absolute;
+    top: 13px;
+    left: 12px;
+    color: #aaa;
+    pointer-events: none;
+    transition: all 0.2s ease-out;
 }
 .form-group input,
 .form-group select,
@@ -334,25 +416,35 @@ footer {
     border-color: var(--secondary-color);
     box-shadow: 0 0 10px var(--secondary-color);
 }
-
+.form-group.floating input:focus + label,
+.form-group.floating input:not(:placeholder-shown) + label,
+.form-group.floating textarea:focus + label,
+.form-group.floating textarea:not(:placeholder-shown) + label {
+    top: -10px;
+    left: 10px;
+    font-size: 0.8rem;
+    background-color: var(--card-bg);
+    padding: 0 5px;
+    color: var(--secondary-color);
+}
 optgroup {
     font-weight: bold;
     font-style: italic;
     background-color: var(--dark-bg);
     color: var(--secondary-color);
 }
-
 option {
     font-style: normal;
     background-color: var(--dark-bg);
     color: var(--text-color);
 }
-
 #char-counter {
-    text-align: right;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
     font-size: 0.9rem;
     color: #aaa;
-    margin-top: 5px;
+    pointer-events: none;
 }
 .terms-check {
     display: flex;
@@ -384,8 +476,6 @@ option {
     transform: translateY(-3px);
     box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
 }
-
-/* --- Terms Modal Content --- */
 #terms-content {
     line-height: 1.8;
 }
@@ -403,6 +493,10 @@ option {
     .logo { font-size: 3rem; }
     .tagline { font-size: 1.2rem; }
     
+    .status-container {
+        flex-direction: column;
+    }
+
     .program-header h3 {
         font-size: 1.8rem;
     }
