@@ -81,36 +81,36 @@ document.addEventListener('DOMContentLoaded', function() {
     const conceptText = document.getElementById('concept-text');
     const charCounter = document.getElementById('char-counter');
     const paypayField = document.getElementById('paypay-field');
+    const paypayInput = document.getElementById('paypay-link');
 
     function updateFormByPlan() {
         const selectedPlan = planSelect.value;
         const minLength = 100;
 
-        if (paypayField) {
+        if (paypayField && paypayInput) {
             if (selectedPlan === '8G Creator Plan') {
                 paypayField.style.display = 'block';
-                paypayField.querySelector('input').required = true;
+                paypayInput.required = true; // 必須項目に
             } else {
                 paypayField.style.display = 'none';
-                paypayField.querySelector('input').required = false;
+                paypayInput.required = false; // 必須項目から解除
             }
         }
 
         if (conceptText && charCounter) {
+            conceptText.required = true; // どのプランでもコンセプトは必須
             if (selectedPlan === 'Friend Plan') {
-                conceptText.required = true;
                 conceptText.removeAttribute('minlength');
                 charCounter.textContent = '文字数制限なし';
                 charCounter.style.color = '#aaa';
-            } else if (selectedPlan) {
-                conceptText.required = true;
+            } else if (selectedPlan) { // Creatorプランが選択された場合
                 conceptText.setAttribute('minlength', minLength);
                 const currentLength = conceptText.value.length;
                 charCounter.textContent = `${currentLength} / ${minLength} 文字以上`;
                 charCounter.style.color = currentLength >= minLength ? '#25fc75' : '#aaa';
-            } else {
-                conceptText.removeAttribute('minlength');
+            } else { // 何も選択されていない場合
                 conceptText.required = false;
+                conceptText.removeAttribute('minlength');
                 charCounter.textContent = '';
             }
         }
@@ -129,7 +129,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (planSelect) {
         planSelect.addEventListener('change', updateFormByPlan);
-        updateFormByPlan();
+        // モーダルが開かれた時に初期化
+        openModalBtn.addEventListener('click', updateFormByPlan);
     }
     
     // --- Load Terms and Conditions ---
