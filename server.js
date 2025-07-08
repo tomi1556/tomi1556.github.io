@@ -37,6 +37,15 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Progress Bar (Donut Chart) Update Function
     function updateProgressBars() {
+        function setRingProgress(ring, percent) {
+            if (!ring) return;
+            const radius = ring.r.baseVal.value;
+            const circumference = 2 * Math.PI * radius;
+            ring.style.strokeDasharray = `${circumference} ${circumference}`;
+            const offset = circumference - (percent * circumference);
+            ring.style.strokeDashoffset = offset;
+        }
+
         const friendAvailable = parseInt(document.getElementById('friend-slots-available').textContent);
         const friendTotal = 3;
         const friendRing = document.getElementById('friend-progress-ring');
@@ -47,116 +56,127 @@ document.addEventListener('DOMContentLoaded', function() {
         const creatorRing = document.getElementById('creator-progress-ring');
         setRingProgress(creatorRing, creatorAvailable / creatorTotal);
     }
-    function setRingProgress(ring, percent) {
-        if (!ring) return;
-        const radius = ring.r.baseVal.value;
-        const circumference = 2 * Math.PI * radius;
-        ring.style.strokeDasharray = `${circumference} ${circumference}`;
-        const offset = circumference - (percent * circumference);
-        ring.style.strokeDashoffset = offset;
-    }
     
     // Multi-Step Form Logic
     const form = document.getElementById('apply-form');
-    const steps = [...form.querySelectorAll('.form-step')];
-    const stepperItems = [...form.querySelectorAll('.step')];
-    const stepLines = [...form.querySelectorAll('.step-line')];
-    const nextButtons = [...form.querySelectorAll('.next-btn')];
-    const backButtons = [...form.querySelectorAll('.back-btn')];
-    const planSelectCards = [...form.querySelectorAll('.plan-select-card')];
-    const planInput = document.getElementById('plan-input');
-    const mcidInput = document.getElementById('mcid');
-    const discordInput = document.getElementById('discord-id');
-    const paypayField = document.getElementById('paypay-field');
-    const paypayInput = document.getElementById('paypay-link');
-    const conceptText = document.getElementById('concept-text');
-    const charCounter = document.getElementById('char-counter');
-    const termsAgree = document.getElementById('terms-agree');
-    const submitButton = form.querySelector('.submit-btn');
-    
-    let currentStep = 1;
-
-    const updateFormState = () => {
-        steps.forEach(step => {
-            step.classList.toggle('active', parseInt(step.dataset.step) === currentStep);
-        });
-        stepperItems.forEach((step, index) => {
-            step.classList.toggle('active', index < currentStep);
-        });
-        validateStep(currentStep);
-    };
-
-    nextButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            if (currentStep < steps.length) {
-                currentStep++;
-                updateFormState();
-            }
-        });
-    });
-
-    backButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            if (currentStep > 1) {
-                currentStep--;
-                updateFormState();
-            }
-        });
-    });
-
-    planSelectCards.forEach(card => {
-        card.addEventListener('click', () => {
-            planSelectCards.forEach(c => c.classList.remove('selected'));
-            card.classList.add('selected');
-            planInput.value = card.dataset.plan;
-            updateDynamicFields();
-            validateStep(1);
-        });
-    });
-
-    function updateDynamicFields() {
-        const selectedPlan = planInput.value;
-        const minLength = 100;
+    if(form) {
+        const steps = [...form.querySelectorAll('.form-step')];
+        const stepperItems = [...form.querySelectorAll('.step')];
+        const nextButtons = [...form.querySelectorAll('.next-btn')];
+        const backButtons = [...form.querySelectorAll('.back-btn')];
+        const planSelectCards = [...form.querySelectorAll('.plan-select-card')];
+        const planInput = document.getElementById('plan-input');
+        const mcidInput = document.getElementById('mcid');
+        const discordInput = document.getElementById('discord-id');
+        const paypayField = document.getElementById('paypay-field');
+        const paypayInput = document.getElementById('paypay-link');
+        const conceptText = document.getElementById('concept-text');
+        const charCounter = document.getElementById('char-counter');
+        const termsAgree = document.getElementById('terms-agree');
+        const submitButton = form.querySelector('.submit-btn');
         
-        paypayField.style.display = selectedPlan === '8G Creator Plan' ? 'block' : 'none';
-        paypayInput.required = selectedPlan === '8G Creator Plan';
+        let currentStep = 1;
 
-        conceptText.removeAttribute('minlength');
-        if (selectedPlan === 'Friend Plan') {
-            charCounter.textContent = '文字数制限なし';
-            charCounter.style.color = '#aaa';
-        } else if (selectedPlan) {
-            conceptText.setAttribute('minlength', minLength);
+        const updateFormVisuals = () => {
+            steps.forEach(step => {
+                step.classList.toggle('active', parseInt(step.dataset.step) === currentStep);
+            });
+            stepperItems.forEach((step, index) => {
+                step.classList.toggle('active', index + 1 === currentStep);
+                step.classList.toggle('completed', index < currentStep);
+            });
+            validateCurrentStep();
+        };
+
+        const validateCurrentStep = () => {
+            let isValid = false;
+            const stepContent = steps[currentStep - 1];
+            if (!stepContent) return;
+
+            const nextBtn = stepContent.querySelector('.next-btn');
+            
+            if (currentStep === 1) {
+                isValid = planInput.value !== '';
+            } else if (currentStep === 2) {
+                isValid = mcidInput.value.trim() !== '' && discordInput.value.trim() !== '';
+                if (paypayInput.required) {
+                    isValid = isValid && paypayInput.value.trim() !== '' && paypayInput.checkValidity();
+                }
+            } else if (currentStep === 3) {
+                const minLength = conceptText.hasAttribute('minlength') ? parseInt(conceptText.getAttribute('minlength')) : 0;
+                isValid = conceptText.value.length >= minLength && termsAgree.checked;
+                if(submitButton) submitButton.disabled = !isValid;
+            }
+
+            if (nextBtn) nextBtn.disabled = !isValid;
+        };
+
+        nextButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (currentStep < steps.length) { currentStep++; updateFormVisuals(); }
+            });
+        });
+
+        backButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                if (currentStep > 1) { currentStep--; updateFormVisuals(); }
+            });
+        });
+
+        planSelectCards.forEach(card => {
+            card.addEventListener('click', () => {
+                planSelectCards.forEach(c => c.classList.remove('selected'));
+                card.classList.add('selected');
+                planInput.value = card.dataset.plan;
+                updateDynamicFields();
+                validateCurrentStep();
+            });
+        });
+
+        function updateDynamicFields() {
+            const selectedPlan = planInput.value;
+            const minLength = 100;
+            
+            paypayField.style.display = selectedPlan === '8G Creator Plan' ? 'block' : 'none';
+            paypayInput.required = selectedPlan === '8G Creator Plan';
+
+            conceptText.removeAttribute('minlength');
+            if (selectedPlan === 'Friend Plan') {
+                charCounter.textContent = '文字数制限なし';
+                charCounter.style.color = '#aaa';
+            } else if (selectedPlan) {
+                conceptText.setAttribute('minlength', minLength);
+                updateCharCounter();
+            }
+        }
+        
+        function updateCharCounter() {
+            if (planInput.value === 'Friend Plan') return;
+            const minLength = 100;
             const currentLength = conceptText.value.length;
             charCounter.textContent = `${currentLength} / ${minLength} 文字以上`;
+            charCounter.style.color = currentLength >= minLength ? '#4ade80' : '#aaa';
         }
-    }
-    
-    function validateStep(stepNumber) {
-        let isValid = false;
-        const nextBtn = steps[stepNumber - 1].querySelector('.next-btn');
-        
-        if (stepNumber === 1) {
-            isValid = planInput.value !== '';
-        } else if (stepNumber === 2) {
-            isValid = mcidInput.value.trim() !== '' && discordInput.value.trim() !== '';
-            if (paypayInput.required) {
-                isValid = isValid && paypayInput.value.trim() !== '' && paypayInput.checkValidity();
+
+        [mcidInput, discordInput, paypayInput, conceptText, termsAgree].forEach(input => {
+            if(input) {
+                input.addEventListener('input', validateCurrentStep);
+                input.addEventListener('change', validateCurrentStep);
+                if(input.type === 'textarea') input.addEventListener('input', updateCharCounter);
             }
-        } else if (stepNumber === 3) {
-            const minLength = conceptText.hasAttribute('minlength') ? parseInt(conceptText.getAttribute('minlength')) : 0;
-            isValid = conceptText.value.length >= minLength && termsAgree.checked;
-            if(submitButton) submitButton.disabled = !isValid;
-        }
+        });
 
-        if (nextBtn) nextBtn.disabled = !isValid;
+        if(openModalBtn){
+             openModalBtn.addEventListener('click', () => {
+                currentStep = 1;
+                form.reset();
+                planSelectCards.forEach(c => c.classList.remove('selected'));
+                updateDynamicFields();
+                updateFormVisuals();
+             });
+        }
     }
 
-    [mcidInput, discordInput, paypayInput, conceptText, termsAgree].forEach(input => {
-        input.addEventListener('input', () => validateStep(currentStep));
-        input.addEventListener('change', () => validateStep(currentStep));
-    });
-    
     // Load Terms and Conditions
     const termsContent = document.getElementById('terms-content');
     if (termsContent) {
