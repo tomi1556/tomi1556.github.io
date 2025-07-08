@@ -27,22 +27,22 @@
             <div class="status-container">
                 <div class="status-block" data-aos="fade-up">
                     <h3><i class="fa-solid fa-users"></i> Friend Program</h3>
-                    <p>現在、<span id="friend-slot-count">3</span> 枠のサーバーを貸出可能です。</p>
+                    <p>現在、<span id="friend-slot-count">3</span> 枠のサーバーが貸出可能です。</p>
                     <div class="slots">
-                        <div class="slot available"></div>
-                        <div class="slot available"></div>
-                        <div class="slot available"></div>
+                        <i class="fa-solid fa-star available"></i>
+                        <i class="fa-solid fa-star available"></i>
+                        <i class="fa-solid fa-star available"></i>
                     </div>
                 </div>
                 <div class="status-block" data-aos="fade-up" data-aos-delay="100">
                     <h3><i class="fa-solid fa-lightbulb"></i> Creator Program</h3>
-                    <p>現在、<span id="creator-slot-count">5</span> 枠のサーバーを貸出可能です。</p>
+                    <p>現在、<span id="creator-slot-count">5</span> 枠のサーバーが貸出可能です。</p>
                     <div class="slots">
-                        <div class="slot available"></div>
-                        <div class="slot available"></div>
-                        <div class="slot available"></div>
-                        <div class="slot available"></div>
-                        <div class="slot available"></div>
+                        <i class="fa-solid fa-star available"></i>
+                        <i class="fa-solid fa-star available"></i>
+                        <i class="fa-solid fa-star available"></i>
+                        <i class="fa-solid fa-star available"></i>
+                        <i class="fa-solid fa-star available"></i>
                     </div>
                 </div>
             </div>
@@ -70,7 +70,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="program-category" data-aos="fade-up" data-aos-delay="200">
                 <div class="program-header">
                     <i class="fa-solid fa-lightbulb"></i>
@@ -107,13 +106,29 @@
         </section>
 
         <section id="disclaimers" class="container">
-            <h4>ご利用にあたっての注意事項</h4>
-            <ul>
-                <li>サーバーのご用意には、申請の承認後、数日程度お時間をいただく場合がございます。</li>
-                <li>ディスク容量に厳密な制限は設けておりませんが、常識の範囲を大幅に超える使用が確認された場合、制限させていただくことがあります。</li>
-                <li>サーバーへの負荷についてもルールはございませんが、意図的な高負荷行為や、他の利用者に影響を及ぼすほどの負荷が継続する場合、利用を制限させていただくことがあります。</li>
-                <li>各プランの延長は自動更新ではありません。指定期間内に更新手続きが行われなかった場合、サーバーは停止され、その後予告なくサーバーデータは完全に削除されますのでご注意ください。</li>
-            </ul>
+            <h2 data-aos="fade-up">ご利用にあたって</h2>
+            <div class="disclaimer-grid">
+                <div class="disclaimer-item" data-aos="fade-up">
+                    <div class="disclaimer-icon"><i class="fa-solid fa-hourglass-half"></i></div>
+                    <h4>準備期間</h4>
+                    <p>サーバーのご用意には、申請の承認後、数日程度お時間をいただく場合がございます。</p>
+                </div>
+                <div class="disclaimer-item" data-aos="fade-up" data-aos-delay="100">
+                    <div class="disclaimer-icon"><i class="fa-solid fa-hard-drive"></i></div>
+                    <h4>ディスク容量</h4>
+                    <p>厳密な制限はありませんが、常識を大幅に超える使用が確認された場合、制限させていただくことがあります。</p>
+                </div>
+                <div class="disclaimer-item" data-aos="fade-up" data-aos-delay="200">
+                    <div class="disclaimer-icon"><i class="fa-solid fa-bolt"></i></div>
+                    <h4>サーバー負荷</h4>
+                    <p>意図的な高負荷行為や、他の利用者に影響を及ぼすほどの負荷が継続する場合、利用を制限することがあります。</p>
+                </div>
+                <div class="disclaimer-item" data-aos="fade-up" data-aos-delay="300">
+                    <div class="disclaimer-icon"><i class="fa-solid fa-trash-can"></i></div>
+                    <h4>データ保持</h4>
+                    <p>延長は自動更新ではありません。更新手続きがない場合、サーバーは停止し、その後データは完全に削除されます。</p>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -152,7 +167,8 @@
                 </div>
                 <div id="paypay-field" class="form-group floating" style="display: none;">
                     <input type="url" id="paypay-link" name="paypay_link" placeholder=" ">
-                    <label for="paypay-link">PayPay送金リンク (月額費用請求用)</label>
+                    <label for="paypay-link">PayPay送金リンク</label>
+                    <p class="form-note">月額料金のお支払いリクエスト（請求）をお送りするために使用します。</p>
                 </div>
                 <div class="form-group floating">
                     <textarea id="concept-text" name="concept" rows="6" placeholder=" " required></textarea>
@@ -174,7 +190,6 @@
             <div id="terms-content"></div>
         </div>
     </div>
-
     <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="server.js"></script>
