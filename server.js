@@ -1,8 +1,18 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Page Loader Logic
+    const loader = document.getElementById('loader');
+    window.addEventListener('load', () => {
+        if (loader) {
+            loader.classList.add('loaded');
+        }
+        updateProgressBars();
+    });
+
     // AOS (Animate on Scroll) Library Initialization
     AOS.init({
         duration: 800,
         once: true,
+        delay: 100,
     });
 
     // Interactive Particles.js Initialization
@@ -31,7 +41,7 @@ document.addEventListener('DOMContentLoaded', function() {
       "retina_detect": true
     });
 
-    // --- Modal Logic ---
+    // Modal Logic
     const applyModal = document.getElementById('apply-modal');
     const termsModal = document.getElementById('terms-modal');
     const openModalBtn = document.getElementById('open-modal-btn');
@@ -76,7 +86,28 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === termsModal) closeModal(termsModal);
     });
 
-    // --- Dynamic Form Logic ---
+    // Progress Bar Update Function
+    function updateProgressBars() {
+        // Friend Program
+        const friendAvailable = parseInt(document.getElementById('friend-slots-available').textContent);
+        const friendTotal = parseInt(document.getElementById('friend-slots-total').textContent);
+        const friendProgress = document.getElementById('friend-progress');
+        if (friendProgress && friendTotal > 0) {
+            const friendPercentage = (friendAvailable / friendTotal) * 100;
+            friendProgress.style.width = friendPercentage + '%';
+        }
+
+        // Creator Program
+        const creatorAvailable = parseInt(document.getElementById('creator-slots-available').textContent);
+        const creatorTotal = parseInt(document.getElementById('creator-slots-total').textContent);
+        const creatorProgress = document.getElementById('creator-progress');
+        if (creatorProgress && creatorTotal > 0) {
+            const creatorPercentage = (creatorAvailable / creatorTotal) * 100;
+            creatorProgress.style.width = creatorPercentage + '%';
+        }
+    }
+
+    // Dynamic Form Logic
     const planSelect = document.getElementById('plan');
     const conceptText = document.getElementById('concept-text');
     const charCounter = document.getElementById('char-counter');
@@ -90,25 +121,25 @@ document.addEventListener('DOMContentLoaded', function() {
         if (paypayField && paypayInput) {
             if (selectedPlan === '8G Creator Plan') {
                 paypayField.style.display = 'block';
-                paypayInput.required = true; // 必須項目に
+                paypayInput.required = true;
             } else {
                 paypayField.style.display = 'none';
-                paypayInput.required = false; // 必須項目から解除
+                paypayInput.required = false;
             }
         }
 
         if (conceptText && charCounter) {
-            conceptText.required = true; // どのプランでもコンセプトは必須
+            conceptText.required = true;
             if (selectedPlan === 'Friend Plan') {
                 conceptText.removeAttribute('minlength');
                 charCounter.textContent = '文字数制限なし';
                 charCounter.style.color = '#aaa';
-            } else if (selectedPlan) { // Creatorプランが選択された場合
+            } else if (selectedPlan) {
                 conceptText.setAttribute('minlength', minLength);
                 const currentLength = conceptText.value.length;
                 charCounter.textContent = `${currentLength} / ${minLength} 文字以上`;
                 charCounter.style.color = currentLength >= minLength ? '#25fc75' : '#aaa';
-            } else { // 何も選択されていない場合
+            } else {
                 conceptText.required = false;
                 conceptText.removeAttribute('minlength');
                 charCounter.textContent = '';
@@ -129,11 +160,12 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (planSelect) {
         planSelect.addEventListener('change', updateFormByPlan);
-        // モーダルが開かれた時に初期化
-        openModalBtn.addEventListener('click', updateFormByPlan);
+        if(openModalBtn){
+             openModalBtn.addEventListener('click', updateFormByPlan);
+        }
     }
     
-    // --- Load Terms and Conditions ---
+    // Load Terms and Conditions
     const termsContent = document.getElementById('terms-content');
     if (termsContent) {
         fetch('terms.html')
