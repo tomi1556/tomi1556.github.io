@@ -9,37 +9,10 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // AOS (Animate on Scroll) Library Initialization
-    AOS.init({
-        duration: 800,
-        once: true,
-        delay: 100,
-    });
+    AOS.init({ duration: 800, once: true, delay: 100 });
 
-    // Interactive Particles.js Initialization
-    particlesJS("particles-js", {
-      "particles": {
-        "number": { "value": 80, "density": { "enable": true, "value_area": 800 }},
-        "color": { "value": "#ffffff" },
-        "shape": { "type": "star" },
-        "opacity": { "value": 0.5, "random": true },
-        "size": { "value": 3, "random": true },
-        "line_linked": { "enable": false },
-        "move": { "enable": true, "speed": 0.5, "direction": "none", "random": true, "straight": false, "out_mode": "out" }
-      },
-      "interactivity": {
-        "detect_on": "canvas",
-        "events": {
-          "onhover": { "enable": true, "mode": "repulse" },
-          "onclick": { "enable": true, "mode": "push" },
-          "resize": true
-        },
-        "modes": {
-          "repulse": { "distance": 100, "duration": 0.4 },
-          "push": { "particles_nb": 4 }
-        }
-      },
-      "retina_detect": true
-    });
+    // Particles.js Initialization
+    particlesJS("particles-js", { "particles": { "number": { "value": 80, "density": { "enable": true, "value_area": 800 }}, "color": { "value": "#ffffff" }, "shape": { "type": "star" }, "opacity": { "value": 0.5, "random": true }, "size": { "value": 3, "random": true }, "line_linked": { "enable": false }, "move": { "enable": true, "speed": 0.5, "direction": "none", "random": true, "straight": false, "out_mode": "out" }}, "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": true, "mode": "repulse" }, "onclick": { "enable": true, "mode": "push" }, "resize": true }, "modes": { "repulse": { "distance": 100, "duration": 0.4 }, "push": { "particles_nb": 4 }}}, "retina_detect": true });
 
     // Modal Logic
     const applyModal = document.getElementById('apply-modal');
@@ -50,135 +23,138 @@ document.addEventListener('DOMContentLoaded', function() {
     const openTermsInFormBtn = document.getElementById('open-terms-in-form');
     const closeTermsBtn = document.getElementById('close-terms-btn');
 
-    function openModal(modal) {
-        if (modal) modal.classList.add('is-visible');
-    }
-
-    function closeModal(modal) {
-        if (modal) modal.classList.remove('is-visible');
-    }
-
-    if (openModalBtn) {
-        openModalBtn.addEventListener('click', () => openModal(applyModal));
-    }
-    if (closeModalBtn) {
-        closeModalBtn.addEventListener('click', () => closeModal(applyModal));
-    }
-    
-    if (openTermsBtn) {
-        openTermsBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal(termsModal);
-        });
-    }
-    if (openTermsInFormBtn) {
-        openTermsInFormBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            openModal(termsModal);
-        });
-    }
-    if (closeTermsBtn) {
-        closeTermsBtn.addEventListener('click', () => closeModal(termsModal));
-    }
-
+    function openModal(modal) { if (modal) modal.classList.add('is-visible'); }
+    function closeModal(modal) { if (modal) modal.classList.remove('is-visible'); }
+    if (openModalBtn) openModalBtn.addEventListener('click', () => openModal(applyModal));
+    if (closeModalBtn) closeModalBtn.addEventListener('click', () => closeModal(applyModal));
+    if (openTermsBtn) openTermsBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(termsModal); });
+    if (openTermsInFormBtn) openTermsInFormBtn.addEventListener('click', (e) => { e.preventDefault(); openModal(termsModal); });
+    if (closeTermsBtn) closeTermsBtn.addEventListener('click', () => closeModal(termsModal));
     window.addEventListener('click', (e) => {
         if (e.target === applyModal) closeModal(applyModal);
         if (e.target === termsModal) closeModal(termsModal);
     });
 
-    // Progress Bar Update Function
+    // Progress Bar (Donut Chart) Update Function
     function updateProgressBars() {
         const friendAvailable = parseInt(document.getElementById('friend-slots-available').textContent);
         const friendTotal = 3;
-        const friendProgress = document.getElementById('friend-progress');
-        if (friendProgress && friendTotal > 0) {
-            const friendPercentage = (friendAvailable / friendTotal) * 100;
-            friendProgress.style.width = friendPercentage + '%';
-        }
+        const friendRing = document.getElementById('friend-progress-ring');
+        setRingProgress(friendRing, friendAvailable / friendTotal);
 
         const creatorAvailable = parseInt(document.getElementById('creator-slots-available').textContent);
         const creatorTotal = 5;
-        const creatorProgress = document.getElementById('creator-progress');
-        if (creatorProgress && creatorTotal > 0) {
-            const creatorPercentage = (creatorAvailable / creatorTotal) * 100;
-            creatorProgress.style.width = creatorPercentage + '%';
-        }
+        const creatorRing = document.getElementById('creator-progress-ring');
+        setRingProgress(creatorRing, creatorAvailable / creatorTotal);
     }
-
-    // Dynamic Form Logic
-    const planSelect = document.getElementById('plan');
-    const conceptText = document.getElementById('concept-text');
-    const charCounter = document.getElementById('char-counter');
-    const paypayField = document.getElementById('paypay-field');
-    const paypayInput = document.getElementById('paypay-link');
-
-    function updateFormByPlan() {
-        const selectedPlan = planSelect.value;
-        const minLength = 100;
-
-        if (paypayField && paypayInput) {
-            if (selectedPlan === '8G Creator Plan') {
-                paypayField.style.display = 'block';
-                paypayInput.required = true;
-            } else {
-                paypayField.style.display = 'none';
-                paypayInput.required = false;
-            }
-        }
-
-        if (conceptText && charCounter) {
-            conceptText.required = true;
-            if (selectedPlan === 'Friend Plan') {
-                conceptText.removeAttribute('minlength');
-                charCounter.textContent = '文字数制限なし';
-                charCounter.style.color = '#aaa';
-            } else if (selectedPlan) {
-                conceptText.setAttribute('minlength', minLength);
-                const currentLength = conceptText.value.length;
-                charCounter.textContent = `${currentLength} / ${minLength} 文字以上`;
-                charCounter.style.color = currentLength >= minLength ? '#25fc75' : '#aaa';
-            } else {
-                conceptText.required = false;
-                conceptText.removeAttribute('minlength');
-                charCounter.textContent = '';
-            }
-        }
-    }
-
-    if (conceptText) {
-        conceptText.addEventListener('input', () => {
-            if (planSelect.value !== 'Friend Plan' && planSelect.value) {
-                const minLength = 100;
-                const currentLength = conceptText.value.length;
-                charCounter.textContent = `${currentLength} / ${minLength} 文字以上`;
-                charCounter.style.color = currentLength >= minLength ? '#25fc75' : '#aaa';
-            }
-        });
+    function setRingProgress(ring, percent) {
+        if (!ring) return;
+        const radius = ring.r.baseVal.value;
+        const circumference = 2 * Math.PI * radius;
+        ring.style.strokeDasharray = `${circumference} ${circumference}`;
+        const offset = circumference - percent * circumference;
+        ring.style.strokeDashoffset = offset;
     }
     
-    if (planSelect) {
-        planSelect.addEventListener('change', updateFormByPlan);
-        if(openModalBtn){
-             openModalBtn.addEventListener('click', updateFormByPlan);
+    // Multi-Step Form Logic
+    const form = document.getElementById('apply-form');
+    const steps = [...form.querySelectorAll('.form-step')];
+    const stepperItems = [...form.querySelectorAll('.step')];
+    const nextButtons = [...form.querySelectorAll('.next-btn')];
+    const backButtons = [...form.querySelectorAll('.back-btn')];
+    const planSelectCards = [...form.querySelectorAll('.plan-select-card')];
+    const planInput = document.getElementById('plan-input');
+    const mcidInput = document.getElementById('mcid');
+    const discordInput = document.getElementById('discord-id');
+    const paypayField = document.getElementById('paypay-field');
+    const paypayInput = document.getElementById('paypay-link');
+    const conceptText = document.getElementById('concept-text');
+    const charCounter = document.getElementById('char-counter');
+    const termsAgree = document.getElementById('terms-agree');
+    const submitButton = form.querySelector('.submit-btn');
+    
+    let currentStep = 1;
+
+    const updateFormState = () => {
+        steps.forEach(step => step.classList.toggle('active', parseInt(step.dataset.step) === currentStep));
+        stepperItems.forEach((step, index) => step.classList.toggle('active', index < currentStep));
+        validateStep();
+    };
+
+    nextButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (currentStep < steps.length) {
+                currentStep++;
+                updateFormState();
+            }
+        });
+    });
+
+    backButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (currentStep > 1) {
+                currentStep--;
+                updateFormState();
+            }
+        });
+    });
+
+    planSelectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            planSelectCards.forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            planInput.value = card.dataset.plan;
+            validateStep();
+            updateDynamicFields();
+        });
+    });
+
+    function updateDynamicFields() {
+        const selectedPlan = planInput.value;
+        const minLength = 100;
+        
+        paypayField.style.display = selectedPlan === '8G Creator Plan' ? 'block' : 'none';
+        paypayInput.required = selectedPlan === '8G Creator Plan';
+
+        conceptText.removeAttribute('minlength');
+        if (selectedPlan === 'Friend Plan') {
+            charCounter.textContent = '文字数制限なし';
+            charCounter.style.color = '#aaa';
+        } else if (selectedPlan) {
+            conceptText.setAttribute('minlength', minLength);
+            const currentLength = conceptText.value.length;
+            charCounter.textContent = `${currentLength} / ${minLength} 文字以上`;
+            charCounter.style.color = currentLength >= minLength ? '#25fc75' : '#aaa';
         }
     }
+    
+    function validateStep() {
+        let isValid = false;
+        if (currentStep === 1) {
+            isValid = planInput.value !== '';
+        } else if (currentStep === 2) {
+            isValid = mcidInput.value.trim() !== '' && discordInput.value.trim() !== '';
+            if (paypayInput.required) {
+                isValid = isValid && paypayInput.value.trim() !== '';
+            }
+        } else if (currentStep === 3) {
+            const minLength = conceptText.hasAttribute('minlength') ? parseInt(conceptText.getAttribute('minlength')) : 0;
+            isValid = conceptText.value.length >= minLength && termsAgree.checked;
+        }
+        
+        const nextBtn = steps[currentStep - 1].querySelector('.next-btn');
+        if (nextBtn) nextBtn.disabled = !isValid;
+        if (submitButton) submitButton.disabled = !isValid;
+    }
+
+    form.addEventListener('input', validateStep);
     
     // Load Terms and Conditions
     const termsContent = document.getElementById('terms-content');
     if (termsContent) {
         fetch('terms.html')
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => {
-                termsContent.innerHTML = data;
-            })
-            .catch(error => {
-                console.error('There has been a problem with your fetch operation:', error);
-                termsContent.innerHTML = '<p>利用規約の読み込みに失敗しました。</p>';
-            });
+            .then(response => response.ok ? response.text() : Promise.reject('Failed to load'))
+            .then(data => { termsContent.innerHTML = data; })
+            .catch(error => { console.error('Terms load error:', error); termsContent.innerHTML = '<p>利用規約の読み込みに失敗しました。</p>'; });
     }
 });
