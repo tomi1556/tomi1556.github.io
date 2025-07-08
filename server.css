@@ -1,10 +1,146 @@
-/* 既存のスタイルに加えて、以下を追加または修正 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Poppins:wght@700&display=swap');
 
-.program-category {
-    background-color: rgba(30, 27, 75, 0.5); /* var(--card-bg) with alpha */
-    padding: 2rem;
-    border-radius: 15px;
+:root {
+    --primary-color: #6a11cb;
+    --secondary-color: #2575fc;
+    --dark-bg: #0f0c29;
+    --text-color: #e0e0e0;
+    --card-bg: #1e1b4b;
+    --white: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* --- Particles.js Background --- */
+#particles-js {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-color: var(--dark-bg);
+}
+
+/* --- Hero Section --- */
+.hero {
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 0 20px;
+}
+
+.hero-content {
+    max-width: 800px;
+}
+
+.logo {
+    font-family: 'Poppins', sans-serif;
+    font-size: 4rem;
+    font-weight: 700;
+    color: var(--white);
+    text-shadow: 0 0 15px rgba(255, 255, 255, 0.5), 0 0 25px rgba(106, 17, 203, 0.7);
+    margin-bottom: 1rem;
+    transition: text-shadow 0.3s ease;
+}
+.logo:hover {
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.8), 0 0 35px rgba(37, 117, 252, 0.9);
+}
+
+.tagline {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+    color: var(--text-color);
+}
+
+.cta-button {
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.2rem;
+    font-weight: 700;
+    text-decoration: none;
+    color: var(--white);
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.cta-button:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(37, 117, 252, 0.5);
+}
+.cta-button i {
+    margin-right: 10px;
+}
+
+/* --- General Content --- */
+main {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(to bottom, transparent, var(--dark-bg) 200px);
+}
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 5rem 2rem;
+}
+h2 {
+    font-family: 'Poppins', sans-serif;
+    font-size: 2.5rem;
+    text-align: center;
     margin-bottom: 3rem;
+    color: var(--white);
+}
+
+/* --- Availability Status --- */
+.availability-status {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+.availability-status h2 {
+    margin-bottom: 1rem;
+}
+.availability-status p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+}
+.slots {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+.slot {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+.slot.available {
+    background-color: #2575fc;
+    box-shadow: 0 0 15px #2575fc;
+}
+
+/* --- Program Category --- */
+.program-category {
+    background-color: rgba(30, 27, 75, 0.5);
+    padding: 2.5rem;
+    border-radius: 15px;
+    margin-bottom: 4rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
@@ -31,16 +167,174 @@
 .program-description {
     text-align: center;
     max-width: 800px;
-    margin: 0 auto 2rem auto;
+    margin: 0 auto 2.5rem auto;
     color: var(--text-color);
 }
 
-/* プランカードのマージンを調整 */
+/* --- Plan Cards --- */
 .plan-cards {
+    display: flex;
+    justify-content: center;
     gap: 2rem;
+    flex-wrap: wrap;
+}
+.card {
+    background: var(--card-bg);
+    border-radius: 15px;
+    overflow: hidden;
+    width: 320px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    flex-direction: column;
+}
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 10px 30px rgba(37, 117, 252, 0.3);
+}
+.card-header {
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    padding: 1.5rem;
+    text-align: center;
+}
+.card-header.premium {
+    background: linear-gradient(45deg, #f7b733, #fc4a1a);
+}
+.card-header h4 {
+    font-size: 1.5rem;
+    color: var(--white);
+    margin-bottom: 0.5rem;
+}
+.card-header .spec {
+    color: rgba(255, 255, 255, 0.8);
+}
+.card-body {
+    padding: 2rem;
+    text-align: center;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.price {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 1rem;
+}
+.price span {
+    font-size: 1rem;
+    color: var(--text-color);
+}
+.description {
+    margin-bottom: 1rem;
+    flex-grow: 1;
+}
+.extension-fee {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #f7b733;
 }
 
-/* 申請フォームのセレクトボックスをグループ分けに対応 */
+/* --- Footer --- */
+footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    position: relative;
+    z-index: 2;
+}
+.footer-links a {
+    color: var(--text-color);
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+.footer-links a:hover {
+    color: var(--secondary-color);
+}
+
+/* --- Modal --- */
+.modal-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.modal-wrapper.is-visible {
+    opacity: 1;
+    visibility: visible;
+}
+.modal-content {
+    background: var(--card-bg);
+    padding: 2rem 3rem;
+    border-radius: 15px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    transform: translateY(-50px);
+    transition: transform 0.3s ease;
+    max-height: 90vh;
+    overflow-y: auto;
+}
+.modal-wrapper.is-visible .modal-content {
+    transform: translateY(0);
+}
+.close-button {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 2rem;
+    color: var(--text-color);
+    cursor: pointer;
+}
+.modal-content h2 {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+/* --- Form --- */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 12px;
+    background-color: var(--dark-bg);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 5px;
+    color: var(--text-color);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 10px var(--secondary-color);
+}
+
 optgroup {
     font-weight: bold;
     font-style: italic;
@@ -52,4 +346,71 @@ option {
     font-style: normal;
     background-color: var(--dark-bg);
     color: var(--text-color);
+}
+
+#char-counter {
+    text-align: right;
+    font-size: 0.9rem;
+    color: #aaa;
+    margin-top: 5px;
+}
+.terms-check {
+    display: flex;
+    align-items: center;
+}
+.terms-check input {
+    width: auto;
+    margin-right: 10px;
+}
+.terms-check a {
+    color: var(--secondary-color);
+    text-decoration: underline;
+    cursor: pointer;
+}
+.submit-btn {
+    width: 100%;
+    padding: 15px;
+    border: none;
+    border-radius: 5px;
+    background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+    color: var(--white);
+    font-family: 'Noto Sans JP', sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(37, 117, 252, 0.4);
+}
+
+/* --- Terms Modal Content --- */
+#terms-content {
+    line-height: 1.8;
+}
+#terms-content h2, #terms-content h4 {
+    color: var(--white);
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+}
+#terms-content ol, #terms-content ul {
+    padding-left: 20px;
+}
+
+/* --- Responsive Design --- */
+@media(max-width: 768px) {
+    .logo { font-size: 3rem; }
+    .tagline { font-size: 1.2rem; }
+    
+    .program-header h3 {
+        font-size: 1.8rem;
+    }
+    
+    .modal-content {
+        padding: 2rem 1.5rem;
+    }
+    .modal-content h2 {
+        font-size: 1.8rem;
+    }
 }
