@@ -80,12 +80,14 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const goToStep = (stepNumber) => {
             currentStep = stepNumber;
+            // ステップ表示の切り替え
             steps.forEach(step => {
                 step.classList.toggle('active', parseInt(step.dataset.step) === currentStep);
             });
-            stepperItems.forEach((step) => {
+            // ステッパーの見た目を更新
+            stepperItems.forEach((step, index) => {
                 const indicator = step.dataset.stepIndicator;
-                step.classList.toggle('active', parseInt(indicator) <= currentStep);
+                step.classList.toggle('active', parseInt(indicator) === currentStep);
             });
             validateCurrentStep();
         };
