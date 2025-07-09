@@ -27,7 +27,7 @@
             <h1 class="logo animated-gradient" data-aos="fade-down">StellaMC</h1>
             <p class="tagline" data-aos="fade-up" data-aos-delay="200">君のワールドが、StellaMCの新たな星になる。</p>
             <div class="hero-buttons" data-aos="zoom-in" data-aos-delay="400">
-                <button id="open-modal-btn" class="cta-button primary shimmer-effect">
+                <button id="open-modal-btn" class="cta-button primary">
                     <i class="fa-solid fa-star-and-crescent"></i> サーバーを申請する
                 </button>
             </div>
@@ -38,23 +38,23 @@
         <section id="status" class="container">
             <h2 data-aos="fade-up">現在の募集状況</h2>
             <div class="status-container">
-                <div class="status-panel friend-glow" data-aos="zoom-in-up">
+                <div class="status-panel friend-border" data-aos="zoom-in-up">
                     <div class="status-chart">
-                        <svg class="progress-ring" viewbox="0 0 120 120">
+                        <svg class="progress-ring" viewbox="0 0 130 130">
                             <defs><linearGradient id="friend-gradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00c6ff" /><stop offset="100%" stop-color="#0072ff" /></linearGradient></defs>
-                           <circle class="progress-ring-circle-bg" r="54" cx="60" cy="60"/>
-                           <circle id="friend-progress-ring" class="progress-ring-circle" r="54" cx="60" cy="60"/>
+                           <circle class="progress-ring-circle-bg" r="54" cx="65" cy="65"/>
+                           <circle id="friend-progress-ring" class="progress-ring-circle" r="54" cx="65" cy="65"/>
                         </svg>
                         <div class="status-counter"><span id="friend-slots-available">3</span><small>/ 3</small></div>
                     </div>
                     <div class="status-label">Friend Program</div>
                 </div>
-                <div class="status-panel premium-glow" data-aos="zoom-in-up" data-aos-delay="100">
+                <div class="status-panel premium-border" data-aos="zoom-in-up" data-aos-delay="100">
                      <div class="status-chart">
-                        <svg class="progress-ring" viewbox="0 0 120 120">
+                        <svg class="progress-ring" viewbox="0 0 130 130">
                            <defs><linearGradient id="premium-gradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f7b733" /><stop offset="100%" stop-color="#fc4a1a" /></linearGradient></defs>
-                           <circle class="progress-ring-circle-bg" r="54" cx="60" cy="60"/>
-                           <circle id="creator-progress-ring" class="progress-ring-circle premium" r="54" cx="60" cy="60"/>
+                           <circle class="progress-ring-circle-bg" r="54" cx="65" cy="65"/>
+                           <circle id="creator-progress-ring" class="progress-ring-circle premium" r="54" cx="65" cy="65"/>
                         </svg>
                          <div class="status-counter"><span id="creator-slots-available">5</span><small>/ 5</small></div>
                     </div>
@@ -66,17 +66,32 @@
         <section id="plans" class="container">
             <h2 data-aos="fade-up">プラン一覧</h2>
             <div class="plan-cards" data-aos="fade-up">
-                <div class="card friend-card shimmer-effect">
+                <div class="card friend-border">
                     <div class="card-header friend"><h4>Friend Plan</h4><p class="spec">4GB / 2Core</p></div>
-                    <div class="card-body"><p class="initial-cost">初期費用 ¥0</p><p class="price">無料<span>/初回1ヶ月</span></p><p class="description">友達と気軽に楽しむのに最適</p><p class="extension-fee">延長：月額 ¥550</p></div>
+                    <div class="card-body">
+                        <p class="initial-cost">初期費用 ¥0</p><p class="price">無料<span>/初回1ヶ月</span></p>
+                        <p class="description">友達と気軽に楽しむのに最適</p>
+                        <p class="recommended-players">推奨人数: ～5名</p>
+                        <p class="extension-fee">延長：月額 ¥550</p>
+                    </div>
                 </div>
-                <div class="card premium-card shimmer-effect">
+                <div class="card premium-border">
                     <div class="card-header premium"><h4>4G Creator Plan</h4><p class="spec">4GB / 2Core</p></div>
-                    <div class="card-body"><p class="initial-cost">初期費用 ¥0</p><p class="price">完全無料</p><p class="description">小規模な企画向け（推奨～5名）</p><p class="extension-fee">&nbsp;</p></div>
+                    <div class="card-body">
+                        <p class="initial-cost">初期費用 ¥0</p><p class="price">完全無料</p>
+                        <p class="description">小規模な企画向け</p>
+                        <p class="recommended-players">推奨人数: ～5名</p>
+                        <p class="extension-fee">&nbsp;</p>
+                    </div>
                 </div>
-                <div class="card premium-card shimmer-effect">
+                <div class="card premium-border">
                      <div class="card-header premium"><h4>8G Creator Plan</h4><p class="spec">8GB / 4Core</p></div>
-                    <div class="card-body"><p class="initial-cost">初期費用 ¥0</p><p class="price">¥690<span>/月</span></p><p class="description">大規模な企画向け（推奨～15名）</p><p class="extension-fee">&nbsp;</p></div>
+                    <div class="card-body">
+                        <p class="initial-cost">初期費用 ¥0</p><p class="price">¥690<span>/月</span></p>
+                        <p class="description">大規模な企画向け</p>
+                        <p class="recommended-players">推奨人数: ～15名</p>
+                        <p class="extension-fee">&nbsp;</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -120,7 +135,7 @@
                             <div class="plan-select-card" data-plan="4G Creator Plan"><h4>4G Creator Plan</h4><p>完全無料</p></div>
                             <div class="plan-select-card" data-plan="8G Creator Plan"><h4>8G Creator Plan</h4><p>¥690/月</p></div>
                         </div>
-                        <div class="form-navigation"><button type="button" class="form-nav-btn next-btn" disabled>次へ</button></div>
+                        <div class="form-navigation nav-right"><button type="button" class="form-nav-btn next-btn" disabled>次へ</button></div>
                     </div>
                     <div class="form-step" data-step="2">
                         <h3 class="step-title">あなたの情報を入力してください</h3>
@@ -133,7 +148,7 @@
                         <h3 class="step-title">サーバーのコンセプトを教えてください</h3>
                         <div class="form-group floating"><textarea id="concept-text" name="concept" rows="6" class="form-input" placeholder=" " required></textarea><label for="concept-text" class="form-label">サーバーコンセプト</label><div id="char-counter"></div></div>
                         <div class="form-group terms-check"><input type="checkbox" id="terms-agree" name="terms_agree" required><label for="terms-agree"><a href="#" id="open-terms-in-form">利用規約</a>に同意する</label></div>
-                        <div class="form-navigation"><button type="button" class="form-nav-btn back-btn">戻る</button><button type="submit" class="submit-btn shimmer-effect" disabled>この内容で申請する</button></div>
+                        <div class="form-navigation"><button type="button" class="form-nav-btn back-btn">戻る</button><button type="submit" class="submit-btn" disabled>この内容で申請する</button></div>
                     </div>
                 </div>
             </form>
