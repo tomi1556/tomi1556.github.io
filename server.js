@@ -35,6 +35,16 @@ document.addEventListener('DOMContentLoaded', function() {
         if (e.target === termsModal) closeModal(termsModal);
     });
 
+    // Spotlight Button Animation
+    const spotlightBtn = document.querySelector('.cta-button.primary');
+    if (spotlightBtn) {
+        spotlightBtn.addEventListener('mousemove', e => {
+            const rect = spotlightBtn.getBoundingClientRect();
+            spotlightBtn.style.setProperty('--mouse-x', e.clientX - rect.left + 'px');
+            spotlightBtn.style.setProperty('--mouse-y', e.clientY - rect.top + 'px');
+        });
+    }
+
     // Progress Bar (Donut Chart) Update Function
     function updateProgressBars() {
         function setRingProgress(ring, percent) {
@@ -43,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const circumference = 2 * Math.PI * radius;
             ring.style.strokeDasharray = `${circumference} ${circumference}`;
             const offset = circumference - (percent * circumference);
-            setTimeout(() => { ring.style.strokeDashoffset = offset; }, 100);
+            setTimeout(() => { ring.style.strokeDashoffset = offset; }, 300);
         }
         const friendAvailable = parseInt(document.getElementById('friend-slots-available').textContent);
         setRingProgress(document.getElementById('friend-progress-ring'), friendAvailable / 3);
@@ -114,6 +124,7 @@ document.addEventListener('DOMContentLoaded', function() {
         function validateCurrentStep() {
             let isValid = false;
             const stepContent = steps[currentStep - 1];
+            if (!stepContent) return;
             const nextBtn = stepContent.querySelector('.next-btn');
             const submitBtn = stepContent.querySelector('.submit-btn');
             
@@ -131,7 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
 
         function updateCharCounter() {
-            if (planInput.value === 'Friend Plan') return;
+            if (!conceptText.hasAttribute('minlength')) return;
             const minLength = 100;
             const currentLength = conceptText.value.length;
             charCounter.textContent = `${currentLength} / ${minLength} 文字以上`;
