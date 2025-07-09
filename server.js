@@ -80,12 +80,10 @@ document.addEventListener('DOMContentLoaded', function() {
 
         const goToStep = (stepNumber) => {
             currentStep = stepNumber;
-            // ステップ表示の切り替え
             steps.forEach(step => {
                 step.classList.toggle('active', parseInt(step.dataset.step) === currentStep);
             });
-            // ステッパーの見た目を更新
-            stepperItems.forEach((step, index) => {
+            stepperItems.forEach((step) => {
                 const indicator = step.dataset.stepIndicator;
                 step.classList.toggle('active', parseInt(indicator) === currentStep);
             });
@@ -131,10 +129,13 @@ document.addEventListener('DOMContentLoaded', function() {
             const nextBtn = stepContent.querySelector('.next-btn');
             const submitBtn = stepContent.querySelector('.submit-btn');
             
-            if (currentStep === 1) isValid = planInput.value !== '';
-            else if (currentStep === 2) {
+            if (currentStep === 1) {
+                isValid = planInput.value !== '';
+            } else if (currentStep === 2) {
                 isValid = mcidInput.checkValidity() && discordInput.checkValidity();
-                if (paypayInput.required) isValid = isValid && paypayInput.checkValidity();
+                if (paypayInput.required) {
+                    isValid = isValid && paypayInput.checkValidity();
+                }
             } else if (currentStep === 3) {
                 const minLength = conceptText.hasAttribute('minlength') ? parseInt(conceptText.getAttribute('minlength')) : 0;
                 isValid = conceptText.value.length >= minLength && termsAgree.checked;
