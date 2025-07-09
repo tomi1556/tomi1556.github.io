@@ -38,7 +38,7 @@
         <section id="status" class="container">
             <h2 data-aos="fade-up">現在の募集状況</h2>
             <div class="status-container">
-                <div class="status-panel friend-border" data-aos="zoom-in-up">
+                <div class="status-panel" data-aos="zoom-in-up">
                     <div class="status-chart">
                         <svg class="progress-ring" viewbox="0 0 130 130">
                             <defs><linearGradient id="friend-gradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#00c6ff" /><stop offset="100%" stop-color="#0072ff" /></linearGradient></defs>
@@ -49,7 +49,7 @@
                     </div>
                     <div class="status-label">Friend Program</div>
                 </div>
-                <div class="status-panel premium-border" data-aos="zoom-in-up" data-aos-delay="100">
+                <div class="status-panel" data-aos="zoom-in-up" data-aos-delay="100">
                      <div class="status-chart">
                         <svg class="progress-ring" viewbox="0 0 130 130">
                            <defs><linearGradient id="premium-gradient" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#f7b733" /><stop offset="100%" stop-color="#fc4a1a" /></linearGradient></defs>
@@ -66,7 +66,7 @@
         <section id="plans" class="container">
             <h2 data-aos="fade-up">プラン一覧</h2>
             <div class="plan-cards" data-aos="fade-up">
-                <div class="card friend-border">
+                <div class="card">
                     <div class="card-header friend"><h4>Friend Plan</h4><p class="spec">4GB / 2Core</p></div>
                     <div class="card-body">
                         <p class="initial-cost">初期費用 ¥0</p><p class="price">無料<span>/初回1ヶ月</span></p>
@@ -75,7 +75,7 @@
                         <p class="extension-fee">延長：月額 ¥550</p>
                     </div>
                 </div>
-                <div class="card premium-border">
+                <div class="card">
                     <div class="card-header premium"><h4>4G Creator Plan</h4><p class="spec">4GB / 2Core</p></div>
                     <div class="card-body">
                         <p class="initial-cost">初期費用 ¥0</p><p class="price">完全無料</p>
@@ -84,7 +84,7 @@
                         <p class="extension-fee">&nbsp;</p>
                     </div>
                 </div>
-                <div class="card premium-border">
+                <div class="card">
                      <div class="card-header premium"><h4>8G Creator Plan</h4><p class="spec">8GB / 4Core</p></div>
                     <div class="card-body">
                         <p class="initial-cost">初期費用 ¥0</p><p class="price">¥690<span>/月</span></p>
@@ -139,15 +139,19 @@
                     </div>
                     <div class="form-step" data-step="2">
                         <h3 class="step-title">あなたの情報を入力してください</h3>
-                        <div class="form-group floating"><input type="text" id="mcid" name="mcid" class="form-input" placeholder=" " required><label for="mcid" class="form-label">Minecraft ID (MCID)</label></div>
-                        <div class="form-group floating"><input type="text" id="discord-id" name="discord_id" class="form-input" placeholder=" " required><label for="discord-id" class="form-label">連絡用Discord ID</label></div>
-                        <div id="paypay-field" class="form-group floating" style="display: none;"><input type="url" id="paypay-link" name="paypay_link" class="form-input" placeholder=" "><label for="paypay-link" class="form-label">PayPay送金リンク</label><p class="form-note">月額料金のお支払いリクエスト（請求）用です。</p></div>
+                        <div class="step-content">
+                            <div class="form-group floating"><input type="text" id="mcid" name="mcid" class="form-input" placeholder=" " required><label for="mcid" class="form-label">Minecraft ID (MCID)</label></div>
+                            <div class="form-group floating"><input type="text" id="discord-id" name="discord_id" class="form-input" placeholder=" " required><label for="discord-id" class="form-label">連絡用Discord ID</label></div>
+                            <div id="paypay-field" class="form-group floating" style="display: none;"><input type="url" id="paypay-link" name="paypay_link" class="form-input" placeholder=" "><label for="paypay-link" class="form-label">PayPay送金リンク</label><p class="form-note">月額料金のお支払いリクエスト（請求）用です。</p></div>
+                        </div>
                         <div class="form-navigation"><button type="button" class="form-nav-btn back-btn">戻る</button><button type="button" class="form-nav-btn next-btn" disabled>次へ</button></div>
                     </div>
                     <div class="form-step" data-step="3">
                         <h3 class="step-title">サーバーのコンセプトを教えてください</h3>
-                        <div class="form-group floating"><textarea id="concept-text" name="concept" rows="6" class="form-input" placeholder=" " required></textarea><label for="concept-text" class="form-label">サーバーコンセプト</label><div id="char-counter"></div></div>
-                        <div class="form-group terms-check"><input type="checkbox" id="terms-agree" name="terms_agree" required><label for="terms-agree"><a href="#" id="open-terms-in-form">利用規約</a>に同意する</label></div>
+                        <div class="step-content">
+                            <div class="form-group floating"><textarea id="concept-text" name="concept" rows="6" class="form-input" placeholder=" " required></textarea><label for="concept-text" class="form-label">サーバーコンセプト</label><div id="char-counter"></div></div>
+                            <div class="form-group terms-check"><input type="checkbox" id="terms-agree" name="terms_agree" required><label for="terms-agree"><a href="#" id="open-terms-in-form">利用規約</a>に同意する</label></div>
+                        </div>
                         <div class="form-navigation"><button type="button" class="form-nav-btn back-btn">戻る</button><button type="submit" class="submit-btn" disabled>この内容で申請する</button></div>
                     </div>
                 </div>
