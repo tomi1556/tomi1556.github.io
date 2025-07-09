@@ -83,8 +83,9 @@ document.addEventListener('DOMContentLoaded', function() {
             steps.forEach(step => {
                 step.classList.toggle('active', parseInt(step.dataset.step) === currentStep);
             });
-            stepperItems.forEach((step, index) => {
-                step.classList.toggle('active', index + 1 === currentStep);
+            stepperItems.forEach((step) => {
+                const indicator = step.dataset.stepIndicator;
+                step.classList.toggle('active', parseInt(indicator) <= currentStep);
             });
             validateCurrentStep();
         };
