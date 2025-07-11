@@ -70,6 +70,8 @@ document.addEventListener('DOMContentLoaded', function() {
         const planInput = document.getElementById('plan-input');
         const mcidInput = document.getElementById('mcid');
         const discordInput = document.getElementById('discord-id');
+        const paypayField = document.getElementById('paypay-field');
+        const paypayInput = document.getElementById('paypay-link');
         const conceptText = document.getElementById('concept-text');
         const charCounter = document.getElementById('char-counter');
         const termsAgree = document.getElementById('terms-agree');
@@ -110,13 +112,15 @@ document.addEventListener('DOMContentLoaded', function() {
             const selectedPlan = planInput.value;
             const minLength = 100;
             
-            // PayPay関連のロジックは削除
+            const isPaidPlan = selectedPlan === 'Friend+ Plan' || selectedPlan === 'Creator+ Plan';
+            paypayField.style.display = isPaidPlan ? 'block' : 'none';
+            paypayInput.required = isPaidPlan;
 
             conceptText.removeAttribute('minlength');
             if (selectedPlan.includes('Creator')) {
                 conceptText.setAttribute('minlength', minLength);
                 updateCharCounter();
-            } else { // Friend Plan, Friend+ Plan
+            } else { 
                 charCounter.textContent = '文字数制限なし';
             }
         }
@@ -132,6 +136,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = planInput.value !== '';
             } else if (currentStep === 2) {
                 isValid = mcidInput.checkValidity() && discordInput.checkValidity();
+                if (paypayInput.required) {
+                    isValid = isValid && paypayInput.checkValidity();
+                }
             } else if (currentStep === 3) {
                 const minLength = conceptText.hasAttribute('minlength') ? parseInt(conceptText.getAttribute('minlength')) : 0;
                 isValid = conceptText.value.length >= minLength && termsAgree.checked;
@@ -149,9 +156,9 @@ document.addEventListener('DOMContentLoaded', function() {
             charCounter.style.color = currentLength >= minLength ? '#4ade80' : '#aaa';
         }
 
-        [mcidInput, discordInput, conceptText, termsAgree].forEach(input => {
+        [mcidInput, discordInput, paypayInput, conceptText, termsAgree].forEach(input => {
             if(input) {
-                input.addEventListener('input', validateCurrentStep);
+                input.addEventListener('input', () => validateCurrentStep());
                 if(input.type === 'textarea') input.addEventListener('input', updateCharCounter);
             }
         });
