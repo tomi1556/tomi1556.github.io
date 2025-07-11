@@ -70,8 +70,6 @@ document.addEventListener('DOMContentLoaded', function() {
         const planInput = document.getElementById('plan-input');
         const mcidInput = document.getElementById('mcid');
         const discordInput = document.getElementById('discord-id');
-        const paypayField = document.getElementById('paypay-field');
-        const paypayInput = document.getElementById('paypay-link');
         const conceptText = document.getElementById('concept-text');
         const charCounter = document.getElementById('char-counter');
         const termsAgree = document.getElementById('terms-agree');
@@ -111,14 +109,15 @@ document.addEventListener('DOMContentLoaded', function() {
         function updateDynamicFields() {
             const selectedPlan = planInput.value;
             const minLength = 100;
-            paypayField.style.display = selectedPlan === '8G Creator Plan' ? 'block' : 'none';
-            paypayInput.required = selectedPlan === '8G Creator Plan';
+            
+            // PayPay関連のロジックは削除
+
             conceptText.removeAttribute('minlength');
-            if (selectedPlan === 'Friend Plan') {
-                charCounter.textContent = '文字数制限なし';
-            } else if (selectedPlan) {
+            if (selectedPlan.includes('Creator')) {
                 conceptText.setAttribute('minlength', minLength);
                 updateCharCounter();
+            } else { // Friend Plan, Friend+ Plan
+                charCounter.textContent = '文字数制限なし';
             }
         }
         
@@ -133,9 +132,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 isValid = planInput.value !== '';
             } else if (currentStep === 2) {
                 isValid = mcidInput.checkValidity() && discordInput.checkValidity();
-                if (paypayInput.required) {
-                    isValid = isValid && paypayInput.checkValidity();
-                }
             } else if (currentStep === 3) {
                 const minLength = conceptText.hasAttribute('minlength') ? parseInt(conceptText.getAttribute('minlength')) : 0;
                 isValid = conceptText.value.length >= minLength && termsAgree.checked;
@@ -153,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
             charCounter.style.color = currentLength >= minLength ? '#4ade80' : '#aaa';
         }
 
-        [mcidInput, discordInput, paypayInput, conceptText, termsAgree].forEach(input => {
+        [mcidInput, discordInput, conceptText, termsAgree].forEach(input => {
             if(input) {
                 input.addEventListener('input', validateCurrentStep);
                 if(input.type === 'textarea') input.addEventListener('input', updateCharCounter);
