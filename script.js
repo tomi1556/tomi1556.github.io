@@ -3,24 +3,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Preloader (オープニングアニメーション) =====
     const body = document.body;
     const preloader = document.querySelector('.preloader');
-    const preloaderContainer = document.querySelector('.preloader-container');
 
     if (preloader) {
-        // アニメーションのシーケンスを開始
-        setTimeout(() => {
-            if(preloaderContainer) preloaderContainer.classList.add('animated');
-        }, 1200);
-
-        // 全体のアニメーションが完了し、サイトを表示するタイミング
-        setTimeout(() => {
-            body.classList.add('preloader-finished');
-        }, 3000); 
-        
-        // プリローダー要素自体をDOMから隠すタイミング
-        setTimeout(() => {
-            preloader.classList.add('hidden');
-            initHeroTextAnimation();
-        }, 3600);
+        // ページが完全に読み込まれたらアニメーションを開始
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                body.classList.add('preloader-finished');
+            }, 1500); 
+            
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                initHeroTextAnimation();
+            }, 2100);
+        });
     } else {
         // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
@@ -63,7 +58,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const titleElement = document.getElementById('typing-title');
         const subtitleElement = document.getElementById('typing-subtitle');
         
-        //ちらつき防止のため、JSで中身を空にする
         if (titleElement) titleElement.innerHTML = '';
         if (subtitleElement) subtitleElement.innerHTML = '';
         
@@ -86,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(type, speed + (Math.random() * 40 - 20));
             } else {
                 element.classList.remove('typing-cursor');
-                element.classList.add('blinking-cursor'); //完了後に点滅開始
+                element.classList.add('blinking-cursor'); 
                 if (callback) callback();
             }
         }
@@ -127,7 +121,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentText = texts[textIndex];
             
             if (isDeleting) {
-                // 削除
+                subtitleElement.classList.remove('blinking-cursor');
+                subtitleElement.classList.add('typing-cursor');
                 subtitleElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
                 if (charIndex === 0) {
@@ -140,7 +135,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(typeDelete, deleteSpeed);
                 }
             } else {
-                // 入力
                 subtitleElement.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
                 if (charIndex === currentText.length) {
@@ -155,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setTimeout(loop, 1000);
     }
-
 
     // ===== Footer Year (フッターの年号) =====
     const currentYearEl = document.getElementById('current-year');
