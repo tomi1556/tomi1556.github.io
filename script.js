@@ -1,16 +1,20 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ===== Preloader (読み込み画面) =====
+    // ===== Preloader (オープニングアニメーション) =====
     const preloader = document.querySelector('.preloader');
     if (preloader) {
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                preloader.classList.add('hidden');
-                initHeroTextAnimation();
-            }, 200);
-        });
+        // アニメーションのシーケンスを開始
+        setTimeout(() => {
+            preloader.classList.add('start-animation');
+        }, 500);
+
+        // サイト表示への切り替え
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            initHeroTextAnimation();
+        }, 2800); // この時間はCSSのアニメーション時間と調整
     } else {
-        // プリローダーがない場合でもアニメーションを開始
+        // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
     }
 
@@ -37,7 +41,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // メニュー項目クリックでメニューを閉じる
         nav.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', () => {
+            link.addEventListener('click', (e) => {
+                // 通常のナビゲーションを妨げないように
                 if (nav.classList.contains('active')) {
                     hamburger.classList.remove('active');
                     nav.classList.remove('active');
@@ -54,13 +59,17 @@ document.addEventListener('DOMContentLoaded', () => {
             const element = document.querySelector(elementSelector);
             if (!element) return;
 
-            const text = element.textContent.trim();
+            const text = element.innerHTML.replace(/<br\s*\/?>/gi, ' \n ').trim(); // 改行を保持
             element.innerHTML = '';
+            
             text.split('').forEach(char => {
-                const span = document.createElement('span');
-                // スペースもspanで囲むが、中身は&nbsp;にする
-                span.innerHTML = (char === ' ') ? '&nbsp;' : char;
-                element.appendChild(span);
+                if (char === '\n') {
+                    element.appendChild(document.createElement('br'));
+                } else {
+                    const span = document.createElement('span');
+                    span.innerHTML = (char === ' ') ? '&nbsp;' : char;
+                    element.appendChild(span);
+                }
             });
 
             setTimeout(() => {
