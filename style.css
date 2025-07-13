@@ -1,4 +1,4 @@
-/* style.css - Final Version */
+/* style.css - Final Adjusted Version */
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
@@ -13,6 +13,7 @@
     --text-muted: #B0B5C8;
     --border-color: #353A4E;
     --glass-bg: rgba(30, 32, 41, 0.75);
+    --glass-bg-darker: rgba(24, 26, 33, 0.7);
     --font-primary: 'Poppins', 'Noto Sans JP', sans-serif;
     --shadow-medium: 0 12px 38px rgba(0,0,0,0.25);
     --shadow-strong: 0 18px 55px rgba(0,0,0,0.3);
@@ -39,8 +40,8 @@ a, .btn { text-decoration: none !important; }
 /* --- サイト全体 & ページラッパー --- */
 #site-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; }
 .stars-1, .stars-2 { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
-.stars-1::before { content: ""; position: absolute; width: 2px; height: 2px; background: #FFF; border-radius: 50%; opacity: 0.85; box-shadow: 433px 1868px #FFF, 154px 475px #FFF, 1842px 1414px #FFF, 844px 34px #FFF, 1528px 500px #FFF, 1135px 1338px #FFF, 481px 192px #FFF, 1426px 819px #FFF, 324px 774px #FFF, 559px 279px #FFF, 1238px 383px #FFF, 399px 1230px #FFF, 1545px 1226px #FFF, 178px 250px #FFF, 1451px 994px #FFF, 382px 556px #FFF, 1615px 655px #FFF, 788px 117px #FFF, 334px 1018px #FFF, 1134px 114px #FFF, 430px 1046px #FFF, 373px 1456px #FFF, 1582px 335px #FFF, 859px 1489px #FFF, 1800px 123px #FFF, 1192px 898px #FFF, 1316px 1658px #FFF, 1079px 238px #FFF, 1483px 185px #FFF, 845px 1783px #FFF, 319px 735px #FFF, 1503px 282px #FFF, 943px 1083px #FFF, 259px 1166px #FFF, 497px 195px #FFF, 1221px 45px #FFF, 1999px 1999px #FFF; animation: move-stars 200s linear infinite; }
-.stars-2::before { content: ""; position: absolute; width: 1px; height: 1px; background: #FFF; border-radius: 50%; opacity: 0.75; box-shadow: 86px 839px #FFF, 621px 1982px #FFF, 1147px 133px #FFF, 1269px 1376px #FFF, 959px 928px #FFF, 1475px 829px #FFF, 911px 479px #FFF, 1104px 194px #FFF, 1032px 656px #FFF, 312px 1438px #FFF, 625px 1709px #FFF, 1251px 145px #FFF, 1289px 1243px #FFF, 772px 1563px #FFF, 1001px 1469px #FFF, 1821px 1555px #FFF, 1900px 500px #FFF, 50px 1200px #FFF, 1000px 1900px #FFF, 1650px 100px #FFF, 200px 300px #FFF, 1400px 1400px #FFF, 750px 1000px #FFF, 1888px 888px #FFF, 22px 1601px #FFF; animation: move-stars 300s linear infinite; animation-delay: -50s; }
+.stars-1::before { content: ""; position: absolute; width: 2px; height: 2px; background: #FFF; border-radius: 50%; opacity: 0.85; box-shadow: 433px 1868px #FFF, 154px 475px #FFF, 1842px 1414px #FFF, 844px 34px #FFF, 1528px 500px #FFF, 1135px 1338px #FFF, 481px 192px #FFF, 1426px 819px #FFF, 324px 774px #FFF, 559px 279px #FFF, 1238px 383px #FFF, 399px 1230px #FFF, 1545px 1226px #FFF, 178px 250px #FFF, 1451px 994px #FFF, 382px 556px #FFF, 1615px 655px #FFF, 788px 117px #FFF, 334px 1018px #FFF, 1134px 114px #FFF, 430px 1046px #FFF, 373px 1456px #FFF, 1582px 335px #FFF, 859px 1489px #FFF, 1800px 123px #FFF, 1192px 898px #FFF, 1316px 1658px #FFF, 1079px 238px #FFF, 1483px 185px #FFF, 845px 1783px #FFF, 319px 735px #FFF, 1503px 282px #FFF, 943px 1083px #FFF, 259px 1166px #FFF, 497px 195px #FFF, 1221px 45px #FFF, 1999px 1999px #FFF, 700px 700px #FFF, 1823px 200px #FFF, 950px 1500px #FFF; animation: move-stars 200s linear infinite; }
+.stars-2::before { content: ""; position: absolute; width: 1px; height: 1px; background: #FFF; border-radius: 50%; opacity: 0.75; box-shadow: 86px 839px #FFF, 621px 1982px #FFF, 1147px 133px #FFF, 1269px 1376px #FFF, 959px 928px #FFF, 1475px 829px #FFF, 911px 479px #FFF, 1104px 194px #FFF, 1032px 656px #FFF, 312px 1438px #FFF, 625px 1709px #FFF, 1251px 145px #FFF, 1289px 1243px #FFF, 772px 1563px #FFF, 1001px 1469px #FFF, 1821px 1555px #FFF, 1900px 500px #FFF, 50px 1200px #FFF, 1000px 1900px #FFF, 1650px 100px #FFF, 200px 300px #FFF, 1400px 1400px #FFF, 750px 1000px #FFF, 1888px 888px #FFF, 22px 1601px #FFF, 1333px 900px #FFF, 888px 1888px #FFF; animation: move-stars 300s linear infinite; animation-delay: -50s; }
 
 .page-wrapper { transition: opacity 0.8s ease-in-out; opacity: 0; }
 body.preloader-finished .page-wrapper { opacity: 1; }
@@ -48,18 +49,17 @@ body.preloader-finished .page-wrapper { opacity: 1; }
 /* --- プリローダー（オープニング） --- */
 .preloader { position: fixed; inset: 0; background-color: var(--dark-bg); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease 0.4s, visibility 0.6s 0.4s; }
 body.preloader-finished .preloader { opacity: 0; visibility: hidden; }
-.preloader-container { display: flex; align-items: center; animation: preloader-container-move 0.8s ease-in-out 1.2s forwards; }
+.preloader-container { display: flex; align-items: center; animation: preloader-container-move 1s ease-in-out 1.2s forwards; }
 .preloader-logo { animation: preloader-logo-in 1s ease-out forwards; }
 .preloader-logo img { width: 60px; height: 60px; }
-.preloader-text-wrapper { display: flex; flex-direction: column; width: 0; opacity: 0; transition: width 0.8s ease-in-out 1.2s, opacity 0.6s ease 1.2s; }
-.preloader-container.text-visible .preloader-text-wrapper { width: 220px; opacity: 1; }
+.preloader-text-wrapper { display: flex; flex-direction: column; width: 220px; margin-left: -220px; opacity: 0; transition: width 0.8s ease-in-out 1.2s, opacity 0.6s ease 1.2s, margin-left 0.8s ease-in-out 1.2s; }
+.preloader-container.text-visible .preloader-text-wrapper { margin-left: 20px; opacity: 1; }
 .preloader-title, .preloader-subtitle { white-space: nowrap; overflow: hidden; }
-.preloader-title { font-size: 2.2rem; font-weight: 700; color: var(--text-color); opacity: 0; transform: translateY(100%); animation: preloader-text-reveal 0.8s ease-out 1.4s forwards; }
-.preloader-subtitle { font-size: 0.8rem; font-weight: 400; color: var(--text-muted); opacity: 0; transform: translateY(100%); animation: preloader-text-reveal 0.8s ease-out 1.6s forwards; }
+.preloader-title { font-size: 2.2rem; font-weight: 700; color: var(--text-color); }
+.preloader-subtitle { font-size: 0.8rem; font-weight: 400; color: var(--text-muted); }
 
 @keyframes preloader-logo-in { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 @keyframes preloader-container-move { to { transform: translateX(-110px); } }
-@keyframes preloader-text-reveal { to { opacity: 1; transform: translateY(0); } }
 
 /* --- 基本スタイル --- */
 main { display: block; }
@@ -93,8 +93,7 @@ code { background-color: var(--light-bg); padding: 0.3em 0.6em; border-radius: v
 
 /* --- ヘッダー & ナビゲーション --- */
 header { background-color: transparent; padding: 18px 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; transition: all var(--transition-normal); }
-header.scrolled { padding: 10px 0; } /* 暗くするスタイルを削除 */
-header.scrolled #logo-img, header.scrolled .nav-link { text-shadow: none; } /* スクロール時のテキストシャドウ削除 */
+header.scrolled { padding: 10px 0; }
 header .container { display: flex; justify-content: space-between; align-items: center; }
 #logo-img { height: 38px; transition: all var(--transition-fast); filter: drop-shadow(0 3px 7px rgba(0,0,0,0.4)); }
 #logo-img:hover { transform: scale(1.08); filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));}
@@ -143,15 +142,15 @@ header .container { display: flex; justify-content: space-between; align-items: 
 
 /* --- コンテンツセクション共通 --- */
 .content-section { padding: 100px 0; position: relative; }
-#features-and-join { background-color: transparent; }
+#features-and-join { background-color: transparent; padding-top: 100px; padding-bottom: 100px; }
+.features-wrapper { margin-bottom: 120px; }
 
 /* --- Features (魅力) セクション --- */
-.features-wrapper { margin-bottom: 120px; }
 .features-grid { display: grid; gap: 30px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
 .feature-card { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); padding: 35px 30px; border-radius: var(--border-radius-lg); text-align: center; transition: all var(--transition-normal); border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; box-shadow: var(--shadow-medium); position: relative; overflow: hidden; }
 .feature-card:hover { transform: translateY(-12px); box-shadow: var(--shadow-strong); }
 .feature-icon-wrapper { width: 90px; height: 90px; border-radius: 25%; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 25px; color: #FFF; flex-shrink: 0; box-shadow: 0 7px 18px rgba(var(--rgb-primary-color),0.3); transition: all 0.35s ease; }
-.feature-card:hover .feature-icon-wrapper { box-shadow: 0 0 25px rgba(var(--rgb-primary-color),0.5), 0 0 15px rgba(var(--rgb-secondary-color),0.3); } /* 傾きと拡大をなくし、光るエフェクトに変更 */
+.feature-card:hover .feature-icon-wrapper { box-shadow: 0 0 25px rgba(var(--rgb-primary-color),0.5), 0 0 15px rgba(var(--rgb-secondary-color),0.3); }
 .feature-icon-wrapper i { font-size: 2.7em; }
 .feature-card h3 { font-size: 1.35em; margin-bottom: 12px; font-weight: 600; }
 .feature-card p { font-size: 0.9rem; line-height: 1.65; flex-grow: 1; max-width: 280px; margin: auto; }
@@ -175,7 +174,7 @@ header .container { display: flex; justify-content: space-between; align-items: 
 .copy-toast.show { bottom: 35px; opacity: 1; transform: translateX(-50%) scale(1); }
 
 /* --- WebMap Promo --- */
-#webmap-promo { background-color: var(--medium-dark-bg); }
+#webmap-promo { background-color: var(--medium-dark-bg); padding: 100px 0; }
 #webmap-promo .container { text-align: center; }
 #webmap-promo .btn { margin-top: 20px; }
 
@@ -191,8 +190,8 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     .main-nav ul li { margin-left: 0; width: 100%;}
     .main-nav ul li a.nav-link { padding: 14px 25px; font-size: 1rem; display:block; border-bottom: 1px solid var(--border-color); }
     .hamburger-menu { display: block; }
-    .content-section { padding: 80px 0; }
-    #features-and-join, #webmap-promo { padding: 80px 20px; }
+    .content-section { padding: 80px 20px; }
+    #features-and-join { padding: 80px 20px 60px; }
     .features-wrapper { margin-bottom: 100px; }
     .hero-content-wrapper { padding: 0 15px; justify-content: center; align-items: flex-end; padding-bottom: 15vh;}
     .hero-text-content { max-width: 100%; text-align: center; padding-right: 0; }
