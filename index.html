@@ -14,15 +14,7 @@
 <body>
 
     <div class="preloader">
-        <div class="preloader-container">
-            <div class="preloader-logo">
-                <img src="logo.png" alt="StellaMC Loading...">
-            </div>
-            <div class="preloader-text-wrapper">
-                <div class="preloader-title">StellaMC</div>
-                <div class="preloader-subtitle">安心できるからこそ、本気で楽しめる。</div>
-            </div>
-        </div>
+        <img src="logo.png" alt="StellaMC Loading..." class="preloader-logo">
     </div>
     
     <div id="site-background">
@@ -62,7 +54,9 @@
                     <div class="hero-text-content">
                         <h1 id="typing-title"></h1>
                         <div class="subtitle-wrapper">
-                            <p id="typing-subtitle" class="subtitle"></p>
+                            <p id="typing-subtitle" class="subtitle">
+                                <span class="static-text"></span><span class="dynamic-text"></span>
+                            </p>
                         </div>
                         <div class="hero-buttons">
                             <a href="#join" class="btn btn-primary-shiny animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="1.2s">
@@ -109,34 +103,38 @@
                         <p class="section-subtitle animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">簡単ステップで、すぐにStellaMCの世界へ！</p>
                         <div class="join-container">
                             <div class="join-box java animate-on-scroll" data-animation="fadeInRightCustom" data-animation-delay="0.2s">
-                                <div class="join-box-icon"><i class="fab fa-java"></i></div>
-                                <h3 class="join-box-title">Java版</h3>
-                                <div class="join-info-item">
-                                    <span class="join-info-label">サーバーアドレス:</span>
-                                    <div class="copy-wrapper">
-                                        <input type="text" value="stellamc.jp" id="java-addr-input" readonly aria-label="Java版サーバーアドレス">
-                                        <button class="copy-action-btn" data-clipboard-target="#java-addr-input" aria-label="Java版アドレスをコピー"><i class="far fa-copy"></i></button>
+                                <div class="join-box-inner">
+                                    <div class="join-box-icon"><i class="fab fa-java"></i></div>
+                                    <h3 class="join-box-title">Java版</h3>
+                                    <div class="join-info-item">
+                                        <span class="join-info-label">サーバーアドレス:</span>
+                                        <div class="copy-wrapper">
+                                            <input type="text" value="stellamc.jp" id="java-addr-input" readonly aria-label="Java版サーバーアドレス">
+                                            <button class="copy-action-btn" data-clipboard-target="#java-addr-input" aria-label="Java版アドレスをコピー"><i class="far fa-copy"></i></button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="join-box bedrock animate-on-scroll" data-animation="fadeInLeftCustom" data-animation-delay="0.2s">
-                                <div class="join-box-icon"><i class="fas fa-mobile-screen-button"></i></div>
-                                <h3 class="join-box-title">統合版 (Bedrock)</h3>
-                                <div class="join-info-item">
-                                    <span class="join-info-label">サーバーアドレス:</span>
-                                    <div class="copy-wrapper">
-                                        <input type="text" value="stellamc.jp" id="bedrock-addr-input" readonly aria-label="統合版サーバーアドレス">
-                                        <button class="copy-action-btn" data-clipboard-target="#bedrock-addr-input" aria-label="統合版アドレスをコピー"><i class="far fa-copy"></i></button>
+                                <div class="join-box-inner">
+                                    <div class="join-box-icon"><i class="fas fa-mobile-screen-button"></i></div>
+                                    <h3 class="join-box-title">統合版 (Bedrock)</h3>
+                                    <div class="join-info-item">
+                                        <span class="join-info-label">サーバーアドレス:</span>
+                                        <div class="copy-wrapper">
+                                            <input type="text" value="stellamc.jp" id="bedrock-addr-input" readonly aria-label="統合版サーバーアドレス">
+                                            <button class="copy-action-btn" data-clipboard-target="#bedrock-addr-input" aria-label="統合版アドレスをコピー"><i class="far fa-copy"></i></button>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="join-info-item">
-                                    <span class="join-info-label">ポート:</span>
-                                    <div class="copy-wrapper">
-                                        <input type="text" value="6911" id="bedrock-port-input" readonly aria-label="統合版ポート">
-                                        <button class="copy-action-btn" data-clipboard-target="#bedrock-port-input" aria-label="統合版ポートをコピー"><i class="far fa-copy"></i></button>
+                                    <div class="join-info-item">
+                                        <span class="join-info-label">ポート:</span>
+                                        <div class="copy-wrapper">
+                                            <input type="text" value="6911" id="bedrock-port-input" readonly aria-label="統合版ポート">
+                                            <button class="copy-action-btn" data-clipboard-target="#bedrock-port-input" aria-label="統合版ポートをコピー"><i class="far fa-copy"></i></button>
+                                        </div>
                                     </div>
+                                    <p class="join-box-note">フレンドID: <code>stellamc9211</code></p>
                                 </div>
-                                <p class="join-box-note">フレンドID: <code>stellamc9211</code></p>
                             </div>
                         </div>
                         <div id="copy-toast" class="copy-toast" role="alert" aria-live="assertive">コピーしました！</div>
