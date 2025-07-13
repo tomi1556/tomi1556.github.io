@@ -1,22 +1,23 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ===== Preloader (オープニングアニメーション) =====
+    const body = document.body;
     const preloader = document.querySelector('.preloader');
-    if (preloader) {
-        // アニメーションのシーケンスを開始
-        setTimeout(() => {
-            preloader.classList.add('start-animation');
-        }, 500);
 
-        // サイト表示への切り替え
-        setTimeout(() => {
-            preloader.classList.add('hidden');
-            initHeroTextAnimation();
-        }, 2800); // この時間はCSSのアニメーション時間と調整
+    if (preloader) {
+        // ページが完全に読み込まれたらアニメーションを開始
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                body.classList.add('preloader-finished');
+                preloader.classList.add('hidden');
+                initHeroTextAnimation();
+            }, 2000); // 2秒後に切り替え
+        });
     } else {
         // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
     }
+
 
     // ===== Header & Navigation (ヘッダーとナビゲーション) =====
     const header = document.querySelector('header');
@@ -41,8 +42,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // メニュー項目クリックでメニューを閉じる
         nav.querySelectorAll('.nav-link').forEach(link => {
-            link.addEventListener('click', (e) => {
-                // 通常のナビゲーションを妨げないように
+            link.addEventListener('click', () => {
                 if (nav.classList.contains('active')) {
                     hamburger.classList.remove('active');
                     nav.classList.remove('active');
@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const element = document.querySelector(elementSelector);
             if (!element) return;
 
-            const text = element.innerHTML.replace(/<br\s*\/?>/gi, ' \n ').trim(); // 改行を保持
+            const text = element.innerHTML.replace(/<br\s*\/?>/gi, ' \n ').trim();
             element.innerHTML = '';
             
             text.split('').forEach(char => {
@@ -79,9 +79,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
             }, baseDelay);
         };
-
-        setupAnimation('.animate-title', 200);
-        setupAnimation('.animate-subtitle', 600);
+        
+        // プリローダーがなければ即時開始、あればプリローダーが消えた後に開始
+        if (!preloader || body.classList.contains('preloader-finished')) {
+            setupAnimation('.animate-title', 200);
+            setupAnimation('.animate-subtitle', 600);
+        }
     }
 
     // ===== Footer Year (フッターの年号) =====
@@ -124,7 +127,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     observerInstance.unobserve(el);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.15 }); // 少し早めに検知
 
         animatedElements.forEach(el => observer.observe(el));
     }
