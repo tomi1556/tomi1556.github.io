@@ -1,4 +1,4 @@
-/* style.css - Ultimate Final Version v4 */
+/* style.css - Final Version v5 */
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
@@ -45,21 +45,10 @@ a, .btn { text-decoration: none !important; }
 .page-wrapper { transition: opacity 0.8s ease-in-out; opacity: 0; }
 body.preloader-finished .page-wrapper { opacity: 1; }
 
-/* --- プリローダー（オープニング） --- */
-.preloader { position: fixed; inset: 0; background-color: var(--dark-bg); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease 0.4s, visibility 0.6s 0.4s; }
-body.preloader-finished .preloader { opacity: 0; visibility: hidden; }
-.preloader-container { position: relative; width: 320px; height: 60px; animation: preloader-container-move 0.8s ease-in-out 1.2s forwards; }
-.preloader-logo { position: absolute; top: 0; left: 50%; transform: translateX(-50%); animation: preloader-logo-in 1s ease-out forwards; }
-.preloader-logo img { width: 60px; height: 60px; }
-.preloader-text-wrapper { position: absolute; top: 0; left: 50%; transform: translateX(calc(-50% + 45px)); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; height: 100%; opacity: 0; }
-.preloader-container.animated .preloader-text-wrapper { animation: preloader-text-fade-in 0.8s ease-out 1s forwards; }
-.preloader-title, .preloader-subtitle { white-space: nowrap; }
-.preloader-title { font-size: 2.2rem; font-weight: 700; color: var(--text-color); }
-.preloader-subtitle { font-size: 0.8rem; font-weight: 400; color: var(--text-muted); }
-
-@keyframes preloader-logo-in { from { opacity: 0; transform: scale(0.8) translateX(-50%); } to { opacity: 1; transform: scale(1) translateX(-50%); } }
-@keyframes preloader-container-move { to { transform: translateX(calc(-50% - 130px)); } }
-@keyframes preloader-text-fade-in { to { opacity: 1; } }
+/* --- プリローダー（安定版） --- */
+.preloader { position: fixed; inset: 0; background-color: var(--dark-bg); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.8s ease, visibility 0.8s; }
+.preloader.hidden { opacity: 0; visibility: hidden; }
+.preloader-logo img { width: 80px; height: 80px; animation: pulse 1.8s infinite ease-in-out; }
 
 /* --- 基本スタイル --- */
 main { display: block; }
@@ -83,9 +72,9 @@ code { background-color: var(--light-bg); padding: 0.3em 0.6em; border-radius: v
 .bounceInCustom { animation: bounceInAnimation 0.9s forwards; }
 
 /* タイピングエフェクト用 */
-#typing-title { min-height: 1.2em; /* ガタつき防止 */ display: inline-block; }
+#typing-title { min-height: 1.2em; display: inline-block; }
 #typing-subtitle { min-height: 1.7em; }
-.typing-cursor::after { content: ''; display: inline-block; width: 3px; background-color: rgba(255, 255, 255, 0.75); margin-left: 5px; vertical-align: baseline; }
+#typing-title.typing-cursor::after, #typing-subtitle.typing-cursor::after { content: ''; display: inline-block; width: 3px; background-color: rgba(255, 255, 255, 0.75); margin-left: 5px; vertical-align: middle; }
 #typing-title.typing-cursor::after { height: 0.9em; }
 #typing-subtitle.typing-cursor::after { height: 1em; }
 .blinking-cursor::after { animation: blink-caret .85s step-end infinite; }
@@ -95,6 +84,7 @@ code { background-color: var(--light-bg); padding: 0.3em 0.6em; border-radius: v
 @keyframes move-stars { from { transform: translateY(0); } to { transform: translateY(-2000px); } }
 @keyframes animated-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 @keyframes blink-caret { from, to { background-color: transparent } 50% { background-color: rgba(255, 255, 255, 0.75); } }
+@keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.05); } }
 
 /* --- ヘッダー & ナビゲーション --- */
 header { background-color: transparent; padding: 18px 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; transition: all var(--transition-normal); }
@@ -102,11 +92,11 @@ header.scrolled { background-color: var(--glass-bg); backdrop-filter: blur(12px)
 header .container { display: flex; justify-content: space-between; align-items: center; }
 #logo-img { height: 38px; transition: all var(--transition-fast); filter: drop-shadow(0 3px 7px rgba(0,0,0,0.4)); }
 #logo-img:hover { transform: scale(1.08); filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));}
+header.scrolled #logo-img, header.scrolled .nav-link, header.scrolled .nav-discord-link { text-shadow: none; }
 .main-nav ul { list-style: none; display: flex; align-items: center; margin:0; padding:0; }
 .main-nav ul li { margin-left: 25px; }
 .main-nav ul li a.nav-link { color: #FFF; font-weight: 500; font-size: 0.95rem; padding: 12px 10px; position: relative; letter-spacing: 0.7px; text-shadow: 0 1px 6px rgba(0,0,0,0.5); transition: all var(--transition-fast); opacity: 0.95; }
 .main-nav ul li a.nav-link:hover, .main-nav ul li a.nav-link.active { opacity: 1; color: var(--accent-color); }
-header.scrolled .main-nav ul li a.nav-link { text-shadow: none; }
 .main-nav ul li a.nav-link::after { content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%) scaleX(0); width: 70%; height: 2.5px; background-color: var(--accent-color); border-radius: 1.5px; transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1); transform-origin: center; }
 .main-nav ul li a.nav-link:hover::after, .main-nav ul li a.nav-link.active::after { transform: translateX(-50%) scaleX(1); }
 .main-nav ul li a.nav-link.active { font-weight: 600; }
@@ -144,6 +134,9 @@ header.scrolled .main-nav ul li a.nav-link { text-shadow: none; }
 #hero h1 { text-shadow: 0 5px 25px rgba(0,0,0,0.65); margin-bottom: 0.4em; }
 #hero .subtitle { color: var(--text-muted); font-size: clamp(1.1rem, 2.6vw, 1.4rem); margin-bottom: 2.8em; text-shadow: 0 2px 10px rgba(0,0,0,0.4); font-weight: 400; max-width: 550px; min-height: 2.8em; }
 .hero-buttons { display: flex; gap: 20px; justify-content: flex-end; flex-wrap: wrap; margin-top: 1em; }
+.hero-buttons .btn { min-width: 190px; padding: 14px 30px; font-size: 1rem; }
+.subtitle-wrapper { float: right; clear: both; width: 100%; }
+#typing-subtitle { text-align: left; }
 
 /* --- コンテンツセクション共通 --- */
 .content-section { padding: 100px 0; position: relative; }
