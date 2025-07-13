@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // 全体のアニメーションが完了し、サイトを表示するタイミング
         setTimeout(() => {
             body.classList.add('preloader-finished');
-        }, 3000); 
+        }, 2800); 
         
         // プリローダー要素自体をDOMから隠すタイミング
         setTimeout(() => {
             preloader.classList.add('hidden');
             initHeroTextAnimation();
-        }, 3600);
+        }, 3400);
     } else {
         // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
