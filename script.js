@@ -3,17 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Preloader (オープニングアニメーション) =====
     const body = document.body;
     const preloader = document.querySelector('.preloader');
-    const preloaderContainer = document.querySelector('.preloader-container');
 
     if (preloader) {
-        // アニメーションのシーケンスを開始
-        setTimeout(() => {
-            if (preloaderContainer) {
-                preloaderContainer.classList.add('animated');
-                preloaderContainer.classList.add('text-visible');
-            }
-        }, 1200);
-
         // 全体のアニメーションが完了し、サイトを表示するタイミング
         setTimeout(() => {
             body.classList.add('preloader-finished');
@@ -28,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
     }
+
 
     // ===== Header & Navigation (ヘッダーとナビゲーション) =====
     const header = document.querySelector('header');
