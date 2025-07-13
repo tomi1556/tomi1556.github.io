@@ -2,11 +2,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== Preloader =====
     const preloader = document.querySelector('.preloader');
-    window.addEventListener('load', () => {
-        setTimeout(() => {
-            preloader.classList.add('hidden');
-        }, 300); // 300ms待ってから非表示
-    });
+    if (preloader) {
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                initHeroTextAnimation(); // ヒーローテキストのアニメーションを開始
+            }, 300);
+        });
+    }
 
     // ===== Header & Navigation =====
     const header = document.querySelector('header');
@@ -14,13 +17,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.main-nav');
 
     // Scroll-based header style
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 20) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-    });
+    if (header) {
+        window.addEventListener('scroll', () => {
+            header.classList.toggle('scrolled', window.scrollY > 20);
+        });
+    }
 
     // Hamburger menu toggle
     if (hamburger && nav) {
@@ -42,16 +43,35 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-
-    // ===== Hero Parallax Effect =====
-    const heroBg = document.querySelector('.hero-background-image');
-    if (heroBg) {
-        window.addEventListener('scroll', () => {
-            const offset = window.pageYOffset;
-            heroBg.style.transform = `translateY(${offset * 0.25}px) scale(1.1)`;
-        });
-    }
     
+    // ===== Hero Text Animation =====
+    function initHeroTextAnimation() {
+        const title = document.querySelector('.animate-title');
+        const subtitle = document.querySelector('.animate-subtitle');
+
+        const setupAnimation = (element, delay) => {
+            if (!element) return;
+            const text = element.textContent;
+            element.innerHTML = '';
+            text.split('').forEach(char => {
+                const span = document.createElement('span');
+                span.textContent = char === ' ' ? '\u00A0' : char;
+                element.appendChild(span);
+            });
+
+            setTimeout(() => {
+                element.classList.add('visible');
+                element.querySelectorAll('span').forEach((span, index) => {
+                    span.style.transitionDelay = `${index * 0.04}s`;
+                });
+            }, delay);
+        };
+        
+        setupAnimation(title, 200);
+        setupAnimation(subtitle, 600);
+    }
+
+
     // ===== Footer Year =====
     const currentYearEl = document.getElementById('current-year');
     if (currentYearEl) {
@@ -67,18 +87,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 const label = e.trigger.getAttribute('aria-label') || 'コンテンツ';
                 toast.textContent = `${label.replace('をコピー', '')} をコピーしました！`;
                 toast.className = 'copy-toast show';
-                setTimeout(() => {
-                    toast.className = 'copy-toast';
-                }, 2000);
+                setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
                 e.clearSelection();
             });
 
             clipboard.on('error', () => {
                 toast.textContent = 'コピーに失敗しました';
                 toast.className = 'copy-toast show';
-                setTimeout(() => {
-                    toast.className = 'copy-toast';
-                }, 2000);
+                setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
             });
         }
     }
@@ -90,17 +106,17 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const el = entry.target;
-                    const animationType = el.dataset.animation || 'fadeInUpCustom';
+                    const animationName = el.dataset.animation || 'animate__fadeInUp';
                     const animationDelay = el.dataset.animationDelay || '0s';
-                    el.style.animationDelay = animationDelay;
-                    el.classList.add(animationType, 'is-visible');
+                    
+                    el.style.setProperty('--animate-delay', animationDelay);
+                    el.classList.add('animate__animated', animationName);
+
                     observerInstance.unobserve(el);
                 }
             });
         }, { threshold: 0.1 });
 
-        animatedElements.forEach(el => {
-            observer.observe(el);
-        });
+        animatedElements.forEach(el => observer.observe(el));
     }
 });
