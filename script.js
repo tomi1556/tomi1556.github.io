@@ -6,9 +6,12 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloaderContainer = document.querySelector('.preloader-container');
 
     if (preloader) {
-        // テキスト表示のタイミング
+        // アニメーションのシーケンスを開始
         setTimeout(() => {
-            if(preloaderContainer) preloaderContainer.classList.add('text-visible');
+            if (preloaderContainer) {
+                preloaderContainer.classList.add('animated');
+                preloaderContainer.classList.add('text-visible');
+            }
         }, 1200);
 
         // 全体のアニメーションが完了し、サイトを表示するタイミング
