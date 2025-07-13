@@ -5,15 +5,19 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.querySelector('.preloader');
 
     if (preloader) {
-        setTimeout(() => {
-            body.classList.add('preloader-finished');
-        }, 1500); 
-        
-        setTimeout(() => {
-            preloader.classList.add('hidden');
-            initHeroTextAnimation();
-        }, 2100);
+        // ページが完全に読み込まれたらアニメーションを開始
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                body.classList.add('preloader-finished');
+            }, 1500); 
+            
+            setTimeout(() => {
+                preloader.classList.add('hidden');
+                initHeroTextAnimation();
+            }, 2100);
+        });
     } else {
+        // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
     }
 
@@ -84,16 +88,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const subtitleElement = document.getElementById('typing-subtitle');
         if (!subtitleElement) return;
 
-        const staticTextSpan = subtitleElement.querySelector('.static-text');
-        const dynamicTextSpan = subtitleElement.querySelector('.dynamic-text');
+        const staticSpan = subtitleElement.querySelector('.static-text');
+        const dynamicSpan = subtitleElement.querySelector('.dynamic-text');
         
+        const staticText = "心安らぐ、あなたのもう一つの居場所。";
         const dynamicTexts = [
             "安心できるからこそ、本気で楽しめる。",
             "民度最優先。",
             "最高のMinecraftサーバー！"
         ];
         
-        staticTextSpan.textContent = "心安らぐ、あなたのもう一つの居場所。";
+        staticSpan.textContent = staticText + " ";
 
         let textIndex = 0;
         let charIndex = 0;
@@ -103,10 +108,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const pauseEnd = 2200;
 
         function loop() {
-            dynamicTextSpan.classList.add('typing-cursor', 'blinking-cursor');
+            dynamicSpan.classList.add('blinking-cursor');
             
             setTimeout(() => {
-                dynamicTextSpan.classList.remove('blinking-cursor');
+                dynamicSpan.classList.remove('blinking-cursor');
+                dynamicSpan.classList.add('typing-cursor');
                 typeDelete();
             }, 500);
         }
@@ -116,23 +122,25 @@ document.addEventListener('DOMContentLoaded', () => {
             
             if (isDeleting) {
                 // 削除
-                dynamicTextSpan.textContent = currentText.substring(0, charIndex - 1);
+                dynamicSpan.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
                 if (charIndex === 0) {
                     isDeleting = false;
                     textIndex = (textIndex + 1) % dynamicTexts.length;
-                    dynamicTextSpan.classList.add('blinking-cursor');
+                    dynamicSpan.classList.remove('typing-cursor');
+                    dynamicSpan.classList.add('blinking-cursor');
                     setTimeout(loop, 500);
                 } else {
                     setTimeout(typeDelete, deleteSpeed);
                 }
             } else {
                 // 入力
-                dynamicTextSpan.textContent = currentText.substring(0, charIndex + 1);
+                dynamicSpan.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
                 if (charIndex === currentText.length) {
                     isDeleting = true;
-                    dynamicTextSpan.classList.add('blinking-cursor');
+                    dynamicSpan.classList.remove('typing-cursor');
+                    dynamicSpan.classList.add('blinking-cursor');
                     setTimeout(typeDelete, pauseEnd);
                 } else {
                     setTimeout(typeDelete, typeSpeed);
