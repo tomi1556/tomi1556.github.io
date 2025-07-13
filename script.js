@@ -1,6 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ===== Preloader =====
+    // ===== Preloader (読み込み画面) =====
     const preloader = document.querySelector('.preloader');
     if (preloader) {
         window.addEventListener('load', () => {
@@ -10,20 +10,23 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 200);
         });
     } else {
+        // プリローダーがない場合でもアニメーションを開始
         initHeroTextAnimation();
     }
 
-    // ===== Header & Navigation =====
+    // ===== Header & Navigation (ヘッダーとナビゲーション) =====
     const header = document.querySelector('header');
     const hamburger = document.querySelector('.hamburger-menu');
     const nav = document.querySelector('.main-nav');
 
+    // スクロール時のヘッダースタイル変更
     if (header) {
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 20);
         });
     }
 
+    // ハンバーガーメニューの動作
     if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
             const isActive = hamburger.classList.toggle('active');
@@ -32,6 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburger.setAttribute('aria-expanded', isActive.toString());
         });
 
+        // メニュー項目クリックでメニューを閉じる
         nav.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 if (nav.classList.contains('active')) {
@@ -44,37 +48,40 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // ===== Hero Text Animation =====
+    // ===== Hero Text Animation (ヒーローテキストのアニメーション) =====
     function initHeroTextAnimation() {
-        const setupAnimation = (element, baseDelay) => {
+        const setupAnimation = (elementSelector, baseDelay) => {
+            const element = document.querySelector(elementSelector);
             if (!element) return;
+
             const text = element.textContent.trim();
             element.innerHTML = '';
             text.split('').forEach(char => {
                 const span = document.createElement('span');
-                span.textContent = char === ' ' ? '\u00A0' : char; // Handle spaces
+                // スペースもspanで囲むが、中身は&nbsp;にする
+                span.innerHTML = (char === ' ') ? '&nbsp;' : char;
                 element.appendChild(span);
             });
 
             setTimeout(() => {
                 element.classList.add('visible');
                 element.querySelectorAll('span').forEach((span, index) => {
-                    span.style.transitionDelay = `${index * 0.05}s`;
+                    span.style.transitionDelay = `${index * 0.04}s`;
                 });
             }, baseDelay);
         };
-        
-        setupAnimation(document.querySelector('.animate-title'), 200);
-        setupAnimation(document.querySelector('.animate-subtitle'), 600);
+
+        setupAnimation('.animate-title', 200);
+        setupAnimation('.animate-subtitle', 600);
     }
 
-    // ===== Footer Year =====
+    // ===== Footer Year (フッターの年号) =====
     const currentYearEl = document.getElementById('current-year');
     if (currentYearEl) {
         currentYearEl.textContent = new Date().getFullYear().toString();
     }
 
-    // ===== Clipboard.js =====
+    // ===== Clipboard.js (コピー機能) =====
     if (typeof ClipboardJS !== 'undefined') {
         const clipboard = new ClipboardJS('.copy-action-btn');
         const toast = document.getElementById('copy-toast');
@@ -87,28 +94,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 e.clearSelection();
             });
 
-            clipboard.on('error', () => {
+            clipboard.on('error', (e) => {
                 toast.textContent = 'コピーに失敗しました';
-                toast.className = 'copy-toast show';
+                toast.className = 'copy-toast show error';
                 setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
             });
         }
     }
 
-    // ===== Scroll Animations (Intersection Observer) =====
+    // ===== Scroll Animations (スクロール時のアニメーション) =====
     const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
     if (animatedElements.length > 0 && 'IntersectionObserver' in window) {
         const observer = new IntersectionObserver((entries, observerInstance) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const el = entry.target;
-                    const animationName = el.dataset.animation || 'slideInUp';
                     const animationDelay = el.dataset.animationDelay || '0s';
-                    
-                    el.style.animationName = animationName;
-                    el.style.animationDelay = animationDelay;
+                    el.style.transitionDelay = animationDelay;
                     el.classList.add('is-visible');
-
                     observerInstance.unobserve(el);
                 }
             });
