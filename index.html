@@ -14,11 +14,20 @@
 <body>
 
     <div class="preloader">
-        <img src="logo.png" alt="StellaMC Loading..." class="preloader-logo">
+        <div class="preloader-container">
+            <div class="preloader-logo">
+                <img src="logo.png" alt="StellaMC Loading...">
+            </div>
+            <div class="preloader-text-wrapper">
+                <div class="preloader-title">StellaMC</div>
+                <div class="preloader-subtitle">安心できるからこそ、本気で楽しめる。</div>
+            </div>
+        </div>
     </div>
     
     <div id="site-background">
-        <div class="stars"></div>
+        <div class="stars-1"></div>
+        <div class="stars-2"></div>
     </div>
 
     <header>
@@ -57,7 +66,7 @@
                             <a href="#join" class="btn btn-primary-shiny animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="1.2s">
                                 <i class="fa-solid fa-compass btn-icon-left"></i>今すぐ冒険へ
                             </a>
-                            <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-discord-metallic animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="1.35s">
+                            <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-discord-shine animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="1.35s">
                                 <i class="fab fa-discord btn-icon-left"></i>Discord
                             </a>
                         </div>
@@ -69,22 +78,22 @@
                 <div class="container">
                     <h2 class="section-title animate-on-scroll" data-animation="fadeInUpCustom">StellaMCの魅力</h2>
                     <div class="features-grid">
-                        <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.1s">
+                        <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0s">
                             <div class="feature-icon-wrapper"><i class="fas fa-cubes"></i></div>
                             <h3>多彩なコンテンツ</h3>
                             <p>独自の経済システムや豊富なクエスト、定期イベントで飽きさせません。</p>
                         </div>
-                        <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.2s">
+                        <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.1s">
                             <div class="feature-icon-wrapper"><i class="fas fa-users-gear"></i></div>
                             <h3>温かいコミュニティ</h3>
                             <p>プレイヤー同士が尊重しあい、初心者も安心して楽しめる温かい雰囲気です。</p>
                         </div>
-                        <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.3s">
+                        <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.2s">
                             <div class="feature-icon-wrapper"><i class="fas fa-server"></i></div>
                             <h3>24時間安定稼働</h3>
                             <p>高性能サーバーで常時安定。いつでも仲間と快適にプレイに没頭できます。</p>
                         </div>
-                        <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.4s">
+                        <div class="feature-card animate-on-scroll" data-animation="zoomInCustom" data-animation-delay="0.3s">
                             <div class="feature-icon-wrapper"><i class="fas fa-shield-heart"></i></div>
                             <h3>安心の運営サポート</h3>
                             <p>経験豊富な運営が迅速・丁寧に対応し、あなたのサーバーライフを守ります。</p>
@@ -99,6 +108,7 @@
                     <p class="section-subtitle animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">簡単ステップで、すぐにStellaMCの世界へ！</p>
                     <div class="join-container">
                         <div class="join-box java animate-on-scroll" data-animation="fadeInRightCustom" data-animation-delay="0.2s">
+                            <div class="join-box-icon"><i class="fab fa-java"></i></div>
                             <h3 class="join-box-title">Java版</h3>
                             <div class="join-info-item">
                                 <span class="join-info-label">サーバーアドレス:</span>
@@ -109,6 +119,7 @@
                             </div>
                         </div>
                         <div class="join-box bedrock animate-on-scroll" data-animation="fadeInLeftCustom" data-animation-delay="0.2s">
+                            <div class="join-box-icon"><i class="fas fa-mobile-screen-button"></i></div>
                             <h3 class="join-box-title">統合版 (Bedrock)</h3>
                             <div class="join-info-item">
                                 <span class="join-info-label">サーバーアドレス:</span>
@@ -133,9 +144,11 @@
 
             <section id="webmap-promo" class="content-section">
                 <div class="container animate-on-scroll" data-animation="bounceInCustom">
-                    <h2 class="section-title"><i class="fas fa-map-location-dot"></i> WebMapで世界を探検！</h2>
-                    <p class="section-subtitle">広大なサーバーの世界を、ブラウザからリアルタイムでチェック。<br>仲間たちの活動や自分の建築物を見つけよう！</p>
-                    <a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">WebMapを開く</a>
+                    <div class="webmap-card">
+                        <h2 class="section-title"><i class="fas fa-map-location-dot"></i> WebMapで世界を探検！</h2>
+                        <p class="section-subtitle">広大なサーバーの世界を、ブラウザからリアルタイムでチェック。<br>仲間たちの活動や自分の建築物を見つけよう！</p>
+                        <a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">WebMapを開く</a>
+                    </div>
                 </div>
             </section>
         </main>
