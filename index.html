@@ -14,8 +14,21 @@
 <body>
 
     <div class="preloader">
-        <div class="preloader-logo"><img src="logo.png" alt="StellaMC Loading..."></div>
+        <div class="preloader-container">
+            <div class="preloader-logo">
+                <img src="logo.png" alt="StellaMC Loading...">
+            </div>
+            <div class="preloader-text">
+                <div class="preloader-title">StellaMC</div>
+                <div class="preloader-subtitle">安心できるからこそ、本気で楽しめる。</div>
+            </div>
+        </div>
     </div>
+    
+    <div id="site-background">
+        <div class="stars"></div>
+    </div>
+
 
     <header>
         <div class="container">
@@ -42,7 +55,6 @@
 
     <main>
         <section id="hero">
-            <div class="stars"></div>
             <div class="hero-background-image"></div>
             <div class="hero-overlay"></div>
             <div class="hero-content-wrapper container">
@@ -50,10 +62,10 @@
                     <h1 class="animate-title">StellaMC</h1>
                     <p class="subtitle animate-subtitle">心安らぐ、あなたのもう一つの居場所。<br>安心できるからこそ、本気で楽しめる。</p>
                     <div class="hero-buttons">
-                        <a href="#join" class="btn btn-primary animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="1.2s">
+                        <a href="#join" class="btn btn-primary-shiny animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="1.2s">
                             <i class="fa-solid fa-compass btn-icon-left"></i>今すぐ冒険へ
                         </a>
-                        <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-discord animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="1.35s">
+                        <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-discord-ghost animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="1.35s">
                             <i class="fab fa-discord btn-icon-left"></i>Discord
                         </a>
                     </div>
@@ -128,7 +140,7 @@
         </section>
 
         <div class="preview-sections-wrapper container">
-            <section id="rules-preview" class="preview-card animate-on-scroll" data-animation="fadeInUpCustom">
+            <section id="rules-preview" class="preview-card animate-on-scroll" data-animation="fadeInRightCustom">
                 <h2 class="section-title-compact">サーバールール</h2>
                 <p>快適なプレイのため、ルールのご確認をお願いします。<br>皆で守って楽しいサーバーに！</p>
                 <div class="rules-highlights">
@@ -138,7 +150,7 @@
                 </div>
                 <a href="rules.html" class="btn btn-secondary">ルール詳細はこちら</a>
             </section>
-            <section id="support-preview" class="preview-card animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.15s">
+            <section id="support-preview" class="preview-card animate-on-scroll" data-animation="fadeInLeftCustom" data-animation-delay="0.1s">
                 <h2 class="section-title-compact">サーバー支援について</h2>
                 <p>皆様のご支援がサーバー運営と<br>今後の発展への大きな力となります。<br>ご理解とご協力に心より感謝申し上げます。</p>
                 <a href="support.html" class="btn btn-primary">ご支援の詳細について</a>
@@ -146,7 +158,7 @@
         </div>
 
         <section id="webmap-promo" class="content-section alt-bg">
-            <div class="container animate-on-scroll" data-animation="zoomInCustom">
+            <div class="container animate-on-scroll" data-animation="bounceInCustom">
                 <h2 class="section-title"><i class="fas fa-map-location-dot"></i> WebMapで世界を探検！</h2>
                 <p class="section-subtitle">広大なサーバーの世界を、ブラウザからリアルタイムでチェック。<br>仲間たちの活動や自分の建築物を見つけよう！</p>
                 <a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="btn btn-secondary">WebMapを開く</a>
