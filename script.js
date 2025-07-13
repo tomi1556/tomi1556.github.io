@@ -14,17 +14,17 @@ document.addEventListener('DOMContentLoaded', () => {
         // 全体のアニメーションが完了し、サイトを表示するタイミング
         setTimeout(() => {
             body.classList.add('preloader-finished');
-        }, 2800); 
+        }, 3000); 
         
         // プリローダー要素自体をDOMから隠すタイミング
         setTimeout(() => {
             preloader.classList.add('hidden');
             initHeroTextAnimation();
-        }, 3400);
+        }, 3600);
     } else {
+        // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
     }
-
 
     // ===== Header & Navigation (ヘッダーとナビゲーション) =====
     const header = document.querySelector('header');
