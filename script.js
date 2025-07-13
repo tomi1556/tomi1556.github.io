@@ -3,19 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Preloader (オープニングアニメーション) =====
     const body = document.body;
     const preloader = document.querySelector('.preloader');
+    const preloaderContainer = document.querySelector('.preloader-container');
 
     if (preloader) {
-        // ページが完全に読み込まれたらアニメーションを開始
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                body.classList.add('preloader-finished');
-            }, 1500); 
-            
-            setTimeout(() => {
-                preloader.classList.add('hidden');
-                initHeroTextAnimation();
-            }, 2100);
-        });
+        // アニメーションのシーケンスを開始
+        setTimeout(() => {
+            if(preloaderContainer) preloaderContainer.classList.add('animated');
+        }, 1200);
+
+        // 全体のアニメーションが完了し、サイトを表示するタイミング
+        setTimeout(() => {
+            body.classList.add('preloader-finished');
+        }, 3000); 
+        
+        // プリローダー要素自体をDOMから隠すタイミング
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            initHeroTextAnimation();
+        }, 3600);
     } else {
         // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
@@ -56,10 +61,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Hero Text Animation (ヒーローテキストのアニメーション) =====
     function initHeroTextAnimation() {
         const titleElement = document.getElementById('typing-title');
-        const subtitleElement = document.getElementById('typing-subtitle');
-        
-        if (titleElement) titleElement.innerHTML = '';
-        if (subtitleElement) subtitleElement.innerHTML = '';
         
         if (titleElement) {
             typewriter(titleElement, "StellaMC", 150, () => {
@@ -71,6 +72,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // 汎用タイピング関数
     function typewriter(element, text, speed, callback) {
         let charIndex = 0;
+        element.innerHTML = '';
         element.classList.add('typing-cursor');
 
         function type() {
@@ -80,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(type, speed + (Math.random() * 40 - 20));
             } else {
                 element.classList.remove('typing-cursor');
-                element.classList.add('blinking-cursor'); 
+                element.classList.add('blinking-cursor'); //完了後に点滅開始
                 if (callback) callback();
             }
         }
@@ -107,7 +109,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const pauseEnd = 2200;
 
         function loop() {
-            subtitleElement.classList.remove('typing-cursor');
             subtitleElement.classList.add('blinking-cursor');
             
             setTimeout(() => {
@@ -121,8 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentText = texts[textIndex];
             
             if (isDeleting) {
-                subtitleElement.classList.remove('blinking-cursor');
-                subtitleElement.classList.add('typing-cursor');
+                // 削除
                 subtitleElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
                 if (charIndex === 0) {
@@ -135,6 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(typeDelete, deleteSpeed);
                 }
             } else {
+                // 入力
                 subtitleElement.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
                 if (charIndex === currentText.length) {
@@ -149,6 +150,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         setTimeout(loop, 1000);
     }
+
 
     // ===== Footer Year (フッターの年号) =====
     const currentYearEl = document.getElementById('current-year');
