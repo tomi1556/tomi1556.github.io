@@ -6,9 +6,11 @@ document.addEventListener('DOMContentLoaded', () => {
         window.addEventListener('load', () => {
             setTimeout(() => {
                 preloader.classList.add('hidden');
-                initHeroTextAnimation(); // ヒーローテキストのアニメーションを開始
-            }, 300);
+                initHeroTextAnimation();
+            }, 200);
         });
+    } else {
+        initHeroTextAnimation();
     }
 
     // ===== Header & Navigation =====
@@ -16,20 +18,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const hamburger = document.querySelector('.hamburger-menu');
     const nav = document.querySelector('.main-nav');
 
-    // Scroll-based header style
     if (header) {
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 20);
         });
     }
 
-    // Hamburger menu toggle
     if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
             const isActive = hamburger.classList.toggle('active');
             nav.classList.toggle('active', isActive);
             document.body.classList.toggle('no-scroll', isActive);
-            hamburger.setAttribute('aria-expanded', isActive);
+            hamburger.setAttribute('aria-expanded', isActive.toString());
         });
 
         nav.querySelectorAll('.nav-link').forEach(link => {
@@ -43,39 +43,35 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-    
+
     // ===== Hero Text Animation =====
     function initHeroTextAnimation() {
-        const title = document.querySelector('.animate-title');
-        const subtitle = document.querySelector('.animate-subtitle');
-
-        const setupAnimation = (element, delay) => {
+        const setupAnimation = (element, baseDelay) => {
             if (!element) return;
-            const text = element.textContent;
+            const text = element.textContent.trim();
             element.innerHTML = '';
             text.split('').forEach(char => {
                 const span = document.createElement('span');
-                span.textContent = char === ' ' ? '\u00A0' : char;
+                span.textContent = char === ' ' ? '\u00A0' : char; // Handle spaces
                 element.appendChild(span);
             });
 
             setTimeout(() => {
                 element.classList.add('visible');
                 element.querySelectorAll('span').forEach((span, index) => {
-                    span.style.transitionDelay = `${index * 0.04}s`;
+                    span.style.transitionDelay = `${index * 0.05}s`;
                 });
-            }, delay);
+            }, baseDelay);
         };
         
-        setupAnimation(title, 200);
-        setupAnimation(subtitle, 600);
+        setupAnimation(document.querySelector('.animate-title'), 200);
+        setupAnimation(document.querySelector('.animate-subtitle'), 600);
     }
-
 
     // ===== Footer Year =====
     const currentYearEl = document.getElementById('current-year');
     if (currentYearEl) {
-        currentYearEl.textContent = new Date().getFullYear();
+        currentYearEl.textContent = new Date().getFullYear().toString();
     }
 
     // ===== Clipboard.js =====
@@ -106,11 +102,12 @@ document.addEventListener('DOMContentLoaded', () => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const el = entry.target;
-                    const animationName = el.dataset.animation || 'animate__fadeInUp';
+                    const animationName = el.dataset.animation || 'slideInUp';
                     const animationDelay = el.dataset.animationDelay || '0s';
                     
-                    el.style.setProperty('--animate-delay', animationDelay);
-                    el.classList.add('animate__animated', animationName);
+                    el.style.animationName = animationName;
+                    el.style.animationDelay = animationDelay;
+                    el.classList.add('is-visible');
 
                     observerInstance.unobserve(el);
                 }
