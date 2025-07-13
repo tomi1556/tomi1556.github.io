@@ -59,26 +59,28 @@ document.addEventListener('DOMContentLoaded', () => {
         const titleElement = document.getElementById('typing-title');
         
         if (titleElement) {
-            typewriter(titleElement, "StellaMC", () => {
-                // タイトルタイピング完了後、サブタイトルのループを開始
+            // タイトルタイピングを開始
+            typewriter(titleElement, "StellaMC", 150, () => {
+                // タイトル完了後、サブタイトルのループを開始
                 loopingTypingEffect();
             });
         }
     }
 
     // 汎用タイピング関数
-    function typewriter(element, text, callback) {
+    function typewriter(element, text, speed, callback) {
         let charIndex = 0;
         element.innerHTML = '';
-        element.classList.add('typing');
+        element.classList.add('typing-cursor');
+        element.classList.remove('blinking-cursor');
 
         function type() {
             if (charIndex < text.length) {
                 element.textContent += text.charAt(charIndex);
                 charIndex++;
-                setTimeout(type, 150 + Math.random() * 50); // 人間味のある揺らぎ
+                setTimeout(type, speed + (Math.random() * 40 - 20)); // 人間味のある揺らぎ
             } else {
-                element.classList.remove('typing');
+                element.classList.add('blinking-cursor');
                 if (callback) callback();
             }
         }
@@ -105,7 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const pauseEnd = 2200;
 
         function loop() {
-            subtitleElement.classList.add('typing');
+            subtitleElement.classList.add('typing-cursor');
+            subtitleElement.classList.remove('blinking-cursor');
             const currentText = texts[textIndex];
             
             if (isDeleting) {
@@ -115,6 +118,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (charIndex === 0) {
                     isDeleting = false;
                     textIndex = (textIndex + 1) % texts.length;
+                    subtitleElement.classList.add('blinking-cursor');
                     setTimeout(loop, 500);
                 } else {
                     setTimeout(loop, deleteSpeed);
@@ -125,13 +129,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 charIndex++;
                 if (charIndex === currentText.length) {
                     isDeleting = true;
+                    subtitleElement.classList.add('blinking-cursor');
                     setTimeout(loop, pauseEnd);
                 } else {
                     setTimeout(loop, typeSpeed);
                 }
             }
         }
-        setTimeout(loop, 500); // 初回開始までの時間
+        setTimeout(loop, 1000); // 初回開始までの時間
     }
 
 
