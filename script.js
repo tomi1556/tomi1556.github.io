@@ -1,143 +1,106 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const menuButton = document.getElementById('menu-button');
-    const mobileNav = document.getElementById('mobile-nav');
 
-    menuButton.addEventListener('click', () => {
-        mobileNav.classList.toggle('open'); // 'open'クラスをトグル
-        console.log('メニュー状態:', mobileNav.classList.contains('open') ? '開いた' : '閉じた');
+    // ===== Preloader =====
+    const preloader = document.querySelector('.preloader');
+    window.addEventListener('load', () => {
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+        }, 300); // 300ms待ってから非表示
     });
-});
 
-async function fetchMinecraftStatus() {
-    try {
-        const response = await fetch('https://mcapi.us/server/status?ip=stellamc.jp');
-        const data = await response.json();
+    // ===== Header & Navigation =====
+    const header = document.querySelector('header');
+    const hamburger = document.querySelector('.hamburger-menu');
+    const nav = document.querySelector('.main-nav');
 
-        console.log('APIレスポンス:', data); // APIレスポンスを確認
+    // Scroll-based header style
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 20) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    });
 
-        // オンライン人数を表示
-        const onlineUsers = document.getElementById('online-users');
-        const onlinePlayersCount = data.players?.now || 0;
-        onlineUsers.textContent = onlinePlayersCount;
+    // Hamburger menu toggle
+    if (hamburger && nav) {
+        hamburger.addEventListener('click', () => {
+            const isActive = hamburger.classList.toggle('active');
+            nav.classList.toggle('active', isActive);
+            document.body.classList.toggle('no-scroll', isActive);
+            hamburger.setAttribute('aria-expanded', isActive);
+        });
 
-        // オンラインプレイヤーリストを表示
-        const onlinePlayers = document.getElementById('online-players');
-        onlinePlayers.innerHTML = '';
-
-        // プレイヤーリストが存在するか確認
-        if (data.players && Array.isArray(data.players.sample)) {
-            console.log('オンラインプレイヤーリスト:', data.players.sample); // プレイヤーリストの確認
-            
-            const bedrockPlayers = [];
-            const javaPlayers = [];
-
-            // プレイヤーを分類
-            data.players.sample.forEach(player => {
-                if (player.name.startsWith('.')) {
-                    bedrockPlayers.push(player);
-                } else {
-                    javaPlayers.push(player);
+        nav.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                if (nav.classList.contains('active')) {
+                    hamburger.classList.remove('active');
+                    nav.classList.remove('active');
+                    document.body.classList.remove('no-scroll');
+                    hamburger.setAttribute('aria-expanded', 'false');
                 }
             });
-
-            // 統合版プレイヤーを表示
-            bedrockPlayers.forEach(player => {
-                const playerDiv = createPlayerElement(player, '統合版', 'bedrock-player');
-                onlinePlayers.appendChild(playerDiv);
-            });
-
-            // Java版プレイヤーを表示
-            javaPlayers.forEach(player => {
-                const playerDiv = createPlayerElement(player, 'Java', 'java-player');
-                onlinePlayers.appendChild(playerDiv);
-            });
-        } else {
-            console.log('プレイヤーリストが存在しないか、空です');
-            onlinePlayers.textContent = 'オンラインプレイヤーの詳細情報がありません';
-        }
-    } catch (error) {
-        console.error('Minecraftステータスの取得に失敗:', error);
-        document.getElementById('online-users').textContent = 'N/A';
-        document.getElementById('online-players').textContent = 'データを取得できませんでした。';
+        });
     }
-}
 
-function createPlayerElement(player, badgeText, className) {
-    const playerDiv = document.createElement('div');
-    playerDiv.className = `player ${className}`;
+    // ===== Hero Parallax Effect =====
+    const heroBg = document.querySelector('.hero-background-image');
+    if (heroBg) {
+        window.addEventListener('scroll', () => {
+            const offset = window.pageYOffset;
+            heroBg.style.transform = `translateY(${offset * 0.25}px) scale(1.1)`;
+        });
+    }
+    
+    // ===== Footer Year =====
+    const currentYearEl = document.getElementById('current-year');
+    if (currentYearEl) {
+        currentYearEl.textContent = new Date().getFullYear();
+    }
 
-    const playerImg = document.createElement('img');
-    const avatarUrl = `https://mc-heads.net/avatar/${player.name}/100`;
-    playerImg.src = avatarUrl;
-    playerImg.alt = `${player.name}のアバター`;
+    // ===== Clipboard.js =====
+    if (typeof ClipboardJS !== 'undefined') {
+        const clipboard = new ClipboardJS('.copy-action-btn');
+        const toast = document.getElementById('copy-toast');
+        if (toast) {
+            clipboard.on('success', (e) => {
+                const label = e.trigger.getAttribute('aria-label') || 'コンテンツ';
+                toast.textContent = `${label.replace('をコピー', '')} をコピーしました！`;
+                toast.className = 'copy-toast show';
+                setTimeout(() => {
+                    toast.className = 'copy-toast';
+                }, 2000);
+                e.clearSelection();
+            });
 
-    // 画像が存在しない場合、フォールバック
-    playerImg.onerror = () => {
-        playerImg.src = 'https://mc-heads.net/avatar/Default/100';
-    };
-
-    const playerId = document.createElement('p');
-    playerId.textContent = player.name || '不明なプレイヤー';
-
-    const badge = document.createElement('div');
-    badge.className = 'badge';
-    badge.textContent = badgeText;
-
-    playerDiv.appendChild(playerImg);
-    playerDiv.appendChild(playerId);
-    playerDiv.appendChild(badge);
-
-    return playerDiv;
-}
-
-// 初回取得と定期更新
-fetchMinecraftStatus();
-setInterval(fetchMinecraftStatus, 60000); // 1分ごとに更新
-
-
-
-
-
-// ====== ✅ メニューボタンのクリックイベント ======
-const menuButton = document.querySelector('.menu-button');
-const body = document.querySelector('body');
-
-menuButton.addEventListener('click', function() {
-    body.classList.toggle('menu-open');
-    document.querySelector('nav').classList.toggle('menu-open');
-});
-
-// ====== ✅ フェードイン要素の監視 ======
-const fadeInElements = document.querySelectorAll(".fade-in");
-
-const observer = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target); // 一度だけアニメーションを適用
+            clipboard.on('error', () => {
+                toast.textContent = 'コピーに失敗しました';
+                toast.className = 'copy-toast show';
+                setTimeout(() => {
+                    toast.className = 'copy-toast';
+                }, 2000);
+            });
         }
-    });
+    }
+
+    // ===== Scroll Animations (Intersection Observer) =====
+    const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
+    if (animatedElements.length > 0 && 'IntersectionObserver' in window) {
+        const observer = new IntersectionObserver((entries, observerInstance) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const animationType = el.dataset.animation || 'fadeInUpCustom';
+                    const animationDelay = el.dataset.animationDelay || '0s';
+                    el.style.animationDelay = animationDelay;
+                    el.classList.add(animationType, 'is-visible');
+                    observerInstance.unobserve(el);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        animatedElements.forEach(el => {
+            observer.observe(el);
+        });
+    }
 });
-
-fadeInElements.forEach(el => observer.observe(el));
-
-
-// ====== ✅ コピー機能 ======
-function copyToClipboard(address, button) {
-    navigator.clipboard.writeText(address).then(() => {
-        button.textContent = '完了！';
-        button.classList.add('copy-success');
-        setTimeout(() => {
-            button.textContent = 'コピー';
-            button.classList.remove('copy-success');
-        }, 2000);
-    }).catch(err => {
-        console.error('エラー:', err);
-        button.textContent = 'エラー';
-        button.classList.add('copy-fail');
-        setTimeout(() => {
-            button.textContent = 'コピー';
-            button.classList.remove('copy-fail');
-        }, 2000);
-    });
-}
