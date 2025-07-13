@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
         setTimeout(() => {
             body.classList.add('preloader-finished');
-        }, 3000); 
+        }, 3200); 
         
         setTimeout(() => {
             preloader.classList.add('hidden');
             initHeroTextAnimation();
-        }, 3600);
+        }, 3800);
     } else {
         initHeroTextAnimation();
     }
@@ -59,9 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const titleElement = document.getElementById('typing-title');
         
         if (titleElement) {
-            // タイトルタイピングを開始
             typewriter(titleElement, "StellaMC", 150, () => {
-                // タイトル完了後、サブタイトルのループを開始
                 loopingTypingEffect();
             });
         }
@@ -72,15 +70,14 @@ document.addEventListener('DOMContentLoaded', () => {
         let charIndex = 0;
         element.innerHTML = '';
         element.classList.add('typing-cursor');
-        element.classList.remove('blinking-cursor');
 
         function type() {
             if (charIndex < text.length) {
                 element.textContent += text.charAt(charIndex);
                 charIndex++;
-                setTimeout(type, speed + (Math.random() * 40 - 20)); // 人間味のある揺らぎ
+                setTimeout(type, speed + (Math.random() * 40 - 20));
             } else {
-                element.classList.add('blinking-cursor');
+                element.classList.remove('typing-cursor');
                 if (callback) callback();
             }
         }
@@ -105,6 +102,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const typeSpeed = 120;
         const deleteSpeed = 60;
         const pauseEnd = 2200;
+
+        subtitleElement.innerHTML = '';
 
         function loop() {
             subtitleElement.classList.add('typing-cursor');
@@ -136,7 +135,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         }
-        setTimeout(loop, 1000); // 初回開始までの時間
+        setTimeout(loop, 1000);
     }
 
 
