@@ -56,24 +56,38 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== Hero Text Animation (ヒーローテキストのアニメーション) =====
     function initHeroTextAnimation() {
-        const typingTitle = document.querySelector('.typing-title');
-        if (typingTitle) {
-            typingTitle.addEventListener('animationend', (e) => {
-                if (e.animationName === 'typing') {
-                    typingTitle.style.borderRightColor = 'transparent';
-                    typingTitle.style.animation = 'blink-caret .75s step-end infinite';
-                }
-            });
-            setTimeout(() => {
-                typingTitle.classList.add('animated');
-                // サブタイトルのループタイピングを開始
+        const titleElement = document.getElementById('typing-title');
+        
+        if (titleElement) {
+            typewriter(titleElement, "StellaMC", () => {
+                // タイトルタイピング完了後、サブタイトルのループを開始
                 loopingTypingEffect();
-            }, 500);
+            });
         }
     }
 
+    // 汎用タイピング関数
+    function typewriter(element, text, callback) {
+        let charIndex = 0;
+        element.innerHTML = '';
+        element.classList.add('typing');
+
+        function type() {
+            if (charIndex < text.length) {
+                element.textContent += text.charAt(charIndex);
+                charIndex++;
+                setTimeout(type, 150 + Math.random() * 50); // 人間味のある揺らぎ
+            } else {
+                element.classList.remove('typing');
+                if (callback) callback();
+            }
+        }
+        type();
+    }
+
+    // サブタイトルのループタイピング関数
     function loopingTypingEffect() {
-        const subtitleElement = document.querySelector('.subtitle');
+        const subtitleElement = document.getElementById('typing-subtitle');
         if (!subtitleElement) return;
 
         const texts = [
@@ -88,39 +102,36 @@ document.addEventListener('DOMContentLoaded', () => {
         let isDeleting = false;
         const typeSpeed = 120;
         const deleteSpeed = 60;
-        const pauseEnd = 2000;
-        const pauseStart = 500;
+        const pauseEnd = 2200;
 
-        subtitleElement.innerHTML = '';
-        subtitleElement.classList.add('typing-loop');
-
-        function type() {
+        function loop() {
+            subtitleElement.classList.add('typing');
             const currentText = texts[textIndex];
             
             if (isDeleting) {
-                // 削除中
+                // 削除
+                subtitleElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
-                subtitleElement.innerHTML = currentText.substring(0, charIndex);
                 if (charIndex === 0) {
                     isDeleting = false;
                     textIndex = (textIndex + 1) % texts.length;
-                    setTimeout(type, pauseStart);
+                    setTimeout(loop, 500);
                 } else {
-                    setTimeout(type, deleteSpeed);
+                    setTimeout(loop, deleteSpeed);
                 }
             } else {
-                // タイピング中
+                // 入力
+                subtitleElement.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
-                subtitleElement.innerHTML = currentText.substring(0, charIndex);
                 if (charIndex === currentText.length) {
                     isDeleting = true;
-                    setTimeout(type, pauseEnd);
+                    setTimeout(loop, pauseEnd);
                 } else {
-                    setTimeout(type, typeSpeed);
+                    setTimeout(loop, typeSpeed);
                 }
             }
         }
-        type();
+        setTimeout(loop, 500); // 初回開始までの時間
     }
 
 
