@@ -6,16 +6,17 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloaderContainer = document.querySelector('.preloader-container');
 
     if (preloader) {
-        // アニメーションのシーケンスを開始
+        // テキスト表示のタイミング
         setTimeout(() => {
             if(preloaderContainer) preloaderContainer.classList.add('text-visible');
-        }, 1200);
+        }, 1500);
 
-        // サイト表示への切り替え
+        // 全体のアニメーションが完了し、サイトを表示するタイミング
         setTimeout(() => {
             body.classList.add('preloader-finished');
-        }, 3000); // この時間はCSSのアニメーション時間と調整
+        }, 3000); 
         
+        // プリローダー要素自体をDOMから隠すタイミング
         setTimeout(() => {
             preloader.classList.add('hidden');
             initHeroTextAnimation();
@@ -24,6 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
     }
+
 
     // ===== Header & Navigation (ヘッダーとナビゲーション) =====
     const header = document.querySelector('header');
@@ -101,8 +103,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const toast = document.getElementById('copy-toast');
         if (toast) {
             clipboard.on('success', (e) => {
-                const label = e.trigger.getAttribute('aria-label') || 'コンテンツ';
-                toast.textContent = `${label.replace('をコピー', '')} をコピーしました！`;
+                toast.textContent = `${e.trigger.ariaLabel.replace('をコピー', '')} をコピーしました！`;
                 toast.className = 'copy-toast show';
                 setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
                 e.clearSelection();
@@ -129,7 +130,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     observerInstance.unobserve(el);
                 }
             });
-        }, { threshold: 0.1 });
+        }, { threshold: 0.15 });
 
         animatedElements.forEach(el => observer.observe(el));
     }
