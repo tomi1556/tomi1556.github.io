@@ -3,19 +3,24 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Preloader (オープニングアニメーション) =====
     const body = document.body;
     const preloader = document.querySelector('.preloader');
+    const preloaderContainer = document.querySelector('.preloader-container');
 
     if (preloader) {
-        // ページが完全に読み込まれたらアニメーションを開始
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                body.classList.add('preloader-finished');
-            }, 1500); 
-            
-            setTimeout(() => {
-                preloader.classList.add('hidden');
-                initHeroTextAnimation();
-            }, 2100);
-        });
+        // アニメーションのシーケンスを開始
+        setTimeout(() => {
+            if(preloaderContainer) preloaderContainer.classList.add('animated');
+        }, 1200);
+
+        // 全体のアニメーションが完了し、サイトを表示するタイミング
+        setTimeout(() => {
+            body.classList.add('preloader-finished');
+        }, 3000); 
+        
+        // プリローダー要素自体をDOMから隠すタイミング
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            initHeroTextAnimation();
+        }, 3600);
     } else {
         // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
@@ -108,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pauseEnd = 2200;
 
         function loop() {
+            subtitleElement.classList.remove('typing-cursor');
             subtitleElement.classList.add('blinking-cursor');
             
             setTimeout(() => {
