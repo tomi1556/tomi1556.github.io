@@ -3,35 +3,39 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Preloader (オープニングアニメーション) =====
     const body = document.body;
     const preloader = document.querySelector('.preloader');
+    const preloaderContainer = document.querySelector('.preloader-container');
 
     if (preloader) {
-        // ページが完全に読み込まれたらアニメーションを開始
-        window.addEventListener('load', () => {
-            setTimeout(() => {
-                body.classList.add('preloader-finished');
-                preloader.classList.add('hidden');
-                initHeroTextAnimation();
-            }, 2000); // 2秒後に切り替え
-        });
+        // アニメーションのシーケンスを開始
+        setTimeout(() => {
+            if(preloaderContainer) preloaderContainer.classList.add('text-visible');
+        }, 1200);
+
+        // サイト表示への切り替え
+        setTimeout(() => {
+            body.classList.add('preloader-finished');
+        }, 3000); // この時間はCSSのアニメーション時間と調整
+        
+        setTimeout(() => {
+            preloader.classList.add('hidden');
+            initHeroTextAnimation();
+        }, 3600);
     } else {
         // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
     }
-
 
     // ===== Header & Navigation (ヘッダーとナビゲーション) =====
     const header = document.querySelector('header');
     const hamburger = document.querySelector('.hamburger-menu');
     const nav = document.querySelector('.main-nav');
 
-    // スクロール時のヘッダースタイル変更
     if (header) {
         window.addEventListener('scroll', () => {
             header.classList.toggle('scrolled', window.scrollY > 20);
         });
     }
 
-    // ハンバーガーメニューの動作
     if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
             const isActive = hamburger.classList.toggle('active');
@@ -40,7 +44,6 @@ document.addEventListener('DOMContentLoaded', () => {
             hamburger.setAttribute('aria-expanded', isActive.toString());
         });
 
-        // メニュー項目クリックでメニューを閉じる
         nav.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
                 if (nav.classList.contains('active')) {
@@ -80,7 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }, baseDelay);
         };
         
-        // プリローダーがなければ即時開始、あればプリローダーが消えた後に開始
         if (!preloader || body.classList.contains('preloader-finished')) {
             setupAnimation('.animate-title', 200);
             setupAnimation('.animate-subtitle', 600);
@@ -127,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     observerInstance.unobserve(el);
                 }
             });
-        }, { threshold: 0.15 }); // 少し早めに検知
+        }, { threshold: 0.1 });
 
         animatedElements.forEach(el => observer.observe(el));
     }
