@@ -48,18 +48,17 @@ body.preloader-finished .page-wrapper { opacity: 1; }
 /* --- プリローダー（オープニング） --- */
 .preloader { position: fixed; inset: 0; background-color: var(--dark-bg); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease 0.4s, visibility 0.6s 0.4s; }
 body.preloader-finished .preloader { opacity: 0; visibility: hidden; }
-.preloader-container { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); display: flex; align-items: center; }
-.preloader-container.animated { animation: preloader-container-move 1s ease-in-out 1.2s forwards; }
-.preloader-logo { animation: preloader-logo-in 1s ease-out forwards; }
+.preloader-container { position: relative; width: 280px; height: 60px; }
+.preloader-logo { position: absolute; top: 0; left: 50%; transform: translateX(-50%); animation: preloader-logo-in 1s ease-out forwards, preloader-logo-move 0.8s ease-in-out 1.2s forwards; }
 .preloader-logo img { width: 60px; height: 60px; }
-.preloader-text-wrapper { display: flex; flex-direction: column; width: 220px; margin-left: 20px; opacity: 0; transition: opacity 0.6s ease-in-out; }
-.preloader-container.text-visible .preloader-text-wrapper { opacity: 1; }
-.preloader-title, .preloader-subtitle { white-space: nowrap; overflow: hidden; }
+.preloader-text-wrapper { position: absolute; top: 0; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; height: 100%; padding-left: 80px; opacity: 0; animation: preloader-text-fade-in 0.8s ease-in-out 1.2s forwards; }
+.preloader-title, .preloader-subtitle { white-space: nowrap; }
 .preloader-title { font-size: 2.2rem; font-weight: 700; color: var(--text-color); }
 .preloader-subtitle { font-size: 0.8rem; font-weight: 400; color: var(--text-muted); }
 
-@keyframes preloader-logo-in { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
-@keyframes preloader-container-move { to { transform: translate(calc(-50% - 110px), -50%); } }
+@keyframes preloader-logo-in { from { opacity: 0; transform: scale(0.8) translateX(-50%); } to { opacity: 1; transform: scale(1) translateX(-50%); } }
+@keyframes preloader-logo-move { to { transform: translateX(calc(-140px)); } }
+@keyframes preloader-text-fade-in { to { opacity: 1; } }
 
 /* --- 基本スタイル --- */
 main { display: block; }
@@ -157,9 +156,11 @@ header .container { display: flex; justify-content: space-between; align-items: 
 
 /* --- 新・参加方法フレーム --- */
 .join-container { display: flex; flex-wrap: wrap; gap: 35px; justify-content: center; align-items: stretch; }
-.join-box { background: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-radius: var(--border-radius-lg); padding: 35px 40px; width: 100%; max-width: 480px; box-shadow: var(--shadow-medium), inset 0 1px 2px rgba(0,0,0,0.25); display: flex; flex-direction: column; align-items: center; transition: all var(--transition-normal); position: relative; border: 1px solid transparent; }
-.join-box::before { content: ''; position: absolute; inset: -1px; border-radius: inherit; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); z-index: -1; }
-.join-box:hover { transform: translateY(-12px); box-shadow: var(--shadow-strong), inset 0 1px 2px rgba(0,0,0,0.25); }
+.join-box { padding: 2px; border-radius: var(--border-radius-lg); width: 100%; max-width: 480px; transition: all var(--transition-normal); position: relative; background: transparent; border: none; }
+.join-box::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 2px; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0); -webkit-mask-composite: xor; mask-composite: exclude; opacity: 0.8; transition: all var(--transition-fast); }
+.join-box-inner { background: linear-gradient(145deg, var(--medium-dark-bg), var(--dark-bg)); border-radius: calc(var(--border-radius-lg) - 2px); padding: 35px 40px; height: 100%; display: flex; flex-direction: column; align-items: center; }
+.join-box:hover { transform: translateY(-12px); }
+.join-box:hover::before { opacity: 1; }
 .join-box-icon { margin-bottom: 18px; font-size: 2.5rem; line-height: 1; }
 .join-box.java .join-box-icon { color: var(--primary-color); }
 .join-box.bedrock .join-box-icon { color: var(--secondary-color); }
