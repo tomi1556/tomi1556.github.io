@@ -6,25 +6,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloaderContainer = document.querySelector('.preloader-container');
 
     if (preloader) {
-        // アニメーションのシーケンスを開始
         setTimeout(() => {
             if(preloaderContainer) preloaderContainer.classList.add('animated');
-        }, 1000);
+        }, 1200);
 
-        // 全体のアニメーションが完了し、サイトを表示するタイミング
         setTimeout(() => {
             body.classList.add('preloader-finished');
-        }, 3200); 
+        }, 3000); 
         
-        // プリローダー要素自体をDOMから隠すタイミング
         setTimeout(() => {
             preloader.classList.add('hidden');
             initHeroTextAnimation();
-        }, 3800);
+        }, 3600);
     } else {
-        // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
     }
+
 
     // ===== Header & Navigation (ヘッダーとナビゲーション) =====
     const header = document.querySelector('header');
@@ -61,46 +58,71 @@ document.addEventListener('DOMContentLoaded', () => {
     function initHeroTextAnimation() {
         const typingTitle = document.querySelector('.typing-title');
         if (typingTitle) {
-            // タイピングアニメーションが完了した後にアンダースコアを点滅させる
             typingTitle.addEventListener('animationend', (e) => {
                 if (e.animationName === 'typing') {
                     typingTitle.style.borderRightColor = 'transparent';
                     typingTitle.style.animation = 'blink-caret .75s step-end infinite';
                 }
             });
-            // ページ読み込み時にアニメーションを開始
             setTimeout(() => {
                 typingTitle.classList.add('animated');
+                // サブタイトルのループタイピングを開始
+                loopingTypingEffect();
             }, 500);
         }
-
-        const setupAnimation = (elementSelector, baseDelay) => {
-            const element = document.querySelector(elementSelector);
-            if (!element) return;
-            const text = element.innerHTML.replace(/<br\s*\/?>/gi, ' \n ').trim();
-            element.innerHTML = '';
-            text.split('').forEach(char => {
-                if (char === '\n') {
-                    element.appendChild(document.createElement('br'));
-                } else {
-                    const span = document.createElement('span');
-                    span.innerHTML = (char === ' ') ? '&nbsp;' : char;
-                    element.appendChild(span);
-                }
-            });
-
-            setTimeout(() => {
-                element.classList.add('visible');
-                element.querySelectorAll('span').forEach((span, index) => {
-                    span.style.transitionDelay = `${index * 0.04}s`;
-                });
-            }, baseDelay);
-        };
-        
-        if (!preloader || body.classList.contains('preloader-finished')) {
-            setupAnimation('.animate-subtitle', 2500);
-        }
     }
+
+    function loopingTypingEffect() {
+        const subtitleElement = document.querySelector('.subtitle');
+        if (!subtitleElement) return;
+
+        const texts = [
+            "安心できるからこそ、本気で楽しめる。",
+            "心安らぐ、あなたのもう一つの居場所。",
+            "民度最優先。",
+            "最高のMinecraftサーバー！"
+        ];
+        
+        let textIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typeSpeed = 120;
+        const deleteSpeed = 60;
+        const pauseEnd = 2000;
+        const pauseStart = 500;
+
+        subtitleElement.innerHTML = '';
+        subtitleElement.classList.add('typing-loop');
+
+        function type() {
+            const currentText = texts[textIndex];
+            
+            if (isDeleting) {
+                // 削除中
+                charIndex--;
+                subtitleElement.innerHTML = currentText.substring(0, charIndex);
+                if (charIndex === 0) {
+                    isDeleting = false;
+                    textIndex = (textIndex + 1) % texts.length;
+                    setTimeout(type, pauseStart);
+                } else {
+                    setTimeout(type, deleteSpeed);
+                }
+            } else {
+                // タイピング中
+                charIndex++;
+                subtitleElement.innerHTML = currentText.substring(0, charIndex);
+                if (charIndex === currentText.length) {
+                    isDeleting = true;
+                    setTimeout(type, pauseEnd);
+                } else {
+                    setTimeout(type, typeSpeed);
+                }
+            }
+        }
+        type();
+    }
+
 
     // ===== Footer Year (フッターの年号) =====
     const currentYearEl = document.getElementById('current-year');
