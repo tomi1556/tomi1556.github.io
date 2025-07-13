@@ -3,23 +3,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Preloader (オープニングアニメーション) =====
     const body = document.body;
     const preloader = document.querySelector('.preloader');
+    const preloaderContainer = document.querySelector('.preloader-container');
 
     if (preloader) {
+        // アニメーションのシーケンスを開始
+        setTimeout(() => {
+            if(preloaderContainer) preloaderContainer.classList.add('animated');
+        }, 1000);
+
         // 全体のアニメーションが完了し、サイトを表示するタイミング
         setTimeout(() => {
             body.classList.add('preloader-finished');
-        }, 2800); 
+        }, 3200); 
         
         // プリローダー要素自体をDOMから隠すタイミング
         setTimeout(() => {
             preloader.classList.add('hidden');
             initHeroTextAnimation();
-        }, 3400);
+        }, 3800);
     } else {
         // プリローダーがない場合は直接ヒーローアニメーションを開始
         initHeroTextAnimation();
     }
-
 
     // ===== Header & Navigation (ヘッダーとナビゲーション) =====
     const header = document.querySelector('header');
@@ -54,13 +59,26 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // ===== Hero Text Animation (ヒーローテキストのアニメーション) =====
     function initHeroTextAnimation() {
+        const typingTitle = document.querySelector('.typing-title');
+        if (typingTitle) {
+            // タイピングアニメーションが完了した後にアンダースコアを点滅させる
+            typingTitle.addEventListener('animationend', (e) => {
+                if (e.animationName === 'typing') {
+                    typingTitle.style.borderRightColor = 'transparent';
+                    typingTitle.style.animation = 'blink-caret .75s step-end infinite';
+                }
+            });
+            // ページ読み込み時にアニメーションを開始
+            setTimeout(() => {
+                typingTitle.classList.add('animated');
+            }, 500);
+        }
+
         const setupAnimation = (elementSelector, baseDelay) => {
             const element = document.querySelector(elementSelector);
             if (!element) return;
-
             const text = element.innerHTML.replace(/<br\s*\/?>/gi, ' \n ').trim();
             element.innerHTML = '';
-            
             text.split('').forEach(char => {
                 if (char === '\n') {
                     element.appendChild(document.createElement('br'));
@@ -80,8 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
         };
         
         if (!preloader || body.classList.contains('preloader-finished')) {
-            setupAnimation('.animate-title', 200);
-            setupAnimation('.animate-subtitle', 600);
+            setupAnimation('.animate-subtitle', 2500);
         }
     }
 
