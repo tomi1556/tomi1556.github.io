@@ -56,6 +56,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Hero Text Animation (ヒーローテキストのアニメーション) =====
     function initHeroTextAnimation() {
         const titleElement = document.getElementById('typing-title');
+        const subtitleElement = document.getElementById('typing-subtitle');
+        
+        //ちらつき防止のため、JSで中身を空にする
+        if (titleElement) titleElement.innerHTML = '';
+        if (subtitleElement) subtitleElement.innerHTML = '';
         
         if (titleElement) {
             typewriter(titleElement, "StellaMC", 150, () => {
@@ -67,7 +72,6 @@ document.addEventListener('DOMContentLoaded', () => {
     // 汎用タイピング関数
     function typewriter(element, text, speed, callback) {
         let charIndex = 0;
-        element.innerHTML = '';
         element.classList.add('typing-cursor');
 
         function type() {
@@ -77,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(type, speed + (Math.random() * 40 - 20));
             } else {
                 element.classList.remove('typing-cursor');
+                element.classList.add('blinking-cursor'); //完了後に点滅開始
                 if (callback) callback();
             }
         }
@@ -88,18 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const subtitleElement = document.getElementById('typing-subtitle');
         if (!subtitleElement) return;
 
-        const staticSpan = subtitleElement.querySelector('.static-text');
-        const dynamicSpan = subtitleElement.querySelector('.dynamic-text');
-        
-        const staticText = "心安らぐ、あなたのもう一つの居場所。";
-        const dynamicTexts = [
+        const texts = [
             "安心できるからこそ、本気で楽しめる。",
+            "心安らぐ、あなたのもう一つの居場所。",
             "民度最優先。",
             "最高のMinecraftサーバー！"
         ];
         
-        staticSpan.textContent = staticText + " ";
-
         let textIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -108,39 +108,39 @@ document.addEventListener('DOMContentLoaded', () => {
         const pauseEnd = 2200;
 
         function loop() {
-            dynamicSpan.classList.add('blinking-cursor');
+            subtitleElement.classList.add('blinking-cursor');
             
             setTimeout(() => {
-                dynamicSpan.classList.remove('blinking-cursor');
-                dynamicSpan.classList.add('typing-cursor');
+                subtitleElement.classList.remove('blinking-cursor');
+                subtitleElement.classList.add('typing-cursor');
                 typeDelete();
             }, 500);
         }
 
         function typeDelete() {
-            const currentText = dynamicTexts[textIndex];
+            const currentText = texts[textIndex];
             
             if (isDeleting) {
                 // 削除
-                dynamicSpan.textContent = currentText.substring(0, charIndex - 1);
+                subtitleElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
                 if (charIndex === 0) {
                     isDeleting = false;
-                    textIndex = (textIndex + 1) % dynamicTexts.length;
-                    dynamicSpan.classList.remove('typing-cursor');
-                    dynamicSpan.classList.add('blinking-cursor');
+                    textIndex = (textIndex + 1) % texts.length;
+                    subtitleElement.classList.remove('typing-cursor');
+                    subtitleElement.classList.add('blinking-cursor');
                     setTimeout(loop, 500);
                 } else {
                     setTimeout(typeDelete, deleteSpeed);
                 }
             } else {
                 // 入力
-                dynamicSpan.textContent = currentText.substring(0, charIndex + 1);
+                subtitleElement.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
                 if (charIndex === currentText.length) {
                     isDeleting = true;
-                    dynamicSpan.classList.remove('typing-cursor');
-                    dynamicSpan.classList.add('blinking-cursor');
+                    subtitleElement.classList.remove('typing-cursor');
+                    subtitleElement.classList.add('blinking-cursor');
                     setTimeout(typeDelete, pauseEnd);
                 } else {
                     setTimeout(typeDelete, typeSpeed);
