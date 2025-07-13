@@ -3,21 +3,16 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Preloader (オープニングアニメーション) =====
     const body = document.body;
     const preloader = document.querySelector('.preloader');
-    const preloaderContainer = document.querySelector('.preloader-container');
 
     if (preloader) {
         setTimeout(() => {
-            if(preloaderContainer) preloaderContainer.classList.add('animated');
-        }, 1200);
-
-        setTimeout(() => {
             body.classList.add('preloader-finished');
-        }, 3200); 
+        }, 1500); 
         
         setTimeout(() => {
             preloader.classList.add('hidden');
             initHeroTextAnimation();
-        }, 3800);
+        }, 2100);
     } else {
         initHeroTextAnimation();
     }
@@ -89,13 +84,17 @@ document.addEventListener('DOMContentLoaded', () => {
         const subtitleElement = document.getElementById('typing-subtitle');
         if (!subtitleElement) return;
 
-        const texts = [
+        const staticTextSpan = subtitleElement.querySelector('.static-text');
+        const dynamicTextSpan = subtitleElement.querySelector('.dynamic-text');
+        
+        const dynamicTexts = [
             "安心できるからこそ、本気で楽しめる。",
-            "心安らぐ、あなたのもう一つの居場所。",
             "民度最優先。",
             "最高のMinecraftサーバー！"
         ];
         
+        staticTextSpan.textContent = "心安らぐ、あなたのもう一つの居場所。";
+
         let textIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
@@ -103,35 +102,40 @@ document.addEventListener('DOMContentLoaded', () => {
         const deleteSpeed = 60;
         const pauseEnd = 2200;
 
-        subtitleElement.innerHTML = '';
-
         function loop() {
-            subtitleElement.classList.add('typing-cursor');
-            subtitleElement.classList.remove('blinking-cursor');
-            const currentText = texts[textIndex];
+            dynamicTextSpan.classList.add('typing-cursor', 'blinking-cursor');
+            
+            setTimeout(() => {
+                dynamicTextSpan.classList.remove('blinking-cursor');
+                typeDelete();
+            }, 500);
+        }
+
+        function typeDelete() {
+            const currentText = dynamicTexts[textIndex];
             
             if (isDeleting) {
                 // 削除
-                subtitleElement.textContent = currentText.substring(0, charIndex - 1);
+                dynamicTextSpan.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
                 if (charIndex === 0) {
                     isDeleting = false;
-                    textIndex = (textIndex + 1) % texts.length;
-                    subtitleElement.classList.add('blinking-cursor');
+                    textIndex = (textIndex + 1) % dynamicTexts.length;
+                    dynamicTextSpan.classList.add('blinking-cursor');
                     setTimeout(loop, 500);
                 } else {
-                    setTimeout(loop, deleteSpeed);
+                    setTimeout(typeDelete, deleteSpeed);
                 }
             } else {
                 // 入力
-                subtitleElement.textContent = currentText.substring(0, charIndex + 1);
+                dynamicTextSpan.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
                 if (charIndex === currentText.length) {
                     isDeleting = true;
-                    subtitleElement.classList.add('blinking-cursor');
-                    setTimeout(loop, pauseEnd);
+                    dynamicTextSpan.classList.add('blinking-cursor');
+                    setTimeout(typeDelete, pauseEnd);
                 } else {
-                    setTimeout(loop, typeSpeed);
+                    setTimeout(typeDelete, typeSpeed);
                 }
             }
         }
