@@ -59,10 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 'proxy', address: 'stellamc.jp:6911' }
         ];
         
-        const animateCountUp = (el, end, duration = 1200) => {
+        const animateCountUp = (el, end) => {
             if (!el) return;
-            const startValue = parseInt(el.textContent) || 0;
-            if (startValue === end) return;
+            const duration = 1200;
+            const startValue = parseInt(el.dataset.currentValue || '0');
+            el.dataset.currentValue = end;
+            if (startValue === end) {
+                el.textContent = end;
+                return;
+            }
             
             let startTime = null;
             const step = (timestamp) => {
@@ -79,106 +84,101 @@ document.addEventListener('DOMContentLoaded', () => {
             try {
                 const response = await fetch(`${API_BASE_URL}${server.address}`);
                 if (!response.ok) throw new Error('Network response error');
-                return await response.json();
+                const data = await response.json();
+                return { ...data, id: server.id }; // IDをデータに含める
             } catch (error) {
                 console.error(`Failed to fetch status for ${server.id}:`, error);
-                return { online: false, error: true };
+                return { id: server.id, online: false, players: { online: 0, max: 0 }, error: true };
             }
         };
 
-        const updateServerPanel = (id, data) => {
+        const updatePanelUI = (id, data) => {
             const panel = document.getElementById(`${id}-server-panel`);
             if (!panel) return;
 
-            const indicator = document.getElementById(`${id}-status-indicator`);
-            const text = document.getElementById(`${id}-status-text`);
-            const label = document.getElementById(`${id}-player-label`);
-            const gauge = document.getElementById(`${id}-gauge-bar`);
-            const errorMsg = document.getElementById(`${id}-error-message`);
+            const accentBorder = panel.querySelector('.panel-accent-border');
+            const playerLabel = panel.querySelector('.label');
+            const gaugeBar = panel.querySelector('.gauge-bar-fill');
+            const errorMsg = panel.querySelector('.error-message');
             
-            if (!indicator) return;
-
-            errorMsg.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
 
             if (data && data.online) {
-                indicator.className = 'status-indicator online';
-                text.textContent = 'オンライン';
+                accentBorder.style.setProperty('--status-color', 'var(--success-color)');
                 const { online, max } = data.players;
-                label.textContent = `プレイヤー数: ${online} / ${max}`;
-                gauge.innerHTML = '';
-                gauge.style.width = max > 0 ? `${(online / max) * 100}%` : '0%';
+                playerLabel.textContent = `プレイヤー数: ${online} / ${max}`;
+                if(gaugeBar) {
+                    gaugeBar.innerHTML = ''; // スケルトン削除
+                    gaugeBar.style.width = max > 0 ? `${(online / max) * 100}%` : '0%';
+                }
             } else {
-                indicator.className = 'status-indicator offline';
-                text.textContent = data && data.error ? '取得失敗' : 'オフライン';
-                label.textContent = 'プレイヤー数: - / -';
-                gauge.innerHTML = '<div class="skeleton"></div>';
-                gauge.style.width = '100%';
-                if (data && data.error) {
+                accentBorder.style.setProperty('--status-color', 'var(--danger-color)');
+                playerLabel.textContent = 'オフラインまたは取得失敗';
+                 if(gaugeBar) {
+                    gaugeBar.innerHTML = '<div class="skeleton"></div>';
+                    gaugeBar.style.width = '100%';
+                }
+                if (data && data.error && errorMsg) {
                     errorMsg.style.display = 'block';
                     errorMsg.textContent = 'サーバー情報の取得に失敗しました。';
                 }
             }
         };
 
-        const updateOtherPanel = (count) => {
+        const updateOtherPanelUI = (count) => {
             const panel = document.getElementById('other-server-panel');
             if (!panel) return;
-
-            const indicator = document.getElementById('other-status-indicator');
-            const text = document.getElementById('other-status-text');
+            const accentBorder = panel.querySelector('.panel-accent-border');
             const countEl = document.getElementById('other-player-count');
-
-            indicator.className = 'status-indicator online';
-            text.textContent = 'ロビー等';
-            countEl.innerHTML = '';
+            
+            accentBorder.style.setProperty('--status-color', 'var(--text-muted)');
+            countEl.innerHTML = ''; // スケルトン削除
             animateCountUp(countEl, count);
         };
 
-        const loadAllStatuses = async () => {
-            const promises = SERVERS.map(server => fetchServerStatus(server).then(data => ({...data, id: server.id })));
-            const results = await Promise.all(promises);
+        const updateOverallPanelUI = (data) => {
+            const panel = document.getElementById('overall-status-panel');
+            const accentBorder = panel.querySelector('.panel-accent-border');
+            const totalCountEl = document.getElementById('total-player-count');
+            const errorMsg = document.getElementById('overall-error-message');
+            
+            errorMsg.style.display = 'none';
 
-            const getData = id => results.find(r => r.id === id) || { online: false, players: { online: 0 }};
+            if(data && data.online) {
+                accentBorder.style.setProperty('--status-color', 'var(--success-color)');
+                totalCountEl.innerHTML = '';
+                animateCountUp(totalCountEl, data.players.online);
+            } else {
+                 accentBorder.style.setProperty('--status-color', 'var(--danger-color)');
+                 totalCountEl.textContent = '-';
+                 if(data && data.error) {
+                    errorMsg.style.display = 'block';
+                    errorMsg.textContent = '総合プレイヤー数の取得に失敗しました。';
+                 }
+            }
+        };
+
+        const loadAllStatuses = async () => {
+            const results = await Promise.all(SERVERS.map(server => fetchServerStatus(server)));
+
+            const getData = id => results.find(r => r.id === id);
             
             const proxyData = getData('proxy');
             const suteraData = getData('sutera');
             const vanillaData = getData('vanilla');
-
+            
             // 各パネルを更新
             updateServerPanel('sutera', suteraData);
             updateServerPanel('vanilla', vanillaData);
-            
-            // 総合パネルの更新
-            const totalPlayers = proxyData.online ? proxyData.players.online : 0;
-            const totalCountEl = document.getElementById('total-player-count');
-            if(totalCountEl) {
-                totalCountEl.innerHTML = '';
-                animateCountUp(totalCountEl, totalPlayers);
-            }
-            const overallError = document.getElementById('overall-error-message');
-            if(proxyData.error) {
-                overallError.style.display = 'block';
-                overallError.textContent = '総合プレイヤー数の取得に失敗しました。';
-                totalCountEl.textContent = '-';
-            } else {
-                overallError.style.display = 'none';
-            }
+            updateOverallPanelUI(proxyData);
 
             // 「その他」の計算と更新
-            const suteraPlayers = suteraData.online ? suteraData.players.online : 0;
-            const vanillaPlayers = vanillaData.online ? vanillaData.players.online : 0;
+            const totalPlayers = proxyData && proxyData.online ? proxyData.players.online : 0;
+            const suteraPlayers = suteraData && suteraData.online ? suteraData.players.online : 0;
+            const vanillaPlayers = vanillaData && vanillaData.online ? vanillaData.players.online : 0;
             const otherPlayers = Math.max(0, totalPlayers - suteraPlayers - vanillaPlayers);
-            updateOtherPanel(otherPlayers);
+            updateOtherPanelUI(otherPlayers);
         };
-
-        // マウス追従エフェクト
-        document.querySelectorAll('.status-panel').forEach(panel => {
-            panel.addEventListener('mousemove', (e) => {
-                const rect = panel.getBoundingClientRect();
-                panel.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
-                panel.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
-            });
-        });
 
         loadAllStatuses();
         setInterval(loadAllStatuses, 60000); // 60秒ごとに更新
