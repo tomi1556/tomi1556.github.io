@@ -1,4 +1,4 @@
-/* status.css - Final Mission Control Design v2 */
+/* status.css - Aurora Mission Control Design */
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
@@ -6,13 +6,13 @@
     --secondary-color: #48D1CC;
     --accent-color: #FFD05A;
     --danger-color: #EF4444;
-    --dark-bg: #111827;
-    --panel-bg: rgba(31, 41, 55, 0.5); /* #1f2937 */
-    --panel-border: rgba(107, 114, 128, 0.2); /* #6b7280 */
-    --text-color: #E5E7EB;
-    --text-muted: #9CA3AF;
+    --dark-bg: #0D1117;
+    --panel-bg: rgba(30, 35, 42, 0.6);
+    --panel-border: rgba(139, 148, 158, 0.2);
+    --text-color: #E6EDF3;
+    --text-muted: #8B949E;
     --font-primary: 'Poppins', 'Noto Sans JP', sans-serif;
-    --shadow-glow: 0 0 25px -5px;
+    --shadow-glow: 0 0 30px -5px;
     --border-radius-lg: 16px;
     --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
@@ -49,10 +49,8 @@ a:hover { color: var(--accent-color); }
 
 /* --- 共通ヘッダー・フッター --- */
 header { background-color: transparent; padding: 18px 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; transition: all var(--transition-normal); }
-header.scrolled { background-color: rgba(31, 41, 55, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 6px 22px rgba(0,0,0,0.3); padding: 10px 0; }
-header .container { display: flex; justify-content: space-between; align-items: center; }
-#logo-img { height: 38px; transition: all var(--transition-fast); }
-#logo-img:hover { transform: scale(1.08); }
+header.scrolled { background-color: rgba(13, 17, 23, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--panel-border); padding: 10px 0; }
+#logo-img { height: 38px; }
 .main-nav ul { list-style: none; display: flex; align-items: center; margin:0; padding:0; }
 .main-nav ul li { margin-left: 22px; }
 .main-nav ul li a.nav-link { color: #FFF; font-weight: 500; font-size: 0.93rem; padding: 12px 8px; position: relative; transition: color var(--transition-fast); }
@@ -70,20 +68,37 @@ header .container { display: flex; justify-content: space-between; align-items: 
     position: relative;
     overflow: hidden;
 }
-.stars { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; display: block; background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABlBMVEUAAAAAAAClZ7nPAAAACXBIWXMAAAsTAAALEwEAmpwYAAABaUlEQVQ4y6VT226DMBCs2eM3S1bJkI3SAon3P/wR78bVFG2S1TYJ2a4f/Yqn2k43TyhQOsNFT3qonYkSBC3a2cQ8bY7VToA3k1wYJ2R9K2OknC5C8cI2oY5r2t5HGFb6jWWB/FDGbrpL8DwD04wBIMl64jS5wA4VCr2gIQ/w1rQjILagRuA8sNQroZgKufPZYdA/4b4DkAiBso9bIUDgH8H8BwC4Bmr9XgD8D8B60NgnW4nAN4c8NEAI4dGDbwzYbypU8U0vU8wB8B2Avz7I4aSVp1k5jsFuA8A8B478DsB0eote4bJBDY2sT7A8QO2BkwW8B4Ac2orsT8G8AAB8AEAF2BqwHkDuBwBc3c2bW0/gHn0CVkPAVA6uQlwFwD3PBiAHeB0/gPAQwG+A8T6v6t3A8A3gL4B4LkK0Q8A3gB4/x/A/wG4AEAZx9UC2AXAswB8B+AnwI8LILwB4CsA3wL4C4C3+AD+AnxXgP8G/gGgvAL8BvgL8FMC/i/gPwB/Bfj+f4B/A2zPgP8D7I8A/wfsjwD/B2x/M/4PbH8z/g9sfzP+D3D/M/4PcB/4B/gB+Anw0wL+W4D/BuA/AD8B/gPAfwD+A/D9f4D/A/D8/wD/BwD/A+D5/wD/BwD/A+D5/wD/B/D9/wC+B/D8/wC+B/D8/wC+B/D1/wC+B/DX/wC+B/DX/wC+B/D3/wC+B/D3/wC+B/D7/wC+B/D7/wC+B/D7/wD/B/D//wD/B/D//wD/B/j//wD/B/j//wD/B2B/AAAArGMAAAClsSoAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTktMTItMTRUMTk6MDA6MDkrMDA6MDB8tG3TAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE5LTEyLTE0VDE5OjAwOjA5KzAwOjAwG8gEXAAAAABJRU5ErkJggg==) repeat top center; z-index: -2; animation: move-background 150s linear infinite; }
-@keyframes move-background { from { background-position-y: 0; } to { background-position-y: -1000px; } }
+/* ★★★ オーロラ背景 ★★★ */
+.aurora-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+.aurora-background::before, .aurora-background::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(120deg, rgba(var(--rgb-primary), 0.3) 0%, rgba(var(--rgb-secondary), 0.3) 100%);
+    filter: blur(100px);
+    opacity: 0.5;
+    animation: move-aurora 20s infinite alternate;
+}
+.aurora-background::after {
+    background-image: linear-gradient(240deg, rgba(var(--rgb-accent), 0.2) 0%, rgba(var(--rgb-danger), 0.2) 100%);
+    animation-direction: alternate-reverse;
+    animation-duration: 25s;
+}
+@keyframes move-aurora {
+    from { transform: translateX(-20%) translateY(-20%) rotate(0deg); }
+    to { transform: translateX(20%) translateY(20%) rotate(30deg); }
+}
 
-.page-header { text-align: center; margin-bottom: 60px; }
+.page-header { text-align: center; margin-bottom: 50px; }
 .page-header h1 { font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 800; color: #FFF; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 15px; }
 .page-header h1 i { color: var(--primary-color); }
 .page-header p { font-size: clamp(1rem, 2.5vw, 1.1rem); color: var(--text-muted); max-width: 650px; margin: 0 auto; }
 
 /* --- ステータスダッシュボード --- */
-.status-dashboard { display: grid; grid-template-columns: 1fr; gap: 30px; }
+.status-dashboard { display: flex; flex-direction: column; gap: 30px; }
 .server-panels-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-@media (min-width: 992px) { .overall-status-panel { margin-bottom: 30px; } }
 
-/* --- ステータスパネル共通 --- */
+/* --- パネル共通 --- */
 .status-panel {
     background: var(--panel-bg);
     border: 1px solid var(--panel-border);
@@ -91,62 +106,50 @@ header .container { display: flex; justify-content: space-between; align-items: 
     backdrop-filter: blur(10px);
     -webkit-backdrop-filter: blur(10px);
     padding: 30px;
-    transition: transform var(--transition-fast) ease-out, box-shadow var(--transition-fast) ease-out;
+    transition: transform var(--transition-fast) ease-out, box-shadow var(--transition-fast) ease-out, background-color var(--transition-fast);
     position: relative;
     overflow: hidden;
-    cursor: pointer;
 }
 .status-panel:hover {
     transform: translateY(-8px);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2), var(--shadow-glow) var(--glow-color, rgba(255,255,255,0.1));
+    background-color: rgba(43, 49, 59, 0.6);
+    box-shadow: 0 0 40px -10px var(--glow-color, rgba(255,255,255,0.1));
 }
-.status-panel:active { transform: translateY(-2px) scale(0.98); transition-duration: 0.1s; }
-.status-panel::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.08), transparent 30%);
-    opacity: 0;
-    transition: opacity 0.4s ease;
-    pointer-events: none;
-}
-.status-panel:hover::before { opacity: 1; }
-.overall-status-panel { --glow-color: rgba(var(--rgb-accent), 0.2); }
-.sutera-panel { --glow-color: rgba(var(--rgb-primary), 0.2); }
-.vanilla-panel { --glow-color: rgba(var(--rgb-secondary), 0.2); }
-.proxy-panel { --glow-color: rgba(var(--rgb-accent), 0.2); }
+.overall-status-panel { --glow-color: rgba(var(--rgb-accent), 0.3); }
+.sutera-panel { --glow-color: rgba(var(--rgb-primary), 0.3); }
+.vanilla-panel { --glow-color: rgba(var(--rgb-secondary), 0.3); }
+.other-panel { --glow-color: rgba(255, 255, 255, 0.1); }
 
+/* --- 総合ステータスパネル --- */
+.overall-status-panel .panel-body { text-align: center; padding: 20px 0; }
+.overall-status-panel .label { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 10px; }
+.overall-status-panel .label i { margin-right: 8px; }
+.overall-status-panel .value { font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; color: #FFF; line-height: 1; min-height: 60px; display: flex; align-items: center; justify-content: center; }
+.overall-status-panel .skeleton { background-color: rgba(255,255,255,0.08); border-radius: 12px; height: 60px; width: 40%; margin: 0 auto; animation: pulseBG 1.5s infinite ease-in-out; }
+
+/* --- 個別サーバーパネル --- */
 .panel-header { display: flex; align-items: center; gap: 15px; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--panel-border); }
-.panel-icon { font-size: 2rem; width: 40px; text-align: center; }
+.panel-icon { font-size: 1.8rem; width: 40px; text-align: center; }
 .panel-title { font-size: 1.5rem; font-weight: 600; color: var(--text-color); margin: 0; }
 .status-indicator { margin-left: auto; font-size: 0.9rem; font-weight: 600; padding: 6px 14px; border-radius: 30px; transition: all var(--transition-fast); }
 .status-indicator.online { background-color: rgba(var(--rgb-secondary), 0.15); color: var(--secondary-color); box-shadow: var(--shadow-glow) rgba(var(--rgb-secondary), 0.3); }
 .status-indicator.offline { background-color: rgba(var(--rgb-danger), 0.15); color: var(--danger-color); box-shadow: var(--shadow-glow) rgba(var(--rgb-danger), 0.3); }
 .status-indicator.loading { background-color: rgba(255,255,255,0.1); color: var(--text-muted); }
 .status-indicator .pulse-dot { display: inline-block; width: 8px; height: 8px; background-color: currentColor; border-radius: 50%; margin-right: 8px; animation: pulseDotAnimation 1.5s infinite ease-in-out; }
-
 @keyframes pulseDotAnimation { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
 .status-indicator.offline .pulse-dot, .status-indicator.loading .pulse-dot { animation: none; }
 
-/* --- パネルボディ --- */
 .panel-body { display: flex; flex-direction: column; gap: 25px; }
-.info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 20px; }
-.info-item { text-align: center; }
-.info-item .label { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; justify-content: center; gap: 6px; }
-.info-item .value { font-size: 1.75rem; font-weight: 700; color: #FFF; line-height: 1.2; min-height: 33px; display: flex; align-items: center; justify-content: center; }
-.info-item .value.small { font-size: 1.25rem; min-height: 24px; }
-.info-item .skeleton { background-color: rgba(255,255,255,0.08); border-radius: 6px; height: 100%; width: 60%; margin: 0 auto; animation: pulseBG 1.5s infinite ease-in-out; }
-
-@keyframes pulseBG { 50% { background-color: rgba(255,255,255,0.12); } }
-
-/* --- プレイヤー数ゲージ --- */
 .player-gauge .label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px; }
 .gauge-bar-bg { background-color: rgba(0,0,0,0.2); height: 12px; border-radius: 6px; overflow: hidden; }
 .gauge-bar-fill { width: 0%; height: 100%; border-radius: 6px; transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
 .player-gauge.stella .gauge-bar-fill { background: linear-gradient(90deg, var(--primary-color), #a263ff); }
 .player-gauge.vanilla .gauge-bar-fill { background: linear-gradient(90deg, var(--secondary-color), #5eead4); }
-.player-gauge.proxy .gauge-bar-fill { background: linear-gradient(90deg, var(--accent-color), #fde047); }
 .gauge-bar-bg .skeleton { width: 100%; height: 100%; animation: pulseBG 1.5s infinite ease-in-out; }
+@keyframes pulseBG { 50% { background-color: rgba(255,255,255,0.15); } }
+.other-panel .panel-body { align-items: center; justify-content: center; min-height: 86px; }
+.other-panel .value { font-size: 3rem; font-weight: 700; color: #FFF; line-height: 1; }
+.other-panel .skeleton { height: 40px; width: 50%; }
 
 .error-message { text-align: center; color: var(--danger-color); font-size: 0.9rem; padding: 20px; background-color: rgba(var(--rgb-danger), 0.1); border-radius: var(--border-radius-lg); }
 
@@ -156,7 +159,6 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 
 /* --- レスポンシブ対応 --- */
 @media (max-width: 992px) {
-    /* Mobile Nav */
     .main-nav { position: fixed; top: 0; left: -100%; width: 100%; max-width: 280px; height: 100vh; background-color: var(--dark-bg); padding-top: 70px; box-shadow: 6px 0 22px rgba(0,0,0,0.3); transition: all var(--transition-normal); z-index: 1001; }
     .main-nav.active { left: 0; }
     .main-nav ul { flex-direction: column; }
@@ -175,5 +177,4 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
     .status-panel { padding: 20px; }
     .panel-header { flex-direction: column; align-items: flex-start; gap: 10px; }
     .status-indicator { margin-left: 0; }
-    .info-grid { grid-template-columns: 1fr; }
 }
