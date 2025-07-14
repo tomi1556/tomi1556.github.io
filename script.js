@@ -67,9 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (subtitleElement) subtitleElement.innerHTML = '';
         
         if (titleElement) {
-            // ★★★ タイトルのタイピングアニメーションを削除 ★★★
             titleElement.textContent = "StellaMC";
-            // サブタイトルのアニメーションを即時開始
             if (subtitleElement) {
                 loopingTypingEffect();
             }
@@ -134,34 +132,72 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ===== Clipboard (コピー機能) =====
-    // ★★★ PCでも動作するようにネイティブAPIに書き換え ★★★
+    // ★★★ どの環境でも動作するようにフォールバック処理を追加 ★★★
     const copyBtns = document.querySelectorAll('.copy-action-btn');
     const toast = document.getElementById('copy-toast');
 
-    if (copyBtns.length > 0 && toast) {
+    async function copyToClipboard(text, element) {
+        try {
+            // モダンな方法 (HTTPS必須)
+            await navigator.clipboard.writeText(text);
+            showToast(true, element.getAttribute('aria-label'));
+        } catch (err) {
+            // モダンな方法が失敗した場合、従来の非推奨な方法を試す
+            legacyCopyToClipboard(text, element);
+        }
+    }
+    
+    function legacyCopyToClipboard(text, element) {
+        const textArea = document.createElement("textarea");
+        textArea.value = text;
+        
+        // 画面外に要素を配置
+        textArea.style.position = "fixed";
+        textArea.style.top = "-9999px";
+        textArea.style.left = "-9999px";
+        
+        document.body.appendChild(textArea);
+        textArea.focus();
+        textArea.select();
+        
+        try {
+            const successful = document.execCommand('copy');
+            if (successful) {
+                showToast(true, element.getAttribute('aria-label'));
+            } else {
+                showToast(false);
+            }
+        } catch (err) {
+            showToast(false);
+        }
+        
+        document.body.removeChild(textArea);
+    }
+
+    function showToast(success, message = '') {
+        if (toast) {
+            if (success) {
+                toast.textContent = `${message.replace('をコピー', '')} をコピーしました！`;
+                toast.className = 'copy-toast show';
+            } else {
+                toast.textContent = 'コピーに失敗しました';
+                toast.className = 'copy-toast show error';
+            }
+            setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
+        }
+    }
+
+    if (copyBtns.length > 0) {
         copyBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const targetSelector = btn.getAttribute('data-clipboard-target');
                 const inputEl = document.querySelector(targetSelector);
-
-                if (inputEl && navigator.clipboard) {
-                    navigator.clipboard.writeText(inputEl.value).then(() => {
-                        // 成功時
-                        toast.textContent = `${btn.getAttribute('aria-label').replace('をコピー', '')} をコピーしました！`;
-                        toast.className = 'copy-toast show';
-                        setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
-                    }).catch(err => {
-                        // 失敗時
-                        console.error("クリップボードへのコピーに失敗しました: ", err);
-                        toast.textContent = 'コピーに失敗しました';
-                        toast.className = 'copy-toast show error'; // エラー用のスタイルがあれば
-                        setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
-                    });
+                if (inputEl && inputEl.value) {
+                    copyToClipboard(inputEl.value, btn);
                 }
             });
         });
     }
-
 
     // ===== Scroll Animations (スクロール時のアニメーション) =====
     const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
