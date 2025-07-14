@@ -119,6 +119,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentText = texts[textIndex];
             
             if (isDeleting) {
+                // 削除
                 subtitleElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
                 if (charIndex === 0) {
@@ -131,6 +132,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(typeDelete, deleteSpeed);
                 }
             } else {
+                // 入力
                 subtitleElement.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
                 if (charIndex === currentText.length) {
