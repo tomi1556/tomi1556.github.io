@@ -8,16 +8,16 @@ document.addEventListener('DOMContentLoaded', () => {
         // ページが完全に読み込まれたらアニメーションを開始
         window.addEventListener('load', () => {
             setTimeout(() => {
-                body.classList.add('preloader-finished');
-            }, 1500); 
-            
-            setTimeout(() => {
+                body.style.visibility = 'visible';
+                body.style.opacity = '1';
                 preloader.classList.add('hidden');
                 initHeroTextAnimation();
-            }, 2100);
+            }, 500); // 0.5秒待ってから表示
         });
     } else {
-        // プリローダーがない場合は直接ヒーローアニメーションを開始
+        // プリローダーがない場合は直接表示
+        body.style.visibility = 'visible';
+        body.style.opacity = '1';
         initHeroTextAnimation();
     }
 
@@ -80,6 +80,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(type, speed + (Math.random() * 40 - 20));
             } else {
                 element.classList.remove('typing-cursor');
+                element.classList.add('blinking-cursor'); //完了後に点滅開始
                 if (callback) callback();
             }
         }
@@ -106,6 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pauseEnd = 2200;
 
         function loop() {
+            subtitleElement.classList.remove('typing-cursor');
             subtitleElement.classList.add('blinking-cursor');
             
             setTimeout(() => {
