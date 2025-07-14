@@ -80,7 +80,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(type, speed + (Math.random() * 40 - 20));
             } else {
                 element.classList.remove('typing-cursor');
-                element.classList.add('blinking-cursor'); 
                 if (callback) callback();
             }
         }
@@ -107,7 +106,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const pauseEnd = 2200;
 
         function loop() {
-            subtitleElement.classList.remove('typing-cursor');
             subtitleElement.classList.add('blinking-cursor');
             
             setTimeout(() => {
