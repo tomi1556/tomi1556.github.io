@@ -54,29 +54,34 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.status-dashboard')) {
         const API_BASE_URL = 'https://api.mcsrvstat.us/3/';
         const SERVERS = [
-            { id: 'sutera', address: 'stellamc.jp' }, // ポートはデフォルト25565と仮定
-            { id: 'vanilla', address: 'stellamc.jp:6910' } // 例
+            { id: 'sutera', address: 'stellamc.jp' }, 
+            { id: 'vanilla', address: 'stellamc.jp:6910' }
         ];
         
-        // 数値をアニメーションさせる関数
         const animateCountUp = (el, end, duration = 800) => {
+            if (el.textContent === String(end)) return; // 同じ値ならアニメーションしない
             let start = 0;
-            const stepTime = Math.abs(Math.floor(duration / end));
+            let stepTime = Math.abs(Math.floor(duration / end));
+            if (end === 0) {
+                el.textContent = 0;
+                return;
+            }
+            if (stepTime < 10) stepTime = 10;
+            
             const timer = setInterval(() => {
                 start++;
                 el.textContent = start;
-                if (start === end) {
+                if (start >= end) {
+                    el.textContent = end;
                     clearInterval(timer);
                 }
             }, stepTime);
-            if (end === 0) el.textContent = 0;
         };
 
-        // サーバー情報を取得・更新するメインの関数
         const fetchServerStatus = async (server) => {
             try {
                 const response = await fetch(`${API_BASE_URL}${server.address}`);
-                if (!response.ok) throw new Error(`Network response was not ok: ${response.statusText}`);
+                if (!response.ok) throw new Error(`Network response error`);
                 const data = await response.json();
                 updateServerPanel(server.id, data);
                 return data;
@@ -87,80 +92,60 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         };
 
-        // UIを更新する関数
         const updateServerPanel = (id, data) => {
-            const panel = document.getElementById(`${id}-server-panel`);
-            if (!panel) return;
-
             const statusIndicator = document.getElementById(`${id}-status-indicator`);
             const statusText = document.getElementById(`${id}-status-text`);
             const playerLabel = document.getElementById(`${id}-player-label`);
             const gaugeBar = document.getElementById(`${id}-gauge-bar`);
             const errorMessage = document.getElementById(`${id}-error-message`);
             
-            // エラーメッセージを隠す
+            if (!statusIndicator) return;
+
             errorMessage.style.display = 'none';
             
             if (data.online) {
                 statusIndicator.className = 'status-indicator online';
                 statusText.textContent = 'オンライン';
-
                 const online = data.players.online;
                 const max = data.players.max;
-                
                 playerLabel.textContent = `プレイヤー数: ${online} / ${max}`;
-                
-                // ゲージのアニメーション
                 const percentage = max > 0 ? (online / max) * 100 : 0;
-                gaugeBar.innerHTML = ''; // スケルトンを削除
+                gaugeBar.innerHTML = '';
                 gaugeBar.style.width = `${percentage}%`;
-                
-                // 総合パネルにも反映
                 const singleCountEl = document.getElementById(`${id}-player-count-single`);
                 if (singleCountEl) {
-                    singleCountEl.innerHTML = ''; // スケルトンを削除
-                    animateCountUp(singleCountEl, online);
+                    singleCountEl.innerHTML = `<span id="${id}-count-anim">${online}</span>`;
+                    animateCountUp(document.getElementById(`${id}-count-anim`), online);
                 }
-
             } else {
                 statusIndicator.className = 'status-indicator offline';
                 statusText.textContent = data.error ? '取得失敗' : 'オフライン';
-                
                 playerLabel.textContent = 'プレイヤー数: - / -';
                 gaugeBar.innerHTML = '';
                 gaugeBar.style.width = '0%';
-                
                 if(data.error) {
                     errorMessage.textContent = 'サーバー情報の取得に失敗しました。';
                     errorMessage.style.display = 'block';
                 }
-
                 const singleCountEl = document.getElementById(`${id}-player-count-single`);
-                 if (singleCountEl) {
-                    singleCountEl.innerHTML = '0';
-                }
+                if (singleCountEl) singleCountEl.textContent = '0';
             }
         };
         
         const updateOverallStatus = (results) => {
             const overallIndicator = document.getElementById('overall-status-indicator');
             const overallStatusText = document.getElementById('overall-status-text');
-            const totalPlayerCount = document.getElementById('total-player-count');
+            const totalPlayerCountEl = document.getElementById('total-player-count');
             const overallErrorMsg = document.getElementById('overall-error-message');
 
             const onlineServers = results.filter(r => r.online);
             const totalPlayers = onlineServers.reduce((acc, curr) => acc + (curr.players ? curr.players.online : 0), 0);
             
-            if (onlineServers.length > 0) {
-                 overallIndicator.className = 'status-indicator online';
-                 overallStatusText.textContent = 'オンライン';
-            } else {
-                 overallIndicator.className = 'status-indicator offline';
-                 overallStatusText.textContent = 'オフライン';
-            }
+            overallIndicator.className = onlineServers.length > 0 ? 'status-indicator online' : 'status-indicator offline';
+            overallStatusText.textContent = onlineServers.length > 0 ? 'オンライン' : 'オフライン';
             
-            totalPlayerCount.innerHTML = ''; // スケルトンを削除
-            animateCountUp(totalPlayerCount, totalPlayers);
+            totalPlayerCountEl.innerHTML = `<span id="total-count-anim">${totalPlayers}</span>`;
+            animateCountUp(document.getElementById('total-count-anim'), totalPlayers);
 
             const errors = results.filter(r => r.error);
             if (errors.length > 0 && onlineServers.length === 0) {
@@ -178,18 +163,34 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         // マウス追従エフェクト
-        const panels = document.querySelectorAll('.status-panel');
-        panels.forEach(panel => {
+        document.querySelectorAll('.status-panel').forEach(panel => {
             panel.addEventListener('mousemove', (e) => {
                 const rect = panel.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                panel.style.setProperty('--mouse-x', `${x}px`);
-                panel.style.setProperty('--mouse-y', `${y}px`);
+                panel.style.setProperty('--mouse-x', `${e.clientX - rect.left}px`);
+                panel.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
+            });
+        });
+        
+        // ★★★ 隠し要素のロジック ★★★
+        const secretSequence = ['overall-status-panel', 'sutera-server-panel', 'vanilla-server-panel'];
+        let userSequence = [];
+        
+        document.querySelectorAll('.status-panel').forEach(panel => {
+            panel.addEventListener('click', () => {
+                userSequence.push(panel.id);
+                // 配列が長くなりすぎないように調整
+                if (userSequence.length > secretSequence.length) {
+                    userSequence.shift();
+                }
+                // シーケンスが一致するかチェック
+                if (userSequence.join(',') === secretSequence.join(',')) {
+                    console.log('Secret sequence triggered!');
+                    window.location.href = 'https://www.stellamc.jp/server.html';
+                }
             });
         });
 
         loadAllStatuses();
-        setInterval(loadAllStatuses, 60000); // 60秒ごとに更新
+        setInterval(loadAllStatuses, 60000);
     }
 });
