@@ -54,19 +54,17 @@ document.addEventListener('DOMContentLoaded', () => {
     if (document.querySelector('.status-dashboard')) {
         const API_BASE_URL = 'https://api.mcsrvstat.us/3/';
         const SERVERS = [
-            { id: 'sutera', address: 'stellamc.jp' }, 
-            { id: 'vanilla', address: 'stellamc.jp:6910' }
+            { id: 'sutera', address: 'stellamc.jp:6908' },
+            { id: 'vanilla', address: 'stellamc.jp:6910' },
+            { id: 'proxy', address: 'stellamc.jp:6911' }
         ];
         
         const animateCountUp = (el, end, duration = 800) => {
-            if (el.textContent === String(end)) return; // 同じ値ならアニメーションしない
+            if (!el || el.textContent === String(end)) return;
             let start = 0;
-            let stepTime = Math.abs(Math.floor(duration / end));
-            if (end === 0) {
-                el.textContent = 0;
-                return;
-            }
-            if (stepTime < 10) stepTime = 10;
+            const range = end - start;
+            if (range === 0) { el.textContent = end; return; }
+            const stepTime = Math.max(10, duration / range);
             
             const timer = setInterval(() => {
                 start++;
@@ -88,11 +86,13 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch (error) {
                 console.error(`Failed to fetch status for ${server.id}:`, error);
                 updateServerPanel(server.id, { online: false, error: true });
-                return { online: false, error: true };
+                return { id: server.id, online: false, error: true };
             }
         };
 
         const updateServerPanel = (id, data) => {
+            const panel = document.getElementById(`${id}-server-panel`);
+            if (!panel) return;
             const statusIndicator = document.getElementById(`${id}-status-indicator`);
             const statusText = document.getElementById(`${id}-status-text`);
             const playerLabel = document.getElementById(`${id}-player-label`);
@@ -100,7 +100,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const errorMessage = document.getElementById(`${id}-error-message`);
             
             if (!statusIndicator) return;
-
             errorMessage.style.display = 'none';
             
             if (data.online) {
@@ -110,25 +109,22 @@ document.addEventListener('DOMContentLoaded', () => {
                 const max = data.players.max;
                 playerLabel.textContent = `プレイヤー数: ${online} / ${max}`;
                 const percentage = max > 0 ? (online / max) * 100 : 0;
-                gaugeBar.innerHTML = '';
-                gaugeBar.style.width = `${percentage}%`;
-                const singleCountEl = document.getElementById(`${id}-player-count-single`);
-                if (singleCountEl) {
-                    singleCountEl.innerHTML = `<span id="${id}-count-anim">${online}</span>`;
-                    animateCountUp(document.getElementById(`${id}-count-anim`), online);
+                if(gaugeBar) {
+                    gaugeBar.innerHTML = '';
+                    gaugeBar.style.width = `${percentage}%`;
                 }
             } else {
                 statusIndicator.className = 'status-indicator offline';
                 statusText.textContent = data.error ? '取得失敗' : 'オフライン';
                 playerLabel.textContent = 'プレイヤー数: - / -';
-                gaugeBar.innerHTML = '';
-                gaugeBar.style.width = '0%';
+                 if(gaugeBar) {
+                    gaugeBar.innerHTML = '';
+                    gaugeBar.style.width = '0%';
+                }
                 if(data.error) {
                     errorMessage.textContent = 'サーバー情報の取得に失敗しました。';
                     errorMessage.style.display = 'block';
                 }
-                const singleCountEl = document.getElementById(`${id}-player-count-single`);
-                if (singleCountEl) singleCountEl.textContent = '0';
             }
         };
         
@@ -138,18 +134,36 @@ document.addEventListener('DOMContentLoaded', () => {
             const totalPlayerCountEl = document.getElementById('total-player-count');
             const overallErrorMsg = document.getElementById('overall-error-message');
 
-            const onlineServers = results.filter(r => r.online);
-            const totalPlayers = onlineServers.reduce((acc, curr) => acc + (curr.players ? curr.players.online : 0), 0);
+            const getData = (id) => results.find(r => r && r.id === id) || { online: false, players: { online: 0 }};
             
-            overallIndicator.className = onlineServers.length > 0 ? 'status-indicator online' : 'status-indicator offline';
-            overallStatusText.textContent = onlineServers.length > 0 ? 'オンライン' : 'オフライン';
-            
-            totalPlayerCountEl.innerHTML = `<span id="total-count-anim">${totalPlayers}</span>`;
-            animateCountUp(document.getElementById('total-count-anim'), totalPlayers);
+            const proxyData = getData('proxy');
+            const suteraData = getData('sutera');
+            const vanillaData = getData('vanilla');
 
-            const errors = results.filter(r => r.error);
-            if (errors.length > 0 && onlineServers.length === 0) {
-                overallErrorMsg.textContent = '全サーバーの情報取得に失敗しました。';
+            const proxyOnline = proxyData.online ? (proxyData.players.online || 0) : 0;
+            const suteraOnline = suteraData.online ? (suteraData.players.online || 0) : 0;
+            const vanillaOnline = vanillaData.online ? (vanillaData.players.online || 0) : 0;
+            const otherOnline = Math.max(0, proxyOnline - suteraOnline - vanillaOnline);
+
+            overallIndicator.className = proxyData.online ? 'status-indicator online' : 'status-indicator offline';
+            overallStatusText.textContent = proxyData.online ? 'オンライン' : 'オフライン';
+
+            const updateCount = (id, count) => {
+                const el = document.getElementById(id);
+                if(el) {
+                    el.innerHTML = `<span id="${id}-anim">${count}</span>`;
+                    animateCountUp(document.getElementById(`${id}-anim`), count);
+                }
+            };
+
+            updateCount('total-player-count', proxyOnline);
+            updateCount('proxy-player-count-single', proxyOnline);
+            updateCount('sutera-player-count-single', suteraOnline);
+            updateCount('vanilla-player-count-single', vanillaOnline);
+            updateCount('other-player-count-single', otherOnline);
+            
+            if (results.some(r => r.error)) {
+                overallErrorMsg.textContent = '一部サーバー情報の取得に失敗しました。';
                 overallErrorMsg.style.display = 'block';
             } else {
                 overallErrorMsg.style.display = 'none';
@@ -157,12 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const loadAllStatuses = async () => {
-            const promises = SERVERS.map(server => fetchServerStatus(server));
+            const promises = SERVERS.map(server => fetchServerStatus(server).then(data => ({ ...data, id: server.id })));
             const results = await Promise.all(promises);
             updateOverallStatus(results);
         };
 
-        // マウス追従エフェクト
         document.querySelectorAll('.status-panel').forEach(panel => {
             panel.addEventListener('mousemove', (e) => {
                 const rect = panel.getBoundingClientRect();
@@ -171,20 +184,16 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
         
-        // ★★★ 隠し要素のロジック ★★★
         const secretSequence = ['overall-status-panel', 'sutera-server-panel', 'vanilla-server-panel'];
         let userSequence = [];
         
         document.querySelectorAll('.status-panel').forEach(panel => {
             panel.addEventListener('click', () => {
                 userSequence.push(panel.id);
-                // 配列が長くなりすぎないように調整
                 if (userSequence.length > secretSequence.length) {
                     userSequence.shift();
                 }
-                // シーケンスが一致するかチェック
                 if (userSequence.join(',') === secretSequence.join(',')) {
-                    console.log('Secret sequence triggered!');
                     window.location.href = 'https://www.stellamc.jp/server.html';
                 }
             });
