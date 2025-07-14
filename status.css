@@ -1,13 +1,14 @@
-/* status.css - Aurora Mission Control Design */
+/* status.css - Final Polished Design */
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
     --primary-color: #6C63FF;
     --secondary-color: #48D1CC;
     --accent-color: #FFD05A;
-    --danger-color: #EF4444;
+    --success-color: #22c55e;
+    --danger-color: #ef4444;
     --dark-bg: #0D1117;
-    --panel-bg: rgba(30, 35, 42, 0.6);
+    --panel-bg: rgba(22, 27, 34, 0.6);
     --panel-border: rgba(139, 148, 158, 0.2);
     --text-color: #E6EDF3;
     --text-muted: #8B949E;
@@ -19,6 +20,7 @@
     --rgb-primary: 108, 99, 255;
     --rgb-secondary: 72, 209, 204;
     --rgb-accent: 255, 208, 90;
+    --rgb-success: 34, 197, 94;
     --rgb-danger: 239, 68, 68;
 }
 
@@ -47,10 +49,12 @@ a:hover { color: var(--accent-color); }
 .is-visible { visibility: visible !important; opacity: 1 !important; transform: none !important; }
 [data-animation="fadeInUp"] { transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
 
-/* --- 共通ヘッダー・フッター --- */
+/* --- ヘッダー & ナビゲーション (全ページ共通) --- */
 header { background-color: transparent; padding: 18px 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; transition: all var(--transition-normal); }
 header.scrolled { background-color: rgba(13, 17, 23, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--panel-border); padding: 10px 0; }
-#logo-img { height: 38px; }
+header .container { display: flex; justify-content: space-between; align-items: center; }
+#logo-img { height: 38px; transition: all var(--transition-fast); }
+#logo-img:hover { transform: scale(1.08); }
 .main-nav ul { list-style: none; display: flex; align-items: center; margin:0; padding:0; }
 .main-nav ul li { margin-left: 22px; }
 .main-nav ul li a.nav-link { color: #FFF; font-weight: 500; font-size: 0.93rem; padding: 12px 8px; position: relative; transition: color var(--transition-fast); }
@@ -68,12 +72,11 @@ header.scrolled { background-color: rgba(13, 17, 23, 0.8); backdrop-filter: blur
     position: relative;
     overflow: hidden;
 }
-/* ★★★ オーロラ背景 ★★★ */
 .aurora-background { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
 .aurora-background::before, .aurora-background::after {
     content: '';
     position: absolute;
-    inset: 0;
+    inset: -10%;
     background-image: linear-gradient(120deg, rgba(var(--rgb-primary), 0.3) 0%, rgba(var(--rgb-secondary), 0.3) 100%);
     filter: blur(100px);
     opacity: 0.5;
@@ -113,33 +116,36 @@ header.scrolled { background-color: rgba(13, 17, 23, 0.8); backdrop-filter: blur
 .status-panel:hover {
     transform: translateY(-8px);
     background-color: rgba(43, 49, 59, 0.6);
-    box-shadow: 0 0 40px -10px var(--glow-color, rgba(255,255,255,0.1));
 }
-.overall-status-panel { --glow-color: rgba(var(--rgb-accent), 0.3); }
-.sutera-panel { --glow-color: rgba(var(--rgb-primary), 0.3); }
-.vanilla-panel { --glow-color: rgba(var(--rgb-secondary), 0.3); }
-.other-panel { --glow-color: rgba(255, 255, 255, 0.1); }
+.panel-accent-border {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+    background-color: var(--status-color, var(--panel-border));
+    box-shadow: 0 0 15px -2px var(--status-color, transparent);
+    transition: all var(--transition-fast);
+}
+.status-panel:hover .panel-accent-border {
+    height: 5px;
+    box-shadow: 0 0 25px -2px var(--status-color, transparent);
+}
 
 /* --- 総合ステータスパネル --- */
-.overall-status-panel .panel-body { text-align: center; padding: 20px 0; }
+.overall-status-panel { text-align: center; }
 .overall-status-panel .label { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 10px; }
 .overall-status-panel .label i { margin-right: 8px; }
 .overall-status-panel .value { font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; color: #FFF; line-height: 1; min-height: 60px; display: flex; align-items: center; justify-content: center; }
 .overall-status-panel .skeleton { background-color: rgba(255,255,255,0.08); border-radius: 12px; height: 60px; width: 40%; margin: 0 auto; animation: pulseBG 1.5s infinite ease-in-out; }
 
 /* --- 個別サーバーパネル --- */
-.panel-header { display: flex; align-items: center; gap: 15px; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--panel-border); }
-.panel-icon { font-size: 1.8rem; width: 40px; text-align: center; }
+.panel-header { display: flex; align-items: center; gap: 15px; }
+.panel-icon { font-size: 1.8rem; width: 40px; text-align: center; color: var(--icon-color, var(--text-color)); }
 .panel-title { font-size: 1.5rem; font-weight: 600; color: var(--text-color); margin: 0; }
-.status-indicator { margin-left: auto; font-size: 0.9rem; font-weight: 600; padding: 6px 14px; border-radius: 30px; transition: all var(--transition-fast); }
-.status-indicator.online { background-color: rgba(var(--rgb-secondary), 0.15); color: var(--secondary-color); box-shadow: var(--shadow-glow) rgba(var(--rgb-secondary), 0.3); }
-.status-indicator.offline { background-color: rgba(var(--rgb-danger), 0.15); color: var(--danger-color); box-shadow: var(--shadow-glow) rgba(var(--rgb-danger), 0.3); }
-.status-indicator.loading { background-color: rgba(255,255,255,0.1); color: var(--text-muted); }
-.status-indicator .pulse-dot { display: inline-block; width: 8px; height: 8px; background-color: currentColor; border-radius: 50%; margin-right: 8px; animation: pulseDotAnimation 1.5s infinite ease-in-out; }
-@keyframes pulseDotAnimation { 0%, 100% { opacity: 0.5; } 50% { opacity: 1; } }
-.status-indicator.offline .pulse-dot, .status-indicator.loading .pulse-dot { animation: none; }
+.sutera-panel { --icon-color: var(--primary-color); }
+.vanilla-panel { --icon-color: var(--secondary-color); }
+.other-panel { --icon-color: var(--text-muted); }
 
-.panel-body { display: flex; flex-direction: column; gap: 25px; }
+.panel-body { display: flex; flex-direction: column; gap: 25px; margin-top: 20px; }
 .player-gauge .label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px; }
 .gauge-bar-bg { background-color: rgba(0,0,0,0.2); height: 12px; border-radius: 6px; overflow: hidden; }
 .gauge-bar-fill { width: 0%; height: 100%; border-radius: 6px; transition: width 0.8s cubic-bezier(0.25, 1, 0.5, 1); }
@@ -147,11 +153,12 @@ header.scrolled { background-color: rgba(13, 17, 23, 0.8); backdrop-filter: blur
 .player-gauge.vanilla .gauge-bar-fill { background: linear-gradient(90deg, var(--secondary-color), #5eead4); }
 .gauge-bar-bg .skeleton { width: 100%; height: 100%; animation: pulseBG 1.5s infinite ease-in-out; }
 @keyframes pulseBG { 50% { background-color: rgba(255,255,255,0.15); } }
+
 .other-panel .panel-body { align-items: center; justify-content: center; min-height: 86px; }
 .other-panel .value { font-size: 3rem; font-weight: 700; color: #FFF; line-height: 1; }
 .other-panel .skeleton { height: 40px; width: 50%; }
 
-.error-message { text-align: center; color: var(--danger-color); font-size: 0.9rem; padding: 20px; background-color: rgba(var(--rgb-danger), 0.1); border-radius: var(--border-radius-lg); }
+.error-message { text-align: center; color: var(--danger-color); font-size: 0.9rem; padding: 10px 0; }
 
 /* --- フッター --- */
 footer { background-color: #12141a; border-top: 1px solid var(--panel-border); padding: 45px 0; text-align: center; }
@@ -175,6 +182,4 @@ footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 
 @media (max-width: 576px) {
     .status-panel { padding: 20px; }
-    .panel-header { flex-direction: column; align-items: flex-start; gap: 10px; }
-    .status-indicator { margin-left: 0; }
 }
