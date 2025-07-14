@@ -12,9 +12,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const nav = document.querySelector('.main-nav');
     if (hamburger && nav) {
         hamburger.addEventListener('click', () => {
-            const isActive = hamburger.classList.toggle('active');
-            nav.classList.toggle('active', isActive);
-            document.body.classList.toggle('no-scroll', isActive);
+            hamburger.classList.toggle('active');
+            nav.classList.toggle('active');
+            document.body.classList.toggle('no-scroll');
         });
         nav.querySelectorAll('.nav-link').forEach(link => {
             link.addEventListener('click', () => {
@@ -59,123 +59,119 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 'proxy', address: 'stellamc.jp:6911' }
         ];
         
-        const animateCountUp = (el, end, duration = 800) => {
-            if (!el || el.textContent === String(end)) return;
-            let start = 0;
-            const range = end - start;
-            if (range === 0) { el.textContent = end; return; }
-            const stepTime = Math.max(10, duration / range);
+        const animateCountUp = (el, end, duration = 1200) => {
+            if (!el) return;
+            const startValue = parseInt(el.textContent) || 0;
+            if (startValue === end) return;
             
-            const timer = setInterval(() => {
-                start++;
-                el.textContent = start;
-                if (start >= end) {
-                    el.textContent = end;
-                    clearInterval(timer);
-                }
-            }, stepTime);
+            let startTime = null;
+            const step = (timestamp) => {
+                if (!startTime) startTime = timestamp;
+                const progress = Math.min((timestamp - startTime) / duration, 1);
+                const easeOut = 1 - Math.pow(1 - progress, 4);
+                el.textContent = Math.floor(easeOut * (end - startValue) + startValue);
+                if (progress < 1) window.requestAnimationFrame(step);
+            };
+            window.requestAnimationFrame(step);
         };
 
         const fetchServerStatus = async (server) => {
             try {
                 const response = await fetch(`${API_BASE_URL}${server.address}`);
-                if (!response.ok) throw new Error(`Network response error`);
-                const data = await response.json();
-                updateServerPanel(server.id, data);
-                return data;
+                if (!response.ok) throw new Error('Network response error');
+                return await response.json();
             } catch (error) {
                 console.error(`Failed to fetch status for ${server.id}:`, error);
-                updateServerPanel(server.id, { online: false, error: true });
-                return { id: server.id, online: false, error: true };
+                return { online: false, error: true };
             }
         };
 
         const updateServerPanel = (id, data) => {
             const panel = document.getElementById(`${id}-server-panel`);
             if (!panel) return;
-            const statusIndicator = document.getElementById(`${id}-status-indicator`);
-            const statusText = document.getElementById(`${id}-status-text`);
-            const playerLabel = document.getElementById(`${id}-player-label`);
-            const gaugeBar = document.getElementById(`${id}-gauge-bar`);
-            const errorMessage = document.getElementById(`${id}-error-message`);
+
+            const indicator = document.getElementById(`${id}-status-indicator`);
+            const text = document.getElementById(`${id}-status-text`);
+            const label = document.getElementById(`${id}-player-label`);
+            const gauge = document.getElementById(`${id}-gauge-bar`);
+            const errorMsg = document.getElementById(`${id}-error-message`);
             
-            if (!statusIndicator) return;
-            errorMessage.style.display = 'none';
-            
-            if (data.online) {
-                statusIndicator.className = 'status-indicator online';
-                statusText.textContent = 'オンライン';
-                const online = data.players.online;
-                const max = data.players.max;
-                playerLabel.textContent = `プレイヤー数: ${online} / ${max}`;
-                const percentage = max > 0 ? (online / max) * 100 : 0;
-                if(gaugeBar) {
-                    gaugeBar.innerHTML = '';
-                    gaugeBar.style.width = `${percentage}%`;
-                }
+            if (!indicator) return;
+
+            errorMsg.style.display = 'none';
+
+            if (data && data.online) {
+                indicator.className = 'status-indicator online';
+                text.textContent = 'オンライン';
+                const { online, max } = data.players;
+                label.textContent = `プレイヤー数: ${online} / ${max}`;
+                gauge.innerHTML = '';
+                gauge.style.width = max > 0 ? `${(online / max) * 100}%` : '0%';
             } else {
-                statusIndicator.className = 'status-indicator offline';
-                statusText.textContent = data.error ? '取得失敗' : 'オフライン';
-                playerLabel.textContent = 'プレイヤー数: - / -';
-                 if(gaugeBar) {
-                    gaugeBar.innerHTML = '';
-                    gaugeBar.style.width = '0%';
-                }
-                if(data.error) {
-                    errorMessage.textContent = 'サーバー情報の取得に失敗しました。';
-                    errorMessage.style.display = 'block';
+                indicator.className = 'status-indicator offline';
+                text.textContent = data && data.error ? '取得失敗' : 'オフライン';
+                label.textContent = 'プレイヤー数: - / -';
+                gauge.innerHTML = '<div class="skeleton"></div>';
+                gauge.style.width = '100%';
+                if (data && data.error) {
+                    errorMsg.style.display = 'block';
+                    errorMsg.textContent = 'サーバー情報の取得に失敗しました。';
                 }
             }
         };
-        
-        const updateOverallStatus = (results) => {
-            const overallIndicator = document.getElementById('overall-status-indicator');
-            const overallStatusText = document.getElementById('overall-status-text');
-            const totalPlayerCountEl = document.getElementById('total-player-count');
-            const overallErrorMsg = document.getElementById('overall-error-message');
 
-            const getData = (id) => results.find(r => r && r.id === id) || { online: false, players: { online: 0 }};
+        const updateOtherPanel = (count) => {
+            const panel = document.getElementById('other-server-panel');
+            if (!panel) return;
+
+            const indicator = document.getElementById('other-status-indicator');
+            const text = document.getElementById('other-status-text');
+            const countEl = document.getElementById('other-player-count');
+
+            indicator.className = 'status-indicator online';
+            text.textContent = 'ロビー等';
+            countEl.innerHTML = '';
+            animateCountUp(countEl, count);
+        };
+
+        const loadAllStatuses = async () => {
+            const promises = SERVERS.map(server => fetchServerStatus(server).then(data => ({...data, id: server.id })));
+            const results = await Promise.all(promises);
+
+            const getData = id => results.find(r => r.id === id) || { online: false, players: { online: 0 }};
             
             const proxyData = getData('proxy');
             const suteraData = getData('sutera');
             const vanillaData = getData('vanilla');
 
-            const proxyOnline = proxyData.online ? (proxyData.players.online || 0) : 0;
-            const suteraOnline = suteraData.online ? (suteraData.players.online || 0) : 0;
-            const vanillaOnline = vanillaData.online ? (vanillaData.players.online || 0) : 0;
-            const otherOnline = Math.max(0, proxyOnline - suteraOnline - vanillaOnline);
-
-            overallIndicator.className = proxyData.online ? 'status-indicator online' : 'status-indicator offline';
-            overallStatusText.textContent = proxyData.online ? 'オンライン' : 'オフライン';
-
-            const updateCount = (id, count) => {
-                const el = document.getElementById(id);
-                if(el) {
-                    el.innerHTML = `<span id="${id}-anim">${count}</span>`;
-                    animateCountUp(document.getElementById(`${id}-anim`), count);
-                }
-            };
-
-            updateCount('total-player-count', proxyOnline);
-            updateCount('proxy-player-count-single', proxyOnline);
-            updateCount('sutera-player-count-single', suteraOnline);
-            updateCount('vanilla-player-count-single', vanillaOnline);
-            updateCount('other-player-count-single', otherOnline);
+            // 各パネルを更新
+            updateServerPanel('sutera', suteraData);
+            updateServerPanel('vanilla', vanillaData);
             
-            if (results.some(r => r.error)) {
-                overallErrorMsg.textContent = '一部サーバー情報の取得に失敗しました。';
-                overallErrorMsg.style.display = 'block';
-            } else {
-                overallErrorMsg.style.display = 'none';
+            // 総合パネルの更新
+            const totalPlayers = proxyData.online ? proxyData.players.online : 0;
+            const totalCountEl = document.getElementById('total-player-count');
+            if(totalCountEl) {
+                totalCountEl.innerHTML = '';
+                animateCountUp(totalCountEl, totalPlayers);
             }
+            const overallError = document.getElementById('overall-error-message');
+            if(proxyData.error) {
+                overallError.style.display = 'block';
+                overallError.textContent = '総合プレイヤー数の取得に失敗しました。';
+                totalCountEl.textContent = '-';
+            } else {
+                overallError.style.display = 'none';
+            }
+
+            // 「その他」の計算と更新
+            const suteraPlayers = suteraData.online ? suteraData.players.online : 0;
+            const vanillaPlayers = vanillaData.online ? vanillaData.players.online : 0;
+            const otherPlayers = Math.max(0, totalPlayers - suteraPlayers - vanillaPlayers);
+            updateOtherPanel(otherPlayers);
         };
 
-        const loadAllStatuses = async () => {
-            const promises = SERVERS.map(server => fetchServerStatus(server).then(data => ({ ...data, id: server.id })));
-            const results = await Promise.all(promises);
-            updateOverallStatus(results);
-        };
-
+        // マウス追従エフェクト
         document.querySelectorAll('.status-panel').forEach(panel => {
             panel.addEventListener('mousemove', (e) => {
                 const rect = panel.getBoundingClientRect();
@@ -183,23 +179,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 panel.style.setProperty('--mouse-y', `${e.clientY - rect.top}px`);
             });
         });
-        
-        const secretSequence = ['overall-status-panel', 'sutera-server-panel', 'vanilla-server-panel'];
-        let userSequence = [];
-        
-        document.querySelectorAll('.status-panel').forEach(panel => {
-            panel.addEventListener('click', () => {
-                userSequence.push(panel.id);
-                if (userSequence.length > secretSequence.length) {
-                    userSequence.shift();
-                }
-                if (userSequence.join(',') === secretSequence.join(',')) {
-                    window.location.href = 'https://www.stellamc.jp/server.html';
-                }
-            });
-        });
 
         loadAllStatuses();
-        setInterval(loadAllStatuses, 60000);
+        setInterval(loadAllStatuses, 60000); // 60秒ごとに更新
     }
 });
