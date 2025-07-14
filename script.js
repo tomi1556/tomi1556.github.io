@@ -6,33 +6,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const pageWrapper = document.querySelector('.page-wrapper');
 
     // ===== Preloader (オープニングアニメーション) =====
-    // 固まる問題を解決し、意図したアニメーションが実行されるように修正
     if (preloader && preloaderContainer && pageWrapper) {
-        // 初期状態としてスクロールを禁止
         body.classList.add('no-scroll');
 
         window.addEventListener('load', () => {
-            // 1. ロゴが表示された後、1秒待ってからアニメーションを開始
             setTimeout(() => {
                 preloaderContainer.classList.add('animated');
             }, 1000);
 
-            // 2. アニメーションが完了する頃 (2.8秒後) にプリローダーを消し始める
             setTimeout(() => {
                 body.classList.add('preloader-finished');
                 body.classList.remove('no-scroll');
-                
-                // 3. メインコンテンツを表示
                 pageWrapper.classList.add('visible');
-
-                // 4. プリローダーが消えるアニメーション(0.6s)が終わった頃にヒーローのタイピングを開始
                 setTimeout(initHeroTextAnimation, 600);
-                
-            }, 2800); // 1000ms(待機) + 1800ms(アニメーション時間) = 2800ms
+            }, 2800);
         });
 
     } else {
-        // プリローダーがない場合のフォールバック
         if(pageWrapper) pageWrapper.classList.add('visible');
         initHeroTextAnimation();
     }
@@ -74,37 +64,16 @@ document.addEventListener('DOMContentLoaded', () => {
         const titleElement = document.getElementById('typing-title');
         const subtitleElement = document.getElementById('typing-subtitle');
         
-        if (titleElement) titleElement.innerHTML = '';
         if (subtitleElement) subtitleElement.innerHTML = '';
         
         if (titleElement) {
-            typewriter(titleElement, "StellaMC", 120, () => {
-                // タイトル表示完了後にサブタイトルのループを開始
-                 if (subtitleElement) {
-                    loopingTypingEffect();
-                }
-            });
-        }
-    }
-
-    // 汎用タイピング関数
-    function typewriter(element, text, speed, callback) {
-        let charIndex = 0;
-        element.classList.add('typing-cursor');
-        element.classList.remove('blinking-cursor');
-
-        function type() {
-            if (charIndex < text.length) {
-                element.textContent += text.charAt(charIndex);
-                charIndex++;
-                setTimeout(type, speed + (Math.random() * 40 - 20));
-            } else {
-                element.classList.remove('typing-cursor');
-                element.classList.add('blinking-cursor'); //完了後に点滅開始
-                if (callback) callback();
+            // ★★★ タイトルのタイピングアニメーションを削除 ★★★
+            titleElement.textContent = "StellaMC";
+            // サブタイトルのアニメーションを即時開始
+            if (subtitleElement) {
+                loopingTypingEffect();
             }
         }
-        type();
     }
 
     // サブタイトルのループタイピング関数
@@ -132,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentText = texts[textIndex];
             
             if (isDeleting) {
-                // 削除処理
                 subtitleElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
                 if (charIndex === 0) {
@@ -143,7 +111,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     setTimeout(loop, deleteSpeed);
                 }
             } else {
-                // 入力処理
                 subtitleElement.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
                 if (charIndex === currentText.length) {
@@ -166,25 +133,35 @@ document.addEventListener('DOMContentLoaded', () => {
         currentYearEl.textContent = new Date().getFullYear().toString();
     }
 
-    // ===== Clipboard.js (コピー機能) =====
-    if (typeof ClipboardJS !== 'undefined') {
-        const clipboard = new ClipboardJS('.copy-action-btn');
-        const toast = document.getElementById('copy-toast');
-        if (toast) {
-            clipboard.on('success', (e) => {
-                toast.textContent = `${e.trigger.ariaLabel.replace('をコピー', '')} をコピーしました！`;
-                toast.className = 'copy-toast show';
-                setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
-                e.clearSelection();
-            });
+    // ===== Clipboard (コピー機能) =====
+    // ★★★ PCでも動作するようにネイティブAPIに書き換え ★★★
+    const copyBtns = document.querySelectorAll('.copy-action-btn');
+    const toast = document.getElementById('copy-toast');
 
-            clipboard.on('error', (e) => {
-                toast.textContent = 'コピーに失敗しました';
-                toast.className = 'copy-toast show error';
-                setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
+    if (copyBtns.length > 0 && toast) {
+        copyBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetSelector = btn.getAttribute('data-clipboard-target');
+                const inputEl = document.querySelector(targetSelector);
+
+                if (inputEl && navigator.clipboard) {
+                    navigator.clipboard.writeText(inputEl.value).then(() => {
+                        // 成功時
+                        toast.textContent = `${btn.getAttribute('aria-label').replace('をコピー', '')} をコピーしました！`;
+                        toast.className = 'copy-toast show';
+                        setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
+                    }).catch(err => {
+                        // 失敗時
+                        console.error("クリップボードへのコピーに失敗しました: ", err);
+                        toast.textContent = 'コピーに失敗しました';
+                        toast.className = 'copy-toast show error'; // エラー用のスタイルがあれば
+                        setTimeout(() => { toast.className = 'copy-toast'; }, 2000);
+                    });
+                }
             });
-        }
+        });
     }
+
 
     // ===== Scroll Animations (スクロール時のアニメーション) =====
     const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
