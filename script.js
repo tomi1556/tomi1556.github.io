@@ -1,21 +1,38 @@
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ===== Preloader (オープニングアニメーション) =====
     const body = document.body;
     const preloader = document.querySelector('.preloader');
+    const preloaderContainer = document.querySelector('.preloader-container');
     const pageWrapper = document.querySelector('.page-wrapper');
 
-    if (preloader) {
-        // ページが完全に読み込まれたらアニメーションを開始
+    // ===== Preloader (オープニングアニメーション) =====
+    // 固まる問題を解決し、意図したアニメーションが実行されるように修正
+    if (preloader && preloaderContainer && pageWrapper) {
+        // 初期状態としてスクロールを禁止
+        body.classList.add('no-scroll');
+
         window.addEventListener('load', () => {
+            // 1. ロゴが表示された後、1秒待ってからアニメーションを開始
             setTimeout(() => {
-                if(pageWrapper) pageWrapper.classList.add('visible');
-                preloader.classList.add('hidden');
-                initHeroTextAnimation();
-            }, 500); // 0.5秒待ってから表示
+                preloaderContainer.classList.add('animated');
+            }, 1000);
+
+            // 2. アニメーションが完了する頃 (2.8秒後) にプリローダーを消し始める
+            setTimeout(() => {
+                body.classList.add('preloader-finished');
+                body.classList.remove('no-scroll');
+                
+                // 3. メインコンテンツを表示
+                pageWrapper.classList.add('visible');
+
+                // 4. プリローダーが消えるアニメーション(0.6s)が終わった頃にヒーローのタイピングを開始
+                setTimeout(initHeroTextAnimation, 600);
+                
+            }, 2800); // 1000ms(待機) + 1800ms(アニメーション時間) = 2800ms
         });
+
     } else {
-        // プリローダーがない場合は直接表示
+        // プリローダーがない場合のフォールバック
         if(pageWrapper) pageWrapper.classList.add('visible');
         initHeroTextAnimation();
     }
@@ -61,8 +78,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (subtitleElement) subtitleElement.innerHTML = '';
         
         if (titleElement) {
-            typewriter(titleElement, "StellaMC", 150, () => {
-                loopingTypingEffect();
+            typewriter(titleElement, "StellaMC", 120, () => {
+                // タイトル表示完了後にサブタイトルのループを開始
+                 if (subtitleElement) {
+                    loopingTypingEffect();
+                }
             });
         }
     }
@@ -71,6 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function typewriter(element, text, speed, callback) {
         let charIndex = 0;
         element.classList.add('typing-cursor');
+        element.classList.remove('blinking-cursor');
 
         function type() {
             if (charIndex < text.length) {
@@ -94,59 +115,48 @@ document.addEventListener('DOMContentLoaded', () => {
         const texts = [
             "安心できるからこそ、本気で楽しめる。",
             "心安らぐ、あなたのもう一つの居場所。",
-            "民度最優先。",
-            "最高のMinecraftサーバー！"
+            "最高のコミュニティと冒険がここに。",
+            "Java版 & 統合版クロスプレイ対応！"
         ];
         
         let textIndex = 0;
         let charIndex = 0;
         let isDeleting = false;
-        const typeSpeed = 120;
-        const deleteSpeed = 60;
+        const typeSpeed = 100;
+        const deleteSpeed = 50;
         const pauseEnd = 2200;
 
         function loop() {
-            subtitleElement.classList.remove('typing-cursor');
-            subtitleElement.classList.add('blinking-cursor');
-            
-            setTimeout(() => {
-                subtitleElement.classList.remove('blinking-cursor');
-                subtitleElement.classList.add('typing-cursor');
-                typeDelete();
-            }, 500);
-        }
-
-        function typeDelete() {
+            subtitleElement.classList.add('typing-cursor');
+            subtitleElement.classList.remove('blinking-cursor');
             const currentText = texts[textIndex];
             
             if (isDeleting) {
-                // 削除
+                // 削除処理
                 subtitleElement.textContent = currentText.substring(0, charIndex - 1);
                 charIndex--;
                 if (charIndex === 0) {
                     isDeleting = false;
                     textIndex = (textIndex + 1) % texts.length;
-                    subtitleElement.classList.remove('typing-cursor');
-                    subtitleElement.classList.add('blinking-cursor');
                     setTimeout(loop, 500);
                 } else {
-                    setTimeout(typeDelete, deleteSpeed);
+                    setTimeout(loop, deleteSpeed);
                 }
             } else {
-                // 入力
+                // 入力処理
                 subtitleElement.textContent = currentText.substring(0, charIndex + 1);
                 charIndex++;
                 if (charIndex === currentText.length) {
                     isDeleting = true;
                     subtitleElement.classList.remove('typing-cursor');
                     subtitleElement.classList.add('blinking-cursor');
-                    setTimeout(typeDelete, pauseEnd);
+                    setTimeout(loop, pauseEnd);
                 } else {
-                    setTimeout(typeDelete, typeSpeed);
+                    setTimeout(loop, typeSpeed);
                 }
             }
         }
-        setTimeout(loop, 1000);
+        loop();
     }
 
 
