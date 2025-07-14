@@ -14,7 +14,15 @@
 <body>
 
     <div class="preloader">
-        <img src="logo.png" alt="StellaMC Loading..." class="preloader-logo">
+        <div class="preloader-container">
+            <div class="preloader-logo">
+                <img src="logo.png" alt="StellaMC Loading...">
+            </div>
+            <div class="preloader-text-wrapper">
+                <div class="preloader-title">StellaMC</div>
+                <div class="preloader-subtitle">安心できるからこそ、本気で楽しめる。</div>
+            </div>
+        </div>
     </div>
     
     <div id="site-background">
@@ -52,13 +60,15 @@
                 <div class="hero-overlay"></div>
                 <div class="hero-content-wrapper container">
                     <div class="hero-text-content">
-                        <h1 class="animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="0.2s">StellaMC</h1>
-                        <p class="subtitle animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="0.4s">心安らぐ、あなたのもう一つの居場所。<br>安心できるからこそ、本気で楽しめる。</p>
+                        <h1 id="typing-title"></h1>
+                        <div class="subtitle-wrapper">
+                            <p id="typing-subtitle" class="subtitle"></p>
+                        </div>
                         <div class="hero-buttons">
-                            <a href="#join" class="btn btn-primary-shiny animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="0.6s">
+                            <a href="#join" class="btn btn-primary-shiny">
                                 <i class="fa-solid fa-compass btn-icon-left"></i>今すぐ冒険へ
                             </a>
-                            <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-discord-solid animate-on-load" data-animation="fadeInUpCustom" data-animation-delay="0.75s">
+                            <a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="btn btn-discord-solid">
                                 <i class="fab fa-discord btn-icon-left"></i>Discord
                             </a>
                         </div>
