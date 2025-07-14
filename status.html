@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サーバー稼働状況 - StellaMC</title>
-    <link rel="stylesheet" href="stella.css"> <link rel="stylesheet" href="status.css"> <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="status.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
 </head>
 <body>
-    <div class="page-background-gradient"></div>
     <header>
         <div class="container">
             <a href="index.html" class="logo-link" aria-label="StellaMC ホームへ">
@@ -22,7 +22,7 @@
                     <li><a href="index.html" class="nav-link">ホーム</a></li>
                     <li><a href="rules.html" class="nav-link">ルール</a></li>
                     <li><a href="support.html" class="nav-link">支援</a></li>
-                    <li><a href="status.html" class="active nav-link">サーバー状況</a></li>
+                    <li><a href="status.html" class="nav-link active">サーバー状況</a></li>
                     <li><a href="http://stellamc.jp:6903/" target="_blank" rel="noopener noreferrer" class="nav-link">WebMap</a></li>
                     <li><a href="https://discord.gg/jurMJk7gqa" target="_blank" rel="noopener noreferrer" class="nav-link nav-discord-link"><i class="fab fa-discord"></i> Discord</a></li>
                 </ul>
@@ -35,88 +35,79 @@
         </div>
     </header>
 
-    <main class="page-content-container">
+    <main class="status-page-wrapper">
         <div class="container">
-            <div class="page-header animate-on-load" data-animation="fadeInUpCustom">
-                <h1 class="page-main-title"><i class="fas fa-broadcast-tower icon-header"></i>サーバー稼働状況</h1>
-                <p class="page-intro">
-                    StellaMCの現在のサーバー状況やオンラインプレイヤーをリアルタイムで確認できます。<br>
-                    データは数分ごとに更新される場合があります。
-                </p>
+            <div class="page-header animate-on-load" data-animation="fadeInUp">
+                <h1><i class="fas fa-satellite-dish"></i>Mission Control</h1>
+                <p>StellaMCネットワークの稼働状況をリアルタイムで監視します。</p>
             </div>
 
-            <section id="overall-status" class="status-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.1s">
-                <h2 class="section-heading-styled"><i class="fas fa-network-wired"></i>総合ステータス</h2>
-                <div class="overall-status-card">
-                    <div class="status-indicator-wrapper">
+            <div class="status-dashboard">
+                <div id="overall-status-panel" class="status-panel overall-status-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.1s">
+                    <div class="panel-header">
+                        <span class="panel-icon" style="color: var(--accent-color);"><i class="fas fa-globe"></i></span>
+                        <h2 class="panel-title">総合ネットワーク状況</h2>
                         <div class="status-indicator loading" id="overall-status-indicator">
-                            <span>確認中...</span> <div class="pulse-dot loading"></div>
+                            <div class="pulse-dot"></div><span id="overall-status-text">確認中</span>
                         </div>
                     </div>
-                    <div class="total-players">
-                        <div class="total-players-icon"><i class="fas fa-users"></i></div>
-                        <div class="total-players-text">
-                            現在の総プレイヤー数:
-                            <span class="player-count animated-number" id="total-player-count" data-target="0" data-current-value="0">0</span>
+                    <div class="panel-body">
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="label">総オンラインプレイヤー</div>
+                                <div class="value" id="total-player-count"><div class="skeleton"></div></div>
+                            </div>
+                            <div class="info-item">
+                                <div class="label">すてら鯖</div>
+                                <div class="value small" id="sutera-player-count-single"><div class="skeleton"></div></div>
+                            </div>
+                            <div class="info-item">
+                                <div class="label">バニラ鯖</div>
+                                <div class="value small" id="vanilla-player-count-single"><div class="skeleton"></div></div>
+                            </div>
                         </div>
+                        <div id="overall-error-message" class="error-message" style="display: none;"></div>
                     </div>
-                     <div id="overall-error-message" class="error-message" style="display:none; margin-top:15px;">総合情報の取得に失敗しました。</div>
                 </div>
-            </section>
 
-            <div class="server-cards-wrapper">
-                <section id="sutera-server-status" class="status-section individual-server-section animate-on-scroll" data-animation="fadeInLeftCustom" data-animation-delay="0.2s">
-                    <div class="server-card-content-wrapper">
-                        <div class="accent-line" style="color: var(--primary-color);"></div>
-                        <div class="server-icon-container">
-                            <div class="server-icon-placeholder" id="sutera-icon-placeholder" style="display:flex;"><i class="fas fa-spinner fa-spin"></i></div>
-                            <img src="" alt="すてら鯖 アイコン" class="server-icon" id="sutera-server-icon" style="display:none;">
-                        </div>
-                        <h3 class="server-name-title">
-                            <span>すてら鯖</span>
-                        </h3>
-                        <div class="status-card">
-                            <div class="status-card-header">
-                                <div class="status-indicator loading small" id="sutera-status-indicator"><span>確認中</span><div class="pulse-dot loading"></div></div>
-                            </div>
-                            <div class="server-status-details-wrapper">
-                                <div class="server-player-info" id="sutera-player-info-content" style="display: block;">
-                                    <p>プレイヤー数: <span class="player-count animated-number" id="sutera-player-count" data-target="0" data-current-value="0">0</span> / <span id="sutera-max-players">-</span></p>
-                                </div>
-                                <p class="error-message" id="sutera-error-message" style="display:none;">情報取得エラー</p>
-                            </div>
+                <div id="sutera-server-panel" class="status-panel individual-server-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.2s">
+                    <div class="panel-header">
+                        <span class="panel-icon" style="color: var(--primary-color);"><i class="fas fa-star"></i></span>
+                        <h2 class="panel-title">すてら鯖</h2>
+                        <div class="status-indicator loading" id="sutera-status-indicator">
+                            <div class="pulse-dot"></div><span id="sutera-status-text">確認中</span>
                         </div>
                     </div>
-                </section>
-
-                <section id="vanilla-server-status" class="status-section individual-server-section animate-on-scroll" data-animation="fadeInRightCustom" data-animation-delay="0.3s">
-                     <div class="server-card-content-wrapper">
-                        <div class="accent-line" style="color: var(--secondary-color);"></div>
-                        <div class="server-icon-container">
-                            <div class="server-icon-placeholder" id="vanilla-icon-placeholder" style="display:flex;"></div>
-                            <img src="" alt="バニラ鯖 アイコン" class="server-icon" id="vanilla-server-icon" style="display:none;">
+                    <div class="panel-body">
+                        <div class="player-gauge stella">
+                            <div class="label" id="sutera-player-label">プレイヤー数: - / -</div>
+                            <div class="gauge-bar-bg">
+                                <div class="gauge-bar-fill" id="sutera-gauge-bar"><div class="skeleton"></div></div>
+                            </div>
                         </div>
-                        <h3 class="server-name-title">
-                            <span>バニラ鯖</span>
-                        </h3>
-                        <div class="status-card">
-                            <div class="status-card-header">
-                                <div class="status-indicator loading small" id="vanilla-status-indicator"><span>確認中</span><div class="pulse-dot loading"></div></div>
-                            </div>
-                            <div class="server-status-details-wrapper">
-                                <div class="server-player-info" id="vanilla-player-info-content" style="display: block;">
-                                     <p>プレイヤー数: <span class="player-count animated-number" id="vanilla-player-count" data-target="0" data-current-value="0">0</span> / <span id="vanilla-max-players">-</span></p>
-                                </div>
-                                <p class="error-message" id="vanilla-error-message" style="display:none;">情報取得エラー</p>
-                            </div>
+                         <div id="sutera-error-message" class="error-message" style="display: none;"></div>
+                    </div>
+                </div>
+
+                <div id="vanilla-server-panel" class="status-panel individual-server-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.3s">
+                    <div class="panel-header">
+                        <span class="panel-icon" style="color: var(--secondary-color);"><i class="fas fa-seedling"></i></span>
+                        <h2 class="panel-title">バニラ鯖</h2>
+                         <div class="status-indicator loading" id="vanilla-status-indicator">
+                            <div class="pulse-dot"></div><span id="vanilla-status-text">確認中</span>
                         </div>
                     </div>
-                </section>
+                    <div class="panel-body">
+                        <div class="player-gauge vanilla">
+                            <div class="label" id="vanilla-player-label">プレイヤー数: - / -</div>
+                            <div class="gauge-bar-bg">
+                                <div class="gauge-bar-fill" id="vanilla-gauge-bar"><div class="skeleton"></div></div>
+                            </div>
+                        </div>
+                        <div id="vanilla-error-message" class="error-message" style="display: none;"></div>
+                    </div>
+                </div>
             </div>
-             <p class="page-closing animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.4s" style="margin-top: 40px;">
-                サーバーの稼働状況は数分おきに更新される場合があります。<br>
-                もし接続できない場合は、Discordサーバーでお知らせを確認するか、運営までお問い合わせください。
-            </p>
         </div>
     </main>
 
@@ -127,293 +118,6 @@
         </div>
     </footer>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- 共通ヘッダー・アニメーション処理 (変更なし) ---
-            const hamburger = document.querySelector('.hamburger-menu');
-            const nav = document.querySelector('.main-nav');
-            if (hamburger && nav) {
-                const navLinks = nav.querySelectorAll('a.nav-link');
-                hamburger.addEventListener('click', () => {
-                    const isActive = hamburger.classList.toggle('active');
-                    nav.classList.toggle('active');
-                    hamburger.setAttribute('aria-expanded', isActive);
-                    document.body.classList.toggle('no-scroll', isActive);
-                });
-                navLinks.forEach(link => {
-                    link.addEventListener('click', () => {
-                        if (nav.classList.contains('active')) {
-                            hamburger.classList.remove('active');
-                            nav.classList.remove('active');
-                            hamburger.setAttribute('aria-expanded', 'false');
-                            document.body.classList.remove('no-scroll');
-                        }
-                    });
-                });
-            }
-            const header = document.querySelector('header');
-            if (header) {
-                 window.addEventListener('scroll', () => {
-                    if (window.scrollY > 20) {
-                        header.classList.add('scrolled');
-                    } else {
-                        header.classList.remove('scrolled');
-                    }
-                });
-            }
-            const currentYearEl = document.getElementById('current-year');
-            if (currentYearEl) currentYearEl.textContent = new Date().getFullYear();
-
-            const animatedElements = document.querySelectorAll('.animate-on-scroll, .animate-on-load');
-            if (animatedElements.length > 0 && typeof IntersectionObserver !== 'undefined') {
-                 const observer = new IntersectionObserver((entries, observerInstance) => {
-                    entries.forEach(entry => {
-                        if (entry.isIntersecting) {
-                            const animationType = entry.target.dataset.animation || 'fadeInUpCustom';
-                            const animationDelay = entry.target.dataset.animationDelay || '0s';
-                            entry.target.style.animationDelay = animationDelay;
-                            entry.target.classList.add(animationType, 'is-visible');
-                            observerInstance.unobserve(entry.target);
-                        }
-                    });
-                }, { threshold: 0.1, rootMargin: "0px 0px -15px 0px" });
-
-                animatedElements.forEach(el => {
-                    const rect = el.getBoundingClientRect();
-                    const isInitiallyVisible = el.classList.contains('animate-on-load') || (rect.top < window.innerHeight && rect.bottom >= 0);
-                    if (isInitiallyVisible) {
-                        const animationType = el.dataset.animation || 'fadeInUpCustom';
-                        const animationDelay = el.dataset.animationDelay || '0s';
-                        el.style.animationDelay = animationDelay;
-                        setTimeout(() => el.classList.add(animationType, 'is-visible'), parseFloat(animationDelay.replace('s','')) * 1000 + 20);
-                    } else {
-                        observer.observe(el);
-                    }
-                });
-            }
-
-            // --- ステータスページ専用JavaScript (デバッグログ強化) ---
-            const API_BASE_URL = 'https://api.mcsrvstat.us/3/';
-            const SERVERS = [
-                { id: 'sutera', address: 'stellamc.jp:6908', name: 'すてら鯖' },
-                { id: 'vanilla', address: 'stellamc.jp:6910', name: 'バニラ鯖' } // 修正: ポート番号など確認してください
-            ];
-            let serversData = {};
-
-            async function fetchServerStatus(serverConfig) {
-                const { id: serverIdPrefix, address } = serverConfig;
-                // ★追加: 関数開始と設定内容のログ
-                console.log(`[${serverIdPrefix}] Starting fetchServerStatus. Address: ${address}, Config:`, serverConfig);
-
-                const elements = {
-                    indicator: document.getElementById(`${serverIdPrefix}-status-indicator`),
-                    playerCount: document.getElementById(`${serverIdPrefix}-player-count`),
-                    maxPlayers: document.getElementById(`${serverIdPrefix}-max-players`),
-                    serverIcon: document.getElementById(`${serverIdPrefix}-server-icon`),
-                    iconPlaceholder: document.getElementById(`${serverIdPrefix}-icon-placeholder`),
-                    errorMessage: document.getElementById(`${serverIdPrefix}-error-message`),
-                    playerInfoContent: document.getElementById(`${serverIdPrefix}-player-info-content`)
-                };
-
-                let критическиеЭлементыОтсутствуют = false;
-                if (!elements.indicator || !elements.playerCount || !elements.maxPlayers) {
-                    console.error(`[${serverIdPrefix}] Critical HTML elements missing for server card.`);
-                    критическиеЭлементыОтсутствуют = true;
-                }
-                // serverIcon, iconPlaceholder, errorMessage, playerInfoContent はあれば使うが、なくても致命的ではないと判断する場合
-                // もしこれらも必須なら、上のif文に含める
-
-                if (критическиеЭлементыОтсутствуют) {
-                     if (elements.indicator) { // インジケータだけでもエラー表示試行
-                        elements.indicator.className = 'status-indicator offline small';
-                        if(elements.indicator.querySelector('span')) elements.indicator.querySelector('span').textContent = 'ページエラー';
-                        if(elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').className = 'pulse-dot';
-                     }
-                     serversData[serverIdPrefix] = { online: false, players: { online: 0 }, error: true, errorMessage: "HTML要素不足" };
-                     updateOverallStatus();
-                     return; // ここで処理を終了
-                }
-                
-                // 初期表示リセット
-                elements.indicator.className = 'status-indicator loading small';
-                if(elements.indicator.querySelector('span')) elements.indicator.querySelector('span').textContent = '確認中';
-                if(elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').className = 'pulse-dot loading';
-                if(elements.errorMessage) elements.errorMessage.style.display = 'none';
-                if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'block'; // 初期はプレイヤー情報表示
-                if(elements.serverIcon) elements.serverIcon.style.display = 'none';
-                if(elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'flex';
-
-
-                try {
-                    // ★追加: fetch直前のログ
-                    console.log(`[${serverIdPrefix}] Attempting to fetch: ${API_BASE_URL}${address}`);
-                    const response = await fetch(`${API_BASE_URL}${address}`);
-                    // ★追加: fetch直後のレスポンスステータスログ
-                    console.log(`[${serverIdPrefix}] Response status for ${address}: ${response.status}, ok: ${response.ok}`);
-
-                    if (!response.ok) {
-                        // ★追加: エラーレスポンス時の内容ログ
-                        let errorText = "Could not read error response body";
-                        try {
-                           errorText = await response.text();
-                        } catch(e) {
-                           console.warn(`[${serverIdPrefix}] Failed to read error response body: `, e);
-                        }
-                        console.error(`[${serverIdPrefix}] Network error response for ${address}: ${response.status} ${response.statusText}. Body: ${errorText.substring(0, 200)}`);
-                        throw new Error(`Network error: ${response.status} ${response.statusText}`);
-                    }
-                    const data = await response.json();
-                    // ★追加: 受け取ったデータ全体のログ
-                    console.log(`[${serverIdPrefix}] Data received for ${address}:`, JSON.stringify(data, null, 2));
-                    serversData[serverIdPrefix] = data;
-
-                    elements.indicator.classList.remove('loading');
-                    if(elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
-
-                    if (elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'none';
-                    if (elements.serverIcon) {
-                        const iconUrl = data.icon ? data.icon : `https://eu.mc-api.net/v3/server/favicon/${address.split(':')[0]}`;
-                        // ★追加: アイコンURL設定時のログ
-                        console.log(`[${serverIdPrefix}] Setting icon URL to: ${iconUrl}`);
-                        elements.serverIcon.src = iconUrl;
-                        elements.serverIcon.style.display = 'block';
-                        elements.serverIcon.onerror = function() {
-                            console.warn(`[${serverIdPrefix}] Failed to load icon: ${this.src}`);
-                            this.style.display = 'none';
-                            if (elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'flex';
-                        };
-                        elements.serverIcon.classList.add('loaded');
-                    }
-
-
-                    if (data.online) {
-                        elements.indicator.classList.add('online');
-                        elements.indicator.classList.remove('offline');
-                        if(elements.indicator.querySelector('span')) elements.indicator.querySelector('span').textContent = 'オンライン';
-
-                        const currentPlayers = (data.players && typeof data.players.online === 'number') ? data.players.online : 0;
-                        const maxP = (data.players && typeof data.players.max === 'number') ? data.players.max : '-';
-                        animatePlayerCount(elements.playerCount, currentPlayers);
-                        elements.maxPlayers.textContent = maxP;
-                        if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'block';
-                        if(elements.errorMessage) elements.errorMessage.style.display = 'none';
-                    } else {
-                        elements.indicator.classList.add('offline');
-                        elements.indicator.classList.remove('online');
-                        if(elements.indicator.querySelector('span')) elements.indicator.querySelector('span').textContent = 'オフライン';
-                        animatePlayerCount(elements.playerCount, 0);
-                        elements.maxPlayers.textContent = '-';
-                        if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'block';
-                        if(elements.errorMessage) elements.errorMessage.style.display = 'none';
-                    }
-                } catch (error) {
-                    // ★変更: エラーオブジェクト全体もログに出力
-                    console.error(`[${serverIdPrefix}] Error in fetchServerStatus for ${address}:`, error.message, error.stack, error);
-
-                    elements.indicator.classList.remove('loading');
-                    if (elements.indicator.querySelector('.pulse-dot')) elements.indicator.querySelector('.pulse-dot').classList.remove('loading');
-                    elements.indicator.classList.add('offline');
-                    elements.indicator.classList.remove('online');
-                    if(elements.indicator.querySelector('span')) elements.indicator.querySelector('span').textContent = '取得失敗';
-
-                    if(elements.iconPlaceholder) elements.iconPlaceholder.style.display = 'flex';
-                    if(elements.serverIcon) elements.serverIcon.style.display = 'none';
-
-                    if(elements.errorMessage) {
-                        elements.errorMessage.textContent = `情報取得エラー`;
-                        elements.errorMessage.style.display = 'block';
-                    }
-                    if(elements.playerInfoContent) elements.playerInfoContent.style.display = 'none';
-                    serversData[serverIdPrefix] = { online: false, players: { online: 0 }, error: true, errorMessage: error.message };
-                } finally {
-                    updateOverallStatus();
-                }
-            }
-
-            function animatePlayerCount(element, targetValue) {
-                if (!element) return;
-                const duration = 1000;
-                const startTime = performance.now();
-                const startValue = parseInt(element.dataset.currentValue) || 0;
-                element.dataset.currentValue = targetValue;
-
-                function update(currentTime) {
-                    const elapsedTime = currentTime - startTime;
-                    if (elapsedTime < duration) {
-                        const progress = Math.min(elapsedTime / duration, 1);
-                        const easeOutQuint = 1 - Math.pow(1 - progress, 4);
-                        const currentValue = Math.round(startValue + (targetValue - startValue) * easeOutQuint);
-                        element.textContent = currentValue;
-                        requestAnimationFrame(update);
-                    } else {
-                        element.textContent = targetValue;
-                    }
-                }
-                requestAnimationFrame(update);
-            }
-
-            function updateOverallStatus() {
-                let currentTotalOnline = 0;
-                let anyOnline = false;
-                // let allFetchedAndNoError = SERVERS.every(server => serversData[server.id] && !serversData[server.id].error); // 未使用のためコメントアウトも可
-                let anyError = SERVERS.some(server => serversData[server.id] && serversData[server.id].error);
-
-                SERVERS.forEach(server => {
-                    if (serversData[server.id] && serversData[server.id].online && serversData[server.id].players) {
-                        currentTotalOnline += (typeof serversData[server.id].players.online === 'number' ? serversData[server.id].players.online : 0);
-                        anyOnline = true;
-                    }
-                });
-
-                const totalPlayerCountEl = document.getElementById('total-player-count');
-                if (totalPlayerCountEl) {
-                    animatePlayerCount(totalPlayerCountEl, currentTotalOnline);
-                }
-
-                const overallIndicator = document.getElementById('overall-status-indicator');
-                const overallErrorMsg = document.getElementById('overall-error-message');
-
-                if (overallIndicator) {
-                    overallIndicator.classList.remove('loading', 'online', 'offline');
-                    const pulseDot = overallIndicator.querySelector('.pulse-dot');
-                    if(pulseDot) pulseDot.classList.remove('loading');
-                    if(overallErrorMsg) overallErrorMsg.style.display = 'none';
-
-                    if (Object.keys(serversData).length < SERVERS.length && !anyError) {
-                        overallIndicator.classList.add('loading');
-                        if(overallIndicator.querySelector('span')) overallIndicator.querySelector('span').textContent = '確認中...';
-                        if(pulseDot) pulseDot.classList.add('loading');
-                    } else if (anyOnline) {
-                        overallIndicator.classList.add('online');
-                        if(overallIndicator.querySelector('span')) overallIndicator.querySelector('span').textContent = 'オンライン';
-                        // エラーがあってもオンラインサーバーがあれば、総合はオンラインと表示し、エラーメッセージは別途表示
-                         if(overallErrorMsg && anyError) {
-                             overallErrorMsg.textContent = '一部サーバー情報の取得に失敗しましたが、オンラインのサーバーがあります。';
-                             overallErrorMsg.style.display = 'block';
-                        }
-                    } else { // オンラインサーバーなし
-                        overallIndicator.classList.add('offline');
-                        if(overallIndicator.querySelector('span')) overallIndicator.querySelector('span').textContent = anyError ? '一部取得失敗' : 'オフライン';
-                        if(overallErrorMsg && anyError) { // オンラインサーバーがなく、かつエラーがある場合
-                            overallErrorMsg.textContent = 'サーバー情報の取得に失敗しました。';
-                            overallErrorMsg.style.display = 'block';
-                        }
-                    }
-                }
-            }
-
-            function loadAllServerStatus() {
-                console.log("Loading all server statuses...");
-                SERVERS.forEach(serverConfig => {
-                    fetchServerStatus(serverConfig);
-                });
-            }
-
-            // 初回ロード
-            loadAllServerStatus();
-            // 定期更新
-            setInterval(loadAllServerStatus, 60000);
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
