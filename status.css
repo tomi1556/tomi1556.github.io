@@ -1,4 +1,4 @@
-/* status.css - Mission Control Redesign */
+/* status.css - Final Mission Control Design */
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
@@ -68,24 +68,21 @@ header .container { display: flex; justify-content: space-between; align-items: 
     padding: 120px 0 90px;
     min-height: 100vh;
     position: relative;
-    background-image: radial-gradient(circle at 15% 20%, rgba(var(--rgb-primary), 0.15), transparent 40%),
-                      radial-gradient(circle at 85% 70%, rgba(var(--rgb-secondary), 0.15), transparent 40%);
+    overflow: hidden; /* 背景アニメーションのため */
 }
+/* ★★★ 星空アニメーション背景 ★★★ */
+.stars { position: absolute; top: 0; left: 0; right: 0; bottom: 0; width: 100%; height: 100%; display: block; }
+.stars { background: transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAABlBMVEUAAAAAAAClZ7nPAAAACXBIWXMAAAsTAAALEwEAmpwYAAABaUlEQVQ4y6VT226DMBCs2eM3S1bJkI3SAon3P/wR78bVFG2S1TYJ2a4f/Yqn2k43TyhQOsNFT3qonYkSBC3a2cQ8bY7VToA3k1wYJ2R9K2OknC5C8cI2oY5r2t5HGFb6jWWB/FDGbrpL8DwD04wBIMl64jS5wA4VCr2gIQ/w1rQjILagRuA8sNQroZgKufPZYdA/4b4DkAiBso9bIUDgH8H8BwC4Bmr9XgD8D8B60NgnW4nAN4c8NEAI4dGDbwzYbypU8U0vU8wB8B2Avz7I4aSVp1k5jsFuA8A8B478DsB0eote4bJBDY2sT7A8QO2BkwW8B4Ac2orsT8G8AAB8AEAF2BqwHkDuBwBc3c2bW0/gHn0CVkPAVA6uQlwFwD3PBiAHeB0/gPAQwG+A8T6v6t3A8A3gL4B4LkK0Q8A3gB4/x/A/wG4AEAZx9UC2AXAswB8B+AnwI8LILwB4CsA3wL4C4C3+AD+AnxXgP8G/gGgvAL8BvgL8FMC/i/gPwB/Bfj+f4B/A2zPgP8D7I8A/wfsjwD/B2x/M/4PbH8z/g9sfzP+D3D/M/4PcB/4B/gB+Anw0wL+W4D/BuA/AD8B/gPAfwD+A/D9f4D/A/D8/wD/BwD/A+D5/wD/BwD/A+D5/wD/B/D9/wC+B/D8/wC+B/D8/wC+B/D1/wC+B/DX/wC+B/DX/wC+B/D3/wC+B/D3/wC+B/D7/wC+B/D7/wC+B/D7/wD/B/D//wD/B/D//wD/B/j//wD/B/j//wD/B2B/AAAArGMAAAClsSoAAAAldEVYdGRhdGU6Y3JlYXRlADIwMTktMTItMTRUMTk6MDA6MDkrMDA6MDB8tG3TAAAAJXRFWHRkYXRlOm1vZGlmeQAyMDE5LTEyLTE0VDE5OjAwOjA5KzAwOjAwG8gEXAAAAABJRU5ErkJggg==) repeat top center; z-index: -1; animation: move-background 150s linear infinite; }
+@keyframes move-background { from { background-position-y: 0; } to { background-position-y: -1000px; } }
+
 .page-header { text-align: center; margin-bottom: 60px; }
 .page-header h1 { font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 800; color: #FFF; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 15px; }
 .page-header h1 i { color: var(--primary-color); }
 .page-header p { font-size: clamp(1rem, 2.5vw, 1.1rem); color: var(--text-muted); max-width: 650px; margin: 0 auto; }
 
 /* --- ステータスダッシュボード --- */
-.status-dashboard {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 30px;
-}
-@media (min-width: 992px) {
-    .status-dashboard { grid-template-columns: repeat(2, 1fr); }
-    .overall-status-panel { grid-column: 1 / -1; }
-}
+.status-dashboard { display: grid; grid-template-columns: 1fr; gap: 30px; }
+@media (min-width: 992px) { .status-dashboard { grid-template-columns: repeat(2, 1fr); } .overall-status-panel { grid-column: 1 / -1; } }
 
 /* --- ステータスパネル共通 --- */
 .status-panel {
@@ -98,18 +95,20 @@ header .container { display: flex; justify-content: space-between; align-items: 
     transition: transform var(--transition-fast) ease-out, box-shadow var(--transition-fast) ease-out;
     position: relative;
     overflow: hidden;
+    cursor: pointer;
 }
 .status-panel:hover {
     transform: translateY(-8px);
     box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
+.status-panel:active {
+    transform: translateY(-2px) scale(0.98); /* ★★★ クリックエフェクト ★★★ */
+    transition-duration: 0.1s;
+}
 .status-panel::before {
     content: '';
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 0; left: 0; width: 100%; height: 100%;
     background: radial-gradient(circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.08), transparent 30%);
     opacity: 0;
     transition: opacity 0.4s ease;
@@ -117,14 +116,7 @@ header .container { display: flex; justify-content: space-between; align-items: 
 }
 .status-panel:hover::before { opacity: 1; }
 
-.panel-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    padding-bottom: 20px;
-    margin-bottom: 20px;
-    border-bottom: 1px solid var(--panel-border);
-}
+.panel-header { display: flex; align-items: center; gap: 15px; padding-bottom: 20px; margin-bottom: 20px; border-bottom: 1px solid var(--panel-border); }
 .panel-icon { font-size: 2rem; width: 40px; text-align: center; }
 .panel-title { font-size: 1.5rem; font-weight: 600; color: var(--text-color); margin: 0; }
 .status-indicator { margin-left: auto; font-size: 0.9rem; font-weight: 600; padding: 6px 14px; border-radius: 30px; transition: all var(--transition-fast); }
@@ -141,7 +133,7 @@ header .container { display: flex; justify-content: space-between; align-items: 
 .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; }
 .info-item { text-align: center; }
 .info-item .label { font-size: 0.9rem; color: var(--text-muted); margin-bottom: 8px; }
-.info-item .value { font-size: 1.75rem; font-weight: 700; color: #FFF; line-height: 1.2; min-height: 33px; }
+.info-item .value { font-size: 1.75rem; font-weight: 700; color: #FFF; line-height: 1.2; min-height: 33px; display: flex; align-items: center; justify-content: center; }
 .info-item .value.small { font-size: 1.25rem; min-height: 24px; }
 .info-item .skeleton { background-color: rgba(255,255,255,0.08); border-radius: 6px; height: 100%; width: 60%; margin: 0 auto; animation: pulseBG 1.5s infinite ease-in-out; }
 
