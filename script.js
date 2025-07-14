@@ -3,22 +3,22 @@ document.addEventListener('DOMContentLoaded', () => {
     // ===== Preloader (オープニングアニメーション) =====
     const body = document.body;
     const preloader = document.querySelector('.preloader');
+    
+    // ちらつき防止のため、JSが読み込まれたらページ本体を非表示にする
+    body.classList.add('is-loading');
 
     if (preloader) {
         // ページが完全に読み込まれたらアニメーションを開始
         window.addEventListener('load', () => {
             setTimeout(() => {
-                body.classList.add('preloader-finished');
-            }, 1500); 
-            
-            setTimeout(() => {
+                body.classList.remove('is-loading');
                 preloader.classList.add('hidden');
                 initHeroTextAnimation();
-            }, 2100);
+            }, 500); // 0.5秒待ってから表示
         });
     } else {
-        // プリローダーがない場合は直接ヒーローアニメーションを開始
-        body.classList.add('preloader-finished');
+        // プリローダーがない場合は直接表示
+        body.classList.remove('is-loading');
         initHeroTextAnimation();
     }
 
@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 setTimeout(type, speed + (Math.random() * 40 - 20));
             } else {
                 element.classList.remove('typing-cursor');
+                element.classList.add('blinking-cursor'); //完了後に点滅開始
                 if (callback) callback();
             }
         }
@@ -107,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const pauseEnd = 2200;
 
         function loop() {
+            subtitleElement.classList.remove('typing-cursor');
             subtitleElement.classList.add('blinking-cursor');
             
             setTimeout(() => {
