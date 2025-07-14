@@ -1,4 +1,4 @@
-/* status.css - Final Polished Design */
+/* status.css - Final Stable Design */
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
@@ -113,9 +113,11 @@ header .container { display: flex; justify-content: space-between; align-items: 
     position: relative;
     overflow: hidden;
 }
+.individual-server-panel { cursor: pointer; }
 .status-panel:hover {
     transform: translateY(-8px);
     background-color: rgba(43, 49, 59, 0.6);
+    box-shadow: 0 0 40px -10px var(--glow-color, rgba(255,255,255,0.1));
 }
 .panel-accent-border {
     position: absolute;
@@ -129,13 +131,16 @@ header .container { display: flex; justify-content: space-between; align-items: 
     height: 5px;
     box-shadow: 0 0 25px -2px var(--status-color, transparent);
 }
+.sutera-panel { --glow-color: rgba(var(--rgb-primary), 0.3); }
+.vanilla-panel { --glow-color: rgba(var(--rgb-secondary), 0.3); }
+.other-panel { --glow-color: rgba(255, 255, 255, 0.1); }
 
 /* --- 総合ステータスパネル --- */
-.overall-status-panel { text-align: center; }
+.overall-status-panel .panel-body { text-align: center; }
 .overall-status-panel .label { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 10px; }
 .overall-status-panel .label i { margin-right: 8px; }
-.overall-status-panel .value { font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; color: #FFF; line-height: 1; min-height: 60px; display: flex; align-items: center; justify-content: center; }
-.overall-status-panel .skeleton { background-color: rgba(255,255,255,0.08); border-radius: 12px; height: 60px; width: 40%; margin: 0 auto; animation: pulseBG 1.5s infinite ease-in-out; }
+.overall-status-panel .value { font-size: clamp(3rem, 10vw, 5rem); font-weight: 800; color: #FFF; line-height: 1; min-height: 80px; display: flex; align-items: center; justify-content: center; }
+.overall-status-panel .skeleton { background-color: rgba(255,255,255,0.08); border-radius: 12px; height: 80px; width: 40%; margin: 0 auto; animation: pulseBG 1.5s infinite ease-in-out; }
 
 /* --- 個別サーバーパネル --- */
 .panel-header { display: flex; align-items: center; gap: 15px; }
@@ -165,7 +170,7 @@ footer { background-color: #12141a; border-top: 1px solid var(--panel-border); p
 footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
 
 /* --- レスポンシブ対応 --- */
-@media (max-width: 992px) {
+@media (max-width: 1050px) { /* ★★★ ブレークポイントを広げてnavのズレを防止 ★★★ */
     .main-nav { position: fixed; top: 0; left: -100%; width: 100%; max-width: 280px; height: 100vh; background-color: var(--dark-bg); padding-top: 70px; box-shadow: 6px 0 22px rgba(0,0,0,0.3); transition: all var(--transition-normal); z-index: 1001; }
     .main-nav.active { left: 0; }
     .main-nav ul { flex-direction: column; }
