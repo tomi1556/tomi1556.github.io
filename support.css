@@ -1,0 +1,177 @@
+/* support.css - 支援ページ専用スタイル */
+
+/* --- グローバル設定 & 基本スタイルリセット --- */
+:root {
+    --primary-color: #6C63FF;
+    --secondary-color: #48D1CC;
+    --accent-color: #FFD05A;
+    --discord-color: #5865F2;
+    --dark-bg: #181A21;
+    --medium-dark-bg: #20232F;
+    --light-bg: #2A2E40;
+    --text-color: #EAEAEA;
+    --text-muted: #B0B5C8;
+    --border-color: #353A4E;
+    --glass-bg: rgba(30, 32, 41, 0.8);
+    --font-primary: 'Poppins', 'Noto Sans JP', sans-serif;
+    --shadow-medium: 0 12px 38px rgba(0,0,0,0.25);
+    --shadow-strong: 0 18px 55px rgba(0,0,0,0.3);
+    --border-radius-sm: 8px;
+    --border-radius-md: 16px;
+    --border-radius-lg: 24px;
+    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --rgb-primary-color: 108, 99, 255;
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html { scroll-behavior: smooth; font-size: 100%; overflow-y: scroll; }
+
+body {
+    font-family: var(--font-primary); background-color: var(--dark-bg); color: var(--text-color);
+    line-height: 1.75; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; position: relative;
+}
+body.no-scroll { overflow-y: hidden; }
+main { display: block; }
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: var(--secondary-color); transition: color var(--transition-fast); }
+a:hover { color: var(--accent-color); }
+.container { width: 90%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+
+/* --- 基本テキストスタイル --- */
+h1,h2,h3,p,code { margin-bottom: 0.5em; }
+p, li { color: var(--text-muted); }
+code { background-color: var(--light-bg); padding: 0.3em 0.6em; border-radius: var(--border-radius-sm); color: var(--accent-color); font-family: monospace; }
+.inline-link { color: var(--accent-color); text-decoration: none; border-bottom: 1px dotted var(--accent-color); font-weight: 500; transition: color var(--transition-fast), border-bottom-color var(--transition-fast); }
+.inline-link:hover { color: var(--secondary-color); border-bottom-color: var(--secondary-color); }
+.br-sp { display: none; }
+.br-pc { display: block; }
+
+/* --- アニメーションクラス --- */
+.animate-on-scroll, .animate-on-load { opacity: 0; visibility: hidden; }
+.is-visible { visibility: visible !important; opacity: 1 !important; transform: none !important; }
+[data-animation] { transition-property: opacity, transform; transition-duration: 0.8s; transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.fadeInUpCustom { transform: translateY(50px); }
+
+/* --- ヘッダー & ナビゲーション (共通) --- */
+header { background-color: transparent; padding: 18px 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; transition: all var(--transition-normal); }
+header.scrolled { background-color: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 6px 22px rgba(0,0,0,0.3); padding: 10px 0; }
+header .container { display: flex; justify-content: space-between; align-items: center; }
+#logo-img { height: 38px; transition: all var(--transition-fast); filter: drop-shadow(0 3px 7px rgba(0,0,0,0.4)); }
+#logo-img:hover { transform: scale(1.08); filter: drop-shadow(0 4px 10px rgba(0,0,0,0.5));}
+header.scrolled #logo-img, header.scrolled .nav-link, header.scrolled .nav-discord-link { text-shadow: none; }
+.main-nav ul { list-style: none; display: flex; align-items: center; margin:0; padding:0; }
+.main-nav ul li { margin-left: 22px; }
+.main-nav ul li a.nav-link { color: #FFF; font-weight: 500; font-size: 0.93rem; padding: 12px 8px; position: relative; letter-spacing: 0.7px; text-shadow: 0 1px 6px rgba(0,0,0,0.5); transition: all var(--transition-fast); opacity: 0.95; }
+.main-nav ul li a.nav-link:hover, .main-nav ul li a.nav-link.active { opacity: 1; color: var(--accent-color); }
+.main-nav ul li a.nav-link::after { content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%) scaleX(0); width: 70%; height: 2.5px; background-color: var(--accent-color); border-radius: 1.5px; transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1); transform-origin: center; }
+.main-nav ul li a.nav-link:hover::after, .main-nav ul li a.nav-link.active::after { transform: translateX(-50%) scaleX(1); }
+.main-nav ul li a.nav-link.active { font-weight: 600; }
+.nav-discord-link { display: inline-flex; align-items: center; padding: 7px 14px !important; background-color: transparent; border: 1.5px solid rgba(255,255,255,0.6); border-radius: var(--border-radius-md); color: #FFF !important; text-shadow: none !important; opacity: 1 !important; font-weight: 500; transition: all var(--transition-fast); }
+.nav-discord-link:hover { background-color: var(--primary-color); color: #FFF !important; border-color: var(--primary-color); box-shadow: 0 0 18px rgba(var(--rgb-primary-color), 0.5); transform: scale(1.05); }
+.nav-discord-link i { margin-right: 7px; font-size: 1em; }
+.hamburger-menu { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1002; margin-left: auto; position: relative; width: 30px; height: 30px;}
+.hamburger-bar { display: block; width: 26px; height: 2.5px; background-color: #FFF; margin: 6px auto; transition: all var(--transition-normal); border-radius: 3px; position: absolute; left: 2px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+.hamburger-bar:nth-child(1) { top: 2px; }
+.hamburger-bar:nth-child(2) { top: 11.5px; }
+.hamburger-bar:nth-child(3) { top: 21px; }
+.hamburger-menu.active .hamburger-bar { background-color: var(--text-color) !important; text-shadow: none; }
+.hamburger-menu.active .hamburger-bar:nth-child(1) { top: 11.5px; transform: rotate(45deg); }
+.hamburger-menu.active .hamburger-bar:nth-child(2) { opacity: 0; transform: translateX(-20px); }
+.hamburger-menu.active .hamburger-bar:nth-child(3) { top: 11.5px; transform: rotate(-45deg); }
+
+/* --- ボタン (共通) --- */
+.btn { display: inline-flex; align-items: center; justify-content: center; padding: 13px 0; border-radius: var(--border-radius-md); font-weight: 600; font-size: 0.95rem; transition: all var(--transition-fast); cursor: pointer; border: none; white-space: nowrap; position: relative; overflow: hidden; text-transform: none; width: auto; padding-left: 30px; padding-right: 30px; }
+.btn-secondary { background-color: var(--medium-dark-bg); color: var(--secondary-color); border: 2px solid var(--secondary-color); box-shadow: var(--shadow-medium); }
+.btn-secondary:hover { background-color: var(--secondary-color); color: var(--dark-bg); transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(72, 209, 204, 0.35); }
+.btn-small { padding: 9px 20px; font-size: 0.9rem; margin-top: auto; }
+
+/* --- フッター (共通) --- */
+footer { background-color: #12141a; border-top: 1px solid var(--border-color); padding: 45px 0; text-align: center; position: relative; z-index: 5; }
+footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
+
+/* --- ここから支援ページ固有のスタイル --- */
+.page-content-container { padding-top: 120px; padding-bottom: 90px; min-height: calc(100vh - 120px - 92px); }
+.page-header { text-align: center; margin-bottom: 60px; }
+.page-main-title { font-size: clamp(2.2em, 5.5vw, 3.5em); color: var(--text-color); margin-bottom: 0.4em; }
+.page-main-title i { color: var(--primary-color); margin-right: 10px; }
+.page-intro { font-size: clamp(0.95rem, 2.2vw, 1.15rem); color: var(--text-muted); max-width: 850px; margin-left: auto; margin-right: auto; line-height: 1.8; }
+.support-article { max-width: 920px; margin: 0 auto; }
+.page-section { background-color: var(--medium-dark-bg); padding: 35px 40px; border-radius: var(--border-radius-lg); margin-bottom: 35px; border: 1px solid var(--border-color); box-shadow: var(--shadow-medium); }
+.section-heading-styled { font-size: clamp(1.6em, 3.8vw, 2.1em); color: var(--secondary-color); margin-bottom: 25px; padding-bottom: 15px; border-bottom: 2px solid var(--border-color); display: flex; align-items: center; font-weight: 600; }
+.section-heading-styled i { margin-right: 15px; font-size: 0.95em; opacity: 0.9; }
+.section-description { font-size: 0.95rem; color: var(--text-muted); line-height: 1.8; margin-bottom: 20px; }
+.page-closing { text-align: center; font-size: 1rem; color: var(--text-muted); margin-top: 50px; padding: 25px; background-color: var(--medium-dark-bg); border-radius: var(--border-radius-md); border: 1px solid var(--border-color); line-height: 1.8; }
+.payment-methods-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; margin: 25px 0; }
+.payment-method { background-color: var(--light-bg); padding: 30px; border-radius: var(--border-radius-md); text-align: center; border: 1px solid var(--border-color); transition: transform var(--transition-fast), box-shadow var(--transition-fast); display: flex; flex-direction: column; align-items: center; }
+.payment-method:hover { transform: translateY(-5px); box-shadow: var(--shadow-medium); }
+.payment-method .payment-icon { font-size: 3.2em; color: var(--primary-color); margin-bottom: 18px; line-height: 1; }
+.payment-method h4 { font-size: 1.35em; color: var(--text-color); margin-bottom: 12px; }
+.payment-method p { font-size: 0.9rem; margin-bottom: 25px; flex-grow: 1; min-height: 55px; }
+.common-benefits { background-color: var(--light-bg); padding: 25px 30px; border-radius: var(--border-radius-md); margin: 35px 0; border: 1px dashed var(--border-color); }
+.common-benefits h4 { font-size: 1.35em; color: var(--accent-color); margin-bottom: 18px; display: flex; align-items: center; border-bottom: 1px solid var(--border-color); padding-bottom: 10px; }
+.common-benefits h4 i { margin-right: 12px; font-size: 0.9em; }
+.info-list-styled, .simple-list { list-style: none; padding-left: 0; }
+.simple-list li { margin-bottom: 10px !important; font-size: 0.95rem !important; display: flex; align-items: flex-start; }
+.simple-list .list-icon { margin-right: 10px; width: 18px; flex-shrink: 0; text-align: center; padding-top: 4px; }
+.simple-list .list-icon i { color: var(--accent-color) !important; font-size: 0.8em !important; }
+.benefit-tiers-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 35px; margin-top: 30px; }
+.benefit-tier { background: linear-gradient(145deg, var(--medium-dark-bg), var(--light-bg)); padding: 30px 35px; border-radius: var(--border-radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-medium); display: flex; flex-direction: column; transition: transform var(--transition-normal), box-shadow var(--transition-normal); }
+.benefit-tier:hover { transform: translateY(-10px) scale(1.02); box-shadow: var(--shadow-strong); }
+.benefit-tier-header { display: flex; align-items: center; margin-bottom: 25px; padding-bottom: 18px; border-bottom: 1px solid var(--border-color); }
+.benefit-tier-header .tier-icon { font-size: 3em; margin-right: 20px; line-height: 1; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35)); transition: transform 0.3s ease; }
+.benefit-tier:hover .benefit-tier-header .tier-icon { transform: rotate(-5deg) scale(1.1); }
+.benefit-tier.patron .tier-icon { color: var(--primary-color); }
+.benefit-tier.patron-plus .tier-icon { color: var(--accent-color); }
+.tier-name-price h3 { font-size: 1.8em; font-weight: 700; color: var(--text-color); margin-bottom: 4px; }
+.tier-name-price .tier-price { font-size: 0.95em; font-weight: 500; color: var(--text-muted); background-color: var(--dark-bg); padding: 5px 12px; border-radius: var(--border-radius-sm); display: inline-block; }
+.benefit-detail-list { list-style: none; padding-left: 0; margin-bottom: 25px; flex-grow: 1; }
+.benefit-detail-list li { display: flex; align-items: center; margin-bottom: 14px; font-size: 0.95rem; line-height: 1.65; }
+.benefit-detail-list .list-bullet { width: 24px; flex-shrink: 0; margin-right: 12px; color: var(--secondary-color); font-size: 1em; text-align: center; }
+.tier-duration-info { margin-top: auto; padding-top: 20px; border-top: 1px dashed var(--border-color); font-size: 0.9rem; }
+.tier-duration-info p { margin-bottom: 10px; display: flex; align-items: center; justify-content: space-between; }
+.tier-duration-info p:last-child { margin-bottom: 0; }
+.tier-duration-info .duration { display: inline-flex; align-items: center; font-weight: 500; color: var(--text-color); }
+.tier-duration-info .duration-icon { margin-right: 6px; color: var(--accent-color); font-size: 0.95em; }
+
+/* --- レスポンシブ対応 --- */
+@media (max-width: 992px) {
+    .br-sp { display: block; }
+    .br-pc { display: none; }
+    /* Mobile Nav */
+    .main-nav { position: fixed; top: 0; left: -100%; width: 100%; max-width: 280px; height: 100vh; background-color: var(--dark-bg); padding-top: 70px; box-shadow: 6px 0 22px rgba(0,0,0,0.3); transition: left var(--transition-normal); z-index: 1001; overflow-y: auto; display: flex; flex-direction: column; }
+    .main-nav.active { left: 0; }
+    .main-nav ul { flex-direction: column; }
+    .main-nav ul li { margin-left: 0; width: 100%;}
+    .main-nav ul li a.nav-link { padding: 14px 25px; font-size: 1rem; display:block; border-bottom: 1px solid var(--border-color); }
+    .main-nav ul li a.nav-link::after { left: 0; bottom: 0; width: 100%; transform-origin: left; transform: scaleX(0); }
+    .main-nav ul li a.nav-link:hover::after, .main-nav ul li a.nav-link.active::after { transform: scaleX(1); }
+    .main-nav ul li a.nav-discord-link { border: none !important; background-color: transparent !important; box-shadow: none !important; transform: none !important; color: #FFF !important; }
+    .main-nav ul li a.nav-discord-link:hover { color: var(--accent-color) !important; }
+    .hamburger-menu { display: block; }
+
+    /* Page Content */
+    .page-content-container { padding-top: 100px; padding-bottom: 70px;}
+    .page-header { margin-bottom: 40px; }
+    .page-main-title { font-size: clamp(2em, 5.5vw, 2.8em); }
+    .page-section { padding: 30px 25px; }
+    .benefit-tiers-container { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    /* Support Page */
+    .benefit-tier-header { flex-direction: column; align-items: flex-start; gap: 10px;}
+    .benefit-tier-header .tier-icon { font-size: 2.5em; margin-right: 0; margin-bottom: 5px;}
+    .tier-name-price h3 { font-size: 1.5em;}
+    .tier-name-price .tier-price { font-size: 0.85em; padding: 3px 8px;}
+}
+
+@media (max-width: 480px) {
+    body { font-size: 14px; line-height: 1.7; }
+    .container { padding: 0 15px; }
+    .page-section { padding: 25px 20px; }
+    .benefit-tier { padding: 25px; }
+    .benefit-detail-list li { font-size: 0.9rem;}
+}
