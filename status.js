@@ -58,18 +58,44 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 'vanilla', address: 'stellamc.jp:6910' },
             { id: 'proxy', address: 'stellamc.jp:6911' }
         ];
+
+        // UI要素を最初にキャッシュ
+        const ui = {
+            overall: {
+                panel: document.getElementById('overall-status-panel'),
+                accent: document.querySelector('#overall-status-panel .panel-accent-border'),
+                count: document.getElementById('total-player-count'),
+                error: document.getElementById('overall-error-message')
+            },
+            sutera: {
+                panel: document.getElementById('sutera-server-panel'),
+                accent: document.querySelector('#sutera-server-panel .panel-accent-border'),
+                label: document.getElementById('sutera-player-label'),
+                gauge: document.getElementById('sutera-gauge-bar'),
+                error: document.getElementById('sutera-error-message')
+            },
+            vanilla: {
+                panel: document.getElementById('vanilla-server-panel'),
+                accent: document.querySelector('#vanilla-server-panel .panel-accent-border'),
+                label: document.getElementById('vanilla-player-label'),
+                gauge: document.getElementById('vanilla-gauge-bar'),
+                error: document.getElementById('vanilla-error-message')
+            },
+            other: {
+                panel: document.getElementById('other-server-panel'),
+                accent: document.querySelector('#other-server-panel .panel-accent-border'),
+                count: document.getElementById('other-player-count')
+            }
+        };
         
         const animateCountUp = (el, end) => {
             if (!el) return;
-            const duration = 1200;
             const startValue = parseInt(el.dataset.currentValue || '0');
             el.dataset.currentValue = end;
-            if (startValue === end) {
-                el.textContent = end;
-                return;
-            }
+            if (startValue === end) { el.textContent = end; return; }
             
-            let startTime = null;
+            let startTime;
+            const duration = 1200;
             const step = (timestamp) => {
                 if (!startTime) startTime = timestamp;
                 const progress = Math.min((timestamp - startTime) / duration, 1);
@@ -85,102 +111,91 @@ document.addEventListener('DOMContentLoaded', () => {
                 const response = await fetch(`${API_BASE_URL}${server.address}`);
                 if (!response.ok) throw new Error('Network response error');
                 const data = await response.json();
-                return { ...data, id: server.id }; // IDをデータに含める
+                return { ...data, id: server.id };
             } catch (error) {
-                console.error(`Failed to fetch status for ${server.id}:`, error);
                 return { id: server.id, online: false, players: { online: 0, max: 0 }, error: true };
             }
         };
 
         const updatePanelUI = (id, data) => {
-            const panel = document.getElementById(`${id}-server-panel`);
-            if (!panel) return;
+            const elements = ui[id];
+            if (!elements || !elements.panel) return;
 
-            const accentBorder = panel.querySelector('.panel-accent-border');
-            const playerLabel = panel.querySelector('.label');
-            const gaugeBar = panel.querySelector('.gauge-bar-fill');
-            const errorMsg = panel.querySelector('.error-message');
-            
-            if (errorMsg) errorMsg.style.display = 'none';
+            elements.error.style.display = 'none';
 
             if (data && data.online) {
-                accentBorder.style.setProperty('--status-color', 'var(--success-color)');
+                elements.accent.style.setProperty('--status-color', 'var(--success-color)');
                 const { online, max } = data.players;
-                playerLabel.textContent = `プレイヤー数: ${online} / ${max}`;
-                if(gaugeBar) {
-                    gaugeBar.innerHTML = ''; // スケルトン削除
-                    gaugeBar.style.width = max > 0 ? `${(online / max) * 100}%` : '0%';
+                elements.label.textContent = `プレイヤー数: ${online} / ${max}`;
+                if(elements.gauge) {
+                    elements.gauge.innerHTML = '';
+                    elements.gauge.style.width = max > 0 ? `${(online / max) * 100}%` : '0%';
                 }
             } else {
-                accentBorder.style.setProperty('--status-color', 'var(--danger-color)');
-                playerLabel.textContent = 'オフラインまたは取得失敗';
-                 if(gaugeBar) {
-                    gaugeBar.innerHTML = '<div class="skeleton"></div>';
-                    gaugeBar.style.width = '100%';
+                elements.accent.style.setProperty('--status-color', 'var(--danger-color)');
+                elements.label.textContent = 'オフライン';
+                if(elements.gauge) {
+                    elements.gauge.innerHTML = '';
+                    elements.gauge.style.width = '0%';
                 }
-                if (data && data.error && errorMsg) {
-                    errorMsg.style.display = 'block';
-                    errorMsg.textContent = 'サーバー情報の取得に失敗しました。';
+                if (data && data.error) {
+                    elements.label.textContent = '取得失敗';
+                    elements.error.style.display = 'block';
+                    elements.error.textContent = 'サーバー情報の取得に失敗しました。';
                 }
-            }
-        };
-
-        const updateOtherPanelUI = (count) => {
-            const panel = document.getElementById('other-server-panel');
-            if (!panel) return;
-            const accentBorder = panel.querySelector('.panel-accent-border');
-            const countEl = document.getElementById('other-player-count');
-            
-            accentBorder.style.setProperty('--status-color', 'var(--text-muted)');
-            countEl.innerHTML = ''; // スケルトン削除
-            animateCountUp(countEl, count);
-        };
-
-        const updateOverallPanelUI = (data) => {
-            const panel = document.getElementById('overall-status-panel');
-            const accentBorder = panel.querySelector('.panel-accent-border');
-            const totalCountEl = document.getElementById('total-player-count');
-            const errorMsg = document.getElementById('overall-error-message');
-            
-            errorMsg.style.display = 'none';
-
-            if(data && data.online) {
-                accentBorder.style.setProperty('--status-color', 'var(--success-color)');
-                totalCountEl.innerHTML = '';
-                animateCountUp(totalCountEl, data.players.online);
-            } else {
-                 accentBorder.style.setProperty('--status-color', 'var(--danger-color)');
-                 totalCountEl.textContent = '-';
-                 if(data && data.error) {
-                    errorMsg.style.display = 'block';
-                    errorMsg.textContent = '総合プレイヤー数の取得に失敗しました。';
-                 }
             }
         };
 
         const loadAllStatuses = async () => {
-            const results = await Promise.all(SERVERS.map(server => fetchServerStatus(server)));
+            const results = await Promise.all(SERVERS.map(fetchServerStatus));
+            const serverData = {};
+            results.forEach(r => { serverData[r.id] = r; });
 
-            const getData = id => results.find(r => r.id === id);
-            
-            const proxyData = getData('proxy');
-            const suteraData = getData('sutera');
-            const vanillaData = getData('vanilla');
-            
-            // 各パネルを更新
-            updateServerPanel('sutera', suteraData);
-            updateServerPanel('vanilla', vanillaData);
-            updateOverallPanelUI(proxyData);
+            // 総合パネルの更新
+            if (serverData.proxy && serverData.proxy.online) {
+                ui.overall.accent.style.setProperty('--status-color', 'var(--success-color)');
+                ui.overall.error.style.display = 'none';
+                animateCountUp(ui.overall.count, serverData.proxy.players.online);
+            } else {
+                ui.overall.accent.style.setProperty('--status-color', 'var(--danger-color)');
+                ui.overall.count.textContent = '-';
+                if(serverData.proxy && serverData.proxy.error) {
+                    ui.overall.error.style.display = 'block';
+                    ui.overall.error.textContent = '総合プレイヤー数の取得に失敗しました。';
+                }
+            }
+
+            // 各サーバーパネルの更新
+            updatePanelUI('sutera', serverData.sutera);
+            updatePanelUI('vanilla', serverData.vanilla);
 
             // 「その他」の計算と更新
-            const totalPlayers = proxyData && proxyData.online ? proxyData.players.online : 0;
-            const suteraPlayers = suteraData && suteraData.online ? suteraData.players.online : 0;
-            const vanillaPlayers = vanillaData && vanillaData.online ? vanillaData.players.online : 0;
-            const otherPlayers = Math.max(0, totalPlayers - suteraPlayers - vanillaPlayers);
-            updateOtherPanelUI(otherPlayers);
-        };
+            const total = serverData.proxy && serverData.proxy.online ? serverData.proxy.players.online : 0;
+            const sutera = serverData.sutera && suteraData.sutera.online ? serverData.sutera.players.online : 0;
+            const vanilla = serverData.vanilla && serverData.vanilla.online ? serverData.vanilla.players.online : 0;
+            const other = Math.max(0, total - sutera - vanilla);
 
+            ui.other.accent.style.setProperty('--status-color', 'var(--text-muted)');
+            animateCountUp(ui.other.count, other);
+        };
+        
+        // ★★★ 隠し要素のロジック ★★★
+        const secretSequence = ['sutera-server-panel', 'vanilla-server-panel', 'other-server-panel'];
+        let userSequence = [];
+        document.querySelectorAll('.individual-server-panel').forEach(panel => {
+            panel.addEventListener('click', () => {
+                userSequence.push(panel.id);
+                if (userSequence.length > secretSequence.length) {
+                    userSequence.shift();
+                }
+                if (userSequence.join(',') === secretSequence.join(',')) {
+                    window.location.href = 'https://www.stellamc.jp/server.html';
+                }
+            });
+        });
+
+        // 初回ロードと定期更新
         loadAllStatuses();
-        setInterval(loadAllStatuses, 60000); // 60秒ごとに更新
+        setInterval(loadAllStatuses, 60000);
     }
 });
