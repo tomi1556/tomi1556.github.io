@@ -36,7 +36,7 @@
     </header>
 
     <main class="status-page-wrapper">
-        <div class="stars"></div>
+        <div class="aurora-background"></div>
         <div class="container">
             <div class="page-header animate-on-load" data-animation="fadeInUp">
                 <h1><i class="fas fa-satellite-dish"></i>Mission Control</h1>
@@ -45,63 +45,17 @@
 
             <div class="status-dashboard">
                 <div id="overall-status-panel" class="status-panel overall-status-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.1s">
-                    <div class="panel-header">
-                        <span class="panel-icon" style="color: var(--accent-color);"><i class="fas fa-globe"></i></span>
-                        <h2 class="panel-title">総合ネットワーク状況</h2>
-                        <div class="status-indicator loading" id="overall-status-indicator">
-                            <div class="pulse-dot"></div><span id="overall-status-text">確認中</span>
-                        </div>
-                    </div>
                     <div class="panel-body">
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="label"><i class="fas fa-users"></i> 総オンライン</div>
-                                <div class="value" id="total-player-count"><div class="skeleton"></div></div>
-                            </div>
-                             <div class="info-item">
-                                <div class="label"><i class="fas fa-star"></i> すてら鯖</div>
-                                <div class="value small" id="sutera-player-count-single"><div class="skeleton"></div></div>
-                            </div>
-                            <div class="info-item">
-                                <div class="label"><i class="fas fa-seedling"></i> バニラ鯖</div>
-                                <div class="value small" id="vanilla-player-count-single"><div class="skeleton"></div></div>
-                            </div>
-                             <div class="info-item">
-                                <div class="label"><i class="fas fa-network-wired"></i> プロキシ</div>
-                                <div class="value small" id="proxy-player-count-single"><div class="skeleton"></div></div>
-                            </div>
-                            <div class="info-item">
-                                <div class="label"><i class="fas fa-question-circle"></i> その他</div>
-                                <div class="value small" id="other-player-count-single"><div class="skeleton"></div></div>
-                            </div>
-                        </div>
+                        <div class="label"><i class="fas fa-users"></i> 総オンラインプレイヤー数</div>
+                        <div class="value" id="total-player-count"><div class="skeleton"></div></div>
                         <div id="overall-error-message" class="error-message" style="display: none;"></div>
                     </div>
                 </div>
 
                 <div class="server-panels-grid">
-                    <div id="proxy-server-panel" class="status-panel individual-server-panel proxy-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.2s">
+                    <div id="sutera-server-panel" class="status-panel individual-server-panel sutera-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.2s">
                         <div class="panel-header">
-                            <span class="panel-icon" style="color: var(--accent-color);"><i class="fas fa-door-open"></i></span>
-                            <h2 class="panel-title">プロキシサーバー</h2>
-                            <div class="status-indicator loading" id="proxy-status-indicator">
-                                <div class="pulse-dot"></div><span id="proxy-status-text">確認中</span>
-                            </div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="player-gauge proxy">
-                                <div class="label" id="proxy-player-label">プレイヤー数: - / -</div>
-                                <div class="gauge-bar-bg">
-                                    <div class="gauge-bar-fill" id="proxy-gauge-bar"><div class="skeleton"></div></div>
-                                </div>
-                            </div>
-                             <div id="proxy-error-message" class="error-message" style="display: none;"></div>
-                        </div>
-                    </div>
-
-                    <div id="sutera-server-panel" class="status-panel individual-server-panel sutera-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.3s">
-                        <div class="panel-header">
-                            <span class="panel-icon" style="color: var(--primary-color);"><i class="fas fa-star"></i></span>
+                            <span class="panel-icon"><i class="fas fa-star"></i></span>
                             <h2 class="panel-title">すてら鯖</h2>
                             <div class="status-indicator loading" id="sutera-status-indicator">
                                 <div class="pulse-dot"></div><span id="sutera-status-text">確認中</span>
@@ -118,9 +72,9 @@
                         </div>
                     </div>
 
-                    <div id="vanilla-server-panel" class="status-panel individual-server-panel vanilla-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.4s">
+                    <div id="vanilla-server-panel" class="status-panel individual-server-panel vanilla-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.3s">
                         <div class="panel-header">
-                            <span class="panel-icon" style="color: var(--secondary-color);"><i class="fas fa-seedling"></i></span>
+                            <span class="panel-icon"><i class="fas fa-seedling"></i></span>
                             <h2 class="panel-title">バニラ鯖</h2>
                              <div class="status-indicator loading" id="vanilla-status-indicator">
                                 <div class="pulse-dot"></div><span id="vanilla-status-text">確認中</span>
@@ -134,6 +88,20 @@
                                 </div>
                             </div>
                             <div id="vanilla-error-message" class="error-message" style="display: none;"></div>
+                        </div>
+                    </div>
+
+                     <div id="other-server-panel" class="status-panel individual-server-panel other-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.4s">
+                        <div class="panel-header">
+                            <span class="panel-icon"><i class="fas fa-users-line"></i></span>
+                            <h2 class="panel-title">その他</h2>
+                             <div class="status-indicator loading" id="other-status-indicator">
+                                <div class="pulse-dot"></div><span id="other-status-text">確認中</span>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                             <div class="label">ロビー等にいるプレイヤー数</div>
+                             <div class="value" id="other-player-count"><div class="skeleton"></div></div>
                         </div>
                     </div>
                 </div>
