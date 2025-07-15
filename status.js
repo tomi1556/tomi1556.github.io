@@ -59,12 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 'proxy', address: 'stellamc.jp:6911' }
         ];
 
-        // UI要素を一度だけ取得
         const ui = {
             overall: document.getElementById('overall-status-panel'),
             sutera: document.getElementById('sutera-server-panel'),
             vanilla: document.getElementById('vanilla-server-panel'),
-            other: document.getElementById('other-server-panel')
+            other: document.getElementById('other-server-panel'),
+            countdown: document.getElementById('countdown-timer'),
         };
         
         const fetchServerStatus = async (server) => {
@@ -129,12 +129,10 @@ document.addEventListener('DOMContentLoaded', () => {
             const results = await Promise.all(SERVERS.map(fetchServerStatus));
             const serverData = results.reduce((acc, r) => ({...acc, [r.id]: r }), {});
 
-            // 各パネルを更新
+            updatePanelUI(ui.overall, serverData.proxy, '総オンラインプレイヤー数');
             updatePanelUI(ui.sutera, serverData.sutera, 'プレイヤー数');
             updatePanelUI(ui.vanilla, serverData.vanilla, 'プレイヤー数');
-            updatePanelUI(ui.overall, serverData.proxy, '総オンラインプレイヤー数');
 
-            // 「その他」の計算と更新
             const total = serverData.proxy?.online ? serverData.proxy.players.online : 0;
             const sutera = serverData.sutera?.online ? serverData.sutera.players.online : 0;
             const vanilla = serverData.vanilla?.online ? serverData.vanilla.players.online : 0;
@@ -161,8 +159,20 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // 初回ロードと1分ごとの定期更新
+        // カウントダウンタイマー
+        let countdown = 60;
+        const countdownTimer = () => {
+            countdown--;
+            if (ui.countdown) ui.countdown.textContent = countdown;
+            if (countdown <= 0) {
+                countdown = 60;
+                if (ui.countdown) ui.countdown.textContent = countdown;
+            }
+        };
+
+        // 初回ロードと定期更新
         loadAllStatuses();
-        setInterval(loadAllStatuses, 60000);
+        setInterval(loadAllStatuses, 60000); // 60秒ごとにデータを更新
+        setInterval(countdownTimer, 1000); // 1秒ごとにタイマーを更新
     }
 });
