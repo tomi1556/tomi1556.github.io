@@ -64,7 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
             sutera: document.getElementById('sutera-server-panel'),
             vanilla: document.getElementById('vanilla-server-panel'),
             other: document.getElementById('other-server-panel'),
-            countdown: document.getElementById('countdown-timer'),
+            countdownText: document.getElementById('update-countdown-text'),
+            countdownTimer: document.getElementById('countdown-timer'),
         };
         
         const fetchServerStatus = async (server) => {
@@ -126,6 +127,8 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         const loadAllStatuses = async () => {
+            if(ui.countdownText) ui.countdownText.textContent = '更新中...';
+
             const results = await Promise.all(SERVERS.map(fetchServerStatus));
             const serverData = results.reduce((acc, r) => ({...acc, [r.id]: r }), {});
 
@@ -146,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
             updatePanelUI(ui.other, otherData, 'プレイヤー数');
         };
         
-        // 隠し要素
         const secretSequence = ['sutera-server-panel', 'vanilla-server-panel', 'other-server-panel'];
         let userSequence = [];
         document.querySelectorAll('.individual-server-panel').forEach(panel => {
@@ -159,20 +161,26 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // カウントダウンタイマー
+        // --- 更新タイマー処理 ---
         let countdown = 60;
-        const countdownTimer = () => {
-            countdown--;
-            if (ui.countdown) ui.countdown.textContent = countdown;
-            if (countdown <= 0) {
-                countdown = 60;
-                if (ui.countdown) ui.countdown.textContent = countdown;
-            }
+        const startTimers = () => {
+            // 最初に一度実行
+            loadAllStatuses();
+            
+            // 1秒ごとのカウントダウンタイマー
+            setInterval(() => {
+                countdown--;
+                if (countdown <= 0) {
+                    countdown = 60; // カウントリセット
+                    loadAllStatuses(); // データ更新
+                }
+                // UI更新
+                if(ui.countdownText && countdown > 0) {
+                   ui.countdownText.innerHTML = `次回更新まで: <span id="countdown-timer">${countdown}</span>秒`;
+                }
+            }, 1000);
         };
-
-        // 初回ロードと定期更新
-        loadAllStatuses();
-        setInterval(loadAllStatuses, 60000); // 60秒ごとにデータを更新
-        setInterval(countdownTimer, 1000); // 1秒ごとにタイマーを更新
+        
+        startTimers();
     }
 });
