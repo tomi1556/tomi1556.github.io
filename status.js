@@ -59,147 +59,109 @@ document.addEventListener('DOMContentLoaded', () => {
             { id: 'proxy', address: 'stellamc.jp:6911' }
         ];
 
-        // UI要素を最初に一度だけ取得
         const ui = {
-            overall: {
-                panel: document.getElementById('overall-status-panel'),
-                accent: document.querySelector('#overall-status-panel .panel-accent-border'),
-                count: document.getElementById('total-player-count'),
-                error: document.getElementById('overall-error-message')
-            },
-            sutera: {
-                panel: document.getElementById('sutera-server-panel'),
-                accent: document.querySelector('#sutera-server-panel .panel-accent-border'),
-                label: document.getElementById('sutera-player-label'),
-                gauge: document.getElementById('sutera-gauge-bar'),
-                error: document.getElementById('sutera-error-message')
-            },
-            vanilla: {
-                panel: document.getElementById('vanilla-server-panel'),
-                accent: document.querySelector('#vanilla-server-panel .panel-accent-border'),
-                label: document.getElementById('vanilla-player-label'),
-                gauge: document.getElementById('vanilla-gauge-bar'),
-                error: document.getElementById('vanilla-error-message')
-            },
-            other: {
-                panel: document.getElementById('other-server-panel'),
-                accent: document.querySelector('#other-server-panel .panel-accent-border'),
-                label: document.getElementById('other-player-label'),
-                count: document.getElementById('other-player-count')
-            }
+            overall: document.getElementById('overall-status-panel'),
+            sutera: document.getElementById('sutera-server-panel'),
+            vanilla: document.getElementById('vanilla-server-panel'),
+            other: document.getElementById('other-server-panel')
         };
         
-        const animateCountUp = (el, end) => {
-            if (!el) return;
-            const startValue = parseInt(el.dataset.currentValue || '0');
-            el.dataset.currentValue = end;
-            if (startValue === end) { el.textContent = end; return; }
-            
-            let startTime;
-            const duration = 1200;
-            const step = (timestamp) => {
-                if (!startTime) startTime = timestamp;
-                const progress = Math.min((timestamp - startTime) / duration, 1);
-                const easeOut = 1 - Math.pow(1 - progress, 4);
-                el.textContent = Math.floor(easeOut * (end - startValue) + startValue);
-                if (progress < 1) window.requestAnimationFrame(step);
-            };
-            window.requestAnimationFrame(step);
-        };
-
         const fetchServerStatus = async (server) => {
             try {
                 const response = await fetch(`${API_BASE_URL}${server.address}`);
-                // APIがエラーHTMLを返すことがあるため、JSONとして扱えるかチェック
-                if (!response.headers.get('content-type')?.includes('application/json')) {
-                    throw new Error('Invalid response from API');
+                if (!response.ok || !response.headers.get('content-type')?.includes('application/json')) {
+                    throw new Error('Invalid API response');
                 }
                 const data = await response.json();
                 return { ...data, id: server.id, hasError: false };
             } catch (error) {
-                console.error(`Failed to fetch status for ${server.id}:`, error);
                 return { id: server.id, online: false, players: { online: 0, max: 0 }, hasError: true };
             }
         };
 
-        const updatePanelUI = (id, data) => {
-            const elements = ui[id];
-            if (!elements || !elements.panel) return;
+        const updatePanelUI = (panel, data) => {
+            if (!panel) return;
+            const accent = panel.querySelector('.panel-accent-border');
+            const label = panel.querySelector('.label');
+            const gauge = panel.querySelector('.gauge-bar-fill');
+            const errorMsg = panel.querySelector('.error-message');
+            const indicator = panel.querySelector('.status-indicator');
 
-            elements.error.style.display = 'none';
+            if (errorMsg) errorMsg.style.display = 'none';
 
-            if (data.online) {
-                elements.accent.style.setProperty('--status-color', 'var(--success-color)');
+            if (data && data.online) {
+                if (accent) accent.style.setProperty('--status-color', 'var(--success-color)');
+                if (indicator) indicator.className = 'status-indicator online';
+                if (indicator) indicator.textContent = 'オンライン';
+                
                 const { online, max } = data.players;
-                elements.label.textContent = `プレイヤー数: ${online} / ${max}`;
-                if (elements.gauge) {
-                    elements.gauge.innerHTML = '';
-                    elements.gauge.style.width = max > 0 ? `${(online / max) * 100}%` : '0%';
+                label.textContent = `${panel.dataset.label || 'プレイヤー数'}: ${online} / ${max}`;
+                if (gauge) {
+                    gauge.innerHTML = '';
+                    gauge.style.width = max > 0 ? `${(online / max) * 100}%` : '0%';
                 }
             } else {
-                elements.accent.style.setProperty('--status-color', 'var(--danger-color)');
-                elements.label.textContent = 'オフライン';
-                if (elements.gauge) {
-                    elements.gauge.innerHTML = '';
-                    elements.gauge.style.width = '0%';
+                if (accent) accent.style.setProperty('--status-color', 'var(--danger-color)');
+                 if (indicator) indicator.className = 'status-indicator offline';
+                if (indicator) indicator.textContent = 'オフライン';
+
+                label.textContent = 'オフライン';
+                if (gauge) {
+                    gauge.innerHTML = '';
+                    gauge.style.width = '0%';
                 }
-                if (data.hasError) {
-                    elements.label.textContent = '取得失敗';
-                    elements.error.style.display = 'block';
-                    elements.error.textContent = 'サーバー情報の取得に失敗しました。';
+                if (data && data.hasError) {
+                    label.textContent = '取得失敗';
+                    if(errorMsg) {
+                        errorMsg.style.display = 'block';
+                        errorMsg.textContent = 'サーバー情報の取得に失敗しました。';
+                    }
                 }
             }
         };
 
         const loadAllStatuses = async () => {
             const results = await Promise.all(SERVERS.map(fetchServerStatus));
-            const serverData = results.reduce((acc, r) => ({ ...acc, [r.id]: r }), {});
+            const dataMap = results.reduce((acc, r) => ({...acc, [r.id]: r }), {});
 
-            // 総合パネル
-            const proxy = serverData.proxy || { online: false, hasError: true };
-            if (proxy.online) {
-                ui.overall.accent.style.setProperty('--status-color', 'var(--success-color)');
-                ui.overall.error.style.display = 'none';
-                animateCountUp(ui.overall.count, proxy.players.online);
-            } else {
-                ui.overall.accent.style.setProperty('--status-color', 'var(--danger-color)');
-                ui.overall.count.textContent = '-';
-                if (proxy.hasError) {
-                    ui.overall.error.style.display = 'block';
-                    ui.overall.error.textContent = '総合プレイヤー数の取得に失敗しました。';
-                }
-            }
+            // 各パネルを更新
+            updatePanelUI(ui.sutera, dataMap.sutera);
+            updatePanelUI(ui.vanilla, dataMap.vanilla);
 
-            // 各サーバーパネル
-            updatePanelUI('sutera', serverData.sutera);
-            updatePanelUI('vanilla', serverData.vanilla);
+            // 総合パネルをプロキシデータで更新
+            ui.overall.dataset.label = "総オンラインプレイヤー数";
+            updatePanelUI(ui.overall, dataMap.proxy);
 
-            // 「その他」パネル
-            const total = proxy.online ? proxy.players.online : 0;
-            const sutera = serverData.sutera && serverData.sutera.online ? serverData.sutera.players.online : 0;
-            const vanilla = serverData.vanilla && serverData.vanilla.online ? serverData.vanilla.players.online : 0;
-            const other = Math.max(0, total - sutera - vanilla);
-            ui.other.accent.style.setProperty('--status-color', 'var(--text-muted)');
-            animateCountUp(ui.other.count, other);
+            // 「その他」を計算して更新
+            const total = dataMap.proxy?.online ? dataMap.proxy.players.online : 0;
+            const sutera = dataMap.sutera?.online ? dataMap.sutera.players.online : 0;
+            const vanilla = dataMap.vanilla?.online ? dataMap.vanilla.players.online : 0;
+            const otherCount = Math.max(0, total - sutera - vanilla);
+
+            // 「その他」パネル用のデータオブジェクトを作成
+            const otherData = {
+                online: true, // パネル自体は常にオンラインとして表示
+                players: { online: otherCount, max: total > 0 ? total : 1 }, // maxをtotalにして割合を計算
+                hasError: false
+            };
+            ui.other.dataset.label = "ロビー等のプレイヤー数";
+            updatePanelUI(ui.other, otherData);
         };
         
-        // 隠し要素（イースターエッグ）
+        // 隠し要素
         const secretSequence = ['sutera-server-panel', 'vanilla-server-panel', 'other-server-panel'];
         let userSequence = [];
         document.querySelectorAll('.individual-server-panel').forEach(panel => {
             panel.addEventListener('click', () => {
                 userSequence.push(panel.id);
-                if (userSequence.length > secretSequence.length) {
-                    userSequence.shift();
-                }
+                if (userSequence.length > secretSequence.length) userSequence.shift();
                 if (userSequence.join(',') === secretSequence.join(',')) {
                     window.location.href = 'https://www.stellamc.jp/server.html';
                 }
             });
         });
 
-        // 初回ロードと定期更新
         loadAllStatuses();
-        setInterval(loadAllStatuses, 60000); // 60秒ごとに更新
+        setInterval(loadAllStatuses, 60000);
     }
 });
