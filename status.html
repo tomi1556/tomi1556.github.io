@@ -36,7 +36,6 @@
     </header>
 
     <main class="status-page-wrapper">
-        <div class="aurora-background"></div>
         <div class="container">
             <div class="page-header animate-on-load" data-animation="fadeInUp">
                 <h1><i class="fas fa-satellite-dish"></i>Mission Control</h1>
@@ -44,66 +43,75 @@
             </div>
 
             <div class="status-dashboard">
-                <div id="overall-status-panel" class="status-panel overall-status-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.1s">
-                    <div class="panel-header">
-                        <span class="panel-icon"><i class="fas fa-network-wired"></i></span>
-                        <h2 class="panel-title">総合ネットワーク状況</h2>
-                        <div class="status-indicator loading" id="overall-status-indicator">確認中</div>
-                    </div>
-                    <div class="panel-body">
-                        <div class="player-gauge overall">
-                            <div class="label" id="overall-player-label">総オンラインプレイヤー数: - / -</div>
-                            <div class="gauge-bar-bg">
-                                <div class="gauge-bar-fill" id="overall-gauge-bar"><div class="skeleton"></div></div>
-                            </div>
+                <div class="panel-border-wrapper animate-on-load" data-animation="fadeInUp" data-animation-delay="0.1s">
+                    <div id="overall-status-panel" class="status-panel overall-status-panel">
+                        <div class="panel-header">
+                            <span class="panel-icon"><i class="fas fa-network-wired"></i></span>
+                            <h2 class="panel-title">総合ネットワーク状況</h2>
+                            <div class="status-indicator loading" id="overall-status-indicator">確認中</div>
                         </div>
-                         <div id="overall-error-message" class="error-message" style="display: none;"></div>
+                        <div class="panel-body">
+                            <div class="player-gauge overall">
+                                <div class="label" id="overall-player-label">総オンラインプレイヤー数: - / -</div>
+                                <div class="gauge-bar-bg">
+                                    <div class="gauge-bar-fill" id="overall-gauge-bar"><div class="skeleton"></div></div>
+                                </div>
+                            </div>
+                             <div id="overall-error-message" class="error-message" style="display: none;"></div>
+                        </div>
                     </div>
                 </div>
 
+
                 <div class="server-panels-grid">
-                    <div id="sutera-server-panel" class="status-panel individual-server-panel sutera-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.2s">
-                        <div class="panel-header">
-                            <span class="panel-icon"><i class="fas fa-star"></i></span>
-                            <h2 class="panel-title">すてら鯖</h2>
-                        </div>
-                        <div class="panel-body">
-                            <div class="player-gauge stella">
-                                <div class="label" id="sutera-player-label">プレイヤー数: - / -</div>
-                                <div class="gauge-bar-bg">
-                                    <div class="gauge-bar-fill" id="sutera-gauge-bar"><div class="skeleton"></div></div>
-                                </div>
+                    <div class="panel-border-wrapper animate-on-load" data-animation="fadeInUp" data-animation-delay="0.2s">
+                        <div id="sutera-server-panel" class="status-panel individual-server-panel sutera-panel">
+                            <div class="panel-header">
+                                <span class="panel-icon"><i class="fas fa-star"></i></span>
+                                <h2 class="panel-title">すてら鯖</h2>
                             </div>
-                             <div id="sutera-error-message" class="error-message" style="display: none;"></div>
+                            <div class="panel-body">
+                                <div class="player-gauge stella">
+                                    <div class="label" id="sutera-player-label">プレイヤー数: - / -</div>
+                                    <div class="gauge-bar-bg">
+                                        <div class="gauge-bar-fill" id="sutera-gauge-bar"><div class="skeleton"></div></div>
+                                    </div>
+                                </div>
+                                 <div id="sutera-error-message" class="error-message" style="display: none;"></div>
+                            </div>
                         </div>
                     </div>
 
-                    <div id="vanilla-server-panel" class="status-panel individual-server-panel vanilla-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.3s">
-                        <div class="panel-header">
-                            <span class="panel-icon"><i class="fas fa-seedling"></i></span>
-                            <h2 class="panel-title">バニラ鯖</h2>
-                        </div>
-                        <div class="panel-body">
-                            <div class="player-gauge vanilla">
-                                <div class="label" id="vanilla-player-label">プレイヤー数: - / -</div>
-                                <div class="gauge-bar-bg">
-                                    <div class="gauge-bar-fill" id="vanilla-gauge-bar"><div class="skeleton"></div></div>
-                                </div>
+                    <div class="panel-border-wrapper animate-on-load" data-animation="fadeInUp" data-animation-delay="0.3s">
+                        <div id="vanilla-server-panel" class="status-panel individual-server-panel vanilla-panel">
+                            <div class="panel-header">
+                                <span class="panel-icon"><i class="fas fa-seedling"></i></span>
+                                <h2 class="panel-title">バニラ鯖</h2>
                             </div>
-                            <div id="vanilla-error-message" class="error-message" style="display: none;"></div>
+                            <div class="panel-body">
+                                <div class="player-gauge vanilla">
+                                    <div class="label" id="vanilla-player-label">プレイヤー数: - / -</div>
+                                    <div class="gauge-bar-bg">
+                                        <div class="gauge-bar-fill" id="vanilla-gauge-bar"><div class="skeleton"></div></div>
+                                    </div>
+                                </div>
+                                <div id="vanilla-error-message" class="error-message" style="display: none;"></div>
+                            </div>
                         </div>
                     </div>
 
-                     <div id="other-server-panel" class="status-panel individual-server-panel other-panel animate-on-load" data-animation="fadeInUp" data-animation-delay="0.4s">
-                        <div class="panel-header">
-                            <span class="panel-icon"><i class="fas fa-users-line"></i></span>
-                            <h2 class="panel-title">その他</h2>
-                        </div>
-                        <div class="panel-body">
-                             <div class="player-gauge other">
-                                <div class="label" id="other-player-label">ロビー等のプレイヤー数: - / -</div>
-                                <div class="gauge-bar-bg">
-                                    <div class="gauge-bar-fill" id="other-gauge-bar"><div class="skeleton"></div></div>
+                     <div class="panel-border-wrapper animate-on-load" data-animation="fadeInUp" data-animation-delay="0.4s">
+                        <div id="other-server-panel" class="status-panel individual-server-panel other-panel">
+                            <div class="panel-header">
+                                <span class="panel-icon"><i class="fas fa-users-line"></i></span>
+                                <h2 class="panel-title">その他</h2>
+                            </div>
+                            <div class="panel-body">
+                                 <div class="player-gauge other">
+                                    <div class="label" id="other-player-label">プレイヤー数: - / -</div>
+                                    <div class="gauge-bar-bg">
+                                        <div class="gauge-bar-fill" id="other-gauge-bar"><div class="skeleton"></div></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
