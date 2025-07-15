@@ -1,4 +1,4 @@
-/* status.css - Final Animated Border Design */
+/* status.css - Final Persistent Border Design */
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
@@ -74,7 +74,7 @@ header .container { display: flex; justify-content: space-between; align-items: 
 .page-header h1 { font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 800; color: #FFF; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 15px; }
 .page-header h1 i { color: var(--primary-color); }
 .page-header p { font-size: clamp(1rem, 2.5vw, 1.1rem); color: var(--text-muted); max-width: 650px; margin: 0 auto; }
-.update-countdown { color: var(--text-muted); font-size: 0.9rem; margin-top: -30px; margin-bottom: 40px; text-align: center; }
+.update-countdown { color: var(--text-muted); font-size: 0.9rem; margin-top: -30px; margin-bottom: 40px; text-align: center; height: 1.2em; }
 #countdown-timer { font-weight: 600; color: var(--text-color); }
 
 /* --- ステータスダッシュボード --- */
@@ -87,7 +87,12 @@ header .container { display: flex; justify-content: space-between; align-items: 
     border-radius: calc(var(--border-radius-lg) + 2px);
     background: conic-gradient(from var(--angle), var(--c1), var(--c2), var(--c3), var(--c1));
     animation: rotate-gradient 5s linear infinite;
+    transition: transform var(--transition-fast);
 }
+.individual-server-panel-wrapper:hover { transform: translateY(-8px); }
+.individual-server-panel-wrapper:active { transform: translateY(-2px) scale(0.99); }
+
+
 @keyframes rotate-gradient { to { --angle: 450deg; } }
 
 .overall-wrapper { --c1: var(--accent-color); --c2: var(--secondary-color); --c3: var(--primary-color); }
@@ -96,9 +101,7 @@ header .container { display: flex; justify-content: space-between; align-items: 
 .other-wrapper { --c1: var(--text-muted); --c2: var(--text-color); --c3: #e5e7eb; }
 
 .status-panel { background: var(--panel-bg); border-radius: var(--border-radius-lg); padding: 30px; }
-.individual-server-panel { cursor: pointer; transition: transform var(--transition-fast); }
-.individual-server-panel:hover { transform: scale(1.03); }
-.individual-server-panel:active { transform: scale(0.99); }
+.individual-server-panel { cursor: pointer; }
 
 .panel-header { display: flex; align-items: center; gap: 15px; }
 .panel-icon { font-size: 1.8rem; width: 40px; text-align: center; color: var(--icon-color, var(--text-color)); }
