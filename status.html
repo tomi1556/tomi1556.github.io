@@ -40,7 +40,7 @@
             <div class="page-header animate-on-load" data-animation="fadeInUp">
                 <h1><i class="fas fa-satellite-dish"></i>Mission Control</h1>
                 <p>StellaMCネットワークの稼働状況をリアルタイムで監視します。</p>
-                <p class="update-countdown">次回更新まで: <span id="countdown-timer">60</span>秒</p>
+                <p class="update-countdown" id="update-countdown-text">次回更新まで: <span id="countdown-timer">60</span>秒</p>
             </div>
 
             <div class="status-dashboard">
@@ -65,7 +65,7 @@
 
                 <div class="server-panels-grid">
                     <div class="panel-border-wrapper sutera-wrapper animate-on-load" data-animation="fadeInUp" data-animation-delay="0.2s">
-                        <div id="sutera-server-panel" class="status-panel individual-server-panel sutera-panel">
+                        <div id="sutera-server-panel" class="status-panel individual-server-panel">
                             <div class="panel-header">
                                 <span class="panel-icon"><i class="fas fa-star"></i></span>
                                 <h2 class="panel-title">すてら鯖</h2>
@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="panel-border-wrapper vanilla-wrapper animate-on-load" data-animation="fadeInUp" data-animation-delay="0.3s">
-                        <div id="vanilla-server-panel" class="status-panel individual-server-panel vanilla-panel">
+                        <div id="vanilla-server-panel" class="status-panel individual-server-panel">
                             <div class="panel-header">
                                 <span class="panel-icon"><i class="fas fa-seedling"></i></span>
                                 <h2 class="panel-title">バニラ鯖</h2>
@@ -101,7 +101,7 @@
                     </div>
 
                      <div class="panel-border-wrapper other-wrapper animate-on-load" data-animation="fadeInUp" data-animation-delay="0.4s">
-                        <div id="other-server-panel" class="status-panel individual-server-panel other-panel">
+                        <div id="other-server-panel" class="status-panel individual-server-panel">
                             <div class="panel-header">
                                 <span class="panel-icon"><i class="fas fa-users-line"></i></span>
                                 <h2 class="panel-title">その他</h2>
