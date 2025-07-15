@@ -1,4 +1,4 @@
-/* status.css - Final Polished Carbon & Neon Design */
+/* status.css - Final Animated Border Design */
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
@@ -7,6 +7,7 @@
     --accent-color: #FFD05A;
     --success-color: #22c55e;
     --danger-color: #ef4444;
+    --neutral-color: #9ca3af;
     --dark-bg: #0D1117;
     --panel-bg: #161B22;
     --panel-border: rgba(139, 148, 158, 0.2);
@@ -16,7 +17,7 @@
     --border-radius-lg: 16px;
     --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    --angle: 90deg; /* アニメーション用 */
+    --angle: 90deg;
 }
 
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -56,14 +57,13 @@ a:hover { color: var(--accent-color); }
 header { background-color: transparent; padding: 18px 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; transition: all var(--transition-normal); }
 header.scrolled { background-color: rgba(13, 17, 23, 0.8); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-bottom: 1px solid var(--panel-border); padding: 10px 0; }
 header .container { display: flex; justify-content: space-between; align-items: center; }
-#logo-img { height: 38px; transition: all var(--transition-fast); }
-#logo-img:hover { transform: scale(1.08); }
+#logo-img { height: 38px; }
 .main-nav ul { list-style: none; display: flex; align-items: center; margin:0; padding:0; }
 .main-nav ul li { margin-left: 22px; }
 .main-nav ul li a.nav-link { color: #FFF; font-weight: 500; font-size: 0.93rem; padding: 12px 8px; position: relative; transition: color var(--transition-fast); }
 .main-nav ul li a.nav-link.active, .main-nav ul li a.nav-link:hover { color: var(--accent-color); }
 .nav-discord-link { display: inline-flex; align-items: center; padding: 7px 14px !important; background-color: transparent; border: 1.5px solid rgba(255,255,255,0.6); border-radius: 16px; color: #FFF !important; font-weight: 500; transition: all var(--transition-fast); }
-.nav-discord-link:hover { background-color: var(--primary-color); border-color: var(--primary-color); transform: scale(1.05); }
+.nav-discord-link:hover { background-color: var(--primary-color); border-color: var(--primary-color); }
 .nav-discord-link i { margin-right: 7px; }
 .hamburger-menu { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1002; }
 .hamburger-bar { display: block; width: 26px; height: 2.5px; background-color: #FFF; margin: 6px auto; transition: all var(--transition-normal); border-radius: 3px; }
@@ -74,6 +74,8 @@ header .container { display: flex; justify-content: space-between; align-items: 
 .page-header h1 { font-size: clamp(2.5rem, 6vw, 3.5rem); font-weight: 800; color: #FFF; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center; gap: 15px; }
 .page-header h1 i { color: var(--primary-color); }
 .page-header p { font-size: clamp(1rem, 2.5vw, 1.1rem); color: var(--text-muted); max-width: 650px; margin: 0 auto; }
+.update-countdown { color: var(--text-muted); font-size: 0.9rem; margin-top: -30px; margin-bottom: 40px; text-align: center; }
+#countdown-timer { font-weight: 600; color: var(--text-color); }
 
 /* --- ステータスダッシュボード --- */
 .status-dashboard { display: flex; flex-direction: column; gap: 30px; }
@@ -81,29 +83,22 @@ header .container { display: flex; justify-content: space-between; align-items: 
 
 /* --- パネル共通 --- */
 .panel-border-wrapper {
-    padding: 1px;
-    border-radius: calc(var(--border-radius-lg) + 1px);
-    background: var(--status-color, var(--panel-border));
-    transition: background var(--transition-fast);
-}
-.panel-border-wrapper:hover {
-    animation: rotate-gradient 3s linear infinite;
-    background: conic-gradient(from var(--angle), 
-                var(--status-color, var(--primary-color)), 
-                var(--secondary-color), 
-                var(--accent-color), 
-                var(--status-color, var(--primary-color)));
+    padding: 2px;
+    border-radius: calc(var(--border-radius-lg) + 2px);
+    background: conic-gradient(from var(--angle), var(--c1), var(--c2), var(--c3), var(--c1));
+    animation: rotate-gradient 5s linear infinite;
 }
 @keyframes rotate-gradient { to { --angle: 450deg; } }
 
-.status-panel {
-    background: var(--panel-bg);
-    border-radius: var(--border-radius-lg);
-    padding: 30px;
-    transition: transform var(--transition-fast) ease-out;
-}
-.individual-server-panel { cursor: pointer; }
-.individual-server-panel:hover { transform: scale(1.02); }
+.overall-wrapper { --c1: var(--accent-color); --c2: var(--secondary-color); --c3: var(--primary-color); }
+.sutera-wrapper { --c1: var(--primary-color); --c2: #da4ea2; --c3: #a263ff; }
+.vanilla-wrapper { --c1: var(--secondary-color); --c2: var(--success-color); --c3: #a7f3d0; }
+.other-wrapper { --c1: var(--text-muted); --c2: var(--text-color); --c3: #e5e7eb; }
+
+.status-panel { background: var(--panel-bg); border-radius: var(--border-radius-lg); padding: 30px; }
+.individual-server-panel { cursor: pointer; transition: transform var(--transition-fast); }
+.individual-server-panel:hover { transform: scale(1.03); }
+.individual-server-panel:active { transform: scale(0.99); }
 
 .panel-header { display: flex; align-items: center; gap: 15px; }
 .panel-icon { font-size: 1.8rem; width: 40px; text-align: center; color: var(--icon-color, var(--text-color)); }
@@ -125,10 +120,7 @@ header .container { display: flex; justify-content: space-between; align-items: 
 .player-gauge.other .gauge-bar-fill { background: linear-gradient(90deg, #9ca3af, #e5e7eb); }
 
 .error-message { text-align: center; color: var(--danger-color); font-size: 0.9rem; padding: 10px 0; }
-
-/* --- 総合ステータスパネル --- */
-.overall-status-panel .panel-header { margin-bottom: 0; }
-.status-indicator { margin-left: auto; font-size: 0.9rem; font-weight: 600; padding: 6px 14px; border-radius: 30px; transition: all var(--transition-fast); }
+.status-indicator { margin-left: auto; font-size: 0.9rem; font-weight: 600; padding: 6px 14px; border-radius: 30px; }
 .status-indicator.online { background-color: rgba(var(--rgb-success), 0.15); color: var(--success-color); }
 .status-indicator.offline { background-color: rgba(var(--rgb-danger), 0.15); color: var(--danger-color); }
 .status-indicator.loading { background-color: rgba(255,255,255,0.1); color: var(--text-muted); }
