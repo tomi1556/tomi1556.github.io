@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minecraftサーバー 深層心理診断</title>
+    <style>
+        /* ====== Google Fonts & 基本設定 ====== */
+        @import url('https://fonts.googleapis.com/css2?family=DotGothic16&family=Noto+Sans+JP:wght@400;700&display=swap');
+
+        :root {
+            --font-pixel: 'DotGothic16', sans-serif;
+            --font-main: 'Noto Sans JP', sans-serif;
+            --bg-color: #1e1e1e;
+            --surface-color: #2d2d2d;
+            --primary-color: #00aaff;
+            --text-color: #e0e0e0;
+            --dark-text-color: #1e1e1e;
+            --border-color: #444;
+            --shadow-color: rgba(0, 0, 0, 0.5);
+            --success-color: #50fa7b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: var(--font-main);
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-image:
+                linear-gradient(rgba(30, 30, 30, 0.95), rgba(30, 30, 30, 0.95)),
+                url('https://www.transparenttextures.com/patterns/cubes.png');
+            overflow: hidden;
+            padding: 1rem;
+        }
+        
+        /* ====== コンテナと全体レイアウト ====== */
+        .container {
+            width: 100%;
+            max-width: 600px;
+            background-color: var(--surface-color);
+            border-radius: 12px;
+            border: 2px solid var(--border-color);
+            box-shadow: 0 10px 30px var(--shadow-color);
+            overflow: hidden;
+            transition: all 0.5s ease-in-out;
+        }
+
+        /* ====== スタート画面 ====== */
+        #start-screen {
+            padding: 40px;
+            text-align: center;
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        #start-screen h1 {
+            font-family: var(--font-pixel);
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 0 #000;
+        }
+
+        #start-screen p {
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 2rem;
+        }
+
+        .start-btn {
+            font-family: var(--font-pixel);
+            font-size: 1.5rem;
+            padding: 15px 40px;
+            background-color: var(--success-color);
+            color: var(--dark-text-color);
+            border: 2px solid #000;
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.1s ease-out;
+            text-shadow: 1px 1px 0px #fff;
+        }
+
+        .start-btn:hover {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0px #000;
+        }
+        
+        .start-btn:active {
+            transform: translate(4px, 4px);
+            box-shadow: 0px 0px 0px #000;
+        }
+
+        /* ====== 診断画面 ====== */
+        #quiz-screen {
+            padding: 30px;
+            display: none; /* JSで表示を切り替える */
+        }
+
+        #progress-bar {
+            width: 100%;
+            height: 10px;
+            background-color: var(--border-color);
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        #progress {
+            width: 0%;
+            height: 100%;
+            background-color: var(--primary-color);
+            transition: width 0.5s ease;
+        }
+        
+        .question-container {
+            animation: slideUp 0.6s ease-out;
+        }
+
+        #question-number {
+            font-family: var(--font-pixel);
+            color: var(--primary-color);
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #question-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            line-height: 1.5;
+        }
+
+        .options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            width: 100%;
+            padding: 15px;
+            font-size: 1.1rem;
+            background-color: #3c3c3c;
+            border: 2px solid var(--border-color);
+            color: var(--text-color);
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            transition: all 0.2s ease;
+        }
+        
+        .option-btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+            border-color: var(--primary-color);
+            transform: translateX(5px);
+        }
+
+        /* ====== 結果画面 ====== */
+        #result-screen {
+            padding: 40px;
+            text-align: center;
+            display: none; /* JSで表示を切り替える */
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        #result-screen h2 {
+            font-family: var(--font-pixel);
+            color: var(--text-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .result-server-name {
+            display: inline-block;
+            font-family: var(--font-pixel);
+            font-size: 3rem;
+            padding: 10px 20px;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            color: var(--dark-text-color);
+            border: 2px solid #000;
+            box-shadow: 4px 4px 0px #000;
+            transform: rotate(-2deg);
+        }
+        
+        #result-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--text-color);
+            margin-bottom: 1rem;
+        }
+        
+        #result-description {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .aptitude-box {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+
+        .aptitude-box h4 {
+            font-family: var(--font-pixel);
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--primary-color);
+        }
+
+        #hidden-aptitude {
+            font-size: 1rem;
+        }
+        
+        .restart-btn {
+            margin-top: 2rem;
+            font-family: var(--font-pixel);
+            font-size: 1.2rem;
+            padding: 12px 30px;
+            background-color: #3c3c3c;
+            color: var(--text-color);
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .restart-btn:hover {
+            background-color: var(--primary-color);
+            color: #fff;
+        }
+        
+        /* ====== アニメーション定義 ====== */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-out {
+            animation: fadeOut 0.5s ease-out forwards;
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        /* ====== レスポンシブ対応 ====== */
+        @media (max-width: 600px) {
+            body { padding: 0.5rem; }
+            #start-screen h1 { font-size: 2rem; }
+            #start-screen p { font-size: 1rem; }
+            .start-btn { font-size: 1.2rem; }
+            #quiz-screen, #start-screen, #result-screen { padding: 20px; }
+            #question-text { font-size: 1.3rem; }
+            .option-btn { font-size: 1rem; }
+            .result-server-name { font-size: 2.2rem; }
+            #result-title { font-size: 1.5rem; }
+            #result-description { font-size: 1rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container" id="container">
+        <div id="start-screen">
+            <h1>Minecraftサーバー<br>深層心理診断</h1>
+            <p>5つの簡単な質問で、あなたにピッタリのサーバーを見つけよう！<br>直感でサクサク答えてね。</p>
+            <button class="start-btn" id="start-btn">診断を始める</button>
+        </div>
+
+        <div id="quiz-screen">
+            <div id="progress-bar">
+                <div id="progress"></div>
+            </div>
+            <div id="question-wrapper">
+                </div>
+        </div>
+
+        <div id="result-screen">
+            <h2>あなたの診断結果は...</h2>
+            <div id="result-server-name" class="result-server-name"></div>
+            <h3 id="result-title"></h3>
+            <p id="result-description"></p>
+            <div class="aptitude-box">
+                <h4>- 隠れた適性 -</h4>
+                <p id="hidden-aptitude"></p>
+            </div>
+            <button class="restart-btn" id="restart-btn">もう一度診断する</button>
+        </div>
+    </div>
+
+    <script>
+        // ======== DOM要素の取得 ========
+        const startScreen = document.getElementById('start-screen');
+        const quizScreen = document.getElementById('quiz-screen');
+        const resultScreen = document.getElementById('result-screen');
+        const startBtn = document.getElementById('start-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const questionWrapper = document.getElementById('question-wrapper');
+        const progress = document.getElementById('progress');
+        
+        // ======== 診断データ ========
+        const quizData = [
+            {
+                question: "あなたがゲームの世界で、最も「達成感」を覚える瞬間はどんな時ですか？",
+                options: [
+                    { text: "試行錯誤の末に編み出した「最適解」で、圧倒的な数値を叩き出した時。", scores: { tenkuu: 3, bouken: 0, seikatsu: 1 } },
+                    { text: "誰も気づかなかった隠しルートや物語の断片を、自らの足で発見した時。", scores: { tenkuu: 0, bouken: 3, seikatsu: 1 } },
+                    { text: "長い時間をかけて育て上げたものが、自分だけの揺るぎない資産となった時。", scores: { tenkuu: 1, bouken: 1, seikatsu: 3 } }
+                ]
+            },
+            {
+                question: "新しい世界が目の前に広がっています。あなたの最初の行動は？",
+                options: [
+                    { text: "まずはゴールを定め、そこへ至る最短ルートと効率的な手段を探し始める。", scores: { tenkuu: 3, bouken: 1, seikatsu: 0 } },
+                    { text: "地図をあえて見ずに、気の向くままに歩き出し、偶然の出会いや発見を楽しむ。", scores: { tenkuu: 0, bouken: 3, seikatsu: 1 } },
+                    { text: "まずは腰を据える安全な拠点を作り、そこから少しずつ世界を広げていく。", scores: { tenkuu: 0, bouken: 1, seikatsu: 3 } }
+                ]
+            },
+            {
+                question: "あなたにとって「最強の武器」とは何ですか？",
+                options: [
+                    { text: "膨大なデータと分析に基づき、最適な一撃を繰り出す「知識」。", scores: { tenkuu: 3, bouken: 1, seikatsu: 1 } },
+                    { text: "仲間との連携や地形の利用など、状況を最大限に活用する「閃き」。", scores: { tenkuu: 1, bouken: 3, seikatsu: 0 } },
+                    { text: "どんな困難にも屈せず、コツコツと努力を積み重ねて得た「揺るぎない力」。", scores: { tenkuu: 0, bouken: 1, seikatsu: 3 } }
+                ]
+            },
+            {
+                question: "ゲームの世界に、あなたが最も惹かれる「美学」はどれですか？",
+                options: [
+                    { text: "機能美。洗練され、無駄がなく、すべてが合理的に設計されたシステム。", scores: { tenkuu: 3, bouken: 1, seikatsu: 0 } },
+                    { text: "物語性。一つ一つのアイテムや場所に背景があり、世界への没入感を深める演出。", scores: { tenkuu: 1, bouken: 3, seikatsu: 1 } },
+                    { text: "生活感。日々の営みの中に小さな喜びがあり、安らぎと愛着を感じられる雰囲気。", scores: { tenkuu: 0, bouken: 1, seikatsu: 3 } }
+                ]
+            },
+            {
+                question: "あなたは集団の中で、どのような存在でありたいですか？",
+                options: [
+                    { text: "常にトップを走り、他者との競争を通じて自らを高めていく「開拓者」。", scores: { tenkuu: 3, bouken: 1, seikatsu: 0 } },
+                    { text: "仲間と役割を分担し、一人では成し遂げられない偉業を達成する「協力者」。", scores: { tenkuu: 1, bouken: 3, seikatsu: 1 } },
+                    { text: "自分の技術や作品を通じて、コミュニティ全体を静かに豊かにする「職人」。", scores: { tenkuu: 0, bouken: 0, seikatsu: 3 } }
+                ]
+            }
+        ];
+
+        const resultsData = {
+            tenkuu: {
+                name: "🏝️ 天空鯖",
+                title: "効率を極める「天空の戦略家」",
+                description: "あなたは、常に最適解を求め、圧倒的な成果を出すことに喜びを感じる「戦略家」タイプ。シーズン制の中で誰よりも早く頂点を目指し、ランキングのトップに君臨することで、最高のゲーム体験が得られるでしょう。その分析力は、まさに天空鯖の王者たる所以です。",
+                color: "#8be9fd"
+            },
+            bouken: {
+                name: "🧭 冒険鯖",
+                title: "未知を愛する「真の探検家」",
+                description: "あなたは、予測不可能な出来事や、まだ見ぬ世界の秘密に心躍らせる「探検家」タイプ。仲間と力を合わせてダンジョンを攻略し、美しい音響と世界観に浸ることで、最高のゲーム体験が得られるでしょう。あなたの好奇心こそが、冒険鯖の物語を紡ぎます。",
+                color: "#f1fa8c"
+            },
+            seikatsu: {
+                name: "🏡 生活鯖",
+                title: "創造を愉しむ「大地の職人」",
+                description: "あなたは、長い時間をかけて自分だけの世界を築き上げ、そこに愛着と安らぎを見出す「職人」タイプ。インフレのない安定した経済の中、自分のペースで釣りや農業を極め、揺るぎない資産を築くことで、最高のゲーム体験が得られるでしょう。その継続力は、生活鯖に豊かな実りをもたらします。",
+                color: "#ffb86c"
+            }
+        };
+
+        // ======== 診断ロジック ========
+        let currentQuestionIndex = 0;
+        let scores = {
+            tenkuu: 0,
+            bouken: 0,
+            seikatsu: 0
+        };
+
+        function startQuiz() {
+            // 初期化
+            currentQuestionIndex = 0;
+            scores = { tenkuu: 0, bouken: 0, seikatsu: 0 };
+            
+            startScreen.classList.add('fade-out');
+            setTimeout(() => {
+                startScreen.style.display = 'none';
+                startScreen.classList.remove('fade-out');
+                
+                quizScreen.style.display = 'block';
+                quizScreen.style.animation = 'fadeIn 1s';
+                showQuestion();
+            }, 500);
+        }
+        
+        function showQuestion() {
+            const questionData = quizData[currentQuestionIndex];
+            
+            // プログレスバー更新
+            progress.style.width = `${((currentQuestionIndex) / quizData.length) * 100}%`;
+            
+            // 質問コンテナ作成
+            const questionContainer = document.createElement('div');
+            questionContainer.classList.add('question-container');
+            
+            questionContainer.innerHTML = `
+                <p id="question-number">質問 ${currentQuestionIndex + 1}/${quizData.length}</p>
+                <h2 id="question-text">${questionData.question}</h2>
+                <div class="options-container">
+                    ${questionData.options.map((option, index) => `
+                        <button class="option-btn" data-index="${index}">${option.text}</button>
+                    `).join('')}
+                </div>
+            `;
+            
+            questionWrapper.innerHTML = ''; // 前の質問をクリア
+            questionWrapper.appendChild(questionContainer);
+            
+            // 各選択肢にイベントリスナーを追加
+            document.querySelectorAll('.option-btn').forEach(button => {
+                button.addEventListener('click', handleOptionClick);
+            });
+        }
+        
+        function handleOptionClick(event) {
+            const selectedOptionIndex = event.target.getAttribute('data-index');
+            const selectedScores = quizData[currentQuestionIndex].options[selectedOptionIndex].scores;
+            
+            // スコアを加算
+            scores.tenkuu += selectedScores.tenkuu;
+            scores.bouken += selectedScores.bouken;
+            scores.seikatsu += selectedScores.seikatsu;
+
+            currentQuestionIndex++;
+            
+            questionWrapper.firstElementChild.classList.add('fade-out');
+
+            setTimeout(() => {
+                if (currentQuestionIndex < quizData.length) {
+                    showQuestion();
+                } else {
+                    showResult();
+                }
+            }, 500);
+        }
+
+        function showResult() {
+            progress.style.width = '100%';
+
+            setTimeout(() => {
+                quizScreen.classList.add('fade-out');
+                
+                setTimeout(() => {
+                    quizScreen.style.display = 'none';
+                    quizScreen.classList.remove('fade-out');
+                    
+                    resultScreen.style.display = 'block';
+                    resultScreen.style.animation = 'fadeIn 1s';
+                    
+                    // 結果を計算して表示
+                    const finalScores = Object.entries(scores).sort((a, b) => b[1] - a[1]);
+                    const primaryResultKey = finalScores[0][0];
+                    const secondaryResultKey = finalScores[1][0];
+                    
+                    const primaryResult = resultsData[primaryResultKey];
+                    const secondaryResult = resultsData[secondaryResultKey];
+                    
+                    document.getElementById('result-server-name').textContent = primaryResult.name;
+                    document.getElementById('result-server-name').style.backgroundColor = primaryResult.color;
+                    document.getElementById('result-title').textContent = primaryResult.title;
+                    document.getElementById('result-description').textContent = primaryResult.description;
+                    document.getElementById('hidden-aptitude').textContent = `また、あなたには「${secondaryResult.title}」としての側面も見られます。メインのサーバーに慣れたら、${secondaryResult.name}を覗いてみるのも面白いかもしれませんね。`;
+
+                }, 500);
+            }, 500);
+        }
+        
+        function restartQuiz() {
+            resultScreen.classList.add('fade-out');
+            setTimeout(() => {
+                resultScreen.style.display = 'none';
+                resultScreen.classList.remove('fade-out');
+                
+                startScreen.style.display = 'block';
+                startScreen.style.animation = 'fadeIn 1s';
+            }, 500);
+        }
+
+        // ======== イベントリスナー ========
+        startBtn.addEventListener('click', startQuiz);
+        restartBtn.addEventListener('click', restartQuiz);
+
+    </script>
+</body>
+</html>
