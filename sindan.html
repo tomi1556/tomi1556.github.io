@@ -58,7 +58,7 @@
         }
 
         /* ====== スタート画面 ====== */
-        #start-screen { padding: 50px; text-align: center; animation: fadeIn 1s ease-in-out; }
+        #start-screen { padding: 50px; text-align: center; }
         #start-screen h1 {
             font-family: var(--font-pixel);
             font-size: 2.8rem;
@@ -118,9 +118,9 @@
         #result-svg .corner-label { font-family: var(--font-pixel); fill: var(--text-muted); font-size: 14px; }
         #result-svg .lines { stroke: var(--border-color); stroke-width: 1.5; }
         #result-svg .corners { fill: var(--border-color); }
-        #result-point { fill: var(--highlight-color); r: 0; transition: r 0.5s ease; }
-        #result-point-halo { fill: var(--highlight-color); r: 0; transition: r 0.5s ease; opacity: 0.3; }
-        .analysis-details > * { transition: opacity 0.5s, transform 0.5s; opacity: 0; transform: translateY(20px); }
+        #result-point { fill: var(--highlight-color); r: 0; transition: r 0.5s ease, cx 0.5s ease, cy 0.5s ease; }
+        #result-point-halo { fill: var(--highlight-color); r: 0; transition: r 0.5s ease, cx 0.5s ease, cy 0.5s ease; opacity: 0.3; }
+        .analysis-details { opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
         #archetype-title {
             font-size: 2.2rem; font-weight: 800;
             color: #fff; margin-bottom: 1rem;
@@ -145,7 +145,7 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
         @keyframes slideInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
+        
         /* ====== レスポンシブ対応 ====== */
         @media (max-width: 680px) {
             body { padding: 0.5rem; }
@@ -158,8 +158,8 @@
 </head>
 <body>
 
-    <div class="container">
-        <div id="start-screen">
+    <div class="container" id="container">
+        <div id="start-screen" class="anim-fade-in">
             <h1>Minecraft<br>プレイスタイル診断【究極版】</h1>
             <p>10のシナリオが、あなたのプレイスタイルを精密に分析。<br>最高のサーバー体験への扉を開こう。</p>
             <button class="start-btn" id="start-btn">診断を開始する</button>
@@ -189,8 +189,10 @@
                         <text class="corner-label" x="20" y="250" text-anchor="middle">🧭 冒険</text>
                         <text class="corner-label" x="280" y="250" text-anchor="middle">🏡 生活</text>
                     </g>
-                    <circle id="result-point-halo" cx="150" cy="160" r="0"></circle>
-                    <circle id="result-point" cx="150" cy="160" r="0"></circle>
+                    <g>
+                        <circle id="result-point-halo" cx="150" cy="160" r="0"></circle>
+                        <circle id="result-point" cx="150" cy="160" r="0"></circle>
+                    </g>
                 </svg>
             </div>
             <div class="analysis-details">
@@ -201,10 +203,11 @@
         </div>
     </div>
     
-    <audio id="click-sound" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU0HT19OALe/ub+3v7W/tb20vrS+s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO-"></audio>
+    <audio id="click-sound" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU0HT19OALe/ub+3v7W/tb20vrS+s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO-"></audio>
     <audio id="result-sound" preload="auto" src="data:audio/wav;base64,UklGRoh+AABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQBofAAAAP//AgAJAAYADwAbABoAFgAJAP//AwAIAAcACwAUABUADgAEAPkABQADAAUACwASABQADQADAPkABgAEAAUACwAUABQADgADAPgABwAFAAYADQATABQADwAEAPkABQACAAcADQAUABMADgACAPkACAAEAAQACwATABQADgADAPgABgADAAQADQATABQADgADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADgATABMADgADAPgABgADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABMADgACAPkACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgAEAPcABgAFAAUADQATABQADgADAPgABQACAAUACwATABMADgAEAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABQADwAEAPgABwAFAAYADgATABMADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADgATABQADwADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABMADwAEAPcABwAFAAYADQATABMADgAEAPgABgAEAAUADgATABMADgADAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABMADwAEAPcABwAFAAYADQATABMADgAEAPgABgAEAAUADQATABMADgAEAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAEAPcABwAFAAYADQATABQADgADAPgABgADAAQADQATABQADwAEAPcABgAFAAYADQATABQADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAABABAAQsDFgMnAysDRQRaBgMAAAAA//8B/gD8AP8BAwIFAQ4CHQEnAS8BOAFDAU0BUgFhAWsBcwF/AYYBigGOAY8BkwGVAZgBmwGfAaIBpQGqAa4BswG6Ab4BwwHHAdEB0wHWAd0B4AHkAesB8AHyAfYB+AH+AgECCQIOAhYCHQEkASkBMQE7AUIBSQFMAVIAVwFbAWQBawF0AXkBfwGJAZsBox/DGb0ZpBmuGacZqBmqGaoZpxmnGaYapiqfKp4rni2LqAxoDKfMaYyoTKiMqEyojKgMaAxoC+gL6AvoC6fLZsslyycK5MrkytgLQAtfS1eLGUsaixqK2YrKitlKSUo5CcdJxwmmyKaIdMa0ArYAtUC0QLLAsMevx6sHqgeoB6XHSMdHB0eGxsZGBkXGRYaEhMQDw8JDwcFAwICAv7+/v38/Pn49/f39vf29fX08/Py8u/u7evq6ejn5eLh4N/d3dva2dbV09HT0c/NzMvKyMjExsPCwcG/vr28ury5t7i3tLW0s7GwsK+ur6uqqamnp6WkpaOjoaSioaGg/+De3drY1NPS0M7My8fGwsK+vby5t7W0srCvrqmpqaalpKSioaGfn56dnZyanJuaWlhXV1RTUVFQT05NTEpKSkdGRUM/PDs5ODc1NDMyLy0rKScmJSQjIiAfHx4dHBsaGRgWFRQRDg0LCQgHBgQCAf/+/v39/f39/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v-"></audio>
 
-<script>
+    <script>
+        // ======== DOM要素と効果音の定義 ========
         const DOM = {
             startScreen: document.getElementById('start-screen'),
             quizScreen: document.getElementById('quiz-screen'),
@@ -213,11 +216,14 @@
             restartBtn: document.getElementById('restart-btn'),
             questionWrapper: document.getElementById('question-wrapper'),
             progress: document.getElementById('progress'),
-            resultSVG: document.getElementById('result-svg'),
             resultPoint: document.getElementById('result-point'),
             resultPointHalo: document.getElementById('result-point-halo'),
             analysisDetails: document.querySelector('.analysis-details'),
         };
+        
+        // ★修正点: 効果音の要素を取得する定義を追加
+        const clickSound = document.getElementById('click-sound');
+        const resultSound = document.getElementById('result-sound');
         
         const quizData = [
             { question: "ワールド生成直後、最初の夜までに最優先することは？", options: [
@@ -283,7 +289,6 @@
             currentQuestionIndex = 0;
             scores = { tenkuu: 0, bouken: 0, seikatsu: 0 };
             
-            // アニメーションクラスをリセット
             DOM.startScreen.classList.remove('anim-fade-in');
             DOM.startScreen.classList.add('anim-fade-out');
             
@@ -392,12 +397,11 @@
                     const finalX = coords.tenkuu.x * p.tenkuu + coords.bouken.x * p.bouken + coords.seikatsu.x * p.seikatsu;
                     const finalY = coords.tenkuu.y * p.tenkuu + coords.bouken.y * p.bouken + coords.seikatsu.y * p.seikatsu;
                     
-                    DOM.resultPoint.setAttribute('cx', finalX);
-                    DOM.resultPoint.setAttribute('cy', finalY);
-                    DOM.resultPointHalo.setAttribute('cx', finalX);
-                    DOM.resultPointHalo.setAttribute('cy', finalY);
-
                     setTimeout(() => {
+                        DOM.resultPoint.setAttribute('cx', finalX);
+                        DOM.resultPoint.setAttribute('cy', finalY);
+                        DOM.resultPointHalo.setAttribute('cx', finalX);
+                        DOM.resultPointHalo.setAttribute('cy', finalY);
                         DOM.resultPoint.style.r = 8;
                         DOM.resultPointHalo.style.r = 20;
                     }, 500);
@@ -430,6 +434,10 @@
                 DOM.analysisDetails.style.transform = 'translateY(20px)';
                 DOM.resultPoint.style.r = 0;
                 DOM.resultPointHalo.style.r = 0;
+                DOM.resultPoint.setAttribute('cx', '150');
+                DOM.resultPoint.setAttribute('cy', '160');
+                DOM.resultPointHalo.setAttribute('cx', '150');
+                DOM.resultPointHalo.setAttribute('cy', '160');
             }, 400);
         }
 
