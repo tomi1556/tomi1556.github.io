@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>プレイスタイル運命分岐診断【Absolute Final】</title>
+    <title>サーバープレイスタイル分析【Final Version】</title>
     <style>
         /* ====== Google Fonts & 基本設定 ====== */
         @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Rajdhani:wght@600&display=swap');
 
         :root {
             --font-display: 'Rajdhani', sans-serif;
-            --font-main: 'Kosugi Maru', sans-serif;
+            --font-main: 'Kosugi+Maru', sans-serif; /* Kosugi Maru for Japanese */
             --bg-color: #0d0c1d;
             --surface-color: rgba(22, 23, 44, 0.6);
             --primary-color: #a67cff;
@@ -135,9 +135,7 @@
         #bouken-bar .chart-value-bar { background-color: var(--bouken-color); }
         #seikatsu-bar .chart-value-bar { background-color: var(--seikatsu-color); }
         .analysis-details { opacity: 0; transform: translateY(20px); transition: opacity 0.5s, transform 0.5s; }
-        #archetype-title { font-size: 2.2rem; font-weight: 800; color: #fff; margin-bottom: 1rem; }
-        #archetype-keywords { margin-bottom: 1.5rem; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; }
-        .keyword-tag { background-color: rgba(0,0,0,0.3); padding: 0.3rem 0.8rem; border-radius: 1rem; font-size: 0.9rem; }
+        #archetype-title { font-size: 2rem; font-weight: 800; color: #fff; margin-bottom: 1.5rem; }
         #archetype-description { font-size: 1.1rem; line-height: 1.9; text-align: left; white-space: pre-wrap; }
         .restart-btn {
             font-family: var(--font-display); font-size: 1.2rem; padding: 12px 30px;
@@ -169,8 +167,8 @@
     <div id="background-stars"></div>
     <div class="container" id="container">
         <div id="start-screen" class="screen anim-fade-in">
-            <h1>Destiny Branch</h1>
-            <p>あなたの選択が、未来を創る。<br>魂の原型を解き明かす、運命の分岐が今、始まる。</p>
+            <h1>Server Style Analysis</h1>
+            <p>あなたのプレイスタイルを分析し、<br>最適なサーバーを見つけ出します。</p>
             <button class="main-btn" id="start-btn">分析を開始する</button>
         </div>
         <div id="quiz-screen" class="screen quiz-screen-padding" style="display: none;">
@@ -182,11 +180,11 @@
         </div>
         <div id="analysis-complete-screen" class="screen" style="display: none;">
             <h2 class="anim-fade-in">ANALYSIS COMPLETE</h2>
-            <p class="anim-fade-in" style="animation-delay: 0.2s;">あなたの魂の原型、その分析が完了しました。</p>
+            <p class="anim-fade-in" style="animation-delay: 0.2s;">あなたのプレイスタイルの分析が完了しました。</p>
             <button class="main-btn anim-fade-in" id="view-results-btn" style="animation-delay: 0.4s;">結果を見る</button>
         </div>
         <div id="result-screen" class="screen" style="display: none;">
-            <h2 class="result-anim">YOUR ARCHETYPE IS...</h2>
+            <h2 class="result-anim">YOUR PLAYSTYLE IS...</h2>
             <div class="result-chart-container result-anim">
                 <div class="chart-bar" id="tenkuu-bar"><div class="chart-label">天空鯖</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
                 <div class="chart-bar" id="bouken-bar"><div class="chart-label">冒険鯖</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
@@ -194,14 +192,13 @@
             </div>
             <div class="analysis-details">
                 <h3 id="archetype-title"></h3>
-                <div id="archetype-keywords"></div>
                 <p id="archetype-description"></p>
                 <button class="restart-btn" id="restart-btn">もう一度分析する</button>
             </div>
         </div>
     </div>
     
-    <audio id="click-sound" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU0HT19OALe/ub+3v7W/tb20vrS+s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO-"></audio>
+    <audio id="click-sound" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU0HT19OALe/ub+3v7W/tb20vrS+s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO-"></audio>
     <audio id="result-sound" preload="auto" src="data:audio/wav;base64,UklGRoh+AABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQBofAAAAP//AgAJAAYADwAbABoAFgAJAP//AwAIAAcACwAUABUADgAEAPkABQADAAUACwASABQADQADAPkABgAEAAUACwAUABQADgADAPgABwAFAAYADQATABQADwAEAPkABQACAAcADQAUABMADgACAPkACAAEAAQACwATABQADgADAPgABgADAAQADQATABQADgADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADgATABMADgADAPgABgADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABMADgACAPkACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgAEAPcABgAFAAUADQATABQADgADAPgABQACAAUACwATABMADgAEAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABQADwAEAPgABwAFAAYADgATABMADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADgATABQADwADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABMADwAEAPcABwAFAAYADQATABMADgAEAPgABgAEAAUADgATABMADgADAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABMADwAEAPcABwAFAAYADQATABMADgAEAPgABgAEAAUADQATABMADgAEAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAEAPcABwAFAAYADQATABQADgADAPgABgADAAQADQATABQADwAEAPcABgAFAAYADQATABQADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAABABAAQsDFgMnAysDRQRaBgMAAAAA//8B/gD8AP8BAwIFAQ4CHQEnAS8BOAFDAU0BUgFhAWsBcwF/AYYBigGOAY8BkwGVAZgBmwGfAaIBpQGqAa4BswG6Ab4BwwHHAdEB0wHWAd0B4AHkAesB8AHyAfYB+AH+AgECCQIOAhYCHQEkASkBMQE7AUIBSQFMAVIAVwFbAWQBawF0AXkBfwGJAZsBox/DGb0ZpBmuGacZqBmqGaoZpxmnGaYapiqfKp4rni2LqAxoDKfMaYyoTKiMqEyojKgMaAxoC+gL6AvoC6fLZsslyycK5MrkytgLQAtfS1eLGUsaixqK2YrKitlKSUo5CcdJxwmmyKaIdMa0ArYAtUC0QLLAsMevx6sHqgeoB6XHSMdHB0eGxsZGBkXGRYaEhMQDw8JDwcFAwICAv7+/v38/Pn49/f39vf29fX08/Py8u/u7evq6ejn5eLh4N/d3dva2dbV09HT0c/NzMvKyMjExsPCwcG/vr28ury5t7i3tLW0s7GwsK+ur6uqqamnp6WkpaOjoaSioaGg/+De3drY1NPS0M7My8fGwsK+vby5t7W0srCvrqmpqaalpKSioaGfn56dnZyanJuaWlhXV1RTUVFQT05NTEpKSkdGRUM/PDs5ODc1NDMyLy0rKScmJSQjIiAfHx4dHBsaGRgWFRQRDg0LCQgHBgQCAf/+/v39/f39/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v-"></audio>
 
     <script>
@@ -217,54 +214,59 @@
             questionWrapper: document.getElementById('question-wrapper'),
             stepCounter: document.getElementById('step-counter'),
             analysisDetails: document.querySelector('.analysis-details'),
-            archetypeKeywords: document.getElementById('archetype-keywords'),
+            archetypeTitle: document.getElementById('archetype-title'),
+            archetypeDescription: document.getElementById('archetype-description'),
         };
         const clickSound = document.getElementById('click-sound');
         const resultSound = document.getElementById('result-sound');
 
         const quizTree = {
-            'start': { question: "あなたの原動力となるのは、どちらの感情ですか？", options: [{ text: "高みを目指す「向上心」", next: 'c1' }, { text: "心を豊かにする「好奇心」", next: 'p1' }] },
-            'c1': { question: "その「向上心」は、主に何に向けられますか？", options: [{ text: "個人の能力や成果", next: 'c2_personal' }, { text: "チーム全体の成功や発展", next: 'c2_group' }] },
-            'c2_personal': { question: "あなたが最も得意なのは、どちらですか？", options: [{ text: "論理的に考え、システムを構築すること", next: 'c3_system' }, { text: "実践を繰り返し、技術を磨き上げること", next: 'c3_craft' }] },
-            'c3_system': { question: "あなたが構築した完璧なシステム。その目的は？", options: [{ text: "あらゆる無駄を省き、最高効率を追求する", next: 'c4_efficiency' }, { text: "複雑な問題を解決し、安定した環境を創る", next: 'c4_stability' }] },
-            'c4_efficiency': { question: "あなたの効率化が、誰かの仕事を奪う可能性が。どう考えますか？", options: [{ text: "より優れたシステムが生まれるのは自然なこと", next: 'c5_natural' }, { text: "全体の利益を考え、導入は慎重に進めるべき", next: 'r_architect' }] },
-            'c5_natural': { question: "最終的に、あなたは何を支配したいですか？", options: [{ text: "世界の法則そのもの", next: 'r_optimizer' }, { text: "自分自身の運命", next: 'r_solitary_king' }] },
-            'c4_stability': { question: "安定した環境の中で、あなたは何をしますか？", options: [{ text: "次の問題に備え、更なる改善を続ける", next: 'r_guardian' }, { text: "穏やかな時間の中、自分の趣味に没頭する", next: 'r_hermit' }] },
-            'c3_craft': { question: "あなたが技術を磨くのは、何のためですか？", options: [{ text: "競争相手に勝利するため", next: 'c4_victory' }, { text: "誰にも真似できない作品を創るため", next: 'c4_creation' }] },
-            'c4_victory': { question: "勝利のために最も重要なことは？", options: [{ text: "絶え間ない鍛錬と、揺るぎない精神力", next: 'r_gladiator' }, { text: "相手を分析し、最適な戦略を立てること", next: 'r_duelist' }] },
-            'c4_creation': { question: "あなたの作品が、誰にも理解されなかったら？", options: [{ text: "意に介さない。自分の道を突き進むだけ", next: 'r_master' }, { text: "なぜ伝わらないのか、表現方法を研究する", next: 'r_artist' }] },
-            'c2_group': { question: "チームを成功に導くために、あなたの役割は？", options: [{ text: "目標達成のための冷徹な判断を下す「司令塔」", next: 'c3_commander' }, { text: "メンバーの心を一つにする「精神的支柱」", next: 'c3_pillar' }] },
-            'c3_commander': { question: "あなたの計画に、仲間が感情的に反対しています。どうしますか？", options: [{ text: "成功確率のデータを提示し、合理的に説得する", next: 'r_commander' }, { text: "最終的にはリーダーとして、責任を持って決断する", next: 'r_leader' }] },
-            'c3_pillar': { question: "チームの士気が下がっています。どうしますか？", options: [{ text: "自ら最前線に立ち、背中でチームを鼓舞する", next: 'r_vanguard' }, { text: "皆で楽しめるイベントを企画し、絆を深める", next: 'r_bard' }] },
-            'p1': { question: "あなたの「好奇心」を最も刺激するのは？", options: [{ text: "まだ誰も見たことのない「景色」や「物語」", next: 'p2_discovery' }, { text: "自分の手で何かを創り出す「創造」の過程", next: 'p2_creation' }] },
-            'p2_discovery': { question: "未知の場所へ向かう時、より心惹かれるのは？", options: [{ text: "一人で静かに、その世界の謎と向き合う旅", next: 'p3_solo' }, { text: "信頼できる仲間と、感動や危険を共有する旅", next: 'p3_party' }] },
-            'p3_solo': { question: "旅の目的は、主にどちらですか？", options: [{ text: "世界の果てを目指すこと自体が目的", next: 'r_wanderer' }, { text: "旅で見つけた素材で、何かを創るのが目的", next: 'c4_creation' }] },
-            'p3_party': { question: "仲間との冒険で、あなたが最も貢献できることは？", options: [{ text: "誰も気づかない道やヒントを見つけ出す洞察力", next: 'r_explorer' }, { text: "旅の思い出を記録し、最高の物語に仕立てること", next: 'r_storyteller' }] },
-            'p2_creation': { question: "何かを創る時、あなたのインスピレーションの源は？", options: [{ text: "自分の内側から湧き上がる、独自のビジョン", next: 'p3_vision' }, { text: "他者の生活や、コミュニティからの需要", next: 'p3_needs' }] },
-            'p3_vision': { question: "あなたの作品は、主に誰のために創りますか？", options: [{ text: "唯一の観客である、自分自身のため", next: 'r_solitary_creator' }, { text: "自分の美学を理解してくれる、誰か一人のため", next: 'r_artist' }] },
-            'p3_needs': { question: "あなたが創るもので、コミュニティに何をもたらしたいですか？", options: [{ text: "日々の生活を豊かにする「利便性」と「快適さ」", next: 'p4_comfort' }, { text: "人々の心を繋ぐ「シンボル」や「集いの場」", next: 'p4_symbol' }] },
-            'p4_comfort': { question: "あなたが設計する上で、最もこだわるところは？", options: [{ text: "誰が使っても分かりやすい、直感的なデザイン", next: 'r_designer' }, { text: "長期的に安定して機能する、堅牢なシステム", next: 'r_architect' }] },
-            'p4_symbol': { question: "あなたが築きたいコミュニティの理想像は？", options: [{ text: "リーダーとして住民を導き、街全体を発展させる", next: 'r_mayor' }, { text: "一住民として、イベントなどを通じて皆を笑顔にする", next: 'r_mood_maker' }] },
+            'start': { question: "新しいゲームを始めた時、あなたが最もワクワクするのは？", options: [{ text: "最速で強くなる計画を立てること", next: 'c1' }, { text: "手探りで進み、世界観に浸ること", next: 'p1' }] },
+            'c1': { question: "「強さ」とは、あなたにとって主にどちらですか？", options: [{ text: "他者を圧倒する「戦闘力」や「生産力」", next: 'c2_power' }, { text: "どんな状況でも対応できる「知識」や「技術」", next: 'c2_skill' }] },
+            'c2_power': { question: "その「力」を、どのように使いたいですか？", options: [{ text: "ランキングなどで、自分の力を証明したい", next: 'c3_rank' }, { text: "誰にも縛られない、自由な活動のため", next: 'c3_freedom' }] },
+            'c3_rank': { question: "競争相手は、あなたにとってどんな存在ですか？", options: [{ text: "乗り越えるべき「壁」", next: 'c4_wall' }, { text: "共に高め合う「好敵手」", next: 'c4_rival' }] },
+            'c4_wall': { question: "最終確認です。あなたは、プロセスよりも何よりも「勝利」という結果を求めますか？", options: [{ text: "はい、勝利こそが全てです", next: 'r_gladiator' }, { text: "いいえ、効率的な過程こそが芸術です", next: 'r_optimizer' }] },
+            'c4_rival': { question: "最終確認です。あなたは、孤独な頂点よりも、競い合える世界の存続を望みますか？", options: [{ text: "はい、ライバルの存在が私を強くします", next: 'r_duelist' }, { text: "いいえ、最後には私が勝ち残るべきです", next: 'r_battle_master' }] },
+            'c3_freedom': { question: "完全に自由になった世界で、あなたは何をしますか？", options: [{ text: "さらなる力を求め、世界の法則を探求する", next: 'r_hermit' }, { text: "誰にも邪魔されない理想郷を、自分の手で創る", next: 'r_solitary_creator' }] },
+            'c2_skill': { question: "その「技術」を、誰のために使いますか？", options: [{ text: "自分自身の理想を実現するため", next: 'c3_for_me' }, { text: "仲間やコミュニティ全体に貢献するため", next: 'c3_for_us' }] },
+            'c3_for_me': { question: "あなたが創り出すものは、どちらかと言えば？", options: [{ text: "機能性を極めた、完璧な「システム」", next: 'r_architect' }, { text: "自分の美学を反映した、唯一無二の「作品」", next: 'r_master' }] },
+            'c3_for_us': { question: "あなたの貢献が、誰にも評価されなかったら？", options: [{ text: "構わない。誰かの役に立てばそれでいい", next: 'c4_selfless' }, { text: "貢献を正しく評価されるよう、働きかける", next: 'c4_fame' }] },
+            'c4_selfless': { question: "最終確認です。あなたは、名声よりもコミュニティの調和を大切にしますか？", options: [{ text: "はい、縁の下の力持ちでありたいです", next: 'r_supporter' }, { text: "いいえ、やはり自分の技術は正しく認められたい", next: 'r_craftsman' }] },
+            'c4_fame': { question: "最終確認です。あなたは、チームの成功と名声のためなら、非情な判断もできますか？", options: [{ text: "はい、それがリーダーの責任です", next: 'r_commander' }, { text: "いいえ、仲間の気持ちを無視することはできません", next: 'r_leader' }] },
+            'p1': { question: "手探りで進む中で、あなたが最も価値を置くのは？", options: [{ text: "まだ誰も知らないモノや場所を見つける「発見」", next: 'p2_discovery' }, { text: "自分だけの居場所を作り、穏やかに過ごす「生活」", next: 'p2_life' }] },
+            'p2_discovery': { question: "「発見」の喜びは、どちらの状況でより大きいですか？", options: [{ text: "危険な冒険の果てに、貴重なお宝を見つけた時", next: 'p3_treasure' }, { text: "旅の途中で、息をのむような美しい風景に出会った時", next: 'p3_scenery' }] },
+            'p3_treasure': { question: "手に入れたお宝。あなたならどうしますか？", options: [{ text: "仲間と分け合い、次の冒険の資金にする", next: 'p4_share' }, { text: "自分だけのコレクションとして、秘密の場所に飾る", next: 'r_collector' }] },
+            'p4_share': { question: "最終確認です。あなたは、困難な挑戦を仲間と共に乗り越えることに、最大の喜びを感じますか？", options: [{ text: "はい、仲間との絆こそが宝です", next: 'r_vanguard' }, { text: "いいえ、スリルと報酬こそが冒険の醍醐味です", next: 'r_treasure_hunter' }] },
+            'p3_scenery': { question: "その美しい風景を、どうしたいですか？", options: [{ text: "地図に記録し、まだ見ぬ誰かに存在を伝えたい", next: 'r_cartographer' }, { text: "その風景の一部となり、そこに住みたい", next: 'p4_live' }] },
+            'p4_live': { question: "最終確認です。あなたは、冒険の刺激よりも、心安らぐ居場所を創ることに価値を感じますか？", options: [{ text: "はい、心豊かな生活こそが理想です", next: 'r_naturalist' }, { text: "いいえ、ここはあくまで次の旅への拠点です", next: 'r_wanderer' }] },
+            'p2_life': { question: "あなたが「生活」の中で、最も大切にすることは？", options: [{ text: "自分の理想の家や庭を、自由に創り上げること", next: 'p3_creation' }, { text: "他の住人と交流し、コミュニティを育むこと", next: 'p3_community' }] },
+            'p3_creation': { question: "あなたが創るものに、最も反映されるのは？", options: [{ text: "自分の内なる世界観や、芸術的なインスピレーション", next: 'r_artist' }, { text: "実用性や、日々の暮らしを快適にするための工夫", next: 'r_designer' }] },
+            'p3_community': { question: "コミュニティへのあなたの関わり方は？", options: [{ text: "リーダーとして、街全体の発展に貢献したい", next: 'r_mayor' }, { text: "一住民として、イベントなどを通じて皆と楽しみたい", next: 'r_mood_maker' }] },
 
-            'r_optimizer': { result: true, title: "効率を求める戦略家", keywords: ["論理", "最適化", "システム", "無駄の排除", "結果主義"], description: "あなたは【効率を求める戦略家】です。\nあなたは、物事を達成するための最も合理的で無駄のない道を常に探求しています。プロセスや感情よりも、再現可能で計測できる「結果」を重視します。あなたの計画は緻密で、その実行力は他の追随を許しません。\nそんなあなたにとって最高の環境は、自身の理論を試し、システムを構築し、その成果が明確な数値として現れる場所です。", scores: { tenkuu: 95, bouken: 5, seikatsu: 0 } },
-            'r_master': { result: true, title: "道を極めし求道者", keywords: ["専門性", "探求", "職人", "継続", "孤高"], description: "あなたは【道を極めし求道者】です。\nあなたは、一つの分野を深く、永続的に探求し続けることに価値を見出します。流行や他人の評価に惑わされず、自らが定めた道を黙々と歩み続けます。その集中力と継続力は、やがて誰にも真似できない「名人」の域へとあなたを到達させるでしょう。\nそんなあなたにとって最高の環境は、時間や競争に縛られず、自分のペースでじっくりと専門性を磨ける場所です。", scores: { tenkuu: 70, bouken: 10, seikatsu: 20 } },
-            'r_hermit': { result: true, title: "真理を探究する隠者", keywords: ["思索", "知識", "静寂", "内省", "独立"], description: "あなたは【真理を探究する隠者】です。\nあなたは、外界の喧騒から離れ、静かな環境で思索に耽ることを好みます。他者との交流よりも、自分自身の内面と向き合い、知識や哲学を深めることに喜びを感じます。あなたの孤独は、孤立ではなく、深い知恵へと至るための道筋です。\nそんなあなたにとって最高の環境は、誰にも邪魔されず、自分の探求心を満たすことに集中できる場所です。", scores: { tenkuu: 60, bouken: 10, seikatsu: 30 } },
-            'r_solitary_creator': { result: true, title: "孤独を愛する創造主", keywords: ["独自の世界観", "芸術", "没頭", "マイペース", "インスピレーション"], description: "あなたは【孤独を愛する創造主】です。\nあなたは、他者の影響を受けない静かな環境で、自らの内なる世界を形にすることに情熱を燃やします。作品は誰かのためである前に、まず自分自身を表現するためのものです。その独創性は、孤独の中でこそ最も強く輝きます。\nそんなあなたにとって最高の環境は、ゼロから自由に世界を構築し、自分の理想を心ゆくまで追求できる場所です。", scores: { tenkuu: 10, bouken: 20, seikatsu: 70 } },
-            'r_survivor': { result: true, title: "逆境を生き抜く生存家", keywords: ["適応力", "自立", "実践的", "冷静沈着", "問題解決"], description: "あなたは【逆境を生き抜く孤高の生存家】です。\nあなたは、どんな困難な状況に置かれても、冷静な判断力と幅広い知識で生き抜くことができます。他者に依存せず、自らの力で道を切り拓くことに誇りを持ちます。そのタフな精神力と適応力は、混沌とした世界でこそ真価を発揮します。\nそんなあなたにとって最高の環境は、予測不能な危険と発見に満ちた、挑戦的な場所です。", scores: { tenkuu: 30, bouken: 60, seikatsu: 10 } },
-            'r_jack_of_all_trades': { result: true, title: "仲間を助ける万能家", keywords: ["器用", "支援", "協調性", "潤滑油", "ユーティリティ"], description: "あなたは【仲間を助ける万能家】です。\nあなたは、一つのことに特化するよりも、幅広いスキルを身につけ、チームの潤滑油となることに喜びを感じます。誰かが困っている時に、必要な知識や技術をさっと提供できるあなたの存在は、どんな組織においても非常に貴重です。\nそんなあなたにとって最高の環境は、様々な役割が求められ、仲間と協力して困難を乗り越えていく場所です。", scores: { tenkuu: 30, bouken: 40, seikatsu: 30 } },
-            'r_commander': { result: true, title: "勝利へ導く司令官", keywords: ["戦略", "大局観", "決断力", "リーダーシップ", "合理的"], description: "あなたは【勝利へ導く冷静な司令官】です。\nあなたは、感情に流されず、常に大局的な視点から最善の一手を導き出します。個人の感情よりもチーム全体の勝利を優先し、時には非情な決断も下せる、天性のリーダーです。あなたの指揮下では、どんな困難なミッションも成功へと近づくでしょう。\nそんなあなたにとって最高の環境は、明確な目標があり、戦略と戦術が勝敗を分ける挑戦的な場所です。", scores: { tenkuu: 60, bouken: 35, seikatsu: 5 } },
-            'r_duelist': { result: true, title: "最強を証明する決闘者", keywords: ["競争", "勝利", "実力主義", "向上心", "挑戦"], description: "あなたは【最強を証明する決闘者】です。\nあなたは、他者との公正な競争の中で、自らの力を証明することに最も情熱を燃やします。勝敗という明確な結果を好み、常に自分より強い相手を探し求めています。その闘争心は、あなたを絶えず成長させる原動力です。\nそんなあなたにとって最高の環境は、実力が全ての、競争とランクが存在する場所です。", scores: { tenkuu: 80, bouken: 20, seikatsu: 0 } },
-            'r_vanguard': { result: true, title: "仲間を守る先導者", keywords: ["情熱", "自己犠牲", "カリスマ", "突破力", "兄貴肌"], description: "あなたは【仲間を守る最前線の盾】です。\nあなたは、理論や作戦よりも、仲間を思う気持ちを力に変える情熱的なリーダーです。危険な状況では、誰よりも先に前に出て、自らが盾となり仲間を守ります。その自己犠牲の精神とカリスマ性は、チームを奇跡的な勝利へと導きます。\nそんなあなたにとって最高の環境は、信頼できる仲間と共に、絶体絶命の危機に立ち向かう冒険の最前線です。", scores: { tenkuu: 10, bouken: 80, seikatsu: 10 } },
-            'r_bard': { result: true, title: "絆を紡ぐ吟遊詩人", keywords: ["共感", "ムードメーカー", "物語", "思い出", "コミュニケーション"], description: "あなたは【絆を紡ぐ吟遊詩人】です。\nあなたは、体験した出来事や感動を、物語や芸術として表現し、人々と分かち合うことに喜びを感じます。あなたにとって、冒険の価値は戦利品ではなく、そこで生まれた「物語」そのものです。あなたの語る物語は、多くの人々に夢と感動を与えるでしょう。\nそんなあなたにとって最高の環境は、仲間と共に感動的な瞬間を共有し、それを形として残せる場所です。", scores: { tenkuu: 0, bouken: 60, seikatsu: 40 } },
-            'r_wanderer': { result: true, title: "未知を求める放浪者", keywords: ["好奇心", "自由", "発見", "探検", "ロマン"], description: "あなたは【まだ見ぬ世界を求める放浪者】です。\nあなたは、一つの場所に留まることなく、常に新しい景色や発見を求めて旅を続ける自由人です。所有することよりも、体験することそのものに価値を見出します。世界の広さを肌で感じることが、あなたの魂を最も満たしてくれるのです。\nそんなあなたにとって最高の環境は、果てしなく広がり、常に新しい発見が待っている世界です。", scores: { tenkuu: 10, bouken: 85, seikatsu: 5 } },
-            'r_storyteller': { result: true, title: "体験を共有する語り部", keywords: ["分かち合い", "交流", "ユーモア", "社交性", "思い出"], description: "あなたは【体験を共有する語り部】です。\nあなたは、人々と交流し、共に体験を分かち合うことに深い喜びを感じます。あなたにとって、最高の冒険とは、後で仲間と笑いながら語り合える冒険です。そのコミュニケーション能力は、どんなコミュニティでも中心的な存在となるでしょう。\nそんなあなたにとって最高の環境は、多くの人々が集い、共に笑い、語り合える賑やかな場所です。", scores: { tenkuu: 0, bouken: 70, seikatsu: 30 } },
-            'r_guide': { result: true, title: "仲間を導く案内人", keywords: ["ホスピタリティ", "献身", "サポート", "優しさ", "教育"], description: "あなたは【仲間を導く心優しき案内人】です。\nあなたは、自分が知っている素晴らしい景色や楽しい体験を、他の誰かにも味わってほしいと心から願っています。誰かの「楽しい」という笑顔が、あなたの最大の報酬です。そのホスピタリティは、多くの初心者を助け、導く光となるでしょう。\nそんなあなたにとって最高の環境は、仲間や新しいメンバーをサポートし、共に成長していけるコミュニティです。", scores: { tenkuu: 0, bouken: 65, seikatsu: 35 } },
-            'r_artist': { result: true, title: "理想を追求する芸術家", keywords: ["美意識", "世界観", "独創性", "哲学", "インスピレーション"], description: "あなたは【理想を追求する芸術家】です。\nあなたは、自分の内面にある「美」のビジョンを、一切の妥協なく世界に表現することに情熱を注ぎます。他者の評価よりも、自らが納得できる作品を創り上げることが、あなたの至上の喜びです。その独創性と美意識は、世界に新たな価値を創造します。\nそんなあなたにとって最高の環境は、誰にも邪魔されず、無限の創造性を発揮できる自由な場所です。", scores: { tenkuu: 0, bouken: 15, seikatsu: 85 } },
-            'r_designer': { result: true, title: "皆を笑顔にする設計士", keywords: ["共感性", "デザイン", "調和", "ホスピタリティ", "親しみやすさ"], description: "あなたは【皆を笑顔にする設計士】です。\nあなたは、自分の創造物が、人々の生活を豊かにし、笑顔を生み出すことに最大の喜びを感じます。独りよがりな芸術ではなく、人々に愛され、使われることで初めて作品は完成すると考えます。その共感性の高さは、多くの人々に安らぎを与えるでしょう。\nそんなあなたにとって最高の環境は、あなたの作ったものが直接人々の役に立ち、感謝されるコミュニティです。", scores: { tenkuu: 5, bouken: 25, seikatsu: 70 } },
-            'r_architect': { result: true, title: "社会基盤を創る設計者", keywords: ["計画性", "機能美", "システム設計", "合理的", "大規模"], description: "あなたは【社会基盤を創る設計者】です。\nあなたは、個々の建築物よりも、それらが集まって形成される「都市」や「社会」全体の機能性に興味を持ちます。人々の生活を、より効率的で豊かにするためのシステムを設計し、それを実現することに喜びを感じる、優れた都市計画家です。\nそんなあなたにとって最高の環境は、大規模なプロジェクトを計画・実行し、社会の発展に貢献できる場所です。", scores: { tenkuu: 40, bouken: 10, seikatsu: 50 } },
-            'r_mayor': { result: true, title: "民に愛される街の長", keywords: ["コミュニティ", "対話", "育成", "文化", "温かさ"], description: "あなたは【民に愛される街の長】です。\nあなたは、機能性や効率だけでなく、そこに住む人々の心の繋がりや、コミュニティの文化を育むことに価値を見出します。ルールやシステムよりも、人々の対話や合意形成を重視する、温かい心を持ったリーダーです。\nそんなあなたにとって最高の環境は、仲間と共に、笑いの絶えない温かいコミュニティを築き上げていける場所です。", scores: { tenkuu: 10, bouken: 20, seikatsu: 70 } },
-            'r_leader': { result: true, title: "未来を切り拓くリーダー", keywords: ["統率力", "ビジョン", "責任感", "決断力", "信頼"], description: "あなたは【未来を切り拓くリーダー】です。\nあなたは、チームの進むべき道を示し、その実現のために仲間を導くことに長けています。対話を通じてメンバーの信頼を得て、時には困難な決断を下しながらも、チーム全体を成功へと導きます。あなたのビジョンは、多くの人々を惹きつけ、不可能を可能にします。\nそんなあなたにとって最高の環境は、仲間とビジョンを共有し、共に未来を創り上げていける場所です。", scores: { tenkuu: 35, bouken: 50, seikatsu: 15 } },
-            'r_mood_maker': { result: true, title: "場を和ませるムードメーカー", keywords: ["社交性", "ユーモア", "ポジティブ", "気配り", "潤滑油"], description: "あなたは【場を和ませるムードメーカー】です。\nあなたは、コミュニティの中心で、その場の雰囲気を明るくすることに天性の才能を持っています。あなたが企画するイベントや、何気ない一言が、人々の心を和ませ、強い絆を生み出します。機能や効率よりも、皆が「楽しい」と感じることを何よりも大切にします。\nそんなあなたにとって最高の環境は、多くの人々が集い、あなたの力で笑顔が生まれる活気あるコミュニティです。", scores: { tenkuu: 5, bouken: 30, seikatsu: 65 } },
+            'r_optimizer': { result: true, title: "効率を求める戦略家", scores: { tenkuu: 95, bouken: 5, seikatsu: 0 } },
+            'r_battle_master': { result: true, title: "戦闘を極めし者", scores: { tenkuu: 85, bouken: 15, seikatsu: 0 } },
+            'r_gladiator': { result: true, title: "勝利に飢えし剣闘士", scores: { tenkuu: 80, bouken: 20, seikatsu: 0 } },
+            'r_duelist': { result: true, title: "好敵手を求める決闘家", scores: { tenkuu: 70, bouken: 30, seikatsu: 0 } },
+            'r_commander': { result: true, title: "勝利へ導く司令官", scores: { tenkuu: 60, bouken: 35, seikatsu: 5 } },
+            'r_architect': { result: true, title: "社会基盤を創る設計者", scores: { tenkuu: 50, bouken: 10, seikatsu: 40 } },
+            'r_treasure_hunter': { result: true, title: "富を求めるトレジャーハンター", scores: { tenkuu: 40, bouken: 60, seikatsu: 0 } },
+            'r_leader': { result: true, title: "仲間を導くリーダー", scores: { tenkuu: 35, bouken: 50, seikatsu: 15 } },
+            'r_pioneer': { result: true, title: "未踏世界を拓く開拓者", scores: { tenkuu: 30, bouken: 70, seikatsu: 0 } },
+            'r_wanderer': { result: true, title: "自由を求める放浪者", scores: { tenkuu: 10, bouken: 85, seikatsu: 5 } },
+            'r_vanguard': { result: true, title: "仲間を守る先導者", scores: { tenkuu: 5, bouken: 80, seikatsu: 15 } },
+            'r_explorer': { result: true, title: "世界の神秘を探求する冒険家", scores: { tenkuu: 0, bouken: 75, seikatsu: 25 } },
+            'r_cartographer': { result: true, title: "世界を記録する地図製作者", scores: { tenkuu: 0, bouken: 70, seikatsu: 30 } },
+            'r_bard': { result: true, title: "冒険を謳う吟遊詩人", scores: { tenkuu: 0, bouken: 60, seikatsu: 40 } },
+            'r_naturalist': { result: true, "title": "自然と調和する隠者", scores: { tenkuu: 0, bouken: 40, seikatsu: 60 } },
+            'r_mayor': { result: true, title: "コミュニティを育む市長", scores: { tenkuu: 10, bouken: 20, seikatsu: 70 } },
+            'r_designer': { result: true, title: "暮らしを彩る設計士", scores: { tenkuu: 5, bouken: 25, seikatsu: 70 } },
+            'r_artist': { result: true, title: "理想を形創る芸術家", scores: { tenkuu: 0, bouken: 15, seikatsu: 85 } },
+            'r_solitary_creator': { result: true, title: "孤独を愛する創造主", scores: { tenkuu: 10, bouken: 5, seikatsu: 85 } },
+            'r_mood_maker': { result: true, title: "皆を笑顔にするムードメーカー", scores: { tenkuu: 5, bouken: 30, seikatsu: 65 } },
+            'r_supporter': { result: true, title: "縁の下の支援者", scores: { tenkuu: 20, bouken: 30, seikatsu: 50 } },
+            'r_craftsman': { result: true, title: "技を磨き続ける職人", scores: { tenkuu: 30, bouken: 20, seikatsu: 50 } },
+            'r_hermit': { result: true, title: "真理を探究する賢者", scores: { tenkuu: 65, bouken: 5, seikatsu: 30 } },
+            'r_master': { result: true, title: "道を極めし求道者", scores: { tenkuu: 40, bouken: 5, seikatsu: 55 } },
         };
 
         let currentNodeId = 'start';
@@ -293,7 +295,6 @@
             step++;
             DOM.stepCounter.textContent = `STEP ${step}`;
             DOM.backBtn.style.display = pathHistory.length > 0 ? 'inline-block' : 'none';
-            
             const questionContainer = document.createElement('div');
             questionContainer.className = 'question-container';
             questionContainer.innerHTML = `
@@ -301,7 +302,6 @@
                 <div class="options-container">
                     ${node.options.map(option => `<button class="option-btn" data-next="${option.next}">${option.text}</button>`).join('')}
                 </div>`;
-            
             DOM.questionWrapper.innerHTML = '';
             DOM.questionWrapper.appendChild(questionContainer);
             questionContainer.classList.add('anim-pop-in');
@@ -351,7 +351,6 @@
                 DOM.analysisCompleteScreen.style.display = 'none';
                 DOM.analysisCompleteScreen.classList.remove('anim-fade-out');
                 DOM.analysisCompleteScreen.querySelectorAll('.anim-fade-in').forEach(el => el.style.opacity = '0');
-
                 DOM.resultScreen.style.display = 'block';
                 DOM.resultScreen.querySelectorAll('.result-anim').forEach(el => el.classList.add('anim-fade-in'));
                 
@@ -373,10 +372,9 @@
                 animateBar('seikatsu', 900);
                 
                 setTimeout(() => {
-                    DOM.analysisDetails.querySelector('#archetype-title').textContent = `あなたは【${finalResultNode.title}】です。`;
-                    DOM.archetypeKeywords.innerHTML = finalResultNode.keywords.map(kw => `<span class="keyword-tag">${kw}</span>`).join('');
+                    DOM.archetypeTitle.textContent = `あなたのプレイスタイルは【${finalResultNode.title}】です。`;
                     const finalDesc = getResultDescription(scores);
-                    DOM.analysisDetails.querySelector('#archetype-description').textContent = finalDesc;
+                    DOM.archetypeDescription.textContent = finalDesc;
                     DOM.analysisDetails.style.opacity = 1;
                     DOM.analysisDetails.style.transform = 'translateY(0)';
                 }, 1500);
@@ -385,14 +383,20 @@
         
         function getResultDescription(scores) {
              const serverMap = { tenkuu: "天空鯖", bouken: "冒険鯖", seikatsu: "生活鯖" };
-             const description = finalResultNode.description;
-             
              const p = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
              const s = Object.keys(scores).filter(k => k !== p).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
-             let recommendation = `\n\nあなたの魂が最も輝く場所は【${serverMap[p]}】です。\nそして、もし新たな刺激が欲しくなったなら【${serverMap[s]}】の門を叩くと、まだ見ぬ自分に出会えるはずです。`;
-             
-             return description + recommendation;
+             let analysis;
+             if (finalResultNode.title === '効率を求める戦略家' || finalResultNode.title === '戦闘を極めし者' || finalResultNode.title === '勝利に飢えし剣闘士' || finalResultNode.title === '好敵手を求める決闘家') {
+                analysis = `あなたは、常に最短・最適ルートで目標を達成することに喜びを感じるタイプです。競争の中でこそ輝き、ランキングやステータスといった明確な指標が、あなたのモチベーションを最高に高めます。\n\nそんなあなたのプレイスタイルが最も輝くのは【天空鯖】です。シーズン制の中で誰よりも早く頂点を目指し、圧倒的な成果を出すことで、あなたは最高の達成感を得られるでしょう。`;
+             } else if (finalResultNode.title === '未踏世界を拓く開拓者' || finalResultNode.title === '自由を求める放浪者' || finalResultNode.title === '仲間を守る先導者' || finalResultNode.title === '世界の神秘を探求する冒険家') {
+                analysis = `あなたは、計画通りに進むことよりも、道中の予期せぬ発見や仲間との体験に価値を見出すタイプです。まだ誰も見たことのない景色、語られざる物語、そうした世界の秘密に触れることが、あなたの心を何よりも豊かにします。\n\nそんなあなたのプレイスタイルが最も輝くのは【冒険鯖】です。広大な世界に散りばめられた謎やダンジョンを仲間と共に攻略し、この世界にしかない物語を体験してください。`;
+             } else if (finalResultNode.title === '理想を形創る芸術家' || finalResultNode.title === '暮らしを彩る設計士' || finalResultNode.title === 'コミュニティを育む市長' || finalResultNode.title === '皆を笑顔にするムードメーカー') {
+                analysis = `あなたは、競争や冒険の刺激よりも、自分や誰かの「居場所」を創り、育んでいくことに深い喜びを感じるタイプです。美しい建築、便利な施設、そして温かいコミュニティ。あなたの創造したものが、人々の笑顔や安らぎを生むことが、最高のモチベーションになります。\n\nそんなあなたのプレイスタイルが最も輝くのは【生活鯖】です。安定した経済の中で、自分のペースで理想の建築を追求したり、仲間と協力して街を発展させたりすることで、あなたは充実した日々を送れるでしょう。`;
+             } else {
+                analysis = `あなたは、複数の要素を高いレベルで楽しむことができる、バランスの取れたプレイスタイルを持っています。一つのことに特化するだけでなく、その時々の気分で様々な活動に価値を見出すことができます。\n\nあなたのメインサーバーは【${serverMap[p]}】がおすすめですが、あなたの多才さは【${serverMap[s]}】でも間違いなく輝きます。二つのサーバーをまたいでプレイすることで、あなただけのユニークな楽しみ方が見つかるはずです。`;
+             }
+             return analysis;
         }
 
         function restartQuiz() {
