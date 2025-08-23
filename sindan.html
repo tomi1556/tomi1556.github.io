@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StellaMC サーバー分析</title>
+    <title>プレイスタイル運命分岐診断【The Final v3】</title>
     <style>
         /* ====== Google Fonts & 基本設定 ====== */
         @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Rajdhani:wght@600&display=swap');
@@ -25,21 +25,23 @@
 
         * { box-sizing: border-box; margin: 0; padding: 0; }
 
+        html { height: 100%; }
         body {
             font-family: var(--font-main);
             color: var(--text-color);
             display: flex;
             justify-content: center;
             align-items: center;
-            min-height: 100vh;
+            min-height: 100%; /* ★修正: min-heightを100%に */
             background-color: var(--bg-color);
-            overflow: hidden;
+            overflow-y: auto; /* ★修正: スクロールを許可 */
+            -webkit-overflow-scrolling: touch; /* ★修正: iOSでの慣性スクロール */
             padding: 1rem;
         }
         
         #background-stars {
             position: fixed; top: 0; left: 0;
-            width: 100%; height: 100%;
+            width: 100%; height: 100vh; /* ★修正: vh単位で画面に固定 */
             background-image:
                 radial-gradient(1px 1px at 25% 15%, #fff, transparent),
                 radial-gradient(1px 1px at 50% 35%, #fff, transparent),
@@ -47,10 +49,12 @@
                 radial-gradient(1px 1px at 60% 85%, #fff, transparent),
                 radial-gradient(1.5px 1.5px at 15% 90%, #fff, transparent);
             animation: twinkle 20s linear infinite;
+            z-index: -1;
         }
         
         .container {
             width: 100%; max-width: 720px;
+            margin: 2rem 0; /* ★修正: 上下にマージンを追加 */
             background-color: var(--surface-color);
             backdrop-filter: blur(16px);
             border-radius: 24px;
@@ -163,8 +167,8 @@
     <div id="background-stars"></div>
     <div class="container" id="container">
         <div id="start-screen" class="screen anim-fade-in">
-            <h1>StellaMC サーバー分析</h1>
-            <p>自分に一番マッチするサーバーを分析しよう！</p>
+            <h1>Destiny Branch</h1>
+            <p>あなたの選択が、未来を創る。<br>魂の原型を解き明かす、運命の分岐が今、始まる。</p>
             <button class="main-btn" id="start-btn">分析を開始する</button>
         </div>
         <div id="quiz-screen" class="screen quiz-screen-padding" style="display: none;">
@@ -176,7 +180,7 @@
         </div>
         <div id="analysis-complete-screen" class="screen" style="display: none;">
             <h2 class="anim-fade-in">ANALYSIS COMPLETE</h2>
-            <p class="anim-fade-in" style="animation-delay: 0.2s;">サーバー分析が終了しました！</p>
+            <p class="anim-fade-in" style="animation-delay: 0.2s;">あなたの魂の原型、その分析が完了しました。</p>
             <button class="main-btn anim-fade-in" id="view-results-btn" style="animation-delay: 0.4s;">結果を見る</button>
         </div>
         <div id="result-screen" class="screen" style="display: none;">
@@ -194,7 +198,7 @@
         </div>
     </div>
     
-    <audio id="click-sound" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU0HT19OALe/ub+3v7W/tb20vrS+s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO-"></audio>
+    <audio id="click-sound" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU0HT19OALe/ub+3v7W/tb20vrS+s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO-"></audio>
     <audio id="result-sound" preload="auto" src="data:audio/wav;base64,UklGRoh+AABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQBofAAAAP//AgAJAAYADwAbABoAFgAJAP//AwAIAAcACwAUABUADgAEAPkABQADAAUACwASABQADQADAPkABgAEAAUACwAUABQADgADAPgABwAFAAYADQATABQADwAEAPkABQACAAcADQAUABMADgACAPkACAAEAAQACwATABQADgADAPgABgADAAQADQATABQADgADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADgATABMADgADAPgABgADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABMADgACAPkACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgAEAPcABgAFAAUADQATABQADgADAPgABQACAAUACwATABMADgAEAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABQADwAEAPgABwAFAAYADgATABMADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADgATABQADwADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABMADwAEAPcABwAFAAYADQATABMADgAEAPgABgAEAAUADgATABMADgADAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABMADwAEAPcABwAFAAYADQATABMADgAEAPgABgAEAAUADQATABMADgAEAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAEAPcABwAFAAYADQATABQADgADAPgABgADAAQADQATABQADwAEAPcABgAFAAYADQATABQADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAABABAAQsDFgMnAysDRQRaBgMAAAAA//8B/gD8AP8BAwIFAQ4CHQEnAS8BOAFDAU0BUgFhAWsBcwF/AYYBigGOAY8BkwGVAZgBmwGfAaIBpQGqAa4BswG6Ab4BwwHHAdEB0wHWAd0B4AHkAesB8AHyAfYB+AH+AgECCQIOAhYCHQEkASkBMQE7AUIBSQFMAVIAVwFbAWQBawF0AXkBfwGJAZsBox/DGb0ZpBmuGacZqBmqGaoZpxmnGaYapiqfKp4rni2LqAxoDKfMaYyoTKiMqEyojKgMaAxoC+gL6AvoC6fLZsslyycK5MrkytgLQAtfS1eLGUsaixqK2YrKitlKSUo5CcdJxwmmyKaIdMa0ArYAtUC0QLLAsMevx6sHqgeoB6XHSMdHB0eGxsZGBkXGRYaEhMQDw8JDwcFAwICAv7+/v38/Pn49/f39vf29fX08/Py8u/u7evq6ejn5eLh4N/d3dva2dbV09HT0c/NzMvKyMjExsPCwcG/vr28ury5t7i3tLW0s7GwsK+ur6uqqamnp6WkpaOjoaSioaGg/+De3drY1NPS0M7My8fGwsK+vby5t7W0srCvrqmpqaalpKSioaGfn56dnZyanJuaWlhXV1RTUVFQT05NTEpKSkdGRUM/PDs5ODc1NDMyLy0rKScmJSQjIiAfHx4dHBsaGRgWFRQRDg0LCQgHBgQCAf/+/v39/f39/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v-"></audio>
 
     <script>
@@ -219,11 +223,13 @@
             'c1': { question: "頂点に立つための、あなたの理想的な手段は？", options: [ { text: "純粋な実力と効率で、他者を圧倒する", next: 'c2_eff' }, { text: "好敵手と競い合い、共に成長する", next: 'c2_rival' } ] },
             'c2_eff': { question: "あなたが求める「効率」の本質とは？", options: [ { text: "時間を支配し、作業を極限まで自動化する", next: 'c3_auto' }, { text: "最強の武具を手にし、戦闘を瞬時に終わらせる", next: 'c3_combat' } ] },
             'c3_auto': { question: "その『究極の効率』を、何のために使いますか？", options: [ { text: "更なる効率化という、終わらない探求のため", next: 'c4_pursuit' }, { text: "誰にも邪魔されない、自分だけの領域を確立するため", next: 'c4_domain' } ] },
-            'c4_pursuit': { question: "あなたの自動化装置が、サーバーの経済を破壊する可能性が。どうしますか？", options: [ { text: "それもまた一興。システムの限界を見る", next: 'r_optimizer' }, { text: "影響を考慮し、出力を調整・管理する", next: 'r_architect' } ] },
+            'c4_pursuit': { question: "あなたの自動化装置が、サーバーの経済を破壊する可能性が。どうしますか？", options: [ { text: "それもまた一興。システムの限界を見る", next: 'c5_limit' }, { text: "影響を考慮し、出力を調整・管理する", next: 'r_architect' } ] },
+            'c5_limit': { question: "あなたは、システムの探求者ですか？それとも破壊者ですか？", options: [ { text: "世界の法則を解き明かす「探求者」だ", next: 'r_optimizer' }, { text: "既存の秩序に満足しない「破壊者」だ", next: 'r_anarchist' } ] },
             'c4_domain': { question: "他者があなたの領域に助けを求めてきました。どうしますか？", options: [ { text: "対価を要求し、ビジネスとして交渉する", next: 'r_solitary_king' }, { text: "無視する。自分の平和が最優先だ", next: 'r_hermit' } ] },
             'c3_combat': { question: "絶対的な『武力』を手にしたあなた。その力で何をしますか？", options: [ { text: "全ての戦いに勝利し、最強の称号を手に入れる", next: 'c4_glory' }, { text: "危険な秘境に挑み、古代の秘宝を独占する", next: 'c4_treasure' } ] },
             'c4_glory': { question: "最強となったあなた。その強さをどう維持しますか？", options: [ { text: "常に挑戦者を求め、戦いの中で強さを証明し続ける", next: 'r_gladiator' }, { text: "更なる効率を求め、装備を完璧に磨き上げる", next: 'r_battle_master' } ] },
-            'c4_treasure': { question: "秘宝の最後の守護者が、あなたに問いかけます。「力とは何か？」と。どう答える？", options: [ { text: "「目的を達成するための、最も純粋な手段だ」", next: 'r_treasure_hunter' }, { text: "「守るべきものを、守り抜くための覚悟だ」", next: 'r_guardian' } ] },
+            'c4_treasure': { question: "秘宝の最後の守護者が、あなたに問いかけます。「力とは何か？」と。どう答える？", options: [ { text: "「目的を達成するための、最も純粋な手段だ」", next: 'r_treasure_hunter' }, { text: "「守るべきものを、守り抜くための覚悟だ」", next: 'c5_guardian' } ] },
+            'c5_guardian' : { question: "あなたが守りたいものとは、具体的に何ですか？", options: [ { text: "自分が築き上げた、ささやかな「居場所」", next: 'r_guardian' }, { text: "信頼する数少ない「仲間」", next: 'r_vanguard' } ] },
             'c2_rival': { question: "その競争の先に、あなたが本当に求めるものは？", options: [ { text: "最終的な勝利と、サーバーに名を刻む「名声」", next: 'c3_fame' }, { text: "まだ誰も知らない「未知」への一番乗り", next: 'c3_pioneer' } ] },
             'c3_fame': { question: "頂点に立ったあなた。次に何を望みますか？", options: [ { text: "新たな挑戦者を求め、戦いの日々を続ける", next: 'r_duelist' }, { text: "自分の伝説を語り継ぎ、後進を育てる", next: 'r_legend' } ] },
             'c3_pioneer': { question: "一番乗りした『未知の領域』。その後どうしますか？", options: [ { text: "すぐさま拠点を築き、その地を完全に支配する", next: 'r_pioneer' }, { text: "発見を記録し、また次の未知を探しに旅立つ", next: 'r_wanderer' } ] },
@@ -232,13 +238,15 @@
             'p3_tactics': { question: "あなたがチームを率いる時、最も重視することは？", options: [ { text: "緻密な作戦と、各員の役割の徹底", next: 'p4_plan' }, { text: "何よりも仲間を信じ、その場の閃きを大切にする", next: 'p4_trust' } ] },
             'p4_plan': { question: "作戦に反対する仲間がいます。どうしますか？", options: [ { text: "データを元に、合理的に説得する", next: 'r_commander' }, { text: "目的は同じはず。対話し、計画を修正する", next: 'r_leader' } ] },
             'p4_trust': { question: "あなたの作戦が裏目に出て、仲間が危険に。どうしますか？", options: [ { text: "自らを犠牲にしても、仲間を必ず救う", next: 'r_vanguard' }, { text: "冷静に状況を分析し、最善の撤退を指示する", next: 'r_commander' } ] },
-            'p3_discovery': { question: "旅の目的が達成された後、あなたはどうしますか？", options: [ { text: "これまでの冒険の記録をまとめ、地図を完成させる", next: 'r_explorer' }, { text: "仲間と共に祝杯をあげ、思い出を語り明かす", next: 'p4_memory' } ] },
+            'p3_discovery': { question: "旅の目的が達成された後、あなたはどうしますか？", options: [ { text: "これまでの冒険の記録をまとめ、地図を完成させる", next: 'p4_record' }, { text: "仲間と共に祝杯をあげ、思い出を語り明かす", next: 'p4_memory' } ] },
+            'p4_record': { question: "完成した地図。それは誰のためのものですか？", options: [ { text: "ギルドの功績として、富と名声を得るため", next: 'r_explorer' }, { text: "まだ見ぬ後世の冒険者たちへの贈り物", next: 'r_cartographer' } ] },
             'p4_memory': { question: "その思い出を、どのような形で残したいですか？", options: [ { text: "冒険の証として、記念の建築物を建てる", next: 'r_monument_builder' }, { text: "次の冒険者への道標として、物語を語り継ぐ", next: 'r_bard' } ] },
             'p2_city': { question: "あなたが創る街で、最も得意な役割は？", options: [ { text: "人々の生活を支える、機能的なインフラを整備する", next: 'p3_infra' }, { text: "誰もが心癒される、美しい景観や芸術を創造する", next: 'p3_art' } ] },
             'p3_infra': { question: "街が発展し、新たな問題が発生しました。どう対応しますか？", options: [ { text: "問題の根源を分析し、システムで解決する", next: 'r_architect' }, { text: "住民集会を開き、皆の意見を聞いて決める", next: 'r_mayor' } ] },
             'p3_art': { question: "あなたの芸術が、誰にも理解されなかったら？", options: [ { text: "それでも自分の信じる「美」を追求し続ける", next: 'r_artist' }, { text: "人々の声に耳を傾け、皆に愛される作品を創る", next: 'r_designer' } ] },
             
             'r_optimizer': { result: true, title: "純粋なる最適化主義者", scores: { tenkuu: 95, bouken: 5, seikatsu: 0 } },
+            'r_anarchist': { result: true, title: "秩序の破壊者", scores: { tenkuu: 90, bouken: 10, seikatsu: 0 } },
             'r_solitary_king': { result: true, title: "孤独なる自動化の王", scores: { tenkuu: 85, bouken: 0, seikatsu: 15 } },
             'r_hermit': { result: true, title: "世界から隔絶した賢者", scores: { tenkuu: 70, bouken: 5, seikatsu: 25 } },
             'r_gladiator': { result: true, title: "常勝のグラディエーター", scores: { tenkuu: 80, bouken: 20, seikatsu: 0 } },
@@ -253,6 +261,7 @@
             'r_vanguard': { result: true, title: "仲間を導く先導者", scores: { tenkuu: 5, bouken: 80, seikatsu: 15 } },
             'r_commander': { result: true, title: "冷静なる司令官", scores: { tenkuu: 20, bouken: 70, seikatsu: 10 } },
             'r_explorer': { result: true, title: "世界を識る探検家", scores: { tenkuu: 0, bouken: 75, seikatsu: 25 } },
+            'r_cartographer': { result: true, title: "世界を記す地図製作者", scores: { tenkuu: 0, bouken: 70, seikatsu: 30 } },
             'r_monument_builder': { result: true, title: "冒険の記念碑を建てる者", scores: { tenkuu: 5, bouken: 45, seikatsu: 50 } },
             'r_bard': { result: true, title: "冒険を謳う旅の吟遊詩人", scores: { tenkuu: 0, bouken: 60, seikatsu: 40 } },
             'r_architect': { result: true, title: "大都市のインフラ設計者", scores: { tenkuu: 40, bouken: 10, seikatsu: 50 } },
@@ -303,9 +312,11 @@
         }
         
         function handleOptionClick(event) {
+            // ★修正: スマホでのホバー残り現象を解消
+            event.target.blur();
             playSound(clickSound);
             const nextNodeId = event.target.dataset.next;
-            pathHistory.push(currentNodeId);
+            pathHistory.push({ from: currentNodeId, to: nextNodeId }); // 選択肢の履歴も保存
             currentNodeId = nextNodeId;
             DOM.questionWrapper.firstElementChild.classList.add('anim-fade-out');
             setTimeout(() => {
@@ -322,7 +333,7 @@
             if (pathHistory.length === 0) return;
             playSound(clickSound);
             step -= 2; // back step is -1, next showQuestion is +1
-            currentNodeId = pathHistory.pop();
+            currentNodeId = pathHistory.pop().from;
             DOM.questionWrapper.firstElementChild.classList.add('anim-fade-out');
             setTimeout(() => showQuestion(currentNodeId), 400);
         }
@@ -376,15 +387,34 @@
         }
         
         function getResultDescription(title, scores) {
-             const p = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
-             const s = Object.keys(scores).filter(k => k !== p).reduce((a, b) => scores[a] > scores[b] ? a : b);
-             const serverMap = { tenkuu: "天空鯖", bouken: "冒険鯖", seikatsu: "生活鯖" };
-             const verbMap = { tenkuu: "効率化", bouken: "冒険", seikatsu: "創造" };
-             let core = `あなたは、自らの本質が「${verbMap[p]}」にあると知る人間です。`;
-             let synergy = `その上で「${verbMap[s]}」への強い衝動も併せ持ち、二つの才能を融合させて独自の道を歩みます。`;
-             if(scores[s] < 10) synergy = `あなたの情熱は一つのことに深く注がれ、その分野で他の追随を許さない圧倒的な成果を生み出すでしょう。`
-             let recommendation = `あなたの魂が最も輝く場所は【${serverMap[p]}】です。そして、もし新たな刺激が欲しくなったなら【${serverMap[s]}】の門を叩くと、まだ見ぬ自分に出会えるでしょう。`;
-             return `【${title}】\n\n${core}\n${synergy}\n\n${recommendation}`;
+            const p = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            const s = Object.keys(scores).filter(k => k !== p).reduce((a, b) => scores[a] > scores[b] ? a : b);
+            
+            const pathHighlights = {
+                'c1': 'あなたはまず、他者との「競争」に身を投じる道を選びました。',
+                'p1': 'あなたはまず、他者との「協力」から物語を始める道を選びました。',
+                'c2_eff': 'そして、勝利の手段として純粋な「効率」を求め、',
+                'c2_rival': 'そして、好敵手との「競い合い」による成長を求め、',
+                'p2_party': 'そして、仲間と「パーティ」を組み、困難に挑むことを選び、',
+                'p2_city': 'そして、仲間と「街」を創り、共に暮らすことを選びました。'
+            };
+            
+            let journey = "";
+            if(pathHistory.length > 1) {
+                const path1 = pathHistory[0].to;
+                const path2 = pathHistory[1].to;
+                journey = `${pathHighlights[path1] || ''}\n${pathHighlights[path2] || ''}…\n\n`;
+            }
+
+            const serverMap = { tenkuu: "天空鯖", bouken: "冒険鯖", seikatsu: "生活鯖" };
+            const verbMap = { tenkuu: "効率", bouken: "冒険", seikatsu: "創造" };
+
+            let core = `あなたの魂の原型、それは【${title}】です。\nその本質は「${verbMap[p]}」への強い渇望にあります。`;
+            let synergy = `同時に、あなたは「${verbMap[s]}」の才能も色濃く併せ持っています。`;
+            if(scores[s] < 10) synergy = `あなたの情熱は一つのことに深く注がれ、その分野で他の追随を許さない圧倒的な成果を生み出すでしょう。`;
+            let recommendation = `あなたのその輝かしい魂が最も輝く場所は【${serverMap[p]}】です。\nそして、もし新たな刺激が欲しくなったなら【${serverMap[s]}】の門を叩くと、まだ見ぬ自分に出会えるはずです。`;
+            
+            return `${journey}${core}\n${synergy}\n\n${recommendation}`;
         }
 
         function restartQuiz() {
@@ -393,7 +423,7 @@
             setTimeout(() => {
                 DOM.resultScreen.style.display = 'none';
                 DOM.resultScreen.classList.remove('anim-fade-out');
-                DOM.quizScreen.classList.remove('anim-fade-out');
+                DOM.quizScreen.classList.remove('anim-fade-out'); // ★バグ修正
                 
                 DOM.startScreen.style.display = 'block';
                 DOM.startScreen.classList.remove('anim-fade-out');
