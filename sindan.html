@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>プレイスタイル深層心理診断【Final Answer】</title>
+    <title>プレイスタイル運命分岐診断【Final Answer】</title>
     <style>
         /* ====== Google Fonts & 基本設定 ====== */
         @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Rajdhani:wght@600&display=swap');
@@ -38,8 +38,7 @@
         }
         
         #background-stars {
-            position: fixed;
-            top: 0; left: 0;
+            position: fixed; top: 0; left: 0;
             width: 100%; height: 100%;
             background-image:
                 radial-gradient(1px 1px at 25% 15%, #fff, transparent),
@@ -50,38 +49,31 @@
             animation: twinkle 20s linear infinite;
         }
         
-        /* ====== コンテナとレイアウト ====== */
         .container {
-            width: 100%;
-            max-width: 720px;
+            width: 100%; max-width: 720px;
             background-color: var(--surface-color);
             backdrop-filter: blur(16px);
             border-radius: 24px;
             box-shadow: 0 0 40px var(--shadow-color);
             border-top: 1px solid rgba(255, 255, 255, 0.2);
             border-left: 1px solid rgba(255, 255, 255, 0.2);
-            overflow: hidden;
-            z-index: 1;
+            overflow: hidden; z-index: 1;
         }
 
-        /* ====== スタート画面 ====== */
         #start-screen { padding: 50px; text-align: center; }
         #start-screen h1 {
             font-family: var(--font-display);
-            font-size: 3.5rem;
-            letter-spacing: 2px;
-            color: #fff;
-            margin-bottom: 1rem;
+            font-size: 3rem; letter-spacing: 2px;
+            color: #fff; margin-bottom: 1rem;
             text-shadow: 0 0 10px var(--primary-color), 0 0 20px var(--primary-color);
+            line-height: 1.4;
         }
         #start-screen p { font-size: 1.1rem; line-height: 1.8; margin-bottom: 2.5rem; color: var(--text-muted); }
         .start-btn {
             font-family: var(--font-display);
             font-size: 1.5rem; padding: 16px 45px;
-            letter-spacing: 1px;
-            background: transparent;
-            color: #fff;
-            border: 2px solid var(--primary-color);
+            letter-spacing: 1px; background: transparent;
+            color: #fff; border: 2px solid var(--primary-color);
             border-radius: 12px; cursor: pointer;
             box-shadow: 0 0 15px var(--border-glow);
             transition: all 0.2s ease-out;
@@ -89,24 +81,29 @@
         }
         .start-btn:hover { background-color: var(--primary-color); color: var(--bg-color); box-shadow: 0 0 25px var(--primary-color); }
         
-        /* ====== 診断画面 ====== */
         #quiz-screen { padding: 40px; display: none; }
-        #progress-bar { width: 100%; height: 4px; background-color: rgba(0,0,0,0.3); border-radius: 2px; overflow: hidden; margin-bottom: 2rem; }
-        #progress { width: 0%; height: 100%; background: var(--primary-color); transition: width 0.5s ease; box-shadow: 0 0 10px var(--primary-color); }
-        .question-container { opacity: 0; }
-        #question-text { font-size: 1.8rem; font-weight: 600; margin-bottom: 2rem; line-height: 1.6; color: #fff; }
-        .options-container { display: grid; grid-template-columns: 1fr; gap: 1rem; }
-        .option-btn {
-            width: 100%; padding: 16px 20px; font-size: 1.1rem;
-            background-color: rgba(0,0,0,0.2);
-            border: 2px solid transparent;
-            color: var(--text-color);
-            border-radius: 12px; cursor: pointer;
-            text-align: left; transition: all 0.2s ease;
+        #step-counter {
+            font-family: var(--font-display);
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
-        .option-btn:hover { background-color: var(--surface-color); border-color: var(--primary-color); }
+        .question-container { opacity: 0; }
+        #question-text { font-size: 1.8rem; font-weight: 600; margin-bottom: 2rem; line-height: 1.6; color: #fff; text-align: center; }
+        .options-container { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .option-btn {
+            padding: 25px 20px; font-size: 1.2rem;
+            background-color: rgba(0,0,0,0.2);
+            border: 2px solid var(--border-glow);
+            color: var(--text-color); font-weight: 600;
+            border-radius: 12px; cursor: pointer;
+            text-align: center; transition: all 0.2s ease;
+            display: flex; align-items: center; justify-content: center;
+            min-height: 100px;
+        }
+        .option-btn:hover { background-color: var(--surface-color); border-color: var(--primary-color); transform: scale(1.05); }
         
-        /* ====== 結果画面 ====== */
         #result-screen { padding: 40px; text-align: center; display: none; }
         #result-screen > * { opacity: 0; }
         #result-screen h2 { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 1px; margin-bottom: 1.5rem; color: var(--text-muted); }
@@ -118,8 +115,7 @@
             width: 0; height: 100%;
             transition: width 1s cubic-bezier(0.25, 1, 0.5, 1);
             line-height: 24px; color: var(--bg-color); font-weight: bold;
-            text-align: right; padding-right: 12px;
-            font-size: 1rem;
+            text-align: right; padding-right: 12px; font-size: 1rem;
         }
         .highlight .chart-value-bar { animation: glow 1.5s infinite alternate; }
         #tenkuu-bar .chart-value-bar { background-color: var(--tenkuu-color); }
@@ -135,26 +131,22 @@
             border-radius: 8px; transition: all 0.2s ease; margin-top: 2rem;
         }
         .restart-btn:hover { background-color: var(--primary-color); border-color: var(--primary-color); color: var(--bg-color); font-weight: bold; }
-
-        /* ====== アニメーション定義 ====== */
+        
         .anim-fade-in { animation: fadeIn 0.8s ease-out forwards; }
         .anim-fade-out { animation: fadeOut 0.4s ease-in forwards; }
-        .anim-slide-in-up { animation: slideInUp 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        .anim-pop-in { animation: popIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
-        @keyframes slideInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes glow {
-            from { box-shadow: 0 0 5px -2px currentColor, 0 0 10px -2px currentColor; }
-            to { box-shadow: 0 0 15px 0px currentColor, 0 0 30px 0px currentColor; }
-        }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+        @keyframes glow { from { box-shadow: 0 0 8px 0px currentColor; } to { box-shadow: 0 0 20px 3px currentColor; } }
         @keyframes twinkle { from { transform: translateY(0); } to { transform: translateY(-100vh); } }
         
-        /* ====== レスポンシブ対応 ====== */
         @media (max-width: 680px) {
             body { padding: 0.5rem; }
-            #start-screen h1 { font-size: 2.5rem; }
+            #start-screen h1 { font-size: 2rem; }
             #quiz-screen, #start-screen, #result-screen { padding: 25px; }
             #question-text { font-size: 1.4rem; }
+            .options-container { grid-template-columns: 1fr; }
             #archetype-title { font-size: 1.8rem; }
         }
     </style>
@@ -163,20 +155,20 @@
     <div id="background-stars"></div>
     <div class="container" id="container">
         <div id="start-screen" class="anim-fade-in">
-            <h1>Style Analysis</h1>
-            <p>10の質問が、あなたの魂の原型を解き明かす。<br>自らの本質と向き合う準備はいいですか？</p>
+            <h1>Destiny Branch</h1>
+            <p>あなたの選択が、未来を創る。<br>魂の原型を解き明かす、運命の分岐が今、始まる。</p>
             <button class="start-btn" id="start-btn">分析を開始する</button>
         </div>
         <div id="quiz-screen">
-            <div id="progress-bar"><div id="progress"></div></div>
+            <p id="step-counter"></p>
             <div id="question-wrapper"></div>
         </div>
         <div id="result-screen">
-            <h2 class="result-anim">ANALYZING YOUR SOUL...</h2>
+            <h2 class="result-anim">ANALYZING YOUR DESTINY...</h2>
             <div class="result-chart-container result-anim">
-                <div class="chart-bar" id="tenkuu-bar"><div class="chart-label">効率性</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
-                <div class="chart-bar" id="bouken-bar"><div class="chart-label">冒険心</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
-                <div class="chart-bar" id="seikatsu-bar"><div class="chart-label">創造性</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
+                <div class="chart-bar" id="tenkuu-bar"><div class="chart-label">天空鯖</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
+                <div class="chart-bar" id="bouken-bar"><div class="chart-label">冒険鯖</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
+                <div class="chart-bar" id="seikatsu-bar"><div class="chart-label">生活鯖</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
             </div>
             <div class="analysis-details">
                 <h3 id="archetype-title"></h3>
@@ -186,7 +178,7 @@
         </div>
     </div>
     
-    <audio id="click-sound" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU0HT19OALe/ub+3v7W/tb20vrS+s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s-"></audio>
+    <audio id="click-sound" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU0HT19OALe/ub+3v7W/tb20vrS+s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO-"></audio>
     <audio id="result-sound" preload="auto" src="data:audio/wav;base64,UklGRoh+AABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQBofAAAAP//AgAJAAYADwAbABoAFgAJAP//AwAIAAcACwAUABUADgAEAPkABQADAAUACwASABQADQADAPkABgAEAAUACwAUABQADgADAPgABwAFAAYADQATABQADwAEAPkABQACAAcADQAUABMADgACAPkACAAEAAQACwATABQADgADAPgABgADAAQADQATABQADgADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADgATABMADgADAPgABgADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABMADgACAPkACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgAEAPcABgAFAAUADQATABQADgADAPgABQACAAUACwATABMADgAEAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABQADwAEAPgABwAFAAYADgATABMADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADgATABQADwADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABMADwAEAPcABwAFAAYADQATABMADgAEAPgABgAEAAUADgATABMADgADAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABMADwAEAPcABwAFAAYADQATABMADgAEAPgABgAEAAUADQATABMADgAEAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAEAPcABwAFAAYADQATABQADgADAPgABgADAAQADQATABQADwAEAPcABgAFAAYADQATABQADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAABABAAQsDFgMnAysDRQRaBgMAAAAA//8B/gD8AP8BAwIFAQ4CHQEnAS8BOAFDAU0BUgFhAWsBcwF/AYYBigGOAY8BkwGVAZgBmwGfAaIBpQGqAa4BswG6Ab4BwwHHAdEB0wHWAd0B4AHkAesB8AHyAfYB+AH+AgECCQIOAhYCHQEkASkBMQE7AUIBSQFMAVIAVwFbAWQBawF0AXkBfwGJAZsBox/DGb0ZpBmuGacZqBmqGaoZpxmnGaYapiqfKp4rni2LqAxoDKfMaYyoTKiMqEyojKgMaAxoC+gL6AvoC6fLZsslyycK5MrkytgLQAtfS1eLGUsaixqK2YrKitlKSUo5CcdJxwmmyKaIdMa0ArYAtUC0QLLAsMevx6sHqgeoB6XHSMdHB0eGxsZGBkXGRYaEhMQDw8JDwcFAwICAv7+/v38/Pn49/f39vf29fX08/Py8u/u7evq6ejn5eLh4N/d3dva2dbV09HT0c/NzMvKyMjExsPCwcG/vr28ury5t7i3tLW0s7GwsK+ur6uqqamnp6WkpaOjoaSioaGg/+De3drY1NPS0M7My8fGwsK+vby5t7W0srCvrqmpqaalpKSioaGfn56dnZyanJuaWlhXV1RTUVFQT05NTEpKSkdGRUM/PDs5ODc1NDMyLy0rKScmJSQjIiAfHx4dHBsaGRgWFRQRDg0LCQgHBgQCAf/+/v39/f39/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v-"></audio>
 
     <script>
@@ -197,191 +189,186 @@
             startBtn: document.getElementById('start-btn'),
             restartBtn: document.getElementById('restart-btn'),
             questionWrapper: document.getElementById('question-wrapper'),
-            progress: document.getElementById('progress'),
+            stepCounter: document.getElementById('step-counter'),
             analysisDetails: document.querySelector('.analysis-details'),
         };
-        
         const clickSound = document.getElementById('click-sound');
         const resultSound = document.getElementById('result-sound');
-        
-        const quizData = [
-            { question: "無人島に一つだけ持っていくなら、どれを選ぶ？", options: [
-                { text: "最短で文明を築くための「万能ツール」", scores: { tenkuu: 3, bouken: 1, seikatsu: 1 } },
-                { text: "島の秘密を解き明かす「古の地図」", scores: { tenkuu: 0, bouken: 3, seikatsu: 1 } },
-                { text: "心地よい生活を創るための「不思議な種」", scores: { tenkuu: 1, bouken: 1, seikatsu: 3 } }
-            ]},
-            { question: "あなたの前に３つの扉が。どれを開ける？", options: [
-                { text: "「10分で頂点へ」と書かれた、ハイリスクな扉", scores: { tenkuu: 3, bouken: 1, seikatsu: 0 } },
-                { text: "「未知なる景色へ」と書かれた、行先の見えない扉", scores: { tenkuu: 1, bouken: 3, seikatsu: 1 } },
-                { text: "「安寧の地へ」と書かれた、穏やかで安全な扉", scores: { tenkuu: 0, bouken: 0, seikatsu: 3 } }
-            ]},
-            { question: "あなたが最も信頼する「力」とは？", options: [
-                { text: "全てを計算し、最適解を導き出す「知性」", scores: { tenkuu: 3, bouken: 1, seikatsu: 0 } },
-                { text: "誰も思いつかない道を切り拓く「直感」", scores: { tenkuu: 1, bouken: 3, seikatsu: 1 } },
-                { text: "時間をかけて着実に積み上げる「経験」", scores: { tenkuu: 1, bouken: 0, seikatsu: 3 } }
-            ]},
-            { question: "あなたが創る世界に、最も重要な要素は？", options: [
-                { text: "寸分の狂いもなく機能する「システム」", scores: { tenkuu: 3, bouken: 0, seikatsu: 1 } },
-                { text: "見る者の心を揺さぶる「物語」", scores: { tenkuu: 0, bouken: 3, seikatsu: 2 } },
-                { text: "愛着が湧き、帰りたくなる「居場所」", scores: { tenkuu: 0, bouken: 1, seikatsu: 3 } }
-            ]},
-            { question: "チームの中で、あなたが最も輝く役割は？", options: [
-                { text: "誰よりも優れた結果を出す「エース」", scores: { tenkuu: 3, bouken: 1, seikatsu: 0 } },
-                { text: "仲間と連携し、不可能を可能にする「司令塔」", scores: { tenkuu: 1, bouken: 3, seikatsu: 1 } },
-                { text: "皆の活動を陰で支える「職人」", scores: { tenkuu: 0, bouken: 0, seikatsu: 3 } }
-            ]},
-            { question: "巨大な壁が目の前に。どうやって乗り越える？", options: [
-                { text: "最短で登るための道具を即席で開発する", scores: { tenkuu: 3, bouken: 1, seikatsu: 0 } },
-                { text: "壁に隠された道や迂回路を探し回る", scores: { tenkuu: 1, bouken: 3, seikatsu: 0 } },
-                { text: "麓にキャンプを張り、時間をかけて登る", scores: { tenkuu: 0, bouken: 1, seikatsu: 3 } }
-            ]},
-            { question: "あなたが手に入れたい「究極の報酬」とは？", options: [
-                { text: "他者を圧倒する、一時的だが絶対的な「力」", scores: { tenkuu: 3, bouken: 1, seikatsu: 0 } },
-                { text: "世界の真理に触れる、唯一無二の「知識」", scores: { tenkuu: 1, bouken: 3, seikatsu: 1 } },
-                { text: "永続的に世界を豊かにする「創造の力」", scores: { tenkuu: 1, bouken: 1, seikatsu: 3 } }
-            ]},
-            { question: "計画が失敗に終わった時、最初に何を思う？", options: [
-                { text: "「敗因を分析し、次の計画を立てよう」", scores: { tenkuu: 3, bouken: 0, seikatsu: 1 } },
-                { text: "「これもまた一興。新たな発見があった」", scores: { tenkuu: 0, bouken: 3, seikatsu: 1 } },
-                { text: "「仕方ない。別の好きなことをしよう」", scores: { tenkuu: 0, bouken: 1, seikatsu: 3 } }
-            ]},
-            { question: "あなたが「美しい」と感じるものは？", options: [
-                { text: "無駄が削ぎ落とされた、完璧な「数式」", scores: { tenkuu: 3, bouken: 0, seikatsu: 0 } },
-                { text: "誰も見たことのない、手付かずの「自然」", scores: { tenkuu: 0, bouken: 3, seikatsu: 1 } },
-                { text: "人々の営みが感じられる、温かい「街の灯り」", scores: { tenkuu: 0, bouken: 1, seikatsu: 3 } }
-            ]},
-            { question: "あなたの理想の時間の使い方は？", options: [
-                { text: "1秒も無駄にせず、常に何かを成し遂げる", scores: { tenkuu: 3, bouken: 1, seikatsu: 0 } },
-                { text: "気の向くままに、寄り道や発見を楽しむ", scores: { tenkuu: 0, bouken: 3, seikatsu: 1 } },
-                { text: "毎日の決まった時間に、好きなことをじっくり嗜む", scores: { tenkuu: 0, bouken: 1, seikatsu: 3 } }
-            ]}
-        ];
 
-        let currentQuestionIndex = 0;
-        let scores = { tenkuu: 0, bouken: 0, seikatsu: 0 };
+        // ======== 運命分岐型の質問ツリー ========
+        const quizTree = {
+            'start': {
+                question: "あなたの根源的な欲求は、どちらに近いですか？",
+                options: [
+                    { text: "他者に打ち勝ち、頂点に立つこと", next: 'competition_1' },
+                    { text: "誰かと力を合わせ、偉業を成すこと", next: 'cooperation_1' }
+                ]
+            },
+            // --- 競争ルート ---
+            'competition_1': {
+                question: "頂点に立つための、あなたの理想的な手段は？",
+                options: [
+                    { text: "純粋な実力と効率で、他者を圧倒する", next: 'competition_2a' },
+                    { text: "好敵手と競い合い、共に成長する", next: 'competition_2b' }
+                ]
+            },
+            'competition_2a': {
+                question: "あなたが求める「効率」の本質とは？",
+                options: [
+                    { text: "時間を支配し、作業を極限まで自動化すること", next: 'result_optimizer' },
+                    { text: "最強の武具を手にし、戦闘を瞬時に終わらせること", next: 'result_gladiator' }
+                ]
+            },
+            'competition_2b': {
+                question: "その競争の先に、あなたが本当に求めるものは？",
+                options: [
+                    { text: "最終的な勝利と、サーバーに名を刻む「名声」", next: 'result_duelist' },
+                    { text: "まだ誰も知らない「未知」への一番乗り", next: 'result_pioneer' }
+                ]
+            },
+            // --- 協力ルート ---
+            'cooperation_1': {
+                question: "あなたの理想とする「協力」の形は？",
+                options: [
+                    { text: "役割を分担し、巨大な敵や難関に挑む", next: 'cooperation_2a' },
+                    { text: "同じ世界で暮らし、巨大な街や国を創る", next: 'cooperation_2b' }
+                ]
+            },
+            'cooperation_2a': {
+                question: "仲間との冒険で、最も心が震える瞬間は？",
+                options: [
+                    { text: "絶体絶命の状況を、完璧な連携で覆すこと", next: 'result_leader' },
+                    { text: "未知の発見や絶景を、仲間と分かち合うこと", next: 'result_explorer' }
+                ]
+            },
+            'cooperation_2b': {
+                question: "あなたが創る街で、最も得意な役割は？",
+                options: [
+                    { text: "人々の生活を支える、機能的なインフラを整備する", next: 'result_architect' },
+                    { text: "誰もが心癒される、美しい景観や芸術を創造する", next: 'result_artist' }
+                ]
+            },
+            // --- 最終結果ノード ---
+            'result_optimizer': { result: true, title: "純粋なる最適化主義者", scores: { tenkuu: 90, bouken: 5, seikatsu: 5 } },
+            'result_gladiator': { result: true, title: "常勝のグラディエーター", scores: { tenkuu: 80, bouken: 20, seikatsu: 0 } },
+            'result_duelist': { result: true, title: "名声を求める決闘者", scores: { tenkuu: 70, bouken: 30, seikatsu: 0 } },
+            'result_pioneer': { result: true, title: "未踏世界の開拓者", scores: { tenkuu: 40, bouken: 60, seikatsu: 0 } },
+            'result_leader': { result: true, title: "伝説のパーティリーダー", scores: { tenkuu: 10, bouken: 85, seikatsu: 5 } },
+            'result_explorer': { result: true, title: "世界を識る探検家", scores: { tenkuu: 0, bouken: 75, seikatsu: 25 } },
+            'result_architect': { result: true, title: "大都市のインフラ設計者", scores: { tenkuu: 40, bouken: 10, seikatsu: 50 } },
+            'result_artist': { result: true, title: "世界を彩る芸術家", scores: { tenkuu: 0, bouken: 15, seikatsu: 85 } }
+        };
+
+        let currentNodeId = 'start';
+        let step = 0;
         
         const playSound = (sound) => { sound.currentTime = 0; sound.play().catch(e => {}); };
-        const shuffle = (array) => array.sort(() => Math.random() - 0.5);
 
         function startQuiz() {
             playSound(clickSound);
-            currentQuestionIndex = 0;
-            scores = { tenkuu: 0, bouken: 0, seikatsu: 0 };
+            currentNodeId = 'start';
+            step = 0;
             DOM.startScreen.classList.remove('anim-fade-in');
             DOM.startScreen.classList.add('anim-fade-out');
             setTimeout(() => {
                 DOM.startScreen.style.display = 'none';
                 DOM.quizScreen.style.display = 'block';
-                showQuestion();
+                showQuestion(currentNodeId);
             }, 400);
         }
         
-        function showQuestion() {
-            const questionData = quizData[currentQuestionIndex];
-            DOM.progress.style.width = `${((currentQuestionIndex) / quizData.length) * 100}%`;
-            const shuffledOptions = shuffle([...questionData.options]);
+        function showQuestion(nodeId) {
+            const node = quizTree[nodeId];
+            step++;
+            DOM.stepCounter.textContent = `STEP ${step}`;
+            
             const questionContainer = document.createElement('div');
             questionContainer.className = 'question-container';
             questionContainer.innerHTML = `
-                <h2 id="question-text">${questionData.question}</h2>
+                <h2 id="question-text">${node.question}</h2>
                 <div class="options-container">
-                    ${shuffledOptions.map(option => `<button class="option-btn" data-scores='${JSON.stringify(option.scores)}'>${option.text}</button>`).join('')}
+                    ${node.options.map(option => `<button class="option-btn" data-next="${option.next}">${option.text}</button>`).join('')}
                 </div>`;
+            
             DOM.questionWrapper.innerHTML = '';
             DOM.questionWrapper.appendChild(questionContainer);
-            questionContainer.classList.add('anim-slide-in-up');
+            questionContainer.classList.add('anim-pop-in');
             document.querySelectorAll('.option-btn').forEach(button => button.addEventListener('click', handleOptionClick));
         }
         
         function handleOptionClick(event) {
             playSound(clickSound);
-            const selectedScores = JSON.parse(event.target.dataset.scores);
-            Object.keys(selectedScores).forEach(key => scores[key] += selectedScores[key]);
-            currentQuestionIndex++;
+            const nextNodeId = event.target.dataset.next;
+            currentNodeId = nextNodeId;
             DOM.questionWrapper.firstElementChild.classList.add('anim-fade-out');
-            setTimeout(() => currentQuestionIndex < quizData.length ? showQuestion() : showResult(), 400);
-        }
-
-        function getResultArchetype(p) {
-            const primaryKey = Object.keys(p).reduce((a, b) => p[a] > p[b] ? a : b);
-            const secondaryKey = Object.keys(p).filter(k => k !== primaryKey).reduce((a, b) => p[a] > p[b] ? a : b);
-            const lowestKey = Object.keys(p).filter(k => k !== primaryKey && k !== secondaryKey)[0];
-
-            const archetypes = {
-                tenkuu: { name: "効率性", verb: "最適化すること" },
-                bouken: { name: "冒険心", verb: "探求すること" },
-                seikatsu: { name: "創造性", verb: "創造すること" }
-            };
-
-            let title, desc_core, desc_synergy, desc_caution, recommendation;
-
-            if (p[primaryKey] > 0.6) { // 特化型
-                title = `純粋なる【${archetypes[primaryKey].name}】の体現者`;
-                desc_core = `あなたは、何よりも「${archetypes[primaryKey].verb}」に魂を燃やす、特化型の天才です。`;
-                desc_synergy = "あなたの情熱は一つのことに深く注がれ、その分野で他の追随を許さない圧倒的な成果を生み出します。";
-                desc_caution = `しかし、その純粋さゆえに、時には【${archetypes[secondaryKey].name}】や【${archetypes[lowestKey].name}】といった他の楽しみを見過ごしてしまうかもしれません。`;
-                recommendation = `あなたの才能が最も輝くのは、${primaryKey === 'tenkuu' ? '天空鯖' : primaryKey === 'bouken' ? '冒険鯖' : '生活鯖'}です。`;
-            } else { // バランス型
-                const titles = {
-                    tenkuu: { bouken: "冷徹な探求家", seikatsu: "自動化帝国の設計者" },
-                    bouken: { tenkuu: "伝説を求める戦略家", seikatsu: "世界を旅する芸術家" },
-                    seikatsu: { tenkuu: "繁栄をもたらす都市計画家", bouken: "物語を紡ぐ建築家" }
-                };
-                title = `【${titles[primaryKey][secondaryKey]}】`;
-                desc_core = `あなたは、最も強い【${archetypes[primaryKey].name}】をその核としながらも、`;
-                desc_synergy = `同時に強い【${archetypes[secondaryKey].name}】を併せ持つ、才能豊かなバランス型のプレイヤーです。\nその結果、あなたは「${archetypes[primaryKey].verb}」と「${archetypes[secondaryKey].verb}」を組み合わせ、独自のプレイスタイルを確立します。`;
-                desc_caution = `一方で、あなたの関心は【${archetypes[lowestKey].name}】にはあまり向かない傾向があります。`;
-                recommendation = `あなたのハイブリッドな才能は、${primaryKey === 'tenkuu' ? '天空鯖' : primaryKey === 'bouken' ? '冒険鯖' : '生活鯖'}を主軸としつつ、気分転換に${secondaryKey === 'tenkuu' ? '天空鯖' : secondaryKey === 'bouken' ? '冒険鯖' : '生活鯖'}を訪れることで、更なる高みへと到達するでしょう。`;
-            }
-
-            return { title, description: `${desc_core}\n${desc_synergy}\n\n${desc_caution}\n\n${recommendation}` };
-        }
-
-        function showResult() {
-            DOM.progress.style.width = '100%';
             setTimeout(() => {
-                DOM.quizScreen.classList.add('anim-fade-out');
-                setTimeout(() => {
-                    DOM.quizScreen.style.display = 'none';
-                    DOM.resultScreen.style.display = 'block';
-                    DOM.resultScreen.querySelectorAll('.result-anim').forEach(el => el.classList.add('anim-fade-in'));
-                    
-                    playSound(resultSound);
+                const nextNode = quizTree[nextNodeId];
+                if (nextNode.result) {
+                    showResult(nextNode);
+                } else {
+                    showQuestion(nextNodeId);
+                }
+            }, 400);
+        }
+        
+        function getResultDescription(title, scores) {
+             let primaryVerb, secondaryVerb, primaryServer, secondaryServer;
+             const p = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+             const s = Object.keys(scores).filter(k => k !== p).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
-                    const totalScore = Object.values(scores).reduce((a, b) => a + b, 1);
-                    const percentages = {
-                        tenkuu: scores.tenkuu / totalScore,
-                        bouken: scores.bouken / totalScore,
-                        seikatsu: scores.seikatsu / totalScore
-                    };
-                    
-                    const primaryKey = Object.keys(percentages).reduce((a, b) => percentages[a] > percentages[b] ? a : b);
+             const serverMap = { tenkuu: "天空鯖", bouken: "冒険鯖", seikatsu: "生活鯖" };
+             const verbMap = { tenkuu: "効率化", bouken: "冒険", seikatsu: "創造" };
+             
+             primaryVerb = verbMap[p];
+             secondaryVerb = verbMap[s];
+             primaryServer = serverMap[p];
+             secondaryServer = serverMap[s];
 
-                    const animateBar = (key, delay) => {
-                        setTimeout(() => {
-                            const bar = document.querySelector(`#${key}-bar .chart-value-bar`);
-                            const percentage = Math.round(percentages[key] * 100);
-                            bar.style.width = `${percentage}%`;
-                            bar.textContent = `${percentage}%`;
-                            if (key === primaryKey) {
-                                document.getElementById(`${key}-bar`).classList.add('highlight');
-                            }
-                        }, delay);
-                    };
-                    
-                    animateBar('tenkuu', 500);
-                    animateBar('bouken', 700);
-                    animateBar('seikatsu', 900);
-                    
+             let core = `あなたは、自らの本質が「${primaryVerb}」にあると知る人間です。`;
+             let synergy = `その上で「${secondaryVerb}」への強い衝動も併せ持ち、二つの才能を融合させて独自の道を歩みます。`;
+             if(scores[s] < 10) { // 特化型の場合
+                synergy = `あなたの情熱は一つのことに深く注がれ、その分野で他の追随を許さない圧倒的な成果を生み出すでしょう。`
+             }
+             let recommendation = `あなたの魂が最も輝く場所は【${primaryServer}】です。そして、もし新たな刺激が欲しくなったなら【${secondaryServer}】の門を叩くと、まだ見ぬ自分に出会えるでしょう。`;
+             
+             return `【${title}】\n\n${core}\n${synergy}\n\n${recommendation}`;
+        }
+
+        function showResult(resultNode) {
+            DOM.quizScreen.classList.add('anim-fade-out');
+            setTimeout(() => {
+                DOM.quizScreen.style.display = 'none';
+                DOM.resultScreen.style.display = 'block';
+                DOM.resultScreen.querySelectorAll('.result-anim').forEach(el => el.classList.add('anim-fade-in'));
+                playSound(resultSound);
+                
+                const scores = resultNode.scores;
+                const primaryKey = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+                const animateBar = (key, delay) => {
                     setTimeout(() => {
-                        const archetype = getResultArchetype(percentages);
-                        DOM.analysisDetails.querySelector('#archetype-title').textContent = archetype.title;
-                        DOM.analysisDetails.querySelector('#archetype-description').textContent = archetype.description;
-                        DOM.analysisDetails.style.opacity = 1;
-                        DOM.analysisDetails.style.transform = 'translateY(0)';
-                    }, 1500);
-                }, 400);
-            }, 500);
+                        const bar = document.querySelector(`#${key}-bar .chart-value-bar`);
+                        const percentage = scores[key] || 0;
+                        bar.style.width = `${percentage}%`;
+                        bar.textContent = `${percentage}%`;
+                        if (key === primaryKey) {
+                            document.getElementById(`${key}-bar`).classList.add('highlight');
+                        }
+                    }, delay);
+                };
+                
+                animateBar('tenkuu', 500);
+                animateBar('bouken', 700);
+                animateBar('seikatsu', 900);
+                
+                setTimeout(() => {
+                    const finalDesc = getResultDescription(resultNode.title, scores);
+                    DOM.analysisDetails.querySelector('#archetype-title').textContent = `あなたの原型は...`;
+                    DOM.analysisDetails.querySelector('#archetype-description').textContent = finalDesc;
+                    DOM.analysisDetails.style.opacity = 1;
+                    DOM.analysisDetails.style.transform = 'translateY(0)';
+                }, 1500);
+            }, 400);
         }
         
         function restartQuiz() {
