@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サーバープレイスタイル分析【最終完成版】</title>
+    <title>サーバープレイスタイル分析【修正・最適化版】</title>
     <style>
         /* ====== Google Fonts & 基本設定 ====== */
         @import url('https://fonts.googleapis.com/css2?family=Kosugi+Maru&family=Rajdhani:wght@600&display=swap');
@@ -107,7 +107,7 @@
             min-height: 100px;
         }
         .option-btn:hover { background-color: var(--surface-color); border-color: var(--primary-color); transform: scale(1.05); }
-        .quiz-footer { margin-top: 2rem; }
+        .quiz-footer { margin-top: 2rem; text-align: left; }
         .back-btn {
             font-family: var(--font-display);
             background: none; border: none; color: var(--text-muted);
@@ -116,7 +116,6 @@
         }
         .back-btn:hover { color: var(--text-color); }
         
-        #result-screen > *, #analysis-complete-screen > * { opacity: 0; }
         #result-screen h2, #analysis-complete-screen h2 { font-family: var(--font-display); font-size: 1.8rem; letter-spacing: 1px; margin-bottom: 1.5rem; color: var(--text-muted); }
         #analysis-complete-screen p { font-size: 1.2rem; line-height: 1.8; margin-bottom: 2.5rem; color: var(--text-color); }
 
@@ -148,7 +147,7 @@
         .anim-fade-in { animation: fadeIn 0.8s ease-out forwards; }
         .anim-fade-out { animation: fadeOut 0.4s ease-in forwards; }
         .anim-pop-in { animation: popIn 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
         @keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
         @keyframes glow { from { box-shadow: 0 0 8px 0px currentColor; } to { box-shadow: 0 0 20px 3px currentColor; } }
@@ -171,6 +170,7 @@
             <p>あなたのプレイスタイルを分析し、<br>最適なサーバーを見つけ出します。</p>
             <button class="main-btn" id="start-btn">分析を開始する</button>
         </div>
+
         <div id="quiz-screen" class="screen quiz-screen-padding" style="display: none;">
             <p id="step-counter"></p>
             <div id="question-wrapper"></div>
@@ -178,14 +178,16 @@
                 <button id="back-btn" class="back-btn" style="display: none;">&lt; ひとつ前に戻る</button>
             </div>
         </div>
+
         <div id="analysis-complete-screen" class="screen" style="display: none;">
             <h2 class="anim-fade-in">ANALYSIS COMPLETE</h2>
             <p class="anim-fade-in" style="animation-delay: 0.2s;">あなたのプレイスタイルの分析が完了しました。</p>
             <button class="main-btn anim-fade-in" id="view-results-btn" style="animation-delay: 0.4s;">結果を見る</button>
         </div>
+
         <div id="result-screen" class="screen" style="display: none;">
-            <h2 class="result-anim">YOUR PLAYSTYLE IS...</h2>
-            <div class="result-chart-container result-anim">
+            <h2>YOUR PLAYSTYLE IS...</h2>
+            <div class="result-chart-container">
                 <div class="chart-bar" id="tenkuu-bar"><div class="chart-label">天空鯖</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
                 <div class="chart-bar" id="bouken-bar"><div class="chart-label">冒険鯖</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
                 <div class="chart-bar" id="seikatsu-bar"><div class="chart-label">生活鯖</div><div class="chart-progress"><div class="chart-value-bar"></div></div></div>
@@ -198,11 +200,12 @@
         </div>
     </div>
     
-    <audio id="click-sound" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU0HT19OALe/ub+3v7W/tb20vrS+s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO-"></audio>
-    <audio id="result-sound" preload="auto" src="data:audio/wav;base64,UklGRoh+AABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQBofAAAAP//AgAJAAYADwAbABoAFgAJAP//AwAIAAcACwAUABUADgAEAPkABQADAAUACwASABQADQADAPkABgAEAAUACwAUABQADgADAPgABwAFAAYADQATABQADwAEAPkABQACAAcADQAUABMADgACAPkACAAEAAQACwATABQADgADAPgABgADAAQADQATABQADgADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADgATABMADgADAPgABgADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABMADgACAPkACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgAEAPcABgAFAAUADQATABQADgADAPgABQACAAUACwATABMADgAEAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABQADwAEAPgABwAFAAYADgATABMADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADgATABQADwADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABQADgADAPgABgAEAAUADQATABMADgAEAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABQADwAEAPcABwAFAAYADQATABMADgAEAPgABgAEAAUADgATABMADgADAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAEAPcABwAFAAYADQATABQADgADAPgABgADAAQADQATABQADwAEAPcABgAFAAYADQATABQADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAABABAAQsDFgMnAysDRQRaBgMAAAAA//8B/gD8AP8BAwIFAQ4CHQEnAS8BOAFDAU0BUgFhAWsBcwF/AYYBigGOAY8BkwGVAZgBmwGfAaIBpQGqAa4BswG6Ab4BwwHHAdEB0wHWAd0B4AHkAesB8AHyAfYB+AH+AgECCQIOAhYCHQEkASkBMQE7AUIBSQFMAVIAVwFbAWQBawF0AXkBfwGJAZsBox/DGb0ZpBmuGacZqBmqGaoZpxmnGaYapiqfKp4rni2LqAxoDKfMaYyoTKiMqEyojKgMaAxoC+gL6AvoC6fLZsslyycK5MrkytgLQAtfS1eLGUsaixqK2YrKitlKSUo5CcdJxwmmyKaIdMa0ArYAtUC0QLLAsMevx6sHqgeoB6XHSMdHB0eGxsZGBkXGRYaEhMQDw8JDwcFAwICAv7+/v38/Pn49/f39vf29fX08/Py8u/u7evq6ejn5eLh4N/d3dva2dbV09HT0c/NzMvKyMjExsPCwcG/vr28ury5t7i3tLW0s7GwsK+ur6uqqamnp6WkpaOjoaSioaGg/+De3drY1NPS0M7My8fGwsK+vby5t7W0srCvrqmpqaalpKSioaGfn56dnZyanJuaWlhXV1RTUVFQT05NTEpKSkdGRUM/PDs5ODc1NDMyLy0rKScmJSQjIiAfHx4dHBsaGRgWFRQRDg0LCQgHBgQCAf/+/v39/f39/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v-"></audio>
+    <audio id="click-sound" preload="auto" src="data:audio/wav;base64,UklGRl9vT19XQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YU0HT19OALe/ub+3v7W/tb20vrS+s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO9s72zvbO-"></audio>
+    <audio id="result-sound" preload="auto" src="data:audio/wav;base64,UklGRoh+AABXQVZFZm10IBAAAAABAAEARKwAAIhYAQACABAAZGF0YQBofAAAAP//AgAJAAYADwAbABoAFgAJAP//AwAIAAcACwAUABUADgAEAPkABQADAAUACwASABQADQADAPkABgAEAAUACwAUABQADgADAPgABwAFAAYADQATABQADwAEAPkABQACAAcADQAUABMADgACAPkACAAEAAQACwATABQADgADAPgABgADAAQADQATABQADgADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADgATABMADgADAPgABgADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABMADgACAPkACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgADAPgABQADAAQACwASABMADwAEAPcABwAFAAYADQASABQADgADAPgABQACAAQADQASABQADwAEAPcABwAFAAYADQASABMADgADAPgABQADAAQADQASABMADwAEAPcABQAEAAcADQASABQADgADAPgACAAFAAYADQASABMADgAEAPcABgAFAAUADQATABQADgADAPgABQACAAUACwATABMADgAEAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABQADwAEAPgABwAFAAYADgATABMADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADgATABQADwADAPgABgAEAAUADQATABMADgAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABQADgADAPgABgAEAAUADQATABMADgAEAPgABwAFAAYADQATABQADwAEAPcABwAFAAYADQATABMADgADAPgABgADAAQADQATABQADwAEAPcABwAFAAYADQATABMADgAEAPgABgAEAAUADgATABMADgADAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAEAPcABwAFAAYADQATABQADgADAPgABgADAAQADQATABQADwAEAPcABgAFAAYADQATABQADgAEAPgABgAEAAUADgATABMADgAEAPgABwAFAAYADQATABQADwADAPgABgAEAAUACwATABMADgAABABAAQsDFgMnAysDRQRaBgMAAAAA//8B/gD8AP8BAwIFAQ4CHQEnAS8BOAFDAU0BUgFhAWsBcwF/AYYBigGOAY8BkwGVAZgBmwGfAaIBpQGqAa4BswG6Ab4BwwHHAdEB0wHWAd0B4AHkAesB8AHyAfYB+AH+AgECCQIOAhYCHQEkASkBMQE7AUIBSQFMAVIAVwFbAWQBawF0AXkBfwGJAZsBox/DGb0ZpBmuGacZqBmqGaoZpxmnGaYapiqfKp4rni2LqAxoDKfMaYyoTKiMqEyojKgMaAxoC+gL6AvoC6fLZsslyycK5MrkytgLQAtfS1eLGUsaixqK2YrKitlKSUo5CcdJxwmmyKaIdMa0ArYAtUC0QLLAsMevx6sHqgeoB6XHSMdHB0eGxsZGBkXGRYaEhMQDw8JDwcFAwICAv7+/v38/Pn49/f39vf29fX08/Py8u/u7evq6ejn5eLh4N/d3dva2dbV09HT0c/NzMvKyMjExsPCwcG/vr28ury5t7i3tLW0s7GwsK+ur6uqqamnp6WkpaOjoaSioaGg/+De3drY1NPS0M7My8fGwsK+vby5t7W0srCvrqmpqaalpKSioaGfn56dnZyanJuaWlhXV1RTUVFQT05NTEpKSkdGRUM/PDs5ODc1NDMyLy0rKScmJSQjIiAfHx4dHBsaGRgWFRQRDg0LCQgHBgQCAf/+/v39/f39/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/v7+/-"></audio>
 
-    <script>
+    <script defer>
         const DOM = {
+            container: document.getElementById('container'),
             startScreen: document.getElementById('start-screen'),
             quizScreen: document.getElementById('quiz-screen'),
             analysisCompleteScreen: document.getElementById('analysis-complete-screen'),
@@ -225,7 +228,7 @@
             'c1': { question: "「強さ」とは、あなたにとって主にどちらですか？", options: [{ text: "他者を圧倒する「総合力」", next: 'c2_power' }, { text: "どんな状況でも対応できる「技術力」", next: 'c2_skill' }] },
             'c2_power': { question: "その「力」を、どのように使いたいですか？", options: [{ text: "ランキングなどで、自分の力を証明したい", next: 'c3_rank' }, { text: "誰にも縛られない、自由な活動のため", next: 'c3_freedom' }] },
             'c3_rank': { question: "競争相手は、あなたにとってどんな存在ですか？", options: [{ text: "乗り越えるべき「壁」", next: 'c4_wall' }, { text: "共に高め合う「好敵手」", next: 'c4_rival' }] },
-            'c4_wall': { question: "あなたは、プロセスよりも何よりも「勝利」という結果を求めますか？", options: [{ text: "はい、勝利こそが全てです", next: 'c5_victory' }, { text: "いいえ、効率的な過程こそが芸術です", next: 'c5_process' }] },
+            'c4_rival': { question: "あなたは、プロセスよりも何よりも「勝利」という結果を求めますか？", options: [{ text: "はい、勝利こそが全てです", next: 'c5_victory' }, { text: "いいえ、効率的な過程こそが芸術です", next: 'c5_process' }] },
             'c5_victory': { question: "あなたの理想の戦い方は？", options: [{ text: "一対一の、公正な条件下での決闘", next: 'c6_duel' }, { text: "戦略を駆使し、集団を圧倒する征服", next: 'c6_conquest' }] },
             'c6_duel': { question: "あなたの求めるものは、最強という「称号」ですか？それとも、戦い続ける「刺激」ですか？", options: [{ text: "最強の「称号」", next: 'c7_title' }, { text: "戦いの「刺激」", next: 'r_duelist' }] },
             'c7_title': { question: "最後の質問です。あなたは、一度手にした最強の座を、誰にも渡したくありませんか？", options: [{ text: "はい、永遠に最強であり続けます", next: 'r_gladiator' }, { text: "いいえ、次なる挑戦者を待っています", next: 'r_legend' }] },
@@ -234,6 +237,7 @@
             'c6_auto': { question: "あなたの自動化装置が、サーバーの経済を破壊する可能性が。どうしますか？", options: [{ text: "それもまた一興。システムの限界を見る", next: 'r_optimizer' }, { text: "影響を考慮し、出力を調整・管理する", next: 'c7_manage' }] },
             'c7_manage': { question: "最後の質問です。あなたが創るシステムは、誰のためのものですか？", options: [{ text: "社会全体の利益のためです", next: 'r_architect' }, { text: "自分の理想を実現するためです", next: 'r_gadgeteer' }] },
             'c6_trade': { question: "あなたの最終的な目標は？", options: [{ text: "誰にも真似できない、巨大な商業帝国を築くこと", next: 'r_merchant_king' }, { text: "富を独占し、世界を裏から操ること", next: 'r_shadow_ruler' }] },
+            'c4_wall': { question: "あなたは、プロセスよりも何よりも「勝利」という結果を求めますか？", options: [{ text: "はい、勝利こそが全てです", next: 'c5_victory' }, { text: "いいえ、効率的な過程こそが芸術です", next: 'c5_process' }] },
             'c3_freedom': { question: "完全に自由になった世界で、あなたは何をしますか？", options: [{ text: "さらなる力を求め、世界の法則を探求する", next: 'r_hermit' }, { text: "誰にも邪魔されない理想郷を、自分の手で創る", next: 'r_solitary_creator' }] },
             'c2_skill': { question: "その「技術」を、誰のために使いますか？", options: [{ text: "自分自身の理想を実現するため", next: 'c3_for_me' }, { text: "仲間やコミュニティ全体に貢献するため", next: 'c3_for_us' }] },
             'c3_for_me': { question: "あなたが創り出すものは、どちらかと言えば？", options: [{ text: "機能性を極めた、完璧な「システム」", next: 'r_architect' }, { text: "自分の美学を反映した、唯一無二の「作品」", next: 'r_master' }] },
@@ -242,6 +246,7 @@
             'c5_command': { question: "あなたは、チームの成功のためなら、非情な判断もできますか？", options: [{ text: "はい、それがリーダーの責任です", next: 'r_commander' }, { text: "いいえ、仲間の気持ちを無視することはできません", next: 'r_leader' }] },
             'c5_vision': { question: "あなたが目指すのは、短期的な勝利ですか？それとも、長期的な繁栄ですか？", options: [{ text: "短期的な勝利", next: 'r_leader' }, { text: "長期的な繁栄", next: 'r_mayor' }] },
             'c4_support': { question: "あなたは、表舞台に立つよりも、縁の下の力持ちであることに誇りを感じますか？", options: [{ text: "はい、誰かの役に立つのが一番です", next: 'r_supporter' }, { text: "いいえ、自分の技術は正しく評価されたいです", next: 'r_craftsman' }] },
+            
             'p1': { question: "手探りで進む中で、あなたが最も価値を置くのは？", options: [{ text: "まだ誰も知らないモノや場所を見つける「発見」", next: 'p2_discovery' }, { text: "自分だけの居場所を作り、穏やかに過ごす「生活」", next: 'p2_life' }] },
             'p2_discovery': { question: "「発見」の喜びは、どちらの状況でより大きいですか？", options: [{ text: "危険な冒険の果てに、貴重なお宝を見つけた時", next: 'p3_treasure' }, { text: "旅の途中で、息をのむような美しい風景に出会った時", next: 'p3_scenery' }] },
             'p3_treasure': { question: "手に入れたお宝。あなたならどうしますか？", options: [{ text: "仲間と分け合い、次の冒険の資金にする", next: 'p4_share' }, { text: "自分だけのコレクションとして、秘密の場所に飾る", next: 'p4_collect' }] },
@@ -258,16 +263,21 @@
             'p4_lead_city': { question: "あなたは、街のシステムを構築するのと、住民の相談に乗るの、どちらが得意ですか？", options: [{ text: "システム構築です", next: 'r_mayor' }, { text: "住民との対話です", next: 'r_mediator' }] },
             'p4_join_city': { question: "あなたは、自らイベントを企画するのと、誰かの企画に参加するの、どちらが好きですか？", options: [{ text: "企画するのが好きです", next: 'r_event_planner' }, { text: "気軽に参加するのが好きです", next: 'r_villager' }] },
 
-            // 天空鯖 (8)
+            // ====== 結果ノード ======
+            // 天空鯖 (Competitive)
             'r_optimizer': { result: true, title: "効率を求める戦略家", scores: { tenkuu: 90, bouken: 5, seikatsu: 5 } },
             'r_battle_master': { result: true, title: "戦闘を極めし者", scores: { tenkuu: 85, bouken: 10, seikatsu: 5 } },
-            'r_gladiator': { result: true, title: "勝利に飢えし剣闘士", scores: { tenkuu: 85, bouken: 15, seikatsu: 5 } },
+            'r_gladiator': { result: true, title: "勝利に飢えし剣闘士", scores: { tenkuu: 85, bouken: 15, seikatsu: 0 } },
             'r_duelist': { result: true, title: "好敵手を求める決闘家", scores: { tenkuu: 75, bouken: 20, seikatsu: 5 } },
             'r_commander': { result: true, title: "勝利へ導く司令官", scores: { tenkuu: 65, bouken: 25, seikatsu: 10 } },
             'r_conqueror': { result: true, title: "全てを支配する征服者", scores: { tenkuu: 80, bouken: 10, seikatsu: 10 } },
             'r_merchant_king': { result: true, title: "商業を支配する帝王", scores: { tenkuu: 75, bouken: 5, seikatsu: 20 } },
             'r_shadow_ruler': { result: true, title: "世界を裏から操る者", scores: { tenkuu: 70, bouken: 20, seikatsu: 10 } },
-            // 冒険鯖 (8)
+            'r_architect': { result: true, title: "完璧なシステムを創る設計者", scores: { tenkuu: 60, bouken: 10, seikatsu: 30 } },
+            'r_hermit': { result: true, title: "真理を探究する隠者", scores: { tenkuu: 50, bouken: 40, seikatsu: 10 } }, // 追加
+            'r_legend': { result: true, title: "次代を待つ伝説", scores: { tenkuu: 70, bouken: 25, seikatsu: 5 } }, // 追加
+
+            // 冒険鯖 (Adventure)
             'r_treasure_hunter': { result: true, title: "富を求めるトレジャーハンター", scores: { tenkuu: 40, bouken: 55, seikatsu: 5 } },
             'r_leader': { result: true, title: "仲間を導くリーダー", scores: { tenkuu: 35, bouken: 50, seikatsu: 15 } },
             'r_wanderer': { result: true, title: "自由を求める放浪者", scores: { tenkuu: 10, bouken: 85, seikatsu: 5 } },
@@ -276,7 +286,9 @@
             'r_cartographer': { result: true, title: "世界を記録する地図製作者", scores: { tenkuu: 5, bouken: 70, seikatsu: 25 } },
             'r_collector': { result: true, title: "希少な宝を蒐集する収集家", scores: { tenkuu: 15, bouken: 60, seikatsu: 25 } },
             'r_historian': { result: true, title: "歴史を保存する編纂者", scores: { tenkuu: 5, bouken: 55, seikatsu: 40 } },
-            // 生活鯖 (8)
+            'r_curator': { result: true, title: "歴史を展示する博物館員", scores: { tenkuu: 5, bouken: 50, seikatsu: 45 } },
+
+            // 生活鯖 (Life/Creative)
             'r_naturalist': { result: true, "title": "自然と調和する隠者", scores: { tenkuu: 5, bouken: 40, seikatsu: 55 } },
             'r_mayor': { result: true, title: "コミュニティを育む市長", scores: { tenkuu: 10, bouken: 20, seikatsu: 70 } },
             'r_designer': { result: true, title: "暮らしを彩る設計士", scores: { tenkuu: 5, bouken: 25, seikatsu: 70 } },
@@ -285,10 +297,11 @@
             'r_event_planner': { result: true, title: "皆を笑顔にする企画家", scores: { tenkuu: 5, bouken: 30, seikatsu: 65 } },
             'r_villager': { result: true, title: "穏やかな日常を愛する村人", scores: { tenkuu: 5, bouken: 20, seikatsu: 75 } },
             'r_craftsman': { result: true, title: "技を磨き続ける職人", scores: { tenkuu: 30, bouken: 20, seikatsu: 50 } },
-            'r_pioneer_builder': { result: true, title: "理想郷を築く開拓者", scores: { tenkuu: 30, bouken: 20, seikatsu: 50 } },
-            'r_gadgeteer': { result: true, title: "便利な道具の発明家", scores: { tenkuu: 45, bouken: 10, seikatsu: 45 } },
-            'r_curator': { result: true, title: "歴史を展示する博物館員", scores: { tenkuu: 5, bouken: 50, seikatsu: 45 } },
-            'r_mediator': { result: true, title: "対話を重んじる調停者", scores: { tenkuu: 10, bouken: 30, seikatsu: 60 } },
+            'r_gadgeteer': { result: true, title: "便利な道具の発明家", scores: { tenkuu: 45, bouken: 10, seikatsu: 45 } },
+            'r_mediator': { result: true, title: "対話を重んじる調停者", scores: { tenkuu: 10, bouken: 30, seikatsu: 60 } },
+            'r_pioneer_builder': { result: true, title: "理想郷を築く開拓者", scores: { tenkuu: 30, bouken: 20, seikatsu: 50 } }, // 未使用だがデータとして残す
+            'r_master': { result: true, title: "美学を追求する匠", scores: { tenkuu: 15, bouken: 10, seikatsu: 75 } }, // 追加
+            'r_supporter': { result: true, title: "仲間を支える支援者", scores: { tenkuu: 10, bouken: 40, seikatsu: 50 } }, // 追加
         };
 
         let currentNodeId = 'start';
@@ -296,27 +309,40 @@
         let pathHistory = [];
         let finalResultNode = null;
         
-        const playSound = (sound) => { sound.currentTime = 0; sound.play().catch(e => {}); };
+        const playSound = (sound) => {
+            sound.currentTime = 0;
+            sound.play().catch(error => console.log(`Audio play failed: ${error.message}`));
+        };
+
+        function switchScreen(from, to) {
+            from.classList.add('anim-fade-out');
+            setTimeout(() => {
+                from.style.display = 'none';
+                from.classList.remove('anim-fade-out');
+                to.style.display = 'block';
+                to.classList.add('anim-fade-in');
+            }, 400);
+        }
 
         function startQuiz() {
             playSound(clickSound);
             currentNodeId = 'start';
             step = 0;
             pathHistory = [];
-            DOM.startScreen.classList.remove('anim-fade-in');
-            DOM.startScreen.classList.add('anim-fade-out');
-            setTimeout(() => {
-                DOM.startScreen.style.display = 'none';
-                DOM.quizScreen.style.display = 'block';
-                showQuestion(currentNodeId);
-            }, 400);
+            switchScreen(DOM.startScreen, DOM.quizScreen);
+            setTimeout(() => showQuestion('start'), 400);
         }
         
         function showQuestion(nodeId) {
             const node = quizTree[nodeId];
+            if (!node) {
+                console.error(`Error: Node with ID "${nodeId}" not found.`);
+                return;
+            }
             step++;
             DOM.stepCounter.textContent = `STEP ${step}`;
             DOM.backBtn.style.display = pathHistory.length > 0 ? 'inline-block' : 'none';
+            
             const questionContainer = document.createElement('div');
             questionContainer.className = 'question-container';
             questionContainer.innerHTML = `
@@ -324,23 +350,29 @@
                 <div class="options-container">
                     ${node.options.map(option => `<button class="option-btn" data-next="${option.next}">${option.text}</button>`).join('')}
                 </div>`;
+            
             DOM.questionWrapper.innerHTML = '';
             DOM.questionWrapper.appendChild(questionContainer);
             questionContainer.classList.add('anim-pop-in');
+            
             document.querySelectorAll('.option-btn').forEach(button => button.addEventListener('click', handleOptionClick));
         }
         
         function handleOptionClick(event) {
             event.target.blur();
             playSound(clickSound);
+            
             const nextNodeId = event.target.dataset.next;
             pathHistory.push(currentNodeId);
             currentNodeId = nextNodeId;
+            
             DOM.questionWrapper.firstElementChild.classList.add('anim-fade-out');
+            
             setTimeout(() => {
                 const nextNode = quizTree[nextNodeId];
                 if (nextNode.result) {
-                    showAnalysisComplete(nextNode);
+                    finalResultNode = nextNode;
+                    switchScreen(DOM.quizScreen, DOM.analysisCompleteScreen);
                 } else {
                     showQuestion(nextNodeId);
                 }
@@ -350,42 +382,31 @@
         function goBack() {
             if (pathHistory.length === 0) return;
             playSound(clickSound);
-            step -= 2;
+            step -= 2; // 1減らして、showQuestionで1増えるので、差し引き1つ戻る
             currentNodeId = pathHistory.pop();
             DOM.questionWrapper.firstElementChild.classList.add('anim-fade-out');
             setTimeout(() => showQuestion(currentNodeId), 400);
         }
 
-        function showAnalysisComplete(resultNode) {
-            finalResultNode = resultNode;
-            DOM.quizScreen.classList.add('anim-fade-out');
-            setTimeout(() => {
-                DOM.quizScreen.style.display = 'none';
-                DOM.analysisCompleteScreen.style.display = 'block';
-                DOM.analysisCompleteScreen.querySelectorAll('.anim-fade-in').forEach(el => el.style.opacity = '1');
-            }, 400);
-        }
-
         function displayFinalResult() {
             playSound(resultSound);
-            DOM.analysisCompleteScreen.classList.add('anim-fade-out');
+            switchScreen(DOM.analysisCompleteScreen, DOM.resultScreen);
+            
             setTimeout(() => {
-                DOM.analysisCompleteScreen.style.display = 'none';
-                DOM.analysisCompleteScreen.classList.remove('anim-fade-out');
-                DOM.analysisCompleteScreen.querySelectorAll('.anim-fade-in').forEach(el => el.style.opacity = '0');
-                DOM.resultScreen.style.display = 'block';
-                DOM.resultScreen.querySelectorAll('.result-anim').forEach(el => el.classList.add('anim-fade-in'));
-                
                 const scores = finalResultNode.scores;
                 const primaryKey = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
 
                 const animateBar = (key, delay) => {
                     setTimeout(() => {
-                        const bar = document.querySelector(`#${key}-bar .chart-value-bar`);
+                        const barEl = document.querySelector(`#${key}-bar`);
+                        const barValueEl = barEl.querySelector('.chart-value-bar');
                         const percentage = scores[key] || 0;
-                        bar.style.width = `${percentage}%`;
-                        bar.textContent = `${percentage}%`;
-                        if (key === primaryKey) document.getElementById(`${key}-bar`).classList.add('highlight');
+                        
+                        barValueEl.style.width = `${percentage}%`;
+                        barValueEl.textContent = `${percentage}%`;
+                        if (key === primaryKey) {
+                            barEl.classList.add('highlight');
+                        }
                     }, delay);
                 };
                 
@@ -395,8 +416,7 @@
                 
                 setTimeout(() => {
                     DOM.archetypeTitle.textContent = `あなたのプレイスタイルは【${finalResultNode.title}】です。`;
-                    const finalDesc = getResultDescription(scores);
-                    DOM.archetypeDescription.textContent = finalDesc;
+                    DOM.archetypeDescription.textContent = getResultDescription(scores);
                     DOM.analysisDetails.style.opacity = 1;
                     DOM.analysisDetails.style.transform = 'translateY(0)';
                 }, 1500);
@@ -404,43 +424,56 @@
         }
         
         function getResultDescription(scores) {
-             const serverMap = { tenkuu: "天空鯖", bouken: "冒険鯖", seikatsu: "生活鯖" };
-             const p = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
-             const s = Object.keys(scores).filter(k => k !== p).reduce((a, b) => scores[a] > scores[b] ? a : b);
-             
-             let analysis = "";
+            const serverMap = { tenkuu: "天空鯖", bouken: "冒険鯖", seikatsu: "生活鯖" };
+            const descMap = {
+                tenkuu: `あなたは、常に最短・最適ルートで目標を達成することに喜びを感じるタイプです。競争の中でこそ輝き、ランキングやステータスといった明確な指標が、あなたのモチベーションを最高に高めます。\n\nそんなあなたのプレイスタイルが最も輝くのは【天空鯖】です。シーズン制の中で誰よりも早く頂点を目指し、圧倒的な成果を出すことで、あなたは最高の達成感を得られるでしょう。`,
+                bouken: `あなたは、計画通りに進むことよりも、道中の予期せぬ発見や仲間との体験に価値を見出すタイプです。まだ誰も見たことのない景色、語られざる物語、そうした世界の秘密に触れることが、あなたの心を何よりも豊かにします。\n\nそんなあなたのプレイスタイルが最も輝くのは【冒険鯖】です。広大な世界に散りばめられた謎やダンジョンを仲間と共に攻略し、この世界にしかない物語を体験してください。`,
+                seikatsu: `あなたは、競争や冒険の刺激よりも、自分や誰かの「居場所」を創り、育んでいくことに深い喜びを感じるタイプです。美しい建築、便利な施設、そして温かいコミュニティ。あなたの創造したものが、人々の笑顔や安らぎを生むことが、最高のモチベーションになります。\n\nそんなあなたのプレイスタイルが最も輝くのは【生活鯖】です。安定した経済の中で、自分のペースで理想の建築を追求したり、仲間と協力して街を発展させたりすることで、あなたは充実した日々を送れるでしょう。`
+            };
+            
+            const sortedScores = Object.entries(scores).sort(([,a],[,b]) => b-a);
+            const [primaryKey] = sortedScores[0];
+            const [secondaryKey] = sortedScores[1];
 
-             if (p === 'tenkuu') {
-                analysis = `あなたは、常に最短・最適ルートで目標を達成することに喜びを感じるタイプです。競争の中でこそ輝き、ランキングやステータスといった明確な指標が、あなたのモチベーションを最高に高めます。\n\nそんなあなたのプレイスタイルが最も輝くのは【天空鯖】です。シーズン制の中で誰よりも早く頂点を目指し、圧倒的な成果を出すことで、あなたは最高の達成感を得られるでしょう。`;
-             } else if (p === 'bouken') {
-                analysis = `あなたは、計画通りに進むことよりも、道中の予期せぬ発見や仲間との体験に価値を見出すタイプです。まだ誰も見たことのない景色、語られざる物語、そうした世界の秘密に触れることが、あなたの心を何よりも豊かにします。\n\nそんなあなたのプレイスタイルが最も輝くのは【冒険鯖】です。広大な世界に散りばめられた謎やダンジョンを仲間と共に攻略し、この世界にしかない物語を体験してください。`;
-             } else if (p === 'seikatsu') {
-                 analysis = `あなたは、競争や冒険の刺激よりも、自分や誰かの「居場所」を創り、育んでいくことに深い喜びを感じるタイプです。美しい建築、便利な施設、そして温かいコミュニティ。あなたの創造したものが、人々の笑顔や安らぎを生むことが、最高のモチベーションになります。\n\nそんなあなたのプレイスタイルが最も輝くのは【生活鯖】です。安定した経済の中で、自分のペースで理想の建築を追求したり、仲間と協力して街を発展させたりすることで、あなたは充実した日々を送れるでしょう。`;
-             }
+            let analysis = descMap[primaryKey];
 
-             if (scores[s] > 25) {
-                analysis += `\n\nまた、あなたの多才さは【${serverMap[s]}】でも間違いなく輝きます。メインの活動に疲れた時は、そちらを訪れることで、新たなインスピレーションや楽しみ方が見つかるはずです。`;
-             }
-             
-             return analysis;
+            if (scores[secondaryKey] > 25) {
+                analysis += `\n\nまた、あなたの多才さは【${serverMap[secondaryKey]}】でも間違いなく輝きます。メインの活動に疲れた時は、そちらを訪れることで、新たなインスピレーションや楽しみ方が見つかるはずです。`;
+            }
+            
+            return analysis;
         }
 
         function restartQuiz() {
             playSound(clickSound);
-            DOM.resultScreen.classList.add('anim-fade-out');
-            setTimeout(() => {
+            
+            // リセット処理
+            const resetResultScreen = () => {
                 DOM.resultScreen.style.display = 'none';
-                DOM.resultScreen.classList.remove('anim-fade-out');
-                DOM.quizScreen.classList.remove('anim-fade-out');
-                
-                DOM.startScreen.style.display = 'block';
-                DOM.startScreen.classList.remove('anim-fade-out');
-                DOM.startScreen.classList.add('anim-fade-in');
-                
+                DOM.resultScreen.classList.remove('anim-fade-in', 'anim-fade-out');
                 DOM.analysisDetails.style.opacity = 0;
                 DOM.analysisDetails.style.transform = 'translateY(20px)';
                 document.querySelectorAll('.chart-bar').forEach(bar => bar.classList.remove('highlight'));
                 document.querySelectorAll('.chart-value-bar').forEach(bar => { bar.style.width = '0%'; bar.textContent = ''; });
+            };
+
+            const showStartScreen = () => {
+                DOM.startScreen.style.display = 'block';
+                DOM.startScreen.classList.remove('anim-fade-out');
+                DOM.startScreen.classList.add('anim-fade-in');
+            };
+
+            // 各画面の状態をリセット
+            DOM.quizScreen.style.display = 'none';
+            DOM.quizScreen.classList.remove('anim-fade-out');
+            DOM.analysisCompleteScreen.style.display = 'none';
+            DOM.analysisCompleteScreen.classList.remove('anim-fade-out');
+            
+            switchScreen(DOM.resultScreen, DOM.startScreen);
+            setTimeout(() => {
+                resetResultScreen();
+                DOM.startScreen.classList.remove('anim-fade-in'); // switchScreenのアニメーションと重複しないように一度消す
+                showStartScreen();
             }, 400);
         }
 
