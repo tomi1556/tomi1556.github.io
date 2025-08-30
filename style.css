@@ -1,43 +1,68 @@
-/* style.css - Patched & Enhanced by Gemini */
+/* style.css - Fully Corrected & Supreme Design Enhanced by Gemini */
 
 /* --- グローバル設定 & 基本スタイルリセット --- */
 :root {
-    --primary-color: #6C63FF;
-    --secondary-color: #48D1CC;
-    --accent-color: #FFD05A;
-    --discord-color: #5865F2;
-    --dark-bg: #121317;
-    --medium-dark-bg: #1a1c23;
-    --light-bg: #2c2f3b;
-    --text-color: #F0F2F5;
-    --text-muted: #a8b0c9;
-    --border-color: rgba(137, 147, 179, 0.2);
-    --glass-bg: rgba(26, 28, 35, 0.7);
-    --glow-color: rgba(108, 99, 255, 0.6);
-    --spotlight-bg: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, rgba(72, 209, 204, 0.08) 50%, transparent 70%);
+    --primary-color: #6C63FF; /* 深い青紫 */
+    --secondary-color: #48D1CC; /* ターコイズグリーン */
+    --accent-color: #FFD05A; /* 鮮やかな黄色 */
+    --discord-color: #5865F2; /* Discordの青 */
+    
+    --dark-bg: #121317; /* 最も暗い背景色 */
+    --medium-dark-bg: #1a1c23; /* 少し明るい背景色 */
+    --light-bg: #2c2f3b; /* 要素の背景色など */
+    
+    --text-color: #F0F2F5; /* メインテキスト色 */
+    --text-muted: #a8b0c9; /* 目立たないテキスト色 */
+    --border-color: rgba(137, 147, 179, 0.2); /* 控えめなボーダー色 */
+    --glass-bg: rgba(26, 28, 35, 0.7); /* ガラス効果の背景 */
+    --glow-color: rgba(108, 99, 255, 0.6); /* 光彩の基本色 */
+    --spotlight-bg: radial-gradient(circle, rgba(108, 99, 255, 0.1) 0%, rgba(72, 209, 204, 0.08) 50%, transparent 70%);
 
-    --font-primary: 'Poppins', 'Noto Sans JP', sans-serif;
-    --shadow-medium: 0 12px 38px rgba(0,0,0,0.3);
-    --shadow-strong: 0 18px 55px rgba(0,0,0,0.4);
-    --border-radius-sm: 8px;
-    --border-radius-md: 16px;
-    --border-radius-lg: 24px;
-    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    --rgb-primary-color: 108, 99, 255;
-    --rgb-secondary-color: 72, 209, 204;
-    --rgb-discord-color: 88, 101, 242;
-    --angle: 0deg; /* アニメーション用 */
+    --font-primary: 'Poppins', 'Noto Sans JP', sans-serif;
+    --shadow-medium: 0 12px 38px rgba(0,0,0,0.3);
+    --shadow-strong: 0 18px 55px rgba(0,0,0,0.4);
+    
+    --border-radius-sm: 8px;
+    --border-radius-md: 16px;
+    --border-radius-lg: 24px;
+    
+    --transition-fast: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-normal: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-bounce: 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* バウンス系アニメーション用 */
+
+    --rgb-primary-color: 108, 99, 255;
+    --rgb-secondary-color: 72, 209, 204;
+    --rgb-discord-color: 88, 101, 242;
+    
+    /* Custom Property for animated border */
+    @property --angle {
+        syntax: '<angle>';
+        inherits: false;
+        initial-value: 0deg;
+    }
 }
 
-*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
-html { scroll-behavior: smooth; font-size: 100%; overflow-y: scroll; }
+html {
+    scroll-behavior: smooth;
+    font-size: 100%;
+    overflow-y: scroll; /* スクロールバーが常に表示されるように */
+}
 
 body {
-    font-family: var(--font-primary); background-color: var(--dark-bg); color: var(--text-color);
-    line-height: 1.75; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;
-    overflow-x: hidden; position: relative;
+    font-family: var(--font-primary);
+    background-color: var(--dark-bg);
+    color: var(--text-color);
+    line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden; /* 横スクロール禁止 */
+    position: relative;
 }
 body.no-scroll { overflow-y: hidden; }
 a, .btn { text-decoration: none !important; }
@@ -47,53 +72,147 @@ a, .btn { text-decoration: none !important; }
     position: fixed;
     top: 0;
     left: 0;
-    width: 500px;
+    width: 500px; /* スポットライトのサイズ */
     height: 500px;
     border-radius: 50%;
     background: var(--spotlight-bg);
-    pointer-events: none;
-    z-index: 0;
-    transition: transform 0.1s ease-out;
-    transform: translate(-50%, -50%);
-    filter: blur(50px);
+    pointer-events: none; /* マウスイベントを透過 */
+    z-index: 0; /* 他のコンテンツの下 */
+    transform: translate(-50%, -50%); /* マウス中央に配置 */
+    filter: blur(50px); /* ぼかし効果 */
+    opacity: 0.7; /* 少し透明度を設定 */
+    transition: opacity 0.5s ease; /* ホバーで明るくするなどの準備 */
 }
 
-#site-background { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; pointer-events: none; overflow: hidden; background-color: var(--dark-bg); }
+#site-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* 最背面 */
+    pointer-events: none;
+    overflow: hidden;
+    background-color: var(--dark-bg); /* フォールバック */
+}
 
 .aurora-background {
-    position: absolute; top: 50%; left: 50%;
-    width: 140vmax; height: 140vmax;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 140vmax; /* 画面の最大サイズ */
+    height: 140vmax;
     background-image: conic-gradient(from 0deg, var(--primary-color), var(--secondary-color), transparent, var(--primary-color));
     animation: aurora-spin 20s linear infinite;
-    opacity: 0.1; /* 不透明度を下げてダークテーマを維持 */
-    filter: blur(80px);
+    opacity: 0.08; /* 不透明度を下げてダークテーマを維持しつつ、かすかに光らせる */
+    filter: blur(100px); /* 非常に強いぼかし */
     transform-origin: center;
     mix-blend-mode: screen; /* 色が明るく混ざるように */
 }
 
-.stars-1, .stars-2 { position: absolute; top: 0; left: 0; right: 0; bottom: 0; }
-.stars-1::before { content: ""; position: absolute; width: 2px; height: 2px; background: #FFF; border-radius: 50%; opacity: 0.85; box-shadow: 433px 1868px #FFF, 154px 475px #FFF, 1842px 1414px #FFF, 844px 34px #FFF, 1528px 500px #FFF, 1135px 1338px #FFF, 481px 192px #FFF, 1426px 819px #FFF, 324px 774px #FFF, 559px 279px #FFF, 1238px 383px #FFF, 399px 1230px #FFF, 1545px 1226px #FFF, 178px 250px #FFF, 1451px 994px #FFF, 382px 556px #FFF, 1615px 655px #FFF, 788px 117px #FFF, 334px 1018px #FFF, 1134px 114px #FFF, 430px 1046px #FFF, 373px 1456px #FFF, 1582px 335px #FFF, 859px 1489px #FFF, 1800px 123px #FFF, 1192px 898px #FFF, 1316px 1658px #FFF, 1079px 238px #FFF, 1483px 185px #FFF, 845px 1783px #FFF, 319px 735px #FFF, 1503px 282px #FFF, 943px 1083px #FFF, 259px 1166px #FFF, 497px 195px #FFF, 1221px 45px #FFF, 1999px 1999px #FFF, 700px 700px #FFF, 1823px 200px #FFF, 950px 1500px #FFF, 1420px 300px #FFF, 600px 1800px #FFF; animation: move-stars 200s linear infinite; }
-.stars-2::before { content: ""; position: absolute; width: 1px; height: 1px; background: #FFF; border-radius: 50%; opacity: 0.75; box-shadow: 86px 839px #FFF, 621px 1982px #FFF, 1147px 133px #FFF, 1269px 1376px #FFF, 959px 928px #FFF, 1475px 829px #FFF, 911px 479px #FFF, 1104px 194px #FFF, 1032px 656px #FFF, 312px 1438px #FFF, 625px 1709px #FFF, 1251px 145px #FFF, 1289px 1243px #FFF, 772px 1563px #FFF, 1001px 1469px #FFF, 1821px 1555px #FFF, 1900px 500px #FFF, 50px 1200px #FFF, 1000px 1900px #FFF, 1650px 100px #FFF, 200px 300px #FFF, 1400px 1400px #FFF, 750px 1000px #FFF, 1888px 888px #FFF, 22px 1601px #FFF, 1333px 900px #FFF, 888px 1888px #FFF, 400px 100px #FFF, 1700px 1300px #FFF; animation: move-stars 300s linear infinite; animation-delay: -50s; }
+/* 星空効果 */
+.stars-1, .stars-2 {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background-size: 2000px 2000px; /* 星のパターンサイズ */
+    animation: move-stars 200s linear infinite;
+}
+.stars-1 {
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII='); /* 非常に小さな透過PNG、実際の星はbox-shadowで */
+    box-shadow: 
+        433px 1868px #FFF, 154px 475px #FFF, 1842px 1414px #FFF, 844px 34px #FFF, 1528px 500px #FFF, 1135px 1338px #FFF, 481px 192px #FFF, 1426px 819px #FFF, 324px 774px #FFF, 559px 279px #FFF, 1238px 383px #FFF, 399px 1230px #FFF, 1545px 1226px #FFF, 178px 250px #FFF, 1451px 994px #FFF, 382px 556px #FFF, 1615px 655px #FFF, 788px 117px #FFF, 334px 1018px #FFF, 1134px 114px #FFF, 430px 1046px #FFF, 373px 1456px #FFF, 1582px 335px #FFF, 859px 1489px #FFF, 1800px 123px #FFF, 1192px 898px #FFF, 1316px 1658px #FFF, 1079px 238px #FFF, 1483px 185px #FFF, 845px 1783px #FFF, 319px 735px #FFF, 1503px 282px #FFF, 943px 1083px #FFF, 259px 1166px #FFF, 497px 195px #FFF, 1221px 45px #FFF, 1999px 1999px #FFF, 700px 700px #FFF, 1823px 200px #FFF, 950px 1500px #FFF, 1420px 300px #FFF, 600px 1800px #FFF; /* 非常に多くの星 */
+    opacity: 0.7;
+    filter: drop-shadow(0 0 1px rgba(255,255,255,0.7)); /* 微妙な光彩 */
+}
+.stars-2 {
+    animation-duration: 300s;
+    animation-delay: -50s; /* 少しずらす */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAQAAAC1HAwCAAAAC0lEQVR42mNkYAAAAAYAAjCB0C8AAAAASUVORK5CYII=');
+    box-shadow: 
+        86px 839px #FFF, 621px 1982px #FFF, 1147px 133px #FFF, 1269px 1376px #FFF, 959px 928px #FFF, 1475px 829px #FFF, 911px 479px #FFF, 1104px 194px #FFF, 1032px 656px #FFF, 312px 1438px #FFF, 625px 1709px #FFF, 1251px 145px #FFF, 1289px 1243px #FFF, 772px 1563px #FFF, 1001px 1469px #FFF, 1821px 1555px #FFF, 1900px 500px #FFF, 50px 1200px #FFF, 1000px 1900px #FFF, 1650px 100px #FFF, 200px 300px #FFF, 1400px 1400px #FFF, 750px 1000px #FFF, 1888px 888px #FFF, 22px 1601px #FFF, 1333px 900px #FFF, 888px 1888px #FFF, 400px 100px #FFF, 1700px 1300px #FFF;
+    opacity: 0.6;
+    filter: drop-shadow(0 0 0.5px rgba(255,255,255,0.6));
+    transform: scale(0.8); /* 少し遠くに見せる */
+}
 
-.page-wrapper { transition: opacity 0.8s ease-in-out; opacity: 0; visibility: hidden; }
-.page-wrapper.visible { opacity: 1; visibility: visible; }
+.page-wrapper {
+    transition: opacity 0.8s ease-in-out;
+    opacity: 0;
+    visibility: hidden;
+}
+.page-wrapper.visible {
+    opacity: 1;
+    visibility: visible;
+}
 
 /* --- プリローダー（オープニング） --- */
-.preloader { position: fixed; inset: 0; background-color: var(--dark-bg); z-index: 10000; display: flex; justify-content: center; align-items: center; transition: opacity 0.6s ease 0.4s, visibility 0.6s 0.4s; }
-body.preloader-finished .preloader { opacity: 0; visibility: hidden; pointer-events: none; }
-.preloader-container { position: relative; width: 320px; height: 60px; }
-.preloader-logo { position: absolute; top: 0; left: 50%; transform: translateX(-50%); animation: preloader-logo-in 1s cubic-bezier(0.22, 1, 0.36, 1) forwards; will-change: transform, opacity; }
-.preloader-container.animated .preloader-logo { animation: preloader-logo-move 0.8s ease-in-out 0.2s forwards; }
-.preloader-logo img { width: 60px; height: 60px; border-radius: 50%; object-fit: cover; box-shadow: 0 0 25px rgba(var(--rgb-primary-color), 0.5); }
-.preloader-text-wrapper { position: absolute; top: 0; left: 50%; transform: translateX(calc(-50% + 45px)) translateY(3px); display: flex; flex-direction: column; align-items: flex-start; justify-content: center; height: 100%; opacity: 0; will-change: transform, opacity; }
-.preloader-container.animated .preloader-text-wrapper { animation: preloader-text-fade-in 0.8s ease-out 0.5s forwards; }
-.preloader-title, .preloader-subtitle { white-space: nowrap; }
-.preloader-title { font-size: 2.2rem; font-weight: 700; color: var(--text-color); }
-.preloader-subtitle { font-size: 0.8rem; font-weight: 400; color: var(--text-muted); }
-
-@keyframes preloader-logo-in { from { opacity: 0; transform: scale(0.8) translateX(-50%); } to { opacity: 1; transform: scale(1) translateX(-50%); } }
-@keyframes preloader-logo-move { to { transform: translateX(calc(-50% - 130px)); } }
-@keyframes preloader-text-fade-in { to { opacity: 1; transform: translateX(calc(-50% + 45px)) translateY(0); } }
+.preloader {
+    position: fixed;
+    inset: 0;
+    background-color: var(--dark-bg);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: opacity 0.6s ease 0.4s, visibility 0.6s 0.4s;
+}
+body.preloader-finished .preloader {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+.preloader-container {
+    position: relative;
+    width: 320px;
+    height: 60px;
+}
+.preloader-logo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    animation: preloader-logo-in 1s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    will-change: transform, opacity;
+}
+.preloader-container.animated .preloader-logo {
+    animation: preloader-logo-move 0.8s ease-in-out 0.2s forwards;
+}
+.preloader-logo img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+    box-shadow: 0 0 25px rgba(var(--rgb-primary-color), 0.5);
+}
+.preloader-text-wrapper {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(calc(-50% + 45px)) translateY(3px); /* ロゴ移動後の位置を考慮 */
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%;
+    opacity: 0;
+    will-change: transform, opacity;
+}
+.preloader-container.animated .preloader-text-wrapper {
+    animation: preloader-text-fade-in 0.8s ease-out 0.5s forwards;
+}
+.preloader-title, .preloader-subtitle {
+    white-space: nowrap;
+}
+.preloader-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--text-color);
+}
+.preloader-subtitle {
+    font-size: 0.8rem;
+    font-weight: 400;
+    color: var(--text-muted);
+}
 
 /* --- 基本スタイル --- */
 main { display: block; }
@@ -109,20 +228,31 @@ code { background-color: var(--light-bg); padding: 0.3em 0.6em; border-radius: v
 /* --- アニメーションクラス --- */
 .animate-on-scroll, .animate-on-load { opacity: 0; visibility: hidden; }
 .is-visible { visibility: visible !important; opacity: 1 !important; transform: none !important; }
-[data-animation] { transition-property: opacity, transform; transition-duration: 0.8s; transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+[data-animation] { transition-property: opacity, transform; transition-duration: var(--transition-bounce); transition-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 .fadeInUpCustom { transform: translateY(60px); }
 .fadeInRightCustom { transform: translateX(-70px) rotate(-4deg); }
 .fadeInLeftCustom { transform: translateX(70px) rotate(4deg); }
 .zoomInCustom { transform: scale(0.8); }
-.bounceInCustom { animation: bounceInAnimation 0.9s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+.bounceInCustom { animation: bounceInAnimation var(--transition-bounce) forwards; }
 
 /* タイピングエフェクト用 */
 #typing-title { min-height: 1.2em; display: inline-block; }
 #typing-subtitle { min-height: 1.7em; }
-.typing-cursor::after { content: ''; display: inline-block; width: 3px; background-color: var(--accent-color); margin-left: 5px; vertical-align: middle; border-radius: 2px; box-shadow: 0 0 8px var(--accent-color); }
+.typing-cursor::after {
+    content: '';
+    display: inline-block;
+    width: 3px;
+    background-color: var(--accent-color);
+    margin-left: 5px;
+    vertical-align: middle;
+    border-radius: 2px;
+    box-shadow: 0 0 8px var(--accent-color);
+}
 #typing-title.typing-cursor::after { height: 0.9em; }
 #typing-subtitle.typing-cursor::after { height: 1em; }
-.blinking-cursor::after { animation: blink-caret .9s step-end infinite; }
+.blinking-cursor::after {
+    animation: blink-caret .9s step-end infinite;
+}
 
 /* --- キーフレームアニメーション --- */
 @keyframes aurora-spin { from { transform: translate(-50%, -50%) rotate(0deg); } to { transform: translate(-50%, -50%) rotate(360deg); } }
@@ -130,140 +260,205 @@ code { background-color: var(--light-bg); padding: 0.3em 0.6em; border-radius: v
 @keyframes move-stars { from { transform: translateY(0); } to { transform: translateY(-2000px); } }
 @keyframes animated-gradient { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 @keyframes blink-caret { from, to { background-color: transparent; box-shadow: none; } 50% { background-color: var(--accent-color); box-shadow: 0 0 8px var(--accent-color); } }
-@keyframes ken-burns { 0% { transform: scale(1.05); } 50% { transform: scale(1.1); } 100% { transform: scale(1.05); } }
-@property --angle { syntax: '<angle>'; inherits: false; initial-value: 0deg; }
-@keyframes animated-border-glow { 0% { --angle: 0deg; } 100% { --angle: 360deg; } }
+@keyframes ken-burns {
+    0% { transform: scale(1.05) translateX(0); }
+    50% { transform: scale(1.1) translateX(5%); }
+    100% { transform: scale(1.05) translateX(0); }
+}
+@keyframes preloader-logo-in { from { opacity: 0; transform: scale(0.8) translateX(-50%); } to { opacity: 1; transform: scale(1) translateX(-50%); } }
+@keyframes preloader-logo-move { to { transform: translateX(calc(-50% - 130px)); } }
+@keyframes preloader-text-fade-in { to { opacity: 1; transform: translateX(calc(45px - 50%)) translateY(0); } }
+
+/* animated-border-glow は @property が必要なので、CSSの一番上で定義するか、インラインスタイルで動的に設定 */
+@keyframes animated-border-glow {
+    0% { --angle: 0deg; }
+    100% { --angle: 360deg; }
+}
 
 /* --- ヘッダー & ナビゲーション --- */
-header { background-color: transparent; padding: 18px 0; position: fixed; width: 100%; top: 0; left: 0; z-index: 1000; transition: all var(--transition-normal); }
-header.scrolled { background-color: var(--glass-bg); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); box-shadow: 0 6px 22px rgba(0,0,0,0.3); padding: 10px 0; }
-header .container { display: flex; justify-content: space-between; align-items: center; }
-#logo-img { height: 38px; transition: all var(--transition-fast); filter: drop-shadow(0 3px 7px rgba(0,0,0,0.4)); }
-#logo-img:hover { transform: scale(1.08) rotate(-5deg); filter: drop-shadow(0 4px 15px rgba(var(--rgb-primary-color), 0.3));}
-header.scrolled #logo-img, header.scrolled .nav-link, header.scrolled .nav-discord-link { text-shadow: none; }
-.main-nav ul { list-style: none; display: flex; align-items: center; margin:0; padding:0; }
-.main-nav ul li { margin-left: 22px; }
-.main-nav ul li a.nav-link { color: #FFF; font-weight: 500; font-size: 0.93rem; padding: 12px 8px; position: relative; letter-spacing: 0.7px; text-shadow: 0 1px 6px rgba(0,0,0,0.5); transition: all var(--transition-fast); opacity: 0.95; }
-.main-nav ul li a.nav-link:hover, .main-nav ul li a.nav-link.active { opacity: 1; color: var(--accent-color); }
-.main-nav ul li a.nav-link::after { content: ''; position: absolute; bottom: 2px; left: 50%; transform: translateX(-50%) scaleX(0); width: 70%; height: 2.5px; background-color: var(--accent-color); border-radius: 1.5px; transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1); transform-origin: center; filter: drop-shadow(0 0 5px var(--accent-color)); }
-.main-nav ul li a.nav-link:hover::after, .main-nav ul li a.nav-link.active::after { transform: translateX(-50%) scaleX(1); }
-.main-nav ul li a.nav-link.active { font-weight: 600; }
-.nav-discord-link { display: inline-flex; align-items: center; padding: 7px 14px !important; background-color: transparent; border: 1.5px solid rgba(255,255,255,0.6); border-radius: var(--border-radius-md); color: #FFF !important; text-shadow: none !important; opacity: 1 !important; font-weight: 500; transition: all var(--transition-fast); }
-.nav-discord-link:hover { background-color: var(--primary-color); color: #FFF !important; border-color: var(--primary-color); box-shadow: 0 0 18px rgba(var(--rgb-primary-color), 0.5); transform: scale(1.05); }
-.nav-discord-link i { margin-right: 7px; font-size: 1em; }
-.hamburger-menu { display: none; background: none; border: none; cursor: pointer; padding: 8px; z-index: 1002; margin-left: auto; position: relative; width: 30px; height: 30px;}
-.hamburger-bar { display: block; width: 26px; height: 2.5px; background-color: #FFF; margin: 6px auto; transition: all var(--transition-normal); border-radius: 3px; position: absolute; left: 2px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); }
+header {
+    background-color: transparent;
+    padding: 18px 0;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: all var(--transition-normal);
+}
+header.scrolled {
+    background-color: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    box-shadow: 0 6px 22px rgba(0,0,0,0.3);
+    padding: 10px 0;
+}
+header .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#logo-img {
+    height: 38px;
+    transition: all var(--transition-fast);
+    filter: drop-shadow(0 3px 7px rgba(0,0,0,0.4));
+}
+#logo-img:hover {
+    transform: scale(1.08) rotate(-5deg);
+    filter: drop-shadow(0 4px 15px rgba(var(--rgb-primary-color), 0.3));
+}
+/* スクロール時のロゴやテキストの影を調整 */
+header.scrolled #logo-img, header.scrolled .nav-link, header.scrolled .nav-discord-link {
+    text-shadow: none;
+    filter: none; /* スクロール時は影をリセットし、背景のぼかしに任せる */
+}
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    margin:0;
+    padding:0;
+}
+.main-nav ul li {
+    margin-left: 22px;
+}
+.main-nav ul li a.nav-link {
+    color: #FFF;
+    font-weight: 500;
+    font-size: 0.93rem;
+    padding: 12px 8px;
+    position: relative;
+    letter-spacing: 0.7px;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.5); /* 視認性向上のための影 */
+    transition: all var(--transition-fast);
+    opacity: 0.95;
+}
+.main-nav ul li a.nav-link:hover, .main-nav ul li a.nav-link.active {
+    opacity: 1;
+    color: var(--accent-color);
+    text-shadow: 0 0 10px rgba(var(--rgb-accent-color), 0.7); /* ホバー時に影で強調 */
+}
+.main-nav ul li a.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%) scaleX(0);
+    width: 70%;
+    height: 2.5px;
+    background-color: var(--accent-color);
+    border-radius: 1.5px;
+    transition: transform 0.35s cubic-bezier(0.19, 1, 0.22, 1);
+    transform-origin: center;
+    filter: drop-shadow(0 0 5px var(--accent-color));
+}
+.main-nav ul li a.nav-link:hover::after, .main-nav ul li a.nav-link.active::after {
+    transform: translateX(-50%) scaleX(1);
+}
+.main-nav ul li a.nav-link.active {
+    font-weight: 600;
+}
+.nav-discord-link {
+    display: inline-flex;
+    align-items: center;
+    padding: 7px 14px !important;
+    background-color: transparent;
+    border: 1.5px solid rgba(255,255,255,0.6);
+    border-radius: var(--border-radius-md);
+    color: #FFF !important;
+    text-shadow: none !important;
+    opacity: 1 !important;
+    font-weight: 500;
+    transition: all var(--transition-fast);
+}
+.nav-discord-link:hover {
+    background-color: var(--primary-color);
+    color: #FFF !important;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 18px rgba(var(--rgb-primary-color), 0.5);
+    transform: scale(1.05);
+}
+.nav-discord-link i {
+    margin-right: 7px;
+    font-size: 1em;
+    /* アイコンの色を親から継承、ホバー時に変化 */
+    color: inherit; /* ここで明示的に継承させる */
+}
+.hamburger-menu {
+    display: none; /* デフォルトで非表示 */
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px;
+    z-index: 1002;
+    margin-left: auto;
+    position: relative;
+    width: 30px;
+    height: 30px;
+}
+.hamburger-bar {
+    display: block;
+    width: 26px;
+    height: 2.5px;
+    background-color: #FFF;
+    margin: 6px auto;
+    transition: all var(--transition-normal);
+    border-radius: 3px;
+    position: absolute;
+    left: 2px;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+}
 .hamburger-bar:nth-child(1) { top: 2px; }
 .hamburger-bar:nth-child(2) { top: 11.5px; }
 .hamburger-bar:nth-child(3) { top: 21px; }
-.hamburger-menu.active .hamburger-bar { background-color: var(--text-color) !important; text-shadow: none; }
+.hamburger-menu.active .hamburger-bar {
+    background-color: var(--text-color) !important;
+    text-shadow: none;
+}
 .hamburger-menu.active .hamburger-bar:nth-child(1) { top: 11.5px; transform: rotate(45deg); }
 .hamburger-menu.active .hamburger-bar:nth-child(2) { opacity: 0; transform: translateX(-20px); }
 .hamburger-menu.active .hamburger-bar:nth-child(3) { top: 11.5px; transform: rotate(-45deg); }
 
+
 /* --- ボタンデザイン --- */
-.btn { display: inline-flex; align-items: center; justify-content: center; padding: 13px 0; border-radius: var(--border-radius-md); font-weight: 600; font-size: 0.95rem; letter-spacing: 0.5px; transition: all var(--transition-fast); cursor: pointer; border: none; white-space: nowrap; position: relative; overflow: hidden; text-transform: none; width: 190px; }
-.btn i { color: inherit; transition: transform 0.3s ease; } /* アイコンの色と動きを制御 */
-.btn-icon-left { margin-right: 10px; font-size: 1.1em; }
-.btn-primary-shiny { color: #FFF; background: linear-gradient(135deg, var(--primary-color) 0%, #a263ff 50%, var(--secondary-color) 100%); background-size: 250% 250%; animation: animated-gradient 4s ease infinite; box-shadow: 0 4px 20px rgba(var(--rgb-primary-color), 0.3), inset 0 1px 1px rgba(255,255,255,0.2); }
-.btn-primary-shiny:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 10px 35px rgba(var(--rgb-primary-color), 0.45), inset 0 1px 1px rgba(255,255,255,0.2); }
-.btn-primary-shiny:hover i { transform: rotate(-5deg); }
-.btn-discord-solid { background-color: var(--discord-color); color: #FFF; box-shadow: 0 4px 20px rgba(var(--rgb-discord-color), 0.3), inset 0 1px 1px rgba(255,255,255,0.2); }
-.btn-discord-solid::before { content: ''; position: absolute; top: 0; left: -85%; width: 40%; height: 100%; background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%); transform: skewX(-25deg); transition: left 0.8s ease; }
-.btn-discord-solid:hover::before { left: 120%; }
-.btn-discord-solid:hover { transform: translateY(-4px) scale(1.05); box-shadow: 0 10px 35px rgba(var(--rgb-discord-color), 0.45), inset 0 1px 1px rgba(255,255,255,0.2); }
-.btn-secondary { background-color: transparent; color: var(--secondary-color); border: 2px solid var(--secondary-color); box-shadow: var(--shadow-medium); }
-.btn-secondary:hover { background-color: var(--secondary-color); color: var(--dark-bg); transform: translateY(-3px) scale(1.035); box-shadow: 0 8px 25px rgba(var(--rgb-secondary-color), 0.35); }
-
-/* --- ヒーローセクション --- */
-#hero { min-height: 100vh; position: relative; display: flex; align-items: center; overflow: hidden; color: #FFF; }
-.hero-background-image { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: url('header.png') no-repeat center center/cover; z-index: -2; animation: ken-burns 40s infinite ease-in-out; }
-.hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to right, rgba(18, 19, 23, 0.98) 20%, rgba(18, 19, 23, 0.8) 50%, rgba(18, 19, 23, 0.1) 80%, transparent 100%); z-index: -1; }
-.hero-content-wrapper { position: relative; z-index: 1; display: flex; justify-content: flex-end; width: 100%; height: 100%; align-items: center; }
-.hero-text-content { max-width: 55%; padding-right: 6%; display: flex; flex-direction: column; align-items: flex-end; will-change: transform; /* Parallax用 */ }
-#hero h1 { text-shadow: 0 5px 25px rgba(0,0,0,0.65); margin-bottom: 0.4em; }
-#hero .subtitle { color: var(--text-muted); font-size: clamp(1.1rem, 2.6vw, 1.4rem); margin-bottom: 2.2em; text-shadow: 0 2px 10px rgba(0,0,0,0.4); font-weight: 400; max-width: 550px; height: 3em; display: flex; align-items: center; justify-content: flex-end; text-align: right; }
-.hero-buttons { display: flex; gap: 20px; justify-content: flex-end; flex-wrap: wrap; margin-top: 1em; width: 100%; }
-.subtitle-wrapper { display: block; width: 100%; }
-
-/* --- コンテンツセクション共通 --- */
-.content-section { padding: 120px 0; position: relative; }
-#features-and-join { background-color: transparent; padding-top: 120px; padding-bottom: 120px; }
-.features-wrapper { margin-bottom: 140px; }
-
-/* --- Features (魅力) セクション --- */
-.features-grid { display: grid; gap: 30px; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-.feature-card { background: var(--glass-bg); padding: 35px 30px; border-radius: var(--border-radius-lg); text-align: center; border: 1px solid var(--border-color); display: flex; flex-direction: column; align-items: center; box-shadow: var(--shadow-medium); position: relative; overflow: hidden; will-change: transform; transition: box-shadow var(--transition-normal), border-color var(--transition-normal); }
-.feature-card::before { content: ""; position: absolute; top: 0; left: 0; right: 0; bottom: 0; border-radius: inherit; background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%); opacity: 0; transition: opacity var(--transition-normal); }
-.feature-card:hover::before { opacity: 1; }
-.feature-card:hover { box-shadow: 0 20px 50px rgba(0,0,0,0.5); border-color: rgba(137, 147, 179, 0.4); }
-.feature-icon-wrapper { width: 90px; height: 90px; border-radius: 25%; background: linear-gradient(135deg, var(--primary-color), var(--secondary-color)); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 25px; color: #FFF; flex-shrink: 0; box-shadow: 0 7px 18px rgba(var(--rgb-primary-color),0.3); transition: all 0.35s ease; }
-.feature-card:hover .feature-icon-wrapper { filter: drop-shadow(0 0 15px rgba(var(--rgb-secondary-color), 0.5)); transform: scale(1.1) rotate(5deg); }
-.feature-icon-wrapper i { font-size: 2.7em; }
-.feature-card h3 { font-size: 1.35em; margin-bottom: 12px; font-weight: 600; }
-.feature-card p { font-size: 0.9rem; line-height: 1.65; flex-grow: 1; max-width: 280px; margin: auto; }
-
-/* --- 参加方法フレーム (修正版) --- */
-.join-container { display: flex; flex-wrap: wrap; gap: 35px; justify-content: center; align-items: stretch; }
-.join-box { padding: 2px; border-radius: var(--border-radius-lg); width: 100%; max-width: 480px; position: relative; background: transparent; transition: all var(--transition-normal); }
-.join-box::before { content: ''; position: absolute; inset: -2px; border-radius: inherit; background: conic-gradient(from var(--angle), var(--primary-color), var(--secondary-color), var(--accent-color), var(--secondary-color), var(--primary-color)); animation: animated-border-glow 4s linear infinite; z-index: -1; opacity: 0.8; transition: all var(--transition-fast); }
-.join-box:hover { transform: translateY(-12px); }
-.join-box:hover::before { opacity: 1; filter: brightness(1.2); }
-.join-box-inner { background: linear-gradient(145deg, var(--medium-dark-bg), var(--dark-bg)); border-radius: var(--border-radius-lg); padding: 35px 40px; height: 100%; display: flex; flex-direction: column; align-items: center; }
-.join-box-icon { margin-bottom: 18px; font-size: 3rem; line-height: 1; filter: drop-shadow(0 0 15px var(--glow-color)); }
-.join-box.java .join-box-icon { color: var(--primary-color); }
-.join-box.bedrock .join-box-icon { color: var(--secondary-color); }
-.join-box-title { text-align: center; font-size: 1.7em; margin-bottom: 28px; }
-.join-info-item { margin-bottom: 15px; width: 100%; max-width: 320px; }
-.join-info-label { display: block; font-size: 0.9rem; color: var(--text-muted); margin-bottom: 6px; font-weight: 500; text-align: left; }
-.copy-wrapper { display: flex; align-items: center; }
-.copy-wrapper input[type="text"] { flex-grow: 1; padding: 11.8px 15px; background-color: var(--light-bg); color: var(--text-color); border: 1px solid var(--border-color); border-right: none; border-radius: var(--border-radius-sm) 0 0 var(--border-radius-sm); font-size: 1em; font-family: 'Poppins', monospace; line-height: 1.5; outline: none; transition: all var(--transition-fast); text-align: left; min-width: 0; }
-.copy-wrapper input[type="text"]:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3.5px rgba(var(--rgb-primary-color),0.25); position: relative; z-index: 2; }
-.copy-action-btn { padding: 11.8px 15px; background-color: var(--primary-color); color: #FFF; border: 1px solid var(--primary-color); border-left: none; border-radius: 0 var(--border-radius-sm) var(--border-radius-sm) 0; cursor: pointer; font-size: 1em; line-height: 1.5; transition: background-color var(--transition-fast), border-color var(--transition-fast); flex-shrink: 0; }
-.copy-action-btn:hover { background-color: #556EF0; border-color: #556EF0; }
-.copy-toast { position: fixed; bottom: -120px; left: 50%; background-color: var(--secondary-color); color: var(--dark-bg); padding: 14px 28px; border-radius: var(--border-radius-md); box-shadow: var(--shadow-strong); font-size: 1rem; font-weight: 600; z-index: 2000; opacity: 0; transition: all 0.6s cubic-bezier(0.68, -0.6, 0.32, 1.6); transform: translateX(-50%) scale(0.9); }
-.copy-toast.show { bottom: 35px; opacity: 1; transform: translateX(-50%) scale(1); }
-.join-box-note { margin-top: 15px; font-size: 0.9em; color: var(--text-muted); }
-
-/* --- WebMap Promo --- */
-#webmap-promo { background: linear-gradient(rgba(18,19,23,0), rgba(18,19,23,0.7)), var(--medium-dark-bg); padding: 100px 0; }
-#webmap-promo .container { text-align: center; }
-#webmap-promo .btn { margin-top: 20px; }
-
-/* --- Footer --- */
-footer { background-color: #0c0d10; border-top: 1px solid var(--border-color); padding: 45px 0; text-align: center; position: relative; z-index: 5; }
-footer p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 7px; }
-
-/* --- レスポンシブ対応 --- */
-@media (max-width: 992px) {
-    .main-nav { position: fixed; top: 0; left: -100%; width: 100%; max-width: 280px; height: 100vh; background-color: var(--dark-bg); padding-top: 70px; box-shadow: 6px 0 22px rgba(0,0,0,0.3); transition: left var(--transition-normal); z-index: 1001; overflow-y: auto; display: flex; flex-direction: column; }
-    .main-nav.active { left: 0; }
-    .main-nav ul { flex-direction: column; }
-    .main-nav ul li { margin-left: 0; width: 100%;}
-    .main-nav ul li a.nav-link { padding: 14px 25px; font-size: 1rem; display:block; border-bottom: 1px solid var(--border-color); }
-    .main-nav ul li a.nav-link::after { left: 0; bottom: 0; width: 100%; transform-origin: left; transform: scaleX(0); }
-    .main-nav ul li a.nav-link:hover::after, .main-nav ul li a.nav-link.active::after { transform: scaleX(1); }
-    .main-nav ul li a.nav-discord-link { border: none !important; background-color: transparent !important; box-shadow: none !important; transform: none !important; color: #FFF !important; }
-    .main-nav ul li a.nav-discord-link:hover { color: var(--accent-color) !important; }
-
-    .hamburger-menu { display: block; }
-    #spotlight { display: none; }
-
-    .content-section { padding: 80px 0; }
-    #features-and-join { padding: 80px 0 60px; }
-    .features-wrapper { margin-bottom: 100px; }
-    
-    .hero-content-wrapper { padding: 0 15px; justify-content: center; align-items: flex-end; padding-bottom: 15vh;}
-    .hero-text-content { max-width: 100%; width: 100%; text-align: center; padding-right: 0; align-items: center; }
-    .subtitle-wrapper { text-align: center; }
-    #hero .subtitle { text-align: center; height: 4.5em; justify-content: center; margin-bottom: 1.5em; }
-    
-    .hero-buttons { flex-direction: row; justify-content: space-between; gap: 10px; flex-wrap: nowrap; }
-    .hero-buttons .btn { width: 48%; padding: 12px 5px; font-size: 0.9rem; }
-    .hero-buttons .btn .btn-icon-left { margin-right: 6px; }
-    
-    .join-box-inner { padding: 35px 20px; }
-    .join-info-item { max-width: 100%; }
-    .copy-wrapper input[type="text"] { font-size: 0.9rem; padding: 12px 10px; }
-    .copy-action-btn { padding: 12px 12px; font-size: 0.9rem; }
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 13px 0;
+    border-radius: var(--border-radius-md);
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.5px;
+    transition: all var(--transition-fast);
+    cursor: pointer;
+    border: none;
+    white-space: nowrap;
+    position: relative;
+    overflow: hidden;
+    text-transform: none;
+    width: 190px;
 }
+.btn i {
+    color: inherit;
+    transition: transform 0.3s ease;
+}
+.btn-icon-left {
+    margin-right: 10px;
+    font-size: 1.1em;
+}
+.btn-primary-shiny {
+    color: #FFF;
+    background: linear-gradient(135deg, var(--primary-color) 0%, #a263ff 50%, var(--secondary-color) 100%);
+    background-size: 250% 250%;
+    animation: animated-gradient 4s ease infinite;
+    box-shadow: 0 4px 20px rgba(var(--rgb-primary-color), 0.3), inset 0 1px 1px rgba(255,255,255,0.2);
+}
+.btn-primary-shiny:hover {
+    transform: translateY(-4px) scale(1.05);
+    box-shadow: 0 10px 35px rgba(var(--rgb-primary-color), 0.45), inset 0 1px 1px rgba(255,255,255,0.2);
+}
+.btn-primary-shiny:hover i {
+    transform: rotate(-5deg);
+}
+.btn-discord-solid {
