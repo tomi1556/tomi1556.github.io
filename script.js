@@ -18,11 +18,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 body.classList.add('preloader-finished');
                 body.classList.remove('no-scroll');
                 pageWrapper.classList.add('visible');
+                // サイト表示後にアニメーション関連の初期化を実行
                 setTimeout(initEnhancedFeatures, 600);
             }, 2800);
         });
 
     } else {
+        // プリローダーがない場合も初期化
         if(pageWrapper) pageWrapper.classList.add('visible');
         initEnhancedFeatures();
     }
@@ -66,39 +68,54 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
     
-    // ===== NEW: マウス追従スポットライト =====
+    // ===== 強化: マウス追従スポットライト =====
     function initSpotlightEffect() {
         const spotlight = document.getElementById('spotlight');
         if (!spotlight) return;
 
         window.addEventListener('mousemove', e => {
-            spotlight.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            // requestAnimationFrameを使用してパフォーマンスを最適化
+            window.requestAnimationFrame(() => {
+                spotlight.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+            });
         });
     }
 
-    // ===== NEW: ヒーローセクションの視差効果 =====
+    // ===== 強化: ヒーローセクションの視差効果 =====
     function initParallaxEffect() {
         const heroText = document.querySelector('.hero-text-content');
         if(!heroText) return;
-
+        
+        let ticking = false;
         window.addEventListener('scroll', () => {
-            const offset = window.scrollY;
-            heroText.style.transform = `translateY(${offset * 0.3}px)`;
+            if (!ticking) {
+                window.requestAnimationFrame(() => {
+                    const offset = window.scrollY;
+                    heroText.style.transform = `translateY(${offset * 0.3}px)`;
+                    ticking = false;
+                });
+                ticking = true;
+            }
         });
     }
 
-    // ===== NEW: 特徴カードの3Dホバーエフェクト =====
+    // ===== 強化: 特徴カードの3Dホバーエフェクト（スムーズ化） =====
     function initCard3DEffect() {
         const cards = document.querySelectorAll('.feature-card');
         cards.forEach(card => {
+            card.addEventListener('mouseenter', () => {
+                // ホバー開始時にトランジションを短くして反応を良くする
+                card.style.transition = 'transform 0.1s linear, box-shadow var(--transition-normal), border-color var(--transition-normal)';
+            });
+            
             card.addEventListener('mousemove', e => {
                 const rect = card.getBoundingClientRect();
                 const x = e.clientX - rect.left;
                 const y = e.clientY - rect.top;
                 const centerX = rect.width / 2;
                 const centerY = rect.height / 2;
-                const rotateX = (y - centerY) / 20; // 回転の強度
-                const rotateY = (centerX - x) / 20;
+                const rotateX = (y - centerY) / 15; // 回転強度を少し弱めて上品に
+                const rotateY = (centerX - x) / 15;
 
                 card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.05, 1.05, 1.05)`;
                 card.style.setProperty('--mouse-x', `${x}px`);
@@ -106,6 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
             });
 
             card.addEventListener('mouseleave', () => {
+                // ホバー終了時にゆっくり元の位置に戻るトランジション
+                card.style.transition = 'transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow var(--transition-normal), border-color var(--transition-normal)';
                 card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) scale3d(1, 1, 1)';
             });
         });
