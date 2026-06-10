@@ -50,74 +50,147 @@
                     <h2 class="section-heading-styled"><i class="fas fa-scroll"></i>サーバー基本規約</h2>
                     <ul class="info-list-styled">
                         <li><span class="list-icon"><i class="fas fa-check"></i></span><span>運営の指示には、いかなる場合も速やかに従ってください。</span></li>
-                        <li><span class="list-icon"><i class="fas fa-check"></i></span><span>運営チームは、本規約に明記されていない事項についても、<br class="br-pc">サーバーの秩序維持のために独自の判断で対応する権利を有します。</span></li>
-                        <li><span class="list-icon"><i class="fas fa-check"></i></span><span>禁止行為が確認された場合、警告、一時的な利用制限、<br class="br-pc">アカウントの永久追放などの処罰が科せられることがあります。</span></li>
-                        <li><span class="list-icon"><i class="fas fa-check"></i></span><span>本サーバー規約は、より良いサーバー運営のため、予告なく変更・追加される場合があります。<br class="br-pc">定期的な確認をお願いします。</span></li>
+                        <li><span class="list-icon"><i class="fas fa-check"></i></span><span>運営チームは、本規約に明記されていない事項についても、サーバーの秩序維持のために独自の判断で対応する権利を有します。</span></li>
+                        <li><span class="list-icon"><i class="fas fa-check"></i></span><span>禁止行為が確認された場合、警告、一時的な利用制限、アカウントの永久追放などの処罰が科せられることがあります。</span></li>
+                        <li><span class="list-icon"><i class="fas fa-check"></i></span><span>本サーバー規約は、より良いサーバー運営のため、予告なく変更・追加される場合があります。</span></li>
                     </ul>
                 </section>
 
                 <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.2s">
-                    <h2 class="section-heading-styled"><i class="fas fa-gavel"></i>禁止行為</h2>
-                    <p class="section-description">以下の行為は、サーバーの健全な運営とコミュニティ維持のため、固く禁止されています。<br>詳細は各項目をご確認ください。</p>
+                    <h2 class="section-heading-styled"><i class="fas fa-layer-group"></i>違反レベル一覧</h2>
+                    <p class="section-description">これは違反行為の重さを明確に判断し、迅速かつ公平に処罰を行うための指針です。<br>記載のない行為も運営の判断により処罰対象になります。</p>
 
-                    <div class="rules-category">
-                        <h3 class="rules-category-title"><i class="fas fa-comments"></i>迷惑行為 (Harassment & Nuisance)</h3>
-                        <ul class="info-list-styled">
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>他プレイヤーに対する暴言、誹謗中傷、脅迫、ストーキング、執拗な追跡行為。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>チャット、看板、ダイレクトメッセージ等での過度なスパム行為、荒らし行為。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>許可なく他人の建築物、所有物を破壊、窃盗、改変する行為。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>意図的なラグの発生、サーバーや他プレイヤーのプレイを妨害する行為全般。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>他プレイヤーのゲーム体験を著しく損なうと運営が判断する行為。</span></li>
+                    <div class="violation-modifiers">
+                        <h3 class="minor-heading">補正ルール (加点・減点)</h3>
+                        <div class="modifier-grid">
+                            <div class="modifier-badge plus"><span class="mod-code">H-1</span> 処罰中の別アカウントでのログイン <strong>+20</strong></div>
+                            <div class="modifier-badge plus"><span class="mod-code">H-2</span> 明らかな悪意・反省なし <strong>+20</strong></div>
+                            <div class="modifier-badge plus"><span class="mod-code">H-7</span> 荒らし目的や参加してすぐの故意的な違反 <strong>+20</strong></div>
+                            <div class="modifier-badge plus"><span class="mod-code">H-3</span> 同一行為の再犯 <strong>+10</strong></div>
+                            <div class="modifier-badge plus"><span class="mod-code">H-4</span> 異なる種類の再犯 <strong>+5</strong></div>
+                            <div class="modifier-badge minus"><span class="mod-code">H-5</span> 過失と明らかに認められる場合（軽度以下のみ） <strong>-3</strong></div>
+                            <div class="modifier-badge minus"><span class="mod-code">H-6</span> 自発的な謝罪・修正の意思（中度以下+初犯のみ） <strong>-5</strong></div>
+                        </div>
+                        <p class="modifier-note">※ 最終レベルは最低 [3] を下回りません。 [16] 以上には減点補正は適用されません。</p>
+                    </div>
+
+                    <div class="violation-card tier-severe">
+                        <div class="tier-header">
+                            <h3>重度違反</h3>
+                            <span class="tier-level">Level 16〜20</span>
+                        </div>
+                        <ul class="violation-list">
+                            <li><span class="v-code">20-A</span><span class="v-text">クライアントチート、ハック、バイパス使用</span></li>
+                            <li><span class="v-code">20-B</span><span class="v-text">他人の土地・建築物を大規模に破壊</span></li>
+                            <li><span class="v-code">20-C</span><span class="v-text">差別的発言や極めて不快な発言・行動</span></li>
+                            <li><span class="v-code">20-D</span><span class="v-text">コミュニティを萎縮させ退出などを誘発させる行為</span></li>
+                            <li><span class="v-code">19</span><span class="v-text">サーバーのバグや不具合の意図的な利用（報告せず使用）</span></li>
+                            <li><span class="v-code">18</span><span class="v-text">外部サーバーやSNS、商品などの無断宣伝行為</span></li>
+                            <li><span class="v-code">17</span><span class="v-text">高負荷装置などによる故意的な負荷行為</span></li>
+                            <li><span class="v-code">16-A</span><span class="v-text">Xray等の改造により資源を不正取得する行為</span></li>
+                            <li><span class="v-code">16-B</span><span class="v-text">チャット荒らし（スパム、連投、誘導、妨害など）</span></li>
                         </ul>
                     </div>
-                    <div class="rules-category">
-                        <h3 class="rules-category-title"><i class="fas fa-user-secret"></i>不正行為 (Cheating & Exploits)</h3>
-                        <ul class="info-list-styled">
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>チートクライアント、ハックツール、不正なMODやリソースパックの使用 (X-Ray, Fly Hack, Kill Aura等)。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>サーバーやゲームのバグ、システムの脆弱性を悪用する行為。<br>発見した場合は速やかに運営に報告してください。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>他人のアカウントの不正利用、アカウントの共有、売買、譲渡。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>運営の許可なく、ゲーム内アイテムや通貨を現実の金銭等で取引する行為 (RMT)。</span></li>
+
+                    <div class="violation-card tier-moderate">
+                        <div class="tier-header">
+                            <h3>中度違反</h3>
+                            <span class="tier-level">Level 9〜15</span>
+                        </div>
+                        <ul class="violation-list">
+                            <li><span class="v-code">15-A</span><span class="v-text">他人の村人・動物を殺す、逃がす、盗用する行為</span></li>
+                            <li><span class="v-code">15-B</span><span class="v-text">運営が意図しない利益の出る行為や仕様を報告せず利用・保有し続ける行為</span></li>
+                            <li><span class="v-code">14-A</span><span class="v-text">保護されていないチェスト等からの盗難行為</span></li>
+                            <li><span class="v-code">14-B</span><span class="v-text">強制的・望まない上下関係の構築</span></li>
+                            <li><span class="v-code">13</span><span class="v-text">中度の嫌がらせ、付きまとい、粘着などの行為</span></li>
+                            <li><span class="v-code">12-A</span><span class="v-text">合意なしのPvP（合意の証明がない場合は全て違反）</span></li>
+                            <li><span class="v-code">12-B</span><span class="v-text">他人の建築物の破壊、改変、構造の損壊</span></li>
+                            <li><span class="v-code">12-C</span><span class="v-text">マクロや自動操作による利益の取得（釣り/採掘など）</span></li>
+                            <li><span class="v-code">11</span><span class="v-text">過剰な喧嘩・言い合いなどの行為</span></li>
+                            <li><span class="v-code">10-A</span><span class="v-text">利益の出るAFK放置を回避する装置や操作の使用</span></li>
+                            <li><span class="v-code">10-B</span><span class="v-text">相手を意図して騙すような詐欺行為</span></li>
+                            <li><span class="v-code">10-C</span><span class="v-text">特定の個人/グループを貶めるような行為</span></li>
+                            <li><span class="v-code">9</span><span class="v-text">他プレイヤーへの意図的な攻撃やトラップなど</span></li>
                         </ul>
                     </div>
-                     <div class="rules-category">
-                        <h3 class="rules-category-title"><i class="fas fa-volume-up"></i>宣伝・勧誘行為 (Advertising & Solicitation)</h3>
-                        <ul class="info-list-styled">
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>運営の許可なく、他のMinecraftサーバー、ウェブサイト、商品、サービス等を宣伝する行為。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>StellaMCと無関係なDiscordサーバーやSNSグループ等への無差別な招待・勧誘。</span></li>
+
+                    <div class="violation-card tier-minor">
+                        <div class="tier-header">
+                            <h3>軽度違反</h3>
+                            <span class="tier-level">Level 4〜8</span>
+                        </div>
+                        <ul class="violation-list">
+                            <li><span class="v-code">8-A</span><span class="v-text">不快な発言、挑発、意味のない連投、独り言荒らし</span></li>
+                            <li><span class="v-code">8-B</span><span class="v-text">不適切な地図アートや看板（過激/下品/暴力的な内容など）</span></li>
+                            <li><span class="v-code">8-C</span><span class="v-text">邪魔となる建造物（光を遮蔽、建築にかぶせるなど）</span></li>
+                            <li><span class="v-code">7-A</span><span class="v-text">他人の土地への無断侵入、うろつき、監視的行為</span></li>
+                            <li><span class="v-code">7-B</span><span class="v-text">過剰なチャット・独り言などの行為</span></li>
+                            <li><span class="v-code">6</span><span class="v-text">軽度の嫌がらせ（冗談の範囲を超える干渉、煽り）</span></li>
+                            <li><span class="v-code">5</span><span class="v-text">軽度の挑発・煽りチャット・強い言葉遣い</span></li>
+                            <li><span class="v-code">4</span><span class="v-text">建築物への軽微な干渉（穴開け、無断の道設置など）</span></li>
                         </ul>
                     </div>
-                    <div class="rules-category">
-                        <h3 class="rules-category-title"><i class="fas fa-user-alt-slash"></i>不適切な言動・表現 (Inappropriate Behavior)</h3>
-                        <ul class="info-list-styled">
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>人種、国籍、性別、宗教、性的指向などに関する差別的、侮辱的な発言や表現。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>わいせつ、暴力的、グロテスクな表現、その他公序良俗に反する不適切なスキン、建築物、発言。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>他者の個人情報（本名、住所、連絡先など）を聞き出したり、本人の許可なく公開したりする行為。</span></li>
+
+                    <div class="violation-card tier-warning">
+                        <div class="tier-header">
+                            <h3>注意レベル</h3>
+                            <span class="tier-level">Level 1〜3</span>
+                        </div>
+                        <ul class="violation-list">
+                            <li><span class="v-code">3</span><span class="v-text">誤解を招く発言、一時的な揉め事、軽度なトラブル</span></li>
+                            <li><span class="v-code">2</span><span class="v-text">軽微なルール違反（未確認による操作ミスなど）</span></li>
+                            <li><span class="v-code">1</span><span class="v-text">初心者による偶発的な誤操作（建築物破壊、誤設置など）</span></li>
                         </ul>
                     </div>
-                    <div class="rules-category">
-                        <h3 class="rules-category-title"><i class="fas fa-server"></i>サーバーへの負荷・攻撃行為 (Server Integrity)</h3>
+
+                    <div class="special-rules-box">
+                        <h3 class="minor-heading">特別ルール</h3>
                         <ul class="info-list-styled">
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>DDoS攻撃、サーバークラッシュを意図した行為、その他サーバーの正常な動作を妨げる行為。</span></li>
-                            <li><span class="list-icon"><i class="fas fa-times"></i></span><span>過度なレッドストーン回路やMOBの集中など、サーバーリソースを不必要に大量消費させる行為。</span></li>
+                            <li><span class="list-icon"><i class="fas fa-exclamation-circle"></i></span><span>再犯は必ず [H-3]（+10）以上の補正対象になります。</span></li>
+                            <li><span class="list-icon"><i class="fas fa-exclamation-circle"></i></span><span>同種の違反を複数回繰り返す場合、レベルに関係なく永久BANの対象となります。</span></li>
+                            <li><span class="list-icon"><i class="fas fa-exclamation-circle"></i></span><span>「知らなかった」「わからなかった」「冗談だった」などの言い訳は免除の対象になりません。</span></li>
+                            <li><span class="list-icon"><i class="fas fa-exclamation-circle"></i></span><span>違反行為をそそのかした者、手助けをした者にも同等の処罰を適用します。</span></li>
+                            <li><span class="list-icon"><i class="fas fa-exclamation-circle"></i></span><span>[19]は関与した全員（使用せずとも報告しない人も含む）処罰対象です。</span></li>
+                            <li><span class="list-icon"><i class="fas fa-exclamation-circle"></i></span><span>喧嘩や言い合いなどの複数人によって起こるものは、続けた・始めた全員が処罰対象です。</span></li>
+                            <li><span class="list-icon"><i class="fas fa-exclamation-circle"></i></span><span>[15-B]については本来の意図と外れる稼ぎ方すべてが対象です。</span></li>
+                            <li><span class="list-icon"><i class="fas fa-exclamation-circle"></i></span><span>すべての判断は運営・スタッフに一任されます。</span></li>
                         </ul>
                     </div>
                 </section>
 
                 <section class="page-section animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.3s">
-                    <h2 class="section-heading-styled"><i class="fas fa-balance-scale"></i>処罰について</h2>
-                    <p class="section-description">ルール違反が確認された場合、違反の度合いや過去の違反歴などを考慮し、<br>運営が以下の処罰を判断・実行します。</p>
-                    <ul class="info-list-styled">
-                        <li><span class="list-icon"><i class="fas fa-exclamation-triangle"></i></span><span>口頭またはチャットでの警告</span></li>
-                        <li><span class="list-icon"><i class="fas fa-clock"></i></span><span>一時的なチャット禁止、サーバーへのアクセス禁止（Temp Ban）</span></li>
-                        <li><span class="list-icon"><i class="fas fa-ban"></i></span><span>サーバーからの永久追放（Permanent Ban）</span></li>
-                        <li><span class="list-icon"><i class="fas fa-undo"></i></span><span>不正に得たアイテムやデータのロールバック、削除</span></li>
-                    </ul>
-                    <p class="section-description" style="margin-top: 1.5em;">処罰に対する異議申し立ては、Discordの指定されたチャンネルまたは<br>運営へのダイレクトメッセージにて受け付けます。<br>ただし、最終的な判断は運営に委ねられるものとします。</p>
+                    <h2 class="section-heading-styled"><i class="fas fa-balance-scale"></i>処罰レベルの対応目安</h2>
+                    <p class="section-description">判定された違反レベルに基づき、以下の基準で処罰が実行されます。</p>
+                    
+                    <div class="punishment-timeline">
+                        <div class="p-item">
+                            <div class="p-level">Level 1〜3</div>
+                            <div class="p-action">警告・注意・指導</div>
+                        </div>
+                        <div class="p-item">
+                            <div class="p-level">Level 4〜8</div>
+                            <div class="p-action">1日の期限BAN</div>
+                        </div>
+                        <div class="p-item">
+                            <div class="p-level">Level 9〜15</div>
+                            <div class="p-action">1週間の期限BAN</div>
+                        </div>
+                        <div class="p-item">
+                            <div class="p-level">Level 16〜19</div>
+                            <div class="p-action">3週間の期限BAN</div>
+                        </div>
+                        <div class="p-item p-permanent">
+                            <div class="p-level">Level 20+</div>
+                            <div class="p-action">永久BAN</div>
+                        </div>
+                    </div>
+
+                    <p class="section-description" style="margin-top: 2em;">処罰に対する異議申し立ては、Discordの指定されたチャンネルまたは運営へのダイレクトメッセージにて受け付けます。ただし、最終的な判断は運営に委ねられるものとします。</p>
                 </section>
 
                 <p class="page-closing animate-on-scroll" data-animation="fadeInUpCustom" data-animation-delay="0.4s">
                     すべてのプレイヤーがStellaMCで楽しい時間を過ごせるよう、ご協力をお願いいたします。<br>
-                    ルールに関してご不明な点がある場合は、遠慮なく運営スタッフにお尋ねください。
+                    このルールは予告なく更新される場合があります。常に最新の規約を確認し、遵守してください。
                 </p>
             </article>
         </div>
