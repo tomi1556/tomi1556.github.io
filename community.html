@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="灯籠をつないで夜の世界を広げる、Java版・統合版対応のMinecraftサバイバルサーバー「灯原」。">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<title>灯原 仲間と遊ぶ</title>
+<link rel="stylesheet" href="./assets/tomo.css">
+</head>
+<body>
+<div id="app"></div>
+<template id="dc">
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=DotGothic16&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#0A1226}
+a{color:#F2B544}a:hover{color:#FFD98A}
+.big-lan{display:flex;flex-direction:column;align-items:center;position:relative}
+.big-cap{width:96px;height:14px;background:#2A1E16}
+.big-head{width:80px;height:100px;border:10px solid #2A1E16;transition:background .4s,box-shadow .4s}
+.big-post{width:14px;height:70px;background:#2A1E16}
+.big-glow{position:absolute;top:-80px;left:50%;width:340px;height:340px;margin-left:-170px;transition:background .4s;animation:flicker 2.6s ease-in-out infinite;pointer-events:none}
+.tier-sw{flex:none;width:22px;height:28px;border:3px solid #2A1E16}
+.streak{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.st-d{display:flex;flex-direction:column;align-items:center;gap:8px;padding:14px 4px;background:rgba(0,0,0,.2)}
+.st-box{width:28px;height:28px;border:3px solid #2A2D33;background:#6B7079}
+.st-d.lit .st-box{background:#F2B544;box-shadow:0 0 12px 3px rgba(242,181,68,.55)}
+.st-d.gift .st-box{background:#F29BB8;box-shadow:0 0 14px 4px rgba(242,155,184,.6)}
+.cr{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:0 40px}
+.cr-i{padding:22px 0;border-top:2px solid rgba(255,255,255,.1)}
+</style>
+</helmet>
+
+<div class="tb" style="width: 100%">
+  <div class="hero" ref="{{setHero}}" onMouseMove="{{onMove}}" style="min-height: 760px">
+    <div class="sky"></div>
+    <div class="stars"><sc-for list="{{stars}}" as="s" hint-placeholder-count="30"><span class="star" style="{{s.style}}"></span></sc-for></div>
+    <div class="moon" style="top: 130px; right: auto; left: 8%; width: 60px; height: 60px"></div>
+    <div class="dusk"></div>
+    <header class="hdr">
+      <div class="wrap hdr-in">
+        <a href="index.html" class="logo">
+          <svg width="30" height="36" viewBox="0 0 10 12" aria-hidden="true" style="display: block; shape-rendering: crispEdges"><rect x="2" y="0" width="6" height="1" fill="currentColor"></rect><rect x="1" y="1" width="8" height="1" fill="currentColor"></rect><rect x="1" y="2" width="1" height="6" fill="currentColor"></rect><rect x="8" y="2" width="1" height="6" fill="currentColor"></rect><rect x="2" y="2" width="6" height="6" fill="#F2B544"></rect><rect x="4" y="4" width="2" height="2" fill="#FFF1C4"></rect><rect x="1" y="8" width="8" height="1" fill="currentColor"></rect><rect x="4" y="9" width="2" height="3" fill="currentColor"></rect></svg>
+          <span class="disp" style="font-size: 26px; line-height: 1">灯原</span>
+        </a>
+        <nav class="nav" aria-label="メイン">
+          <a href="index.html" class="nl"><span class="nl-lamp"></span>トップ</a>
+          <a href="join.html" class="nl"><span class="nl-lamp"></span>はじめる</a>
+          <a href="season.html" class="nl"><span class="nl-lamp"></span>シーズン</a>
+          <a href="events.html" class="nl"><span class="nl-lamp"></span>夜祭</a>
+          <a href="community.html" class="nl cur" aria-current="page"><span class="nl-lamp"></span>仲間と遊ぶ</a>
+        </nav>
+      </div>
+    </header>
+    <div class="wrap" style="position: relative; z-index: 3; padding-top: 64px; padding-bottom: 32px">
+      <p class="depth fadein" style="color: #BFC9DB">仲間と遊ぶ</p>
+      <h1 class="disp reveal" style="margin: 14px 0 0; font-size: clamp(44px, 7.4vw, 108px); line-height: 1.1; white-space: pre-line">誘うほど、
+夜は明るい。</h1>
+      <p class="lead fadein" style="margin-top: 22px; font-size: 18px">友達を誘う、毎日投票する、配信で広める。どれも報酬は見た目だけですが、灯原の夜を少しずつ明るくします。</p>
+    </div>
+    <div class="scene" aria-hidden="true" style="height: 250px">
+      <div class="layer l1" style="height: 200px"><svg viewBox="0 0 960 250" preserveAspectRatio="none"><polygon points="{{farPts}}" fill="#17274E"></polygon></svg></div>
+      <div class="layer l3" style="height: 190px">
+        <div class="terrain">
+          <sc-for list="{{cols}}" as="c" hint-placeholder-count="48">
+            <div class="col" style="{{c.style}}">
+              <sc-if value="{{c.lantern}}" hint-placeholder-val="{{ false }}">
+                <div class="lan"><div class="lan-glow" style="{{c.glowStyle}}"></div><div class="lan-cap"></div><div class="lan-head" style="{{c.headStyle}}"></div><div class="lan-post"></div></div>
+              </sc-if>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 招待 -->
+  <section class="stratum tex s-soil">
+    <div class="wrap">
+      <p class="depth">Y=48</p>
+      <h2 class="disp h2">友達を招待する</h2>
+      <p class="lead">招待した人も、招待された人も、どちらにも特典があります。</p>
+      <ol style="list-style: none; margin: 40px 0 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px">
+        <li class="pn" style="padding: 22px; display: flex; gap: 16px; align-items: flex-start"><span class="num">1</span><span style="font-size: 16px; line-height: 1.85; padding-top: 4px">ゲーム内で <span class="dot" style="color: #F2B544">/invite</span> と入力して、自分の招待コードを受け取ります。</span></li>
+        <li class="pn" style="padding: 22px; display: flex; gap: 16px; align-items: flex-start"><span class="num">2</span><span style="font-size: 16px; line-height: 1.85; padding-top: 4px">友達が初めて参加したとき、そのコードを入力してもらいます。</span></li>
+        <li class="pn" style="padding: 22px; display: flex; gap: 16px; align-items: flex-start"><span class="num">3</span><span style="font-size: 16px; line-height: 1.85; padding-top: 4px">ふたりとも、灯籠の色がひとつ増えます。</span></li>
+      </ol>
+
+      <div style="display: flex; flex-wrap: wrap; gap: 32px; margin-top: 56px; align-items: stretch">
+        <div style="flex: 1 1 320px; min-width: 0">
+          <h3 class="disp" style="margin: 0 0 16px; font-size: 24px; line-height: 1.4">招待した人数で増える特典</h3>
+          <div style="display: flex; flex-direction: column; gap: 10px" role="group" aria-label="招待人数">
+            <sc-for list="{{tiers}}" as="t" hint-placeholder-count="4">
+              <button type="button" class="{{t.cls}}" onClick="{{t.pick}}" aria-pressed="{{t.pressed}}">
+                <span class="tier-sw" style="{{t.sw}}" aria-hidden="true"></span>
+                <span class="dot" style="font-size: 20px; color: #F2B544; min-width: 52px">{{t.n}}</span>
+                <span style="font-weight: 700">{{t.short}}</span>
+              </button>
+            </sc-for>
+          </div>
+        </div>
+        <div class="pn" style="flex: 999 1 520px; min-width: 0; padding: 40px 32px; display: flex; flex-wrap: wrap; gap: 32px 48px; align-items: center; overflow: hidden">
+          <div class="big-lan" aria-hidden="true" style="flex: 0 0 auto; margin: 40px auto 0">
+            <span class="big-glow" style="{{cur.glow}}"></span>
+            <span class="big-cap"></span>
+            <span class="big-head" style="{{cur.head}}"></span>
+            <span class="big-post"></span>
+          </div>
+          <sc-for list="{{tiers}}" as="t" hint-placeholder-count="1">
+            <sc-if value="{{t.on}}" hint-placeholder-val="{{ true }}">
+              <div class="panel" style="flex: 1 1 280px; min-width: 0">
+                <p class="dot" style="margin: 0; font-size: 18px; color: #F2B544">{{t.n}}招待</p>
+                <h3 class="disp" style="margin: 6px 0 10px; font-size: 32px; line-height: 1.3">{{t.title}}</h3>
+                <p style="margin: 0; font-size: 16px; line-height: 1.95">{{t.desc}}</p>
+              </div>
+            </sc-if>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 投票 -->
+  <section class="stratum tex s-stone">
+    <div class="edge"></div>
+    <div class="wrap" style="display: flex; flex-wrap: wrap; gap: 40px 72px; align-items: center">
+      <div style="flex: 1 1 400px; min-width: 0">
+        <p class="depth">Y=0</p>
+        <h2 class="disp h2">1日1回、投票する</h2>
+        <p class="lead">サーバー一覧サイトで灯原に投票すると、次にログインしたとき灯籠を1基受け取れます。投票が増えるほど一覧の上に表示され、新しい仲間が見つけやすくなります。</p>
+        <p class="mu" style="margin: 22px 0 0; font-size: 15px">投票ページ：[投票ページのURL]</p>
+      </div>
+      <div class="pn" style="flex: 1 1 440px; min-width: 0; padding: 28px">
+        <p style="margin: 0 0 16px; font-weight: 700">7日続けると、桜色の灯籠</p>
+        <div class="streak" aria-label="連続投票の例：5日目まで投票済み">
+          <sc-for list="{{streak}}" as="d" hint-placeholder-count="7">
+            <div class="{{d.cls}}"><span class="st-box"></span><span class="dot" style="font-size: 14px; color: #DADDE1">{{d.n}}</span></div>
+          </sc-for>
+        </div>
+        <p class="mu" style="margin: 14px 0 0; font-size: 14px">1日休むと、また1日目から数えます。</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 配信 -->
+  <section class="stratum tex s-deep">
+    <div class="edge"></div>
+    <div class="wrap">
+      <p class="depth">Y=−48</p>
+      <h2 class="disp h2">配信も動画も、自由に。</h2>
+      <p class="lead">灯原での出来事は、好きに配信して、好きに動画にしてください。クリエイター登録をすると、撮影に便利な機能が使えます。</p>
+      <div class="cr" style="margin-top: 40px">
+        <div class="cr-i"><h3 class="disp" style="margin: 0 0 8px; font-size: 21px; line-height: 1.4">名前の横に印</h3><p class="mu" style="margin: 0; font-size: 15px; line-height: 1.9">登録したクリエイターだとひと目でわかる印がつきます。</p></div>
+        <div class="cr-i"><h3 class="disp" style="margin: 0 0 8px; font-size: 21px; line-height: 1.4">配信中をロビーでお知らせ</h3><p class="mu" style="margin: 0; font-size: 15px; line-height: 1.9">配信を始めると、ロビーの掲示板とコミュニティに自動で表示されます。</p></div>
+        <div class="cr-i"><h3 class="disp" style="margin: 0 0 8px; font-size: 21px; line-height: 1.4">撮影用ワールド</h3><p class="mu" style="margin: 0; font-size: 15px; line-height: 1.9">時間と天気を固定したコピーワールドで、建築の紹介を撮れます。</p></div>
+        <div class="cr-i"><h3 class="disp" style="margin: 0 0 8px; font-size: 21px; line-height: 1.4">守ってほしいこと</h3><p class="mu" style="margin: 0; font-size: 15px; line-height: 1.9">ほかのプレイヤーを笑いものにする切り抜きは控えてください。</p></div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; align-items: center">
+        <span class="mu" style="font-size: 15px">クリエイター登録とコミュニティへの参加：[コミュニティの招待URL]</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot s-rock">
+    <div class="edge"></div>
+    <div class="wrap" style="display: flex; flex-direction: column; gap: 26px">
+      <h2 class="disp" style="margin: 0; font-size: clamp(30px, 4.6vw, 58px); line-height: 1.3">夜は、ひとりより大勢で。</h2>
+      <div class="addr" style="max-width: 580px">
+        <span class="addr-t dot">tomoshibara.example</span>
+        <button type="button" class="{{footBtnCls}}" onClick="{{copyFoot}}">{{footBtnLabel}}</button>
+      </div>
+      <p role="status" class="mu" style="margin: -14px 0 0; font-size: 14px; min-height: 1.6em">{{footStatus}}</p>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; border-top: 2px solid rgba(255,255,255,.08)">
+        <nav aria-label="フッター" style="display: flex; flex-wrap: wrap; gap: 2px 8px">
+          <a href="index.html" class="fl">トップ</a><a href="join.html" class="fl">はじめる</a><a href="season.html" class="fl">シーズン</a><a href="events.html" class="fl">夜祭</a>
+        </nav>
+        <p class="mu" style="margin: 0; font-size: 13px; max-width: 34em">灯原は非公式のファンサーバーで、Mojang Studios および Microsoft とは関係ありません。</p>
+      </div>
+    </div>
+  </footer>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3700}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { tier: 0, copied: false };
+    this.D = this.build();
+    this.setHero = (el) => { this.heroEl = el; };
+    this.onMove = (e) => {
+      const el = this.heroEl; if (!el) return;
+      const r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (((e.clientX - r.left) / r.width - 0.5) * 2).toFixed(3));
+      el.style.setProperty('--my', (((e.clientY - r.top) / r.height - 0.5) * 2).toFixed(3));
+    };
+    this.copyFoot = () => {
+      try { if (navigator.clipboard) navigator.clipboard.writeText('tomoshibara.example'); } catch (e) {}
+      this.setState({ copied: true }); clearTimeout(this._t);
+      this._t = setTimeout(() => this.setState({ copied: false }), 1800);
+    };
+  }
+  componentWillUnmount() { clearTimeout(this._t); }
+
+  build() {
+    let s = 71;
+    const r = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+    const stars = [];
+    for (let i = 0; i < 48; i++) {
+      const d = 1.4 + r() * 1.6, t = 2 + r() * 3, z = r() > 0.85 ? 4 : 2;
+      stars.push({ style: 'left:' + (r() * 100).toFixed(2) + '%;top:' + (r() * 55).toFixed(2) + '%;width:' + z + 'px;height:' + z + 'px;animation-delay:' + d.toFixed(2) + 's,' + (d + r() * 3).toFixed(2) + 's;animation-duration:1s,' + t.toFixed(2) + 's' });
+    }
+    let p = '0,250';
+    for (let x = 0; x < 960; x += 32) { const y = Math.round((250 - (130 + 34 * Math.sin(x / 100 + 2) + 18 * Math.sin(x / 41))) / 8) * 8; p += ' ' + x + ',' + y + ' ' + (x + 32) + ',' + y; }
+    p += ' 960,250';
+    const cols = [];
+    for (let i = 0; i < 48; i++) {
+      const h = Math.max(2, Math.round(3 + 0.9 * Math.sin(i * 0.33) + 0.8 * Math.sin(i * 0.12 + 1.5)));
+      const has = i % 3 === 1;
+      const d = 2.4 + Math.abs(i - 24) * 0.07;
+      cols.push({ style: 'height:' + (h * 20) + 'px', lantern: has, headStyle: 'animation-delay:' + d.toFixed(2) + 's', glowStyle: 'animation-delay:' + d.toFixed(2) + 's,' + (d + 0.8).toFixed(2) + 's' });
+    }
+    const tiers = [
+      { n: '1人', short: '称号「灯友」と白銀の灯籠', title: '灯友', c: '#DCE3F0', desc: '最初のひとりを招待すると、称号「灯友」と白銀色の灯籠が使えるようになります。招待された友達にも同じ灯籠が届きます。' },
+      { n: '3人', short: '藤色の灯籠', title: '藤の灯り', c: '#B79CF2', desc: '3人を招待すると、藤色の灯籠が加わります。夜祭の広場で目立つ、やわらかな紫です。' },
+      { n: '5人', short: '灯路の色を変えられる', title: '灯路の色', c: '#7FD1B9', desc: '5人を招待すると、自分が建てた灯籠どうしの灯路の色を選べるようになります。地図の上でも、その色で表示されます。' },
+      { n: '10人', short: 'ロビーの碑に名前が残る', title: '灯友の碑', c: '#F2B544', desc: '10人を招待すると、ロビーにある「灯友の碑」に名前が刻まれます。シーズンが変わっても残ります。' }
+    ];
+    const streak = [1, 2, 3, 4, 5, 6, 7].map((n) => ({ n: n + '日', cls: 'st-d' + (n === 7 ? ' gift' : n <= 5 ? ' lit' : '') }));
+    return { stars, cols, tiers, streak, farPts: p };
+  }
+
+  renderVals() {
+    const st = this.state, D = this.D;
+    const tiers = D.tiers.map((t, i) => ({
+      n: t.n, short: t.short, title: t.title, desc: t.desc,
+      on: i === st.tier, cls: i === st.tier ? 'opt on' : 'opt', pressed: i === st.tier ? 'true' : 'false',
+      sw: 'background:' + t.c, pick: () => this.setState({ tier: i })
+    }));
+    const c = D.tiers[st.tier].c;
+    return {
+      stars: D.stars, cols: D.cols, farPts: D.farPts, setHero: this.setHero, onMove: this.onMove,
+      tiers, streak: D.streak,
+      cur: { head: 'background:' + c + ';box-shadow:0 0 40px 10px ' + c + '99', glow: 'background:radial-gradient(circle,' + c + '66,' + c + '00 62%)' },
+      copyFoot: this.copyFoot,
+      footBtnCls: st.copied ? 'pbtn done' : 'pbtn', footBtnLabel: st.copied ? 'コピーしました' : 'アドレスをコピー',
+      footStatus: st.copied ? 'マルチプレイの「サーバーを追加」に貼り付けてください。' : ''
+    };
+  }
+}
+</script>
+<script src="./assets/morphdom.min.js"></script>
+<script src="./assets/dc-lite.js"></script>
+</body>
+</html>
