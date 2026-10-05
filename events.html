@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070E20">
+<meta name="description" content="灯籠をつないで夜の世界を広げる、Java版・統合版対応のMinecraftサバイバルサーバー「灯原」。">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<title>灯原 夜祭</title>
+<link rel="stylesheet" href="./assets/tomo.css">
+</head>
+<body>
+<div id="app"></div>
+<template id="dc">
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=DotGothic16&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#0A1226}
+a{color:#F2B544}a:hover{color:#FFD98A}
+.fsky{position:absolute;inset:0;z-index:-3;background:linear-gradient(180deg,#0B0C24 0%,#211A46 55%,#3E2A5C 100%)}
+.fw{position:absolute;width:0;height:0;z-index:-1}
+.fw-p{position:absolute;left:-3px;top:-3px;width:6px;height:6px;opacity:0;animation:burst 5.4s steps(10) infinite}
+@keyframes burst{0%{transform:translate(0,0);opacity:0}2%{opacity:1}22%{transform:translate(var(--dx),var(--dy));opacity:.9}32%{transform:translate(var(--dx2),var(--dy2));opacity:0}100%{opacity:0}}
+.garland{position:absolute;left:0;right:0;pointer-events:none}
+.gl{position:absolute;top:0;display:flex;flex-direction:column;align-items:center;transform-origin:top center;animation:swing 3.4s ease-in-out infinite}
+.gl-str{width:2px;background:rgba(238,234,248,.35)}
+.gl-cap{width:18px;height:4px;background:#2A1E16}
+.gl-head{width:22px;height:28px;border:3px solid #2A1E16}
+@keyframes swing{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+.cdb{display:flex;flex-wrap:wrap;gap:12px}
+.cdb-u{display:flex;flex-direction:column;align-items:center;min-width:88px;padding:12px 14px;background:rgba(10,8,30,.55);border:2px solid rgba(238,234,248,.18)}
+.cdb-n{font-family:'DotGothic16',sans-serif;font-size:44px;line-height:1.05}
+.week{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px}
+.tb .day{position:relative;display:flex;flex-direction:column;align-items:center;gap:6px;padding:14px 4px 16px;min-height:120px;background:rgba(0,0,0,.22);color:inherit;border:2px solid transparent;transition:background .15s,border-color .15s}
+.tb .day:hover{background:rgba(0,0,0,.36)}
+.tb .day.on{border-color:#F2B544;background:rgba(242,181,68,.12)}
+.day-l{width:14px;height:18px;border:3px solid #2A1E16;background:#4A3B2C}
+.day.has .day-l{background:#F2B544;box-shadow:0 0 14px 3px rgba(242,181,68,.6)}
+.day.fest .day-l{background:#F29BB8;box-shadow:0 0 16px 4px rgba(242,155,184,.65)}
+.today{position:absolute;top:-12px;left:50%;transform:translateX(-50%);padding:0 8px;background:#F2B544;color:#24180A;font-size:12px;font-weight:700;line-height:22px;white-space:nowrap}
+.rot{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px}
+.rot-i{position:relative;padding:24px;background:rgba(0,0,0,.18);border:2px solid transparent}
+.rot-i.now{border-color:#F29BB8;background:rgba(242,155,184,.1)}
+.rot-tag{display:inline-block;padding:0 10px;font-size:13px;font-weight:700;line-height:26px;margin-bottom:12px}
+.sw{display:flex;flex-direction:column;align-items:center;gap:8px;min-width:84px}
+.sw-h{width:30px;height:38px;border:4px solid #2A1E16}
+@media (max-width:640px){.tb .day{min-height:96px;padding:12px 2px}.day-n{font-size:12px}}
+</style>
+</helmet>
+
+<div class="tb" style="width: 100%">
+  <div class="hero" style="min-height: 820px">
+    <div class="fsky"></div>
+    <div class="stars"><sc-for list="{{stars}}" as="s" hint-placeholder-count="30"><span class="star" style="{{s.style}}"></span></sc-for></div>
+    <sc-for list="{{fireworks}}" as="f" hint-placeholder-count="3">
+      <div class="fw" style="{{f.pos}}" aria-hidden="true">
+        <sc-for list="{{f.parts}}" as="p" hint-placeholder-count="14"><span class="fw-p" style="{{p}}"></span></sc-for>
+      </div>
+    </sc-for>
+    <div class="dusk"></div>
+    <header class="hdr">
+      <div class="wrap hdr-in">
+        <a href="index.html" class="logo">
+          <svg width="30" height="36" viewBox="0 0 10 12" aria-hidden="true" style="display: block; shape-rendering: crispEdges"><rect x="2" y="0" width="6" height="1" fill="currentColor"></rect><rect x="1" y="1" width="8" height="1" fill="currentColor"></rect><rect x="1" y="2" width="1" height="6" fill="currentColor"></rect><rect x="8" y="2" width="1" height="6" fill="currentColor"></rect><rect x="2" y="2" width="6" height="6" fill="#F2B544"></rect><rect x="4" y="4" width="2" height="2" fill="#FFF1C4"></rect><rect x="1" y="8" width="8" height="1" fill="currentColor"></rect><rect x="4" y="9" width="2" height="3" fill="currentColor"></rect></svg>
+          <span class="disp" style="font-size: 26px; line-height: 1">灯原</span>
+        </a>
+        <nav class="nav" aria-label="メイン">
+          <a href="index.html" class="nl"><span class="nl-lamp"></span>トップ</a>
+          <a href="join.html" class="nl"><span class="nl-lamp"></span>はじめる</a>
+          <a href="season.html" class="nl"><span class="nl-lamp"></span>シーズン</a>
+          <a href="events.html" class="nl cur" aria-current="page"><span class="nl-lamp"></span>夜祭</a>
+          <a href="community.html" class="nl"><span class="nl-lamp"></span>仲間と遊ぶ</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="garland" aria-hidden="true" style="top: 96px; height: 160px">
+      <svg viewBox="0 0 100 40" preserveAspectRatio="none" style="position: absolute; left: 0; top: 0; width: 100%; height: 60px"><path d="M0 2 Q50 40 100 2" fill="none" stroke="rgba(238,234,248,.3)" stroke-width="0.4"></path></svg>
+      <sc-for list="{{garland}}" as="g" hint-placeholder-count="13">
+        <div class="gl" style="{{g.style}}"><span class="gl-str" style="{{g.str}}"></span><span class="gl-cap"></span><span class="gl-head" style="{{g.head}}"></span></div>
+      </sc-for>
+    </div>
+
+    <div class="wrap" style="position: relative; z-index: 3; padding-top: 210px; padding-bottom: 100px">
+      <p class="depth fadein" style="color: #CFC6E8">夜祭</p>
+      <h1 class="disp reveal" style="margin: 14px 0 0; font-size: clamp(48px, 8.4vw, 124px); line-height: 1.08">土曜21時、夜祭。</h1>
+      <p class="lead fadein" style="margin-top: 22px; font-size: 18px; color: #CFC6E8">毎週土曜の21時から約90分。全員参加のミニゲームで、サーバーがいちばんにぎやかになる夜です。</p>
+      <div class="fadein" style="margin-top: 34px; display: flex; flex-wrap: wrap; gap: 28px 40px; align-items: flex-end">
+        <div>
+          <p style="margin: 0 0 10px; font-weight: 700; font-size: 15px; color: #CFC6E8">{{festDate}}</p>
+          <div class="cdb" role="timer" aria-label="次の夜祭まで">
+            <div class="cdb-u"><span class="cdb-n">{{fcd.d}}</span><span style="font-size: 13px; color: #CFC6E8">日</span></div>
+            <div class="cdb-u"><span class="cdb-n">{{fcd.h}}</span><span style="font-size: 13px; color: #CFC6E8">時間</span></div>
+            <div class="cdb-u"><span class="cdb-n">{{fcd.m}}</span><span style="font-size: 13px; color: #CFC6E8">分</span></div>
+            <div class="cdb-u"><span class="cdb-n">{{fcd.s}}</span><span style="font-size: 13px; color: #CFC6E8">秒</span></div>
+          </div>
+        </div>
+        <div style="max-width: 360px">
+          <p style="margin: 0; font-size: 14px; font-weight: 700; color: #CFC6E8">今週のゲーム</p>
+          <p class="disp" style="margin: 4px 0 0; font-size: 34px; line-height: 1.3; color: #F6B8CE">{{game.name}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 1週間 -->
+  <section class="stratum tex s-soil">
+    <div class="wrap">
+      <p class="depth">Y=48</p>
+      <h2 class="disp h2">灯原の1週間</h2>
+      <p class="lead">決まった曜日に、決まった時間。予定を覚えておけば、いつでも誰かと遊べます。</p>
+      <div class="week" role="group" aria-label="曜日" style="margin-top: 44px">
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="7">
+          <button type="button" class="{{d.cls}}" onClick="{{d.pick}}" aria-pressed="{{d.pressed}}" aria-label="{{d.aria}}">
+            <sc-if value="{{d.isToday}}" hint-placeholder-val="{{ false }}"><span class="today">今日</span></sc-if>
+            <span class="disp" style="font-size: 26px; line-height: 1.2">{{d.wd}}</span>
+            <span class="day-l" aria-hidden="true"></span>
+            <span class="dot day-n" style="font-size: 14px; color: #D9C7AF">{{d.time}}</span>
+          </button>
+        </sc-for>
+      </div>
+      <div class="pn" style="margin-top: 18px; padding: 28px 32px; min-height: 170px">
+        <sc-for list="{{days}}" as="d" hint-placeholder-count="1">
+          <sc-if value="{{d.on}}" hint-placeholder-val="{{ true }}">
+            <div class="panel" style="display: flex; flex-wrap: wrap; gap: 12px 40px; align-items: baseline">
+              <p class="dot" style="margin: 0; font-size: 26px; color: #F2B544; flex: 0 0 200px">{{d.wdLong}} {{d.time}}</p>
+              <div style="flex: 1 1 380px; min-width: 0">
+                <h3 class="disp" style="margin: 0 0 8px; font-size: 26px; line-height: 1.4">{{d.title}}</h3>
+                <p class="mu" style="margin: 0; font-size: 16px; line-height: 1.9">{{d.desc}}</p>
+              </div>
+            </div>
+          </sc-if>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <!-- ゲームの順番 -->
+  <section class="stratum tex s-dusk">
+    <div class="edge"></div>
+    <div class="wrap">
+      <p class="depth">Y=0</p>
+      <h2 class="disp h2">4週でひと回り</h2>
+      <p class="lead">夜祭のゲームは毎週入れ替わり、4週で一周します。苦手なゲームの週があっても、翌週は別の遊びです。</p>
+      <ol class="rot" style="list-style: none; margin: 44px 0 0; padding: 0">
+        <sc-for list="{{rotation}}" as="g" hint-placeholder-count="4">
+          <li class="{{g.cls}}">
+            <sc-if value="{{g.tag}}" hint-placeholder-val="{{ false }}"><span class="rot-tag" style="{{g.tagStyle}}">{{g.tag}}</span></sc-if>
+            <h3 class="disp" style="margin: 0 0 10px; font-size: 26px; line-height: 1.35">{{g.name}}</h3>
+            <p class="mu" style="margin: 0; font-size: 15px; line-height: 1.9">{{g.desc}}</p>
+          </li>
+        </sc-for>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ごほうび -->
+  <section class="stratum tex s-deep">
+    <div class="edge"></div>
+    <div class="wrap" style="display: flex; flex-wrap: wrap; gap: 40px 72px; align-items: center">
+      <div style="flex: 1 1 420px; min-width: 0">
+        <p class="depth">Y=−48</p>
+        <h2 class="disp h2">ごほうびは、見た目だけ。</h2>
+        <p class="lead">夜祭の報酬で強くなることはありません。だから、初めての人も古参も同じ条件で遊べます。</p>
+        <ul style="list-style: none; margin: 28px 0 0; padding: 0; display: flex; flex-direction: column; gap: 14px; font-size: 16px">
+          <li style="display: flex; gap: 14px; align-items: baseline"><span style="flex: none; width: 12px; height: 12px; background: #F2B544"></span>参加した回数に応じて、灯籠の色が増える</li>
+          <li style="display: flex; gap: 14px; align-items: baseline"><span style="flex: none; width: 12px; height: 12px; background: #F29BB8"></span>優勝者は、次の夜祭まで名前の横に印がつく</li>
+          <li style="display: flex; gap: 14px; align-items: baseline"><span style="flex: none; width: 12px; height: 12px; background: #8FC3E8"></span>建築早押しの1位作品は、ロビーに飾られる</li>
+        </ul>
+      </div>
+      <div class="pn" style="flex: 1 1 380px; min-width: 0; padding: 32px; display: flex; flex-wrap: wrap; gap: 20px; justify-content: space-around">
+        <sc-for list="{{swatches}}" as="w" hint-placeholder-count="4">
+          <div class="sw"><span class="sw-h" style="{{w.style}}"></span><span class="dot" style="font-size: 14px; color: #BCC1C9">{{w.n}}</span><span style="font-size: 14px; font-weight: 700">{{w.name}}</span></div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <footer class="foot s-rock">
+    <div class="edge"></div>
+    <div class="wrap" style="display: flex; flex-direction: column; gap: 26px">
+      <h2 class="disp" style="margin: 0; font-size: clamp(30px, 4.6vw, 58px); line-height: 1.3">土曜の夜に、広場で。</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px">
+        <a href="join.html" class="pbtn">参加方法を見る</a>
+        <a href="community.html" class="gbtn">友達を誘う</a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; border-top: 2px solid rgba(255,255,255,.08)">
+        <nav aria-label="フッター" style="display: flex; flex-wrap: wrap; gap: 2px 8px">
+          <a href="index.html" class="fl">トップ</a><a href="join.html" class="fl">はじめる</a><a href="season.html" class="fl">シーズン</a><a href="community.html" class="fl">仲間と遊ぶ</a>
+        </nav>
+        <p class="mu" style="margin: 0; font-size: 13px; max-width: 34em">灯原は非公式のファンサーバーで、Mojang Studios および Microsoft とは関係ありません。</p>
+      </div>
+    </div>
+  </footer>
+  <div class="gauge" aria-hidden="true"><span class="gauge-m"></span></div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"$preview":{"width":1440,"height":3700}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    const now = Date.now();
+    this.state = { now, day: new Date(now).getDay() };
+    this.D = this.build();
+  }
+  componentDidMount() { this._iv = setInterval(() => this.setState({ now: Date.now() }), 1000); }
+  componentWillUnmount() { clearInterval(this._iv); }
+
+  build() {
+    let s = 59;
+    const r = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+    const stars = [];
+    for (let i = 0; i < 40; i++) {
+      const d = 1.4 + r() * 1.6, t = 2 + r() * 3, z = r() > 0.85 ? 4 : 2;
+      stars.push({ style: 'left:' + (r() * 100).toFixed(2) + '%;top:' + (r() * 70).toFixed(2) + '%;width:' + z + 'px;height:' + z + 'px;animation-delay:' + d.toFixed(2) + 's,' + (d + r() * 3).toFixed(2) + 's;animation-duration:1s,' + t.toFixed(2) + 's' });
+    }
+    const fwDefs = [[72, 30, '#F29BB8', 3.0], [86, 18, '#F2B544', 4.8], [60, 16, '#8FC3E8', 6.4], [92, 42, '#FFE3A3', 7.6]];
+    const fireworks = fwDefs.map(([x, y, col, d]) => {
+      const parts = [];
+      for (let k = 0; k < 14; k++) {
+        const a = (k / 14) * Math.PI * 2, R = 70 + (k % 2) * 22;
+        parts.push('--dx:' + (Math.cos(a) * R).toFixed(0) + 'px;--dy:' + (Math.sin(a) * R).toFixed(0) + 'px;--dx2:' + (Math.cos(a) * R * 1.25).toFixed(0) + 'px;--dy2:' + (Math.sin(a) * R * 1.25 + 30).toFixed(0) + 'px;background:' + col + ';box-shadow:0 0 8px 1px ' + col + ';animation-delay:' + d.toFixed(1) + 's');
+      }
+      return { pos: 'left:' + x + '%;top:' + y + '%', parts };
+    });
+    const garland = [];
+    for (let i = 0; i < 13; i++) {
+      const t = (i + 0.5) / 13, sag = 1 - Math.pow(2 * t - 1, 2), pink = i % 2 === 1;
+      garland.push({
+        style: 'left:calc(' + (t * 100).toFixed(2) + '% - 11px);animation-delay:' + (-i * 0.37).toFixed(2) + 's',
+        str: 'height:' + (6 + sag * 46 + (i % 3) * 10).toFixed(0) + 'px',
+        head: 'background:' + (pink ? '#F29BB8' : '#F2B544') + ';box-shadow:0 0 22px 6px ' + (pink ? 'rgba(242,155,184,.5)' : 'rgba(242,181,68,.55)')
+      });
+    }
+    const days = [
+      { wd: '日', time: '20:00', title: 'はじめての人ツアー', desc: '灯守がスポーンから開拓地まで一緒に歩きます。今週参加した人向けの、30分ほどの案内です。', kind: 'has' },
+      { wd: '月', time: '—', title: '自由な夜', desc: '決まった予定はありません。建築や開拓を進める夜です。', kind: '' },
+      { wd: '火', time: '—', title: '自由な夜', desc: '決まった予定はありません。建築や開拓を進める夜です。', kind: '' },
+      { wd: '水', time: '21:00', title: '今週のお題発表', desc: '土曜の建築早押しや、週末の目標になるお題をロビーで発表します。', kind: 'has' },
+      { wd: '木', time: '—', title: '自由な夜', desc: '決まった予定はありません。建築や開拓を進める夜です。', kind: '' },
+      { wd: '金', time: '21:00', title: '灯守の夜回り', desc: '灯守がワールドを見回ります。困っていることがあれば、その場で声をかけてください。', kind: 'has' },
+      { wd: '土', time: '21:00', title: '夜祭', desc: '全員参加のミニゲーム。21時に広場へ集合し、22時半ごろに解散します。途中参加もできます。', kind: 'fest' }
+    ];
+    const games = [
+      { name: '灯籠リレー', desc: 'チームで灯籠をつなぎ、先に向こう岸まで灯路を通したほうが勝ち。' },
+      { name: '闇かくれんぼ', desc: '灯りのない区域で、鬼から朝まで隠れきる。灯籠を置くと見つかりやすくなります。' },
+      { name: '建築早押し', desc: '水曜に出たお題の建物を15分で建て、参加者全員の投票で順位を決めます。' },
+      { name: '夜明けまで', desc: '敵がいつもより多く湧く特別な夜を、灯籠だけを頼りに生き延びます。' }
+    ];
+    const swatches = [
+      { n: '1回', name: '山吹', c: '#F2B544' }, { n: '5回', name: '桜', c: '#F29BB8' },
+      { n: '10回', name: '水縹', c: '#8FC3E8' }, { n: '20回', name: '若竹', c: '#8BD18F' }
+    ].map((w, i) => ({ n: w.n, name: w.name, style: 'background:' + w.c + ';box-shadow:0 0 22px 6px ' + w.c + '88;animation:flicker 2.6s ease-in-out ' + (i * 0.4) + 's infinite' }));
+    return { stars, fireworks, garland, days, games, swatches };
+  }
+
+  renderVals() {
+    const st = this.state, D = this.D, now = st.now;
+    const pad = (n) => String(n).padStart(2, '0');
+    const nd = new Date(now);
+    const fest = new Date(nd); fest.setHours(21, 0, 0, 0);
+    fest.setDate(nd.getDate() + ((6 - nd.getDay() + 7) % 7));
+    if (now > fest.getTime() + 90 * 60000) fest.setDate(fest.getDate() + 7);
+    const t = Math.max(0, Math.floor((fest.getTime() - now) / 1000));
+    const live = now >= fest.getTime();
+    const gi = Math.floor(fest.getTime() / 604800000) % 4;
+    const today = nd.getDay();
+    const longs = ['日曜', '月曜', '火曜', '水曜', '木曜', '金曜', '土曜'];
+    const order = [1, 2, 3, 4, 5, 6, 0];
+    const days = order.map((i) => {
+      const d = D.days[i];
+      return {
+        wd: d.wd, wdLong: longs[i], time: d.time, title: d.title, desc: d.desc,
+        isToday: i === today, on: i === st.day,
+        cls: 'day ' + d.kind + (i === st.day ? ' on' : ''), pressed: i === st.day ? 'true' : 'false',
+        aria: longs[i] + '、' + d.title, pick: () => this.setState({ day: i })
+      };
+    });
+    const rotation = D.games.map((g, i) => {
+      const isNow = i === gi, isNext = i === (gi + 1) % 4;
+      return {
+        name: g.name, desc: g.desc, cls: 'rot-i' + (isNow ? ' now' : ''),
+        tag: isNow ? '今週' : isNext ? '来週' : '',
+        tagStyle: isNow ? 'background:#F29BB8;color:#2A0F1C' : 'background:rgba(255,255,255,.12);color:#EEEAF8'
+      };
+    });
+    return {
+      stars: D.stars, fireworks: D.fireworks, garland: D.garland, swatches: D.swatches,
+      festDate: live ? 'ただいま開催中' : '次回 ' + (fest.getMonth() + 1) + '月' + fest.getDate() + '日（土）21:00',
+      fcd: { d: String(Math.floor(t / 86400)), h: pad(Math.floor(t / 3600) % 24), m: pad(Math.floor(t / 60) % 60), s: pad(t % 60) },
+      game: D.games[gi], days, rotation
+    };
+  }
+}
+</script>
+<script src="./assets/morphdom.min.js"></script>
+<script src="./assets/dc-lite.js"></script>
+</body>
+</html>

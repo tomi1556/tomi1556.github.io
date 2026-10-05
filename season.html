@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070E20">
+<meta name="description" content="灯籠をつないで夜の世界を広げる、Java版・統合版対応のMinecraftサバイバルサーバー「灯原」。">
+<link rel="icon" href="./assets/favicon.svg" type="image/svg+xml">
+<title>灯原 シーズン</title>
+<link rel="stylesheet" href="./assets/tomo.css">
+</head>
+<body>
+<div id="app"></div>
+<template id="dc">
+<helmet>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&amp;family=DotGothic16&amp;family=Zen+Kaku+Gothic+New:wght@400;500;700&amp;display=swap">
+<style>
+body{margin:0;background:#0A1226}
+a{color:#F2B544}a:hover{color:#FFD98A}
+.sea{position:absolute;left:0;right:0;bottom:0;height:170px;background:linear-gradient(180deg,#152B57 0%,#0C1A38 100%);overflow:hidden}
+.wave{position:absolute;left:0;right:0;height:4px;background-image:repeating-linear-gradient(90deg,rgba(160,200,235,.38) 0 22px,transparent 22px 70px);animation:wave linear infinite}
+@keyframes wave{to{background-position:70px 0}}
+.refl{position:absolute;top:0;bottom:0;right:calc(11% + 8px);width:60px;background:repeating-linear-gradient(180deg,rgba(233,238,246,.45) 0 4px,transparent 4px 16px);animation:refl 2.4s steps(4) infinite}
+@keyframes refl{50%{opacity:.5;transform:scaleX(.7)}}
+.isl{position:absolute;left:0;right:0;bottom:166px;height:120px;width:100%}
+.isl-lan{position:absolute;width:0;height:0}
+.arcs{position:absolute;left:0;right:0;bottom:0;height:300px;width:100%;overflow:visible;pointer-events:none}
+.cdb{display:flex;flex-wrap:wrap;gap:12px}
+.cdb-u{display:flex;flex-direction:column;align-items:center;min-width:92px;padding:12px 14px;background:rgba(8,14,30,.6);border:2px solid rgba(233,238,246,.18)}
+.cdb-n{font-family:'DotGothic16',sans-serif;font-size:48px;line-height:1.05}
+.pt{flex:1 1 260px;min-width:0;padding-top:22px;border-top:4px solid rgba(255,255,255,.12)}
+.track{position:relative;height:12px;background:rgba(0,0,0,.3);margin:56px 0 0}
+.track-fill{position:absolute;left:0;top:0;bottom:0;background:#F2B544;box-shadow:0 0 16px rgba(242,181,68,.6)}
+.ph{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-top:-26px}
+.ph-i{position:relative;padding-top:42px}
+.ph-pin{position:absolute;top:0;left:0;width:28px;height:28px;border:4px solid #2A2D33;background:#6B7079}
+.ph-i.done .ph-pin{background:#F2B544;box-shadow:0 0 14px 3px rgba(242,181,68,.55)}
+.ph-i.now .ph-pin{background:#FFE3A3;box-shadow:0 0 0 4px rgba(242,181,68,.4),0 0 18px 6px rgba(242,181,68,.6);animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 8px rgba(242,181,68,.12),0 0 24px 8px rgba(242,181,68,.5)}}
+.map{position:relative;display:grid;grid-template-columns:repeat(36,minmax(0,1fr));border:2px solid rgba(0,0,0,.4)}
+.cell{aspect-ratio:1/1;min-width:0}
+.mk{position:absolute;width:1.6%;aspect-ratio:1/1;background:#F2B544;border:2px solid #2A1E16;transform:translate(-50%,-50%);box-shadow:0 0 12px 4px rgba(242,181,68,.6);animation:pop .3s steps(3) both}
+@keyframes pop{from{transform:translate(-50%,-50%) scale(0)}to{transform:translate(-50%,-50%) scale(1)}}
+.map-road{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.map-road path{fill:none;stroke:#FFE3A3;stroke-width:.14;stroke-dasharray:.3 .22;animation:flow2 1.6s linear infinite}
+@keyframes flow2{to{stroke-dashoffset:-.52}}
+.mist{position:absolute;inset:0;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(210,218,232,.0) 0 22px,rgba(210,218,232,.16) 22px 40px);animation:mist 9s linear infinite}
+@keyframes mist{to{background-position:0 80px}}
+</style>
+</helmet>
+
+<div class="tb" style="width: 100%">
+  <div class="hero" style="min-height: 820px">
+    <div class="sky"></div>
+    <div class="stars"><sc-for list="{{stars}}" as="s" hint-placeholder-count="30"><span class="star" style="{{s.style}}"></span></sc-for></div>
+    <span class="shoot" style="animation-delay: 3s"></span>
+    <div class="moon"></div>
+    <div class="dusk"></div>
+    <header class="hdr">
+      <div class="wrap hdr-in">
+        <a href="index.html" class="logo">
+          <svg width="30" height="36" viewBox="0 0 10 12" aria-hidden="true" style="display: block; shape-rendering: crispEdges"><rect x="2" y="0" width="6" height="1" fill="currentColor"></rect><rect x="1" y="1" width="8" height="1" fill="currentColor"></rect><rect x="1" y="2" width="1" height="6" fill="currentColor"></rect><rect x="8" y="2" width="1" height="6" fill="currentColor"></rect><rect x="2" y="2" width="6" height="6" fill="#F2B544"></rect><rect x="4" y="4" width="2" height="2" fill="#FFF1C4"></rect><rect x="1" y="8" width="8" height="1" fill="currentColor"></rect><rect x="4" y="9" width="2" height="3" fill="currentColor"></rect></svg>
+          <span class="disp" style="font-size: 26px; line-height: 1">灯原</span>
+        </a>
+        <nav class="nav" aria-label="メイン">
+          <a href="index.html" class="nl"><span class="nl-lamp"></span>トップ</a>
+          <a href="join.html" class="nl"><span class="nl-lamp"></span>はじめる</a>
+          <a href="season.html" class="nl cur" aria-current="page"><span class="nl-lamp"></span>シーズン</a>
+          <a href="events.html" class="nl"><span class="nl-lamp"></span>夜祭</a>
+          <a href="community.html" class="nl"><span class="nl-lamp"></span>仲間と遊ぶ</a>
+        </nav>
+      </div>
+    </header>
+    <div class="wrap" style="position: relative; z-index: 3; padding-top: 48px; padding-bottom: 330px">
+      <p class="depth fadein" style="color: #BFC9DB">シーズン3</p>
+      <h1 class="disp reveal h1-xl" style="margin: 14px 0 0; font-size: clamp(56px, 10vw, 148px); line-height: 1.05">灯ノ海</h1>
+      <p class="lead fadein" style="margin-top: 22px; font-size: 18px">今季の世界は、大小の島が浮かぶ夜の海。島から島へ灯路を渡し、海の向こうまで灯りをつないでください。</p>
+      <div class="cdb fadein" role="timer" aria-label="開幕まで" style="margin-top: 32px">
+        <div class="cdb-u"><span class="cdb-n">{{cd.d}}</span><span class="mu" style="font-size: 13px">日</span></div>
+        <div class="cdb-u"><span class="cdb-n">{{cd.h}}</span><span class="mu" style="font-size: 13px">時間</span></div>
+        <div class="cdb-u"><span class="cdb-n">{{cd.m}}</span><span class="mu" style="font-size: 13px">分</span></div>
+        <div class="cdb-u"><span class="cdb-n">{{cd.s}}</span><span class="mu" style="font-size: 13px">秒</span></div>
+      </div>
+      <p class="mu fadein" style="margin: 14px 0 0; font-size: 15px">{{startText}}</p>
+    </div>
+
+    <div aria-hidden="true">
+      <div class="sea">
+        <sc-for list="{{waves}}" as="w" hint-placeholder-count="10"><span class="wave" style="{{w.style}}"></span></sc-for>
+        <span class="refl"></span>
+      </div>
+      <svg class="isl" viewBox="0 0 1440 120" preserveAspectRatio="none">
+        <polygon fill="#1B2D52" points="110,120 110,100 140,100 140,80 180,80 180,60 280,60 280,80 320,80 320,100 350,100 350,120"></polygon>
+        <polygon fill="#1B2D52" points="520,120 520,96 560,96 560,72 660,72 660,96 700,96 700,120"></polygon>
+        <polygon fill="#1B2D52" points="860,120 860,104 890,104 890,84 970,84 970,104 1000,104 1000,120"></polygon>
+        <polygon fill="#1B2D52" points="1130,120 1130,96 1160,96 1160,76 1200,76 1200,56 1300,56 1300,76 1340,76 1340,100 1370,100 1370,120"></polygon>
+        <rect x="190" y="60" width="80" height="8" fill="#4E7A33"></rect>
+        <rect x="570" y="72" width="80" height="8" fill="#4E7A33"></rect>
+        <rect x="900" y="84" width="60" height="8" fill="#4E7A33"></rect>
+        <rect x="1210" y="56" width="80" height="8" fill="#4E7A33"></rect>
+      </svg>
+      <sc-for list="{{isles}}" as="i" hint-placeholder-count="4">
+        <div class="isl-lan" style="{{i.pos}}">
+          <div class="lan"><div class="lan-glow" style="{{i.glow}}"></div><div class="lan-cap"></div><div class="lan-head" style="{{i.head}}"></div><div class="lan-post"></div></div>
+        </div>
+      </sc-for>
+      <svg class="arcs" viewBox="0 0 1440 300" preserveAspectRatio="none">
+        <path class="road-base" pathLength="100" d="M230 31 Q420 -14 610 43 Q770 6 930 55 Q1090 -4 1250 27" style="animation-delay: 4s"></path>
+        <path class="road-flow" pathLength="100" d="M230 31 Q420 -14 610 43 Q770 6 930 55 Q1090 -4 1250 27" style="animation-delay: 6.4s, 6.4s"></path>
+      </svg>
+    </div>
+  </div>
+
+  <!-- しくみ -->
+  <section class="stratum tex s-soil">
+    <div class="wrap">
+      <p class="depth">Y=48</p>
+      <h2 class="disp h2">シーズンのしくみ</h2>
+      <p class="lead">古参も新人も、シーズンが始まる日は同じスタートライン。だから、いつ来ても遅すぎることはありません。</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 32px; margin-top: 44px">
+        <div class="pt"><p class="dot" style="margin: 0; font-size: 34px; color: #F2B544; line-height: 1.2">開幕</p><h3 class="disp" style="margin: 10px 0 8px; font-size: 22px; line-height: 1.4">全員が同じ日に始まる</h3><p class="mu" style="margin: 0; font-size: 16px; line-height: 1.9">新しい世界、空っぽの持ち物。開幕の夜は全員がスポーンから一斉に出発します。</p></div>
+        <div class="pt"><p class="dot" style="margin: 0; font-size: 34px; color: #F2B544; line-height: 1.2">約3か月</p><h3 class="disp" style="margin: 10px 0 8px; font-size: 22px; line-height: 1.4">季節ごとに違う世界</h3><p class="mu" style="margin: 0; font-size: 16px; line-height: 1.9">海、雪原、霧の谷。シーズンごとに地形とお題が変わり、毎回ちがう攻略になります。</p></div>
+        <div class="pt"><p class="dot" style="margin: 0; font-size: 34px; color: #F2B544; line-height: 1.2">保存</p><h3 class="disp" style="margin: 10px 0 8px; font-size: 22px; line-height: 1.4">終わった世界は地図に残る</h3><p class="mu" style="margin: 0; font-size: 16px; line-height: 1.9">シーズン終了後、世界はまるごと地図として公開。自分の建てたものに、いつでも会いに行けます。</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 予定 -->
+  <section class="stratum tex s-stone">
+    <div class="edge"></div>
+    <div class="wrap">
+      <p class="depth">Y=0</p>
+      <h2 class="disp h2">シーズン3の流れ</h2>
+      <p class="lead">{{phaseLead}}</p>
+      <div class="track" aria-hidden="true"><div class="track-fill" style="{{fill}}"></div></div>
+      <ol class="ph" style="list-style: none; padding: 0">
+        <sc-for list="{{phases}}" as="p" hint-placeholder-count="5">
+          <li class="{{p.cls}}">
+            <span class="ph-pin" aria-hidden="true"></span>
+            <p class="dot" style="margin: 0; font-size: 18px; color: #F2B544">{{p.w}}</p>
+            <h3 class="disp" style="margin: 4px 0 6px; font-size: 20px; line-height: 1.4">{{p.h}}</h3>
+            <p class="mu" style="margin: 0; font-size: 14px; line-height: 1.8">{{p.d}}</p>
+          </li>
+        </sc-for>
+      </ol>
+    </div>
+  </section>
+
+  <!-- アーカイブ -->
+  <section class="stratum tex s-deep">
+    <div class="edge"></div>
+    <div class="wrap">
+      <p class="depth">Y=−48</p>
+      <h2 class="disp h2">これまでの世界</h2>
+      <p class="lead">過去のシーズンの世界は、灯籠と灯路ごと地図に残っています。</p>
+      <div style="display: flex; flex-wrap: wrap; gap: 8px; margin: 36px 0 20px" role="group" aria-label="シーズン">
+        <sc-for list="{{archives}}" as="a" hint-placeholder-count="2">
+          <button type="button" class="{{a.cls}}" onClick="{{a.pick}}" aria-pressed="{{a.pressed}}" style="width: auto; min-height: 52px"><span class="dot" style="font-size: 18px; color: #F2B544">{{a.no}}</span><span style="font-weight: 700">{{a.name}}</span></button>
+        </sc-for>
+      </div>
+      <sc-for list="{{archives}}" as="a" hint-placeholder-count="1">
+        <sc-if value="{{a.on}}" hint-placeholder-val="{{ true }}">
+          <div class="panel" style="display: flex; flex-wrap: wrap; gap: 32px; align-items: flex-start">
+            <div style="flex: 999 1 640px; min-width: 0">
+              <div class="map" role="img" aria-label="{{a.alt}}">
+                <sc-for list="{{a.cells}}" as="c" hint-placeholder-count="720"><span class="cell" style="{{c}}"></span></sc-for>
+                <svg class="map-road" viewBox="0 0 36 20" preserveAspectRatio="none" aria-hidden="true"><path d="{{a.roadD}}"></path></svg>
+                <sc-for list="{{a.marks}}" as="m" hint-placeholder-count="12"><span class="mk" style="{{m}}"></span></sc-for>
+                <sc-if value="{{a.mist}}" hint-placeholder-val="{{ false }}"><span class="mist"></span></sc-if>
+              </div>
+            </div>
+            <div style="flex: 1 1 280px; min-width: 0">
+              <p class="dot" style="margin: 0; font-size: 18px; color: #F2B544">{{a.no}}</p>
+              <h3 class="disp" style="margin: 6px 0 4px; font-size: 32px; line-height: 1.3">{{a.name}}</h3>
+              <p class="mu" style="margin: 0 0 16px; font-size: 14px">期間：[期間]</p>
+              <p style="margin: 0 0 20px; font-size: 16px; line-height: 1.95">{{a.story}}</p>
+              <p class="mu" style="margin: 0; font-size: 14px; line-height: 1.8">地図はブラウザで自由に歩けます。<br>[アーカイブ地図のURL]</p>
+            </div>
+          </div>
+        </sc-if>
+      </sc-for>
+    </div>
+  </section>
+
+  <footer class="foot s-rock">
+    <div class="edge"></div>
+    <div class="wrap" style="display: flex; flex-direction: column; gap: 26px">
+      <h2 class="disp" style="margin: 0; font-size: clamp(30px, 4.6vw, 58px); line-height: 1.3">次の地図に、あなたの灯りを。</h2>
+      <div style="display: flex; flex-wrap: wrap; gap: 12px">
+        <a href="join.html" class="pbtn">参加方法を見る</a>
+        <a href="events.html" class="gbtn">夜祭の予定</a>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; border-top: 2px solid rgba(255,255,255,.08)">
+        <nav aria-label="フッター" style="display: flex; flex-wrap: wrap; gap: 2px 8px">
+          <a href="index.html" class="fl">トップ</a><a href="join.html" class="fl">はじめる</a><a href="events.html" class="fl">夜祭</a><a href="community.html" class="fl">仲間と遊ぶ</a>
+        </nav>
+        <p class="mu" style="margin: 0; font-size: 13px; max-width: 34em">灯原は非公式のファンサーバーで、Mojang Studios および Microsoft とは関係ありません。</p>
+      </div>
+    </div>
+  </footer>
+  <div class="gauge" aria-hidden="true"><span class="gauge-m"></span></div>
+</div>
+</template>
+<script type="text/x-dc" data-dc-script data-props='{"seasonStart":{"editor":"text","default":"2026-11-07T21:00:00+09:00"},"$preview":{"width":1440,"height":3900}}'>
+class Component extends DCLogic {
+  constructor(props) {
+    super(props);
+    this.state = { now: Date.now(), arc: 0 };
+    this.D = this.build();
+  }
+  componentDidMount() { this._iv = setInterval(() => this.setState({ now: Date.now() }), 1000); }
+  componentWillUnmount() { clearInterval(this._iv); }
+
+  build() {
+    let s = 37;
+    const r = () => { s = (s * 9301 + 49297) % 233280; return s / 233280; };
+    const stars = [];
+    for (let i = 0; i < 56; i++) {
+      const d = 1.4 + r() * 1.6, t = 2 + r() * 3, z = r() > 0.85 ? 4 : 2;
+      stars.push({ style: 'left:' + (r() * 100).toFixed(2) + '%;top:' + (r() * 50).toFixed(2) + '%;width:' + z + 'px;height:' + z + 'px;animation-delay:' + d.toFixed(2) + 's,' + (d + r() * 3).toFixed(2) + 's;animation-duration:1s,' + t.toFixed(2) + 's' });
+    }
+    const waves = [];
+    for (let i = 0; i < 11; i++) waves.push({ style: 'top:' + (12 + i * 14) + 'px;opacity:' + (0.35 + i * 0.06).toFixed(2) + ';animation-duration:' + (3 + r() * 5).toFixed(1) + 's;animation-direction:' + (i % 2 ? 'reverse' : 'normal') + ';background-size:' + (60 + i * 6) + 'px 4px' });
+    const isl = [[15.97, 230], [42.36, 218], [64.58, 206], [86.81, 234]];
+    const isles = isl.map((p, i) => { const d = 2.6 + i * 0.35; return { pos: 'left:' + p[0] + '%;bottom:' + p[1] + 'px', head: 'animation-delay:' + d.toFixed(2) + 's', glow: 'animation-delay:' + d.toFixed(2) + 's,' + (d + 0.8).toFixed(2) + 's' }; });
+
+    const W = 36, H = 20;
+    const mkMap = (seed, kind) => {
+      let q = seed;
+      const rr = () => { q = (q * 9301 + 49297) % 233280; return q / 233280; };
+      const o1 = rr() * 10, o2 = rr() * 10, o3 = rr() * 10;
+      const land = [];
+      for (let y = 0; y < H; y++) for (let x = 0; x < W; x++) {
+        let v = Math.sin(x / 4.2 + o1) + Math.sin(y / 3.1 + o2) + 0.7 * Math.sin((x + y) / 2.6 + o3) + 0.4 * (rr() - 0.5);
+        let t;
+        if (kind === 'snow') {
+          v += 0.6 - Math.abs(x - 18) / 30;
+          t = v < -0.4 ? 'w' : v < -0.1 ? 's' : y < 5 ? 'n' : v > 1.3 ? 'f' : 'g';
+        } else {
+          const river = Math.abs(x - (18 + 4 * Math.sin(y / 3))) < 1.3;
+          t = river ? 'w' : v > 1.2 ? 'f' : v < -1.3 ? 'r' : 'g';
+        }
+        land.push(t);
+      }
+      const lan = [];
+      let tries = 0;
+      while (lan.length < 13 && tries < 400) {
+        tries++;
+        const x = 2 + Math.floor(rr() * (W - 4)), y = 2 + Math.floor(rr() * (H - 4));
+        const t = land[y * W + x];
+        if (t === 'w') continue;
+        if (lan.some((p) => Math.abs(p[0] - x) + Math.abs(p[1] - y) < 5)) continue;
+        lan.push([x, y]);
+      }
+      const inT = [0]; const segs = [];
+      while (inT.length < lan.length) {
+        let best = null;
+        inT.forEach((a) => lan.forEach((pb, b) => {
+          if (inT.indexOf(b) >= 0) return;
+          const d = Math.hypot(lan[a][0] - pb[0], lan[a][1] - pb[1]);
+          if (!best || d < best[2]) best = [a, b, d];
+        }));
+        inT.push(best[1]); segs.push(best);
+      }
+      const C = { w: ['#0F1F40', '#2C5288'], s: ['#4A4433', '#B39B66'], g: ['#1E3321', '#5E8C3A'], f: ['#15261A', '#3F6B2E'], n: ['#59647A', '#C9D3E2'], r: ['#2F333B', '#7D8593'] };
+      const cells = land.map((t, i) => {
+        const x = i % W, y = Math.floor(i / W);
+        const lit = lan.some((p) => Math.max(Math.abs(p[0] - x), Math.abs(p[1] - y)) <= 2);
+        return 'background:' + C[t][lit ? 1 : 0];
+      });
+      const roadD = segs.map(([a, b]) => 'M' + (lan[a][0] + 0.5) + ' ' + (lan[a][1] + 0.5) + 'L' + (lan[b][0] + 0.5) + ' ' + (lan[b][1] + 0.5)).join(' ');
+      const marks = lan.map((p, i) => 'left:' + ((p[0] + 0.5) / W * 100).toFixed(2) + '%;top:' + ((p[1] + 0.5) / H * 100).toFixed(2) + '%;animation-delay:' + (i * 0.05).toFixed(2) + 's');
+      return { cells, roadD, marks };
+    };
+    const archives = [
+      Object.assign({ no: 'S1', name: 'はじまりの夜', mist: false, alt: 'シーズン1の地図。13基の灯籠が灯路でつながっている',
+        story: '全員がひとつのスポーン地点から出発した、最初のシーズン。最後の夜、北の雪原まで灯路がつながりました。' }, mkMap(101, 'snow')),
+      Object.assign({ no: 'S2', name: '霧の谷', mist: true, alt: 'シーズン2の地図。川沿いの谷を灯路が縦断している',
+        story: '霧で遠くが見えない谷のシーズン。灯りなしでは迷う地形で、谷を縦断する長い灯路がいちばんの名所になりました。' }, mkMap(733, 'valley'))
+    ];
+    const phases = [
+      { wk: 0, w: '開幕', h: '一斉スタート', d: '全員がスポーンから出発。最初の島へ灯路を渡す。' },
+      { wk: 2, w: '2週目', h: '外海が開く', d: '遠くの島々へ渡れるようになる。' },
+      { wk: 6, w: '6週目', h: '大夜祭', d: '全員で海を横断する特別な夜。' },
+      { wk: 12, w: '12週目', h: '最終夜', d: 'シーズン最後の夜。灯籠を灯して見送る。' },
+      { wk: 13, w: '終了後', h: '地図を公開', d: '世界をまるごとアーカイブ地図に。' }
+    ];
+    return { stars, waves, isles, archives, phases };
+  }
+
+  renderVals() {
+    const st = this.state, D = this.D, now = st.now;
+    const pad = (n) => String(n).padStart(2, '0');
+    const start = Date.parse(this.props.seasonStart || '2026-11-07T21:00:00+09:00');
+    const ok = !isNaN(start);
+    const t = Math.max(0, Math.floor((start - now) / 1000));
+    const cd = ok ? { d: String(Math.floor(t / 86400)), h: pad(Math.floor(t / 3600) % 24), m: pad(Math.floor(t / 60) % 60), s: pad(t % 60) } : { d: '-', h: '--', m: '--', s: '--' };
+    const sd = new Date(start);
+    const wd = ['日', '月', '火', '水', '木', '金', '土'];
+    const startText = ok ? (sd.getMonth() + 1) + '月' + sd.getDate() + '日（' + wd[sd.getDay()] + '）' + pad(sd.getHours()) + ':' + pad(sd.getMinutes()) + ' 開幕' + (start <= now ? '。ただいま開催中です。' : '') : '開幕日 [日付]';
+    const weeks = ok ? (now - start) / 604800000 : -1;
+    const phases = D.phases.map((p, i) => {
+      const next = D.phases[i + 1];
+      const reached = weeks >= p.wk;
+      const current = reached && (!next || weeks < next.wk);
+      return { w: p.w, h: p.h, d: p.d, cls: 'ph-i' + (current ? ' now' : reached ? ' done' : '') };
+    });
+    const pct = weeks < 0 ? 0 : Math.min(100, (weeks / 13) * 100);
+    const archives = D.archives.map((a, i) => Object.assign({}, a, {
+      on: i === st.arc, cls: i === st.arc ? 'opt on' : 'opt', pressed: i === st.arc ? 'true' : 'false',
+      pick: () => this.setState({ arc: i })
+    }));
+    return {
+      stars: D.stars, waves: D.waves, isles: D.isles, cd, startText, phases, archives,
+      fill: 'width:' + pct.toFixed(1) + '%',
+      phaseLead: weeks < 0 ? '開幕まであと少し。シーズンは約3か月、節目ごとに世界が少しずつ広がります。' : 'シーズンは進行中です。光っている印が、いまの段階です。'
+    };
+  }
+}
+</script>
+<script src="./assets/morphdom.min.js"></script>
+<script src="./assets/dc-lite.js"></script>
+</body>
+</html>
