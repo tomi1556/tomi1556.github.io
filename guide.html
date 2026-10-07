@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#070E20">
+<title>遊び方｜灯原</title>
+<meta name="description" content="灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、敵が落とす欠片で解放する8つの加護。灯原のしくみ。">
+<link rel="canonical" href="https://tomoshibara.life/guide.html">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="灯原">
+<meta property="og:title" content="遊び方｜灯原">
+<meta property="og:description" content="灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、敵が落とす欠片で解放する8つの加護。灯原のしくみ。">
+<meta property="og:url" content="https://tomoshibara.life/guide.html">
+<meta property="og:image" content="https://tomoshibara.life/assets/og.png">
+<meta property="og:locale" content="ja_JP">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="assets/icon-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DotGothic16&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+</head>
+<body>
+<main>
+<div class="hero">
+  <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
+  <a href="#content" class="skip">本文へ進む</a>
+<header class="hdr"><div class="wrap hdr-in">
+  <a href="index.html" class="logo"><svg width="30" height="36" viewBox="0 0 10 12" aria-hidden="true" style="display:block;shape-rendering:crispEdges"><rect x="2" y="0" width="6" height="1" fill="currentColor"/><rect x="1" y="1" width="8" height="1" fill="currentColor"/><rect x="1" y="2" width="1" height="6" fill="currentColor"/><rect x="8" y="2" width="1" height="6" fill="currentColor"/><rect x="2" y="2" width="6" height="6" fill="#F2B544"/><rect x="4" y="4" width="2" height="2" fill="#FFF1C4"/><rect x="1" y="8" width="8" height="1" fill="currentColor"/><rect x="4" y="9" width="2" height="3" fill="currentColor"/></svg><span>灯原</span></a>
+  <nav class="nav" aria-label="メイン"><a href="index.html" class="nl"><i></i>トップ</a><a href="start.html" class="nl"><i></i>はじめる</a><a href="guide.html" class="nl" aria-current="page"><i></i>遊び方</a><a href="events.html" class="nl"><i></i>夜祭</a><a href="rules.html" class="nl"><i></i>きまり</a></nav>
+  <a href="https://discord.gg/wAKGQBHmPS" class="pbtn dbtn sm" target="_blank" rel="noopener">Discord に参加</a>
+</div></header>
+  <div class="wrap phead" id="content">
+    <h1 class="disp h1-sub">遊び方</h1>
+    <p class="lead">灯りを置き、つなぎ、夜から守り、欠片を集めて強くなる。この世界のしくみを、順番に。</p>
+    <nav class="toc" aria-label="このページの内容"><a href="#lantern">灯籠と灯路</a><a href="#night">長い夜</a><a href="#higui">灯喰い</a><a href="#buff">加護と欠片</a><a href="#more">灯標・色・招待</a></nav>
+  </div>
+</div>
+<section class="stratum tex s-soil" id="lantern">
+  <div class="wrap">
+    <p class="depth">1</p>
+    <h2 class="disp h2">灯籠を置くと、そこが安全になる。</h2>
+    <p class="lead">ランタンを置くと「灯籠」として登録されます。ソウルランタンや銅のランタンでもかまいません。</p>
+    <div class="two">
+      <div><h3 class="h3 disp">灯りの中で起きること</h3><p class="mu">敵が自然に湧かない。爆発でブロックが壊れない。倒れても持ち物と経験値を失わない。画面の下に、いま灯りの中か外かが出ます。</p></div>
+      <div><h3 class="h3 disp">灯路</h3><p class="mu">16ブロック以内の灯籠どうしは、自動で灯路につながります（1基につき4本まで）。灯路の上は足が速くなります。だれの灯籠とでもつながります。</p></div>
+    </div>
+    <h3 class="h3 disp" style="margin-top:56px">つながるほど、格が上がる。</h3>
+    <p class="lead">灯路でつながった灯籠のまとまりを「灯路網」と呼びます。基数がふえると格が上がり、守られる範囲が広がって、まわりが本当に明るくなります。</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>格</th><th>つながった基数</th><th>守られる半径</th><th>できるようになること</th></tr></thead>
+      <tbody>
+        <tr><th>一ノ灯</th><td class="n">1〜4基</td><td class="n">10</td><td>基本の守り。加護は Lv1 まで働く</td></tr>
+        <tr><th>二ノ灯</th><td class="n">5〜14基</td><td class="n">12</td><td>灯標どうしを行き来できる。加護は Lv2 まで</td></tr>
+        <tr><th>三ノ灯</th><td class="n">15〜39基</td><td class="n">14</td><td>灯路の上がさらに速くなる。加護は Lv3 まで</td></tr>
+        <tr><th>四ノ灯</th><td class="n">40基〜</td><td class="n">16</td><td>いちばん広く守られる</td></tr>
+      </tbody>
+    </table></div>
+    <h3 class="h3 disp" style="margin-top:56px">置くときのきまり</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>置き方</th><th>かかるもの・もらえるもの</th></tr></thead>
+      <tbody>
+        <tr><th>最初の1基</th><td>無料</td></tr>
+        <tr><th>いまある灯籠から16ブロック以内</th><td>無料。灯路1本につき経験値がもらえる（3本まで）</td></tr>
+        <tr><th>どの灯籠ともつながらない場所</th><td>経験値レベル 2 がかかる</td></tr>
+        <tr><th>同じチャンクに3基目</th><td>灯籠にならず、ふつうのランタンとして置かれる（1チャンク2基まで）</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">ぎゅうぎゅうに置くより、少しはなして外へのばすほうが得になるようにしてあります。</p>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="night">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">2</p>
+    <h2 class="disp h2">昼は4分、夜は24分。</h2>
+    <p class="lead">灯原では、ほとんどの時間が夜です。ベッドで寝ても夜は飛ばせません（リスポーン地点は決められます）。日没と夜明けには、画面の真ん中に知らせが出ます。</p>
+    <h3 class="h3 disp" style="margin-top:44px">夜に湧く敵</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>ふつうのマインクラフトとくらべて</th><th>倍率</th></tr></thead>
+      <tbody>
+        <tr><th>体力</th><td class="n">×2.5</td></tr>
+        <tr><th>攻撃</th><td class="n">×2.0</td></tr>
+        <tr><th>矢・爆発</th><td class="n">×1.8</td></tr>
+        <tr><th>足の速さ</th><td class="n">×1.15</td></tr>
+        <tr><th>気づく距離</th><td class="n">×1.5</td></tr>
+      </tbody>
+    </table></div>
+    <div class="two">
+      <div><h3 class="h3 disp">さらに強くなるとき</h3><p class="mu">夜を1つ重ねるごとに+4%（最大で2倍）。真夜中は+25%。そして、あなたの防具が固いほど敵も強くなります。育っても、夜は楽になりません。</p></div>
+      <div><h3 class="h3 disp">精鋭と群れ</h3><p class="mu">10体に1体は、名前のついた「精鋭」です。体力も攻撃もさらに高いかわりに、経験値は4倍、欠片も6割の確率で落とします。3回に1回は、もう1体いっしょに湧きます。</p></div>
+    </div>
+    <p class="note warn"><b>朱月（しゅげつ）の夜。</b>7夜に一度、月が赤くなります。敵は1.4倍強く、群れと精鋭がふえます。ひとりで外にいる夜ではありません。</p>
+    <p class="note">昼に湧いた敵と、スポナーから出た敵は、ふつうの強さのままです。いまの時刻と敵の強さは <span class="kbd">/tokoyo</span> で見られます。</p>
+  </div>
+</section>
+
+<section class="stratum s-blood" id="higui">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">3</p>
+    <h2 class="disp h2">灯喰いは、灯りを消しに来る。</h2>
+    <p class="lead">黒い体に白い面。人には目もくれず、灯籠へまっすぐ歩いてきます。</p>
+    <ol class="steps" style="margin-top:36px">
+      <li><div><h3>狙われる</h3><p>夜、人の近く（48ブロック以内）にある灯籠のうち、灯路がいちばん少ない「端」の1基が狙われます。</p></div></li>
+      <li><div><h3>知らせが出る</h3><p>画面の下に「北東の灯が狙われている（32m）」と、方角と距離が出ます。</p></div></li>
+      <li><div><h3>喰いはじめる</h3><p>灯籠に取りつくと紫に光り、灯籠から光を吸いはじめます。喰い終わるまでの時間は、下の式のとおりです。</p></div></li>
+      <li><div><h3>守る</h3><p>たたくと喰うのが2秒ぶん戻り、しばらくこちらへ向かってきます。倒せば守りきりです。3回に1回ほど、欠片を落とします。</p></div></li>
+      <li><div><h3>喰われたら</h3><p>灯籠は青い冷たい火になり、守りも灯路も止まります。途中の1基が消えると、灯路網が2つに分かれて格が下がることもあります。</p></div></li>
+      <li><div><h3>灯し直す</h3><p>青い灯籠を、何も持たずに右クリックすると、だれでも灯し直せます。ほかの人の灯籠を灯し直すと、経験値がもらえます。</p></div></li>
+    </ol>
+    <div class="pn" style="margin-top:32px">
+      <p class="mu" style="font-size:14px;font-weight:700">喰い終わるまでの時間</p>
+      <p class="dot" style="font-size:clamp(19px,2.6vw,28px);line-height:1.6;color:#FFE3A3;margin-top:6px">5秒 ＋ 灯路1本ごとに5秒 ＋ 灯りの中の人ひとりごとに3秒</p>
+      <p class="mu" style="margin-top:10px;font-size:16px">ぽつんと1基だけの灯籠は5秒。灯路が3本つながり、そばに2人いれば26秒。つなぐほど、集まるほど、守れます。</p>
+    </div>
+    <div class="two">
+      <div><h3 class="h3 disp">夜明けに起きること</h3><p class="mu">まだ灯っている灯籠とつながっている灯籠には、火が移って自然に戻ります。つながりのない灯籠は、だれかが行くまで消えたままです。ひとつも消させなかった夜は「無欠の夜」として、経験値がもらえます。</p></div>
+      <div><h3 class="h3 disp">狙われないもの</h3><p class="mu">3基より少ない灯路網。名前をつけた灯標。最初の広場のまわり。来てから24時間以内の人のまわり。地下や高い塔の灯籠。そして、近くにだれもいない灯籠。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stratum s-deep" id="buff">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">4</p>
+    <h2 class="disp h2">倒して、集めて、強くなる。</h2>
+    <p class="lead">敵はときどき「欠片」を落とします。右クリックで取り込み（しゃがむと全部）、<span class="kbd">/tomoshibi buffs</span> で加護を解放します。加護は、灯りの中にいるあいだだけ働きます。</p>
+    <div class="two">
+      <div>
+        <h3 class="h3 disp">欠片が落ちる確率</h3>
+        <div class="tbl-wrap" style="margin-top:8px"><table style="min-width:0">
+          <tbody>
+            <tr><th>ふつうの敵</th><td class="n">5%</td></tr>
+            <tr><th>夜に強くなった敵</th><td class="n">12%</td></tr>
+            <tr><th>灯喰い</th><td class="n">35%</td></tr>
+            <tr><th>精鋭</th><td class="n">60%</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div>
+        <h3 class="h3 disp">解放に要る欠片</h3>
+        <div class="tbl-wrap" style="margin-top:8px"><table style="min-width:0">
+          <tbody>
+            <tr><th>Lv1</th><td class="n">4個</td></tr>
+            <tr><th>Lv2</th><td class="n">さらに10個</td></tr>
+            <tr><th>Lv3</th><td class="n">さらに20個</td></tr>
+          </tbody>
+        </table></div>
+        <p class="mu" style="font-size:15px;margin-top:10px">欠片は加護の種類ごとに別です。再生の欠片は、再生の加護にだけ使えます。</p>
+      </div>
+    </div>
+    <h3 class="h3 disp" style="margin-top:56px">8つの加護</h3>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>加護</th><th>働く場所</th><th>Lv1</th><th>Lv2</th><th>Lv3</th></tr></thead>
+      <tbody>
+        <tr><th><span class="sw" style="background:#F29BB8"></span>再生</th><td>灯りの中</td><td colspan="3">体力が少しずつ戻る。Lv が上がるほど速い</td></tr>
+        <tr><th><span class="sw" style="background:#F2D544"></span>採掘速度</th><td>灯りの中</td><td colspan="3">掘るのが速くなる</td></tr>
+        <tr><th><span class="sw" style="background:#C9D0DC"></span>耐性</th><td>灯りの中</td><td colspan="3">受けるダメージが減る</td></tr>
+        <tr><th><span class="sw" style="background:#E0453A"></span>攻撃力</th><td>灯りの中</td><td colspan="3">攻撃が強くなる</td></tr>
+        <tr><th><span class="sw" style="background:#8BD18F"></span>幸運</th><td>灯りの中</td><td colspan="3">戦利品や釣りの運が上がる</td></tr>
+        <tr><th><span class="sw" style="background:#8FC3E8"></span>跳躍</th><td>灯路の上</td><td colspan="3">高く跳べる</td></tr>
+        <tr><th><span class="sw" style="background:#F2B544"></span>満腹</th><td>灯りの中</td><td class="n">空腹 −50%</td><td class="n">−75%</td><td>腹が減らない</td></tr>
+        <tr><th><span class="sw" style="background:#6FD39A"></span>経験</th><td>灯りの中</td><td class="n">経験値 +15%</td><td class="n">+30%</td><td class="n">+50%</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note"><b>格とのかけ算。</b>働くのは「いまいる灯路網の格まで」の Lv です。Lv3 を解放していても、一ノ灯の灯りの中では Lv1 しか働きません。自分が強くなることと、みんなで灯路網を育てることの、両方が要ります。</p>
+  </div>
+</section>
+
+<section class="stratum s-stone" id="more">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">5</p>
+    <h2 class="disp h2">灯標、灯りの色、招待。</h2>
+    <div class="two">
+      <div><h3 class="h3 disp">灯標と灯渡り</h3><p class="mu">灯籠に名前をつけると「灯標（とうひょう）」になります。二ノ灯より上の灯路網では、同じ灯路網の灯標へ、3秒じっとしているだけで移動できます（つぎに使えるまで30秒）。灯標は灯喰いに喰われません。ひとつを「帰る場所」に決めておけます。</p></div>
+      <div><h3 class="h3 disp">仲間</h3><p class="mu">メニューの「仲間」に加えた人は、あなたの灯籠に名前をつけたり、取り除いたりできます。ほかの人は、あなたの灯籠を壊せません。</p></div>
+    </div>
+    <h3 class="h3 disp" style="margin-top:56px">灯りの色は、12色。</h3>
+    <p class="lead">灯籠の光と灯路の色を変えられます。強さは変わりません。手に入れ方は、遊ぶことだけです。</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>色</th><th>手に入れ方</th></tr></thead>
+      <tbody>
+        <tr><th><span class="sw" style="background:#F2B544"></span>山吹</th><td>最初から</td></tr>
+        <tr><th><span class="sw" style="background:#F29BB8"></span>桜</th><td>夜祭に5回参加する</td></tr>
+        <tr><th><span class="sw" style="background:#8FC3E8"></span>水縹（みはなだ）</th><td>夜祭に10回参加する</td></tr>
+        <tr><th><span class="sw" style="background:#8BD18F"></span>若竹</th><td>夜祭に20回参加する</td></tr>
+        <tr><th><span class="sw" style="background:#C9D0DC"></span>白銀</th><td>友達を1人招待する</td></tr>
+        <tr><th><span class="sw" style="background:#B79CF2"></span>藤</th><td>友達を3人招待する</td></tr>
+        <tr><th><span class="sw" style="background:#F2A07A"></span>曙</th><td>友達を5人招待する</td></tr>
+        <tr><th><span class="sw" style="background:#FFF1C4"></span>はじまりの灯</th><td>シーズン1の開幕の夜（11月7日）に参加する</td></tr>
+      </tbody>
+    </table></div>
+    <p class="mu" style="font-size:15px;margin-top:12px">ほかの色は、メニューの「灯りの色」に手に入れ方が書いてあります。</p>
+    <h3 class="h3 disp" style="margin-top:56px">友達を呼ぶ</h3>
+    <ol class="steps" style="margin-top:16px">
+      <li><div><h3><span class="kbd">/tomoshibi invite</span> で、自分の招待コードを見る</h3><p>メニューの「招待」からも見られます。</p></div></li>
+      <li><div><h3>友達に、サーバーのアドレスとコードを伝える</h3><p>アドレスは <span class="kbd">tomoshibara.life</span> です。</p></div></li>
+      <li><div><h3>友達が、入ってから7日以内に <span class="kbd">/tomoshibi code コード</span> と打つ</h3><p>呼んだ人の招待が1人ふえます。10人呼ぶと、番付の「灯友の碑」に名前が載ります。</p></div></li>
+    </ol>
+  </div>
+</section>
+
+</main>
+<footer class="foot s-rock"><div class="edge"></div><div class="wrap">
+  <h2 class="disp" style="font-size:clamp(30px,4.6vw,56px);line-height:1.3;margin-bottom:24px">夜は、ひとりより大勢で。</h2>
+  <div class="addr">
+  <span class="addr-t"><small>サーバーアドレス（Java版・統合版 共通）</small><b>tomoshibara.life</b></span>
+  <button type="button" class="pbtn" data-copy="tomoshibara.life">アドレスをコピー</button>
+</div>
+<p class="addr-note" data-note role="status">統合版のポートは 19132（最初から入っている数字のまま）です。</p>
+  <div class="btns" style="margin-top:8px"><a href="start.html" class="gbtn">入り方を見る</a><a href="https://discord.gg/wAKGQBHmPS" class="pbtn dbtn" target="_blank" rel="noopener">Discord に参加</a></div>
+  <div class="foot-links">
+    <nav aria-label="フッター" style="display:flex;flex-wrap:wrap;gap:2px 8px"><a href="start.html" class="fl">はじめる</a><a href="guide.html" class="fl">遊び方</a><a href="events.html" class="fl">夜祭</a><a href="rules.html" class="fl">きまり</a><a href="https://discord.gg/wAKGQBHmPS" class="fl" target="_blank" rel="noopener">Discord</a></nav>
+    <p class="legal">灯原は非公式のファンサーバーです。Mojang Studios および Microsoft とは関係ありません。Minecraft は Mojang Synergies AB の商標です。</p>
+  </div>
+</div></footer>
+<div class="gauge" aria-hidden="true"><i></i></div>
+<script src="assets/site.js" defer></script>
+</body>
+</html>
