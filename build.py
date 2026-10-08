@@ -140,8 +140,8 @@ index = f'''<div class="hero" style="min-height:min(900px,100svh)">
     <p class="lead">灯原がふつうのサバイバルとちがうのは、この三つだけです。</p>
     <div class="facts">
       <div class="fact"><div class="fact-n">24<small>分</small></div><div><h3 class="h3 disp">夜が長い。</h3><p>昼は4分、夜は24分。夜の敵は体力が2.5倍、攻撃が2倍で、夜を重ねるほど強くなります。来たばかりでは、まず勝てません。</p></div></div>
-      <div class="fact"><div class="fact-n">10<small>ブロック</small></div><div><h3 class="h3 disp">灯りの中は安全。</h3><p>灯籠（ランタン）を置くと、まわり半径10ブロックには敵が湧きません。爆発で壊れず、倒れても持ち物を失いません。近くの灯籠どうしは灯路でつながり、その上は足が速くなります。</p></div></div>
-      <div class="fact"><div class="fact-n" style="color:var(--violet)">灯喰い</div><div><h3 class="h3 disp">夜は、灯りを消しに来る。</h3><p>夜になると「灯喰い」が灯籠を狙います。喰われた灯籠は青い冷たい火になり、道も途切れます。倒して守るか、あとで灯し直すか。つながりの多い灯籠ほど、喰われにくくなります。</p></div></div>
+      <div class="fact"><div class="fact-n">10<small>ブロック</small></div><div><h3 class="h3 disp">灯りの中は安全。</h3><p>灯籠を置くと、まわり半径10ブロックには敵が入れず、灯りの中の人は狙われません。爆発で壊れず、倒れても持ち物を失いません。近くの灯籠どうしは灯路でつながり、その上は足が速くなります。</p></div></div>
+      <div class="fact"><div class="fact-n" style="color:var(--violet)">灯喰い</div><div><h3 class="h3 disp">夜は、灯りを消しに来る。</h3><p>灯りの守りを破れるのは「灯喰い」だけ。夜になると灯籠を狙い、喰われた灯籠は青い冷たい火になって、守りも道も途切れます。倒して守るか、あとで灯し直すか。つながりの多い灯籠ほど、喰われにくくなります。</p></div></div>
     </div>
   </div>
 </section>
@@ -182,7 +182,7 @@ index = f'''<div class="hero" style="min-height:min(900px,100svh)">
     <h2 class="disp h2">つづきは、こちらから。</h2>
   </div>
   <a href="start.html" class="band" style="background:#50555C"><div class="wrap band-in"><span class="band-y">Y=−12</span><div class="band-body"><h3 class="disp h3">はじめる</h3><p class="lead">機種ごとの入り方と、最初の夜の過ごし方。3分で入れます。</p><span class="band-go"><i></i>入り方を見る</span></div></div></a>
-  <a href="guide.html" class="band" style="background:#474C53"><div class="wrap band-in"><span class="band-y">Y=−24</span><div class="band-body"><h3 class="disp h3">遊び方</h3><p class="lead">灯籠と灯路、長い夜、灯喰い、敵が落とす欠片で解放する加護。</p><span class="band-go"><i></i>しくみを読む</span></div></div></a>
+  <a href="guide.html" class="band" style="background:#474C53"><div class="wrap band-in"><span class="band-y">Y=−24</span><div class="band-body"><h3 class="disp h3">遊び方</h3><p class="lead">灯籠と灯路、長い夜、灯喰い、欠片で解放する加護、252の「灯の証」。</p><span class="band-go"><i></i>しくみを読む</span></div></div></a>
   <a href="events.html" class="band" style="background:#3E4249"><div class="wrap band-in"><span class="band-y">Y=−36</span><div class="band-body"><h3 class="disp h3">夜祭</h3><p class="lead">毎週土曜21時。人数がそろうと、週替わりのゲームが自動で始まります。</p><span class="band-go"><i></i>今週のゲームを見る</span></div></div></a>
   <a href="rules.html" class="band" style="background:#34383E;padding-bottom:40px"><div class="wrap band-in"><span class="band-y">Y=−48</span><div class="band-body"><h3 class="disp h3">きまり</h3><p class="lead">してはいけないこと、守られていること、困ったときの連絡先。</p><span class="band-go"><i></i>きまりを読む</span></div></div></a>
 </section>
@@ -291,11 +291,12 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
     <h2 class="disp h2">最初の夜を、越える。</h2>
     <p class="lead">夜は24分つづき、夜の敵には、来たばかりでは勝てません。だから最初にやることは、たたかうことではなく、灯りをともすことです。</p>
     <ol class="night">
-      <li><time>0分</time><div><h3>灯籠を3基受け取る</h3><p>はじめて入ると、持ち物に灯籠（ランタン）が3基入ります。</p></div></li>
-      <li><time>1分</time><div><h3>1基目を置く</h3><p>置いた場所のまわり半径10ブロックが「灯りの中」になります。敵が湧かず、爆発で壊れず、倒れても持ち物を失いません。最初の1基は無料です。</p></div></li>
+      <li><time>0分</time><div><h3>灯籠を3基受け取る</h3><p>はじめて入ると、持ち物に光る「灯籠」が3基入ります。ふつうのランタンとは別のもので、ふつうのランタンは飾りにしかなりません。灯籠は作業台で作れます（アメジストの欠片2・金インゴット2・ランタン1）。</p></div></li>
+      <li><time>1分</time><div><h3>1基目を置く</h3><p>置いた場所のまわり半径10ブロックが「灯りの中」になります。敵は入ってこられず、中にいる人を狙えません。爆発で壊れず、倒れても持ち物を失いません。最初の1基は無料です。</p></div></li>
       <li><time>3分</time><div><h3>2基目を、16ブロック以内に置く</h3><p>2基が「灯路」でつながります。灯路の上は足が速くなり、つなげて置くと経験値ももらえます。</p></div></li>
       <li><time>5分</time><div><h3>メニューを開く</h3><p>チャットに <span class="kbd">/tomoshibi</span> と打つか、何も持たずに灯籠を右クリック（統合版は長押し）します。「はじめの一歩」が6つあり、1つ達成するたびに灯籠を2基もらえます。</p></div></li>
       <li><time>夜</time><div><h3>灯りの中で過ごす</h3><p>画面の下に「灯りの中」と出ていれば安全です。灯りの外に出ると「闇の中」と出て、いちばん近い灯りの方角を教えてくれます。</p></div></li>
+      <li><time>いつでも</time><div><h3>灯の証を見る</h3><p><span class="kbd">/akashi</span> で、灯原だけの進捗「灯の証」が開きます。全部で252個。すぐ届くものから、季節をまたぐものまであります。</p></div></li>
       <li><time>慣れたら</time><div><h3>人の灯りと、つなぐ</h3><p>だれの灯籠とでも灯路はつながります。5基つながると「二ノ灯」になり、守られる範囲が広がって、灯標どうしを行き来できるようになります。</p></div></li>
     </ol>
     <p class="note cold"><b>来たばかりの人は守られています。</b>はじめて入ってから24時間は、あなたのまわりに灯喰いは来ません。灯籠が3基より少ない拠点も狙われません。</p>
@@ -313,10 +314,14 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <tbody>
         <tr><td class="n">/tomoshibi</td><td>メニューを開く（<span class="kbd">/tomo</span> でも同じ）</td></tr>
         <tr><td class="n">/tomoshibi buffs</td><td>加護を見る、欠片で解放する</td></tr>
+        <tr><td class="n">/tomoshibi recipe</td><td>灯籠の作り方</td></tr>
         <tr><td class="n">/tomoshibi go 名前</td><td>名前のついた灯籠（灯標）へ移動する</td></tr>
         <tr><td class="n">/tomoshibi home</td><td>「帰る場所」に決めた灯標へ戻る</td></tr>
         <tr><td class="n">/tomoshibi invite</td><td>自分の招待コードを見る</td></tr>
         <tr><td class="n">/tomoshibi particles low</td><td>光の粒を減らす（動きが重いとき）</td></tr>
+        <tr><td class="n">/akashi</td><td>灯の証（進捗）を開く。報酬の受け取り、称号・足跡の選択も</td></tr>
+        <tr><td class="n">/akashi claim</td><td>証の報酬をまとめて受け取る</td></tr>
+        <tr><td class="n">/akashi top</td><td>証の番付</td></tr>
         <tr><td class="n">/tokoyo</td><td>いまが昼か夜か、夜明けまでの時間、敵の強さ</td></tr>
         <tr><td class="n">/yomatsuri</td><td>次の夜祭と、自分の参加回数</td></tr>
         <tr><td class="n">/yomatsuri out</td><td>募集中の夜祭に、今回は参加しない</td></tr>
@@ -335,7 +340,8 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <details><summary>Java版と統合版で、いっしょに遊べますか</summary><p>遊べます。PCの人も、スマホやSwitchの人も、同じ世界に入ります。</p></details>
       <details><summary>ひとりでも遊べますか</summary><p>遊べます。ただ、この世界は灯りをつなぐほど楽になるように作ってあります。だれかの灯路のそばに灯籠を置くだけで、もう「いっしょに遊んでいる」ことになります。</p></details>
       <details><summary>いない間に、こわされませんか</summary><p>ほかの人の灯籠は壊せません。灯喰いが狙うのは、近くに人がいる灯籠だけなので、留守の間に灯りが消されることもありません。建物をこわされたときは、きまりのページの手順で知らせてください。</p></details>
-      <details><summary>夜の敵が強すぎます</summary><p>そのとおりで、最初は勝てないように作ってあります。灯りの中にいれば襲われません。敵や灯喰いが落とす「欠片」を集めて加護を解放していくと、少しずつ戦えるようになります。</p></details>
+      <details><summary>ランタンを置いたのに、灯りになりません</summary><p>灯路網につながるのは、光る「灯籠」だけです。ふつうのランタンは飾りになります。灯籠は作業台で、真ん中にランタン、上下にアメジストの欠片、左右に金インゴットを置くと作れます（<span class="kbd">/tomoshibi recipe</span>）。灯籠を壊すと、灯籠のまま戻ります。</p></details>
+      <details><summary>夜の敵が強すぎます</summary><p>そのとおりで、最初は勝てないように作ってあります。灯りの中にいれば襲われません。敵は灯りに入れず、外から狙うこともできません。敵や灯喰いが落とす「欠片」を集めて加護を解放していくと、少しずつ戦えるようになります。</p></details>
       <details><summary>動きが重いです</summary><p><span class="kbd">/tomoshibi particles low</span> で光の粒が半分になり、<span class="kbd">off</span> で消えます。統合版の人は、最初から少なめになっています。</p></details>
       <details><summary>動画や配信にしてもいいですか</summary><p>かまいません。許可はいりません。ほかの人の名前が映るので、いやがる人がいたら映さないようにしてください。</p></details>
       <details><summary>困ったときは、どこに聞けばいいですか</summary><p>Discord で聞いてください。入り方、遊び方、こわされた・いやなことをされた、どれでも受けつけています。</p></details>
@@ -346,14 +352,23 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
 
 # ───────────────────────── 遊び方 ─────────────────────────
 guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜から守り、欠片を集めて強くなる。この世界のしくみを、順番に。",
-                 [("lantern", "灯籠と灯路"), ("night", "長い夜"), ("higui", "灯喰い"), ("buff", "加護と欠片"), ("more", "灯標・色・招待")]) + f'''
+                 [("lantern", "灯籠と灯路"), ("night", "長い夜"), ("higui", "灯喰い"), ("buff", "加護と欠片"), ("akashi", "灯の証"), ("more", "灯標・色・招待")]) + f'''
 <section class="stratum tex s-soil" id="lantern">
   <div class="wrap">
     <p class="depth">1</p>
     <h2 class="disp h2">灯籠を置くと、そこが安全になる。</h2>
-    <p class="lead">ランタンを置くと「灯籠」として登録されます。ソウルランタンや銅のランタンでもかまいません。</p>
+    <p class="lead">光る「灯籠」を置くと、灯路網に登録されます。ふつうのランタンは飾りで、灯りにはなりません。</p>
+    <div class="pn" style="margin-top:28px">
+      <p class="mu" style="font-size:14px;font-weight:700">灯籠の作り方（作業台）</p>
+      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;max-width:380px;margin:12px 0 14px">
+        <span></span><span class="kbd" style="display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;font-size:13px;line-height:1.4;padding:8px 4px;min-height:48px">アメジストの欠片</span><span></span>
+        <span class="kbd" style="display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;font-size:13px;line-height:1.4;padding:8px 4px;min-height:48px">金インゴット</span><span class="kbd" style="display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;font-size:13px;line-height:1.4;padding:8px 4px;min-height:48px;color:var(--amber)">ランタン</span><span class="kbd" style="display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;font-size:13px;line-height:1.4;padding:8px 4px;min-height:48px">金インゴット</span>
+        <span></span><span class="kbd" style="display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;font-size:13px;line-height:1.4;padding:8px 4px;min-height:48px">アメジストの欠片</span><span></span>
+      </div>
+      <p class="mu" style="font-size:16px">はじめて入ったときに3基もらえます。「はじめの一歩」や毎日の灯守り、灯の証の報酬でも手に入ります。壊すと灯籠のまま戻るので、置き直してもむだになりません。</p>
+    </div>
     <div class="two">
-      <div><h3 class="h3 disp">灯りの中で起きること</h3><p class="mu">敵が自然に湧かない。爆発でブロックが壊れない。倒れても持ち物と経験値を失わない。画面の下に、いま灯りの中か外かが出ます。</p></div>
+      <div><h3 class="h3 disp">灯りの中で起きること</h3><p class="mu">敵は入ってこられない。入りこんだ敵は外へ押し返され、居座ると灯りに焼かれる。灯りの中の人は狙われないので、外からの矢や爆発も来ない。敵が湧かない。爆発でブロックが壊れない。倒れても持ち物と経験値を失わない。画面の下に、いま灯りの中か外かが出ます。</p></div>
       <div><h3 class="h3 disp">灯路</h3><p class="mu">16ブロック以内の灯籠どうしは、自動で灯路につながります（1基につき4本まで）。灯路の上は足が速くなります。だれの灯籠とでもつながります。</p></div>
     </div>
     <h3 class="h3 disp" style="margin-top:56px">つながるほど、格が上がる。</h3>
@@ -374,10 +389,12 @@ guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜�
         <tr><th>最初の1基</th><td>無料</td></tr>
         <tr><th>いまある灯籠から16ブロック以内</th><td>無料。灯路1本につき経験値がもらえる（3本まで）</td></tr>
         <tr><th>どの灯籠ともつながらない場所</th><td>経験値レベル 2 がかかる</td></tr>
-        <tr><th>同じチャンクに3基目</th><td>灯籠にならず、ふつうのランタンとして置かれる（1チャンク2基まで）</td></tr>
+        <tr><th>同じチャンクに3基目</th><td>置けない（1チャンク2基まで）。灯籠は手もとに残る</td></tr>
+        <tr><th>ふつうのランタン</th><td>飾りとして置かれる。灯路網にはつながらない</td></tr>
       </tbody>
     </table></div>
     <p class="note">ぎゅうぎゅうに置くより、少しはなして外へのばすほうが得になるようにしてあります。</p>
+    <p class="note warn"><b>灯りの守りが効かないもの。</b>灯喰いと、ウィザー・エンダードラゴン・ウォーデン・エルダーガーディアン。灯喰いに喰われた灯籠のまわりも、守りが消えます。</p>
   </div>
 </section>
 
@@ -412,12 +429,12 @@ guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜�
   <div class="wrap">
     <p class="depth">3</p>
     <h2 class="disp h2">灯喰いは、灯りを消しに来る。</h2>
-    <p class="lead">黒い体に白い面。人には目もくれず、灯籠へまっすぐ歩いてきます。</p>
+    <p class="lead">黒い体に白い面。灯りの守りを破れる、ただひとつの敵です。人には目もくれず、灯籠へまっすぐ向かってきます。道をふさいでも、闇を渡って灯籠のそばに現れます。</p>
     <ol class="steps" style="margin-top:36px">
       <li><div><h3>狙われる</h3><p>夜、人の近く（48ブロック以内）にある灯籠のうち、灯路がいちばん少ない「端」の1基が狙われます。</p></div></li>
-      <li><div><h3>知らせが出る</h3><p>画面の下に「北東の灯が狙われている（32m）」と、方角と距離が出ます。</p></div></li>
-      <li><div><h3>喰いはじめる</h3><p>灯籠に取りつくと紫に光り、灯籠から光を吸いはじめます。喰い終わるまでの時間は、下の式のとおりです。</p></div></li>
-      <li><div><h3>守る</h3><p>たたくと喰うのが2秒ぶん戻り、しばらくこちらへ向かってきます。倒せば守りきりです。3回に1回ほど、欠片を落とします。</p></div></li>
+      <li><div><h3>知らせが出る</h3><p>灯喰いがいるあいだ、画面の下に「灯喰いが灯を狙っている｜北東 32m・灯まであと 12m」と出つづけます。灯喰いの体は光っていて、暗がりでも見えます。</p></div></li>
+      <li><div><h3>喰いはじめる</h3><p>灯籠に取りつくと、灯籠から光を吸いはじめます。画面の下に、どこまで喰われたかが ■■■■□□ のように出ます。喰い終わるまでの時間は、下の式のとおりです。</p></div></li>
+      <li><div><h3>守る</h3><p>たたくと喰うのが2秒ぶん戻り、たたいた人にだけ、しばらくやり返してきます。倒せば守りきりです。3回に1回ほど、欠片を落とします。</p></div></li>
       <li><div><h3>喰われたら</h3><p>灯籠は青い冷たい火になり、守りも灯路も止まります。途中の1基が消えると、灯路網が2つに分かれて格が下がることもあります。</p></div></li>
       <li><div><h3>灯し直す</h3><p>青い灯籠を、何も持たずに右クリックすると、だれでも灯し直せます。ほかの人の灯籠を灯し直すと、経験値がもらえます。</p></div></li>
     </ol>
@@ -481,16 +498,44 @@ guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜�
   </div>
 </section>
 
-<section class="stratum s-stone" id="more">
+<section class="stratum s-dusk" id="akashi">
   <div class="edge"></div>
   <div class="wrap">
     <p class="depth">5</p>
+    <h2 class="disp h2">灯の証。252の、灯原だけの進捗。</h2>
+    <p class="lead"><span class="kbd">/akashi</span> で開きます。灯籠、夜、狩り、旅、ものづくり、暮らし、夜祭。この世界で過ごしたことが、そのまま証になります。すべて集めるには、季節をまたぐほどの時間がかかります。</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>難度</th><th>数</th><th>目安</th><th>例</th></tr></thead>
+      <tbody>
+        <tr><th style="color:#55FF55">◆ 易</th><td class="n">43</td><td>その日のうちに</td><td>灯籠をひとつ灯す、最初の夜を越える</td></tr>
+        <tr><th style="color:#55FFFF">◆◆ 並</th><td class="n">74</td><td>何日か続ければ</td><td>15基の灯路網に加わる、朱月の夜を越える</td></tr>
+        <tr><th style="color:#FF55FF">◆◆◆ 難</th><td class="n">78</td><td>腰を据えて</td><td>100回の夜を越える、ウィザーを倒す</td></tr>
+        <tr><th style="color:#FFAA00">◆◆◆◆ 極</th><td class="n">40</td><td>何週間も</td><td>灯籠を300基持つ、ウォーデンを倒す</td></tr>
+        <tr><th style="color:#FF5555">◆◆◆◆◆ 伝</th><td class="n">17</td><td>季節をまたいで</td><td>500回の夜を越える、8つの加護をすべて Lv3 にする</td></tr>
+      </tbody>
+    </table></div>
+    <div class="three">
+      <div><h3 class="h3 disp">段になっている</h3><p class="mu">同じ種類の証は段になっていて、前の段を得ると次が現れます。ひとつ選んで「追跡」すると、画面の上のバーで進み具合を見られます。</p></div>
+      <div><h3 class="h3 disp">秘められた証</h3><p class="mu">条件が隠されていて、ヒントだけが読める証が12個あります。だれかが見つけると、その証の札に「初達成」の名前が残ります。</p></div>
+      <div><h3 class="h3 disp">報酬は、強さの差がつかない量</h3><p class="mu">経験値、加護の欠片、名前の前に出る称号（63種）、歩くと光が残る足跡（12種）、証でしか手に入らない灯りの色（5色）。</p></div>
+    </div>
+    <h3 class="h3 disp" style="margin-top:56px">証点と位階</h3>
+    <p class="lead">証を得るたびに、難度に応じて証点がたまります（易10・並25・難50・極100・伝250）。証点で位階が上がり、称号や足跡がもらえます。</p>
+    <p class="dot" style="font-size:clamp(16px,2.2vw,22px);line-height:2;color:#FFE3A3;margin-top:10px">灯見習い → 灯守 → 灯師 → 灯匠 → 灯司 → 夜番 → 夜渡り → 宵の主 → 暁の灯 → 灯原の伝説</p>
+    <p class="note">放置している時間（5分間、視点が動かない）と、クリエイティブでの行動は数えません。「夜を越える」は、夜のはじめから夜明けまで、地上の世界で倒れずに過ごすことです。</p>
+  </div>
+</section>
+
+<section class="stratum s-stone" id="more">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">6</p>
     <h2 class="disp h2">灯標、灯りの色、招待。</h2>
     <div class="two">
       <div><h3 class="h3 disp">灯標と灯渡り</h3><p class="mu">灯籠に名前をつけると「灯標（とうひょう）」になります。二ノ灯より上の灯路網では、同じ灯路網の灯標へ、3秒じっとしているだけで移動できます（つぎに使えるまで30秒）。灯標は灯喰いに喰われません。ひとつを「帰る場所」に決めておけます。</p></div>
       <div><h3 class="h3 disp">仲間</h3><p class="mu">メニューの「仲間」に加えた人は、あなたの灯籠に名前をつけたり、取り除いたりできます。ほかの人は、あなたの灯籠を壊せません。</p></div>
     </div>
-    <h3 class="h3 disp" style="margin-top:56px">灯りの色は、12色。</h3>
+    <h3 class="h3 disp" style="margin-top:56px">灯りの色は、17色。</h3>
     <p class="lead">灯籠の光と灯路の色を変えられます。強さは変わりません。手に入れ方は、遊ぶことだけです。</p>
     <div class="tbl-wrap"><table>
       <thead><tr><th>色</th><th>手に入れ方</th></tr></thead>
@@ -503,6 +548,11 @@ guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜�
         <tr><th><span class="sw" style="background:#B79CF2"></span>藤</th><td>友達を3人招待する</td></tr>
         <tr><th><span class="sw" style="background:#F2A07A"></span>曙</th><td>友達を5人招待する</td></tr>
         <tr><th><span class="sw" style="background:#FFF1C4"></span>はじまりの灯</th><td>シーズン1の開幕の夜（11月7日）に参加する</td></tr>
+        <tr><th><span class="sw" style="background:#FF7624"></span>篝火</th><td>証「夜を貫く灯路」（300基の灯路網に加わる）</td></tr>
+        <tr><th><span class="sw" style="background:#40D6A0"></span>翡翠</th><td>証「八徳の灯」（8つの加護をすべて Lv3）</td></tr>
+        <tr><th><span class="sw" style="background:#D62448"></span>紅</th><td>証「一年の灯守」（灯守りを365日続ける）</td></tr>
+        <tr><th><span class="sw" style="background:#FF6ED2"></span>花火</th><td>証「祭神」（夜祭で50回勝つ）</td></tr>
+        <tr><th><span class="sw" style="background:#BAAAFF"></span>天の川</th><td>位階「灯原の伝説」に届く</td></tr>
       </tbody>
     </table></div>
     <p class="mu" style="font-size:15px;margin-top:12px">ほかの色は、メニューの「灯りの色」に手に入れ方が書いてあります。</p>
@@ -561,7 +611,7 @@ events = f'''<div class="hero">
     <div class="tbl-wrap" data-rot><table>
       <thead><tr><th>ゲーム</th><th>どんな遊び</th><th>長さ</th><th>最少人数</th></tr></thead>
       <tbody>
-        <tr data-g="0"><th>灯籠リレー</th><td>紅組と藍組に分かれ、出発点から終点まで、自分の組の灯籠だけで先に灯路を通した組の勝ち。ランタンは16個ずつ配られます。置いた灯籠は、終わったあともそのまま道として残ります。</td><td class="n">12分</td><td class="n">4人</td></tr>
+        <tr data-g="0"><th>灯籠リレー</th><td>紅組と藍組に分かれ、出発点から終点まで、自分の組の灯籠だけで先に灯路を通した組の勝ち。「祭の灯籠」が16個ずつ配られます。祭の灯籠は、祭が終わると置いたものも手もとのものも消えます。</td><td class="n">12分</td><td class="n">4人</td></tr>
         <tr data-g="1"><th>闇かくれんぼ</th><td>5人に1人が鬼。鬼は最初の30秒、動けません。触れられたら負けで、範囲の外に出ても負け。灯籠を置くと10秒間、体が光ります。朝まで隠れきれば勝ち。</td><td class="n">8分</td><td class="n">4人</td></tr>
         <tr data-g="2"><th>建築早押し</th><td>お題（灯台、橋、屋台など）の建物を15分で建てます。最後に <span class="kbd">/yomatsuri vote 名前</span> で、いちばん良いと思う人に投票します。途中参加できます。</td><td class="n">15分</td><td class="n">3人</td></tr>
         <tr data-g="3"><th>夜明けまで</th><td>朱月の夜を呼びます。倒れたら脱落。朝まで生き延びた人の勝ち。全員で灯りを守りきる夜です。途中参加できます。</td><td class="n">10分</td><td class="n">2人</td></tr>
@@ -587,7 +637,7 @@ events = f'''<div class="hero">
         </tbody></table></div>
         <p class="mu" style="font-size:15px;margin-top:10px">勝ち負けは関係ありません。参加した回数だけで数えます。</p>
       </div>
-      <div><h3 class="h3 disp">勝った人には、印</h3><p class="mu">勝者は次の夜祭まで、プレイヤー一覧の名前の横に ✦ がつきます。次の夜祭でだれかが勝つと、印はその人に移ります。</p></div>
+      <div><h3 class="h3 disp">勝った人には、印</h3><p class="mu">勝者は次の夜祭まで、プレイヤー一覧の名前の横に ✦ がつきます。次の夜祭でだれかが勝つと、印はその人に移ります。</p><h3 class="h3 disp" style="margin-top:28px">灯の証「祭の章」</h3><p class="mu">参加と勝利は、灯の証にも記録されます。4つの遊びすべてで勝つ、50回勝つ、といった証があります。</p></div>
     </div>
   </div>
 </section>
@@ -633,6 +683,7 @@ rules = sub_hero("rules.html", "きまり", "むずかしいことはありま�
     <h2 class="disp h2">守られていること</h2>
     <ul class="rules ok">
       <li><div><h3>ほかの人は、あなたの灯籠を壊せない</h3><p>壊せるのは、置いた本人と、本人が「仲間」に加えた人だけです。</p></div></li>
+      <li><div><h3>灯りの中では、敵に襲われない</h3><p>敵は灯りに入れず、灯りの中の人を狙えません（灯喰いとボスをのぞく）。</p></div></li>
       <li><div><h3>灯りの中は、爆発で壊れない</h3><p>クリーパーやTNTの爆発で、灯りの中のブロックは壊れません。</p></div></li>
       <li><div><h3>灯りの中で倒れても、持ち物を失わない</h3><p>持ち物も経験値も、そのまま残ります。</p></div></li>
       <li><div><h3>いない間に、灯りは消されない</h3><p>灯喰いが狙うのは、近くに人がいる灯籠だけです。</p></div></li>
@@ -704,7 +755,7 @@ notfound = f'''<div class="hero" style="min-height:70svh">
 PAGES = [
     ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1は2026年11月7日21時開幕。", index),
     ("start.html", "はじめる｜灯原", "灯原への入り方を機種別に。Java版、スマホ、Windows、Switch・PS・Xbox。最初の夜の過ごし方と、よくある質問。", start),
-    ("guide.html", "遊び方｜灯原", "灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、敵が落とす欠片で解放する8つの加護。灯原のしくみ。", guide),
+    ("guide.html", "遊び方｜灯原", "灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、欠片で解放する8つの加護、252の進捗「灯の証」。灯原のしくみ。", guide),
     ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり4種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。", events),
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
