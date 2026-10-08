@@ -17,8 +17,27 @@ def addr_box(extra=""):
 <p class="addr-note" data-note role="status">統合版のポートは 19132（最初から入っている数字のまま）です。</p>'''
 
 
+# ナビのアイコン（16×16 のドット絵。# は線、o は灯りの色）
+ICONS = {
+    "index.html": ["......####......", ".....######.....", ".....#....#.....", ".....#oooo#.....", ".....#oooo#.....", ".....#oooo#.....", ".....#oooo#.....", ".....######.....", ".......##.......", ".......##.......", ".......##.......", ".......##.......", ".......##.......", "......####......", ".....######.....", "................"],
+    "start.html": ["................", "...##########...", "...#........#...", "...#........#...", "...#....#...#...", "...#....##..#...", "...#.######.#...", "...#.#######o...", "...#.######.#...", "...#....##..#...", "...#....#...#...", "...#........#...", "...#........#...", "...##########...", "................", "................"],
+    "guide.html": ["................", "................", ".######..######.", ".#....#..#....#.", ".#.oo.#..#.oo.#.", ".#....#..#....#.", ".#.oo.#..#.oo.#.", ".#....#..#....#.", ".#.oo.#..#.oo.#.", ".#....#..#....#.", ".#....####....#.", ".##############.", "................", "................", "................", "................"],
+    "events.html": ["................", "......####......", ".......##.......", ".....######.....", "....#oooooo#....", "...#oooooooo#...", "...##########...", "...#oooooooo#...", "...#oooooooo#...", "...##########...", "...#oooooooo#...", "....#oooooo#....", ".....######.....", ".......##.......", "......####......", "................"],
+    "rules.html": ["................", "..###########...", "..#.........#...", "..#.oooooo..#...", "..#.........#...", "..#.oooooooo#...", "..#.........#...", "..#.oooooo..#...", "..#.........#...", "..#.oooo....#...", "..#.........#...", "..#......####...", "..#......#.#....", "..#......##.....", "..#########.....", "................"],
+}
+
+
+def icon(h):
+    rects = []
+    for y, row in enumerate(ICONS[h]):
+        for x, ch in enumerate(row):
+            if ch != ".":
+                rects.append(f'<rect x="{x}" y="{y}" width="1" height="1" class="{"ic-l" if ch == "o" else "ic-s"}"/>')
+    return '<svg class="ic" viewBox="0 0 16 16" aria-hidden="true">' + "".join(rects) + "</svg>"
+
+
 def header(cur):
-    links = "".join(f'<a href="{h}" class="nl"{" aria-current=\"page\"" if h == cur else ""}><i></i>{t}</a>' for h, t in NAV)
+    links = "".join(f'<a href="{h}" class="nl"{" aria-current=\"page\"" if h == cur else ""}>{icon(h)}<span>{t}</span></a>' for h, t in NAV)
     return f'''<a href="#content" class="skip">本文へ進む</a>
 <header class="hdr"><div class="wrap hdr-in">
   <a href="index.html" class="logo">{LOGO}<span>灯原</span></a>
@@ -42,6 +61,7 @@ def footer():
 
 
 def page(file, title, desc, body, hero_min=""):
+    cur = file if file in dict(NAV) else ""
     url = SITE + ("/" if file == "index.html" else "/" + file)
     return f'''<!doctype html>
 <html lang="ja">
@@ -68,6 +88,7 @@ def page(file, title, desc, body, hero_min=""):
 <link rel="stylesheet" href="assets/site.css">
 </head>
 <body>
+{header(cur)}
 <main>
 {body}
 </main>
@@ -82,7 +103,6 @@ def sub_hero(cur, h1, lead, toc):
     t = "".join(f'<a href="#{i}">{n}</a>' for i, n in toc)
     return f'''<div class="hero">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
-  {header(cur)}
   <div class="wrap phead" id="content">
     <h1 class="disp h1-sub">{h1}</h1>
     <p class="lead">{lead}</p>
@@ -100,7 +120,6 @@ def cd(kind, label):
 # ───────────────────────── トップ ─────────────────────────
 index = f'''<div class="hero" style="min-height:min(900px,100svh)">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div><div class="dusk" aria-hidden="true"></div>
-  {header("index.html")}
   <div class="wrap hero-body" id="content">
     <a href="#season" class="chip fadein"><i></i><span>シーズン1「灯ノ海」</span><b data-season-short>11月7日（土）21:00 開幕</b></a>
     <span class="online" data-online><i></i>いま <b>0</b> 人が参加中</span>
@@ -500,7 +519,6 @@ guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜�
 # ───────────────────────── 夜祭 ─────────────────────────
 events = f'''<div class="hero">
   <div class="sky" style="background:linear-gradient(180deg,#0B0C24 0%,#211A46 55%,#4A2F66 100%)"></div><div class="stars" aria-hidden="true"></div>
-  {header("events.html")}
   <div class="garland" data-garland aria-hidden="true" style="margin-top:8px"></div>
   <div class="wrap phead" id="content" style="padding-top:8px">
     <h1 class="disp h1-sub">毎週土曜21時は、夜祭。</h1>
@@ -675,7 +693,6 @@ rules = sub_hero("rules.html", "きまり", "むずかしいことはありま�
 
 notfound = f'''<div class="hero" style="min-height:70svh">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
-  {header("")}
   <div class="wrap phead" id="content">
     <p class="dot" style="color:var(--amber);font-size:20px">404　闇の中</p>
     <h1 class="disp h1-sub" style="margin-top:8px">ここには、灯りがありません。</h1>

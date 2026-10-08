@@ -19,6 +19,25 @@
   var seed = 11;
   var rnd = function () { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
 
+  // ── ヘッダー：スクロールしたら背景をつけ、スマホでは下へ進むと隠して、少し戻すと出す ──
+  var hdr = $('.hdr');
+  if (hdr) {
+    var lastY = window.scrollY, up = 0, ticking = false;
+    var mobile = window.matchMedia('(max-width: 760px)');
+    var onScroll = function () {
+      ticking = false;
+      var y = Math.max(0, window.scrollY), dy = y - lastY;
+      hdr.classList.toggle('solid', y > 8);
+      if (!mobile.matches || y < 80) { hdr.classList.remove('hide'); up = 0; }
+      else if (dy > 0) { up = 0; if (y > 120) hdr.classList.add('hide'); }
+      else if (dy < 0) { up -= dy; if (up > 24) hdr.classList.remove('hide'); }
+      lastY = y;
+    };
+    window.addEventListener('scroll', function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
+    hdr.addEventListener('focusin', function () { hdr.classList.remove('hide'); });
+    onScroll();
+  }
+
   // ── アドレスのコピー ──
   $$('[data-copy]').forEach(function (btn) {
     var label = btn.textContent;
