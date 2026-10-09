@@ -182,7 +182,7 @@ index = f'''<div class="hero" style="min-height:min(900px,100svh)">
     <h2 class="disp h2">つづきは、こちらから。</h2>
   </div>
   <a href="start.html" class="band" style="background:#50555C"><div class="wrap band-in"><span class="band-y">Y=−12</span><div class="band-body"><h3 class="disp h3">はじめる</h3><p class="lead">機種ごとの入り方と、最初の夜の過ごし方。3分で入れます。</p><span class="band-go"><i></i>入り方を見る</span></div></div></a>
-  <a href="guide.html" class="band" style="background:#474C53"><div class="wrap band-in"><span class="band-y">Y=−24</span><div class="band-body"><h3 class="disp h3">遊び方</h3><p class="lead">灯籠と灯路、長い夜、灯喰い、欠片で解放する加護、252の「灯の証」。</p><span class="band-go"><i></i>しくみを読む</span></div></div></a>
+  <a href="guide.html" class="band" style="background:#474C53"><div class="wrap band-in"><span class="band-y">Y=−24</span><div class="band-body"><h3 class="disp h3">遊び方</h3><p class="lead">灯籠と灯路、長い夜、灯喰い、欠片で解放する加護、263の「灯の証」、130の技と106種の灯魚「灯技」。</p><span class="band-go"><i></i>しくみを読む</span></div></div></a>
   <a href="events.html" class="band" style="background:#3E4249"><div class="wrap band-in"><span class="band-y">Y=−36</span><div class="band-body"><h3 class="disp h3">夜祭</h3><p class="lead">毎週土曜21時。人数がそろうと、週替わりのゲームが自動で始まります。</p><span class="band-go"><i></i>今週のゲームを見る</span></div></div></a>
   <a href="rules.html" class="band" style="background:#34383E;padding-bottom:40px"><div class="wrap band-in"><span class="band-y">Y=−48</span><div class="band-body"><h3 class="disp h3">きまり</h3><p class="lead">してはいけないこと、守られていること、困ったときの連絡先。</p><span class="band-go"><i></i>きまりを読む</span></div></div></a>
 </section>
@@ -296,7 +296,8 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <li><time>3分</time><div><h3>2基目を、16ブロック以内に置く</h3><p>2基が「灯路」でつながります。灯路の上は足が速くなり、つなげて置くと経験値ももらえます。</p></div></li>
       <li><time>5分</time><div><h3>メニューを開く</h3><p>チャットに <span class="kbd">/tomoshibi</span> と打つか、何も持たずに灯籠を右クリック（統合版は長押し）します。「はじめの一歩」が6つあり、1つ達成するたびに灯籠を2基もらえます。</p></div></li>
       <li><time>夜</time><div><h3>灯りの中で過ごす</h3><p>画面の下に「灯りの中」と出ていれば安全です。灯りの外に出ると「闇の中」と出て、いちばん近い灯りの方角を教えてくれます。</p></div></li>
-      <li><time>いつでも</time><div><h3>灯の証を見る</h3><p><span class="kbd">/akashi</span> で、灯原だけの進捗「灯の証」が開きます。全部で252個。すぐ届くものから、季節をまたぐものまであります。</p></div></li>
+      <li><time>いつでも</time><div><h3>灯の証を見る</h3><p><span class="kbd">/akashi</span> で、灯原だけの進捗「灯の証」が開きます。全部で263個。すぐ届くものから、季節をまたぐものまであります。</p></div></li>
+      <li><time>いつでも</time><div><h3>技を育てる</h3><p><span class="kbd">/waza</span> で「灯技」が開きます。掘る・切る・釣る・旅をする…遊んだ道の Lv が上がり、技点で技を覚えます。毎日3つの「今日の務め」もあります。</p></div></li>
       <li><time>慣れたら</time><div><h3>人の灯りと、つなぐ</h3><p>だれの灯籠とでも灯路はつながります。5基つながると「二ノ灯」になり、守られる範囲が広がって、灯標どうしを行き来できるようになります。</p></div></li>
     </ol>
     <p class="note cold"><b>来たばかりの人は守られています。</b>はじめて入ってから24時間は、あなたのまわりに灯喰いは来ません。灯籠が3基より少ない拠点も狙われません。</p>
@@ -322,6 +323,10 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
         <tr><td class="n">/akashi</td><td>灯の証（進捗）を開く。報酬の受け取り、称号・足跡の選択も</td></tr>
         <tr><td class="n">/akashi claim</td><td>証の報酬をまとめて受け取る</td></tr>
         <tr><td class="n">/akashi top</td><td>証の番付</td></tr>
+        <tr><td class="n">/waza</td><td>灯技（技の木・使う技・今日の務め・灯魚図鑑）を開く</td></tr>
+        <tr><td class="n">/waza use</td><td>使う技の一覧（しゃがみ2回で主技、しゃがんで F で副技）</td></tr>
+        <tr><td class="n">/waza tasks</td><td>今日の務め</td></tr>
+        <tr><td class="n">/waza fish</td><td>灯魚図鑑</td></tr>
         <tr><td class="n">/tokoyo</td><td>いまが昼か夜か、夜明けまでの時間、敵の強さ</td></tr>
         <tr><td class="n">/yomatsuri</td><td>次の夜祭と、自分の参加回数</td></tr>
         <tr><td class="n">/yomatsuri out</td><td>募集中の夜祭に、今回は参加しない</td></tr>
@@ -352,7 +357,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
 
 # ───────────────────────── 遊び方 ─────────────────────────
 guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜から守り、欠片を集めて強くなる。この世界のしくみを、順番に。",
-                 [("lantern", "灯籠と灯路"), ("night", "長い夜"), ("higui", "灯喰い"), ("buff", "加護と欠片"), ("akashi", "灯の証"), ("more", "灯標・色・招待")]) + f'''
+                 [("lantern", "灯籠と灯路"), ("night", "長い夜"), ("higui", "灯喰い"), ("buff", "加護と欠片"), ("akashi", "灯の証"), ("hiwaza", "灯技と灯魚"), ("more", "灯標・色・招待")]) + f'''
 <section class="stratum tex s-soil" id="lantern">
   <div class="wrap">
     <p class="depth">1</p>
@@ -502,22 +507,22 @@ guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜�
   <div class="edge"></div>
   <div class="wrap">
     <p class="depth">5</p>
-    <h2 class="disp h2">灯の証。252の、灯原だけの進捗。</h2>
-    <p class="lead"><span class="kbd">/akashi</span> で開きます。灯籠、夜、狩り、旅、ものづくり、暮らし、夜祭。この世界で過ごしたことが、そのまま証になります。すべて集めるには、季節をまたぐほどの時間がかかります。</p>
+    <h2 class="disp h2">灯の証。263の、灯原だけの進捗。</h2>
+    <p class="lead"><span class="kbd">/akashi</span> で開きます。灯籠、夜、狩り、旅、ものづくり、暮らし、夜祭、灯技。この世界で過ごしたことが、そのまま証になります。すべて集めるには、季節をまたぐほどの時間がかかります。</p>
     <div class="tbl-wrap"><table>
       <thead><tr><th>難度</th><th>数</th><th>目安</th><th>例</th></tr></thead>
       <tbody>
         <tr><th style="color:#55FF55">◆ 易</th><td class="n">43</td><td>その日のうちに</td><td>灯籠をひとつ灯す、最初の夜を越える</td></tr>
-        <tr><th style="color:#55FFFF">◆◆ 並</th><td class="n">74</td><td>何日か続ければ</td><td>15基の灯路網に加わる、朱月の夜を越える</td></tr>
-        <tr><th style="color:#FF55FF">◆◆◆ 難</th><td class="n">78</td><td>腰を据えて</td><td>100回の夜を越える、ウィザーを倒す</td></tr>
-        <tr><th style="color:#FFAA00">◆◆◆◆ 極</th><td class="n">40</td><td>何週間も</td><td>灯籠を300基持つ、ウォーデンを倒す</td></tr>
-        <tr><th style="color:#FF5555">◆◆◆◆◆ 伝</th><td class="n">17</td><td>季節をまたいで</td><td>500回の夜を越える、8つの加護をすべて Lv3 にする</td></tr>
+        <tr><th style="color:#55FFFF">◆◆ 並</th><td class="n">77</td><td>何日か続ければ</td><td>15基の灯路網に加わる、朱月の夜を越える</td></tr>
+        <tr><th style="color:#FF55FF">◆◆◆ 難</th><td class="n">81</td><td>腰を据えて</td><td>100回の夜を越える、ウィザーを倒す</td></tr>
+        <tr><th style="color:#FFAA00">◆◆◆◆ 極</th><td class="n">43</td><td>何週間も</td><td>灯籠を300基持つ、ウォーデンを倒す</td></tr>
+        <tr><th style="color:#FF5555">◆◆◆◆◆ 伝</th><td class="n">19</td><td>季節をまたいで</td><td>500回の夜を越える、8つの加護をすべて Lv3 にする</td></tr>
       </tbody>
     </table></div>
     <div class="three">
       <div><h3 class="h3 disp">段になっている</h3><p class="mu">同じ種類の証は段になっていて、前の段を得ると次が現れます。ひとつ選んで「追跡」すると、画面の上のバーで進み具合を見られます。</p></div>
       <div><h3 class="h3 disp">秘められた証</h3><p class="mu">条件が隠されていて、ヒントだけが読める証が12個あります。だれかが見つけると、その証の札に「初達成」の名前が残ります。</p></div>
-      <div><h3 class="h3 disp">報酬は、強さの差がつかない量</h3><p class="mu">経験値、加護の欠片、名前の前に出る称号（63種）、歩くと光が残る足跡（12種）、証でしか手に入らない灯りの色（5色）。</p></div>
+      <div><h3 class="h3 disp">報酬は、強さの差がつかない量</h3><p class="mu">経験値、加護の欠片、名前の前に出る称号（69種）、歩くと光が残る足跡（12種）、証でしか手に入らない灯りの色（5色）。</p></div>
     </div>
     <h3 class="h3 disp" style="margin-top:56px">証点と位階</h3>
     <p class="lead">証を得るたびに、難度に応じて証点がたまります（易10・並25・難50・極100・伝250）。証点で位階が上がり、称号や足跡がもらえます。</p>
@@ -526,10 +531,53 @@ guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜�
   </div>
 </section>
 
-<section class="stratum s-stone" id="more">
+<section class="stratum s-deep" id="hiwaza">
   <div class="edge"></div>
   <div class="wrap">
     <p class="depth">6</p>
+    <h2 class="disp h2">灯技。10の道、130の技。</h2>
+    <p class="lead"><span class="kbd">/waza</span> で開きます。掘る、切る、耕す、釣る、作る、旅をする、動物と暮らす、付呪する、灯籠を守る、夜を越える。遊んだ道の Lv が上がり（最大50）、Lv が1上がるごとに技点が1。技点で技を覚えます。戦うための技は少しだけで、ほとんどは暮らしと夜を越えるための技です。</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>道</th><th>育つこと</th><th>たとえばこんな技</th><th>奥義</th></tr></thead>
+      <tbody>
+        <tr><th style="color:#FFAA00">灯</th><td>灯籠を置く・守る・灯し直す、灯喰いを倒す</td><td>手に持った灯りでまわりが明るい、闇に一時の結界「仮灯」、灯路の上で足が速い、消えた灯籠を探す「見回り」</td><td>灯の化身</td></tr>
+        <tr><th style="color:#AA55FF">夜</th><td>夜を越える、闇で過ごす</td><td>夜目、まわりの敵の気配、背後の敵を知らせる「梟の耳」、暗がりを一瞬で渡る「影渡り」、家の灯標へ帰る「帰り火」</td><td>静夜</td></tr>
+        <tr><th style="color:#55FFFF">掘</th><td>石・鉱石を掘る</td><td>つながった鉱石をまとめて掘る、壁ごしに鉱石を光らせる、掘った鉱石がその場で溶ける、3×3 掘り</td><td>地脈の声</td></tr>
+        <tr><th style="color:#55FF55">樵</th><td>木を切る</td><td>木を丸ごと切り倒す、巨木切り、苗木の植え直し、つながった丸太をまとめて皮剥ぎ</td><td>森の主</td></tr>
+        <tr><th style="color:#FFFF55">耕</th><td>実った作物を収穫する</td><td>7×7 の一斉収穫、5×5 の種まき・一斉耕し、自動植え直し、ときどき採れる「上物」</td><td>灯の恵み</td></tr>
+        <tr><th style="color:#00AAAA">釣</th><td>魚を釣る</td><td>早釣り、大漁、その場で釣れる灯魚の数がわかる「魚読み」、みんなに効く「撒き餌」、魚拓</td><td>主の竿</td></tr>
+        <tr><th style="color:#FF55FF">匠</th><td>作る、かまど、灯籠を作る</td><td>箱の整頓、近くの箱へまとめ入れ、携帯作業台、自分だけの「背負い籠」、手の届く距離 +2</td><td>灯の手入れ</td></tr>
+        <tr><th style="color:#FFFFFF">旅</th><td>遠くへ行く、新しい土地を訪れる</td><td>歩く速さ、1段の段差を歩いて越える、落下ダメージ −75%、印への道しるべ、滑空中の加速「灯の翼」</td><td>疾風</td></tr>
+        <tr><th style="color:#FF5555">牧</th><td>殖やす、手なずける、毛を刈る</td><td>双子、子が早く育つ、まわりの羊もまとめて毛刈り、まとめて餌やり、仲間を呼ぶ「呼び笛」</td><td>牧の主</td></tr>
+        <tr><th style="color:#5555FF">術</th><td>付呪、醸造、経験値</td><td>集める経験値 +30%、倒れても Lv が残る、金床の「高すぎる」がなくなる、光の矢「灯矢」</td><td>灯の賢者</td></tr>
+      </tbody>
+    </table></div>
+    <div class="three">
+      <div><h3 class="h3 disp">4つの枝 × 3つの段</h3><p class="mu">道ごとに13の技。上の段を覚えると下の段が開き、三の段を2つ覚えると奥義が開きます。下の段ほど強く、派手になります。奥義を会得すると、全体に知らされます。</p></div>
+      <div><h3 class="h3 disp">灯力</h3><p class="mu">「使う技」の力です。灯籠の灯りの中でたまり、灯路網の格が高いほど早くたまります。灯りで蓄えて、闇へ持ち出す。使う技は主技・副技に決めて、しゃがみ2回／しゃがんで F で呼び出します。</p></div>
+      <div><h3 class="h3 disp">今日の務めと極み</h3><p class="mu">毎日（0時）3つの務めが出て、すべて果たすと加護の欠片。Lv50 を超えた経験値は「極み」の★になります（★10まで）。</p></div>
+    </div>
+    <h3 class="h3 disp" style="margin-top:56px">灯魚（ひうお）106種</h3>
+    <p class="lead">釣りをしていると、ふつうの魚の代わりに「灯魚」がかかります。川・海・沼・地底・野山と、時刻・天気・月の満ち欠け・現実の季節・朱月・灯りの格で、かかる顔ぶれが変わります。</p>
+    <div class="tbl-wrap"><table>
+      <thead><tr><th>珍しさ</th><th>数</th><th>かかったとき</th></tr></thead>
+      <tbody>
+        <tr><th>◆ 並</th><td class="n">24</td><td>図鑑に手がかりがすべて出る</td></tr>
+        <tr><th style="color:#55FF55">◆◆ 珍</th><td class="n">38</td><td>1割ほど逃げる</td></tr>
+        <tr><th style="color:#55FFFF">◆◆◆ 稀</th><td class="n">28</td><td>手がかりは一部だけ。4回に1回は逃げる</td></tr>
+        <tr><th style="color:#FF55FF">◆◆◆◆ 秘</th><td class="n">10</td><td>手がかりなし。逃げると姿が図鑑に残る。釣ると全体に知らされる</td></tr>
+        <tr><th style="color:#FFAA00">◆◆◆◆◆ 幻</th><td class="n">6</td><td>半分以上が逃げる。満月の真夜中、朱月、新月の嵐…条件がいくつも重なったときだけ</td></tr>
+      </tbody>
+    </table></div>
+    <p class="note">大きさ（cm）が記録され、種類ごとの最大が「灯原一」として図鑑に残ります。「主の竿」を覚えると、倍の大きさの「ヌシ」もかかります。</p>
+    <p class="note cold"><b>ずるはできないようにしてあります。</b>放置（視点が5分動かない）中は育たず、灯魚もかかりません。自分で置いたブロックや、石の製造機、同じ場所を回る・瞬間移動では経験値が入りません。保護された場所では技も働きません。</p>
+  </div>
+</section>
+
+<section class="stratum s-stone" id="more">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">7</p>
     <h2 class="disp h2">灯標、灯りの色、招待。</h2>
     <div class="two">
       <div><h3 class="h3 disp">灯標と灯渡り</h3><p class="mu">灯籠に名前をつけると「灯標（とうひょう）」になります。二ノ灯より上の灯路網では、同じ灯路網の灯標へ、3秒じっとしているだけで移動できます（つぎに使えるまで30秒）。灯標は灯喰いに喰われません。ひとつを「帰る場所」に決めておけます。</p></div>
@@ -755,7 +803,7 @@ notfound = f'''<div class="hero" style="min-height:70svh">
 PAGES = [
     ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1は2026年11月7日21時開幕。", index),
     ("start.html", "はじめる｜灯原", "灯原への入り方を機種別に。Java版、スマホ、Windows、Switch・PS・Xbox。最初の夜の過ごし方と、よくある質問。", start),
-    ("guide.html", "遊び方｜灯原", "灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、欠片で解放する8つの加護、252の進捗「灯の証」。灯原のしくみ。", guide),
+    ("guide.html", "遊び方｜灯原", "灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、欠片で解放する8つの加護、263の進捗「灯の証」、10の道・130の技と106種の灯魚「灯技」。灯原のしくみ。", guide),
     ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり4種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。", events),
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
