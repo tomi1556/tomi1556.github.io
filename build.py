@@ -330,7 +330,7 @@ index = f'''<div class="hero" style="min-height:min(900px,100svh)">
   <div class="wrap">
     <p class="depth">Y=−72</p>
     <h2 class="disp h2">予告編</h2>
-    <p class="lead">64秒。音が出ます。</p>
+    <p class="lead">74秒。音が出ます。長い夜、灯喰い、灯技と灯魚と灯の証、そして6人の旅人。</p>
     <div class="film"><video controls preload="none" playsinline poster="assets/trailer-poster.jpg"><source src="assets/trailer.mp4" type="video/mp4">お使いのブラウザでは動画を再生できません。</video></div>
   </div>
 </section>
