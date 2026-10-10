@@ -61,7 +61,7 @@ def footer():
 
 
 def page(file, title, desc, body, hero_min=""):
-    cur = file if file in dict(NAV) else ""
+    cur = file if file in dict(NAV) else ("guide.html" if file.startswith("guide-") else "")
     url = SITE + ("/" if file == "index.html" else "/" + file)
     return f'''<!doctype html>
 <html lang="ja">
@@ -356,8 +356,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
 '''
 
 # ───────────────────────── 遊び方 ─────────────────────────
-guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜から守り、欠片を集めて強くなる。この世界のしくみを、順番に。",
-                 [("lantern", "灯籠と灯路"), ("night", "長い夜"), ("higui", "灯喰い"), ("buff", "加護と欠片"), ("akashi", "灯の証"), ("hiwaza", "灯技と灯魚"), ("more", "灯標・色・招待")]) + f'''
+_guide_src = f'''
 <section class="stratum tex s-soil" id="lantern">
   <div class="wrap">
     <p class="depth">1</p>
@@ -531,48 +530,6 @@ guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜�
   </div>
 </section>
 
-<section class="stratum s-deep" id="hiwaza">
-  <div class="edge"></div>
-  <div class="wrap">
-    <p class="depth">6</p>
-    <h2 class="disp h2">灯技。10の道、130の技。</h2>
-    <p class="lead"><span class="kbd">/waza</span> で開きます。掘る、切る、耕す、釣る、作る、旅をする、動物と暮らす、付呪する、灯籠を守る、夜を越える。遊んだ道の Lv が上がり（最大50）、Lv が1上がるごとに技点が1。技点で技を覚えます。戦うための技は少しだけで、ほとんどは暮らしと夜を越えるための技です。</p>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>道</th><th>育つこと</th><th>たとえばこんな技</th><th>奥義</th></tr></thead>
-      <tbody>
-        <tr><th style="color:#FFAA00">灯</th><td>灯籠を置く・守る・灯し直す、灯喰いを倒す</td><td>手に持った灯りでまわりが明るい、闇に一時の結界「仮灯」、灯路の上で足が速い、消えた灯籠を探す「見回り」</td><td>灯の化身</td></tr>
-        <tr><th style="color:#AA55FF">夜</th><td>夜を越える、闇で過ごす</td><td>夜目、まわりの敵の気配、背後の敵を知らせる「梟の耳」、暗がりを一瞬で渡る「影渡り」、家の灯標へ帰る「帰り火」</td><td>静夜</td></tr>
-        <tr><th style="color:#55FFFF">掘</th><td>石・鉱石を掘る</td><td>つながった鉱石をまとめて掘る、壁ごしに鉱石を光らせる、掘った鉱石がその場で溶ける、3×3 掘り</td><td>地脈の声</td></tr>
-        <tr><th style="color:#55FF55">樵</th><td>木を切る</td><td>木を丸ごと切り倒す、巨木切り、苗木の植え直し、つながった丸太をまとめて皮剥ぎ</td><td>森の主</td></tr>
-        <tr><th style="color:#FFFF55">耕</th><td>実った作物を収穫する</td><td>7×7 の一斉収穫、5×5 の種まき・一斉耕し、自動植え直し、ときどき採れる「上物」</td><td>灯の恵み</td></tr>
-        <tr><th style="color:#00AAAA">釣</th><td>魚を釣る</td><td>早釣り、大漁、その場で釣れる灯魚の数がわかる「魚読み」、みんなに効く「撒き餌」、魚拓</td><td>主の竿</td></tr>
-        <tr><th style="color:#FF55FF">匠</th><td>作る、かまど、灯籠を作る</td><td>箱の整頓、近くの箱へまとめ入れ、携帯作業台、自分だけの「背負い籠」、手の届く距離 +2</td><td>灯の手入れ</td></tr>
-        <tr><th style="color:#FFFFFF">旅</th><td>遠くへ行く、新しい土地を訪れる</td><td>歩く速さ、1段の段差を歩いて越える、落下ダメージ −75%、印への道しるべ、滑空中の加速「灯の翼」</td><td>疾風</td></tr>
-        <tr><th style="color:#FF5555">牧</th><td>殖やす、手なずける、毛を刈る</td><td>双子、子が早く育つ、まわりの羊もまとめて毛刈り、まとめて餌やり、仲間を呼ぶ「呼び笛」</td><td>牧の主</td></tr>
-        <tr><th style="color:#5555FF">術</th><td>付呪、醸造、経験値</td><td>集める経験値 +30%、倒れても Lv が残る、金床の「高すぎる」がなくなる、光の矢「灯矢」</td><td>灯の賢者</td></tr>
-      </tbody>
-    </table></div>
-    <div class="three">
-      <div><h3 class="h3 disp">4つの枝 × 3つの段</h3><p class="mu">道ごとに13の技。上の段を覚えると下の段が開き、三の段を2つ覚えると奥義が開きます。下の段ほど強く、派手になります。奥義を会得すると、全体に知らされます。</p></div>
-      <div><h3 class="h3 disp">灯力</h3><p class="mu">「使う技」の力です。灯籠の灯りの中でたまり、灯路網の格が高いほど早くたまります。灯りで蓄えて、闇へ持ち出す。使う技は主技・副技に決めて、しゃがみ2回／しゃがんで F で呼び出します。</p></div>
-      <div><h3 class="h3 disp">今日の務めと極み</h3><p class="mu">毎日（0時）3つの務めが出て、すべて果たすと加護の欠片。Lv50 を超えた経験値は「極み」の★になります（★10まで）。</p></div>
-    </div>
-    <h3 class="h3 disp" style="margin-top:56px">灯魚（ひうお）106種</h3>
-    <p class="lead">釣りをしていると、ふつうの魚の代わりに「灯魚」がかかります。川・海・沼・地底・野山と、時刻・天気・月の満ち欠け・現実の季節・朱月・灯りの格で、かかる顔ぶれが変わります。</p>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>珍しさ</th><th>数</th><th>かかったとき</th></tr></thead>
-      <tbody>
-        <tr><th>◆ 並</th><td class="n">24</td><td>図鑑に手がかりがすべて出る</td></tr>
-        <tr><th style="color:#55FF55">◆◆ 珍</th><td class="n">38</td><td>1割ほど逃げる</td></tr>
-        <tr><th style="color:#55FFFF">◆◆◆ 稀</th><td class="n">28</td><td>手がかりは一部だけ。4回に1回は逃げる</td></tr>
-        <tr><th style="color:#FF55FF">◆◆◆◆ 秘</th><td class="n">10</td><td>手がかりなし。逃げると姿が図鑑に残る。釣ると全体に知らされる</td></tr>
-        <tr><th style="color:#FFAA00">◆◆◆◆◆ 幻</th><td class="n">6</td><td>半分以上が逃げる。満月の真夜中、朱月、新月の嵐…条件がいくつも重なったときだけ</td></tr>
-      </tbody>
-    </table></div>
-    <p class="note">大きさ（cm）が記録され、種類ごとの最大が「灯原一」として図鑑に残ります。「主の竿」を覚えると、倍の大きさの「ヌシ」もかかります。</p>
-    <p class="note cold"><b>ずるはできないようにしてあります。</b>放置（視点が5分動かない）中は育たず、灯魚もかかりません。自分で置いたブロックや、石の製造機、同じ場所を回る・瞬間移動では経験値が入りません。保護された場所では技も働きません。</p>
-  </div>
-</section>
 
 <section class="stratum s-stone" id="more">
   <div class="edge"></div>
@@ -613,6 +570,297 @@ guide = sub_hero("guide.html", "遊び方", "灯りを置き、つなぎ、夜�
   </div>
 </section>
 '''
+
+import re as _re
+
+# ───────────────────────── 遊び方：章立て ─────────────────────────
+# 遊び方は「目次（guide.html）」と、章ごとのページ（guide-○○.html）に分ける。
+
+# 章のドット絵（16×16。# は線、o は章の色でともる部分）
+CH_ICONS = {
+    "lantern": ICONS["index.html"],
+    "night": ["................", "..........o.....", ".........ooo....", "....###...o.....", "...#ooo#........", "..#oo##.........", "..#o#...........", ".#oo#...........", ".#oo#.......o...", ".#oo#...........", "..#o#...........", "..#oo##.........", "...#ooo##.......", "....#####.......", "................", "................"],
+    "higui": ["................", "....########....", "...#oooooooo#...", "...#o##oo##o#...", "...#o##oo##o#...", "...#oooooooo#...", "...#ooo##ooo#...", "....#oooooo#....", ".....######.....", "....########....", "...##########...", "...##########...", "...##.####.##...", "...##.####.##...", "...##......##...", "................"],
+    "buff": ["................", ".......##.......", "......#oo#......", ".....#oooo#.....", "....#oooooo#....", "...#oooooooo#...", "..#oooooooooo#..", "..############..", "...#oooooooo#...", "....#oooooo#....", ".....#oooo#.....", "......#oo#......", ".......##.......", "................", "................", "................"],
+    "hiwaza": ["................", "..####....####..", "..#oo#....#oo#..", "..#oo#....#oo#..", "..####....####..", "....#......#....", "....#......#....", "....########....", ".......#........", ".......#........", "......####......", "......#oo#......", "......#oo#......", "......####......", "................", "................"],
+    "fish": ["................", "................", "................", "......#####.....", "....##ooooo##...", "...#ooooooooo#.#", "..#o#oooooooo###", "..#ooooooooooo##", "..#ooooooooooo##", "...#ooooooooo#.#", "....##ooooo##...", "......#####.....", "................", "................", "................", "................"],
+    "akashi": ["................", "...##......##...", "....##....##....", ".....##..##.....", "......####......", ".....######.....", "....#oooooo#....", "...#oooooooo#...", "...#ooo##ooo#...", "...#oo####oo#...", "...#ooo##ooo#...", "...#oooooooo#...", "....#oooooo#....", ".....######.....", "................", "................"],
+    "more": ["................", ".......##.......", "..##########....", "..#oooooooo##...", "..#oooooooo###..", "..#oooooooo##...", "..##########....", ".......##.......", "....##########..", "...##oooooooo#..", "..###oooooooo#..", "...##oooooooo#..", "....##########..", ".......##.......", ".......##.......", "......####......"],
+}
+
+
+def pix(rows, cls="ch-ic"):
+    r = []
+    for y, row in enumerate(rows):
+        x = 0
+        while x < len(row):
+            ch = row[x]
+            if ch == ".":
+                x += 1
+                continue
+            w = 1
+            while x + w < len(row) and row[x + w] == ch:
+                w += 1
+            r.append(f'<rect x="{x}" y="{y}" width="{w}" height="1" class="{"l" if ch == "o" else "s"}"/>')
+            x += w
+    return f'<svg class="{cls}" viewBox="0 0 16 16" aria-hidden="true">' + "".join(r) + "</svg>"
+
+
+# 章の一覧（読む順）。layer は目次での区切り。
+CH = [
+    {"id": "lantern", "t": "灯籠と灯路", "c": "#F2B544", "layer": 0, "sec": ["lantern"],
+     "sum": "置いた場所だけが安全になる。つなぐほど、格が上がる。", "facts": ["守り 半径10〜16", "16ブロックでつながる", "格は4段"],
+     "desc": "灯籠を置くとそこが安全になる。灯路でつなぎ、灯路網の格を上げる。作り方と置くときのきまり。"},
+    {"id": "night", "t": "長い夜", "c": "#9C8CFF", "layer": 0, "sec": ["night"],
+     "sum": "昼は4分、夜は24分。夜を重ねるほど、敵は強くなる。", "facts": ["夜 24分", "敵の体力 ×2.5", "7夜に一度の朱月"],
+     "desc": "昼4分・夜24分の灯原の夜。夜に湧く敵の強さ、精鋭と群れ、朱月の夜。"},
+    {"id": "higui", "t": "灯喰い", "c": "#E0453A", "layer": 0, "sec": ["higui"],
+     "sum": "灯りの守りを破る、ただひとつの敵。人ではなく灯籠を狙う。", "facts": ["灯籠だけを狙う", "喰い終わるまで 5秒〜", "夜明けに火が戻る"],
+     "desc": "灯籠を喰いに来る灯喰い。狙われる灯籠、喰い終わるまでの時間、守り方と灯し直し方。"},
+    {"id": "buff", "t": "加護と欠片", "c": "#6FD39A", "layer": 1, "sec": ["buff"],
+     "sum": "敵が落とす欠片で、灯りの中だけで働く加護を解放する。", "facts": ["8つの加護", "Lv3 まで", "格とのかけ算"],
+     "desc": "欠片が落ちる確率、解放に要る数、8つの加護。灯路網の格とのかけ算。"},
+    {"id": "hiwaza", "t": "灯技", "c": "#5AAAFF", "layer": 1, "sec": [],
+     "sum": "遊ぶほど育つ10の道。技点で130の技を覚える。", "facts": ["10の道", "130の技", "今日の務め"],
+     "desc": "灯技（ひわざ）。10の道・130の技、技の木の見方、灯力、主技と副技、今日の務めと極み。"},
+    {"id": "fish", "t": "灯魚", "c": "#4FD8C8", "layer": 1, "sec": [],
+     "sum": "時と場所と月でかわる、106種の魚。珍しいほど逃げる。", "facts": ["106種", "5つの珍しさ", "ヌシ"],
+     "desc": "灯魚（ひうお）106種。珍しさ、かかる条件（水辺・時刻・天気・月・季節・朱月・灯り）、図鑑と灯原一。"},
+    {"id": "akashi", "t": "灯の証", "c": "#F29BB8", "layer": 2, "sec": ["akashi"],
+     "sum": "この世界で過ごしたことが、そのまま証になる。", "facts": ["263の証", "位階10段", "称号69種"],
+     "desc": "灯原だけの進捗「灯の証」263個。難度、段と秘められた証、報酬、証点と位階。"},
+    {"id": "more", "t": "灯標・色・招待", "c": "#C9D0DC", "layer": 2, "sec": ["more"],
+     "sum": "名前をつけて行き来し、灯りの色を変え、友を呼ぶ。", "facts": ["灯渡り 3秒", "灯りの色 17色", "招待コード"],
+     "desc": "灯標と灯渡り、仲間、17の灯りの色の手に入れ方、友達の招待のしかた。"},
+]
+LAYERS = [("第一層", "はじめに知ること", "ここまで読めば、最初の夜を越えられます。"),
+          ("第二層", "強くなる", "慣れてきたら。育てるほど、暮らしが楽になります。"),
+          ("第三層", "残す・つなぐ", "長く遊ぶほど、残るものがふえます。")]
+
+_SEC = {m.group(1): m.group(0) for m in _re.finditer(r'<section class="stratum[^"]*" id="(\w+)">.*?\n</section>', _guide_src, _re.S)}
+
+
+def _clean(sec):
+    sec = _re.sub(r'\n\s*<p class="depth">\d+</p>', "", sec)
+    if '<div class="edge">' not in sec[:200]:
+        sec = sec.replace(">\n  <div class=\"wrap\">", ">\n  <div class=\"edge\"></div>\n  <div class=\"wrap\">", 1)
+    return sec
+
+
+# ── 灯技の章 ──
+_PATHS = [
+    ("灯", "灯の道", "#FFAA00", "灯籠を置く・守る・灯し直す、灯喰いを倒す", ["手灯り", "仮灯（闇に一時の結界）", "灯路の足", "見回り"], "灯の化身"),
+    ("夜", "夜の道", "#B46CFF", "夜を越える、闇で過ごす", ["夜目", "梟の耳（背後の敵）", "影渡り", "帰り火（家へ帰る）"], "静夜"),
+    ("掘", "掘の道", "#55FFFF", "石・鉱石を掘る", ["灯脈掘り（まとめ掘り）", "鉱石の灯視", "灯の熱（その場で精錬）", "3×3 掘り"], "地脈の声"),
+    ("樵", "樵の道", "#55FF55", "木を切る", ["一本切り", "巨木切り", "苗木植え", "まとめ剥ぎ"], "森の主"),
+    ("耕", "耕の道", "#FFFF55", "実った作物を収穫する", ["7×7 の一斉収穫", "種まき 5×5", "自動植え直し", "上物が採れる"], "灯の恵み"),
+    ("釣", "釣の道", "#3CC8C8", "魚を釣る", ["早釣り", "魚読み（釣れる灯魚の数）", "撒き餌（みんなに効く）", "魚拓"], "主の竿"),
+    ("匠", "匠の道", "#FF55FF", "作る、かまど、灯籠を作る", ["整頓", "近くの箱へまとめ入れ", "携帯作業台", "背負い籠"], "灯の手入れ"),
+    ("旅", "旅の道", "#FFFFFF", "遠くへ行く、新しい土地を訪れる", ["健脚", "段差越え", "受け身（落下 −75%）", "灯の翼（滑空の加速）"], "疾風"),
+    ("牧", "牧の道", "#FF5555", "殖やす、手なずける、毛を刈る", ["双子", "群れ刈り", "まとめ餌やり", "呼び笛"], "牧の主"),
+    ("術", "術の道", "#7C7CFF", "付呪、醸造、経験値を集める", ["経験の灯（+30%）", "魂の残り火", "金床の名人", "灯矢（光の矢）"], "灯の賢者"),
+]
+
+
+def _tree_demo():
+    # 技の木の見方：4つの枝 × 3つの段 ＋ 奥義。状態の印を実物どおりに並べる
+    st = [["ok", "ok", "go", "no"], ["ok", "go", "lock", "lock"], ["go", "lock", "lock", "lock"]]
+    mark = {"ok": "✔", "go": "▶", "no": "・", "lock": "✖"}
+    rows = ""
+    for t in range(3):
+        cells = "".join(f'<span class="tc {st[t][b]}"><i>{mark[st[t][b]]}</i></span>' for b in range(4))
+        rows += f'<div class="tr"><span class="tl dot">{["一の段", "二の段", "三の段"][t]}</span>{cells}</div>'
+    head = '<div class="tr th"><span class="tl"></span>' + "".join(f'<span class="tb dot">枝{n}</span>' for n in "一二三四") + "</div>"
+    return f'''<div class="tree" role="img" aria-label="技の木の見本。4つの枝と3つの段、その下に奥義。">
+      {head}{rows}
+      <div class="tr cap"><span class="tl dot">奥義</span><span class="tc lock wide"><i>✖</i><em>三の段を2つ覚えると開く</em></span></div>
+    </div>'''
+
+
+def _hiwaza_sec():
+    cards = "".join(f'''<div class="path" style="--c:{c}">
+        <h3><span class="k">{k}</span><span class="disp">{name}</span></h3>
+        <p class="grow">育つこと：{grow}</p>
+        <ul>{"".join(f"<li>{x}</li>" for x in ex)}</ul>
+        <p class="cap">奥義 <b>{cap}</b></p>
+      </div>''' for k, name, c, grow, ex, cap in _PATHS)
+    return f'''<section class="stratum s-deep" id="hiwaza">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">遊ぶほど、技が身につく。</h2>
+    <p class="lead"><span class="kbd">/waza</span> で開きます。掘る、切る、耕す、釣る、作る、旅をする、動物と暮らす、付呪する、灯籠を守る、夜を越える。遊んだ道の Lv が上がり（最大50）、Lv が1上がるごとに技点が1。技点で技を覚えます。戦うための技は少しだけで、ほとんどは暮らしと夜を越えるための技です。</p>
+    <div class="paths">{cards}</div>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="tree">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">技の木の見方。</h2>
+    <p class="lead">どの道も同じ形です。4つの「枝」に3つの「段」、いちばん下に「奥義」。上の段を覚えると、その下の段が開きます。下の段ほど強く、覚えたときの演出も派手になります。</p>
+    <div class="demo-tree">
+      {_tree_demo()}
+      <dl class="marks">
+        <div><dt class="ok">✔</dt><dd><b>覚えた</b>技は光っています。段の強さは Ⅰ〜Ⅲ。</dd></div>
+        <div><dt class="go">▶</dt><dd><b>いま覚えられる</b>左クリックで覚えます。</dd></div>
+        <div><dt class="no">・</dt><dd><b>Lv か技点が足りない</b>道を育てると覚えられます。</dd></div>
+        <div><dt class="lock">✖</dt><dd><b>前の技が先</b>灰色で表示されます。</dd></div>
+      </dl>
+    </div>
+    <div class="three">
+      <div><h3 class="h3 disp"><span class="tag t1">〔常時〕</span></h3><p class="mu">覚えれば、いつも働く技。速く歩ける、経験値が増える、など。</p></div>
+      <div><h3 class="h3 disp"><span class="tag t2">〔切替〕</span></h3><p class="mu">右クリックでオン／オフできる技。まとめ掘りや一本切りなど、いらないときは止められます。</p></div>
+      <div><h3 class="h3 disp"><span class="tag t3">〔発動〕</span></h3><p class="mu">自分で使う技。主技・副技に決めて、<b>しゃがみ2回</b>／<b>しゃがんで F</b> で呼び出します。17あります。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stratum s-stone" id="gauge">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">灯りで蓄えて、闇へ持ち出す。</h2>
+    <div class="facts">
+      <div class="fact"><p class="fact-n">灯力</p><p>使う技の力です。灯籠の灯りの中でたまり、灯路網の格が高いほど早くたまります。灯りの外ではほとんどたまりません。画面の上のバーに出ます。</p></div>
+      <div class="fact"><p class="fact-n">3<small>つ／日</small></p><p>毎日0時に「今日の務め」が3つ出ます。果たすと経験値と灯力、3つすべて果たすと加護の欠片がもらえます。</p></div>
+      <div class="fact"><p class="fact-n">★10</p><p>Lv50 を超えた経験値は「極み」の★になります。道ごとに★10まで。番付にも出ます。</p></div>
+      <div class="fact"><p class="fact-n">1<small>回目は無料</small></p><p>技は振り直せます。はじめの1回は無料、そのあとは経験値 Lv10 と24時間の待ちがかかります。</p></div>
+    </div>
+    <p class="note cold"><b>ずるはできないようにしてあります。</b>放置（視点が5分動かない）中は育ちません。自分で置いたブロック、石の製造機、同じ場所を回る・瞬間移動では経験値が入りません。保護された場所では技も働きません。</p>
+  </div>
+</section>
+'''
+
+
+# ── 灯魚の章 ──
+_RAR = [("並", 1, "#E9EEF6", 24, 0, "手がかりがすべて図鑑に出る"),
+        ("珍", 2, "#55FF55", 38, 10, "手がかりがすべて出る。1割ほど逃げる"),
+        ("稀", 3, "#55FFFF", 28, 25, "手がかりは一部だけ。4回に1回は逃げる"),
+        ("秘", 4, "#FF55FF", 10, 40, "手がかりなし。逃げると、姿と手がかりが図鑑に残る"),
+        ("幻", 5, "#FFAA00", 6, 55, "半分以上が逃げる。条件がいくつも重なったときだけ")]
+_CONDS = [("水辺", ["川", "海", "暖かい海", "冷たい海", "深い海", "沼", "マングローブ", "鍾乳洞", "繁茂した洞窟", "ディープダーク", "密林", "桜の林", "雪の地", "砂漠", "果ての地", "ほか"]),
+          ("時刻", ["昼", "夜", "夜明け", "夕暮れ", "真夜中", "真昼"]),
+          ("天気", ["晴れ", "雨", "雷雨"]),
+          ("月", ["満月", "十三夜", "半月", "三日月", "新月"]),
+          ("季節", ["春（3〜5月）", "夏（6〜8月）", "秋（9〜11月）", "冬（12〜2月）"]),
+          ("灯原だけ", ["朱月", "灯りの中", "格2〜4の灯り", "灯りの外", "深い水"])]
+
+
+def _fish_sec():
+    mx = max(r[3] for r in _RAR)
+    rows = "".join(f'''<div class="rar" style="--c:{c}">
+        <span class="rar-n"><b class="dot">{"◆" * n}<s>{"◇" * (5 - n)}</s></b><span class="disp">{name}</span></span>
+        <span class="rar-count"><span class="bar"><i style="width:{cnt / mx * 100:.0f}%"></i></span><b class="dot">{cnt}<small>種</small></b></span>
+        <span class="rar-esc"><small>逃げる</small><span class="esc">{"".join(f'<i class="{"on" if k < esc // 10 else ""}"></i>' for k in range(6))}</span><b class="dot">{esc}%</b></span>
+        <p>{txt}</p>
+      </div>''' for name, n, c, cnt, esc, txt in _RAR)
+    conds = "".join(f'<div class="cond"><dt class="dot">{k}</dt><dd>{"".join(f"<span>{x}</span>" for x in v)}</dd></div>' for k, v in _CONDS)
+    return f'''<section class="stratum s-deep" id="fish">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">同じ場所でも、時がちがえば別の魚。</h2>
+    <p class="lead">釣りをしていると、ふつうの魚の代わりに「灯魚（ひうお）」がかかります。全部で106種。どこで、いつ、どんな空の下で釣るかで、かかる顔ぶれが変わります。</p>
+    <div class="rars">{rows}</div>
+    <p class="mu" style="font-size:14px;margin-top:12px">逃げる確率は、釣の道「糸さばき」でさげられます。大きな灯りの中で釣ると、少し逃げにくくなります。</p>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="conds">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">かかる魚を決めるもの。</h2>
+    <p class="lead">灯魚にはそれぞれ条件があります。珍しい魚ほど、いくつもの条件が重なったときにしか現れません。季節は、現実の日本の暦です。</p>
+    <dl class="conds">{conds}</dl>
+    <div class="three">
+      <div><h3 class="h3 disp">図鑑と灯原一</h3><p class="mu"><span class="kbd">/waza fish</span> で図鑑が開きます。川・海・沼・地底・野山・特別のつまみで分かれ、釣った・影だけ見た・まだ、の3つの状態で並びます。大きさ（cm）が記録され、種類ごとのいちばん大きな記録が「灯原一」として残ります。</p></div>
+      <div><h3 class="h3 disp">魚読み</h3><p class="mu">釣の道の「魚読み」を覚えると、竿を投げたとき、その場・その時に釣れる灯魚が何種いて、まだ図鑑にないものがいくつあるかがわかります。</p></div>
+      <div><h3 class="h3 disp">ヌシ</h3><p class="mu">釣の道の奥義「主の竿」を覚えると、倍ほどの大きさの「ヌシ」がかかります。秘と幻、そしてヌシを釣り上げると、全体に知らされます。</p></div>
+    </div>
+    <p class="note cold"><b>放置した釣り場では、灯魚はかかりません。</b>視点が5分動かないあいだは、灯魚も経験値も出ません。</p>
+  </div>
+</section>
+'''
+
+
+def _body(k):
+    c = CH[k]
+    if c["id"] == "hiwaza":
+        return _hiwaza_sec()
+    if c["id"] == "fish":
+        return _fish_sec()
+    return "\n".join(_clean(_SEC[s]) for s in c["sec"])
+
+
+def _rail(cur):
+    return '<nav class="rail" aria-label="章">' + "".join(
+        f'<a href="guide-{c["id"]}.html" style="--rc:{c["c"]}" title="{i + 1:02d} {c["t"]}"{" aria-current=\"page\"" if i == cur else ""}><span class="dot">{i + 1:02d}</span><span class="rail-t">{c["t"]}</span></a>'
+        for i, c in enumerate(CH)) + "</nav>"
+
+
+def chapter_page(k):
+    c = CH[k]
+    prev = CH[k - 1] if k > 0 else None
+    nxt = CH[k + 1] if k + 1 < len(CH) else None
+    hero = f'''<div class="hero ch-hero" style="--c:{c["c"]}">
+  <div class="sky"></div><div class="stars" aria-hidden="true"></div>
+  <div class="wrap phead" id="content">
+    <nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><span>第{k + 1}章</span></nav>
+    <div class="ch-head">{pix(CH_ICONS[c["id"]], "ch-ic big")}<div><p class="ch-big dot">CHAPTER {k + 1:02d} ／ {len(CH):02d}</p><h1 class="disp h1-sub">{c["t"]}</h1></div></div>
+    <p class="lead">{c["sum"]}</p>
+    {_rail(k)}
+  </div>
+</div>'''
+
+    def pg(x, i, cls, label):
+        if x is None:
+            return f'<a href="guide.html" class="pg {cls}" style="--c:var(--amber)"><small class="dot">{label}</small><b>目次にもどる</b><span class="mu">8つの章の一覧へ</span></a>'
+        return f'<a href="guide-{x["id"]}.html" class="pg {cls}" style="--c:{x["c"]}"><small class="dot">{label} {i + 1:02d}</small><b>{x["t"]}</b><span class="mu">{x["sum"]}</span></a>'
+
+    pager = f'''<section class="stratum s-rock pager-s">
+  <div class="edge"></div>
+  <div class="wrap">
+    <nav class="pager" aria-label="前後の章">{pg(prev, k - 1, "prev", "← 前の章")}{pg(nxt, k + 1, "next", "次の章 →")}</nav>
+    <p class="pager-toc"><a href="guide.html" class="gbtn sm">≡ 遊び方の目次</a></p>
+  </div>
+</section>'''
+    return hero + "\n" + _body(k) + "\n" + pager
+
+
+def _guide_index():
+    layers = ""
+    for li, (no, name, note) in enumerate(LAYERS):
+        cards = ""
+        for k, c in enumerate(CH):
+            if c["layer"] != li:
+                continue
+            cards += f'''<a href="guide-{c["id"]}.html" class="ch" style="--c:{c["c"]}">
+        <span class="ch-top"><span class="ch-no">{k + 1:02d}</span>{pix(CH_ICONS[c["id"]])}</span>
+        <h3 class="disp">{c["t"]}</h3>
+        <p>{c["sum"]}</p>
+        <ul>{"".join(f"<li>{x}</li>" for x in c["facts"])}</ul>
+        <span class="ch-go">読む<i></i></span>
+      </a>'''
+        layers += f'''<div class="glayer">
+      <div class="layer-h"><span class="dot">{no}</span><h2 class="disp">{name}</h2><p>{note}</p></div>
+      <div class="chs">{cards}</div>
+    </div>'''
+    return f'''<div class="hero">
+  <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
+  <div class="wrap phead" id="content">
+    <h1 class="disp h1-sub">遊び方</h1>
+    <p class="lead">灯りを置き、つなぎ、夜から守り、育てて、残す。灯原のしくみを8つの章にまとめました。気になる章から開いてください。</p>
+    {_rail(-1)}
+  </div>
+</div>
+<section class="stratum s-deep gi">
+  <div class="edge"></div>
+  <div class="wrap">
+    <div class="gi-start">{pix(CH_ICONS["lantern"], "ch-ic lit")}<p><b>はじめての人は、第一層の3章だけで大丈夫です。</b>灯籠を置き、夜を知り、灯喰いから守れれば、最初の夜は越えられます。ほかの章は、遊びながらでどうぞ。</p><a href="guide-lantern.html" class="pbtn">第1章から読む</a></div>
+    {layers}
+  </div>
+</section>'''
+
+
+guide = _guide_index()
 
 # ───────────────────────── 夜祭 ─────────────────────────
 events = f'''<div class="hero">
@@ -803,7 +1051,8 @@ notfound = f'''<div class="hero" style="min-height:70svh">
 PAGES = [
     ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1は2026年11月7日21時開幕。", index),
     ("start.html", "はじめる｜灯原", "灯原への入り方を機種別に。Java版、スマホ、Windows、Switch・PS・Xbox。最初の夜の過ごし方と、よくある質問。", start),
-    ("guide.html", "遊び方｜灯原", "灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、欠片で解放する8つの加護、263の進捗「灯の証」、10の道・130の技と106種の灯魚「灯技」。灯原のしくみ。", guide),
+    ("guide.html", "遊び方｜灯原", "灯原のしくみを8つの章で。灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、8つの加護、10の道・130の技「灯技」、106種の灯魚、263の進捗「灯の証」、灯標と灯りの色。", guide),
+] + [(f"guide-{c['id']}.html", f"{c['t']}｜遊び方｜灯原", c['desc'], chapter_page(k)) for k, c in enumerate(CH)] + [
     ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり4種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。", events),
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
@@ -873,7 +1122,7 @@ def finish(html):
 for f, t, d, b in PAGES:
     (out / f).write_text(finish(page(f, t, d, b)), encoding="utf-8")
 today = datetime.date.today().isoformat()
-(out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE}/{'' if f == 'index.html' else f}</loc><lastmod>{today}</lastmod></url>\n" for f, *_ in PAGES[:5]) + "</urlset>\n", encoding="utf-8")
+(out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE}/{'' if f == 'index.html' else f}</loc><lastmod>{today}</lastmod></url>\n" for f, *_ in PAGES if f != "404.html") + "</urlset>\n", encoding="utf-8")
 (out / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")
 # 独自ドメインを使うときは、GitHub の Settings → Pages の Custom domain に入れる（CNAME はそこで自動で作られる）
 print("built", len(PAGES))
