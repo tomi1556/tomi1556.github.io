@@ -1,0 +1,5494 @@
+{
+ "maxLevel": 50,
+ "starNeed": 20000,
+ "maxStar": 10,
+ "dailyXp": 4000,
+ "overflow": 0.1,
+ "bankDays": 3,
+ "chainXp": 0.5,
+ "capNeeds": 2,
+ "need": [
+  0,
+  132,
+  168,
+  210,
+  256,
+  308,
+  365,
+  429,
+  499,
+  576,
+  660,
+  752,
+  852,
+  960,
+  1077,
+  1203,
+  1338,
+  1483,
+  1638,
+  1804,
+  1980,
+  2168,
+  2367,
+  2578,
+  2801,
+  3038,
+  3287,
+  3549,
+  3825,
+  4115,
+  4420,
+  4739,
+  5074,
+  5424,
+  5790,
+  6173,
+  6571,
+  6987,
+  7420,
+  7871,
+  8340,
+  8827,
+  9333,
+  9858,
+  10403,
+  10968,
+  11552,
+  12157,
+  12784,
+  13431,
+  0
+ ],
+ "total": [
+  0,
+  0,
+  132,
+  300,
+  510,
+  766,
+  1074,
+  1439,
+  1868,
+  2367,
+  2943,
+  3603,
+  4355,
+  5207,
+  6167,
+  7244,
+  8447,
+  9785,
+  11268,
+  12906,
+  14710,
+  16690,
+  18858,
+  21225,
+  23803,
+  26604,
+  29642,
+  32929,
+  36478,
+  40303,
+  44418,
+  48838,
+  53577,
+  58651,
+  64075,
+  69865,
+  76038,
+  82609,
+  89596,
+  97016,
+  104887,
+  113227,
+  122054,
+  131387,
+  141245,
+  151648,
+  162616,
+  174168,
+  186325,
+  199109,
+  212540
+ ],
+ "paths": [
+  {
+   "id": "light",
+   "k": "灯",
+   "name": "灯の道",
+   "rgb": [
+    255,
+    176,
+    64
+   ],
+   "icon": "LANTERN",
+   "desc": [
+    "灯籠と灯りを扱う道。",
+    "灯籠を置く・守る・灯し直す、灯りの中で夜を過ごす、灯喰いを倒すと育つ。"
+   ],
+   "branches": [
+    "手灯",
+    "守り",
+    "灯渡り",
+    "灯喰い"
+   ],
+   "cost": 42,
+   "trial": "灯喰いを30体倒す",
+   "trialGoal": 30,
+   "trialTomo": true,
+   "nodes": [
+    {
+     "id": "hand",
+     "name": "手灯り",
+     "branch": 0,
+     "tier": 1,
+     "kind": 1,
+     "icon": "TORCH",
+     "req": [
+      1,
+      8,
+      16
+     ],
+     "cost": [
+      1,
+      1,
+      2
+     ],
+     "effect": [
+      "明るさ 8",
+      "明るさ 11",
+      "明るさ 14"
+     ],
+     "desc": [
+      "灯りになる物（松明・ランタン・灯籠・",
+      "グロウストーンなど）を手に持つと、",
+      "まわりが明るくなる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "kari",
+     "name": "仮灯（かりび）",
+     "branch": 0,
+     "tier": 2,
+     "kind": 2,
+     "icon": "SOUL_LANTERN",
+     "req": [
+      6,
+      16,
+      26
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "半径5・45秒",
+      "半径6・60秒",
+      "半径8・90秒"
+     ],
+     "desc": [
+      "灯力を使い、闇に一時の結界を張る。",
+      "中には敵が入れず、中の人は狙われない。"
+     ],
+     "gauge": 40,
+     "cooldown": [
+      120,
+      100,
+      80
+     ],
+     "parent": "hand"
+    },
+    {
+     "id": "okuribi",
+     "name": "灯送り",
+     "branch": 0,
+     "tier": 3,
+     "kind": 2,
+     "icon": "END_ROD",
+     "req": [
+      20,
+      30
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "前へ24ブロック・60秒",
+      "前へ40ブロック・120秒"
+     ],
+     "desc": [
+      "見ている方へ、光の粒を飛ばして",
+      "点々と灯りを置いていく。",
+      "洞窟や夜道で。まわりの人にも見える。"
+     ],
+     "gauge": 20,
+     "cooldown": [
+      30,
+      20
+     ],
+     "parent": "kari"
+    },
+    {
+     "id": "guard",
+     "name": "灯籠の守り",
+     "branch": 1,
+     "tier": 1,
+     "kind": 0,
+     "icon": "SHIELD",
+     "req": [
+      3,
+      13,
+      23
+     ],
+     "cost": [
+      1,
+      1,
+      2
+     ],
+     "effect": [
+      "喰い終わるまで ×1.25",
+      "×1.5",
+      "×1.75"
+     ],
+     "desc": [
+      "自分の灯籠が、灯喰いに喰われにくくなる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "relight",
+     "name": "一斉灯し",
+     "branch": 1,
+     "tier": 2,
+     "kind": 0,
+     "icon": "FLINT_AND_STEEL",
+     "req": [
+      12,
+      22
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "半径8",
+      "半径16"
+     ],
+     "desc": [
+      "灯籠を灯し直すと、まわりの",
+      "消えた灯籠にも火が移る。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "guard"
+    },
+    {
+     "id": "eternal",
+     "name": "不滅の灯",
+     "branch": 1,
+     "tier": 3,
+     "kind": 0,
+     "icon": "SEA_LANTERN",
+     "req": [
+      30
+     ],
+     "cost": [
+      3
+     ],
+     "effect": [
+      "90秒で灯り直す"
+     ],
+     "desc": [
+      "自分の灯籠が喰われても、",
+      "しばらくすると、ひとりでに灯り直す。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "relight"
+    },
+    {
+     "id": "travel",
+     "name": "灯渡りの名人",
+     "branch": 2,
+     "tier": 1,
+     "kind": 0,
+     "icon": "ENDER_PEARL",
+     "req": [
+      5,
+      15
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "溜め −1秒・待ち −40%",
+      "溜め −2秒・待ち −80%"
+     ],
+     "desc": [
+      "灯渡りの溜めと、次に使えるまでの",
+      "待ち時間が短くなる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "roadspeed",
+     "name": "灯路の足",
+     "branch": 2,
+     "tier": 2,
+     "kind": 0,
+     "icon": "POWERED_RAIL",
+     "req": [
+      10,
+      24
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "灯路の上で 速さⅠ",
+      "灯路の上で 速さⅡ"
+     ],
+     "desc": [
+      "灯籠と灯籠を結ぶ灯路の上を歩くと、",
+      "足が速くなる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "travel"
+    },
+    {
+     "id": "patrol",
+     "name": "見回り",
+     "branch": 2,
+     "tier": 3,
+     "kind": 2,
+     "icon": "SOUL_TORCH",
+     "req": [
+      18
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "消えた灯籠を3分しるべる"
+     ],
+     "desc": [
+      "灯喰いに消された自分の灯籠を数え、",
+      "いちばん近い灯籠へのしるべを出す。"
+     ],
+     "gauge": 10,
+     "cooldown": [
+      20
+     ],
+     "parent": "roadspeed"
+    },
+    {
+     "id": "hunter",
+     "name": "灯喰い狩り",
+     "branch": 3,
+     "tier": 1,
+     "kind": 0,
+     "icon": "IRON_SWORD",
+     "req": [
+      4,
+      14
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "灯喰いへ +30%",
+      "灯喰いへ +60%"
+     ],
+     "desc": [
+      "灯喰いに与えるダメージが増える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "eatersense",
+     "name": "灯喰いの気配",
+     "branch": 3,
+     "tier": 2,
+     "kind": 0,
+     "icon": "ENDER_EYE",
+     "req": [
+      9
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "32ブロック以内を知らせる"
+     ],
+     "desc": [
+      "近くの灯喰いを光らせ（自分にだけ）、",
+      "近づいてくると方角を知らせる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "hunter"
+    },
+    {
+     "id": "shard",
+     "name": "喰い跡の欠片",
+     "branch": 3,
+     "tier": 3,
+     "kind": 0,
+     "icon": "AMETHYST_SHARD",
+     "req": [
+      20,
+      32
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "加護の欠片 25%",
+      "加護の欠片 50%"
+     ],
+     "desc": [
+      "灯喰いを倒すと、加護の欠片が落ちる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "eatersense"
+    },
+    {
+     "id": "avatar",
+     "name": "灯の化身",
+     "branch": -1,
+     "tier": 4,
+     "kind": 2,
+     "icon": "BEACON",
+     "req": [
+      40
+     ],
+     "cost": [
+      4
+     ],
+     "effect": [
+      "30秒"
+     ],
+     "desc": [
+      "光の柱とともに、歩く灯籠になる。",
+      "まわり6ブロックの敵を退け、灯喰いを焼く。",
+      "そのあいだ、まわりの人も灯りの中になる。"
+     ],
+     "gauge": 80,
+     "cooldown": [
+      300
+     ],
+     "parent": null
+    }
+   ]
+  },
+  {
+   "id": "night",
+   "k": "夜",
+   "name": "夜の道",
+   "rgb": [
+    150,
+    90,
+    230
+   ],
+   "icon": "BLACK_CANDLE",
+   "desc": [
+    "長い夜を生きる道。",
+    "夜を越える、闇の中で過ごす、朱月を越える、夜の精鋭を倒すと育つ。"
+   ],
+   "branches": [
+    "夜目",
+    "闇",
+    "帰り道",
+    "夜読み"
+   ],
+   "cost": 37,
+   "trial": "夜明けを30回迎える",
+   "trialGoal": 30,
+   "trialTomo": false,
+   "nodes": [
+    {
+     "id": "sight",
+     "name": "夜目",
+     "branch": 0,
+     "tier": 1,
+     "kind": 2,
+     "icon": "SPYGLASS",
+     "req": [
+      1,
+      12
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "45秒",
+      "90秒"
+     ],
+     "desc": [
+      "灯力を使い、しばらく闇でも目が利く。"
+     ],
+     "gauge": 15,
+     "cooldown": [
+      30,
+      30
+     ],
+     "parent": null
+    },
+    {
+     "id": "sense",
+     "name": "気配読み",
+     "branch": 0,
+     "tier": 2,
+     "kind": 2,
+     "icon": "SCULK_SENSOR",
+     "req": [
+      8,
+      18
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "半径24・12秒",
+      "半径40・16秒"
+     ],
+     "desc": [
+      "灯力を使い、まわりの敵の居場所に",
+      "印を浮かべる（自分にだけ見える）。"
+     ],
+     "gauge": 10,
+     "cooldown": [
+      45,
+      30
+     ],
+     "parent": "sight"
+    },
+    {
+     "id": "owl",
+     "name": "梟の耳",
+     "branch": 0,
+     "tier": 3,
+     "kind": 0,
+     "icon": "FEATHER",
+     "req": [
+      20,
+      30
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "背後8ブロック",
+      "背後14ブロック"
+     ],
+     "desc": [
+      "見えていない背後に敵が来ると、",
+      "音と矢印で知らせる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "sense"
+    },
+    {
+     "id": "quiet",
+     "name": "忍び足",
+     "branch": 1,
+     "tier": 1,
+     "kind": 0,
+     "icon": "SCULK_SHRIEKER",
+     "req": [
+      4,
+      14
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "スカルクに聞かれる音が半分",
+      "スカルクにほとんど聞かれない"
+     ],
+     "desc": [
+      "歩く・走る・掘る音を、スカルクに",
+      "聞かれにくい。古代都市を歩くときに。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "hide",
+     "name": "闇隠れ",
+     "branch": 1,
+     "tier": 2,
+     "kind": 1,
+     "icon": "BLACK_WOOL",
+     "req": [
+      10,
+      20,
+      30
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "10ブロックより遠い敵に",
+      "7ブロックより遠い敵に",
+      "4ブロックより遠い敵に"
+     ],
+     "desc": [
+      "暗がりでしゃがんでいると、",
+      "離れた敵に気づかれない。",
+      "そのあいだ、灯力が少しずつ減る。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "quiet"
+    },
+    {
+     "id": "shadow",
+     "name": "影渡り",
+     "branch": 1,
+     "tier": 3,
+     "kind": 2,
+     "icon": "CRYING_OBSIDIAN",
+     "req": [
+      24,
+      34
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "前へ6ブロック",
+      "前へ10ブロック"
+     ],
+     "desc": [
+      "暗がりの中を、見ている方へ",
+      "一瞬で渡る（壁は越えない）。"
+     ],
+     "gauge": 15,
+     "cooldown": [
+      20,
+      12
+     ],
+     "parent": "hide"
+    },
+    {
+     "id": "grave",
+     "name": "死に場所しるべ",
+     "branch": 2,
+     "tier": 1,
+     "kind": 0,
+     "icon": "RECOVERY_COMPASS",
+     "req": [
+      3,
+      13
+     ],
+     "cost": [
+      1,
+      1
+     ],
+     "effect": [
+      "倒れた場所への方角と距離が出る",
+      "落とした物が光り、消えず、燃えない"
+     ],
+     "desc": [
+      "倒れたあと、その場所へ帰るための",
+      "しるべが画面の上に出る。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "phantom",
+     "name": "幻翼除け",
+     "branch": 2,
+     "tier": 2,
+     "kind": 0,
+     "icon": "PHANTOM_MEMBRANE",
+     "req": [
+      9
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "ファントムが来ない"
+     ],
+     "desc": [
+      "眠らずに夜を越えつづけても、",
+      "ファントムに狙われない。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "grave"
+    },
+    {
+     "id": "recall",
+     "name": "帰り火",
+     "branch": 2,
+     "tier": 3,
+     "kind": 2,
+     "icon": "RESPAWN_ANCHOR",
+     "req": [
+      22,
+      34
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "次まで 20分",
+      "次まで 10分"
+     ],
+     "desc": [
+      "灯力を使い、8秒の祈りで",
+      "「帰る場所」の灯標へ帰る（なければベッド）。",
+      "動く・殴られると途切れる。"
+     ],
+     "gauge": 60,
+     "cooldown": [
+      1200,
+      600
+     ],
+     "parent": "phantom"
+    },
+    {
+     "id": "omen",
+     "name": "夜読み",
+     "branch": 3,
+     "tier": 1,
+     "kind": 0,
+     "icon": "CLOCK",
+     "req": [
+      5
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "夜明けと朱月がわかる"
+     ],
+     "desc": [
+      "日が沈むと、夜明けまでの時間と",
+      "次の朱月を教えてくれる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "moon",
+     "name": "月読み",
+     "branch": 3,
+     "tier": 2,
+     "kind": 0,
+     "icon": "DAYLIGHT_DETECTOR",
+     "req": [
+      11
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "月の満ち欠けと、今夜の灯魚"
+     ],
+     "desc": [
+      "日が沈むと、今夜の月と、",
+      "月にまつわる灯魚を教えてくれる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "omen"
+    },
+    {
+     "id": "bloodtide",
+     "name": "朱月の満ち",
+     "branch": 3,
+     "tier": 3,
+     "kind": 0,
+     "icon": "RED_CANDLE",
+     "req": [
+      26
+     ],
+     "cost": [
+      2
+     ],
+     "effect": [
+      "朱月の夜、どこでも灯力 +1/秒・上限 +50"
+     ],
+     "desc": [
+      "朱月の夜は、灯りの外でも",
+      "灯力がたまり、たくさん持てる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "moon"
+    },
+    {
+     "id": "calm",
+     "name": "静夜（せいや）",
+     "branch": -1,
+     "tier": 4,
+     "kind": 0,
+     "icon": "SOUL_CAMPFIRE",
+     "req": [
+      40
+     ],
+     "cost": [
+      4
+     ],
+     "effect": [
+      "まわり16ブロックで敵が湧きにくい（半分）"
+     ],
+     "desc": [
+      "夜、自分のまわりには",
+      "敵が半分しか湧かない。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    }
+   ]
+  },
+  {
+   "id": "mine",
+   "k": "掘",
+   "name": "掘の道",
+   "rgb": [
+    90,
+    200,
+    255
+   ],
+   "icon": "DEEPSLATE_DIAMOND_ORE",
+   "desc": [
+    "地の底を掘る道。",
+    "石や鉱石を掘ると育つ。"
+   ],
+   "branches": [
+    "灯脈",
+    "拾い",
+    "用心",
+    "坑道"
+   ],
+   "cost": 42,
+   "trial": "鉱石を3,000個掘る",
+   "trialGoal": 3000,
+   "trialTomo": false,
+   "nodes": [
+    {
+     "id": "vein",
+     "name": "灯脈掘り",
+     "branch": 0,
+     "tier": 1,
+     "kind": 1,
+     "icon": "IRON_ORE",
+     "req": [
+      1,
+      10,
+      20
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "8個まで",
+      "16個まで",
+      "32個まで"
+     ],
+     "desc": [
+      "しゃがんで鉱石を掘ると、つながった",
+      "同じ鉱石もまとめて掘る。",
+      "灯りの外では、1個ごとに灯力を1使う。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "orevision",
+     "name": "鉱石の灯視",
+     "branch": 0,
+     "tier": 2,
+     "kind": 2,
+     "icon": "AMETHYST_CLUSTER",
+     "req": [
+      8,
+      18,
+      28
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "半径5・8秒",
+      "半径7・8秒",
+      "半径9・10秒"
+     ],
+     "desc": [
+      "灯力を使い、近くの鉱石を",
+      "壁ごしに光らせる（自分にだけ見える）。"
+     ],
+     "gauge": 15,
+     "cooldown": [
+      60,
+      45,
+      30
+     ],
+     "parent": "vein"
+    },
+    {
+     "id": "luck",
+     "name": "鉱運",
+     "branch": 0,
+     "tier": 3,
+     "kind": 0,
+     "icon": "EMERALD",
+     "req": [
+      22,
+      30,
+      38
+     ],
+     "cost": [
+      2,
+      2,
+      3
+     ],
+     "effect": [
+      "10%で1つ多い",
+      "20%で1つ多い",
+      "30%で1つ多い"
+     ],
+     "desc": [
+      "掘った鉱石の落とす物が、",
+      "ときどき1つ多くなる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "orevision"
+    },
+    {
+     "id": "pickup",
+     "name": "拾い集め",
+     "branch": 1,
+     "tier": 1,
+     "kind": 1,
+     "icon": "HOPPER",
+     "req": [
+      3,
+      12
+     ],
+     "cost": [
+      1,
+      1
+     ],
+     "effect": [
+      "掘った物が直接入る",
+      "＋丸石や土を拾わない設定"
+     ],
+     "desc": [
+      "つるはし・シャベルで掘った物が、",
+      "直接持ち物に入る。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "smelt",
+     "name": "灯の熱",
+     "branch": 1,
+     "tier": 2,
+     "kind": 1,
+     "icon": "BLAST_FURNACE",
+     "req": [
+      15
+     ],
+     "cost": [
+      2
+     ],
+     "effect": [
+      "鉄・金・銅・古代の残骸"
+     ],
+     "desc": [
+      "掘った鉱石が、その場で溶けて塊になる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "pickup"
+    },
+    {
+     "id": "orexp",
+     "name": "灯の経験",
+     "branch": 1,
+     "tier": 3,
+     "kind": 0,
+     "icon": "LAPIS_LAZULI",
+     "req": [
+      24,
+      34
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "鉱石の経験値 ×1.5",
+      "×2"
+     ],
+     "desc": [
+      "鉱石から出る経験値が増える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "smelt"
+    },
+    {
+     "id": "care",
+     "name": "道具の労わり",
+     "branch": 2,
+     "tier": 1,
+     "kind": 0,
+     "icon": "DAMAGED_ANVIL",
+     "req": [
+      4,
+      14,
+      24
+     ],
+     "cost": [
+      1,
+      1,
+      2
+     ],
+     "effect": [
+      "15%",
+      "30%",
+      "45%"
+     ],
+     "desc": [
+      "つるはし・シャベルの耐久が、",
+      "ときどき減らない。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "lava",
+     "name": "溶岩の気配",
+     "branch": 2,
+     "tier": 2,
+     "kind": 1,
+     "icon": "LAVA_BUCKET",
+     "req": [
+      7
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "知らせて止める"
+     ],
+     "desc": [
+      "掘ろうとした先に溶岩があると、",
+      "1度だけ止めて知らせる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "care"
+    },
+    {
+     "id": "footing",
+     "name": "足元の気配",
+     "branch": 2,
+     "tier": 3,
+     "kind": 1,
+     "icon": "SCAFFOLDING",
+     "req": [
+      16
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "落ちそうなら止める"
+     ],
+     "desc": [
+      "足もとを掘って、深い穴や溶岩へ",
+      "落ちそうなときは、1度だけ止める。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "lava"
+    },
+    {
+     "id": "rhythm",
+     "name": "掘り勢い",
+     "branch": 3,
+     "tier": 1,
+     "kind": 0,
+     "icon": "GOLDEN_PICKAXE",
+     "req": [
+      5,
+      15,
+      25
+     ],
+     "cost": [
+      1,
+      1,
+      2
+     ],
+     "effect": [
+      "石を8個続けて 勢いⅠ",
+      "5個続けて 勢いⅠ",
+      "5個続けて 勢いⅡ"
+     ],
+     "desc": [
+      "石を続けて掘ると調子が乗り、",
+      "しばらく掘る速さが上がる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "torch",
+     "name": "灯置き",
+     "branch": 3,
+     "tier": 2,
+     "kind": 1,
+     "icon": "TORCH",
+     "req": [
+      12
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "暗い所で松明を置く"
+     ],
+     "desc": [
+      "つるはしで掘っているとき、",
+      "足もとが暗ければ持っている松明を置く。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "rhythm"
+    },
+    {
+     "id": "tunnel",
+     "name": "坑道掘り",
+     "branch": 3,
+     "tier": 3,
+     "kind": 1,
+     "icon": "DEEPSLATE",
+     "req": [
+      30
+     ],
+     "cost": [
+      3
+     ],
+     "effect": [
+      "3×3"
+     ],
+     "desc": [
+      "しゃがんで石を掘ると、",
+      "3×3 をまとめて掘る（鉱石は含まない）。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "torch"
+    },
+    {
+     "id": "earth",
+     "name": "地脈の声",
+     "branch": -1,
+     "tier": 4,
+     "kind": 0,
+     "icon": "DIAMOND",
+     "req": [
+      40
+     ],
+     "cost": [
+      4
+     ],
+     "effect": [
+      "半径12のダイヤ・エメラルド・残骸"
+     ],
+     "desc": [
+      "地の下でつるはしを持っていると、",
+      "近くの宝の鉱石の気配を、",
+      "方角と音で知らせる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    }
+   ]
+  },
+  {
+   "id": "wood",
+   "k": "樵",
+   "name": "樵の道",
+   "rgb": [
+    110,
+    210,
+    90
+   ],
+   "icon": "OAK_LOG",
+   "desc": [
+    "木を切る道。",
+    "木を切ると育つ。"
+   ],
+   "branches": [
+    "倒す",
+    "運ぶ",
+    "植える",
+    "刃"
+   ],
+   "cost": 40,
+   "trial": "原木を8,000本切る",
+   "trialGoal": 8000,
+   "trialTomo": false,
+   "nodes": [
+    {
+     "id": "feller",
+     "name": "一本切り",
+     "branch": 0,
+     "tier": 1,
+     "kind": 1,
+     "icon": "OAK_LOG",
+     "req": [
+      1,
+      10,
+      20
+     ],
+     "cost": [
+      1,
+      2,
+      3
+     ],
+     "effect": [
+      "32本まで",
+      "64本まで",
+      "128本まで"
+     ],
+     "desc": [
+      "しゃがんで幹を切ると、",
+      "木を丸ごと切り倒す。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "giant",
+     "name": "巨木切り",
+     "branch": 0,
+     "tier": 2,
+     "kind": 0,
+     "icon": "JUNGLE_LOG",
+     "req": [
+      18
+     ],
+     "cost": [
+      3
+     ],
+     "effect": [
+      "上限 256本"
+     ],
+     "desc": [
+      "大きな木や巨大キノコも、",
+      "一本切りで倒せる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "feller"
+    },
+    {
+     "id": "richwood",
+     "name": "豊かな森",
+     "branch": 0,
+     "tier": 3,
+     "kind": 0,
+     "icon": "OAK_WOOD",
+     "req": [
+      26,
+      36
+     ],
+     "cost": [
+      2,
+      3
+     ],
+     "effect": [
+      "10本ごとに1本多い",
+      "5本ごとに1本多い"
+     ],
+     "desc": [
+      "一本切りで倒した木から、",
+      "丸太が多く取れる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "giant"
+    },
+    {
+     "id": "haul",
+     "name": "木の運び",
+     "branch": 1,
+     "tier": 1,
+     "kind": 1,
+     "icon": "CHEST",
+     "req": [
+      3
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "直接入る"
+     ],
+     "desc": [
+      "切った木が、直接持ち物に入る。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "leaves",
+     "name": "葉払い",
+     "branch": 1,
+     "tier": 2,
+     "kind": 1,
+     "icon": "OAK_LEAVES",
+     "req": [
+      10
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "すぐに散る"
+     ],
+     "desc": [
+      "切り倒した木の葉が、すぐに散る。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "haul"
+    },
+    {
+     "id": "leafgift",
+     "name": "葉の恵み",
+     "branch": 1,
+     "tier": 3,
+     "kind": 0,
+     "icon": "APPLE",
+     "req": [
+      20,
+      30
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "棒・リンゴ 10%",
+      "棒・リンゴ 20%"
+     ],
+     "desc": [
+      "散った葉から、棒やリンゴが",
+      "多く落ちる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "leaves"
+    },
+    {
+     "id": "sapling",
+     "name": "苗木植え",
+     "branch": 2,
+     "tier": 1,
+     "kind": 1,
+     "icon": "OAK_SAPLING",
+     "req": [
+      4
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "植え直す"
+     ],
+     "desc": [
+      "切り倒した跡に、持っている苗木を植える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "bark",
+     "name": "樹皮を守る",
+     "branch": 2,
+     "tier": 2,
+     "kind": 1,
+     "icon": "STRIPPED_OAK_LOG",
+     "req": [
+      8
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "うっかり剥がさない"
+     ],
+     "desc": [
+      "しゃがんでいないときは、",
+      "斧で丸太の皮を剥がさない。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "sapling"
+    },
+    {
+     "id": "grower",
+     "name": "森の育て手",
+     "branch": 2,
+     "tier": 3,
+     "kind": 0,
+     "icon": "BONE_MEAL",
+     "req": [
+      22,
+      32
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "20秒ごとに苗木2本",
+      "20秒ごとに苗木4本"
+     ],
+     "desc": [
+      "まわりの苗木が、早く育つ。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "bark"
+    },
+    {
+     "id": "axecare",
+     "name": "斧の労わり",
+     "branch": 3,
+     "tier": 1,
+     "kind": 0,
+     "icon": "GRINDSTONE",
+     "req": [
+      4,
+      14,
+      24
+     ],
+     "cost": [
+      1,
+      1,
+      2
+     ],
+     "effect": [
+      "15%",
+      "30%",
+      "45%"
+     ],
+     "desc": [
+      "斧の耐久が、ときどき減らない。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "stripall",
+     "name": "まとめ剥ぎ",
+     "branch": 3,
+     "tier": 2,
+     "kind": 1,
+     "icon": "IRON_AXE",
+     "req": [
+      12
+     ],
+     "cost": [
+      2
+     ],
+     "effect": [
+      "つながった丸太32本まで"
+     ],
+     "desc": [
+      "しゃがんで斧で皮を剥ぐと、",
+      "つながった丸太もまとめて剥ぐ。",
+      "（建築の柱づくりに）"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "axecare"
+    },
+    {
+     "id": "sap",
+     "name": "木霊の灯",
+     "branch": 3,
+     "tier": 3,
+     "kind": 0,
+     "icon": "HONEY_BOTTLE",
+     "req": [
+      28
+     ],
+     "cost": [
+      3
+     ],
+     "effect": [
+      "倒した幹1本ごとに灯力 +1"
+     ],
+     "desc": [
+      "木を倒すと、木霊の灯が宿り、",
+      "灯力がたまる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "stripall"
+    },
+    {
+     "id": "forestlord",
+     "name": "森の主",
+     "branch": -1,
+     "tier": 4,
+     "kind": 0,
+     "icon": "AZALEA",
+     "req": [
+      40
+     ],
+     "cost": [
+      5
+     ],
+     "effect": [
+      "葉が一瞬で散り、落ちた物は持ち物へ"
+     ],
+     "desc": [
+      "一本切りで倒した木の葉は一瞬で散り、",
+      "苗木・リンゴ・棒はすべて持ち物に入る。",
+      "巨木の跡には、苗木を4本植える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    }
+   ]
+  },
+  {
+   "id": "farm",
+   "k": "耕",
+   "name": "耕の道",
+   "rgb": [
+    250,
+    220,
+    80
+   ],
+   "icon": "WHEAT",
+   "desc": [
+    "畑を耕す道。",
+    "実った作物を収穫すると育つ。"
+   ],
+   "branches": [
+    "収穫",
+    "種",
+    "土",
+    "台所"
+   ],
+   "cost": 44,
+   "trial": "作物を15,000株収穫する",
+   "trialGoal": 15000,
+   "trialTomo": false,
+   "nodes": [
+    {
+     "id": "harvest",
+     "name": "一斉収穫",
+     "branch": 0,
+     "tier": 1,
+     "kind": 0,
+     "icon": "GOLDEN_HOE",
+     "req": [
+      1,
+      10,
+      20
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "3×3",
+      "5×5",
+      "7×7"
+     ],
+     "desc": [
+      "実った作物をクワで右クリックすると、",
+      "まわりもまとめて収穫する。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "bounty",
+     "name": "豊穣",
+     "branch": 0,
+     "tier": 2,
+     "kind": 0,
+     "icon": "HAY_BLOCK",
+     "req": [
+      12,
+      22,
+      32
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "10%",
+      "20%",
+      "30%"
+     ],
+     "desc": [
+      "収穫の量が、ときどき増える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "harvest"
+    },
+    {
+     "id": "golden",
+     "name": "金の実り",
+     "branch": 0,
+     "tier": 3,
+     "kind": 0,
+     "icon": "GOLDEN_CARROT",
+     "req": [
+      28,
+      38
+     ],
+     "cost": [
+      2,
+      3
+     ],
+     "effect": [
+      "上物 1%",
+      "上物 2%"
+     ],
+     "desc": [
+      "収穫すると、ときどき「上物」が採れる。",
+      "（金のニンジン・きらめくスイカなど）"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "bounty"
+    },
+    {
+     "id": "replant",
+     "name": "自動植え直し",
+     "branch": 1,
+     "tier": 1,
+     "kind": 1,
+     "icon": "WHEAT_SEEDS",
+     "req": [
+      3
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "種をひとつ使う"
+     ],
+     "desc": [
+      "実った作物を収穫すると、",
+      "落ちた種で植え直す。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "ripe",
+     "name": "熟れ見",
+     "branch": 1,
+     "tier": 2,
+     "kind": 1,
+     "icon": "SUNFLOWER",
+     "req": [
+      6
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "うっかり壊さない"
+     ],
+     "desc": [
+      "まだ実っていない作物は壊さない。",
+      "（しゃがむと壊せる）"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "replant"
+    },
+    {
+     "id": "seeder",
+     "name": "種まき",
+     "branch": 1,
+     "tier": 3,
+     "kind": 0,
+     "icon": "BEETROOT_SEEDS",
+     "req": [
+      16,
+      26
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "3×3",
+      "5×5"
+     ],
+     "desc": [
+      "耕した土に種を植えると、",
+      "まわりにもまとめて植える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "ripe"
+    },
+    {
+     "id": "trample",
+     "name": "畑を守る",
+     "branch": 2,
+     "tier": 1,
+     "kind": 0,
+     "icon": "FARMLAND",
+     "req": [
+      5
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "荒れない"
+     ],
+     "desc": [
+      "畑を踏んでも荒れない。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "till",
+     "name": "一斉耕し",
+     "branch": 2,
+     "tier": 2,
+     "kind": 0,
+     "icon": "IRON_HOE",
+     "req": [
+      10,
+      20
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "3×3",
+      "5×5"
+     ],
+     "desc": [
+      "しゃがんでクワで土を耕すと、",
+      "まわりもまとめて耕す。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "trample"
+    },
+    {
+     "id": "bonemeal",
+     "name": "骨粉の広がり",
+     "branch": 2,
+     "tier": 3,
+     "kind": 0,
+     "icon": "BONE_MEAL",
+     "req": [
+      24,
+      34
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "となり4マスに半分の確率",
+      "まわり8マスに必ず"
+     ],
+     "desc": [
+      "骨粉を使うと、まわりの作物にも効く。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "till"
+    },
+    {
+     "id": "cook",
+     "name": "料理上手",
+     "branch": 3,
+     "tier": 1,
+     "kind": 0,
+     "icon": "BREAD",
+     "req": [
+      3,
+      13,
+      23
+     ],
+     "cost": [
+      1,
+      1,
+      2
+     ],
+     "effect": [
+      "満腹の持ち +1",
+      "+2",
+      "+3"
+     ],
+     "desc": [
+      "食べたときの、満腹度の持ちがよくなる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "compost",
+     "name": "堆肥名人",
+     "branch": 3,
+     "tier": 2,
+     "kind": 0,
+     "icon": "COMPOSTER",
+     "req": [
+      8
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "ひと束まとめて入れる"
+     ],
+     "desc": [
+      "しゃがんでコンポスターを右クリックすると、",
+      "手に持った束をまとめて入れる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "cook"
+    },
+    {
+     "id": "seconds",
+     "name": "おかわり",
+     "branch": 3,
+     "tier": 3,
+     "kind": 0,
+     "icon": "CAKE",
+     "req": [
+      25,
+      35
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "15%で減らない",
+      "30%で減らない"
+     ],
+     "desc": [
+      "食べた物が、ときどき減らない。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "compost"
+    },
+    {
+     "id": "blessing",
+     "name": "灯の恵み",
+     "branch": -1,
+     "tier": 4,
+     "kind": 0,
+     "icon": "GLOW_BERRIES",
+     "req": [
+      40,
+      46
+     ],
+     "cost": [
+      3,
+      3
+     ],
+     "effect": [
+      "20秒ごとに作物4つ",
+      "20秒ごとに作物8つ"
+     ],
+     "desc": [
+      "灯りの中にいると、まわりの作物が",
+      "早く育つ。灯路網の格が高いほどよく育つ。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    }
+   ]
+  },
+  {
+   "id": "fish",
+   "k": "釣",
+   "name": "釣の道",
+   "rgb": [
+    60,
+    190,
+    200
+   ],
+   "icon": "FISHING_ROD",
+   "desc": [
+    "水辺の道。",
+    "魚を釣ると育つ。灯魚（ひうお）ほど多く育つ。"
+   ],
+   "branches": [
+    "手返し",
+    "灯釣り",
+    "水",
+    "宝"
+   ],
+   "cost": 46,
+   "trial": "灯魚を60種、図鑑に載せる",
+   "trialGoal": 60,
+   "trialTomo": false,
+   "nodes": [
+    {
+     "id": "quick",
+     "name": "早釣り",
+     "branch": 0,
+     "tier": 1,
+     "kind": 0,
+     "icon": "FISHING_ROD",
+     "req": [
+      1,
+      10,
+      20
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "−15%",
+      "−30%",
+      "−45%"
+     ],
+     "desc": [
+      "魚がかかるまでの時間が短くなる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "double",
+     "name": "大漁",
+     "branch": 0,
+     "tier": 2,
+     "kind": 0,
+     "icon": "COD_BUCKET",
+     "req": [
+      8,
+      18,
+      28
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "10%",
+      "20%",
+      "30%"
+     ],
+     "desc": [
+      "釣れた魚が、ときどき2匹になる。",
+      "（灯魚と宝は増えない）"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "quick"
+    },
+    {
+     "id": "line",
+     "name": "糸さばき",
+     "branch": 0,
+     "tier": 3,
+     "kind": 0,
+     "icon": "LEAD",
+     "req": [
+      15,
+      25,
+      35
+     ],
+     "cost": [
+      2,
+      2,
+      2
+     ],
+     "effect": [
+      "逃げられにくさ −20%",
+      "−40%",
+      "−60%"
+     ],
+     "desc": [
+      "珍しい灯魚ほどよく逃げる。",
+      "その逃げられる確率が下がる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "double"
+    },
+    {
+     "id": "lure",
+     "name": "灯釣り",
+     "branch": 1,
+     "tier": 1,
+     "kind": 0,
+     "icon": "GLOW_INK_SAC",
+     "req": [
+      5,
+      15,
+      25
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "灯魚 +3%",
+      "灯魚 +6%",
+      "灯魚 +9%"
+     ],
+     "desc": [
+      "灯魚（ひうお）がかかりやすくなる。",
+      "夜と、灯りの中ではさらに。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "read",
+     "name": "魚読み",
+     "branch": 1,
+     "tier": 2,
+     "kind": 0,
+     "icon": "WRITABLE_BOOK",
+     "req": [
+      10
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "ここで釣れる灯魚の数がわかる"
+     ],
+     "desc": [
+      "釣り糸を投げると、その場・その時に",
+      "釣れる灯魚の数と、まだ図鑑にない数を知らせる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "lure"
+    },
+    {
+     "id": "eye",
+     "name": "目利き",
+     "branch": 1,
+     "tier": 3,
+     "kind": 0,
+     "icon": "SPYGLASS",
+     "req": [
+      20,
+      30
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "大きさ +10%・珍しい魚 ×1.3",
+      "大きさ +20%・珍しい魚 ×1.6"
+     ],
+     "desc": [
+      "灯魚が大きく、珍しくなる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "read"
+    },
+    {
+     "id": "rodcare",
+     "name": "竿の労わり",
+     "branch": 2,
+     "tier": 1,
+     "kind": 0,
+     "icon": "STRING",
+     "req": [
+      4,
+      14,
+      24
+     ],
+     "cost": [
+      1,
+      1,
+      1
+     ],
+     "effect": [
+      "20%",
+      "40%",
+      "60%"
+     ],
+     "desc": [
+      "釣り竿の耐久が、ときどき減らない。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "breath",
+     "name": "息継ぎ",
+     "branch": 2,
+     "tier": 2,
+     "kind": 0,
+     "icon": "PUFFERFISH",
+     "req": [
+      6,
+      16
+     ],
+     "cost": [
+      1,
+      1
+     ],
+     "effect": [
+      "息が減る速さ 2/3",
+      "息が減る速さ 1/3"
+     ],
+     "desc": [
+      "水の中で、息が長く続く。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "rodcare"
+    },
+    {
+     "id": "swim",
+     "name": "水の足",
+     "branch": 2,
+     "tier": 3,
+     "kind": 0,
+     "icon": "PRISMARINE_SHARD",
+     "req": [
+      22,
+      32
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "泳ぐのが速い",
+      "＋水の中で息・視界・掘る速さ"
+     ],
+     "desc": [
+      "水の中を、魚のように泳ぐ。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "breath"
+    },
+    {
+     "id": "treasure",
+     "name": "宝釣り",
+     "branch": 3,
+     "tier": 1,
+     "kind": 0,
+     "icon": "NAME_TAG",
+     "req": [
+      7,
+      17
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "3%",
+      "6%"
+     ],
+     "desc": [
+      "ふつうの魚の代わりに、ときどき宝がかかる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "bait",
+     "name": "撒き餌",
+     "branch": 3,
+     "tier": 2,
+     "kind": 2,
+     "icon": "TROPICAL_FISH_BUCKET",
+     "req": [
+      14,
+      24
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "3分・灯魚 ×1.5",
+      "5分・灯魚 ×1.5"
+     ],
+     "desc": [
+      "灯りの餌を撒く。まわり8ブロックで",
+      "釣る人みんなに、灯魚がかかりやすくなる。"
+     ],
+     "gauge": 20,
+     "cooldown": [
+      180,
+      120
+     ],
+     "parent": "treasure"
+    },
+    {
+     "id": "takuhon",
+     "name": "魚拓",
+     "branch": 3,
+     "tier": 3,
+     "kind": 0,
+     "icon": "PAPER",
+     "req": [
+      18
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "自己最大で魚拓が手に入る"
+     ],
+     "desc": [
+      "自分のいちばん大きな灯魚を釣り上げると、",
+      "日付と大きさの入った魚拓が手に入る。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "bait"
+    },
+    {
+     "id": "master",
+     "name": "主の竿",
+     "branch": -1,
+     "tier": 4,
+     "kind": 0,
+     "icon": "NAUTILUS_SHELL",
+     "req": [
+      40
+     ],
+     "cost": [
+      4
+     ],
+     "effect": [
+      "ヌシがかかる"
+     ],
+     "desc": [
+      "灯魚の「ヌシ」（倍の大きさ）がかかる。",
+      "釣り上げると、全体に知らされる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    }
+   ]
+  },
+  {
+   "id": "craft",
+   "k": "匠",
+   "name": "匠の道",
+   "rgb": [
+    240,
+    120,
+    210
+   ],
+   "icon": "CRAFTING_TABLE",
+   "desc": [
+    "手仕事の道。",
+    "ものを作る、かまどから取り出す、灯籠を作ると育つ。"
+   ],
+   "branches": [
+    "整理",
+    "携帯",
+    "道具",
+    "工房"
+   ],
+   "cost": 39,
+   "trial": "ものを2,000回作る",
+   "trialGoal": 2000,
+   "trialTomo": false,
+   "nodes": [
+    {
+     "id": "sort",
+     "name": "整頓",
+     "branch": 0,
+     "tier": 1,
+     "kind": 0,
+     "icon": "CHEST",
+     "req": [
+      1
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "箱と持ち物を整頓"
+     ],
+     "desc": [
+      "しゃがんで素手で箱を左クリックすると、",
+      "中身を整頓する。",
+      "灯技の画面から、持ち物も整頓できる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "stash",
+     "name": "まとめ入れ",
+     "branch": 0,
+     "tier": 2,
+     "kind": 0,
+     "icon": "HOPPER_MINECART",
+     "req": [
+      6
+     ],
+     "cost": [
+      2
+     ],
+     "effect": [
+      "まわり6ブロックの箱へ"
+     ],
+     "desc": [
+      "持ち物を、同じ物が入っている",
+      "近くの箱へまとめて入れる（手持ちの段は残す）。",
+      "灯技の画面か /waza stash"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "sort"
+    },
+    {
+     "id": "refill",
+     "name": "補充",
+     "branch": 0,
+     "tier": 3,
+     "kind": 1,
+     "icon": "BUNDLE",
+     "req": [
+      12
+     ],
+     "cost": [
+      2
+     ],
+     "effect": [
+      "使い切ると補充"
+     ],
+     "desc": [
+      "手に持ったブロックや食べ物を使い切ると、",
+      "持ち物から補充する。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "stash"
+    },
+    {
+     "id": "bench",
+     "name": "携帯作業台",
+     "branch": 1,
+     "tier": 1,
+     "kind": 0,
+     "icon": "CRAFTING_TABLE",
+     "req": [
+      4
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "どこでも作業台"
+     ],
+     "desc": [
+      "どこでも作業台を開ける。",
+      "（灯技の画面か /waza craft）"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "ender",
+     "name": "携帯エンダーチェスト",
+     "branch": 1,
+     "tier": 2,
+     "kind": 0,
+     "icon": "ENDER_CHEST",
+     "req": [
+      16
+     ],
+     "cost": [
+      3
+     ],
+     "effect": [
+      "どこでもエンダーチェスト"
+     ],
+     "desc": [
+      "どこでもエンダーチェストを開ける。",
+      "（灯技の画面か /waza ender）"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "bench"
+    },
+    {
+     "id": "bag",
+     "name": "背負い籠",
+     "branch": 1,
+     "tier": 3,
+     "kind": 0,
+     "icon": "BARREL",
+     "req": [
+      20,
+      28,
+      36
+     ],
+     "cost": [
+      2,
+      3,
+      3
+     ],
+     "effect": [
+      "9マス",
+      "18マス",
+      "27マス"
+     ],
+     "desc": [
+      "自分だけの持ち物入れ。",
+      "（灯技の画面か /waza bag）"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "ender"
+    },
+    {
+     "id": "watch",
+     "name": "道具の見張り",
+     "branch": 2,
+     "tier": 1,
+     "kind": 1,
+     "icon": "COMPARATOR",
+     "req": [
+      5
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "壊れる前にしまう"
+     ],
+     "desc": [
+      "壊れそうな道具を、壊れる前に",
+      "しまって知らせる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "swap",
+     "name": "持ち替え上手",
+     "branch": 2,
+     "tier": 2,
+     "kind": 1,
+     "icon": "IRON_PICKAXE",
+     "req": [
+      10
+     ],
+     "cost": [
+      2
+     ],
+     "effect": [
+      "合う道具へ持ち替える"
+     ],
+     "desc": [
+      "ブロックを叩くと、手持ちの段から",
+      "それに合う道具へ持ち替える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "watch"
+    },
+    {
+     "id": "mend",
+     "name": "修繕の灯",
+     "branch": 2,
+     "tier": 3,
+     "kind": 2,
+     "icon": "SMITHING_TABLE",
+     "req": [
+      24
+     ],
+     "cost": [
+      3
+     ],
+     "effect": [
+      "手の道具を25%直す"
+     ],
+     "desc": [
+      "灯力を使い、手に持った道具を直す。"
+     ],
+     "gauge": 50,
+     "cooldown": [
+      600
+     ],
+     "parent": "swap"
+    },
+    {
+     "id": "reach",
+     "name": "長い手",
+     "branch": 3,
+     "tier": 1,
+     "kind": 0,
+     "icon": "LIGHTNING_ROD",
+     "req": [
+      8,
+      18
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "手の届く距離 +1",
+      "+2"
+     ],
+     "desc": [
+      "遠くのブロックまで手が届く。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "furnace",
+     "name": "かまどの名人",
+     "branch": 3,
+     "tier": 2,
+     "kind": 0,
+     "icon": "FURNACE",
+     "req": [
+      12,
+      22
+     ],
+     "cost": [
+      1,
+      1
+     ],
+     "effect": [
+      "経験値 ×1.5",
+      "×2"
+     ],
+     "desc": [
+      "かまどから取り出すときの経験値が増える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "reach"
+    },
+    {
+     "id": "lanternsmith",
+     "name": "灯籠職人",
+     "branch": 3,
+     "tier": 3,
+     "kind": 0,
+     "icon": "LANTERN",
+     "req": [
+      25,
+      35
+     ],
+     "cost": [
+      2,
+      3
+     ],
+     "effect": [
+      "15%",
+      "30%"
+     ],
+     "desc": [
+      "灯籠を作ると、ときどき2基できる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "furnace"
+    },
+    {
+     "id": "tending",
+     "name": "灯の手入れ",
+     "branch": -1,
+     "tier": 4,
+     "kind": 0,
+     "icon": "NETHER_STAR",
+     "req": [
+      40
+     ],
+     "cost": [
+      5
+     ],
+     "effect": [
+      "10秒ごとに耐久 +1"
+     ],
+     "desc": [
+      "灯りの中にいると、身につけた",
+      "道具と防具が少しずつ直っていく。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    }
+   ]
+  },
+  {
+   "id": "travel",
+   "k": "旅",
+   "name": "旅の道",
+   "rgb": [
+    235,
+    235,
+    235
+   ],
+   "icon": "LEATHER_BOOTS",
+   "desc": [
+    "遠くへ行く道。",
+    "遠くへ移動する、はじめてのバイオームを訪れると育つ。"
+   ],
+   "branches": [
+    "足",
+    "空",
+    "地図",
+    "騎乗"
+   ],
+   "cost": 34,
+   "trial": "40種の土地を訪れる",
+   "trialGoal": 40,
+   "trialTomo": false,
+   "nodes": [
+    {
+     "id": "stride",
+     "name": "健脚",
+     "branch": 0,
+     "tier": 1,
+     "kind": 0,
+     "icon": "LEATHER_BOOTS",
+     "req": [
+      1,
+      10,
+      20
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "歩く速さ +4%",
+      "+8%",
+      "+12%"
+     ],
+     "desc": [
+      "歩く・走る速さが上がる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "stamina",
+     "name": "腹持ち",
+     "branch": 0,
+     "tier": 2,
+     "kind": 0,
+     "icon": "COOKED_BEEF",
+     "req": [
+      6,
+      16
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "腹の減り −25%",
+      "−50%"
+     ],
+     "desc": [
+      "走ったり跳んだりしても、",
+      "おなかが減りにくい。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "stride"
+    },
+    {
+     "id": "step",
+     "name": "段差越え",
+     "branch": 0,
+     "tier": 3,
+     "kind": 1,
+     "icon": "RABBIT_FOOT",
+     "req": [
+      22
+     ],
+     "cost": [
+      3
+     ],
+     "effect": [
+      "1段を歩いて越える"
+     ],
+     "desc": [
+      "1ブロックの段差を、跳ばずに歩いて越える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "stamina"
+    },
+    {
+     "id": "fall",
+     "name": "受け身",
+     "branch": 1,
+     "tier": 1,
+     "kind": 0,
+     "icon": "SLIME_BLOCK",
+     "req": [
+      3,
+      13,
+      23
+     ],
+     "cost": [
+      1,
+      1,
+      2
+     ],
+     "effect": [
+      "落下ダメージ −25%",
+      "−50%",
+      "−75%"
+     ],
+     "desc": [
+      "高い所から落ちても、けがが軽い。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "drift",
+     "name": "綿毛",
+     "branch": 1,
+     "tier": 2,
+     "kind": 2,
+     "icon": "FEATHER",
+     "req": [
+      12
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "15秒ゆっくり落ちる"
+     ],
+     "desc": [
+      "灯力を使い、綿毛のように",
+      "ゆっくり舞い降りる。"
+     ],
+     "gauge": 10,
+     "cooldown": [
+      20
+     ],
+     "parent": "fall"
+    },
+    {
+     "id": "wings",
+     "name": "灯の翼",
+     "branch": 1,
+     "tier": 3,
+     "kind": 2,
+     "icon": "ELYTRA",
+     "req": [
+      26,
+      36
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "滑空中に前へ加速",
+      "より強く・待ち2秒"
+     ],
+     "desc": [
+      "エリトラで滑空しているとき、",
+      "灯力で前へ飛び出す。"
+     ],
+     "gauge": 15,
+     "cooldown": [
+      4,
+      2
+     ],
+     "parent": "drift"
+    },
+    {
+     "id": "compass",
+     "name": "旅の目",
+     "branch": 2,
+     "tier": 1,
+     "kind": 0,
+     "icon": "COMPASS",
+     "req": [
+      2
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "方角・座標・場所の名"
+     ],
+     "desc": [
+      "コンパスか地図を手に持つと、",
+      "方角と座標と、いまいる場所の名が出る。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "mark",
+     "name": "しるべ",
+     "branch": 2,
+     "tier": 2,
+     "kind": 2,
+     "icon": "LODESTONE",
+     "req": [
+      8
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "印への方角と距離を出す"
+     ],
+     "desc": [
+      "いまいる場所に印をつけ、",
+      "そこへの方角と距離を、画面の上に出す。",
+      "（画面から消せる）"
+     ],
+     "gauge": 5,
+     "cooldown": [
+      3
+     ],
+     "parent": "compass"
+    },
+    {
+     "id": "wanderer",
+     "name": "旅人の灯力",
+     "branch": 2,
+     "tier": 3,
+     "kind": 0,
+     "icon": "FILLED_MAP",
+     "req": [
+      18,
+      28
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "20ブロックごとに灯力 +1",
+      "10ブロックごとに灯力 +1"
+     ],
+     "desc": [
+      "灯りの外でも、旅をすると",
+      "灯力がたまる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "mark"
+    },
+    {
+     "id": "rider",
+     "name": "乗り手",
+     "branch": 3,
+     "tier": 1,
+     "kind": 0,
+     "icon": "SADDLE",
+     "req": [
+      5,
+      15
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "馬が 速さⅠ",
+      "馬が 速さⅡ"
+     ],
+     "desc": [
+      "自分が乗っている馬などが速くなる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "saddlesafe",
+     "name": "騎乗の受け身",
+     "branch": 3,
+     "tier": 2,
+     "kind": 0,
+     "icon": "GOLDEN_HORSE_ARMOR",
+     "req": [
+      10
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "乗り物も落下ダメージなし"
+     ],
+     "desc": [
+      "乗っている生きものが、",
+      "落ちてもけがをしない。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "rider"
+    },
+    {
+     "id": "homeward",
+     "name": "迷わずの灯",
+     "branch": 3,
+     "tier": 3,
+     "kind": 0,
+     "icon": "CAMPFIRE",
+     "req": [
+      20
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "家から300ブロック以上で方角を出す"
+     ],
+     "desc": [
+      "家（帰る場所の灯標・ベッド）から遠くにいると、",
+      "家の方角と距離を灯力のバーに出す。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "saddlesafe"
+    },
+    {
+     "id": "gale",
+     "name": "疾風",
+     "branch": -1,
+     "tier": 4,
+     "kind": 0,
+     "icon": "WIND_CHARGE",
+     "req": [
+      40
+     ],
+     "cost": [
+      4
+     ],
+     "effect": [
+      "2秒走ると 速さⅡ・腹が減らない"
+     ],
+     "desc": [
+      "走りつづけると風をまとい、",
+      "さらに速く、疲れずに駆ける。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    }
+   ]
+  },
+  {
+   "id": "ranch",
+   "k": "牧",
+   "name": "牧の道",
+   "rgb": [
+    230,
+    90,
+    80
+   ],
+   "icon": "LEAD",
+   "desc": [
+    "生きものと暮らす道。",
+    "動物を殖やす、手なずける、毛を刈る、卵を拾うと育つ。"
+   ],
+   "branches": [
+    "殖やす",
+    "刈る",
+    "仲間",
+    "世話"
+   ],
+   "cost": 32,
+   "trial": "動物を400回殖やす",
+   "trialGoal": 400,
+   "trialTomo": false,
+   "nodes": [
+    {
+     "id": "twins",
+     "name": "双子",
+     "branch": 0,
+     "tier": 1,
+     "kind": 0,
+     "icon": "SNIFFER_EGG",
+     "req": [
+      1,
+      12
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "10%",
+      "20%"
+     ],
+     "desc": [
+      "動物を殖やすと、ときどき双子が生まれる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "love",
+     "name": "恋の季節",
+     "branch": 0,
+     "tier": 2,
+     "kind": 0,
+     "icon": "POPPY",
+     "req": [
+      8
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "待ち時間が半分"
+     ],
+     "desc": [
+      "殖やした親が、早くまた殖やせる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "twins"
+    },
+    {
+     "id": "grow",
+     "name": "すくすく",
+     "branch": 0,
+     "tier": 3,
+     "kind": 0,
+     "icon": "MILK_BUCKET",
+     "req": [
+      24,
+      34
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "10分で大人",
+      "5分で大人"
+     ],
+     "desc": [
+      "自分が殖やした子が、早く育つ。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "love"
+    },
+    {
+     "id": "shear",
+     "name": "毛刈り上手",
+     "branch": 1,
+     "tier": 1,
+     "kind": 0,
+     "icon": "SHEARS",
+     "req": [
+      3,
+      13
+     ],
+     "cost": [
+      1,
+      1
+     ],
+     "effect": [
+      "羊毛 +1",
+      "羊毛 +2"
+     ],
+     "desc": [
+      "羊の毛を刈ると、多く取れる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "flock",
+     "name": "群れ刈り",
+     "branch": 1,
+     "tier": 2,
+     "kind": 0,
+     "icon": "WHITE_WOOL",
+     "req": [
+      10
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "まわり4ブロックの羊"
+     ],
+     "desc": [
+      "羊の毛を刈ると、まわりの羊も",
+      "まとめて刈る。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "shear"
+    },
+    {
+     "id": "feed",
+     "name": "まとめ餌やり",
+     "branch": 1,
+     "tier": 3,
+     "kind": 0,
+     "icon": "CARROT_ON_A_STICK",
+     "req": [
+      18,
+      28
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "半径4",
+      "半径8"
+     ],
+     "desc": [
+      "大人の動物に餌をやると、まわりの",
+      "同じ動物にもまとめて餌をやる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "flock"
+    },
+    {
+     "id": "tame",
+     "name": "手なずけ上手",
+     "branch": 2,
+     "tier": 1,
+     "kind": 0,
+     "icon": "BONE",
+     "req": [
+      4,
+      14
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "半分の確率で一度で",
+      "必ず一度で"
+     ],
+     "desc": [
+      "オオカミ・ネコ・オウムを、",
+      "少ない餌で手なずける。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "pets",
+     "name": "仲間の癒やし",
+     "branch": 2,
+     "tier": 2,
+     "kind": 0,
+     "icon": "COOKIE",
+     "req": [
+      10,
+      20
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "5秒ごとに 1 回復",
+      "5秒ごとに 2 回復・落下ダメージなし"
+     ],
+     "desc": [
+      "近くにいる自分の仲間が、",
+      "少しずつ傷を癒やす。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "tame"
+    },
+    {
+     "id": "whistle",
+     "name": "呼び笛",
+     "branch": 2,
+     "tier": 3,
+     "kind": 2,
+     "icon": "GOAT_HORN",
+     "req": [
+      22
+     ],
+     "cost": [
+      2
+     ],
+     "effect": [
+      "半径100の仲間を呼ぶ"
+     ],
+     "desc": [
+      "笛を吹いて、離れた自分の仲間を",
+      "そばへ呼び寄せる（座っている仲間は来ない）。"
+     ],
+     "gauge": 10,
+     "cooldown": [
+      30
+     ],
+     "parent": "pets"
+    },
+    {
+     "id": "judge",
+     "name": "馬の目利き",
+     "branch": 3,
+     "tier": 1,
+     "kind": 0,
+     "icon": "BOOK",
+     "req": [
+      5
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "速さ・跳ぶ高さ・体力がわかる"
+     ],
+     "desc": [
+      "しゃがんで素手で馬などを右クリックすると、",
+      "その力がわかる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "eggs",
+     "name": "卵集め",
+     "branch": 3,
+     "tier": 2,
+     "kind": 0,
+     "icon": "EGG",
+     "req": [
+      9
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "まわり8ブロックの卵"
+     ],
+     "desc": [
+      "近くの鶏が産んだ卵が、",
+      "直接持ち物に入る。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "judge"
+    },
+    {
+     "id": "meat",
+     "name": "命の恵み",
+     "branch": 3,
+     "tier": 3,
+     "kind": 0,
+     "icon": "COOKED_PORKCHOP",
+     "req": [
+      20,
+      30
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "25%で肉 +1",
+      "50%で肉 +1"
+     ],
+     "desc": [
+      "家畜からとれる肉が増える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "eggs"
+    },
+    {
+     "id": "ranchlord",
+     "name": "牧の主",
+     "branch": -1,
+     "tier": 4,
+     "kind": 0,
+     "icon": "BELL",
+     "req": [
+      40
+     ],
+     "cost": [
+      4
+     ],
+     "effect": [
+      "三つ子 5%・子は3分で大人"
+     ],
+     "desc": [
+      "殖やすと三つ子が生まれることもあり、",
+      "生まれた子はすぐに大人になる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    }
+   ]
+  },
+  {
+   "id": "arcane",
+   "k": "術",
+   "name": "術の道",
+   "rgb": [
+    80,
+    110,
+    255
+   ],
+   "icon": "ENCHANTING_TABLE",
+   "desc": [
+    "見えない力の道。",
+    "付呪する、醸造する、経験値を集めると育つ。"
+   ],
+   "branches": [
+    "経験",
+    "付呪",
+    "霊薬",
+    "灯力"
+   ],
+   "cost": 42,
+   "trial": "付呪を120回する",
+   "trialGoal": 120,
+   "trialTomo": false,
+   "nodes": [
+    {
+     "id": "expup",
+     "name": "経験の灯",
+     "branch": 0,
+     "tier": 1,
+     "kind": 0,
+     "icon": "GLOWSTONE_DUST",
+     "req": [
+      1,
+      10,
+      20
+     ],
+     "cost": [
+      1,
+      2,
+      2
+     ],
+     "effect": [
+      "経験値 ×1.1",
+      "×1.2",
+      "×1.3"
+     ],
+     "desc": [
+      "集める経験値が増える。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "soulkeep",
+     "name": "魂の残り火",
+     "branch": 0,
+     "tier": 2,
+     "kind": 0,
+     "icon": "ECHO_SHARD",
+     "req": [
+      12,
+      24
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "倒れても Lv の30%が残る",
+      "Lv の60%が残る"
+     ],
+     "desc": [
+      "倒れても、経験値 Lv の一部が残る。",
+      "（残った分は落とさない）"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "expup"
+    },
+    {
+     "id": "bottle",
+     "name": "経験の瓶詰め",
+     "branch": 0,
+     "tier": 3,
+     "kind": 0,
+     "icon": "EXPERIENCE_BOTTLE",
+     "req": [
+      18
+     ],
+     "cost": [
+      1
+     ],
+     "effect": [
+      "ガラス瓶に経験値を詰める"
+     ],
+     "desc": [
+      "持っているガラス瓶に、",
+      "自分の経験値を詰める（灯技の画面から）。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "soulkeep"
+    },
+    {
+     "id": "enchref",
+     "name": "付呪の灯",
+     "branch": 1,
+     "tier": 1,
+     "kind": 0,
+     "icon": "LAPIS_BLOCK",
+     "req": [
+      5,
+      15
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "30%で1Lv戻る",
+      "60%で1Lv戻る"
+     ],
+     "desc": [
+      "付呪したとき、使った経験値 Lv が",
+      "ときどき戻ってくる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "anvil",
+     "name": "金床の名人",
+     "branch": 1,
+     "tier": 2,
+     "kind": 0,
+     "icon": "ANVIL",
+     "req": [
+      14,
+      26
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "費用 −1Lv",
+      "費用 −2Lv・「高すぎる」の上限なし"
+     ],
+     "desc": [
+      "金床の費用が下がる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "enchref"
+    },
+    {
+     "id": "bolt",
+     "name": "灯矢（ともしや）",
+     "branch": 1,
+     "tier": 3,
+     "kind": 2,
+     "icon": "BLAZE_ROD",
+     "req": [
+      28,
+      38
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "6ダメージ（灯喰いには倍）",
+      "9ダメージ（灯喰いには倍）"
+     ],
+     "desc": [
+      "灯力を光の矢にして、見ている方へ放つ。",
+      "最初に当たった敵を射抜く。"
+     ],
+     "gauge": 25,
+     "cooldown": [
+      8,
+      5
+     ],
+     "parent": "anvil"
+    },
+    {
+     "id": "brewing",
+     "name": "醸造の手",
+     "branch": 2,
+     "tier": 1,
+     "kind": 0,
+     "icon": "BREWING_STAND",
+     "req": [
+      3,
+      13
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "醸造が 25% 早い",
+      "50% 早い"
+     ],
+     "desc": [
+      "自分が触った醸造台の、醸造が早くなる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "linger",
+     "name": "薬の持ち",
+     "branch": 2,
+     "tier": 2,
+     "kind": 0,
+     "icon": "POTION",
+     "req": [
+      10,
+      20
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "効き目 +20%",
+      "+40%"
+     ],
+     "desc": [
+      "飲んだ薬の効き目が、長く続く。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "brewing"
+    },
+    {
+     "id": "fireward",
+     "name": "火除けの灯",
+     "branch": 2,
+     "tier": 3,
+     "kind": 2,
+     "icon": "MAGMA_CREAM",
+     "req": [
+      22
+     ],
+     "cost": [
+      2
+     ],
+     "effect": [
+      "火に強くなる 60秒"
+     ],
+     "desc": [
+      "灯力を使い、火と溶岩から身を守る。"
+     ],
+     "gauge": 40,
+     "cooldown": [
+      180
+     ],
+     "parent": "linger"
+    },
+    {
+     "id": "store",
+     "name": "灯を蓄える",
+     "branch": 3,
+     "tier": 1,
+     "kind": 0,
+     "icon": "GLOWSTONE",
+     "req": [
+      4,
+      14
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "灯力の上限 125",
+      "灯力の上限 150"
+     ],
+     "desc": [
+      "灯力をたくさん持ち歩ける。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    },
+    {
+     "id": "flow",
+     "name": "灯力の巡り",
+     "branch": 3,
+     "tier": 2,
+     "kind": 0,
+     "icon": "LIGHT_BLUE_DYE",
+     "req": [
+      12,
+      22
+     ],
+     "cost": [
+      1,
+      2
+     ],
+     "effect": [
+      "灯りの外で 0.4/秒",
+      "0.6/秒"
+     ],
+     "desc": [
+      "灯りの外でも、灯力がたまりやすい。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "store"
+    },
+    {
+     "id": "thrift",
+     "name": "灯力の節約",
+     "branch": 3,
+     "tier": 3,
+     "kind": 0,
+     "icon": "PRISMARINE_CRYSTALS",
+     "req": [
+      26,
+      36
+     ],
+     "cost": [
+      2,
+      2
+     ],
+     "effect": [
+      "使う灯力 −15%",
+      "−30%"
+     ],
+     "desc": [
+      "使う技の灯力が少なくてすむ。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": "flow"
+    },
+    {
+     "id": "sage",
+     "name": "灯の賢者",
+     "branch": -1,
+     "tier": 4,
+     "kind": 0,
+     "icon": "AMETHYST_BLOCK",
+     "req": [
+      40
+     ],
+     "cost": [
+      4
+     ],
+     "effect": [
+      "すべての使う技の待ち −25%"
+     ],
+     "desc": [
+      "灯の理を知り、すべての使う技を",
+      "早く使い直せる。"
+     ],
+     "gauge": 0,
+     "cooldown": null,
+     "parent": null
+    }
+   ]
+  }
+ ],
+ "tasks": [
+  {
+   "id": "ore30",
+   "path": 2,
+   "goal": 30,
+   "xp": 250,
+   "text": "鉱石を30個掘る"
+  },
+  {
+   "id": "stone300",
+   "path": 2,
+   "goal": 300,
+   "xp": 200,
+   "text": "石を300個掘る"
+  },
+  {
+   "id": "log64",
+   "path": 3,
+   "goal": 64,
+   "xp": 220,
+   "text": "幹を64本切る"
+  },
+  {
+   "id": "tree5",
+   "path": 3,
+   "goal": 5,
+   "xp": 200,
+   "text": "木を5本まるごと倒す"
+  },
+  {
+   "id": "crop120",
+   "path": 4,
+   "goal": 120,
+   "xp": 220,
+   "text": "実った作物を120株収穫する"
+  },
+  {
+   "id": "fish10",
+   "path": 5,
+   "goal": 10,
+   "xp": 200,
+   "text": "魚を10匹釣る"
+  },
+  {
+   "id": "hiuo3",
+   "path": 5,
+   "goal": 3,
+   "xp": 260,
+   "text": "灯魚を3匹釣る"
+  },
+  {
+   "id": "craft40",
+   "path": 6,
+   "goal": 40,
+   "xp": 180,
+   "text": "ものを40回作る"
+  },
+  {
+   "id": "smelt32",
+   "path": 6,
+   "goal": 32,
+   "xp": 180,
+   "text": "かまどから32個取り出す"
+  },
+  {
+   "id": "walk2000",
+   "path": 7,
+   "goal": 2000,
+   "xp": 240,
+   "text": "2,000ブロック旅をする"
+  },
+  {
+   "id": "biome1",
+   "path": 7,
+   "goal": 1,
+   "xp": 260,
+   "text": "はじめてのバイオームを訪れる"
+  },
+  {
+   "id": "breed6",
+   "path": 8,
+   "goal": 6,
+   "xp": 220,
+   "text": "動物を6回殖やす"
+  },
+  {
+   "id": "shear8",
+   "path": 8,
+   "goal": 8,
+   "xp": 180,
+   "text": "羊の毛を8回刈る"
+  },
+  {
+   "id": "enchant3",
+   "path": 9,
+   "goal": 3,
+   "xp": 240,
+   "text": "3回付呪する"
+  },
+  {
+   "id": "brew6",
+   "path": 9,
+   "goal": 6,
+   "xp": 220,
+   "text": "薬を6本醸造する"
+  },
+  {
+   "id": "dawn1",
+   "path": 1,
+   "goal": 1,
+   "xp": 260,
+   "text": "夜を越えて夜明けを迎える"
+  },
+  {
+   "id": "dark10",
+   "path": 1,
+   "goal": 10,
+   "xp": 200,
+   "text": "夜の闇の中で10分過ごす"
+  },
+  {
+   "id": "lantern2",
+   "path": 0,
+   "goal": 2,
+   "xp": 240,
+   "text": "灯籠を2基置く"
+  },
+  {
+   "id": "relight1",
+   "path": 0,
+   "goal": 1,
+   "xp": 260,
+   "text": "消えた灯籠を灯し直す"
+  },
+  {
+   "id": "eater1",
+   "path": 0,
+   "goal": 1,
+   "xp": 300,
+   "text": "灯喰いを1体倒す"
+  },
+  {
+   "id": "active5",
+   "path": 9,
+   "goal": 5,
+   "xp": 200,
+   "text": "使う技を5回使う"
+  }
+ ],
+ "rarity": [
+  "",
+  "並",
+  "珍",
+  "稀",
+  "秘",
+  "幻"
+ ],
+ "rarityXp": [
+  0,
+  25,
+  45,
+  90,
+  180,
+  400
+ ],
+ "escape": [
+  0.0,
+  0.0,
+  0.1,
+  0.25,
+  0.4,
+  0.55
+ ],
+ "groups": [
+  "川",
+  "海",
+  "沼",
+  "地底",
+  "野山",
+  "特別"
+ ],
+ "fish": [
+  {
+   "id": "kawaakari",
+   "name": "川灯り",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 10.0,
+   "max": 22.0,
+   "group": 0,
+   "cond": [
+    "川"
+   ],
+   "flavor": "鱗に光をためる川魚。"
+  },
+  {
+   "id": "medaka",
+   "name": "灯路めだか",
+   "mat": "TROPICAL_FISH",
+   "rarity": 1,
+   "min": 2.0,
+   "max": 5.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "灯りの中"
+   ],
+   "flavor": "灯路の光に集まる、小さな魚。"
+  },
+  {
+   "id": "haya",
+   "name": "朝霧はや",
+   "mat": "SALMON",
+   "rarity": 1,
+   "min": 8.0,
+   "max": 18.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "夜明け"
+   ],
+   "flavor": "霧の立つ朝にだけ群れる。"
+  },
+  {
+   "id": "oikawa",
+   "name": "夕映えおいかわ",
+   "mat": "TROPICAL_FISH",
+   "rarity": 1,
+   "min": 9.0,
+   "max": 16.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "夕暮れ"
+   ],
+   "flavor": "夕焼けを鱗にうつす。"
+  },
+  {
+   "id": "kajika",
+   "name": "かじか石",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 6.0,
+   "max": 14.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "雪の地"
+   ],
+   "flavor": "冷たい川の石の陰に住む。"
+  },
+  {
+   "id": "masu",
+   "name": "星屑鱒",
+   "mat": "SALMON",
+   "rarity": 2,
+   "min": 25.0,
+   "max": 55.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "夜"
+   ],
+   "flavor": "背に星を散らしたような鱒。"
+  },
+  {
+   "id": "ayu",
+   "name": "香り鮎",
+   "mat": "SALMON",
+   "rarity": 2,
+   "min": 15.0,
+   "max": 30.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "夏（6〜8月）"
+   ],
+   "flavor": "夏の川を上る、香りのいい魚。"
+  },
+  {
+   "id": "yamame",
+   "name": "雨やまめ",
+   "mat": "SALMON",
+   "rarity": 2,
+   "min": 18.0,
+   "max": 35.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "雨"
+   ],
+   "flavor": "雨の日に、川面へ跳ねる。"
+  },
+  {
+   "id": "unagi",
+   "name": "灯鰻",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 40.0,
+   "max": 90.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "夜",
+    "灯りの中"
+   ],
+   "flavor": "灯籠の下の淀みに潜む。"
+  },
+  {
+   "id": "hotaru",
+   "name": "蛍魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 3.0,
+   "max": 8.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "夏（6〜8月）",
+    "夜"
+   ],
+   "flavor": "夏の夜、川辺で淡く光る。"
+  },
+  {
+   "id": "kogarashi",
+   "name": "木枯らし鱒",
+   "mat": "SALMON",
+   "rarity": 2,
+   "min": 28.0,
+   "max": 50.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "秋（9〜11月）"
+   ],
+   "flavor": "秋風の吹くころ、よく釣れる。"
+  },
+  {
+   "id": "hanaikada",
+   "name": "花筏",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 6.0,
+   "max": 12.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "春（3〜5月）"
+   ],
+   "flavor": "春の川を、花びらと流れる。"
+  },
+  {
+   "id": "namazu",
+   "name": "雷鯰",
+   "mat": "PUFFERFISH",
+   "rarity": 3,
+   "min": 40.0,
+   "max": 110.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "…"
+   ],
+   "flavor": "雷を呼ぶと言われる大鯰。"
+  },
+  {
+   "id": "tsukiyu",
+   "name": "月夕鯉",
+   "mat": "COD",
+   "rarity": 3,
+   "min": 50.0,
+   "max": 100.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "…"
+   ],
+   "flavor": "満月の夜にだけ、川をさかのぼる。"
+  },
+  {
+   "id": "shinome",
+   "name": "東雲鮭",
+   "mat": "SALMON",
+   "rarity": 3,
+   "min": 50.0,
+   "max": 95.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "…"
+   ],
+   "flavor": "秋の夜明け、群れで川を上る。"
+  },
+  {
+   "id": "yukimasu",
+   "name": "雪見鱒",
+   "mat": "SALMON",
+   "rarity": 3,
+   "min": 30.0,
+   "max": 60.0,
+   "group": 0,
+   "cond": [
+    "川",
+    "…"
+   ],
+   "flavor": "冬の、凍える川でだけ。"
+  },
+  {
+   "id": "secret16",
+   "name": null,
+   "mat": "COD",
+   "rarity": 4,
+   "min": 90.0,
+   "max": 180.0,
+   "group": 0,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "iwashi",
+   "name": "灯鰯",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 10.0,
+   "max": 18.0,
+   "group": 1,
+   "cond": [
+    "海"
+   ],
+   "flavor": "群れで海を照らす小魚。"
+  },
+  {
+   "id": "aji",
+   "name": "夕凪鯵",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 15.0,
+   "max": 30.0,
+   "group": 1,
+   "cond": [
+    "海",
+    "夕暮れ"
+   ],
+   "flavor": "夕凪の海で、よくかかる。"
+  },
+  {
+   "id": "saba",
+   "name": "青灯鯖",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 25.0,
+   "max": 45.0,
+   "group": 1,
+   "cond": [
+    "海",
+    "昼"
+   ],
+   "flavor": "昼の海の、まっすぐな青。"
+  },
+  {
+   "id": "sango",
+   "name": "珊瑚灯",
+   "mat": "TROPICAL_FISH",
+   "rarity": 1,
+   "min": 5.0,
+   "max": 14.0,
+   "group": 1,
+   "cond": [
+    "暖かい海"
+   ],
+   "flavor": "あたたかい海の、色とりどりの灯。"
+  },
+  {
+   "id": "fugu",
+   "name": "灯河豚",
+   "mat": "PUFFERFISH",
+   "rarity": 1,
+   "min": 15.0,
+   "max": 35.0,
+   "group": 1,
+   "cond": [
+    "暖かい海"
+   ],
+   "flavor": "ふくらむと、ほんのり光る。"
+  },
+  {
+   "id": "tara",
+   "name": "氷灯鱈",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 30.0,
+   "max": 70.0,
+   "group": 1,
+   "cond": [
+    "冷たい海"
+   ],
+   "flavor": "冷たい海で、灯りを抱いて泳ぐ。"
+  },
+  {
+   "id": "shirauo",
+   "name": "白魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 1,
+   "min": 4.0,
+   "max": 8.0,
+   "group": 1,
+   "cond": [
+    "浜",
+    "春（3〜5月）"
+   ],
+   "flavor": "春の浜で、透けて光る。"
+  },
+  {
+   "id": "tsukishiro",
+   "name": "月白魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 10.0,
+   "max": 26.0,
+   "group": 1,
+   "cond": [
+    "海",
+    "夜"
+   ],
+   "flavor": "月の色をした、海の小魚。"
+  },
+  {
+   "id": "kumanomi",
+   "name": "灯熊ノ実",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 6.0,
+   "max": 12.0,
+   "group": 1,
+   "cond": [
+    "暖かい海",
+    "晴れ"
+   ],
+   "flavor": "珊瑚に住む、灯色の小魚。"
+  },
+  {
+   "id": "hagi",
+   "name": "夏はぎ",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 15.0,
+   "max": 30.0,
+   "group": 1,
+   "cond": [
+    "暖かい海",
+    "夏（6〜8月）"
+   ],
+   "flavor": "夏の海で、ひらひら泳ぐ。"
+  },
+  {
+   "id": "hirame",
+   "name": "砂灯平目",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 30.0,
+   "max": 70.0,
+   "group": 1,
+   "cond": [
+    "浜"
+   ],
+   "flavor": "浜の砂にまぎれる。"
+  },
+  {
+   "id": "tai",
+   "name": "朝焼け鯛",
+   "mat": "SALMON",
+   "rarity": 2,
+   "min": 30.0,
+   "max": 60.0,
+   "group": 1,
+   "cond": [
+    "海",
+    "夜明け"
+   ],
+   "flavor": "朝焼けの海の、めでたい色。"
+  },
+  {
+   "id": "nishin",
+   "name": "春告魚",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 25.0,
+   "max": 35.0,
+   "group": 1,
+   "cond": [
+    "冷たい海",
+    "春（3〜5月）"
+   ],
+   "flavor": "春を告げる、北の海の魚。"
+  },
+  {
+   "id": "kurage",
+   "name": "灯海月",
+   "mat": "PUFFERFISH",
+   "rarity": 2,
+   "min": 10.0,
+   "max": 40.0,
+   "group": 1,
+   "cond": [
+    "海",
+    "夜",
+    "灯りの中"
+   ],
+   "flavor": "灯りに寄ってくる、透きとおる魚。"
+  },
+  {
+   "id": "tobiuo",
+   "name": "飛び灯魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 20.0,
+   "max": 35.0,
+   "group": 1,
+   "cond": [
+    "海",
+    "晴れ",
+    "昼"
+   ],
+   "flavor": "晴れた海を、灯のように飛ぶ。"
+  },
+  {
+   "id": "utsubo",
+   "name": "岩陰うつぼ",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 60.0,
+   "max": 120.0,
+   "group": 1,
+   "cond": [
+    "海",
+    "深い水（12ブロック以上）"
+   ],
+   "flavor": "海底の岩陰から顔を出す。"
+  },
+  {
+   "id": "katsuo",
+   "name": "初鰹",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 40.0,
+   "max": 80.0,
+   "group": 1,
+   "cond": [
+    "海",
+    "夏（6〜8月）"
+   ],
+   "flavor": "夏のはじめの、勢いのいい魚。"
+  },
+  {
+   "id": "sanma",
+   "name": "秋刀灯",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 25.0,
+   "max": 35.0,
+   "group": 1,
+   "cond": [
+    "海",
+    "秋（9〜11月）",
+    "夜"
+   ],
+   "flavor": "秋の夜の海を、銀色に走る。"
+  },
+  {
+   "id": "buri",
+   "name": "寒鰤",
+   "mat": "COD",
+   "rarity": 3,
+   "min": 60.0,
+   "max": 100.0,
+   "group": 1,
+   "cond": [
+    "冷たい海",
+    "…"
+   ],
+   "flavor": "冬の荒れた海で脂がのる。"
+  },
+  {
+   "id": "chochin",
+   "name": "深海提灯",
+   "mat": "PUFFERFISH",
+   "rarity": 3,
+   "min": 20.0,
+   "max": 48.0,
+   "group": 1,
+   "cond": [
+    "深い海",
+    "…"
+   ],
+   "flavor": "額の灯で、獲物を呼び寄せる。"
+  },
+  {
+   "id": "kajiki",
+   "name": "嵐梶木",
+   "mat": "SALMON",
+   "rarity": 3,
+   "min": 150.0,
+   "max": 300.0,
+   "group": 1,
+   "cond": [
+    "海",
+    "…"
+   ],
+   "flavor": "嵐の海を、槍のように走る。"
+  },
+  {
+   "id": "mambo",
+   "name": "夢見翻車",
+   "mat": "PUFFERFISH",
+   "rarity": 3,
+   "min": 100.0,
+   "max": 250.0,
+   "group": 1,
+   "cond": [
+    "暖かい海",
+    "…"
+   ],
+   "flavor": "真昼の海面で、横になって眠る。"
+  },
+  {
+   "id": "ankou",
+   "name": "闇鮟鱇",
+   "mat": "PUFFERFISH",
+   "rarity": 3,
+   "min": 40.0,
+   "max": 100.0,
+   "group": 1,
+   "cond": [
+    "深い海",
+    "…"
+   ],
+   "flavor": "新月の深海の、ひとつ灯り。"
+  },
+  {
+   "id": "hoshigarei",
+   "name": "星鰈",
+   "mat": "COD",
+   "rarity": 3,
+   "min": 30.0,
+   "max": 60.0,
+   "group": 1,
+   "cond": [
+    "冷たい海",
+    "…"
+   ],
+   "flavor": "晴れた夜の冷たい海で、星を背負う。"
+  },
+  {
+   "id": "hyoukai",
+   "name": "氷海の灯",
+   "mat": "TROPICAL_FISH",
+   "rarity": 3,
+   "min": 8.0,
+   "max": 15.0,
+   "group": 1,
+   "cond": [
+    "冷たい海",
+    "…"
+   ],
+   "flavor": "冬の深い氷の海に灯る。"
+  },
+  {
+   "id": "secret42",
+   "name": null,
+   "mat": "COD",
+   "rarity": 4,
+   "min": 150.0,
+   "max": 400.0,
+   "group": 1,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "dojou",
+   "name": "泥鰌灯",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 10.0,
+   "max": 20.0,
+   "group": 2,
+   "cond": [
+    "沼"
+   ],
+   "flavor": "泥の中で、ちろちろ光る。"
+  },
+  {
+   "id": "tanago",
+   "name": "雨たなご",
+   "mat": "TROPICAL_FISH",
+   "rarity": 1,
+   "min": 5.0,
+   "max": 9.0,
+   "group": 2,
+   "cond": [
+    "沼",
+    "雨"
+   ],
+   "flavor": "雨の沼で、虹色に光る。"
+  },
+  {
+   "id": "akago",
+   "name": "昼寝鯉",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 20.0,
+   "max": 45.0,
+   "group": 2,
+   "cond": [
+    "沼",
+    "昼"
+   ],
+   "flavor": "昼の沼の、のんびりした鯉。"
+  },
+  {
+   "id": "onibi",
+   "name": "沼の鬼火",
+   "mat": "PUFFERFISH",
+   "rarity": 2,
+   "min": 15.0,
+   "max": 35.0,
+   "group": 2,
+   "cond": [
+    "沼",
+    "夜"
+   ],
+   "flavor": "青白く光りながら、沼の底をさまよう。"
+  },
+  {
+   "id": "negoke",
+   "name": "根っこ灯",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 8.0,
+   "max": 16.0,
+   "group": 2,
+   "cond": [
+    "マングローブ"
+   ],
+   "flavor": "マングローブの根の間に住む。"
+  },
+  {
+   "id": "kirinuma",
+   "name": "霧沼の鯉",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 40.0,
+   "max": 80.0,
+   "group": 2,
+   "cond": [
+    "沼",
+    "夜明け"
+   ],
+   "flavor": "朝霧の沼で、ゆっくり口をあける。"
+  },
+  {
+   "id": "hasu",
+   "name": "蓮灯魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 6.0,
+   "max": 12.0,
+   "group": 2,
+   "cond": [
+    "沼",
+    "夏（6〜8月）"
+   ],
+   "flavor": "夏、蓮の葉の陰にいる。"
+  },
+  {
+   "id": "raigyo",
+   "name": "雷魚",
+   "mat": "COD",
+   "rarity": 3,
+   "min": 50.0,
+   "max": 90.0,
+   "group": 2,
+   "cond": [
+    "沼",
+    "…"
+   ],
+   "flavor": "雷の沼で、大口をあける。"
+  },
+  {
+   "id": "kagero",
+   "name": "陽炎魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 3,
+   "min": 5.0,
+   "max": 10.0,
+   "group": 2,
+   "cond": [
+    "マングローブ",
+    "…"
+   ],
+   "flavor": "夏の真昼、マングローブの水が揺らぐとき。"
+  },
+  {
+   "id": "secret52",
+   "name": null,
+   "mat": "PUFFERFISH",
+   "rarity": 4,
+   "min": 80.0,
+   "max": 160.0,
+   "group": 2,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "mekura",
+   "name": "盲灯魚",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 10.0,
+   "max": 20.0,
+   "group": 3,
+   "cond": [
+    "地の下（高さ40より下）"
+   ],
+   "flavor": "地の底の水に住む、目のない魚。"
+  },
+  {
+   "id": "dokutsu",
+   "name": "洞窟の灯り魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 5.0,
+   "max": 12.0,
+   "group": 3,
+   "cond": [
+    "深層（高さ0より下）"
+   ],
+   "flavor": "光の届かない水で、自分で光る。"
+  },
+  {
+   "id": "koke",
+   "name": "苔灯魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 6.0,
+   "max": 12.0,
+   "group": 3,
+   "cond": [
+    "繁茂した洞窟"
+   ],
+   "flavor": "苔の洞窟で、淡い緑に光る。"
+  },
+  {
+   "id": "sekijun",
+   "name": "石筍魚",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 15.0,
+   "max": 30.0,
+   "group": 3,
+   "cond": [
+    "鍾乳洞"
+   ],
+   "flavor": "しずくの洞窟の、尖った水たまりに。"
+  },
+  {
+   "id": "kouseki",
+   "name": "鉱石魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 8.0,
+   "max": 15.0,
+   "group": 3,
+   "cond": [
+    "地の奥（高さ20より下）"
+   ],
+   "flavor": "鉱石のかけらを、鱗に混ぜている。"
+  },
+  {
+   "id": "tsurara",
+   "name": "垂氷魚",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 20.0,
+   "max": 40.0,
+   "group": 3,
+   "cond": [
+    "地の下（高さ40より下）",
+    "雪の地"
+   ],
+   "flavor": "雪の地の下の、冷たい地底湖に。"
+  },
+  {
+   "id": "shounyu",
+   "name": "鍾乳鮫",
+   "mat": "COD",
+   "rarity": 3,
+   "min": 60.0,
+   "max": 120.0,
+   "group": 3,
+   "cond": [
+    "鍾乳洞",
+    "…"
+   ],
+   "flavor": "深いしずくの洞窟の、大きな影。"
+  },
+  {
+   "id": "mizugoke",
+   "name": "光苔鱒",
+   "mat": "SALMON",
+   "rarity": 3,
+   "min": 25.0,
+   "max": 50.0,
+   "group": 3,
+   "cond": [
+    "繁茂した洞窟",
+    "…"
+   ],
+   "flavor": "灯りを置いた苔の洞窟でだけ。"
+  },
+  {
+   "id": "yakou",
+   "name": "地底の夜光",
+   "mat": "TROPICAL_FISH",
+   "rarity": 3,
+   "min": 4.0,
+   "max": 9.0,
+   "group": 3,
+   "cond": [
+    "地の底（高さ−30より下）",
+    "…"
+   ],
+   "flavor": "ずっと深い水の底で、星のように光る。"
+  },
+  {
+   "id": "secret62",
+   "name": null,
+   "mat": "PUFFERFISH",
+   "rarity": 4,
+   "min": 20.0,
+   "max": 40.0,
+   "group": 3,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "secret63",
+   "name": null,
+   "mat": "PUFFERFISH",
+   "rarity": 4,
+   "min": 30.0,
+   "max": 60.0,
+   "group": 3,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "secret64",
+   "name": null,
+   "mat": "COD",
+   "rarity": 5,
+   "min": 120.0,
+   "max": 240.0,
+   "group": 3,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "hara",
+   "name": "野原の鮒",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 15.0,
+   "max": 28.0,
+   "group": 4,
+   "cond": [
+    "平原"
+   ],
+   "flavor": "野原の池の、どこにでもいる鮒。"
+  },
+  {
+   "id": "himawari",
+   "name": "日向魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 1,
+   "min": 5.0,
+   "max": 12.0,
+   "group": 4,
+   "cond": [
+    "平原",
+    "真昼"
+   ],
+   "flavor": "真昼の池で、日にあたっている。"
+  },
+  {
+   "id": "komorebi",
+   "name": "木漏れ魚",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 12.0,
+   "max": 25.0,
+   "group": 4,
+   "cond": [
+    "森"
+   ],
+   "flavor": "森の池の、木漏れ日の色。"
+  },
+  {
+   "id": "iwana",
+   "name": "岩灯魚",
+   "mat": "SALMON",
+   "rarity": 2,
+   "min": 20.0,
+   "max": 45.0,
+   "group": 4,
+   "cond": [
+    "山",
+    "高い所（高さ100より上）"
+   ],
+   "flavor": "高い山の水にひそむ。"
+  },
+  {
+   "id": "yamabe",
+   "name": "山辺の魚",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 15.0,
+   "max": 30.0,
+   "group": 4,
+   "cond": [
+    "山"
+   ],
+   "flavor": "風の吹く山の池に。"
+  },
+  {
+   "id": "hidamari",
+   "name": "陽だまり魚",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 15.0,
+   "max": 30.0,
+   "group": 4,
+   "cond": [
+    "サバンナ"
+   ],
+   "flavor": "乾いた草原の、ぬるい池に。"
+  },
+  {
+   "id": "nobuna",
+   "name": "春の野鮒",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 12.0,
+   "max": 25.0,
+   "group": 4,
+   "cond": [
+    "平原",
+    "春（3〜5月）"
+   ],
+   "flavor": "春の野の池に、たくさん。"
+  },
+  {
+   "id": "sakuramasu",
+   "name": "桜鱒",
+   "mat": "SALMON",
+   "rarity": 2,
+   "min": 30.0,
+   "max": 62.0,
+   "group": 4,
+   "cond": [
+    "桜の林"
+   ],
+   "flavor": "花びらの色をした、春の鱒。"
+  },
+  {
+   "id": "hyoutou",
+   "name": "氷灯魚",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 20.0,
+   "max": 45.0,
+   "group": 4,
+   "cond": [
+    "雪の地"
+   ],
+   "flavor": "氷の下で、小さな灯をともす。"
+  },
+  {
+   "id": "mitsurin",
+   "name": "密林の灯",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 8.0,
+   "max": 18.0,
+   "group": 4,
+   "cond": [
+    "密林"
+   ],
+   "flavor": "密林の水辺で、鮮やかに光る。"
+  },
+  {
+   "id": "akatsuchi",
+   "name": "赤土魚",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 20.0,
+   "max": 40.0,
+   "group": 4,
+   "cond": [
+    "荒野"
+   ],
+   "flavor": "荒野の赤い水たまりに。"
+  },
+  {
+   "id": "kirimori",
+   "name": "霧の森の魚",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 20.0,
+   "max": 40.0,
+   "group": 4,
+   "cond": [
+    "森",
+    "夜明け"
+   ],
+   "flavor": "霧の森の、夜明けの池に。"
+  },
+  {
+   "id": "shirakaba",
+   "name": "白樺魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 8.0,
+   "max": 14.0,
+   "group": 4,
+   "cond": [
+    "白樺の森"
+   ],
+   "flavor": "白樺の森の池で、白く光る。"
+  },
+  {
+   "id": "kuromori",
+   "name": "黒森の魚",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 25.0,
+   "max": 50.0,
+   "group": 4,
+   "cond": [
+    "暗い森"
+   ],
+   "flavor": "暗い森の、深い池に。"
+  },
+  {
+   "id": "momiji",
+   "name": "紅葉鯉",
+   "mat": "COD",
+   "rarity": 2,
+   "min": 30.0,
+   "max": 60.0,
+   "group": 4,
+   "cond": [
+    "森",
+    "秋（9〜11月）"
+   ],
+   "flavor": "秋、紅葉の池に浮かぶ。"
+  },
+  {
+   "id": "hanabira",
+   "name": "花びら魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 3,
+   "min": 5.0,
+   "max": 10.0,
+   "group": 4,
+   "cond": [
+    "桜の林",
+    "…"
+   ],
+   "flavor": "春の桜の下でだけ、花のように泳ぐ。"
+  },
+  {
+   "id": "unjou",
+   "name": "雲上魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 3,
+   "min": 8.0,
+   "max": 15.0,
+   "group": 4,
+   "cond": [
+    "雲の上（高さ150より上）",
+    "…"
+   ],
+   "flavor": "雲より高い池に住む。"
+  },
+  {
+   "id": "kinoko",
+   "name": "茸灯魚",
+   "mat": "PUFFERFISH",
+   "rarity": 3,
+   "min": 10.0,
+   "max": 25.0,
+   "group": 4,
+   "cond": [
+    "キノコ島",
+    "…"
+   ],
+   "flavor": "茸の島の、胞子の降る水に。"
+  },
+  {
+   "id": "kiba",
+   "name": "牙灯魚",
+   "mat": "PUFFERFISH",
+   "rarity": 3,
+   "min": 20.0,
+   "max": 40.0,
+   "group": 4,
+   "cond": [
+    "密林",
+    "…"
+   ],
+   "flavor": "雨の密林で、牙をむく。"
+  },
+  {
+   "id": "oasis",
+   "name": "砂漠の泉魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 3,
+   "min": 5.0,
+   "max": 12.0,
+   "group": 4,
+   "cond": [
+    "砂漠",
+    "…"
+   ],
+   "flavor": "砂漠のまれな泉に住む。"
+  },
+  {
+   "id": "hoshimi",
+   "name": "星見魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 3,
+   "min": 6.0,
+   "max": 12.0,
+   "group": 4,
+   "cond": [
+    "山",
+    "…"
+   ],
+   "flavor": "晴れた夜、山の池に星を映す。"
+  },
+  {
+   "id": "secret86",
+   "name": null,
+   "mat": "COD",
+   "rarity": 4,
+   "min": 80.0,
+   "max": 150.0,
+   "group": 4,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "secret87",
+   "name": null,
+   "mat": "PUFFERFISH",
+   "rarity": 4,
+   "min": 15.0,
+   "max": 35.0,
+   "group": 4,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "koi",
+   "name": "宵闇鯉",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 30.0,
+   "max": 75.0,
+   "group": 5,
+   "cond": [
+    "夜"
+   ],
+   "flavor": "長い夜を泳ぎつづける、灯原の鯉。"
+  },
+  {
+   "id": "funa",
+   "name": "灯籠鮒",
+   "mat": "COD",
+   "rarity": 1,
+   "min": 18.0,
+   "max": 40.0,
+   "group": 5,
+   "cond": [
+    "夜",
+    "灯りの中"
+   ],
+   "flavor": "灯籠の明かりの下でだけ、水面に上がる。"
+  },
+  {
+   "id": "kingyo",
+   "name": "灯守金魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 5.0,
+   "max": 16.0,
+   "group": 5,
+   "cond": [
+    "格3以上の灯り"
+   ],
+   "flavor": "灯守りに飼われていた、と言われる金魚。"
+  },
+  {
+   "id": "asagao",
+   "name": "暁の金魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 2,
+   "min": 5.0,
+   "max": 12.0,
+   "group": 5,
+   "cond": [
+    "夜明け",
+    "格2以上の灯り"
+   ],
+   "flavor": "夜明けの灯籠の下で、朝顔のように開く。"
+  },
+  {
+   "id": "akatsuki",
+   "name": "朱月鯛",
+   "mat": "SALMON",
+   "rarity": 3,
+   "min": 30.0,
+   "max": 62.0,
+   "group": 5,
+   "cond": [
+    "朱月",
+    "…"
+   ],
+   "flavor": "赤い月の夜にだけ、浅瀬へ上がる。"
+  },
+  {
+   "id": "raitou",
+   "name": "雷灯",
+   "mat": "PUFFERFISH",
+   "rarity": 3,
+   "min": 25.0,
+   "max": 50.0,
+   "group": 5,
+   "cond": [
+    "雷雨",
+    "…"
+   ],
+   "flavor": "雷のたびに、体が白く光る。"
+  },
+  {
+   "id": "mikazuki",
+   "name": "三日月魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 3,
+   "min": 10.0,
+   "max": 20.0,
+   "group": 5,
+   "cond": [
+    "三日月",
+    "…"
+   ],
+   "flavor": "三日月の夜、灯りの下にだけ。"
+  },
+  {
+   "id": "kagenushi",
+   "name": "新月の影",
+   "mat": "COD",
+   "rarity": 3,
+   "min": 40.0,
+   "max": 80.0,
+   "group": 5,
+   "cond": [
+    "新月",
+    "…"
+   ],
+   "flavor": "月のない夜、灯りの外の闇にひそむ。"
+  },
+  {
+   "id": "mangetsu",
+   "name": "満月鯉",
+   "mat": "COD",
+   "rarity": 3,
+   "min": 50.0,
+   "max": 100.0,
+   "group": 5,
+   "cond": [
+    "満月",
+    "…"
+   ],
+   "flavor": "満月と灯りが重なる夜に。"
+  },
+  {
+   "id": "hanabi",
+   "name": "花火魚",
+   "mat": "TROPICAL_FISH",
+   "rarity": 3,
+   "min": 6.0,
+   "max": 12.0,
+   "group": 5,
+   "cond": [
+    "夏（6〜8月）",
+    "…"
+   ],
+   "flavor": "夏の夜、大きな灯路網の下で花火のように光る。"
+  },
+  {
+   "id": "secret98",
+   "name": null,
+   "mat": "PUFFERFISH",
+   "rarity": 4,
+   "min": 20.0,
+   "max": 45.0,
+   "group": 5,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "secret99",
+   "name": null,
+   "mat": "TROPICAL_FISH",
+   "rarity": 4,
+   "min": 8.0,
+   "max": 16.0,
+   "group": 5,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "secret100",
+   "name": null,
+   "mat": "COD",
+   "rarity": 4,
+   "min": 90.0,
+   "max": 160.0,
+   "group": 5,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "secret101",
+   "name": null,
+   "mat": "COD",
+   "rarity": 5,
+   "min": 80.0,
+   "max": 160.0,
+   "group": 5,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "secret102",
+   "name": null,
+   "mat": "TROPICAL_FISH",
+   "rarity": 5,
+   "min": 20.0,
+   "max": 40.0,
+   "group": 5,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "secret103",
+   "name": null,
+   "mat": "SALMON",
+   "rarity": 5,
+   "min": 100.0,
+   "max": 200.0,
+   "group": 5,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "secret104",
+   "name": null,
+   "mat": "TROPICAL_FISH",
+   "rarity": 5,
+   "min": 10.0,
+   "max": 20.0,
+   "group": 5,
+   "cond": [],
+   "flavor": null
+  },
+  {
+   "id": "secret105",
+   "name": null,
+   "mat": "SALMON",
+   "rarity": 5,
+   "min": 40.0,
+   "max": 80.0,
+   "group": 5,
+   "cond": [],
+   "flavor": null
+  }
+ ],
+ "mineXp": {
+  "AMETHYST_CLUSTER": 2,
+  "ANCIENT_DEBRIS": 50,
+  "ANDESITE": 1,
+  "BASALT": 1,
+  "BLACKSTONE": 1,
+  "CALCITE": 1,
+  "COAL_ORE": 4,
+  "COPPER_ORE": 4,
+  "DEEPSLATE": 1,
+  "DEEPSLATE_COAL_ORE": 4,
+  "DEEPSLATE_COPPER_ORE": 4,
+  "DEEPSLATE_DIAMOND_ORE": 25,
+  "DEEPSLATE_EMERALD_ORE": 25,
+  "DEEPSLATE_GOLD_ORE": 10,
+  "DEEPSLATE_IRON_ORE": 6,
+  "DEEPSLATE_LAPIS_ORE": 7,
+  "DEEPSLATE_REDSTONE_ORE": 5,
+  "DIAMOND_ORE": 25,
+  "DIORITE": 1,
+  "DRIPSTONE_BLOCK": 1,
+  "EMERALD_ORE": 25,
+  "END_STONE": 1,
+  "GOLD_ORE": 10,
+  "GRANITE": 1,
+  "IRON_ORE": 6,
+  "LAPIS_ORE": 7,
+  "NETHERRACK": 1,
+  "NETHER_GOLD_ORE": 4,
+  "NETHER_QUARTZ_ORE": 4,
+  "OBSIDIAN": 2,
+  "REDSTONE_ORE": 5,
+  "RED_SANDSTONE": 1,
+  "SANDSTONE": 1,
+  "SMOOTH_BASALT": 1,
+  "STONE": 1,
+  "TERRACOTTA": 1,
+  "TUFF": 1
+ },
+ "woodXp": {
+  "ACACIA_LOG": 6,
+  "ACACIA_WOOD": 6,
+  "BIRCH_LOG": 6,
+  "BIRCH_WOOD": 6,
+  "BROWN_MUSHROOM_BLOCK": 2,
+  "CHERRY_LOG": 6,
+  "CHERRY_WOOD": 6,
+  "CRIMSON_HYPHAE": 6,
+  "CRIMSON_STEM": 6,
+  "DARK_OAK_LOG": 6,
+  "DARK_OAK_WOOD": 6,
+  "JUNGLE_LOG": 6,
+  "JUNGLE_WOOD": 6,
+  "MANGROVE_LOG": 6,
+  "MANGROVE_WOOD": 6,
+  "MUSHROOM_STEM": 6,
+  "OAK_LOG": 6,
+  "OAK_WOOD": 6,
+  "PALE_OAK_LOG": 6,
+  "PALE_OAK_WOOD": 6,
+  "RED_MUSHROOM_BLOCK": 2,
+  "SPRUCE_LOG": 6,
+  "SPRUCE_WOOD": 6,
+  "WARPED_HYPHAE": 6,
+  "WARPED_STEM": 6
+ },
+ "cropXp": {
+  "BEETROOTS": 3,
+  "CARROTS": 3,
+  "COCOA": 3,
+  "MELON": 4,
+  "NETHER_WART": 3,
+  "PITCHER_CROP": 6,
+  "POTATOES": 3,
+  "PUMPKIN": 4,
+  "TORCHFLOWER_CROP": 6,
+  "WHEAT": 3
+ }
+}

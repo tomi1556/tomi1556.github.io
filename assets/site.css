@@ -625,3 +625,178 @@ th,td{padding:12px 10px}
 .nl{font-size:10px}
 }
 @media (prefers-reduced-motion:reduce){.nametag,.ch-ic.heart .l{animation:none}}
+
+/* ───── 灯技 Wiki ───── */
+.wk{padding-top:72px}
+.wk-in{display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px;align-items:start}
+.wside{position:sticky;top:calc(var(--hdr-h) + 18px);display:flex;flex-direction:column;gap:2px;padding:14px 10px;background:#1B1D22;border:2px solid rgba(0,0,0,.35);box-shadow:5px 5px 0 rgba(0,0,0,.3);max-height:calc(100vh - var(--hdr-h) - 40px);overflow:auto}
+.wside-h{font-size:13px;color:var(--mu);letter-spacing:.12em;padding:2px 8px 8px}
+.wside a{--c:#fff;display:flex;align-items:center;gap:10px;min-height:40px;padding:4px 8px;color:#D7DCE6;text-decoration:none;font-weight:700;font-size:14px;border-left:3px solid transparent}
+.wside a:hover{background:rgba(255,255,255,.05);color:#fff}
+.wside a[aria-current]{border-left-color:var(--c);background:color-mix(in srgb,var(--c) 14%,transparent);color:#fff}
+.ws-k{display:grid;place-items:center;width:26px;height:26px;flex:none;font-family:var(--disp);font-size:14px;color:#14161B;background:var(--c);box-shadow:inset 0 -3px 0 rgba(0,0,0,.25)}
+.wk-main{min-width:0}
+.wk-h{margin-top:64px}
+.wk-main>.wk-h:first-of-type{margin-top:44px}
+.wk-p{margin:-6px 0 18px;font-size:15px}
+.wk-small{font-size:14px;margin-top:12px;line-height:1.8}
+.wk-two{margin-top:56px}
+.wk-stats{--c:var(--amber);display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:2px;background:rgba(0,0,0,.25);border:2px solid rgba(0,0,0,.3)}
+.wk-stats div{display:flex;flex-direction:column;gap:2px;padding:16px 18px;background:#1F2228}
+.wk-stats b{font-weight:400;font-size:38px;line-height:1;color:var(--c);text-shadow:0 0 16px color-mix(in srgb,var(--c) 40%,transparent)}
+.wk-stats.big b{color:var(--amber)}
+.wk-stats span{font-size:13px;color:var(--mu);font-weight:700}
+/* 道のカード */
+.wpcs{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,300px),1fr));gap:14px}
+.wpc{--c:#fff;display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:14px;align-items:center;padding:16px 16px;background:#1F2228;border:2px solid rgba(255,255,255,.07);border-left:6px solid var(--c);color:var(--paper);text-decoration:none;box-shadow:5px 5px 0 rgba(0,0,0,.35);transition:transform .14s steps(2),box-shadow .14s steps(2)}
+.wpc:hover{transform:translate(-3px,-3px);box-shadow:8px 8px 0 rgba(0,0,0,.45),0 0 0 2px color-mix(in srgb,var(--c) 50%,transparent);color:#fff}
+.wpc-k{display:grid;place-items:center;width:52px;height:52px;font-family:var(--disp);font-size:28px;color:#14161B;background:var(--c);box-shadow:inset 0 -5px 0 rgba(0,0,0,.25),0 0 18px color-mix(in srgb,var(--c) 35%,transparent)}
+.wpc-b{display:flex;flex-direction:column;gap:2px;min-width:0}
+.wpc-b b{font-weight:400;font-size:20px}
+.wpc-b span{font-size:13px;color:var(--mu)}
+.wpc-b small{font-size:12px;color:var(--c);font-weight:700}
+.wpc-mini{display:grid;grid-template-columns:repeat(4,8px);gap:3px}
+.wpc-mini i{width:8px;height:8px;background:#5A6070}
+.wpc-mini i.k1{background:#3BB7C9}.wpc-mini i.k2{background:#C55BB4}
+.wpc-mini i.cap{grid-column:2/4;width:auto;background:var(--c);box-shadow:0 0 8px var(--c)}
+/* 技を探す */
+.finder{margin-top:4px}
+.find{position:relative;display:flex;align-items:center;background:#111317;border:2px solid rgba(255,255,255,.18);box-shadow:5px 5px 0 rgba(0,0,0,.35)}
+.find:focus-within{border-color:var(--amber);box-shadow:5px 5px 0 rgba(0,0,0,.35),0 0 0 3px rgba(242,181,68,.2)}
+.find input{flex:1;min-width:0;height:56px;padding:0 18px;background:transparent;border:0;color:#fff;font:700 17px var(--body);outline:none}
+.find input::placeholder{color:#7E8697;font-weight:400}
+.find kbd{margin-right:14px;padding:2px 9px;border:2px solid rgba(255,255,255,.2);color:var(--mu);font-size:14px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+.filters{display:grid;gap:10px;margin-top:16px}
+.fg{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.fl-l{width:4em;font-size:13px;font-weight:700;color:var(--mu)}
+.chip-f{--c:#fff;min-height:36px;padding:2px 12px;background:rgba(0,0,0,.28);border:2px solid rgba(255,255,255,.12);color:#D7DCE6;font:700 14px var(--body);cursor:pointer;transition:border-color .15s,background .15s}
+.chip-f:hover{border-color:var(--c);color:#fff}
+.chip-f[aria-pressed="true"]{background:color-mix(in srgb,var(--c) 22%,transparent);border-color:var(--c);color:#fff;box-shadow:0 0 12px color-mix(in srgb,var(--c) 35%,transparent)}
+.find-n{margin:18px 0 10px;font-size:14px;display:flex;align-items:center;gap:10px}
+.find-n b{font-weight:400;font-size:24px;color:var(--amber)}
+.clear{margin-left:auto;background:none;border:0;color:var(--amber);font:700 14px var(--body);cursor:pointer;min-height:36px;text-decoration:underline}
+.sks{display:grid;gap:2px;max-height:min(70vh,680px);overflow:auto;overscroll-behavior:contain;background:rgba(0,0,0,.25);border:2px solid rgba(0,0,0,.3);scrollbar-color:#3B4466 #16181D}
+.sk{--c:#fff;display:grid;grid-template-columns:36px minmax(0,1fr) 54px 64px 86px;gap:14px;align-items:center;padding:12px 16px;background:#1F2228;color:var(--paper);text-decoration:none;border-left:4px solid var(--c);transition:background .12s}
+.sk:hover{background:#272B33;color:#fff}
+.sk[hidden],.fc[hidden]{display:none!important}
+.sk-p{display:grid;place-items:center;width:32px;height:32px;font-family:var(--disp);font-size:17px;color:#14161B;background:var(--c)}
+.sk-n{display:flex;flex-direction:column;gap:1px;min-width:0}
+.sk-n b{font-size:16px}
+.sk-n small{font-size:13px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sk-k{font-size:12px;font-weight:700;text-align:center;padding:2px 0;border:1px solid currentColor}
+.sk-k.k0,.nc-tag.k0,.tn.k0 .tn-k{color:#C9CFDA}.sk-k.k1,.nc-tag.k1,.tn.k1 .tn-k{color:#55FFFF}.sk-k.k2,.nc-tag.k2,.tn.k2 .tn-k{color:#FF7AE6}
+.sk-t,.sk-l{font-size:13px;color:var(--mu);text-align:right}
+.wk-empty{padding:28px;text-align:center;color:var(--mu);background:#1F2228}
+/* 育て方の曲線 */
+.curve{width:100%;height:auto;margin-top:16px;background:#16181D;border:2px solid rgba(0,0,0,.3)}
+.curve .cg{stroke:rgba(255,255,255,.07);stroke-width:1}
+.curve .ca{stroke:rgba(255,255,255,.25);stroke-width:1.5}
+.curve .cl{fill:none;stroke:#F2B544;stroke-width:3;stroke-linejoin:round;filter:drop-shadow(0 0 6px rgba(242,181,68,.5))}
+.curve .cm{fill:#16181D;stroke:#FFD98A;stroke-width:2.5}
+.curve .ct{font:12px var(--body);fill:#9AA3B5}
+.curve .cv{font:12px var(--dot);fill:#FFE3A3}
+.xpt{min-width:0}
+.xpt th{font-weight:400;white-space:normal}
+.xpt td.n{text-align:right;color:#FFE3A3}
+/* 道のページ：技の木 */
+.tg{display:grid;grid-template-columns:76px repeat(4,minmax(0,1fr));gap:8px;padding:18px;background:#121418;border:2px solid rgba(0,0,0,.4);box-shadow:6px 6px 0 rgba(0,0,0,.35)}
+.tg-b{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 4px 10px;border-bottom:2px dashed rgba(255,255,255,.1)}
+.tg-b span{font-size:12px;color:var(--mu)}
+.tg-b b{font-size:15px}
+.tg-t{display:flex;align-items:center;font-size:13px;color:var(--mu)}
+.tg-t.cap{color:var(--amber)}
+.tg-c{position:relative}
+.tg-c::before{content:'';position:absolute;left:50%;top:-8px;width:4px;height:8px;margin-left:-2px;background:color-mix(in srgb,var(--c,#888) 45%,transparent)}
+.tg>.tg-c:nth-child(-n+10)::before{display:none}
+.tn{--c:#fff;position:relative;display:flex;flex-direction:column;gap:4px;height:100%;min-height:96px;padding:10px 12px;background:#20242C;border:2px solid rgba(255,255,255,.1);color:#fff;text-decoration:none;transition:transform .12s steps(2),border-color .15s,box-shadow .15s}
+.tn:hover{transform:translate(-2px,-2px);border-color:var(--c);box-shadow:4px 4px 0 rgba(0,0,0,.4),0 0 14px color-mix(in srgb,var(--c) 35%,transparent)}
+.tn-k{font-size:11px;font-weight:700}
+.tn b{font-size:15px;line-height:1.35}
+.tn-r{display:flex;gap:3px;margin-top:auto}
+.tn-r i{width:12px;height:5px;background:var(--c);opacity:.7}
+.tn small{position:absolute;right:8px;top:8px;font-size:11px;color:var(--mu)}
+.tg-cap{grid-column:2/6;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+.tg-cap .tn{flex:0 0 260px;min-height:84px;border-color:var(--c);background:linear-gradient(135deg,color-mix(in srgb,var(--c) 22%,#20242C),#20242C 70%);box-shadow:0 0 22px color-mix(in srgb,var(--c) 30%,transparent)}
+.tg-cap p{flex:1 1 200px;font-size:13px}
+/* 試練 */
+.trial{display:flex;flex-direction:column;gap:8px;padding:20px 22px;background:var(--pn);border:2px solid rgba(0,0,0,.25);border-left:6px solid var(--c)}
+.trial b{font-family:var(--disp);font-weight:400;font-size:22px;color:#fff}
+.trial span{font-size:14px;color:var(--mu);line-height:1.8}
+/* 技の札 */
+.br-h{display:flex;align-items:baseline;gap:12px;margin:48px 0 14px;padding-bottom:10px;border-bottom:2px solid color-mix(in srgb,var(--c) 40%,transparent)}
+.br-h span{font-size:14px;color:var(--c)}
+.ncs{display:grid;gap:14px}
+.nc{--c:#fff;scroll-margin-top:calc(var(--hdr-h) + 20px);padding:20px 24px 16px;background:#1F2228;border:2px solid rgba(255,255,255,.07);border-left:6px solid var(--c);box-shadow:5px 5px 0 rgba(0,0,0,.3)}
+.nc.t3{background:linear-gradient(120deg,color-mix(in srgb,var(--c) 8%,#1F2228),#1F2228 50%)}
+.nc.t4{background:linear-gradient(120deg,color-mix(in srgb,var(--c) 16%,#1F2228),#1F2228 60%);border-color:color-mix(in srgb,var(--c) 45%,transparent);border-left-color:var(--c);box-shadow:5px 5px 0 rgba(0,0,0,.3),0 0 28px color-mix(in srgb,var(--c) 18%,transparent)}
+.nc.flash,.nc:target{animation:ncflash 1.6s ease-out 1}
+@keyframes ncflash{0%{box-shadow:0 0 0 3px var(--c),0 0 30px var(--c)}100%{box-shadow:5px 5px 0 rgba(0,0,0,.3)}}
+.nc header{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.nc h3{font-size:24px;line-height:1.3}
+.nc-tag{font-size:14px;font-weight:700}
+.nc-place{margin-left:auto;font-size:13px;color:var(--mu)}
+.nc-desc{margin-top:8px;color:#E3E7EF;font-size:16px;line-height:1.85}
+.nc-act{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px;margin-top:10px;padding:8px 12px;background:rgba(255,122,230,.07);border:1px solid rgba(255,122,230,.25);font-size:13px;color:var(--mu)}
+.nc-act b{font-weight:400;font-size:17px;color:#FFB8F2;margin-right:10px}
+.nc-t{min-width:0;margin-top:2px}
+.nc-t th,.nc-t td{padding:9px 12px}
+.nc .tbl-wrap{margin-top:12px}
+.nc-need{margin-top:12px;font-size:14px;color:#D7DCE6}
+.nc-need span{display:inline-block;margin-right:10px;padding:1px 8px;font-size:12px;font-weight:700;color:#14161B;background:var(--c)}
+.nc-need a{color:var(--c)}
+.nc-foot{display:flex;flex-wrap:wrap;gap:4px 18px;margin-top:10px;padding-top:10px;border-top:1px solid rgba(255,255,255,.07);font-size:12px}
+.wk-pager{margin-top:56px}
+/* 灯魚図鑑 */
+.fcs{list-style:none;padding:0;margin:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,230px),1fr));gap:12px}
+.fc{--c:#fff;position:relative;display:flex;flex-direction:column;gap:6px;padding:16px 16px 14px;background:#1F2228;border:2px solid rgba(255,255,255,.07);border-top:4px solid var(--c);box-shadow:4px 4px 0 rgba(0,0,0,.3)}
+.fc-r{font-size:13px;color:var(--c)}
+.fc-r s{text-decoration:none;color:rgba(255,255,255,.18)}
+.fc-n{font-family:var(--disp);font-weight:400;font-size:21px;line-height:1.3;color:#fff}
+.fc-g{position:absolute;right:12px;top:14px;font-size:12px;font-weight:700;color:#4FD8C8;padding:1px 7px;border:1px solid rgba(79,216,200,.4)}
+.fc-c{font-size:14px;color:#D7DCE6;line-height:1.7}
+.fc-c span{display:inline-block;margin-right:8px;font-size:11px;font-weight:700;color:var(--mu)}
+.fc-f{font-size:13px;line-height:1.7}
+.fc-s{margin-top:auto;font-size:14px;color:#FFE3A3}
+.fc.secret{background:repeating-linear-gradient(135deg,#1C1E23 0 10px,#1F2228 10px 20px)}
+.fc.secret .fc-n{color:#6B7282;letter-spacing:.2em}
+/* 目次の Wiki 帯 */
+.wiki-band{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:18px 26px;align-items:center;margin-top:56px;padding:24px 28px;background:linear-gradient(110deg,rgba(90,170,255,.16),rgba(0,0,0,.2) 55%),#16191F;border:2px solid rgba(90,170,255,.45);color:var(--paper);text-decoration:none;box-shadow:6px 6px 0 rgba(0,0,0,.4);transition:transform .14s steps(2),box-shadow .14s steps(2)}
+.wiki-band:hover{transform:translate(-3px,-3px);box-shadow:9px 9px 0 rgba(0,0,0,.5),0 0 24px rgba(90,170,255,.25);color:#fff}
+.wb-k{padding:6px 10px;font-size:15px;color:#0B1530;background:#5AAAFF;box-shadow:inset 0 -4px 0 rgba(0,0,0,.25)}
+.wb-b{display:flex;flex-direction:column;gap:4px;min-width:0}
+.wb-b b{font-weight:400;font-size:clamp(20px,2.4vw,26px)}
+.wb-b span{font-size:14px;color:var(--mu);line-height:1.7}
+.wb-go{display:inline-flex;align-items:center;gap:10px;font-weight:700;color:#8CC4FF;white-space:nowrap}
+.wb-go i{width:10px;height:12px;background:currentColor;transition:transform .2s steps(2)}
+.wiki-band:hover .wb-go i{transform:translateX(4px)}
+@media (max-width:980px){
+.wk-in{grid-template-columns:minmax(0,1fr);gap:24px}
+.wside{position:static;flex-direction:row;overflow-x:auto;max-height:none;padding:8px;gap:4px;-webkit-overflow-scrolling:touch}
+.wside-h{display:none}
+.wside a{flex:none;border-left:0;border-bottom:3px solid transparent;font-size:13px;min-height:44px}
+.wside a[aria-current]{border-bottom-color:var(--c)}
+}
+@media (max-width:760px){
+.tg{grid-template-columns:repeat(4,minmax(0,1fr));padding:10px;gap:6px}
+.tg-h,.tg-t{display:none}
+.tg-b b{font-size:13px}
+.tn{min-height:84px;padding:8px}
+.tn b{font-size:13px}
+.tn small{position:static;order:-1}
+.tg-cap{grid-column:1/5}
+.tg-cap .tn{flex:1 1 100%}
+.sk{grid-template-columns:32px minmax(0,1fr) 48px;gap:10px;padding:10px 12px}
+.sk-t,.sk-l{display:none}
+.nc{padding:16px 16px 12px}
+.nc-place{margin-left:0;width:100%}
+.wiki-band{grid-template-columns:1fr;gap:10px;padding:20px}
+.wb-k{justify-self:start}
+.fl-l{width:100%}
+}
+.xpt td.n{white-space:nowrap!important}
+.sk-n small{display:-webkit-box;-webkit-line-clamp:1;-webkit-box-orient:vertical;white-space:normal}
+@media (max-width:760px){
+.tg-cap .tn{min-height:64px;height:auto}
+.sk-n small{-webkit-line-clamp:2}
+}

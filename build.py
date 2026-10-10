@@ -62,7 +62,7 @@ def footer():
 
 
 def page(file, title, desc, body, hero_min=""):
-    cur = file if file in dict(NAV) else ("guide.html" if file.startswith("guide-") else "")
+    cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki")) else "")
     url = SITE + ("/" if file == "index.html" else "/" + file)
     return f'''<!doctype html>
 <html lang="ja">
@@ -692,6 +692,7 @@ def _hiwaza_sec():
     <h2 class="disp h2">遊ぶほど、技が身につく。</h2>
     <p class="lead"><span class="kbd">/waza</span> で開きます。掘る、切る、耕す、釣る、作る、旅をする、動物と暮らす、付呪する、灯籠を守る、夜を越える。遊んだ道の Lv が上がり（最大50）、Lv が1上がるごとに技点が1。技点で技を覚えます。戦うための技は少しだけで、ほとんどは暮らしと夜を越えるための技です。</p>
     <div class="paths">{cards}</div>
+    <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">130の技を、ひとつずつ</b><span>効き目・要る Lv・技点・灯力・待ち時間。技の名前で探せます。</span></span><span class="wb-go">灯技 Wiki へ<i></i></span></a>
   </div>
 </section>
 
@@ -779,6 +780,7 @@ def _fish_sec():
       <div><h3 class="h3 disp">魚読み</h3><p class="mu">釣の道の「魚読み」を覚えると、竿を投げたとき、その場・その時に釣れる灯魚が何種いて、まだ図鑑にないものがいくつあるかがわかります。</p></div>
       <div><h3 class="h3 disp">ヌシ</h3><p class="mu">釣の道の奥義「主の竿」を覚えると、倍ほどの大きさの「ヌシ」がかかります。秘と幻、そしてヌシを釣り上げると、全体に知らされます。</p></div>
     </div>
+    <a href="wiki-hiuo.html" class="wiki-band" style="margin-top:28px"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯魚図鑑</b><span>106種の珍しさ・大きさ・水辺・手がかり（珍しい魚は伏せてあります）。</span></span><span class="wb-go">図鑑を見る<i></i></span></a>
     <p class="note cold"><b>放置した釣り場では、灯魚はかかりません。</b>視点が5分動かないあいだは、灯魚も経験値も出ません。</p>
   </div>
 </section>
@@ -860,6 +862,7 @@ def _guide_index():
   <div class="wrap">
     <div class="gi-start">{pix(CH_ICONS["lantern"], "ch-ic lit")}<p><b>はじめての人は、第一層の3章だけで大丈夫です。</b>灯籠を置き、夜を知り、灯喰いから守れれば、最初の夜は越えられます。ほかの章は、遊びながらでどうぞ。</p><a href="guide-lantern.html" class="pbtn">第1章から読む</a></div>
     {layers}
+    <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯技 完全解説 Wiki</b><span>130の技の効き目・要る Lv・技点・待ち時間、技の木、奥義の試練、務め、灯魚図鑑。ぜんぶ、ゲームと同じ数字で。</span></span><span class="wb-go">開く<i></i></span></a>
   </div>
 </section>'''
 
@@ -1041,6 +1044,330 @@ rules = sub_hero("rules.html", "きまり", "むずかしいことはありま�
   </div>
 </section>
 '''
+
+# ───────────────────────── 灯技 Wiki ─────────────────────────
+# data/hiwaza.json（プラグインの定義から書き出したもの）から作る。数字は手で書かない。
+import json as _wj, html as _wh
+
+HW = _wj.loads((pathlib.Path(__file__).parent / "data" / "hiwaza.json").read_text(encoding="utf-8"))
+_KIND = ["常時", "切替", "発動"]
+_KIND_C = ["#C9CFDA", "#55FFFF", "#FF7AE6"]
+_KIND_HELP = ["覚えれば、いつも働く", "右クリックでオン／オフ", "主技・副技にして使う"]
+_TIER = ["", "一の段", "二の段", "三の段", "奥義"]
+_ROMAN = ["", "Ⅰ", "Ⅱ", "Ⅲ"]
+_PCOL = ["#FFAA00", "#B46CFF", "#55FFFF", "#55FF55", "#FFFF55", "#3CC8C8", "#FF55FF", "#FFFFFF", "#FF5555", "#7C7CFF"]
+_E = _wh.escape
+
+
+def _sec(s):
+    if s >= 60 and s % 60 == 0:
+        return f"{s // 60}分"
+    if s >= 60:
+        return f"{s // 60}分{s % 60}秒"
+    return f"{s}秒"
+
+
+def _desc(n):
+    return "".join(n["desc"])
+
+
+def _num(v):
+    return f"{v:,}"
+
+
+# 道ごとの「育つこと」（経験値の入り口）。プラグインの数え方と同じ。
+def _xp_rows(i):
+    mx, wx, cx = HW["mineXp"], HW["woodXp"], HW["cropXp"]
+    if i == 2:
+        groups = {}
+        for k, v in mx.items():
+            groups.setdefault(v, []).append(k)
+        names = {1: "石・深層岩・花崗岩・ネザーラックなど", 2: "黒曜石・アメジストの塊", 4: "石炭・銅・石英・ネザー金", 5: "レッドストーン", 6: "鉄", 7: "ラピスラズリ", 10: "金",
+                 25: "ダイヤモンド・エメラルド", 50: "古代の残骸"}
+        return [(names.get(v, "ほか"), f"+{v}") for v in sorted(groups)]
+    if i == 3:
+        return [("原木・幹（オーク・トウヒ・桜・ペールオークなど、すべて）", f"+{max(wx.values())}"), ("巨大キノコのかさ", "+2")]
+    if i == 4:
+        return [("小麦・ニンジン・ジャガイモ・ビートルート・ネザーウォート・カカオ（実ったもの）", "+3"), ("スイカ・カボチャ", "+4"), ("トーチフラワー・ウツボカズラ", "+6")]
+    return {
+        0: [("灯籠を置く", "+25"), ("灯喰いから灯籠を守りきる", "+60"), ("消えた灯籠を灯し直す", "+30"), ("灯喰いを倒す", "+60"), ("夜、灯りの中で過ごす", "+2 ／分")],
+        1: [("夜を越えて夜明けを迎える", "+40"), ("朱月の夜を越える", "+150"), ("夜、灯りの外で過ごす", "+3 ／分"), ("夜哭きの精鋭を倒す", "+20")],
+        5: [("魚を釣る（なんでも）", "+15"), ("灯魚：並 ／ 珍 ／ 稀", f"+{HW['rarityXp'][1]} ／ +{HW['rarityXp'][2]} ／ +{HW['rarityXp'][3]}"),
+            ("灯魚：秘 ／ 幻", f"+{HW['rarityXp'][4]} ／ +{HW['rarityXp'][5]}")],
+        6: [("ものを作る", "+2"), ("灯籠を作る", "+15"), ("かまどから取り出す", "1個 +1"), ("（作る・かまどは合わせて1分に60まで）", "")],
+        7: [("遠くへ進む（10秒ごと、まっすぐ進んだ距離 6ブロックにつき）", "+1"), ("はじめての土地（バイオーム）を訪れる", "+40"), ("（10秒で数えるのは120ブロックまで）", "")],
+        8: [("動物を殖やす", "+15"), ("動物を手なずける", "+60"), ("羊の毛を刈る", "+3"), ("卵集めで卵を拾う", "+1"), ("（1分に150まで）", "")],
+        9: [("付呪する", "+15×段 ＋ 使ったLv"), ("薬を醸造する", "1本 +8（1分に120まで）"), ("経験値オーブを拾う", "半分（1分に40まで）")],
+    }[i]
+
+
+def _wiki_side(cur):
+    items = f'<a href="wiki.html"{" aria-current=\"page\"" if cur == "top" else ""}><span class="ws-k" style="--c:var(--amber)">≡</span>Wiki のはじめ</a>'
+    for i, p in enumerate(HW["paths"]):
+        items += f'<a href="wiki-{p["id"]}.html" style="--c:{_PCOL[i]}"{" aria-current=\"page\"" if cur == p["id"] else ""}><span class="ws-k">{p["k"]}</span>{p["name"]}</a>'
+    items += f'<a href="wiki-hiuo.html" style="--c:#4FD8C8"{" aria-current=\"page\"" if cur == "hiuo" else ""}><span class="ws-k">魚</span>灯魚図鑑</a>'
+    return f'<nav class="wside" aria-label="Wiki の目次"><p class="dot wside-h">灯技 Wiki</p>{items}</nav>'
+
+
+def _wiki_hero(title, lead, color, crumb, icon_rows=None, sub=""):
+    ic = pix(icon_rows, "ch-ic big") if icon_rows else ""
+    return f'''<div class="hero ch-hero wk-hero" style="--c:{color}">
+  <div class="sky"></div><div class="stars" aria-hidden="true"></div>
+  <div class="wrap phead" id="content">
+    <nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><a href="wiki.html">灯技 Wiki</a>{crumb}</nav>
+    <div class="ch-head">{ic}<div><p class="ch-big dot">{sub}</p><h1 class="disp h1-sub">{title}</h1></div></div>
+    <p class="lead">{lead}</p>
+  </div>
+</div>'''
+
+
+def _tile(n, color):
+    k = n["kind"]
+    ranks = "".join("<i></i>" for _ in range(len(n["req"])))
+    return f'''<a href="#{n["id"]}" class="tn k{k}" style="--c:{color}" title="{_E(n["name"])}"><span class="tn-k">{_KIND[k]}</span><b>{_E(n["name"])}</b><span class="tn-r">{ranks}</span><small class="dot">Lv{n["req"][0]}〜</small></a>'''
+
+
+def _tree(p, color):
+    nodes = p["nodes"]
+    head = '<div class="tg-h"></div>' + "".join(f'<div class="tg-b"><span class="dot">枝{"一二三四"[b]}</span><b>{_E(p["branches"][b])}</b></div>' for b in range(4))
+    rows = ""
+    for t in (1, 2, 3):
+        rows += f'<div class="tg-t dot">{_TIER[t]}</div>'
+        for b in range(4):
+            n = next((x for x in nodes if x["branch"] == b and x["tier"] == t), None)
+            rows += f'<div class="tg-c">{_tile(n, color) if n else ""}</div>'
+    cap = next(x for x in nodes if x["tier"] == 4)
+    rows += f'<div class="tg-t dot cap">奥義</div><div class="tg-cap">{_tile(cap, color)}<p class="mu">三の段を {HW["capNeeds"]} つ覚え、Lv{cap["req"][0]} と「奥義の試練」を果たすと開く</p></div>'
+    return f'<div class="tg" role="group" aria-label="技の木">{head}{rows}</div>'
+
+
+def _node_card(p, n, color):
+    k = n["kind"]
+    parent = next((x for x in p["nodes"] if x["id"] == n["parent"]), None) if n["parent"] else None
+    if n["tier"] == 4:
+        need = f'三の段の技を {HW["capNeeds"]} つ ＋ 奥義の試練「{_E(p["trial"])}」' + ("（灯籠プラグインがなければ試練なし）" if p["trialTomo"] else "")
+    elif parent:
+        need = f'同じ枝の「<a href="#{parent["id"]}">{_E(parent["name"])}</a>」を先に覚える'
+    else:
+        need = "なし（一の段）"
+    rows = ""
+    for r in range(len(n["req"])):
+        cd = f'<td class="n">{_sec(n["cooldown"][min(r, len(n["cooldown"]) - 1)])}</td>' if k == 2 else ""
+        rows += f'<tr><th class="n">{_ROMAN[r + 1] if len(n["req"]) > 1 else "—"}</th><td>{_E(n["effect"][r])}</td><td class="n">Lv{n["req"][r]}</td><td class="n">{n["cost"][r]}</td>{cd}</tr>'
+    act = f'<p class="nc-act"><span>灯力</span><b class="dot">{n["gauge"]}</b><span>待ち時間</span><b class="dot">{" → ".join(_sec(c) for c in n["cooldown"])}</b></p>' if k == 2 else ""
+    total = sum(n["cost"])
+    place = "奥義" if n["tier"] == 4 else f'{_E(p["branches"][n["branch"]])}の枝 ・ {_TIER[n["tier"]]}'
+    return f'''<article class="nc t{n["tier"]}" id="{n["id"]}" style="--c:{color}" data-name="{_E(n["name"])}">
+      <header><span class="nc-tag k{k}">〔{_KIND[k]}〕</span><h3 class="disp">{_E(n["name"])}</h3><span class="nc-place dot">{place}</span></header>
+      <p class="nc-desc">{_E(_desc(n))}</p>
+      {act}
+      <div class="tbl-wrap"><table class="nc-t"><thead><tr><th>段</th><th>効き目</th><th>要る Lv</th><th>技点</th>{"<th>待ち</th>" if k == 2 else ""}</tr></thead><tbody>{rows}</tbody></table></div>
+      <p class="nc-need"><span>覚える条件</span>{need}</p>
+      <p class="nc-foot mu"><span>{_KIND_HELP[k]}</span><span>すべての段で技点 {total}</span><span class="dot">id: {n["id"]}</span></p>
+    </article>'''
+
+
+def wiki_path(i):
+    p = HW["paths"][i]
+    color = _PCOL[i]
+    nodes = p["nodes"]
+    xp = "".join(f'<tr><th>{_E(a)}</th><td class="n">{_E(b)}</td></tr>' for a, b in _xp_rows(i))
+    acts = sum(1 for n in nodes if n["kind"] == 2)
+    order = sorted(nodes, key=lambda n: (n["tier"] == 4, n["branch"], n["tier"]))
+    cards = ""
+    for b in range(4):
+        cards += f'<h2 class="disp h3 br-h" style="--c:{color}"><span class="dot">枝{"一二三四"[b]}</span>{_E(p["branches"][b])}の枝</h2>'
+        cards += "".join(_node_card(p, n, color) for n in order if n["branch"] == b)
+    cards += f'<h2 class="disp h3 br-h cap" style="--c:{color}"><span class="dot">奥義</span>この道の極み</h2>' + "".join(_node_card(p, n, color) for n in order if n["tier"] == 4)
+    nb = HW["paths"]
+    prev, nxt = nb[i - 1] if i > 0 else None, nb[i + 1] if i + 1 < len(nb) else None
+    pg = lambda x, j, cls, lab: (f'<a href="wiki-{x["id"]}.html" class="pg {cls}" style="--c:{_PCOL[j]}"><small class="dot">{lab}</small><b>{x["name"]}</b><span class="mu">{_E(x["desc"][0])}</span></a>' if x else
+                                 f'<a href="wiki-hiuo.html" class="pg {cls}" style="--c:#4FD8C8"><small class="dot">{lab}</small><b>灯魚図鑑</b><span class="mu">106種の灯魚と、かかる条件。</span></a>' if cls == "next" else
+                                 f'<a href="wiki.html" class="pg {cls}" style="--c:var(--amber)"><small class="dot">{lab}</small><b>Wiki のはじめ</b><span class="mu">すべての技の一覧と、育て方。</span></a>')
+    hero = _wiki_hero(p["name"], _E(p["desc"][0] + p["desc"][1]), color, f'<span aria-hidden="true">›</span><span>{p["name"]}</span>', None, f'PATH {i + 1:02d} ／ 10')
+    return hero + f'''
+<section class="stratum s-deep wk">
+  <div class="edge"></div>
+  <div class="wrap wk-in">
+    {_wiki_side(p["id"])}
+    <div class="wk-main">
+      <div class="wk-stats" style="--c:{color}">
+        <div><b class="dot">13</b><span>技</span></div><div><b class="dot">{acts}</b><span>使う技（発動）</span></div><div><b class="dot">{p["cost"]}</b><span>すべて覚える技点</span></div><div><b class="dot">50</b><span>最大 Lv</span></div>
+      </div>
+      <h2 class="disp h2 wk-h">技の木</h2>
+      <p class="mu wk-p">上から順に開きます。技をおすと、その技の説明へ飛びます。</p>
+      {_tree(p, color)}
+      <div class="two wk-two">
+        <div><h2 class="disp h3">育つこと</h2><div class="tbl-wrap"><table class="xpt"><tbody>{xp}</tbody></table></div>
+          <p class="mu wk-small">技がいっしょに壊したブロック（まとめ掘り・一本切り・一斉収穫など）は半分。1日 {_num(HW["dailyXp"])} を超えた分は {int(HW["overflow"] * 100)}%。放置中は育ちません。</p></div>
+        <div><h2 class="disp h3">奥義の試練</h2><p class="trial" style="--c:{color}"><b>{_E(p["trial"])}</b><span>奥義を覚えるには、Lv と三の段2つに加えてこの積み重ねが要ります。務めと同じ数え方です。{"灯籠プラグインがないサーバーでは試練なし。" if p["trialTomo"] else ""}</span></p></div>
+      </div>
+      <h2 class="disp h2 wk-h">技のすべて</h2>
+      <div class="ncs">{cards}</div>
+      <nav class="pager wk-pager" aria-label="前後の道">{pg(prev, i - 1, "prev", "← 前の道")}{pg(nxt, i + 1, "next", "次の道 →")}</nav>
+    </div>
+  </div>
+</section>
+<script src="assets/wiki.js" defer></script>'''
+
+
+def _curve_svg():
+    tot = HW["total"]
+    W, H, L, B, T, R = 640, 260, 54, 34, 14, 14
+    mx = tot[-1]
+    pts = []
+    for lv in range(1, 51):
+        x = L + (W - L - R) * (lv - 1) / 49
+        y = T + (H - T - B) * (1 - tot[lv] / mx)
+        pts.append(f"{x:.1f},{y:.1f}")
+    grid = ""
+    for v in (50000, 100000, 150000, 200000):
+        if v > mx:
+            continue
+        y = T + (H - T - B) * (1 - v / mx)
+        grid += f'<line x1="{L}" x2="{W - R}" y1="{y:.1f}" y2="{y:.1f}" class="cg"/><text x="{L - 8}" y="{y + 4:.1f}" class="ct" text-anchor="end">{v // 10000}万</text>'
+    marks = ""
+    for lv in (10, 20, 30, 40, 50):
+        x = L + (W - L - R) * (lv - 1) / 49
+        y = T + (H - T - B) * (1 - tot[lv] / mx)
+        marks += f'<circle cx="{x:.1f}" cy="{y:.1f}" r="4" class="cm"/><text x="{x:.1f}" y="{H - 12}" class="ct" text-anchor="middle">Lv{lv}</text>'
+        marks += f'<text x="{x - 6:.1f}" y="{y - 10:.1f}" class="cv" text-anchor="end">{_num(tot[lv])}</text>'
+    return f'''<svg class="curve" viewBox="0 0 {W} {H}" role="img" aria-label="Lv ごとの、そこまでに要る経験値の合計。Lv10 で {_num(tot[10])}、Lv40 で {_num(tot[40])}、Lv50 で {_num(tot[50])}。">
+      {grid}<line x1="{L}" x2="{W - R}" y1="{H - B}" y2="{H - B}" class="ca"/><polyline points="{" ".join(pts)}" class="cl"/>{marks}</svg>'''
+
+
+def wiki_index():
+    allnodes = [(i, p, n) for i, p in enumerate(HW["paths"]) for n in p["nodes"]]
+    cards = ""
+    for i, p in enumerate(HW["paths"]):
+        mini = ""
+        for t in (1, 2, 3):
+            for b in range(4):
+                n = next(x for x in p["nodes"] if x["branch"] == b and x["tier"] == t)
+                mini += f'<i class="k{n["kind"]}"></i>'
+        cap = next(x for x in p["nodes"] if x["tier"] == 4)
+        cards += f'''<a href="wiki-{p["id"]}.html" class="wpc" style="--c:{_PCOL[i]}">
+        <span class="wpc-k">{p["k"]}</span>
+        <span class="wpc-b"><b class="disp">{p["name"]}</b><span>{_E(p["desc"][0])}</span><small>奥義「{_E(cap["name"])}」</small></span>
+        <span class="wpc-mini" aria-hidden="true">{mini}<i class="cap"></i></span>
+      </a>'''
+    rows = ""
+    for i, p, n in allnodes:
+        k = n["kind"]
+        tier = "奥義" if n["tier"] == 4 else _TIER[n["tier"]]
+        rows += f'''<a href="wiki-{p["id"]}.html#{n["id"]}" class="sk" style="--c:{_PCOL[i]}" data-path="{p["id"]}" data-kind="{k}" data-tier="{n["tier"]}" data-q="{_E(n["name"] + " " + _desc(n) + " " + " ".join(n["effect"]) + " " + p["name"] + " " + n["id"])}">
+        <span class="sk-p">{p["k"]}</span><span class="sk-n"><b>{_E(n["name"])}</b><small>{_E(_desc(n))}</small></span><span class="sk-k k{k}">{_KIND[k]}</span><span class="sk-t dot">{tier}</span><span class="sk-l dot">Lv{n["req"][0]}{"〜" + str(n["req"][-1]) if len(n["req"]) > 1 else ""}</span>
+      </a>'''
+    pchips = "".join(f'<button type="button" class="chip-f" data-f="path" data-v="{p["id"]}" style="--c:{_PCOL[i]}">{p["k"]}</button>' for i, p in enumerate(HW["paths"]))
+    kchips = "".join(f'<button type="button" class="chip-f" data-f="kind" data-v="{k}" style="--c:{_KIND_C[k]}">{_KIND[k]}</button>' for k in range(3))
+    tchips = "".join(f'<button type="button" class="chip-f" data-f="tier" data-v="{t}" style="--c:var(--amber)">{_TIER[t]}</button>' for t in (1, 2, 3, 4))
+    acts = [(i, p, n) for i, p, n in allnodes if n["kind"] == 2]
+    arows = "".join(f'<tr><th><a href="wiki-{p["id"]}.html#{n["id"]}" style="color:{_PCOL[i]}">{_E(n["name"])}</a></th><td>{p["name"]}</td><td class="n">{n["gauge"]}</td><td class="n">{" → ".join(_sec(c) for c in n["cooldown"])}</td><td>{_E(n["effect"][-1])}</td></tr>' for i, p, n in acts)
+    trows = "".join(f'<tr><th style="color:{_PCOL[i]}">{p["name"]}</th><td>{_E(p["trial"])}</td><td>{_E(next(x for x in p["nodes"] if x["tier"] == 4)["name"])}</td></tr>' for i, p in enumerate(HW["paths"]))
+    taskrows = "".join(f'<tr><th style="color:{_PCOL[t["path"]]}">{HW["paths"][t["path"]]["k"]}</th><td>{_E(t["text"])}</td><td class="n">+{t["xp"]}</td></tr>' for t in HW["tasks"])
+    tot = HW["total"]
+    hero = _wiki_hero("灯技 完全解説", "10の道、130の技、106種の灯魚。プラグインの定義からそのまま作った、灯技のすべてです。数字はゲームと同じです。", "#5AAAFF", "", CH_ICONS["hiwaza"], "HIWAZA WIKI")
+    return hero + f'''
+<section class="stratum s-deep wk">
+  <div class="edge"></div>
+  <div class="wrap wk-in">
+    {_wiki_side("top")}
+    <div class="wk-main">
+      <div class="wk-stats big">
+        <div><b class="dot">10</b><span>道</span></div><div><b class="dot">{len(allnodes)}</b><span>技</span></div><div><b class="dot">{len(acts)}</b><span>使う技（発動）</span></div><div><b class="dot">{len(HW["fish"])}</b><span>灯魚</span></div><div><b class="dot">{len(HW["tasks"])}</b><span>務め</span></div>
+      </div>
+
+      <h2 class="disp h2 wk-h" id="paths">10の道</h2>
+      <div class="wpcs">{cards}</div>
+
+      <h2 class="disp h2 wk-h" id="all">すべての技を探す</h2>
+      <div class="finder">
+        <label class="find"><span class="sr">技を探す</span><input type="search" id="wq" placeholder="名前・効き目で探す（例：まとめ、灯力、落下）" autocomplete="off"><kbd class="dot">/</kbd></label>
+        <div class="filters"><div class="fg"><span class="fl-l">道</span>{pchips}</div><div class="fg"><span class="fl-l">種類</span>{kchips}</div><div class="fg"><span class="fl-l">段</span>{tchips}</div></div>
+        <p class="find-n mu" aria-live="polite"><b class="dot" id="wn">{len(allnodes)}</b> の技 <button type="button" class="clear" id="wclear" hidden>しぼりこみを消す</button></p>
+        <div class="sks" id="wl">{rows}</div>
+        <p class="wk-empty" id="wempty" hidden>見つかりませんでした。ことばを短くしてみてください。</p>
+      </div>
+
+      <h2 class="disp h2 wk-h" id="grow">育て方</h2>
+      <div class="two wk-two">
+        <div><h3 class="disp h3">Lv と経験値</h3><p class="mu">Lv が1上がるごとに、その道の技点が1。Lv50 で、その道の技はすべて覚えられます（余る道もあります）。Lv50 の先は「極み」の★（{_num(HW["starNeed"])} ごとに1つ、★{HW["maxStar"]} まで）。</p>{_curve_svg()}</div>
+        <div><h3 class="disp h3">今日の伸び</h3><div class="tbl-wrap"><table class="xpt"><tbody>
+          <tr><th>1日にふつうに育つ量（道ごと）</th><td class="n">{_num(HW["dailyXp"])}</td></tr>
+          <tr><th>それを超えた分</th><td class="n">{int(HW["overflow"] * 100)}%</td></tr>
+          <tr><th>使わなかった分が貯まる</th><td class="n">{HW["bankDays"]}日ぶんまで</td></tr>
+          <tr><th>技がいっしょに壊したブロック</th><td class="n">{int(HW["chainXp"] * 100)}%</td></tr>
+          <tr><th>務めのごほうび</th><td class="n">伸びを使わない</td></tr>
+          <tr><th>Lv10 ／ Lv20 ／ Lv40 ／ Lv50 まで</th><td class="n">{_num(tot[10])} ／ {_num(tot[20])} ／ {_num(tot[40])} ／ {_num(tot[50])}</td></tr>
+        </tbody></table></div><p class="mu wk-small">放置（視点が5分動かない）中、クリエイティブ、自分で置いたブロック、石の製造機では育ちません。</p></div>
+      </div>
+
+      <h2 class="disp h2 wk-h" id="trials">奥義の試練</h2>
+      <div class="tbl-wrap"><table><thead><tr><th>道</th><th>試練</th><th>奥義</th></tr></thead><tbody>{trows}</tbody></table></div>
+
+      <h2 class="disp h2 wk-h" id="actives">使う技（発動）の一覧</h2>
+      <p class="mu wk-p">主技は <b>しゃがみ2回</b>、副技は <b>しゃがんで F</b>。<span class="kbd">/waza use</span> で一覧から使うこともできます。灯力は灯籠の灯りの中でたまります。</p>
+      <div class="tbl-wrap"><table><thead><tr><th>技</th><th>道</th><th>灯力</th><th>待ち時間（段ごと）</th><th>いちばん上の段</th></tr></thead><tbody>{arows}</tbody></table></div>
+
+      <h2 class="disp h2 wk-h" id="tasks">今日の務め（{len(HW["tasks"])}種から毎日3つ）</h2>
+      <div class="tbl-wrap"><table><thead><tr><th>道</th><th>務め</th><th>経験値</th></tr></thead><tbody>{taskrows}</tbody></table></div>
+      <p class="mu wk-small">果たすと経験値と灯力 +20。3つすべて果たすと加護の欠片。毎日0時（日本時間）に入れ替わります。</p>
+    </div>
+  </div>
+</section>
+<script src="assets/wiki.js" defer></script>'''
+
+
+def wiki_fish():
+    groups = HW["groups"]
+    rar = HW["rarity"]
+    rc = ["", "#E9EEF6", "#55FF55", "#55FFFF", "#FF55FF", "#FFAA00"]
+    cards = ""
+    for f in HW["fish"]:
+        r = f["rarity"]
+        secret = f["name"] is None
+        cond = "・".join(f["cond"]) if f["cond"] else ("手がかりなし" if secret else "どこでも")
+        name = "？？？" if secret else _E(f["name"])
+        cards += f'''<li class="fc{" secret" if secret else ""}" style="--c:{rc[r]}" data-g="{f["group"]}" data-r="{r}">
+        <span class="fc-r dot">{"◆" * r}<s>{"◇" * (5 - r)}</s> {rar[r]}</span>
+        <b class="fc-n">{name}</b>
+        <span class="fc-g">{_E(groups[f["group"]])}</span>
+        <p class="fc-c"><span>手がかり</span>{_E(cond)}</p>
+        {"" if secret else f'<p class="fc-f mu">{_E(f["flavor"])}</p>'}
+        <p class="fc-s dot">{("？" if secret else f'{f["min"]:g}〜{f["max"]:g}cm')}</p>
+      </li>'''
+    gchips = "".join(f'<button type="button" class="chip-f" data-f="g" data-v="{i}" style="--c:#4FD8C8">{_E(g)}</button>' for i, g in enumerate(groups))
+    rchips = "".join(f'<button type="button" class="chip-f" data-f="r" data-v="{i}" style="--c:{rc[i]}">{rar[i]}</button>' for i in range(1, 6))
+    counts = " ・ ".join(f'{rar[i]} {sum(1 for f in HW["fish"] if f["rarity"] == i)}' for i in range(1, 6))
+    hero = _wiki_hero("灯魚図鑑", f"全{len(HW['fish'])}種（{counts}）。手がかりはゲームの図鑑と同じだけ載せています。珍しい魚ほど、自分で見つけてください。", "#4FD8C8",
+                      '<span aria-hidden="true">›</span><span>灯魚図鑑</span>', CH_ICONS["fish"], "HIUO")
+    return hero + f'''
+<section class="stratum s-deep wk">
+  <div class="edge"></div>
+  <div class="wrap wk-in">
+    {_wiki_side("hiuo")}
+    <div class="wk-main">
+      <div class="finder fishf">
+        <div class="filters"><div class="fg"><span class="fl-l">水辺</span>{gchips}</div><div class="fg"><span class="fl-l">珍しさ</span>{rchips}</div></div>
+        <p class="find-n mu" aria-live="polite"><b class="dot" id="fn">{len(HW["fish"])}</b> 種 <button type="button" class="clear" id="fclear" hidden>しぼりこみを消す</button></p>
+        <ul class="fcs" id="fl">{cards}</ul>
+      </div>
+      <div class="three">
+        <div><h3 class="h3 disp">逃げる確率</h3><p class="mu">並 0% ・ 珍 {int(HW["escape"][2] * 100)}% ・ 稀 {int(HW["escape"][3] * 100)}% ・ 秘 {int(HW["escape"][4] * 100)}% ・ 幻 {int(HW["escape"][5] * 100)}%。釣の道「糸さばき」で、段ごとに2割ずつ下がります。逃げられた魚は、図鑑に姿と手がかりが残ります。</p></div>
+        <div><h3 class="h3 disp">釣れる見込み</h3><p class="mu">釣りをしたとき、灯魚がかかるかどうかは「灯釣り」・夜・灯りの中で上がります。釣の道「魚読み」を覚えると、その場で釣れる灯魚の数がわかります。</p></div>
+        <div><h3 class="h3 disp">季節は現実の暦</h3><p class="mu">春は3〜5月、夏は6〜8月、秋は9〜11月、冬は12〜2月（日本時間）。月の満ち欠けは、ゲームの中の月です。</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+<script src="assets/wiki.js" defer></script>'''
+
+
+WIKI_PAGES = [("wiki.html", "灯技 完全解説｜灯原", "灯技（ひわざ）のすべて。10の道・130の技の効き目と要るLv・技点・灯力・待ち時間、奥義の試練、今日の務め、灯魚図鑑。", wiki_index())]
+WIKI_PAGES += [(f"wiki-{p['id']}.html", f"{p['name']}｜灯技 Wiki｜灯原", f"{p['name']}の13の技（{'・'.join(n['name'] for n in p['nodes'][:5])}…）の効き目、要るLv・技点、技の木、育つこと、奥義の試練。", wiki_path(i))
+               for i, p in enumerate(HW["paths"])]
+WIKI_PAGES += [("wiki-hiuo.html", "灯魚図鑑｜灯技 Wiki｜灯原", f"灯魚（ひうお）{len(HW['fish'])}種の珍しさ・大きさ・水辺・手がかり。", wiki_fish())]
+
 
 # ───────────────────────── 支える（寄付） ─────────────────────────
 import json as _json, html as _html
@@ -1244,6 +1571,7 @@ PAGES = [
 ] + [(f"guide-{c['id']}.html", f"{c['t']}｜遊び方｜灯原", c['desc'], chapter_page(k)) for k, c in enumerate(CH)] + [
     ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり4種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。", events),
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
+] + WIKI_PAGES + [
     ("support.html", "支える｜灯原", "灯原を支える（寄付）。PayPay で金額は自由、100円から。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
 ]
