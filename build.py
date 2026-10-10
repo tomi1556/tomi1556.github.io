@@ -4,7 +4,7 @@ import datetime, pathlib
 ADDR = "tomoshibara.life"
 DISCORD = "https://discord.gg/wAKGQBHmPS"
 SITE = "https://tomoshibara.life"
-NAV = [("index.html", "トップ"), ("start.html", "はじめる"), ("guide.html", "遊び方"), ("events.html", "夜祭"), ("rules.html", "きまり")]
+NAV = [("index.html", "トップ"), ("start.html", "はじめる"), ("guide.html", "遊び方"), ("events.html", "夜祭"), ("rules.html", "きまり"), ("support.html", "支える")]
 
 LOGO = '<svg width="30" height="36" viewBox="0 0 10 12" aria-hidden="true" style="display:block;shape-rendering:crispEdges"><rect x="2" y="0" width="6" height="1" fill="currentColor"/><rect x="1" y="1" width="8" height="1" fill="currentColor"/><rect x="1" y="2" width="1" height="6" fill="currentColor"/><rect x="8" y="2" width="1" height="6" fill="currentColor"/><rect x="2" y="2" width="6" height="6" fill="#F2B544"/><rect x="4" y="4" width="2" height="2" fill="#FFF1C4"/><rect x="1" y="8" width="8" height="1" fill="currentColor"/><rect x="4" y="9" width="2" height="3" fill="currentColor"/></svg>'
 
@@ -23,6 +23,7 @@ ICONS = {
     "start.html": ["................", "...##########...", "...#........#...", "...#........#...", "...#....#...#...", "...#....##..#...", "...#.######.#...", "...#.#######o...", "...#.######.#...", "...#....##..#...", "...#....#...#...", "...#........#...", "...#........#...", "...##########...", "................", "................"],
     "guide.html": ["................", "................", ".######..######.", ".#....#..#....#.", ".#.oo.#..#.oo.#.", ".#....#..#....#.", ".#.oo.#..#.oo.#.", ".#....#..#....#.", ".#.oo.#..#.oo.#.", ".#....#..#....#.", ".#....####....#.", ".##############.", "................", "................", "................", "................"],
     "events.html": ["................", "......####......", ".......##.......", ".....######.....", "....#oooooo#....", "...#oooooooo#...", "...##########...", "...#oooooooo#...", "...#oooooooo#...", "...##########...", "...#oooooooo#...", "....#oooooo#....", ".....######.....", ".......##.......", "......####......", "................"],
+    "support.html": ["................", "................", "..####....####..", ".#oooo#..#oooo#.", "#oooooo##oooooo#", "#oooooooooooooo#", "#oooooooooooooo#", ".#oooooooooooo#.", "..#oooooooooo#..", "...#oooooooo#...", "....#oooooo#....", ".....#oooo#.....", "......#oo#......", ".......##.......", "................", "................"],
     "rules.html": ["................", "..###########...", "..#.........#...", "..#.oooooo..#...", "..#.........#...", "..#.oooooooo#...", "..#.........#...", "..#.oooooo..#...", "..#.........#...", "..#.oooo....#...", "..#.........#...", "..#......####...", "..#......#.#....", "..#......##.....", "..#########.....", "................"],
 }
 
@@ -184,7 +185,8 @@ index = f'''<div class="hero" style="min-height:min(900px,100svh)">
   <a href="start.html" class="band" style="background:#50555C"><div class="wrap band-in"><span class="band-y">Y=−12</span><div class="band-body"><h3 class="disp h3">はじめる</h3><p class="lead">機種ごとの入り方と、最初の夜の過ごし方。3分で入れます。</p><span class="band-go"><i></i>入り方を見る</span></div></div></a>
   <a href="guide.html" class="band" style="background:#474C53"><div class="wrap band-in"><span class="band-y">Y=−24</span><div class="band-body"><h3 class="disp h3">遊び方</h3><p class="lead">灯籠と灯路、長い夜、灯喰い、欠片で解放する加護、263の「灯の証」、130の技と106種の灯魚「灯技」。</p><span class="band-go"><i></i>しくみを読む</span></div></div></a>
   <a href="events.html" class="band" style="background:#3E4249"><div class="wrap band-in"><span class="band-y">Y=−36</span><div class="band-body"><h3 class="disp h3">夜祭</h3><p class="lead">毎週土曜21時。人数がそろうと、週替わりのゲームが自動で始まります。</p><span class="band-go"><i></i>今週のゲームを見る</span></div></div></a>
-  <a href="rules.html" class="band" style="background:#34383E;padding-bottom:40px"><div class="wrap band-in"><span class="band-y">Y=−48</span><div class="band-body"><h3 class="disp h3">きまり</h3><p class="lead">してはいけないこと、守られていること、困ったときの連絡先。</p><span class="band-go"><i></i>きまりを読む</span></div></div></a>
+  <a href="rules.html" class="band" style="background:#34383E"><div class="wrap band-in"><span class="band-y">Y=−48</span><div class="band-body"><h3 class="disp h3">きまり</h3><p class="lead">してはいけないこと、守られていること、困ったときの連絡先。</p><span class="band-go"><i></i>きまりを読む</span></div></div></a>
+  <a href="support.html" class="band" style="background:#2E3137;padding-bottom:40px"><div class="wrap band-in"><span class="band-y">Y=−60</span><div class="band-body"><h3 class="disp h3">支える</h3><p class="lead">灯原を続けるための寄付。PayPay で、金額は自由。お礼は名前の ❤ と、支え手の壁。</p><span class="band-go"><i></i>支え方を見る</span></div></div></a>
 </section>
 
 <section class="stratum s-rock" id="film">
@@ -1040,6 +1042,191 @@ rules = sub_hero("rules.html", "きまり", "むずかしいことはありま�
 </section>
 '''
 
+# ───────────────────────── 支える（寄付） ─────────────────────────
+import json as _json, html as _html
+
+# PayPay の受け取り。どちらか（両方でも）を入れると、ボタン・QR・コピーが出る。空のあいだは「準備中」。
+PAYPAY_LINK = ""   # PayPay アプリの「受け取りリンク」（https://… で始まるもの）
+PAYPAY_ID = ""     # PayPay ID（アプリの「送る」→ ID で検索してもらう）
+SUPPORT_CH = "#支援"  # 送ったあとに知らせてもらう Discord のチャンネル名
+
+try:
+    SUPPORTERS = _json.loads((pathlib.Path(__file__).parent / "data" / "supporters.json").read_text(encoding="utf-8"))
+except (OSError, ValueError):
+    SUPPORTERS = []
+
+
+def _qr_svg(text):
+    try:
+        import segno
+    except ImportError:
+        return ""
+    q = segno.make(text, error="m")
+    rows = list(q.matrix_iter(scale=1, border=2))
+    n = len(rows)
+    r = []
+    for y, row in enumerate(rows):
+        x = 0
+        while x < n:
+            if not row[x]:
+                x += 1
+                continue
+            w = 1
+            while x + w < n and row[x + w]:
+                w += 1
+            r.append(f'<rect x="{x}" y="{y}" width="{w}" height="1"/>')
+            x += w
+    return f'<svg class="qr" viewBox="0 0 {n} {n}" role="img" aria-label="PayPay の受け取りQRコード"><rect width="{n}" height="{n}" fill="#fff"/><g fill="#14161B">{"".join(r)}</g></svg>'
+
+
+_HEART = ["................", "................", "..####....####..", ".#oooo#..#oooo#.", "#oooooo##oooooo#", "#oooooooooooooo#", "#oooooooooooooo#", ".#oooooooooooo#.",
+          "..#oooooooooo#..", "...#oooooooo#...", "....#oooooo#....", ".....#oooo#.....", "......#oo#......", ".......##.......", "................", "................"]
+
+# 顔の画像が出ないとき（統合版の名前など）の代わりの顔（8×8 のドット絵）
+_FACE = ("data:image/svg+xml," + "%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8' shape-rendering='crispEdges'%3E%3Crect width='8' height='8' fill='%233B4466'/%3E"
+         "%3Crect y='0' width='8' height='2' fill='%23262C45'/%3E%3Crect x='1' y='3' width='2' height='1' fill='%23F2B544'/%3E%3Crect x='5' y='3' width='2' height='1' fill='%23F2B544'/%3E"
+         "%3Crect x='3' y='5' width='2' height='1' fill='%23262C45'/%3E%3C/svg%3E")
+
+
+def _face(mcid, size=64):
+    m = _html.escape(mcid, quote=True)
+    src = f"https://mc-heads.net/avatar/{m}/{size}" if not mcid.startswith(".") else _FACE
+    return f'<img class="face" src="{src}" alt="" width="{size}" height="{size}" loading="lazy" decoding="async" onerror="this.onerror=null;this.src=&quot;{_FACE}&quot;">'
+
+
+def _wall():
+    if not SUPPORTERS:
+        ghosts = "".join('<li class="sup ghost" aria-hidden="true"><span class="face"></span><b class="dot">？？？</b><small>&nbsp;</small></li>' for _ in range(6))
+        return f'''<div class="wall-empty">
+      <ul class="wall">{ghosts}</ul>
+      <p class="wall-msg"><b>あなたの灯が、最初のひとつになります。</b>まだ、この壁にはだれもいません。</p>
+    </div>'''
+    items = ""
+    for s in SUPPORTERS:
+        mcid = str(s.get("mcid", "")).strip()
+        if not mcid:
+            continue
+        since = str(s.get("since", ""))[:7].replace("-", ".")
+        items += f'<li class="sup">{_face(mcid)}<b class="dot">{_html.escape(mcid)}</b><small>{since} から</small></li>'
+    return f'<ul class="wall">{items}</ul>'
+
+
+def _pay_panel():
+    ready = bool(PAYPAY_LINK or PAYPAY_ID)
+    if not ready:
+        return '''<div class="pay soon">
+        <div class="pay-qr"><span class="qr-ph" aria-hidden="true"></span></div>
+        <div class="pay-body">
+          <p class="pay-k dot">PayPay</p>
+          <h3 class="disp">ただいま準備中です</h3>
+          <p class="mu">受け取りの用意ができしだい、ここにボタンとQRコードが出ます。Discord でもお知らせします。</p>
+          <span class="pbtn paypay is-off" aria-disabled="true">準備中</span>
+        </div>
+      </div>'''
+    qr = _qr_svg(PAYPAY_LINK) if PAYPAY_LINK else ""
+    btn = f'<a href="{_html.escape(PAYPAY_LINK, quote=True)}" class="pbtn paypay" target="_blank" rel="noopener">PayPay で送る</a>' if PAYPAY_LINK else ""
+    idrow = f'''<div class="addr pay-id"><span class="addr-t"><small>PayPay ID（アプリの「送る」→「ID」で検索）</small><b>{_html.escape(PAYPAY_ID)}</b></span><button type="button" class="gbtn sm" data-copy="{_html.escape(PAYPAY_ID, quote=True)}">IDをコピー</button></div>''' if PAYPAY_ID else ""
+    return f'''<div class="pay">
+        <div class="pay-qr">{qr or '<span class="qr-ph" aria-hidden="true"></span>'}<small class="mu">{"スマホのカメラか PayPay で読みとる" if qr else ""}</small></div>
+        <div class="pay-body">
+          <p class="pay-k dot">PayPay</p>
+          <h3 class="disp">PayPay で、ひとことと一緒に。</h3>
+          <p class="mu">金額は自由です（100円から）。<b>メッセージ欄に、あなたの MCID（マインクラフトの名前）</b>を書いてください。統合版の人は、名前の前の「.」もそのまま。</p>
+          <div class="btns">{btn}</div>
+          {idrow}
+        </div>
+      </div>'''
+
+
+support = f'''<div class="hero sp-hero">
+  <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
+  <div class="wrap phead" id="content">
+    <div class="sp-head">{pix(_HEART, "ch-ic big heart")}<div><p class="ch-big dot">SUPPORT</p><h1 class="disp h1-sub">灯原を、支える。</h1></div></div>
+    <p class="lead">灯原は、運営がひとりで、自分のお金で動かしています。もし「この夜が続いてほしい」と思ってもらえたら、少しだけ手を貸してください。寄付はまったくの自由です。しなくても、遊び方は何ひとつ変わりません。</p>
+    <div class="btns" style="margin-top:26px"><a href="#how" class="pbtn">PayPay で支える</a><a href="#wall" class="gbtn">支え手の壁を見る</a></div>
+  </div>
+</div>
+
+<section class="stratum s-deep" id="thanks">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">お礼は、見た目だけ。</h2>
+    <p class="lead">支えてくれた人には、ふたつの「ありがとう」を。どちらも強さには関わりません。アイテムも経験値も加護も、ほかの人と同じです。</p>
+    <div class="perks">
+      <div class="perk">
+        <div class="tagscene" aria-hidden="true">
+          <div class="nametag"><i>❤</i> Tomi</div>
+          <div class="pc"><span class="pc-h"></span><span class="pc-b"></span><span class="pc-l"></span><span class="pc-lan"></span></div>
+          <div class="ground"></div>
+        </div>
+        <div class="perk-body">
+          <p class="perk-k dot">01</p>
+          <h3 class="disp h3">名前に <span class="hrt">❤</span> がつく</h3>
+          <p class="mu">頭の上の名前、タブの一覧、チャットに、灯色の ❤ がつきます。灯籠のそばに立つあなたが、遠くからでもわかります。</p>
+          <div class="mock">
+            <p class="mock-row tab"><span class="mk-l">タブ</span><span><i class="hrt">❤</i> <s>[灯の大家]</s> Tomi</span></p>
+            <p class="mock-row chat"><span class="mk-l">チャット</span><span><i class="hrt">❤</i> <s>[灯の大家]</s> &lt;Tomi&gt; こんばんは、今夜も灯しにきた</span></p>
+          </div>
+        </div>
+      </div>
+      <div class="perk">
+        <div class="wallscene" aria-hidden="true">
+          <span class="ws"></span><span class="ws on"></span><span class="ws"></span><span class="ws on"></span><span class="ws"></span><span class="ws"></span><span class="ws on"></span><span class="ws"></span>
+        </div>
+        <div class="perk-body">
+          <p class="perk-k dot">02</p>
+          <h3 class="disp h3">支え手の壁に、顔と名前が載る</h3>
+          <p class="mu">このページのいちばん下の「支え手の壁」に、スキンの顔と MCID が並びます。載りたくなければ、ゲームの中で <span class="kbd">/akashi supporter hide</span> と打つだけ。名前の ❤ はそのまま残ります。</p>
+        </div>
+      </div>
+    </div>
+    <p class="note cold"><b>買えるものは、ありません。</b>灯原では、お金で強くなることはできません。マインクラフトの利用規約（EULA）とガイドラインに沿って、お礼は見た目だけにしています。</p>
+  </div>
+</section>
+
+<section class="stratum s-stone" id="how">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">支え方は、3つの手順。</h2>
+    <ol class="flow">
+      <li><span class="fl-n dot">1</span><div><h3>PayPay で送る</h3><p>下のボタンかQRコードから。金額は自由。メッセージ欄に <b>MCID</b> を書いてください。</p></div></li>
+      <li><span class="fl-n dot">2</span><div><h3>Discord で知らせる</h3><p>灯原の Discord の <span class="kbd">{SUPPORT_CH}</span> に「送りました」と、MCID をひとこと。送ったときの画面の写しがあると、確かめるのが早くなります。</p></div></li>
+      <li><span class="fl-n dot">3</span><div><h3>名前に ❤ がつく</h3><p>運営が確かめて、たいてい24時間以内に ❤ がつきます。ついたときは、画面にお礼が出ます。支え手の壁には、サイトの次の更新で載ります。</p></div></li>
+    </ol>
+    {_pay_panel()}
+    <div class="btns" style="margin-top:20px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord を開く</a></div>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="wall">
+  <div class="edge"></div>
+  <div class="wrap">
+    <div class="wall-h"><h2 class="disp h2">支え手の壁</h2><p class="wall-n"><b class="dot">{len([s for s in SUPPORTERS if str(s.get("mcid", "")).strip()])}</b><span>人の灯が、この夜を照らしています</span></p></div>
+    <p class="lead">灯原を支えてくれた人たちです。ここに並ぶ灯のひとつひとつが、サーバーの明日をつくっています。</p>
+    {_wall()}
+  </div>
+</section>
+
+<section class="stratum s-rock" id="faq">
+  <div class="edge"></div>
+  <div class="wrap narrow">
+    <h2 class="disp h2">よくある質問</h2>
+    <div class="faq">
+      <details><summary>いくらから送れますか？</summary><p>100円からです。上限はありません。お礼はどの金額でも同じです。</p></details>
+      <details><summary>❤ はいつまでつきますか？</summary><p>ずっとです。シーズンが変わっても残ります。</p></details>
+      <details><summary>名前を変えたら、❤ は消えますか？</summary><p>消えません。一度入ったあとは、マインクラフトのアカウントでつながっているので、名前を変えてもそのままです。支え手の壁の名前も、次の更新で新しい名前になります。</p></details>
+      <details><summary>統合版（スマホ・Switch など）でもつきますか？</summary><p>つきます。MCID は、名前の前の「.」も含めて書いてください。統合版の人は、支え手の壁ではスキンの代わりに灯原の顔が出ることがあります。</p></details>
+      <details><summary>名前を出さずに支えたいです。</summary><p>できます。ゲームの中で <span class="kbd">/akashi supporter hide</span> と打つと、支え手の壁に載りません。Discord で知らせるときに「壁には載せないで」と書いてもらっても大丈夫です。</p></details>
+      <details><summary>返金はできますか？</summary><p>寄付なので、お返しはできません。送る前に、金額をよく確かめてください。まちがえて送ったときは、Discord で運営に相談してください。</p></details>
+      <details><summary>子どもでも送れますか？</summary><p>18歳より下の人は、かならずおうちの人に相談して、いいよと言ってもらってから送ってください。おうちの人の PayPay で送るときも同じです。</p></details>
+      <details><summary>送ったお金は、何に使われますか？</summary><p>灯原を続けるための費用（サーバーの借り代・ドメイン・バックアップなど）に使います。</p></details>
+    </div>
+    <p class="mu legal-n">寄付は見返りを目的としない、任意のものです。お礼の ❤ と支え手の壁は、感謝のしるしとしてお渡しするもので、ゲームの中の有利さはありません。PayPay は PayPay株式会社の商標です。灯原は Mojang Studios・Microsoft とは関係ありません。</p>
+  </div>
+</section>
+'''
+
+
 notfound = f'''<div class="hero" style="min-height:70svh">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
   <div class="wrap phead" id="content">
@@ -1057,6 +1244,7 @@ PAGES = [
 ] + [(f"guide-{c['id']}.html", f"{c['t']}｜遊び方｜灯原", c['desc'], chapter_page(k)) for k, c in enumerate(CH)] + [
     ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり4種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。", events),
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
+    ("support.html", "支える｜灯原", "灯原を支える（寄付）。PayPay で金額は自由、100円から。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
 ]
 out = pathlib.Path(__file__).parent
