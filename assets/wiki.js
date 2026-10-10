@@ -18,7 +18,7 @@
     var items = $$(opts.item, list);
     var input = opts.input ? $(opts.input) : null;
     var count = $(opts.count), clear = $(opts.clear), empty = opts.empty ? $(opts.empty) : null;
-    var chips = $$('.chip-f', list.closest('.finder'));
+    var chips = $$('.chip-f', list.closest('.finder') || list);
     var on = {};
     items.forEach(function (el) { el._q = norm(el.getAttribute('data-q') || el.textContent); });
 
@@ -72,6 +72,16 @@
 
   setup({ list: '#wl', item: '.sk', input: '#wq', count: '#wn', clear: '#wclear', empty: '#wempty' });
   setup({ list: '#fl', item: '.fc', count: '#fn', clear: '#fclear' });
+  setup({ list: '#cl', item: '.cr', input: '#cq', count: '#cn', clear: '#cclear', empty: '#cempty' });
+  // コマンド：見出しの下が全部隠れたら、見出しも隠す
+  var cl = $('#cl');
+  if (cl) {
+    var groups = $$('.cmdg', cl);
+    var sync = function () { groups.forEach(function (g) { g.hidden = !$$('.cr', g).some(function (r) { return !r.hidden; }); }); };
+    var cq = $('#cq'); if (cq) cq.addEventListener('input', sync);
+    var cc = $('#cclear'); if (cc) cc.addEventListener('click', sync);
+    sync();
+  }
 
   // 技の木のタイルを押したら、説明の札を光らせる
   function flash() {

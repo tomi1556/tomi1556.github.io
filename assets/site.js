@@ -122,10 +122,12 @@
       return p + ' ' + w + ',' + h;
     };
     var at = { 4: 0, 10: 1, 17: 2, 24: 3, 30: 4, 37: 5, 44: 6 }, cols = '', road = [];
+    var tpl = $('#tpl-cast'), who = tpl ? $$('.who', tpl.content) : [];
+    var put = { 13: who[0], 41: who[1] };
     for (var i = 0; i < 48; i++) {
       var hh = Math.max(3, Math.round(4 + 1.6 * Math.sin(i * 0.42) + 1.2 * Math.sin(i * 0.19 + 2) + (rnd() > 0.8 ? 1 : 0)));
       var li = at[i], has = li !== undefined, d2 = 2.6 + (has ? li : 0) * 0.3;
-      cols += '<div class="col" style="height:' + (hh * 26) + 'px">' + (has ? '<div class="lan"><div class="lan-glow" style="animation-delay:' + d2.toFixed(2) + 's,' + (d2 + 0.8).toFixed(2) + 's"></div><div class="lan-cap"></div><div class="lan-head" style="animation-delay:' + d2.toFixed(2) + 's"></div><div class="lan-post"></div></div>' : '') + '</div>';
+      cols += '<div class="col" style="height:' + (hh * 26) + 'px">' + (has ? '<div class="lan"><div class="lan-glow" style="animation-delay:' + d2.toFixed(2) + 's,' + (d2 + 0.8).toFixed(2) + 's"></div><div class="lan-cap"></div><div class="lan-head" style="animation-delay:' + d2.toFixed(2) + 's"></div><div class="lan-post"></div></div>' : '') + (put[i] ? put[i].outerHTML : '') + '</div>';
       if (has) road.push(((i + 0.5) * 30).toFixed(0) + ',' + (300 - hh * 26 - 40));
     }
     scene.innerHTML =

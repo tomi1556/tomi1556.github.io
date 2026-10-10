@@ -1,5 +1,6 @@
 # 灯原サイトの組み立て（ヘッダーとフッターを各ページに入れて、静的な HTML を書き出す）
-import datetime, pathlib
+import datetime, pathlib, re as _re0
+from cast import CAST, BY, SCARF, CLOAK, fig, eater, reds, ridge, say_box
 
 ADDR = "tomoshibara.life"
 DISCORD = "https://discord.gg/wAKGQBHmPS"
@@ -48,21 +49,86 @@ def header(cur):
 
 
 def footer():
-    links = "".join(f'<a href="{h}" class="fl">{t}</a>' for h, t in NAV[1:])
-    return f'''<footer class="foot s-rock"><div class="edge"></div><div class="wrap">
-  <h2 class="disp" style="font-size:clamp(30px,4.6vw,56px);line-height:1.3;margin-bottom:24px">夜は、ひとりより大勢で。</h2>
-  {addr_box()}
-  <div class="btns" style="margin-top:8px"><a href="start.html" class="gbtn">入り方を見る</a><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord に参加</a></div>
-  <div class="foot-links">
-    <nav aria-label="フッター" style="display:flex;flex-wrap:wrap;gap:2px 8px">{links}<a href="{DISCORD}" class="fl" target="_blank" rel="noopener">Discord</a></nav>
-    <p class="legal">灯原は非公式のファンサーバーです。Mojang Studios および Microsoft とは関係ありません。Minecraft は Mojang Synergies AB の商標です。</p>
+    ch = "".join(f'<li><a href="guide-{c["id"]}.html">{c["t"]}</a></li>' for c in CH)
+    cols = [
+        ("はじめる", [("start.html#join", "入り方"), ("start.html#first", "最初の夜"), ("commands.html", "コマンド一覧"), ("start.html#faq", "よくある質問")]),
+        ("遊び方", None),
+        ("灯技 Wiki", [("wiki.html", "Wiki のはじめ"), ("wiki.html#all", "すべての技を探す"), ("wiki.html#trials", "奥義の試練"), ("wiki.html#tasks", "今日の務め"), ("wiki-hiuo.html", "灯魚図鑑")]),
+        ("灯原", [("events.html", "夜祭"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
+    ]
+    cm = ""
+    for h, items in cols:
+        lis = ch if items is None else "".join(f'<li><a href="{u}"{" target=\"_blank\" rel=\"noopener\"" if u.startswith("http") else ""}>{t}</a></li>' for u, t in items)
+        cm += f'<div class="fm"><h3>{h}</h3><ul>{lis}</ul></div>'
+    # 灯りの輪：6人と灯籠、闇の端に灯喰い
+    xs = [14, 25, 38, 55, 68, 80]
+    camp = "".join(f'<span class="cm" style="left:{x}%">{fig(c["id"], i % 2 == 0)}</span>' for i, (x, c) in enumerate(zip(xs, CAST)))
+    camp += "".join(f'<span class="lp" style="left:{x}%"><i class="rl" style="--d:0s"><i class="rl-g"></i><i class="rl-c"></i><i class="rl-h" style="background:var(--amber);box-shadow:0 0 18px 4px rgba(242,181,68,.75)"></i><i class="rl-p"></i></i></span>' for x in (6, 46, 89))
+    camp += f'<span class="cm foe" style="left:97%">{eater()}</span>'
+    return f'''<footer class="foot s-rock"><div class="edge"></div>
+  <div class="wrap foot-cta">
+    <div><h2 class="disp" style="font-size:clamp(30px,4.6vw,56px);line-height:1.3;margin-bottom:24px">夜は、ひとりより大勢で。</h2>
+    {addr_box()}</div>
+    <div class="btns"><a href="start.html" class="gbtn">入り方を見る</a><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord に参加</a></div>
   </div>
-</div></footer>
+  <div class="camp" aria-hidden="true"><div class="camp-in">{camp}</div><div class="camp-g"></div></div>
+  <div style="background:#101215">
+  <nav class="wrap foot-map" aria-label="サイトの地図">{cm}</nav>
+  <div class="wrap foot-end"><a href="index.html" class="logo">{LOGO}<span>灯原</span></a><p class="legal">灯原は非公式のファンサーバーです。Mojang Studios および Microsoft とは関係ありません。Minecraft は Mojang Synergies AB の商標です。</p></div>
+  </div>
+</footer>
 <div class="gauge" aria-hidden="true"><i></i></div>'''
 
 
+# 夜空の下に敷く景色の縁（ページごとに、立っている人とひとことが変わる）
+RIDGE = {
+    "start.html": dict(seed=2, cast=[("hino", 9, True)], say=("hino", "最初の1基は、ここに置こう。")),
+    "guide.html": dict(seed=3, cast=[("hino", 7, True), ("yuki", 37, False)], say=("yuki", "8つの章に、ぜんぶ書いたよ。")),
+    "events.html": dict(seed=4, cast=[("momo", 10, True), ("hino", 13, False), ("sora", 34, True)], say=("momo", "土曜の21時、広場でね！")),
+    "rules.html": dict(seed=5, cast=[("shino", 9, True)], say=("shino", "人の灯りは、守るもの。")),
+    "support.html": dict(seed=6, cast=[("yuki", 9, True), ("hino", 12, False)], say=("yuki", "名前は、ちゃんと残すからね。")),
+    "404.html": dict(seed=7, cast=[("hino", 12, True)], say=("hino", "あれ……こっちは闇の中だ。"), eaters=(40,)),
+    "characters.html": dict(seed=8, cast=[("hino", 6, True), ("momo", 13, False), ("sora", 20, True), ("waka", 27, False), ("shino", 34, True), ("yuki", 41, False)], lamps=4),
+    "commands.html": dict(seed=9, cast=[("hino", 9, True)], say=("hino", "/tomoshibi だけ覚えれば大丈夫。")),
+    "wiki.html": dict(seed=10, cast=[("yuki", 9, True), ("waka", 36, False)], say=("yuki", "130の技、ぜんぶ書きとめたよ。")),
+    "wiki-hiuo.html": dict(seed=11, cast=[("sora", 10, True)], say=("sora", "「秘」の魚は、まだ見つからない……")),
+}
+_CH_WHO = {"lantern": "hino", "night": "shino", "higui": "shino", "buff": "momo", "hiwaza": "waka", "fish": "sora", "akashi": "yuki", "more": "sora"}
+_PATH_WHO = {"light": "hino", "night": "shino", "mine": "momo", "wood": "waka", "farm": "waka", "fish": "sora", "craft": "yuki", "travel": "sora", "ranch": "momo", "arcane": "hino"}
+
+
+def _ridge_for(file):
+    if file in RIDGE:
+        return ridge(**RIDGE[file])
+    m = _re0.match(r"guide-(\w+)\.html", file)
+    if m:
+        k = [c["id"] for c in CH].index(m.group(1))
+        who = _CH_WHO[m.group(1)]
+        return ridge(seed=20 + k, cast=[(who, 9, True)], eaters=(41,) if m.group(1) == "higui" else ())
+    m = _re0.match(r"wiki-(\w+)\.html", file)
+    if m and m.group(1) in _PATH_WHO:
+        return ridge(seed=40 + len(m.group(1)), cast=[(_PATH_WHO[m.group(1)], 9, True)])
+    return ridge(seed=1)
+
+
+def _with_ridge(file, body):
+    """先頭の夜空（.hero）の終わりに景色の縁を入れ、次のセクションに縁（ギザギザ）がなければつける。"""
+    if not body.startswith('<div class="hero') or "data-scene" in body[:2000]:
+        return body
+    i = body.find("<section")
+    head, rest = (body[:i], body[i:]) if i >= 0 else (body, "")
+    j = head.rstrip().rfind("</div>")
+    head = head[:j] + "  " + _ridge_for(file) + "\n" + head[j:]
+    if rest:
+        k = rest.index(">") + 1
+        if '<div class="edge">' not in rest[k:k + 40]:
+            rest = rest[:k] + '\n  <div class="edge"></div>' + rest[k:]
+    return head + rest
+
+
 def page(file, title, desc, body, hero_min=""):
-    cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki")) else "")
+    cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki")) else "start.html" if file == "commands.html" else "")
+    body = _with_ridge(file, body)
     url = SITE + ("/" if file == "index.html" else "/" + file)
     return f'''<!doctype html>
 <html lang="ja">
@@ -118,6 +184,64 @@ def cd(kind, label):
 </div>'''
 
 
+_CMDS = [
+    ("灯", "#F2B544", "灯籠と灯路", "Tomoshibi", "灯籠を素手で右クリックしても、同じメニューが開きます。", [
+        ("/tomoshibi", "", "メニューを開く。<b>これだけ覚えれば大丈夫</b>（<span class=\"kbd\">/tomo</span> でも同じ）"),
+        ("/tomoshibi info", "", "いま立っている灯路網と、灯籠の数"),
+        ("/tomoshibi recipe", "", "灯籠の作り方"),
+        ("/tomoshibi buffs", "", "加護を見る・欠片で解放する"),
+        ("/tomoshibi name", "<名前>", "近くの自分の灯籠を灯標にする（16文字まで）"),
+        ("/tomoshibi unname", "", "灯標の名前を取り消す"),
+        ("/tomoshibi list", "", "行ける灯標の一覧"),
+        ("/tomoshibi go", "<名前>", "灯標へ灯渡り"),
+        ("/tomoshibi home", "", "「帰る場所」に決めた灯標へ灯渡り"),
+        ("/tomoshibi trust", "<名前>", "仲間にする（もう一度で外す）。いまサーバーにいる人だけ"),
+        ("/tomoshibi colors", "", "灯りの色の一覧"),
+        ("/tomoshibi color", "<色>", "灯りの色を変える"),
+        ("/tomoshibi invite", "", "自分の招待コードを見る"),
+        ("/tomoshibi code", "<コード>", "友達の招待コードを使う"),
+        ("/tomoshibi particles", "<off|low|normal>", "自分に見える光の粒の量（重いときは low）"),
+        ("/tomoshibi top", "", "灯籠の多い人"),
+    ]),
+    ("証", "#F29BB8", "灯の証", "Akashi", "報酬の受け取り、称号・足跡の選択は、画面からもできます。", [
+        ("/akashi", "", "証の一覧を開く"),
+        ("/akashi claim", "", "報酬をまとめて受け取る"),
+        ("/akashi top", "", "証の番付"),
+        ("/akashi stats", "[名前]", "記録を見る"),
+        ("/akashi track", "<id|off>", "証を追跡する（画面の上に進み具合が出る）"),
+        ("/akashi title", "<id|off>", "称号を選ぶ"),
+        ("/akashi trail", "<id|off>", "足跡を選ぶ"),
+        ("/akashi supporter", "[hide|show]", "支え手の ❤ と、サイトの「支え手の壁」に載せるかどうか"),
+    ]),
+    ("技", "#5AAAFF", "灯技", "Hiwaza", "<span class=\"kbd\">/waza</span> は <span class=\"kbd\">/hiwaza</span> でも同じ。便利な技は、覚えたあとで使えます。", [
+        ("/waza", "", "技の画面を開く（技の木・使う技・今日の務め・灯魚図鑑）"),
+        ("/waza use", "[技]", "使う技の一覧／その技を使う"),
+        ("/waza main", "<技>", "主技を決める（しゃがみ2回で使う）"),
+        ("/waza sub", "<技>", "副技を決める（しゃがんで F で使う）"),
+        ("/waza tasks", "", "今日の務め"),
+        ("/waza fish", "", "灯魚図鑑"),
+        ("/waza top", "", "番付"),
+        ("/waza craft", "", "携帯作業台", "匠"),
+        ("/waza ender", "", "携帯エンダーチェスト", "匠"),
+        ("/waza bag", "", "背負い籠（自分だけの入れ物）", "匠"),
+        ("/waza sort", "", "持ち物を整頓", "匠"),
+        ("/waza stash", "", "まとめ入れ（同じ物が入った近くの箱へ）", "匠"),
+        ("/waza bottle", "", "経験の瓶詰め", "術"),
+        ("/waza mark", "", "しるべ（印への方角と距離）", "旅"),
+        ("/waza mark clear", "", "しるべを消す", "旅"),
+    ]),
+    ("祭", "#C79BFF", "夜祭", "Yomatsuri", "何もしなければ参加です。", [
+        ("/yomatsuri", "", "次の夜祭と、自分の参加回数（<span class=\"kbd\">/matsuri</span> でも同じ）"),
+        ("/yomatsuri out", "", "今回は参加しない"),
+        ("/yomatsuri in", "", "やっぱり参加する"),
+        ("/yomatsuri vote", "<名前>", "建築早押しで、いちばん良い建物に投票（自分には入れられません）"),
+    ]),
+    ("夜", "#9C8CFF", "長い夜", "Tokoyo", "", [
+        ("/tokoyo", "", "いまが昼か夜か、夜明けまでの時間、夜の敵の強さ（<span class=\"kbd\">/yoru</span> でも同じ）"),
+    ]),
+]
+
+
 # ───────────────────────── トップ ─────────────────────────
 index = f'''<div class="hero" style="min-height:min(900px,100svh)">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div><div class="dusk" aria-hidden="true"></div>
@@ -132,6 +256,7 @@ index = f'''<div class="hero" style="min-height:min(900px,100svh)">
     </div>
   </div>
   <div class="scene" data-scene aria-hidden="true"></div>
+  <template id="tpl-cast"><span class="who">{fig("hino", True)}</span><span class="who foe">{eater()}</span></template>
 </div>
 
 <section class="stratum tex s-soil">
@@ -176,6 +301,17 @@ index = f'''<div class="hero" style="min-height:min(900px,100svh)">
   </div>
 </section>
 
+
+<section class="stratum s-dusk" id="cast">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">Y=12</p>
+    <h2 class="disp h2">灯原の、ひとびと。</h2>
+    <p class="lead">予告編に出てくる6人の旅人が、このサイトの案内役です。えりまきの色で見分けてください。</p>
+    <div class="castrow">{"".join(f'''<a href="characters.html#{c["id"]}" class="cc" style="--sc:{SCARF[c["k"] % 6]}"><span class="cc-st">{fig(c["id"], True)}</span><b>{c["n"]}</b><small>{c["role"]}</small><q>{c["line"]}</q></a>''' for c in CAST)}</div>
+    <p style="margin-top:28px"><a href="characters.html" class="gbtn">ひとびとと、灯喰いのこと</a></p>
+  </div>
+</section>
 <section class="s-stone" style="position:relative">
   <div class="edge"></div>
   <div class="wrap" style="padding-top:96px;padding-bottom:36px">
@@ -192,7 +328,7 @@ index = f'''<div class="hero" style="min-height:min(900px,100svh)">
 <section class="stratum s-rock" id="film">
   <div class="edge"></div>
   <div class="wrap">
-    <p class="depth">Y=−60</p>
+    <p class="depth">Y=−72</p>
     <h2 class="disp h2">予告編</h2>
     <p class="lead">64秒。音が出ます。</p>
     <div class="film"><video controls preload="none" playsinline poster="assets/trailer-poster.jpg"><source src="assets/trailer.mp4" type="video/mp4">お使いのブラウザでは動画を再生できません。</video></div>
@@ -334,6 +470,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
         <tr><td class="n">/yomatsuri out</td><td>募集中の夜祭に、今回は参加しない</td></tr>
       </tbody>
     </table></div>
+    <p style="margin-top:24px"><a href="commands.html" class="gbtn">すべてのコマンドを見る（{sum(len(g[5]) for g in _CMDS)}）</a></p>
   </div>
 </section>
 
@@ -796,6 +933,18 @@ def _body(k):
     return "\n".join(_clean(_SEC[s]) for s in c["sec"])
 
 
+_CH_SAY = {
+    "lantern": "まずは1基。次の1基を16ブロック以内に置けば、灯路でつながるよ。",
+    "night": "夜は24分。来たばかりなら、灯りの外へは出るな。",
+    "higui": "灯喰いは、人を見ない。灯籠だけを見る。端の灯籠から守れ。",
+    "buff": "欠片が集まったら、加護をひらこう！ 灯りの中だけで効くからね。",
+    "hiwaza": "急がなくていいよ。1日ちょっとずつ、毎日育てるのがいちばん。",
+    "fish": "同じ水辺でも、時刻と月で、かかる魚が変わるんだ。",
+    "akashi": "やったことは、ぜんぶ証になるよ。秘められた証もあるからね。",
+    "more": "灯標に名前をつけたら、灯渡りでひとっ飛び。",
+}
+
+
 def _rail(cur):
     return '<nav class="rail" aria-label="章">' + "".join(
         f'<a href="guide-{c["id"]}.html" style="--rc:{c["c"]}" title="{i + 1:02d} {c["t"]}"{" aria-current=\"page\"" if i == cur else ""}><span class="dot">{i + 1:02d}</span><span class="rail-t">{c["t"]}</span></a>'
@@ -828,7 +977,10 @@ def chapter_page(k):
     <p class="pager-toc"><a href="guide.html" class="gbtn sm">≡ 遊び方の目次</a></p>
   </div>
 </section>'''
-    return hero + "\n" + _body(k) + "\n" + pager
+    body = _body(k)
+    w = body.find('<div class="wrap">') + len('<div class="wrap">')
+    body = body[:w] + "\n    " + say_box(_CH_WHO[c["id"]], _CH_SAY[c["id"]]) + body[w:]
+    return hero + "\n" + body + "\n" + pager
 
 
 def _guide_index():
@@ -863,6 +1015,7 @@ def _guide_index():
     <div class="gi-start">{pix(CH_ICONS["lantern"], "ch-ic lit")}<p><b>はじめての人は、第一層の3章だけで大丈夫です。</b>灯籠を置き、夜を知り、灯喰いから守れれば、最初の夜は越えられます。ほかの章は、遊びながらでどうぞ。</p><a href="guide-lantern.html" class="pbtn">第1章から読む</a></div>
     {layers}
     <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯技 完全解説 Wiki</b><span>130の技の効き目・要る Lv・技点・待ち時間、技の木、奥義の試練、務め、灯魚図鑑。ぜんぶ、ゲームと同じ数字で。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="commands.html" class="wiki-band cmd-band"><span class="wb-k dot">CMD</span><span class="wb-b"><b class="disp">コマンド一覧</b><span>/tomoshibi・/akashi・/waza・/yomatsuri・/tokoyo のすべて。探して、すぐ見つかる。</span></span><span class="wb-go">開く<i></i></span></a>
   </div>
 </section>'''
 
@@ -1213,7 +1366,7 @@ def wiki_path(i):
 
 def _curve_svg():
     tot = HW["total"]
-    W, H, L, B, T, R = 640, 260, 54, 34, 14, 14
+    W, H, L, B, T, R = 640, 270, 54, 34, 30, 14
     mx = tot[-1]
     pts = []
     for lv in range(1, 51):
@@ -1290,16 +1443,18 @@ def wiki_index():
       </div>
 
       <h2 class="disp h2 wk-h" id="grow">育て方</h2>
-      <div class="two wk-two">
-        <div><h3 class="disp h3">Lv と経験値</h3><p class="mu">Lv が1上がるごとに、その道の技点が1。Lv50 で、その道の技はすべて覚えられます（余る道もあります）。Lv50 の先は「極み」の★（{_num(HW["starNeed"])} ごとに1つ、★{HW["maxStar"]} まで）。</p>{_curve_svg()}</div>
-        <div><h3 class="disp h3">今日の伸び</h3><div class="tbl-wrap"><table class="xpt"><tbody>
-          <tr><th>1日にふつうに育つ量（道ごと）</th><td class="n">{_num(HW["dailyXp"])}</td></tr>
-          <tr><th>それを超えた分</th><td class="n">{int(HW["overflow"] * 100)}%</td></tr>
-          <tr><th>使わなかった分が貯まる</th><td class="n">{HW["bankDays"]}日ぶんまで</td></tr>
-          <tr><th>技がいっしょに壊したブロック</th><td class="n">{int(HW["chainXp"] * 100)}%</td></tr>
-          <tr><th>務めのごほうび</th><td class="n">伸びを使わない</td></tr>
-          <tr><th>Lv10 ／ Lv20 ／ Lv40 ／ Lv50 まで</th><td class="n">{_num(tot[10])} ／ {_num(tot[20])} ／ {_num(tot[40])} ／ {_num(tot[50])}</td></tr>
-        </tbody></table></div><p class="mu wk-small">放置（視点が5分動かない）中、クリエイティブ、自分で置いたブロック、石の製造機では育ちません。</p></div>
+      <div class="grow2">
+        <div><h3 class="disp h3">Lv と経験値</h3><p class="mu">Lv が1上がるごとに、その道の技点が1。Lv50 で、その道の技はすべて覚えられます（余る道もあります）。Lv50 の先は「極み」の★（{_num(HW["starNeed"])} ごとに1つ、★{HW["maxStar"]} まで）。</p>{_curve_svg()}
+          <div class="lvsteps">{"".join(f'<div><small>Lv{l} まで</small><b>{_num(tot[l])}</b></div>' for l in (10, 20, 40, 50))}</div></div>
+        <div><h3 class="disp h3" id="daily">今日の伸び</h3>
+          <div class="gtiles">
+            <div class="gt wide"><b>{_num(HW["dailyXp"])}<small>／日・道ごと</small></b><strong>ふつうに育つ量</strong><span>道ごとに数えます。掘る日と釣る日を分けても、損はありません。</span></div>
+            <div class="gt" style="--c:#E0453A"><b>{int(HW["overflow"] * 100)}<small>%</small></b><strong>超えた分</strong><span>伸びを使い切ったあとも、少しは育ちます。</span></div>
+            <div class="gt" style="--c:#6FD39A"><b>{HW["bankDays"]}<small>日ぶん</small></b><strong>貯まる</strong><span>遊べなかった日の伸びは、あとで使えます。</span></div>
+            <div class="gt" style="--c:#9AA3B5"><b>{int(HW["chainXp"] * 100)}<small>%</small></b><strong>技がいっしょに壊した分</strong><span>まとめ掘り・一本切りなど。</span></div>
+            <div class="gt" style="--c:#5AAAFF"><b>別<small>勘定</small></b><strong>務めのごほうび</strong><span>今日の伸びを使いません。</span></div>
+          </div>
+          <p class="mu wk-small">放置（視点が5分動かない）中、クリエイティブ、自分で置いたブロック、石の製造機では育ちません。</p></div>
       </div>
 
       <h2 class="disp h2 wk-h" id="trials">奥義の試練</h2>
@@ -1564,6 +1719,117 @@ notfound = f'''<div class="hero" style="min-height:70svh">
   </div>
 </div>'''
 
+
+# ───────────────────────── ひとびと ─────────────────────────
+_SCARF_NAME = ["琥珀", "桃", "空色", "若葉", "藤", "雪"]
+
+
+def _appears(cid):
+    out = []
+    names = {"start.html": "はじめる", "guide.html": "遊び方", "events.html": "夜祭", "rules.html": "きまり", "support.html": "支える", "404.html": "迷子のページ", "commands.html": "コマンド", "wiki.html": "灯技 Wiki", "wiki-hiuo.html": "灯魚図鑑"}
+    for f, r in RIDGE.items():
+        if f in names and any(w == cid for w, *_ in r["cast"]):
+            out.append((f, names[f]))
+    for k, c in enumerate(CH):
+        if _CH_WHO[c["id"]] == cid:
+            out.append((f"guide-{c['id']}.html", f"第{k + 1}章 {c['t']}"))
+    return out
+
+
+def _pf(c):
+    paths = "".join(f'<a href="wiki-{p["id"]}.html" style="--c:{_PCOL[i]}"><i>{p["k"]}</i>{p["name"]}</a>' for i, p in enumerate(HW["paths"]) if p["id"] in c["paths"])
+    ap = "".join(f'<a href="{f}">{t}</a>' for f, t in _appears(c["id"])[:6])
+    return f'''<article class="pf" id="{c["id"]}" style="--sc:{SCARF[c["k"] % 6]}">
+      <div class="pf-st">{fig(c["id"], True)}</div>
+      <div class="pf-b">
+        <div class="pf-h"><h3>{c["n"]}</h3><span>{c["kj"]}　／　えりまき：{_SCARF_NAME[c["k"] % 6]}</span></div>
+        <span class="pf-role">{c["role"]}</span>
+        <p class="pf-q">{c["line"]}</p>
+        <p class="pf-bio">{c["bio"]}</p>
+        <dl class="pf-dl"><div><dt>好きなもの</dt><dd>{c["like"]}</dd></div><div><dt>得意な道</dt><dd>{paths}</dd></div><div><dt>出てくるところ</dt><dd>{ap}</dd></div></dl>
+      </div>
+    </article>'''
+
+
+characters = sub_hero("characters.html", "灯原の、ひとびと。", "予告編に出てくる6人の旅人と、灯りを喰う影。このサイトのあちこちで、案内をしてくれます。",
+                      [("cast", "6人の旅人"), ("foe", "灯喰いと夜の敵"), ("about", "この人たちのこと")]) + f'''
+<section class="stratum tex s-soil" id="cast">
+  <div class="wrap">
+    <p class="depth">6人</p>
+    <h2 class="disp h2">えりまきの色で、見分ける。</h2>
+    <p class="lead">6人とも、同じフードのマントを着ています。ちがうのは、えりまきと、マントの色。名前はみんな、ふた文字です。</p>
+    <div class="lineup" aria-hidden="true">{"".join(fig(c["id"], True) for c in CAST)}</div>
+    {"".join(_pf(c) for c in CAST)}
+  </div>
+</section>
+
+<section class="stratum s-blood" id="foe">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">闇の中</p>
+    <h2 class="disp h2">灯りを、喰うもの。</h2>
+    <p class="lead">6人が守っているのは、灯りです。灯りを狙うものと、闇から見ているもの。</p>
+    <article class="pf foe" id="higui">
+      <div class="pf-st">{eater()}</div>
+      <div class="pf-b">
+        <div class="pf-h"><h3>灯喰い</h3><span>ひぐい　／　すみれ色の目</span></div>
+        <span class="pf-role">灯りの守りを破る、ただひとつの敵</span>
+        <p class="pf-q">（なにも言わない）</p>
+        <p class="pf-bio">黒い体に、白い面。夜になると、灯路のいちばん少ない「端」の灯籠へまっすぐ向かい、喰いはじめます。人には目もくれません。喰われた灯籠は青い冷たい火になり、守りも灯路も途切れます。倒せば欠片を落とし、夜明けには、つながっている灯籠へ火が戻ります。</p>
+        <dl class="pf-dl"><div><dt>くわしく</dt><dd><a href="guide-higui.html">第3章 灯喰い</a></dd></div><div><dt>守りかた</dt><dd><a href="guide-lantern.html">灯籠どうしを、つなぐ</a></dd></div></dl>
+      </div>
+    </article>
+    <article class="pf foe" id="reds" style="--sc:#FF3B30">
+      <div class="pf-st" style="background:linear-gradient(180deg,#020205,#0B0710 80%)">{reds("pf-reds")}{reds("pf-reds")}</div>
+      <div class="pf-b">
+        <div class="pf-h"><h3>闇の目</h3><span>夜の敵　／　赤い目</span></div>
+        <span class="pf-role" style="color:#fff">灯りの外にいるもの</span>
+        <p class="pf-q">灯りの外へ出たら、見られている。</p>
+        <p class="pf-bio">24分の夜に湧く敵たち。体力は2.5倍、攻撃は2倍で、夜を重ねるほど強くなります。灯りの中には入れず、中にいる人を狙えません。7夜に一度の朱月の夜には、さらに強く、群れと精鋭がふえます。</p>
+        <dl class="pf-dl"><div><dt>くわしく</dt><dd><a href="guide-night.html">第2章 長い夜</a></dd></div><div><dt>朱月の夜</dt><dd><a href="events.html">夜祭「夜明けまで」</a></dd></div></dl>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="stratum s-rock" id="about">
+  <div class="edge"></div>
+  <div class="wrap narrow">
+    <p class="depth">このページについて</p>
+    <h2 class="disp h2">ゲームの中では、あなたが旅人。</h2>
+    <p class="lead">6人は、予告編とこのサイトの案内役です。サーバーの中に、この6人が人物として出てくることはありません。灯原で灯籠を置き、夜を越えるのは、あなたです。</p>
+    <div class="btns" style="margin-top:28px"><a href="start.html" class="pbtn">旅人になる（入り方）</a><a href="index.html#film" class="gbtn">予告編を見る</a></div>
+  </div>
+</section>
+'''
+
+# ───────────────────────── コマンド ─────────────────────────
+def _cmd_rows(rows):
+    out = ""
+    for r in rows:
+        c, a, d = r[0], r[1], r[2]
+        need = f'<span class="need" title="この道の技を覚えると使えます">{r[3]}の技</span>' if len(r) > 3 else ""
+        q = _E(c + " " + a + " " + _re0.sub("<[^>]+>", "", d))
+        out += f'<div class="cr" data-q="{q}"><code>{_E(c)}{" <i>" + _E(a) + "</i>" if a else ""}</code><span>{d}{need}</span></div>'
+    return out
+
+
+commands = sub_hero("commands.html", "コマンド一覧", "ふだんはメニューを押すだけで遊べます。直接打ちたい人のための、すべてのコマンドです。",
+                    [(f"c{i}", g[2]) for i, g in enumerate(_CMDS)]) + f'''
+<section class="stratum s-deep" id="cmds">
+  <div class="wrap">
+    {say_box("hino", "迷ったら <span class=\"kbd\">/tomoshibi</span>。統合版なら、押しやすいメニューが出るよ。")}
+    <div class="finder">
+      <label class="find"><span class="sr">コマンドを探す</span><input type="search" id="cq" placeholder="コマンド・できることで探す（例：灯渡り、色、番付）" autocomplete="off"><kbd class="dot">/</kbd></label>
+      <p class="find-n mu" aria-live="polite"><b class="dot" id="cn">{sum(len(g[5]) for g in _CMDS)}</b> のコマンド <button type="button" class="clear" id="cclear" hidden>探すのをやめる</button></p>
+      <div id="cl">{"".join(f'''<div class="cmdg" id="c{i}"><div class="cmdg-h" style="--c:{g[1]}"><span class="k">{g[0]}</span><h2 class="disp">{g[2]}</h2><p>{g[4]}</p></div>{_cmd_rows(g[5])}</div>''' for i, g in enumerate(_CMDS))}</div>
+      <p class="wk-empty" id="cempty" hidden>見つかりませんでした。ことばを短くしてみてください。</p>
+    </div>
+    <p class="note" style="margin-top:44px"><b>統合版（スマホ・Switch など）の人へ。</b>コマンドを打たなくても、<span class="kbd">/tomoshibi</span>・<span class="kbd">/akashi</span>・<span class="kbd">/waza</span> で押しやすい専用のメニューが開きます。</p>
+  </div>
+</section>
+<script src="assets/wiki.js" defer></script>'''
+
 PAGES = [
     ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1は2026年11月7日21時開幕。", index),
     ("start.html", "はじめる｜灯原", "灯原への入り方を機種別に。Java版、スマホ、Windows、Switch・PS・Xbox。最初の夜の過ごし方と、よくある質問。", start),
@@ -1573,6 +1839,8 @@ PAGES = [
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
 ] + WIKI_PAGES + [
     ("support.html", "支える｜灯原", "灯原を支える（寄付）。PayPay で金額は自由、100円から。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
+    ("characters.html", "ひとびと｜灯原", "灯原の案内役、6人の旅人（ヒノ・モモ・ソラ・ワカ・シノ・ユキ）と、灯りを喰う灯喰い、夜の敵。予告編に出てくるドット絵の登場人物たち。", characters),
+    ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯籠と灯路（/tomoshibi）、灯の証（/akashi）、灯技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
 ]
 out = pathlib.Path(__file__).parent
