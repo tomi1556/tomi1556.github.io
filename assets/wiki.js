@@ -29,7 +29,8 @@
         var ok = true;
         for (var f in on) {
           if (!on[f].length) continue;
-          if (on[f].indexOf(el.getAttribute('data-' + f)) < 0) { ok = false; break; }
+          var vs = (el.getAttribute('data-' + f) || '').split(' ');
+          if (!vs.some(function (v) { return on[f].indexOf(v) >= 0; })) { ok = false; break; }
         }
         if (ok) for (var i = 0; i < words.length; i++) if (el._q.indexOf(words[i]) < 0) { ok = false; break; }
         el.hidden = !ok;
@@ -72,6 +73,7 @@
 
   setup({ list: '#wl', item: '.sk', input: '#wq', count: '#wn', clear: '#wclear', empty: '#wempty' });
   setup({ list: '#fl', item: '.fc', count: '#fn', clear: '#fclear' });
+  setup({ list: '#al', item: '.ak', input: '#aq', count: '#an', clear: '#aclear', empty: '#aempty' });
   setup({ list: '#cl', item: '.cr', input: '#cq', count: '#cn', clear: '#cclear', empty: '#cempty' });
   // コマンド：見出しの下が全部隠れたら、見出しも隠す
   var cl = $('#cl');
@@ -88,7 +90,7 @@
     var id = decodeURIComponent(location.hash.slice(1));
     if (!id) return;
     var el = document.getElementById(id);
-    if (!el || !el.classList.contains('nc')) return;
+    if (!el || !(el.classList.contains('nc') || el.classList.contains('ac'))) return;
     el.classList.remove('flash');
     void el.offsetWidth;
     el.classList.add('flash');

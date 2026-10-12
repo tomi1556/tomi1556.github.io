@@ -53,7 +53,7 @@ def footer():
     cols = [
         ("はじめる", [("start.html#join", "入り方"), ("start.html#first", "最初の夜"), ("commands.html", "コマンド一覧"), ("start.html#faq", "よくある質問")]),
         ("遊び方", None),
-        ("灯技 Wiki", [("wiki.html", "Wiki のはじめ"), ("wiki.html#all", "すべての技を探す"), ("wiki.html#trials", "奥義の試練"), ("wiki.html#tasks", "今日の務め"), ("wiki-hiuo.html", "灯魚図鑑")]),
+        ("Wiki", [("wiki.html", "Wiki のはじめ"), ("wiki.html#all", "すべての技を探す"), ("wiki.html#trials", "奥義の試練"), ("wiki.html#tasks", "今日の務め"), ("wiki-hiuo.html", "灯魚図鑑"), ("akashi.html", "灯の証 Wiki")]),
         ("灯原", [("events.html", "夜祭"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
     ]
     cm = ""
@@ -105,6 +105,8 @@ def _ridge_for(file):
         k = [c["id"] for c in CH].index(m.group(1))
         who = _CH_WHO[m.group(1)]
         return ridge(seed=20 + k, cast=[(who, 9, True)], eaters=(41,) if m.group(1) == "higui" else ())
+    if file.startswith("akashi"):
+        return ridge(seed=60 + len(file), cast=[("yuki", 9, True)], say=("yuki", "ぜんぶ、書きとめておいたよ。") if file == "akashi.html" else None)
     m = _re0.match(r"wiki-(\w+)\.html", file)
     if m and m.group(1) in _PATH_WHO:
         return ridge(seed=40 + len(m.group(1)), cast=[(_PATH_WHO[m.group(1)], 9, True)])
@@ -127,7 +129,7 @@ def _with_ridge(file, body):
 
 
 def page(file, title, desc, body, hero_min=""):
-    cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki")) else "start.html" if file == "commands.html" else "")
+    cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki", "akashi")) else "start.html" if file == "commands.html" else "")
     body = _with_ridge(file, body)
     url = SITE + ("/" if file == "index.html" else "/" + file)
     return f'''<!doctype html>
@@ -926,6 +928,10 @@ def _fish_sec():
 
 def _body(k):
     c = CH[k]
+    if c["id"] == "akashi":
+        b = "\n".join(_clean(_SEC[s]) for s in c["sec"])
+        i = b.rfind("\n  </div>\n</section>")
+        return b[:i] + '\n    <a href="akashi.html" class="wiki-band ak-band" style="margin-top:44px"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">263の証を、ひとつずつ</b><span>目標・報酬・段の道・秘められた証の手がかり。名前や報酬で探せます。</span></span><span class="wb-go">灯の証 Wiki へ<i></i></span></a>' + b[i:]
     if c["id"] == "hiwaza":
         return _hiwaza_sec()
     if c["id"] == "fish":
@@ -1015,6 +1021,7 @@ def _guide_index():
     <div class="gi-start">{pix(CH_ICONS["lantern"], "ch-ic lit")}<p><b>はじめての人は、第一層の3章だけで大丈夫です。</b>灯籠を置き、夜を知り、灯喰いから守れれば、最初の夜は越えられます。ほかの章は、遊びながらでどうぞ。</p><a href="guide-lantern.html" class="pbtn">第1章から読む</a></div>
     {layers}
     <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯技 完全解説 Wiki</b><span>130の技の効き目・要る Lv・技点・待ち時間、技の木、奥義の試練、務め、灯魚図鑑。ぜんぶ、ゲームと同じ数字で。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯の証 完全解説 Wiki</b><span>263の証の目標と報酬、段の道、10の位階、称号・灯りの色・足跡の手に入れ方。秘められた証は手がかりだけ。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="commands.html" class="wiki-band cmd-band"><span class="wb-k dot">CMD</span><span class="wb-b"><b class="disp">コマンド一覧</b><span>/tomoshibi・/akashi・/waza・/yomatsuri・/tokoyo のすべて。探して、すぐ見つかる。</span></span><span class="wb-go">開く<i></i></span></a>
   </div>
 </section>'''
@@ -1259,6 +1266,7 @@ def _wiki_side(cur):
     for i, p in enumerate(HW["paths"]):
         items += f'<a href="wiki-{p["id"]}.html" style="--c:{_PCOL[i]}"{" aria-current=\"page\"" if cur == p["id"] else ""}><span class="ws-k">{p["k"]}</span>{p["name"]}</a>'
     items += f'<a href="wiki-hiuo.html" style="--c:#4FD8C8"{" aria-current=\"page\"" if cur == "hiuo" else ""}><span class="ws-k">魚</span>灯魚図鑑</a>'
+    items += '<a href="akashi.html" class="ws-x" style="--c:#F29BB8"><span class="ws-k">証</span>灯の証 Wiki へ</a>'
     return f'<nav class="wside" aria-label="Wiki の目次"><p class="dot wside-h">灯技 Wiki</p>{items}</nav>'
 
 
@@ -1522,6 +1530,271 @@ WIKI_PAGES = [("wiki.html", "灯技 完全解説｜灯原", "灯技（ひわざ�
 WIKI_PAGES += [(f"wiki-{p['id']}.html", f"{p['name']}｜灯技 Wiki｜灯原", f"{p['name']}の13の技（{'・'.join(n['name'] for n in p['nodes'][:5])}…）の効き目、要るLv・技点、技の木、育つこと、奥義の試練。", wiki_path(i))
                for i, p in enumerate(HW["paths"])]
 WIKI_PAGES += [("wiki-hiuo.html", "灯魚図鑑｜灯技 Wiki｜灯原", f"灯魚（ひうお）{len(HW['fish'])}種の珍しさ・大きさ・水辺・手がかり。", wiki_fish())]
+
+
+# ───────────────────────── 灯の証 Wiki ─────────────────────────
+AK = _wj.loads((pathlib.Path(__file__).parent / "data" / "akashi.json").read_text(encoding="utf-8"))
+_MC = {"0": "#3A3F55", "1": "#5A5AFF", "2": "#3CC83C", "3": "#3CC8C8", "4": "#E04848", "5": "#C77DFF", "6": "#FFAA00", "7": "#AAB0BD", "8": "#7A8295", "9": "#7C7CFF",
+       "a": "#55FF55", "b": "#55FFFF", "c": "#FF5555", "d": "#FF55FF", "e": "#FFFF55", "f": "#FFFFFF"}
+_AK_SLUG = ["light", "night", "hunt", "travel", "craft", "life", "fest", "secret"]
+_AK_COL = [_MC[c["mc"][0]] for c in AK["cats"]]
+_TCOL = ["", "#55FF55", "#55FFFF", "#FF55FF", "#FFAA00", "#FF5555"]
+_TNAME = ["", "易", "並", "難", "極", "伝"]
+_TFEEL = ["", "すぐ届く", "少し続ければ", "腰を据えて", "何週間も", "季節をまたいで"]
+_AK_ICON = {0: CH_ICONS["lantern"], 1: CH_ICONS["night"], 2: CH_ICONS["higui"], 3: CH_ICONS["more"], 4: CH_ICONS["hiwaza"], 5: CH_ICONS["buff"], 6: ICONS["events.html"], 7: CH_ICONS["akashi"]}
+
+
+def _dia(t):
+    return f'<span class="dia" style="--t:{_TCOL[t]}" aria-label="難度 {_TNAME[t]}">{"◆" * t}<s>{"◇" * (5 - t)}</s></span>'
+
+
+def _ak_medal(t, hidden=False):
+    c = "#5A6070" if hidden else _TCOL[t]
+    return pix(CH_ICONS["akashi"], "md").replace('<svg class="md"', f'<svg class="md" style="--t:{c}"')
+
+
+def _rewards(x, full=True):
+    t = AK["tiers"][x["tier"] - 1]
+    out = []
+    if full:
+        out.append(f'<li class="rw-p"><b class="dot">+{t["points"]}</b>証点</li>')
+        out.append(f'<li class="rw-x"><b class="dot">+{t["xp"]}</b>経験値</li>')
+        if t["frag"]:
+            out.append(f'<li class="rw-f"><b class="dot">×{t["frag"]}</b>加護の欠片</li>')
+    if x.get("title"):
+        out.append(f'<li class="rw-t">称号<b>{_E(x["title"])}</b></li>')
+    if x.get("tint"):
+        r, g, b = x["tint"]["rgb"]
+        out.append(f'<li class="rw-c" style="--rgb:rgb({r},{g},{b})">灯りの色<b>{_E(x["tint"]["name"])}</b></li>')
+    if x.get("trail"):
+        out.append(f'<li class="rw-s">足跡<b>{_E(x["trail"])}</b></li>')
+    if x.get("item"):
+        out.append(f'<li class="rw-i">品物<b>{_E(x["item"])}</b></li>')
+    return "".join(out)
+
+
+def _rw_keys(x):
+    return " ".join(k for k in ("title", "tint", "trail", "item") if x.get(k))
+
+
+def _ak_defs(c):
+    return [x for x in AK["defs"] if x["cat"] == c]
+
+
+def _ak_series(c):
+    """段でつながった証をひとまとめにする（[最初の段, …]）。ひとつきりのものは長さ1。"""
+    ds = _ak_defs(c)
+    byid = {x["id"]: x for x in ds if x["id"]}
+    nxt = {x["prev"]: x for x in ds if x.get("prev")}
+    out = []
+    for x in ds:
+        if x["hidden"] or x.get("prev"):
+            continue
+        chain = [x]
+        while chain[-1]["id"] in nxt:
+            chain.append(nxt[chain[-1]["id"]])
+        out.append(chain)
+    return out
+
+
+def _ak_hid_ix(c):
+    return [i for i, x in enumerate(_ak_defs(c)) if x["hidden"]]
+
+
+def _ak_side(cur):
+    items = f'<a href="akashi.html"{" aria-current=\"page\"" if cur == "top" else ""}><span class="ws-k" style="--c:var(--pink)">≡</span>証 Wiki のはじめ</a>'
+    for i, c in enumerate(AK["cats"]):
+        items += f'<a href="akashi-{_AK_SLUG[i]}.html" style="--c:{_AK_COL[i]}"{" aria-current=\"page\"" if cur == i else ""}><span class="ws-k">{c["k"]}</span>{c["name"]}<small class="dot">{len(_ak_defs(i))}</small></a>'
+    items += '<a href="wiki.html" class="ws-x" style="--c:#5AAAFF"><span class="ws-k">技</span>灯技 Wiki へ</a>'
+    return f'<nav class="wside" aria-label="証 Wiki の目次"><p class="dot wside-h">灯の証 Wiki</p>{items}</nav>'
+
+
+def _ak_hero(title, lead, color, crumb, icon_rows, sub):
+    ic = pix(icon_rows, "ch-ic big") if icon_rows else ""
+    return f'''<div class="hero ch-hero wk-hero" style="--c:{color}">
+  <div class="sky"></div><div class="stars" aria-hidden="true"></div>
+  <div class="wrap phead" id="content">
+    <nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><a href="akashi.html">灯の証 Wiki</a>{crumb}</nav>
+    <div class="ch-head">{ic}<div><p class="ch-big dot">{sub}</p><h1 class="disp h1-sub">{title}</h1></div></div>
+    <p class="lead">{lead}</p>
+  </div>
+</div>'''
+
+
+def _ak_card(x, c):
+    """証の札（章のページ）。"""
+    if x["hidden"]:
+        n = _ak_hid_ix(c).index(_ak_defs(c).index(x)) + 1
+        return f'''<article class="ac hid" id="h{n}" style="--t:#5A6070">
+      <div class="ac-m">{_ak_medal(x["tier"], True)}</div>
+      <div class="ac-b"><header><h3 class="disp">？？？</h3>{_dia(x["tier"])}</header>
+      <p class="ac-hint">「{_E(x["hint"])}」</p>
+      <p class="ac-foot mu"><span>秘められた証</span><span>得ると、名前と条件が明かされます</span></p></div>
+    </article>'''
+    stage = f'<span class="ac-st dot">第{x["stage"]}段 / 全{x["stages"]}段</span>' if x["stages"] > 1 else ""
+    prev = next((y for y in _ak_defs(c) if y["id"] == x["prev"]), None) if x.get("prev") else None
+    need = f'<p class="ac-need"><span>現れる条件</span>前の段「<a href="#{prev["id"]}">{_E(prev["name"])}</a>」を得る</p>' if prev else ""
+    return f'''<article class="ac" id="{x["id"]}" style="--t:{_TCOL[x["tier"]]}">
+      <div class="ac-m">{_ak_medal(x["tier"])}</div>
+      <div class="ac-b"><header><h3 class="disp">{_E(x["name"])}</h3>{_dia(x["tier"])}{stage}</header>
+      <p class="ac-d">{"<br>".join(_E(s) for s in x["desc"])}</p>
+      <p class="ac-goal"><span>目標</span><b class="dot">{_E(x["goal"])}</b></p>
+      <ul class="rw">{_rewards(x)}</ul>
+      {need}</div>
+    </article>'''
+
+
+def _ak_track(chain, c):
+    nodes = ""
+    for x in chain:
+        nodes += f'''<a href="#{x["id"]}" class="tk-n" style="--t:{_TCOL[x["tier"]]}"><i class="tk-l"></i><b>{_E(x["name"])}</b><span class="dot">{_E(x["goal"])}</span>{"<em>" + ("称号" if x.get("title") else "色" if x.get("tint") else "足跡" if x.get("trail") else "品物") + "</em>" if _rw_keys(x) else ""}</a>'''
+    head = chain[0]["desc"][0]
+    return f'<div class="tk" style="--n:{len(chain)}"><p class="tk-h"><span class="dot">{len(chain)}段</span>{_E(head)}</p><div class="tk-r">{nodes}</div></div>'
+
+
+def akashi_cat(c):
+    cat = AK["cats"][c]
+    color = _AK_COL[c]
+    ds = _ak_defs(c)
+    series = _ak_series(c)
+    chains = [s for s in series if len(s) > 1]
+    singles = [s[0] for s in series if len(s) == 1]
+    hid = [x for x in ds if x["hidden"]]
+    pts = sum(AK["tiers"][x["tier"] - 1]["points"] for x in ds)
+    tracks = "".join(_ak_track(s, c) for s in chains)
+    order = [x for s in chains for x in s] + singles
+    cards = "".join(_ak_card(x, c) for x in order)
+    hcards = "".join(_ak_card(x, c) for x in hid)
+    tiers = [sum(1 for x in ds if x["tier"] == t) for t in range(1, 6)]
+    tbar = "".join(f'<i style="--t:{_TCOL[t + 1]};flex:{n}" title="{_TNAME[t + 1]} {n}"></i>' for t, n in enumerate(tiers) if n)
+    prv, nx = (c - 1, c + 1)
+    pg = lambda j, cls, lab: (f'<a href="akashi-{_AK_SLUG[j]}.html" class="pg {cls}" style="--c:{_AK_COL[j]}"><small class="dot">{lab}</small><b>{AK["cats"][j]["name"]}</b><span class="mu">{_E(AK["cats"][j]["desc"][0])}</span></a>' if 0 <= j < 8 else
+                              f'<a href="akashi.html" class="pg {cls}" style="--c:var(--pink)"><small class="dot">{lab}</small><b>証 Wiki のはじめ</b><span class="mu">すべての証の一覧と、位階・報酬。</span></a>')
+    hero = _ak_hero(cat["name"], _E(cat["desc"][0] + cat["desc"][1]), color, f'<span aria-hidden="true">›</span><span>{cat["name"]}</span>', _AK_ICON[c], f'CHAPTER {c + 1:02d} ／ 08')
+    return hero + f'''
+<section class="stratum s-deep wk">
+  <div class="edge"></div>
+  <div class="wrap wk-in">
+    {_ak_side(c)}
+    <div class="wk-main">
+      <div class="wk-stats" style="--c:{color}">
+        <div><b class="dot">{len(ds)}</b><span>証</span></div><div><b class="dot">{len(chains)}</b><span>段の道</span></div><div><b class="dot">{_num(pts)}</b><span>章の証点</span></div><div><b class="dot">{len(hid)}</b><span>秘められた証</span></div>
+      </div>
+      <div class="tbar" aria-label="難度の内わけ">{tbar}</div>
+      <p class="tlg mu">{"".join(f'<span style="--t:{_TCOL[t + 1]}">{_TNAME[t + 1]} {n}</span>' for t, n in enumerate(tiers))}</p>
+      {f'<h2 class="disp h2 wk-h">段の道</h2><p class="mu wk-p">同じ記録の証は段になっていて、前の段を得ると次の段が現れます。押すと、その証の札へ。</p><div class="tks">{tracks}</div>' if chains else ""}
+      <h2 class="disp h2 wk-h">証のすべて</h2>
+      <div class="acs">{cards}</div>
+      {f'<h2 class="disp h2 wk-h">秘められた証</h2><p class="mu wk-p">名前も条件も伏せられた証。手がかりはひとことだけ。得ると、ゲームの中で明かされます。</p><div class="acs">{hcards}</div>' if hid else ""}
+      <nav class="pager wk-pager" aria-label="前後の章">{pg(prv, "prev", "← 前の章")}{pg(nx, "next", "次の章 →")}</nav>
+    </div>
+  </div>
+</section>
+<script src="assets/wiki.js" defer></script>'''
+
+
+def akashi_index():
+    ds = AK["defs"]
+    cards = ""
+    for i, c in enumerate(AK["cats"]):
+        d = _ak_defs(i)
+        tiers = [sum(1 for x in d if x["tier"] == t) for t in range(1, 6)]
+        tb = "".join(f'<i style="--t:{_TCOL[t + 1]};flex:{n}"></i>' for t, n in enumerate(tiers) if n)
+        cards += f'''<a href="akashi-{_AK_SLUG[i]}.html" class="akc" style="--c:{_AK_COL[i]}">
+        <span class="akc-k">{c["k"]}</span>
+        <span class="akc-b"><b class="disp">{c["name"]}</b><span>{_E(c["desc"][0])}</span></span>
+        <span class="akc-n dot">{len(d)}</span>
+        <span class="tbar sm" aria-hidden="true">{tb}</span>
+      </a>'''
+    rows = ""
+    hidn = {i: 0 for i in range(8)}
+    for x in ds:
+        c = x["cat"]
+        if x["hidden"]:
+            hidn[c] += 1
+            href = f'akashi-{_AK_SLUG[c]}.html#h{hidn[c]}'
+            q = f'秘 ？？？ {x["hint"]} {AK["cats"][c]["name"]}'
+            nm, sm = "？？？", "「" + _E(x["hint"]) + "」"
+        else:
+            href = f'akashi-{_AK_SLUG[c]}.html#{x["id"]}'
+            q = " ".join(filter(None, [x["name"], " ".join(x["desc"]), x["goal"], x.get("title"), (x.get("tint") or {}).get("name"), x.get("trail"), x.get("item"), AK["cats"][c]["name"]]))
+            nm, sm = _E(x["name"]), _E(x["desc"][0])
+        marks = "".join(f'<i class="m-{k}" title="{t}">{t[0]}</i>' for k, t in (("title", "称号"), ("tint", "色"), ("trail", "足跡"), ("item", "品物")) if x.get(k))
+        rows += f'''<a href="{href}" class="ak{" hid" if x["hidden"] else ""}" style="--c:{_AK_COL[c]};--t:{_TCOL[x["tier"]]}" data-cat="{c}" data-tier="{x["tier"]}" data-rw="{_rw_keys(x) or "none"}" data-q="{_E(q)}">
+        <span class="sk-p">{AK["cats"][c]["k"]}</span><span class="sk-n"><b>{nm}</b><small>{sm}</small></span><span class="ak-r">{marks}</span>{_dia(x["tier"])}<span class="sk-l dot">{_E(x["goal"] or "—")}</span>
+      </a>'''
+    cchips = "".join(f'<button type="button" class="chip-f" data-f="cat" data-v="{i}" style="--c:{_AK_COL[i]}">{c["k"]}</button>' for i, c in enumerate(AK["cats"]))
+    tchips = "".join(f'<button type="button" class="chip-f" data-f="tier" data-v="{t}" style="--c:{_TCOL[t]}">{_TNAME[t]}</button>' for t in range(1, 6))
+    rchips = "".join(f'<button type="button" class="chip-f" data-f="rw" data-v="{k}" style="--c:var(--amber)">{t}</button>' for k, t in (("title", "称号"), ("tint", "灯りの色"), ("trail", "足跡"), ("item", "品物")))
+    tiles = ""
+    for t in range(1, 6):
+        ti = AK["tiers"][t - 1]
+        n = sum(1 for x in ds if x["tier"] == t)
+        tiles += f'''<div class="tt" style="--t:{_TCOL[t]}"><p>{_dia(t)}</p><b class="disp">{_TNAME[t]}</b><span class="tt-f">{_TFEEL[t]}</span>
+          <dl><div><dt>証点</dt><dd class="dot">{ti["points"]}</dd></div><div><dt>経験値</dt><dd class="dot">{ti["xp"]}</dd></div><div><dt>欠片</dt><dd class="dot">{ti["frag"] or "—"}</dd></div></dl><span class="tt-n dot">{n} 個</span></div>'''
+    mx = AK["ranks"][-1]["need"]
+    ladder = ""
+    for i, r in enumerate(AK["ranks"]):
+        rc = _MC[r["mc"][0]]
+        rw = []
+        if i > 0:
+            rw.append(f'称号「{_E(r["name"])}」')
+        if r.get("trail"):
+            rw.append(f'足跡「{_E(r["trail"])}」')
+        if r.get("tint"):
+            rw.append(f'灯りの色「{_E(r["tint"]["name"])}」')
+        ladder += f'''<li style="--r:{rc};--w:{max(1.2, r["need"] / mx * 100):.1f}%"><span class="rk-i dot">{i + 1:02d}</span><b class="disp">{_E(r["name"])}</b><span class="rk-b"><i></i></span><span class="rk-n dot">{_num(r["need"])}</span><span class="rk-w">{" ・ ".join(rw) or "はじまりの位"}</span></li>'''
+    titles = "".join(f'<li{" class=hid" if t["id"] is None else ""}><b>{_E(t["t"]) if t["t"] else "？？？"}</b><span>{_E(t["how"])}</span></li>' for t in AK["titles"])
+    trails = "".join(f'<li><b>{_E(t["name"])}</b><span>{_E(t["how"])}</span></li>' for t in AK["trails"])
+    tints = [(x["tint"]["name"], x["tint"]["rgb"], x["name"]) for x in ds if x.get("tint")] + [(r["tint"]["name"], r["tint"]["rgb"], "位階「" + r["name"] + "」") for r in AK["ranks"] if r.get("tint")]
+    tintl = "".join(f'<li style="--rgb:rgb({c[0]},{c[1]},{c[2]})"><i></i><b>{_E(n)}</b><span>{_E(h)}</span></li>' for n, c, h in tints)
+    hero = _ak_hero("灯の証 完全解説", f"灯原だけの進捗、{len(ds)}の証。8つの章・5つの難度・10の位階と、称号・灯りの色・足跡の手に入れ方。プラグインの定義からそのまま作りました。", "#F29BB8", "", CH_ICONS["akashi"], "AKASHI WIKI")
+    return hero + f'''
+<section class="stratum s-deep wk">
+  <div class="edge"></div>
+  <div class="wrap wk-in">
+    {_ak_side("top")}
+    <div class="wk-main">
+      <div class="wk-stats big" style="--c:var(--pink)">
+        <div><b class="dot">{len(ds)}</b><span>証</span></div><div><b class="dot">8</b><span>章</span></div><div><b class="dot">{_num(AK["total"])}</b><span>証点の合計</span></div><div><b class="dot">{len(AK["ranks"])}</b><span>位階</span></div><div><b class="dot">{len(AK["titles"])}</b><span>称号</span></div><div><b class="dot">{len(AK["trails"])}</b><span>足跡</span></div>
+      </div>
+
+      <h2 class="disp h2 wk-h" id="cats">8つの章</h2>
+      <div class="akcs">{cards}</div>
+
+      <h2 class="disp h2 wk-h" id="all">すべての証を探す</h2>
+      <div class="finder">
+        <label class="find"><span class="sr">証を探す</span><input type="search" id="aq" placeholder="名前・条件・報酬で探す（例：灯籠、朱月、称号）" autocomplete="off"><kbd class="dot">/</kbd></label>
+        <div class="filters"><div class="fg"><span class="fl-l">章</span>{cchips}</div><div class="fg"><span class="fl-l">難度</span>{tchips}</div><div class="fg"><span class="fl-l">報酬</span>{rchips}</div></div>
+        <p class="find-n mu" aria-live="polite"><b class="dot" id="an">{len(ds)}</b> の証 <button type="button" class="clear" id="aclear" hidden>しぼりこみを消す</button></p>
+        <div class="sks aks" id="al">{rows}</div>
+        <p class="wk-empty" id="aempty" hidden>見つかりませんでした。ことばを短くしてみてください。</p>
+      </div>
+
+      <h2 class="disp h2 wk-h" id="tiers">5つの難度</h2>
+      <p class="mu wk-p">報酬の証点・経験値・加護の欠片は難度で決まります。称号・灯りの色・足跡・品物は、証ごとに追加でつきます。</p>
+      <div class="tts">{tiles}</div>
+
+      <h2 class="disp h2 wk-h" id="ranks">10の位階</h2>
+      <p class="mu wk-p">証点がたまると位階が上がります。バーは、いちばん上の位階までの道のり。</p>
+      <ol class="rks">{ladder}</ol>
+
+      <h2 class="disp h2 wk-h" id="rewards">見た目の報酬</h2>
+      <div class="rwg">
+        <div><h3 class="disp h3">灯りの色 <small class="dot">{len(tints)}</small></h3><ul class="tintl">{tintl}</ul>
+             <h3 class="disp h3" style="margin-top:28px">足跡 <small class="dot">{len(AK["trails"])}</small></h3><ul class="nml">{trails}</ul></div>
+        <div><h3 class="disp h3">称号 <small class="dot">{len(AK["titles"])}</small></h3><ul class="nml ttl">{titles}</ul></div>
+      </div>
+      <p class="mu wk-small">報酬はすべて、見た目か少しの手助けだけ。強さの差は開きません。秘められた証の報酬は伏せてあります。</p>
+      <nav class="pager wk-pager" aria-label="ほかの Wiki">{f'<a href="akashi-light.html" class="pg next" style="--c:{_AK_COL[0]}"><small class="dot">はじめの章 →</small><b>灯の章</b><span class="mu">{_E(AK["cats"][0]["desc"][0])}</span></a>'}<a href="wiki.html" class="pg prev" style="--c:#5AAAFF"><small class="dot">← もうひとつの Wiki</small><b>灯技 Wiki</b><span class="mu">10の道・130の技と、灯魚図鑑。</span></a></nav>
+    </div>
+  </div>
+</section>
+<script src="assets/wiki.js" defer></script>'''
+
+
+AK_PAGES = [("akashi.html", "灯の証 完全解説｜灯原", f"灯の証（あかし）{len(AK['defs'])}個のすべて。8つの章、難度と報酬（証点・経験値・欠片・称号・灯りの色・足跡）、段の道、10の位階。秘められた証は手がかりだけ。", akashi_index())]
+AK_PAGES += [(f"akashi-{_AK_SLUG[i]}.html", f"{c['name']}｜灯の証 Wiki｜灯原", f"{c['name']}の{len(_ak_defs(i))}の証。{c['desc'][0]}段の道、目標、報酬、秘められた証の手がかり。", akashi_cat(i)) for i, c in enumerate(AK["cats"])]
 
 
 # ───────────────────────── 支える（寄付） ─────────────────────────
@@ -1837,7 +2110,7 @@ PAGES = [
 ] + [(f"guide-{c['id']}.html", f"{c['t']}｜遊び方｜灯原", c['desc'], chapter_page(k)) for k, c in enumerate(CH)] + [
     ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり4種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。", events),
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
-] + WIKI_PAGES + [
+] + WIKI_PAGES + AK_PAGES + [
     ("support.html", "支える｜灯原", "灯原を支える（寄付）。PayPay で金額は自由、100円から。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
     ("characters.html", "ひとびと｜灯原", "灯原の案内役、6人の旅人（ヒノ・モモ・ソラ・ワカ・シノ・ユキ）と、灯りを喰う灯喰い、夜の敵。予告編に出てくるドット絵の登場人物たち。", characters),
     ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯籠と灯路（/tomoshibi）、灯の証（/akashi）、灯技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
