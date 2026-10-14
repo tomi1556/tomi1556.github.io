@@ -100,6 +100,51 @@
     }).catch(function () {});
   }
 
+  var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var fine = window.matchMedia('(pointer: fine)').matches;
+
+  // ── 予告編：再生すると劇場のように、まわりを暗くする ──
+  $$('[data-film]').forEach(function (box) {
+    var v = $('video', box), btn = $('.film-play', box);
+    var exit = function () { document.body.classList.remove('theater'); };
+    var play = function () { v.controls = true; v.play(); };
+    btn.addEventListener('click', play);
+    v.addEventListener('play', function () { box.classList.add('on'); document.body.classList.add('theater'); });
+    v.addEventListener('pause', exit);
+    v.addEventListener('ended', function () { exit(); box.classList.remove('on'); v.controls = false; });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && document.body.classList.contains('theater')) v.pause(); });
+    document.addEventListener('click', function (e) { if (document.body.classList.contains('theater') && !box.contains(e.target)) v.pause(); });
+  });
+
+  // ── 深さの目盛り（PC）：いま読んでいる地層の Y を右端に ──
+  var alt = $('.alt'), depths = $$('.stratum .depth');
+  if (alt && depths.length > 1 && 'IntersectionObserver' in window) {
+    var altT = $('.alt-t', alt), al = $('.alt-l', alt);
+    var secs = depths.map(function (d) { return { el: d.closest('.stratum'), t: d.textContent.trim() }; });
+    var pick = function () {
+      var y = window.innerHeight * 0.45, cur = null;
+      secs.forEach(function (s) { var r = s.el.getBoundingClientRect(); if (r.top < y && r.bottom > y) cur = s; });
+      var doc = document.documentElement, p = Math.min(1, Math.max(0, window.scrollY / Math.max(1, doc.scrollHeight - window.innerHeight)));
+      al.style.top = altT.style.top = (p * 100).toFixed(2) + '%';
+      alt.classList.toggle('on', !!cur);
+      if (cur && altT.textContent !== cur.t) { altT.textContent = cur.t; altT.classList.remove('pop'); void altT.offsetWidth; altT.classList.add('pop'); }
+    };
+    var tk = false;
+    window.addEventListener('scroll', function () { if (!tk) { tk = true; requestAnimationFrame(function () { tk = false; pick(); }); } }, { passive: true });
+    pick();
+  }
+
+  // ── 灯りを持って歩く（PC）：マウスのまわりだけ、ほんのり明るい ──
+  var glow = $('.glow');
+  if (glow && fine && !reduce) {
+    var gx = 0, gy = 0, gt = false;
+    window.addEventListener('pointermove', function (e) {
+      gx = e.clientX; gy = e.clientY;
+      if (!gt) { gt = true; requestAnimationFrame(function () { gt = false; glow.style.transform = 'translate(' + gx + 'px,' + gy + 'px)'; glow.classList.add('on'); }); }
+    }, { passive: true });
+    document.addEventListener('pointerleave', function () { glow.classList.remove('on'); });
+  }
+
   // ── 星 ──
   $$('.stars').forEach(function (box) {
     var n = window.innerWidth < 760 ? 36 : 64, h = '';

@@ -1134,3 +1134,88 @@ main>section:not([style*="position"]){position:relative}
 .md{width:40px;height:40px}
 .ac-st{margin-left:0;width:100%}
 }
+
+/* ═════════ 映画のような体験 ═════════ */
+/* 開幕：トップは黒い帯が上下に開いて始まる */
+.bars{position:absolute;inset:0;z-index:20;pointer-events:none}
+.bars i{position:absolute;left:0;right:0;height:50%;background:#000}
+.bars i:first-child{top:0}.bars i:last-child{bottom:0}
+@media (prefers-reduced-motion:no-preference){
+.bars i:first-child{animation:barUp 1.5s cubic-bezier(.7,0,.2,1) .15s forwards}
+.bars i:last-child{animation:barDn 1.5s cubic-bezier(.7,0,.2,1) .15s forwards}
+}
+@media (prefers-reduced-motion:reduce){.bars{display:none}}
+@keyframes barUp{to{transform:translateY(-100%)}}
+@keyframes barDn{to{transform:translateY(100%)}}
+/* フィルムの粒子と周辺の陰り（夜空の上だけ） */
+.hero::after{content:'';position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(ellipse at 50% 45%,transparent 55%,rgba(0,0,0,.38) 100%)}
+.hero-top::before{content:'';position:absolute;inset:-50%;z-index:2;pointer-events:none;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+@media (prefers-reduced-motion:no-preference){.hero-top::before{animation:grain .8s steps(4) infinite}}
+@keyframes grain{0%{transform:translate(0,0)}25%{transform:translate(-3%,2%)}50%{transform:translate(2%,-3%)}75%{transform:translate(-2%,-2%)}100%{transform:translate(3%,1%)}}
+/* 地面へ降りていくカメラ：スクロールで景色が遅れて動き、題字は奥へ */
+@supports (animation-timeline:scroll()){
+@media (prefers-reduced-motion:no-preference){
+.hero-top .hero-body{animation:camUp linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+.hero-top .moon{animation:camMoon linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+.hero-top .stars{animation:camStars linear both;animation-timeline:scroll(root);animation-range:0 100vh}
+.hero-top .scene .layer:nth-child(1){animation:camFar linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+.hero-top .scene .layer:nth-child(2){animation:camMid linear both;animation-timeline:scroll(root);animation-range:0 90vh}
+}
+}
+@keyframes camUp{to{transform:translateY(-14vh) scale(.96);opacity:0;filter:blur(3px)}}
+@keyframes camMoon{to{transform:translateY(22vh)}}
+@keyframes camStars{to{transform:translateY(16vh)}}
+@keyframes camFar{to{transform:translateY(9vh)}}
+@keyframes camMid{to{transform:translateY(5vh)}}
+/* 深さの目盛り（PCだけ） */
+.alt{position:fixed;right:22px;top:50%;z-index:40;width:4px;height:42vh;transform:translateY(-50%);pointer-events:none;opacity:0;transition:opacity .4s}
+.alt.on{opacity:1}
+.alt-r{position:absolute;inset:0;background:repeating-linear-gradient(180deg,rgba(233,238,246,.28) 0 2px,transparent 2px 12px)}
+.alt-l{position:absolute;left:50%;width:12px;height:14px;margin:-7px 0 0 -6px;background:var(--amber);border:3px solid #2A1E16;box-shadow:0 0 14px 4px rgba(242,181,68,.6);transition:top .15s linear}
+.alt-t{position:absolute;right:16px;top:50%;transform:translateY(-50%);transition:top .15s linear;white-space:nowrap;font-size:13px;color:#E9EEF6;padding:3px 8px;background:rgba(7,11,24,.72);border:1px solid rgba(233,238,246,.16)}
+.alt-t.pop{animation:altPop .5s steps(3)}
+@keyframes altPop{from{opacity:0;transform:translate(8px,-50%)}to{opacity:1;transform:translate(0,-50%)}}
+@media (max-width:1439px){.alt{display:none}}
+/* 灯りを持って歩く（マウスがある端末だけ） */
+.glow{position:fixed;left:-240px;top:-240px;z-index:45;width:480px;height:480px;pointer-events:none;border-radius:50%;background:radial-gradient(circle,rgba(255,206,120,.10) 0%,rgba(255,190,90,.05) 35%,rgba(255,190,90,0) 68%);mix-blend-mode:screen;opacity:0;transition:opacity .5s}
+.glow.on{opacity:1}
+@media (pointer:coarse),(prefers-reduced-motion:reduce){.glow{display:none}}
+/* 予告編：劇場 */
+.film{position:relative;z-index:2;transition:box-shadow .6s}
+.film video{cursor:pointer}
+.film-play{position:absolute;inset:0;display:grid;place-content:center;justify-items:center;gap:14px;width:100%;border:0;background:radial-gradient(ellipse at 50% 50%,rgba(0,0,0,0) 30%,rgba(0,0,0,.45));color:#fff;cursor:pointer}
+.film-play i{width:104px;height:104px;background:var(--amber);clip-path:polygon(0 0,0 100%,20% 100%,20% 90%,40% 90%,40% 80%,60% 80%,60% 70%,80% 70%,80% 60%,100% 60%,100% 40%,80% 40%,80% 30%,60% 30%,60% 20%,40% 20%,40% 10%,20% 10%,20% 0);filter:drop-shadow(0 0 22px rgba(242,181,68,.8));transition:transform .15s steps(2)}
+.film-play span{font-size:18px;letter-spacing:.4em;padding-left:.4em;color:#FFE3A3;text-shadow:0 2px 12px #000}
+.film-play:hover i,.film-play:focus-visible i{transform:scale(1.1)}
+.film.on .film-play{display:none}
+.film-note{margin-top:12px;font-size:13px}
+body.theater::before{content:'';position:fixed;inset:0;z-index:55;background:rgba(0,0,0,.86);animation:fadeTh .6s ease both}
+body.theater .film{z-index:56;box-shadow:0 0 0 1px rgba(242,181,68,.25),0 40px 160px rgba(242,181,68,.18)}
+body.theater #film{z-index:56}
+body.theater .hdr,body.theater .alt,body.theater .glow{opacity:.15;transition:opacity .6s}
+@keyframes fadeTh{from{opacity:0}}
+/* iPad：上のメニューを詰めて、1行に収める */
+@media (min-width:761px) and (max-width:1100px){
+.hdr-in{gap:6px 10px}
+.logo{gap:8px;flex:none}
+.logo span{font-size:22px;white-space:nowrap}
+.nav{gap:0}
+.nl{flex-direction:column;justify-content:center;gap:3px;padding:6px 8px;min-height:56px;font-size:12px;line-height:1.1;white-space:nowrap}
+.nl[aria-current]::after{left:10px;right:10px;bottom:0}
+.hdr .dbtn{white-space:nowrap;padding:8px 12px;font-size:13px;min-height:42px}
+.hero-top .hero-body{padding-top:30px}
+.moon{right:6%;top:96px;width:60px;height:60px}
+.castrow{grid-template-columns:repeat(3,minmax(0,1fr))}
+.wk-in{gap:20px}
+}
+body.theater #film .wrap>*:not(.film){opacity:.12;transition:opacity .6s}
+
+/* 下のページの題字も、幕が上がるように */
+@media (prefers-reduced-motion:no-preference){
+.phead .h1-sub{animation:reveal .9s steps(8) .1s both}
+.phead .lead,.phead .toc,.phead .rail,.phead .btns{animation:fadein .7s ease .55s both}
+}
+/* iPad 縦：題字を景色とのあいだの真ん中に */
+@media (min-width:761px) and (orientation:portrait){.hero-top .hero-body{margin-top:auto}}
+@media (max-width:1100px){.wk-stats.big{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media (max-width:760px){.wk-stats.big{grid-template-columns:repeat(2,minmax(0,1fr))}}

@@ -162,6 +162,8 @@ def page(file, title, desc, body, hero_min=""):
 {body}
 </main>
 {footer()}
+<div class="alt" aria-hidden="true"><i class="alt-r"></i><b class="alt-l"></b><span class="alt-t dot"></span></div>
+<div class="glow" aria-hidden="true"></div>
 <script src="assets/site.js" defer></script>
 </body>
 </html>
@@ -245,7 +247,8 @@ _CMDS = [
 
 
 # ───────────────────────── トップ ─────────────────────────
-index = f'''<div class="hero" style="min-height:min(900px,100svh)">
+index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
+  <div class="bars" aria-hidden="true"><i></i><i></i></div>
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div><div class="dusk" aria-hidden="true"></div>
   <div class="wrap hero-body" id="content">
     <a href="#season" class="chip fadein"><i></i><span>シーズン1「灯ノ海」</span><b data-season-short>11月7日（土）21:00 開幕</b></a>
@@ -333,7 +336,9 @@ index = f'''<div class="hero" style="min-height:min(900px,100svh)">
     <p class="depth">Y=−72</p>
     <h2 class="disp h2">予告編</h2>
     <p class="lead">62秒。音が出ます。長い夜、灯喰い、加護、灯技と灯魚と灯の証。</p>
-    <div class="film"><video controls preload="none" playsinline poster="assets/trailer-poster.jpg"><source src="assets/trailer.mp4" type="video/mp4">お使いのブラウザでは動画を再生できません。</video></div>
+    <div class="film" data-film><video preload="none" playsinline poster="assets/trailer-poster.jpg"><source src="assets/trailer.mp4" type="video/mp4">お使いのブラウザでは動画を再生できません。</video>
+      <button type="button" class="film-play" aria-label="予告編を再生する"><i aria-hidden="true"></i><span class="dot">PLAY</span></button></div>
+    <p class="film-note mu">再生すると、まわりが暗くなります。Esc か画面の外を押すと戻ります。</p>
   </div>
 </section>
 
