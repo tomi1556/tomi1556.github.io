@@ -187,10 +187,11 @@
 
   // ── 星 ──
   $$('.stars').forEach(function (box) {
-    var n = window.innerWidth < 760 ? 36 : 64, h = '';
+    // トップの3Dの夜空と同じ：小さな四角い星を多めに、明るい星だけ少しにじませる
+    var n = window.innerWidth < 760 ? 70 : 140, h = '';
     for (var i = 0; i < n; i++) {
-      var z = rnd() > 0.85 ? 4 : 2, d = 0.4 + rnd() * 1.8;
-      h += '<span class="star" style="left:' + (rnd() * 100).toFixed(2) + '%;top:' + (rnd() * 70).toFixed(2) + '%;width:' + z + 'px;height:' + z + 'px;animation-delay:' + d.toFixed(2) + 's,' + (d + rnd() * 3).toFixed(2) + 's;animation-duration:1s,' + (2 + rnd() * 3).toFixed(2) + 's"></span>';
+      var r0 = rnd(), z = r0 > 0.93 ? 3 : r0 > 0.55 ? 2 : 1, d = 0.4 + rnd() * 1.8, y = Math.pow(rnd(), 1.4) * 72;
+      h += '<span class="star' + (z === 3 ? ' big' : '') + '" style="left:' + (rnd() * 100).toFixed(2) + '%;top:' + y.toFixed(2) + '%;width:' + z + 'px;height:' + z + 'px;--o:' + (0.45 + rnd() * 0.5).toFixed(2) + ';animation-delay:' + d.toFixed(2) + 's,' + (d + rnd() * 3).toFixed(2) + 's;animation-duration:1s,' + (2 + rnd() * 4).toFixed(2) + 's"></span>';
     }
     box.innerHTML = h;
   });

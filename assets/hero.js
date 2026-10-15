@@ -263,13 +263,19 @@
     'void main(){vec3 c=vec3(0.0);for(int i=0;i<4;i++){vec2 d=vec2(float(i%2)-0.5,float(i/2)-0.5)*uPx*2.0;vec3 s=texture(uT,vU+d).rgb;float l=max(s.r,max(s.g,s.b));c+=s*smoothstep(0.55,0.95,l);}o=vec4(c*0.25,1.0);}');
   var pBlur = prog(VQ, HDR + 'in vec2 vU;uniform sampler2D uT;uniform vec2 uDir;out vec4 o;\n' +
     'void main(){vec3 c=texture(uT,vU).rgb*0.227;c+=(texture(uT,vU+uDir*1.385).rgb+texture(uT,vU-uDir*1.385).rgb)*0.316;c+=(texture(uT,vU+uDir*3.23).rgb+texture(uT,vU-uDir*3.23).rgb)*0.07;o=vec4(c,1.0);}');
-  var pComp = prog(VQ, HDR + 'in vec2 vU;uniform sampler2D uT;uniform sampler2D uB;uniform sampler2D uB2;uniform float uTime;uniform float uK;uniform vec2 uAsp;out vec4 o;\n' + HASH +
+  var pComp = prog(VQ, HDR + 'in vec2 vU;uniform sampler2D uT;uniform sampler2D uB;uniform sampler2D uB2;uniform float uTime;uniform float uK;uniform vec2 uAsp;uniform float uDig;uniform float uGY;uniform float uCell;uniform vec2 uRes;out vec4 o;\n' + HASH +
     'void main(){vec2 c0=vU-0.5;float r2=dot(c0*uAsp,c0*uAsp);\n' +
     ' vec2 ca=c0*r2*0.006;vec3 c=vec3(texture(uT,vU+ca).r,texture(uT,vU).g,texture(uT,vU-ca).b);\n' +
     ' vec3 b=texture(uB,vU).rgb*1.1+texture(uB2,vU).rgb*1.5;c+=b*uK;\n' +
     ' c=mix(c,c*vec3(0.92,0.97,1.12),smoothstep(0.35,0.0,max(c.r,max(c.g,c.b))));\n' +
     ' c*=1.0-r2*0.55;\n' +
-    ' c+=(h21(vU*vec2(1913.0,1771.0)+fract(uTime*7.0)*91.0)-0.5)*0.035;\n' +
+    ' c+=(h21(vU*vec2(1913.0,1771.0)+fract(uTime*7.0)*91.0)-0.5)*0.035*(1.0-uDig);\n' +
+    ' if(uDig>0.0){vec2 px=vec2(gl_FragCoord.x,uRes.y-gl_FragCoord.y);vec2 q=vec2(px.x,px.y-uGY);vec2 cell=floor(q/uCell);vec2 f=q-cell*uCell;\n' +
+    '  float yb=clamp((uRes.y-(cell.y*uCell+uGY))/uRes.y,0.0,1.0);float th=h21(cell+7.0)*0.55+yb*0.45;\n' +
+    '  float k=smoothstep(th*0.9,th*0.9+0.12,uDig*1.1);\n' +
+    '  vec3 soil=vec3(0.2275,0.1647,0.1255);float ln=(f.x<uCell/26.0||f.y<uCell/26.0)?0.91:1.0;soil*=ln;\n' +
+    '  float pre=smoothstep(th*0.9-0.2,th*0.9,uDig*1.1);c*=1.0-0.45*pre;\n' +
+    '  c=mix(c,soil,k);}\n' +
     ' o=vec4(c,1.0);}');
   var vaoQ = gl.createVertexArray(); gl.bindVertexArray(vaoQ);
   attr(0, buf(new Float32Array([-1, -1, 1, -1, 1, 1, -1, -1, 1, 1, -1, 1])), 2, 2, 0);
@@ -328,7 +334,7 @@
     blur(RT.b1, RT.b2); blur(RT.b1, RT.b2);
     pass(pBlur, RT.c1, [RT.b1], function (u) { gl.uniform1i(u.uT, 0); gl.uniform2f(u.uDir, 0, 0); });
     blur(RT.c1, RT.c2); blur(RT.c1, RT.c2);
-    pass(pComp, null, [RT.a, RT.b1, RT.c1], function (u) { gl.uniform1i(u.uT, 0); gl.uniform1i(u.uB, 1); gl.uniform1i(u.uB2, 2); gl.uniform1f(u.uTime, t); gl.uniform1f(u.uK, 1.0); gl.uniform2f(u.uAsp, Math.min(1, aspect), Math.min(1, 1 / aspect)); });
+    pass(pComp, null, [RT.a, RT.b1, RT.c1], function (u) { gl.uniform1i(u.uT, 0); gl.uniform1i(u.uB, 1); gl.uniform1i(u.uB2, 2); gl.uniform1f(u.uTime, t); gl.uniform1f(u.uK, 1.0); gl.uniform2f(u.uAsp, Math.min(1, aspect), Math.min(1, 1 / aspect)); gl.uniform1f(u.uDig, dig); gl.uniform1f(u.uGY, gridY); gl.uniform1f(u.uCell, 52 * dpr0); gl.uniform2f(u.uRes, cw, ch); });
   }
 
   // ───────── 行列 ─────────
@@ -341,9 +347,13 @@
   // ───────── 大きさ ─────────
   var spacer = hero.querySelector('.scene');
   var quality = 1, slow = 0, frames = 0;
-  var cw = 0, ch = 0, aspect = 1.5, wide = true;
+  var cw = 0, ch = 0, aspect = 1.5, wide = true, dpr0 = 1;
+  // 掘り進む：トップのあとの余白（.dive）と、その下の土の章
+  var dive = hero.nextElementSibling && hero.nextElementSibling.classList.contains('dive') ? hero.nextElementSibling : null;
+  var soil = dive ? dive.nextElementSibling : null;
+  var dig = 0, gridY = 0;
   function size() {
-    var w = hero.clientWidth, h = hero.clientHeight;
+    var w = cv.clientWidth || window.innerWidth, h = cv.clientHeight || window.innerHeight;
     var dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1.5 : 1.75) * quality;
     if (w * h * dpr * dpr > 3.2e6 * quality) dpr = Math.sqrt(3.2e6 * quality / (w * h));
     cw = Math.round(w * dpr); ch = Math.round(h * dpr);
@@ -351,9 +361,9 @@
     targets();
     aspect = w / h; wide = aspect > 1.2;
     var sp = spacer ? spacer.offsetHeight : 260;
-    var vh = Math.min(h, window.innerHeight || h);
-    cam.frac = wide ? 0.6 * vh / h : Math.min(0.85, 0.58 * vh / h);
-    cam.moon = 1 - 2 * (wide ? 0.17 : 0.24) * vh / h;
+    cam.frac = wide ? 0.6 : 0.58;
+    cam.moon = 1 - 2 * (wide ? 0.17 : 0.24);
+    dpr0 = dpr;
     if (RM || !running) draw(now());
   }
 
@@ -419,7 +429,15 @@
     if (!RM) { ex += Math.sin(t * 0.11) * 1.4; ey += Math.sin(t * 0.17) * 0.4; }
     ptr.sx += (ptr.x - ptr.sx) * 0.04; ptr.sy += (ptr.y - ptr.sy) * 0.04;
     if (!coarse) { ex += ptr.sx * 2.2; ey -= ptr.sy * 1.0; }
-    ey -= scrollP * 7.5; ez += scrollP * 9; tz += scrollP * 2; var ty = 1 - scrollP * 1.5;
+    var ty = 1;
+    // 下へ：最初の灯籠の足もとへ降りていき、真上から見下ろす
+    var dp = scrollP < 0.04 ? 0 : Math.min(1, (scrollP - 0.04) / 0.8), de = dp * dp * (3 - 2 * dp);
+    if (de > 0) {
+      var L0 = LAN[startI];
+      var dx = L0.cx + 0.2, dy = L0.y + 2.6, dz = L0.cz - 1.1;
+      ex += (dx - ex) * de; ey += (dy - ey) * de; ez += (dz - ez) * de;
+      tx += (L0.cx - tx) * de; ty += (L0.y - ty) * de; tz += (L0.cz + 0.35 - tz) * de;
+    }
     var eye = [ex, ey, ez], f = norm([tx - ex, ty - ey, tz - ez]), s = norm(cross(f, [0, 1, 0])), u = cross(s, f);
     var fov = wide ? 44 : 58;
     if (!wide && aspect < 0.7) fov = 64;
@@ -668,14 +686,26 @@
   if (hint) hint.textContent = (coarse ? '地面をタップ' : '地面をクリック') + 'すると、灯籠を置けます';
 
   window.addEventListener('resize', function () { size(); }, { passive: true });
-  window.addEventListener('scroll', function () {
-    scrollP = Math.min(1, Math.max(0, window.scrollY / (hero.offsetHeight || 1)));
-    if (RM) draw(60);
-  }, { passive: true });
+  function onScroll() {
+    var vh = window.innerHeight || 800, y = window.scrollY;
+    var span = hero.offsetHeight + (dive ? dive.offsetHeight : 0);
+    scrollP = Math.min(1, Math.max(0, y / Math.max(1, span - vh * 0.35)));
+    // 土の章の上端（画面上の位置）。掘った土の目地を、章の目地とそろえる
+    var top = soil ? soil.getBoundingClientRect().top : span - y;
+    gridY = top * dpr0;
+    dig = RM || !dive ? 0 : Math.min(1, Math.max(0, (scrollP - 0.62) / 0.34));
+    var fade = Math.max(0, 1 - scrollP * 2.2);
+    hud.style.opacity = fade < 1 ? fade : '';
+    if (hint) hint.style.opacity = fade < 1 ? fade * 0.9 : '';
+    var v = y < span + 4;
+    if (v !== visible) { visible = v; setRun(); }
+    if (RM || !running) draw(now());
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
   document.addEventListener('visibilitychange', setRun);
-  if ('IntersectionObserver' in window) new IntersectionObserver(function (es) { visible = es[0].isIntersecting; setRun(); }).observe(hero);
+  onScroll();
   hero.addEventListener('pointermove', function (e) {
-    var r = hero.getBoundingClientRect();
+    var r = cv.getBoundingClientRect();
     var nx = (e.clientX - r.left) / r.width * 2 - 1, ny = 1 - (e.clientY - r.top) / r.height * 2;
     ptr.x = nx; ptr.y = ny;
     if (e.pointerType === 'mouse' && cam.V) ptr.cell = ray(nx, ny);
@@ -683,7 +713,8 @@
   hero.addEventListener('pointerleave', function () { ptr.cell = null; ptr.x = 0; ptr.y = 0; });
   hero.addEventListener('click', function (e) {
     if (e.target.closest('a,button,input,label,.addr,.chip,h1,p,.btns,.online')) return;
-    var r = hero.getBoundingClientRect();
+    if (scrollP > 0.3) return;
+    var r = cv.getBoundingClientRect();
     var c = ray((e.clientX - r.left) / r.width * 2 - 1, 1 - (e.clientY - r.top) / r.height * 2);
     if (!c) return;
     var i = c[1] * W + c[0];

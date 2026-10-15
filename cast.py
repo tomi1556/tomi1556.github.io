@@ -154,8 +154,8 @@ def ridge(seed=1, cast=(), lamps=5, say=None, eaters=()):
     road = " ".join(f"{(c + .5) * 10:.0f},{(H - hs[c] - 2.8) * 10:.1f}" for c in lc)
     ph = seed * .9
     return f'''<div class="ridge" aria-hidden="true">
-    <svg class="rg-far" viewBox="0 0 960 130" preserveAspectRatio="none"><polygon points="{_hills(960, 130, 30, 74, 16, 110, 47, ph)}" fill="#17274E"/></svg>
-    <svg class="rg-mid" viewBox="0 0 960 130" preserveAspectRatio="none"><polygon points="{_hills(960, 130, 18, 50, 12, 70, 33, ph + 2)}" fill="#1F3460"/></svg>
+    <svg class="rg-far" viewBox="0 0 960 130" preserveAspectRatio="none"><polygon points="{_hills(960, 130, 30, 74, 16, 110, 47, ph)}" fill="#2A2A48"/></svg>
+    <svg class="rg-mid" viewBox="0 0 960 130" preserveAspectRatio="none"><polygon points="{_hills(960, 130, 18, 50, 12, 70, 33, ph + 2)}" fill="#1D2542"/></svg>
     <div class="rg-cols">{cols}</div>
     <svg class="rg-road" viewBox="0 0 {N * 10} {H * 10}" preserveAspectRatio="none"><polyline class="rb" points="{road}" pathLength="100" vector-effect="non-scaling-stroke"/><polyline class="rf" points="{road}" pathLength="100" vector-effect="non-scaling-stroke"/></svg>
   </div>'''

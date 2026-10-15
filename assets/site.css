@@ -1456,3 +1456,19 @@ a.dbtn:hover,a.dbtn:focus-visible{color:#fff}
 .s-stone time{color:var(--amber-hi)}
 table th[style*="color"],table td a[style*="color"]{filter:brightness(1.22)}
 #reds .pf-role{background:#C4231A}
+/* ═════════ トップ → 土の章：掘って降りる ═════════ */
+/* 景色は画面に止まり、文字と章がその上を流れる */
+.hero-top.webgl{background:transparent}
+.hero-top.webgl .gl-cv{position:fixed;left:0;top:0;width:100vw;height:100lvh;z-index:-1}
+.dive{height:0;pointer-events:none}
+.hero-top.webgl+.dive{height:72svh}
+html.rm .hero-top.webgl+.dive{height:0}
+html{background:#05070F}
+/* ═════════ 下のページの夜空：トップの3Dの空とそろえる ═════════ */
+.sky{background:linear-gradient(180deg,#070C1D 0%,#0C1530 34%,#18264A 64%,#2E3456 84%,#4A3E55 100%)}
+.hero:not(.webgl) .sky::after{content:'';position:absolute;left:0;right:0;bottom:0;height:45%;background:radial-gradient(ellipse 70% 100% at 50% 100%,rgba(242,160,80,.16),rgba(242,160,80,0) 70%);pointer-events:none}
+.star{background:#E6ECFA}
+@keyframes starIn{to{opacity:var(--o,.85)}}
+.star.big{box-shadow:0 0 6px 1px rgba(214,226,255,.55)}
+.moon{background:#CFD5E0;box-shadow:0 0 0 1px rgba(255,255,255,.15),0 0 34px 6px rgba(190,205,235,.32),0 0 120px 34px rgba(120,145,205,.16)}
+.moon::before,.moon::after{background:rgba(120,130,152,.55)}

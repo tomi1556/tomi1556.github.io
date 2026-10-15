@@ -268,6 +268,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <div class="scene" data-scene aria-hidden="true"></div>
   <template id="tpl-cast"><span class="who">{fig("hino", True)}</span><span class="who foe">{eater()}</span></template>
 </div>
+<div class="dive" aria-hidden="true"></div>
 
 <section class="stratum tex s-soil">
   <div class="wrap">
