@@ -1219,3 +1219,127 @@ body.theater #film .wrap>*:not(.film){opacity:.12;transition:opacity .6s}
 @media (min-width:761px) and (orientation:portrait){.hero-top .hero-body{margin-top:auto}}
 @media (max-width:1100px){.wk-stats.big{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media (max-width:760px){.wk-stats.big{grid-template-columns:repeat(2,minmax(0,1fr))}}
+
+/* ═════════ 探す（Ctrl+K） ═════════ */
+.qs-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:6px 12px;background:rgba(10,18,38,.45);border:2px solid rgba(233,238,246,.22);color:#D3D9E6;font:700 14px var(--body);cursor:pointer;transition:border-color .15s,color .15s}
+.qs-btn:hover{border-color:var(--amber);color:#fff}
+.qs-btn svg{width:18px;height:18px;fill:currentColor;shape-rendering:crispEdges}
+.qs-btn kbd{font-size:11px;padding:1px 5px;border:1px solid rgba(255,255,255,.2);color:var(--mu)}
+.qs{position:fixed;inset:0;z-index:90;display:grid;justify-items:center;align-items:start;padding:12vh 16px 16px;background:rgba(3,5,11,.72);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px)}
+.qs[hidden]{display:none}
+.qs-in{width:min(720px,100%);max-height:76vh;display:flex;flex-direction:column;background:#141820;border:2px solid rgba(242,181,68,.45);box-shadow:0 30px 90px rgba(0,0,0,.6),0 0 0 1px rgba(0,0,0,.4),0 0 40px rgba(242,181,68,.15);animation:qsIn .18s steps(3)}
+@keyframes qsIn{from{opacity:0;transform:translateY(-8px)}}
+.qs-f{display:flex;align-items:center;border-bottom:2px solid rgba(255,255,255,.08)}
+.qs-f input{flex:1;min-width:0;height:60px;padding:0 20px;background:transparent;border:0;color:#fff;font:700 18px var(--body);outline:none}
+.qs-f input::placeholder{color:#7E8697;font-weight:400}
+.qs-f kbd{margin-right:16px;padding:2px 8px;border:1px solid rgba(255,255,255,.2);font-size:12px;color:var(--mu)}
+.qs-k{display:flex;flex-wrap:wrap;gap:6px;padding:10px 16px;border-bottom:1px solid rgba(255,255,255,.06)}
+.qs-k button{min-height:32px;padding:0 12px;background:rgba(0,0,0,.3);border:2px solid rgba(255,255,255,.1);color:#D7DCE6;font:700 13px var(--body);cursor:pointer}
+.qs-k button[aria-pressed="true"]{border-color:var(--amber);color:#fff;background:rgba(242,181,68,.14)}
+.qs-l{list-style:none;margin:0;padding:6px;overflow:auto;overscroll-behavior:contain;flex:1}
+.qs-l a{--c:#fff;display:grid;grid-template-columns:72px minmax(0,1fr);grid-template-rows:auto auto;gap:0 14px;align-items:center;padding:10px 12px;color:#fff;text-decoration:none;border-left:4px solid transparent}
+.qs-l li.on a{background:rgba(242,181,68,.10);border-left-color:var(--c)}
+.qs-kd{grid-row:1/3;justify-self:start;padding:2px 8px;font-size:12px;font-weight:700;color:#14161B;background:var(--c)}
+.qs-l b{font-size:16px}
+.qs-l small{font-size:13px;color:var(--mu);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.qs-0{padding:28px;text-align:center;color:var(--mu)}
+.qs-h{display:flex;gap:18px;justify-content:flex-end;padding:8px 16px;font-size:12px;border-top:1px solid rgba(255,255,255,.06)}
+body.qs-open{overflow:hidden}
+@media (max-width:1100px){.qs-btn kbd,.qs-btn span{display:none}.qs-btn{padding:6px 10px}}
+@media (max-width:760px){.qs{padding-top:72px}.qs-h{display:none}.qs-l a{grid-template-columns:60px minmax(0,1fr)}}
+@media (pointer:coarse){.qs-btn kbd{display:none}}
+
+/* ═════════ 灯籠の知らせ ═════════ */
+.toast{position:fixed;left:50%;bottom:28px;z-index:95;display:flex;align-items:center;gap:14px;padding:12px 20px 12px 16px;background:#141820;border:2px solid rgba(242,181,68,.55);box-shadow:0 18px 50px rgba(0,0,0,.55),0 0 30px rgba(242,181,68,.25);color:#fff;transform:translate(-50%,140%);opacity:0;transition:transform .35s cubic-bezier(.2,.8,.2,1),opacity .35s;pointer-events:none}
+.toast.on{transform:translate(-50%,0);opacity:1}
+.toast-l{flex:none;width:18px;height:22px;background:#3B2E22;border:3px solid #2A1E16}
+.toast.on .toast-l{animation:light .5s steps(3) .1s forwards}
+.toast b{display:block;font-size:15px}
+.toast small{display:block;font-size:12px;color:var(--mu)}
+@media (max-width:760px){.toast{bottom:calc(76px + env(safe-area-inset-bottom));width:calc(100% - 32px)}}
+
+/* ═════════ 夜祭の帯 ═════════ */
+.live{position:fixed;left:50%;top:calc(var(--hdr-h) + 10px);z-index:58;display:flex;align-items:center;gap:10px 16px;padding:8px 10px 8px 16px;transform:translateX(-50%);width:max-content;max-width:calc(100% - 32px);background:linear-gradient(90deg,rgba(74,47,102,.96),rgba(33,26,70,.96));border:2px solid rgba(242,155,184,.55);box-shadow:0 14px 40px rgba(0,0,0,.45),0 0 26px rgba(242,155,184,.2)}
+.live[hidden]{display:none}
+.live-i{flex:none;width:10px;height:10px;background:#F29BB8;box-shadow:0 0 10px 3px rgba(242,155,184,.8);animation:blink 1.4s steps(2) infinite}
+.live.now .live-i{background:#FF5A6E;box-shadow:0 0 12px 4px rgba(255,90,110,.85)}
+.live-t{display:flex;flex-wrap:wrap;align-items:baseline;gap:2px 12px;font-size:14px}
+.live-t b{color:#fff}
+.live-t span{color:#E8D9F6}
+.live-a{color:#F6B8CE;font-size:13px;font-weight:700}
+.live-c{min-height:36px;padding:0 12px;background:var(--amber);border:0;color:#24180A;font:700 13px var(--body);cursor:pointer;box-shadow:inset 0 -3px 0 var(--amber-lo)}
+.live-x{width:36px;height:36px;background:none;border:0;color:#E8D9F6;font-size:18px;cursor:pointer}
+@media (max-width:760px){.live{top:auto;bottom:calc(72px + env(safe-area-inset-bottom));padding:8px 6px 8px 12px}.live-a{display:none}}
+
+/* はじめる：端末に合わせたタブ */
+.dev-note{margin-top:10px;font-size:13px}
+
+/* ═════════ 技の組み立て ═════════ */
+.bd{--c:var(--amber)}
+.bd-tabs{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.bd-tab{--c:#fff;display:flex;align-items:center;gap:8px;min-height:48px;padding:6px 10px;background:#1B1D22;border:2px solid rgba(255,255,255,.08);color:#D7DCE6;font:700 14px var(--body);cursor:pointer;text-align:left}
+.bd-tab .bd-tn{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bd-tab small{font-size:11px;color:var(--mu)}
+.bd-tab.used small{color:var(--c)}
+.bd-tab:hover{border-color:color-mix(in srgb,var(--c) 50%,transparent)}
+.bd-tab[aria-selected="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 14%,#1B1D22);color:#fff;box-shadow:0 0 16px color-mix(in srgb,var(--c) 25%,transparent)}
+.bd-top{display:flex;flex-wrap:wrap;align-items:center;gap:14px 28px;margin-top:22px;padding:16px 18px;background:#1F2228;border:2px solid rgba(255,255,255,.07);border-left:6px solid var(--c)}
+.bd-lv{display:flex;align-items:center;gap:12px;flex:1 1 300px;font-weight:700;color:var(--mu)}
+.bd-lv input{flex:1;accent-color:var(--c);height:28px}
+.bd-lv b{min-width:2.2em;font-weight:400;font-size:30px;color:var(--c);text-align:right}
+.bd-pts{display:flex;align-items:baseline;gap:8px;font-weight:700;color:var(--mu)}
+.bd-pts b{font-weight:400;font-size:26px;color:#fff}
+.bd-pts em{font-style:normal;margin-left:6px;font-size:14px;color:var(--c)}
+.bd-trial{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:700;color:#D7DCE6;cursor:pointer}
+.bd-trial input{width:18px;height:18px;accent-color:var(--c)}
+.bd-bar{height:10px;margin-top:2px;background:rgba(0,0,0,.35)}
+.bd-bar i{display:block;height:100%;width:0;background:repeating-linear-gradient(90deg,var(--c) 0 10px,color-mix(in srgb,var(--c) 70%,#000) 10px 12px);transition:width .2s steps(4)}
+.bd-grid{display:grid;grid-template-columns:minmax(0,1fr) 300px;gap:18px;margin-top:18px;align-items:start}
+.bdn{font:inherit;text-align:left;cursor:pointer;width:100%}
+.bdn small{font-size:11px;color:var(--mu)}
+.bdn .tn-r i{opacity:.18}
+.bdn .tn-r i.on{opacity:1;box-shadow:0 0 6px var(--c)}
+.bdn.no{opacity:.55}
+.bdn.no b{color:#AEB5C2}
+.bdn.can{border-color:#FFFF55;border-style:dashed}
+.bdn.has{border-color:var(--c);background:linear-gradient(160deg,color-mix(in srgb,var(--c) 22%,#20242C),#20242C 70%)}
+.bdn.max{border-color:var(--c);background:linear-gradient(160deg,color-mix(in srgb,var(--c) 34%,#20242C),#20242C 75%);box-shadow:0 0 18px color-mix(in srgb,var(--c) 35%,transparent)}
+.bdn.sel{outline:3px solid #fff;outline-offset:2px}
+.bd-info{position:sticky;top:calc(var(--hdr-h) + 18px);padding:18px;background:#1F2228;border:2px solid rgba(255,255,255,.07);border-top:4px solid var(--c);box-shadow:5px 5px 0 rgba(0,0,0,.3);min-height:200px}
+.bd-info h3{font-size:24px;line-height:1.3;margin:4px 0 10px}
+.bd-ik{font-size:13px;font-weight:700}
+.bd-ik.k0{color:#C9CFDA}.bd-ik.k1{color:#55FFFF}.bd-ik.k2{color:#FF7AE6}
+.bd-ranks{list-style:none;margin:0 0 14px;padding:0;display:grid;gap:4px}
+.bd-ranks li{display:grid;grid-template-columns:22px minmax(0,1fr);gap:0 8px;padding:7px 10px;background:rgba(0,0,0,.25);border-left:3px solid rgba(255,255,255,.1);font-size:14px}
+.bd-ranks li.on{border-left-color:var(--c);background:color-mix(in srgb,var(--c) 12%,rgba(0,0,0,.25))}
+.bd-ranks li.next{border-left-color:#FFFF55;border-left-style:dashed}
+.bd-ranks span{color:var(--mu);grid-row:1/3}
+.bd-ranks small{font-size:12px;color:var(--mu)}
+.bd-why{margin-top:12px;font-size:14px;font-weight:700;color:#FFE3A3}
+.bd-link{margin-top:8px;font-size:13px}
+.bd-info .pbtn[disabled],.bd-info .gbtn[disabled]{opacity:.35;cursor:not-allowed}
+.bd-acts{display:flex;flex-wrap:wrap;align-items:center;gap:10px;margin-top:18px}
+.bd-msg{font-size:14px;color:#FFE3A3}
+.bd-sum{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,320px),1fr));gap:12px}
+.bd-sp{--c:#fff;padding:14px 16px;background:#1F2228;border:2px solid rgba(255,255,255,.07);border-left:6px solid var(--c)}
+.bd-sh{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+.bd-sh b{font-size:17px}
+.bd-sh small{margin-left:auto;font-size:12px;color:var(--mu)}
+.bd-sh .ws-k{background:var(--c)}
+.bd-sp ul{list-style:none;margin:0;padding:0;display:grid;gap:3px}
+.bd-sp li{display:flex;flex-wrap:wrap;gap:2px 10px;font-size:14px}
+.bd-sp li span{color:var(--mu);font-size:13px}
+@media (max-width:1100px){.bd-grid{grid-template-columns:1fr}.bd-info{position:static}}
+@media (max-width:760px){.bd-tabs{grid-template-columns:repeat(2,minmax(0,1fr))}.bd-tab small{display:none}}
+
+/* 見つけた細かい直し：スマホでキャラの吹き出しが上のボタンに重ならないように */
+@media (max-width:760px){.hero:has(.ridge) .phead{padding-bottom:64px}}
+/* 夜空の上の説明文を、ほんの少し明るく */
+.hero .lead{color:#CDD5E4}
+.legal,.fm a{color:#C9D0DC}
+.fc,.cr{scroll-margin-top:calc(var(--hdr-h) + 20px)}
+.fc.flash,.cr.flash{animation:acflash 1.6s ease-out 1}
+.cr{--t:var(--amber)}
+.fc{--t:var(--c)}
+.bdn small{position:static;order:3}
+.bdn .tn-r{order:4}

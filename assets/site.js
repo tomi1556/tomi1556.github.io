@@ -38,6 +38,20 @@
     onScroll();
   }
 
+  // ── 灯籠の知らせ（画面の下に、ぽっと灯る） ──
+  var toastEl = null, toastT = 0;
+  function toast(title, sub) {
+    if (!toastEl) {
+      toastEl = document.createElement('div');
+      toastEl.className = 'toast'; toastEl.setAttribute('role', 'status');
+      document.body.appendChild(toastEl);
+    }
+    toastEl.innerHTML = '<i class="toast-l" aria-hidden="true"></i><span><b>' + title + '</b>' + (sub ? '<small>' + sub + '</small>' : '') + '</span>';
+    toastEl.classList.remove('on'); void toastEl.offsetWidth; toastEl.classList.add('on');
+    clearTimeout(toastT); toastT = setTimeout(function () { toastEl.classList.remove('on'); }, 2600);
+  }
+  window.tomoToast = toast;
+
   // ── アドレスのコピー ──
   $$('[data-copy]').forEach(function (btn) {
     var label = btn.textContent;
@@ -45,6 +59,7 @@
     btn.addEventListener('click', function () {
       var text = btn.getAttribute('data-copy') || ADDRESS;
       var done = function (ok) {
+        if (ok) toast('アドレスをコピーしました', 'マインクラフトの「サーバーを追加」に貼り付けてください。');
         btn.classList.toggle('done', ok);
         btn.textContent = ok ? 'コピーしました' : '長押しでコピーしてください';
         if (note && note.hasAttribute('data-note')) note.textContent = ok ? 'マインクラフトの「サーバーを追加」に貼り付けてください。' : '';
@@ -88,8 +103,31 @@
     $$('[data-fest-cd]').forEach(function (el) { ['d', 'h', 'm', 's'].forEach(function (k) { var b = $('[data-u="' + k + '"]', el); if (b) b.textContent = fc[k]; }); });
     $$('[data-fest-game]').forEach(function (el) { el.textContent = f.game.name; });
     $$('[data-fest-desc]').forEach(function (el) { el.textContent = f.game.desc; });
+    liveBar(f, now);
     $$('[data-rot]').forEach(function (el) { el.setAttribute('data-now', String(f.week % 4)); $$('[data-g]', el).forEach(function (r) { r.classList.toggle('cur', r.getAttribute('data-g') === String(f.week % 4)); }); });
   }
+  // ── 夜祭の帯：開始30分前から「まもなく」、開催中は「いま」 ──
+  var bar = null, barOff = false;
+  try { barOff = sessionStorage.getItem('liveOff') === '1'; } catch (e) {}
+  function liveBar(f, now) {
+    var left = f.at - now, live = now >= f.at && now < f.at + 90 * 60000, soon = left > 0 && left <= 30 * 60000;
+    if (!(live || soon) || barOff) { if (bar) bar.hidden = true; return; }
+    if (!bar) {
+      bar = document.createElement('div');
+      bar.className = 'live';
+      bar.innerHTML = '<span class="live-i" aria-hidden="true"></span><span class="live-t"></span><a href="events.html" class="live-a">夜祭について</a><button type="button" class="live-c" data-copy="' + ADDRESS + '">アドレスをコピー</button><button type="button" class="live-x" aria-label="この帯を閉じる">×</button>';
+      document.body.appendChild(bar);
+      bar.querySelector('.live-x').addEventListener('click', function () { barOff = true; bar.hidden = true; try { sessionStorage.setItem('liveOff', '1'); } catch (e) {} });
+      bar.querySelector('.live-c').addEventListener('click', function () {
+        if (navigator.clipboard) navigator.clipboard.writeText(ADDRESS).then(function () { toast('アドレスをコピーしました', ADDRESS); });
+      });
+    }
+    bar.hidden = false;
+    bar.classList.toggle('now', live);
+    var s = split(left);
+    bar.querySelector('.live-t').innerHTML = live ? '<b>いま夜祭を開催中</b><span>今夜のゲーム「' + f.game.name + '」</span>' : '<b>今夜21時から夜祭</b><span class="dot">あと ' + s.m + ':' + s.s + '</span>';
+  }
+
   tick(); setInterval(tick, 1000);
 
   // ── いまの参加人数（サーバーが動いているときだけ表示） ──
@@ -211,6 +249,98 @@
       });
     });
   });
+
+  // ── はじめる：スマホ・ゲーム機で開いたら、その機種のタブを先に開く ──
+  (function () {
+    var ua = navigator.userAgent || '';
+    var mob = /iPhone|iPad|iPod|Android/i.test(ua) || (/Macintosh/.test(ua) && navigator.maxTouchPoints > 1);
+    var con = /Nintendo|PlayStation|Xbox/i.test(ua);
+    var id = con ? 't-con' : mob ? 't-mob' : null;
+    var t = id && document.getElementById(id);
+    if (t && !location.hash) t.click();
+    if (t) { var h = document.querySelector('[data-device-note]'); if (h) h.hidden = false; }
+  })();
+
+  // ── サイト内を探す（Ctrl+K / ⌘K / 虫めがね） ──
+  (function () {
+    var IDX = null, box = null, input, list, cur = 0, kind = 'すべて', hits = [];
+    var KINDS = ['すべて', '技', '灯魚', '証', 'コマンド', 'ページ'];
+    var norm = function (s) {
+      return (s || '').toLowerCase().replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
+        .replace(/[ァ-ヶ]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 0x60); });
+    };
+    function load() {
+      if (IDX) return Promise.resolve(IDX);
+      return fetch('assets/search.json').then(function (r) { return r.json(); }).then(function (d) {
+        IDX = d.map(function (x) { x._t = norm(x.t); x._s = norm(x.s); return x; }); return IDX;
+      });
+    }
+    function build() {
+      box = document.createElement('div');
+      box.className = 'qs'; box.hidden = true;
+      box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', 'サイト内を探す');
+      box.innerHTML = '<div class="qs-in"><label class="qs-f"><span class="sr">探す</span><input type="search" placeholder="技・灯魚・証・コマンド・ページを探す" autocomplete="off"><kbd class="dot">Esc</kbd></label>' +
+        '<div class="qs-k">' + KINDS.map(function (k) { return '<button type="button" data-k="' + k + '"' + (k === kind ? ' aria-pressed="true"' : ' aria-pressed="false"') + '>' + k + '</button>'; }).join('') + '</div>' +
+        '<ul class="qs-l" role="listbox"></ul><p class="qs-h mu"><span>↑↓ でえらぶ</span><span>Enter でひらく</span><span>Esc で閉じる</span></p></div>';
+      document.body.appendChild(box);
+      input = box.querySelector('input'); list = box.querySelector('.qs-l');
+      input.addEventListener('input', function () { cur = 0; run(); });
+      box.addEventListener('click', function (e) {
+        if (e.target === box) close();
+        var k = e.target.closest('[data-k]');
+        if (k) { kind = k.getAttribute('data-k'); box.querySelectorAll('[data-k]').forEach(function (b) { b.setAttribute('aria-pressed', b === k ? 'true' : 'false'); }); cur = 0; run(); input.focus(); }
+      });
+      list.addEventListener('mousemove', function (e) { var li = e.target.closest('li[data-i]'); if (li) { cur = +li.getAttribute('data-i'); mark(); } });
+      box.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape') { e.preventDefault(); close(); }
+        else if (e.key === 'ArrowDown') { e.preventDefault(); cur = Math.min(hits.length - 1, cur + 1); mark(true); }
+        else if (e.key === 'ArrowUp') { e.preventDefault(); cur = Math.max(0, cur - 1); mark(true); }
+        else if (e.key === 'Enter' && hits[cur]) { e.preventDefault(); location.href = hits[cur].u; close(); }
+      });
+    }
+    function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function run() {
+      var q = norm(input.value.trim()), words = q.split(/\s+/).filter(Boolean);
+      var pool = IDX.filter(function (x) { return kind === 'すべて' || x.k === kind; });
+      if (!words.length) { hits = kind === 'すべて' ? IDX.filter(function (x) { return x.k === 'ページ'; }).slice(0, 12) : pool.slice(0, 40); }
+      else {
+        hits = pool.map(function (x) {
+          var sc = 0;
+          for (var i = 0; i < words.length; i++) {
+            var w = words[i], a = x._t.indexOf(w), b = x._s.indexOf(w);
+            if (a < 0 && b < 0) return null;
+            sc += a === 0 ? 30 : a > 0 ? 15 : 4;
+          }
+          return [sc - x.t.length * 0.1, x];
+        }).filter(Boolean).sort(function (a, b) { return b[0] - a[0]; }).slice(0, 40).map(function (a) { return a[1]; });
+      }
+      list.innerHTML = hits.length ? hits.map(function (x, i) {
+        return '<li data-i="' + i + '" role="option"><a href="' + x.u + '" style="--c:' + (x.c || 'var(--amber)') + '"><span class="qs-kd">' + x.k + '</span><b>' + esc(x.t) + '</b><small>' + esc(x.s) + '</small></a></li>';
+      }).join('') : '<li class="qs-0">見つかりませんでした。ことばを短くしてみてください。</li>';
+      mark();
+    }
+    function mark(scroll) {
+      list.querySelectorAll('li[data-i]').forEach(function (li) {
+        var on = +li.getAttribute('data-i') === cur;
+        li.classList.toggle('on', on);
+        if (on && scroll) li.scrollIntoView({ block: 'nearest' });
+      });
+    }
+    var last = null;
+    function open() {
+      if (!box) build();
+      last = document.activeElement;
+      box.hidden = false; document.body.classList.add('qs-open');
+      input.value = ''; input.focus();
+      list.innerHTML = '<li class="qs-0">読みこみ中…</li>';
+      load().then(run).catch(function () { list.innerHTML = '<li class="qs-0">読みこめませんでした。</li>'; });
+    }
+    function close() { if (!box) return; box.hidden = true; document.body.classList.remove('qs-open'); if (last && last.focus) last.focus(); }
+    $$('[data-qs]').forEach(function (b) { b.addEventListener('click', open); });
+    document.addEventListener('keydown', function (e) {
+      if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); if (box && !box.hidden) close(); else open(); }
+    });
+  })();
 
   // ── 体験：灯籠を置く、夜にする、灯喰いから守る ──
   var demo = $('[data-demo]');

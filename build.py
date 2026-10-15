@@ -44,6 +44,7 @@ def header(cur):
 <header class="hdr"><div class="wrap hdr-in">
   <a href="index.html" class="logo">{LOGO}<span>灯原</span></a>
   <nav class="nav" aria-label="メイン">{links}</nav>
+  <button type="button" class="qs-btn" data-qs aria-label="サイト内を探す（Ctrl+K）"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="6" height="2"/><rect x="2" y="3" width="2" height="6"/><rect x="8" y="3" width="2" height="6"/><rect x="3" y="8" width="6" height="2"/><rect x="9" y="9" width="2" height="2"/><rect x="11" y="11" width="2" height="2"/><rect x="12" y="12" width="2" height="2"/></svg><span>探す</span><kbd class="dot">Ctrl K</kbd></button>
   <a href="{DISCORD}" class="pbtn dbtn sm" target="_blank" rel="noopener">Discord に参加</a>
 </div></header>'''
 
@@ -53,7 +54,7 @@ def footer():
     cols = [
         ("はじめる", [("start.html#join", "入り方"), ("start.html#first", "最初の夜"), ("commands.html", "コマンド一覧"), ("start.html#faq", "よくある質問")]),
         ("遊び方", None),
-        ("Wiki", [("wiki.html", "Wiki のはじめ"), ("wiki.html#all", "すべての技を探す"), ("wiki.html#trials", "奥義の試練"), ("wiki.html#tasks", "今日の務め"), ("wiki-hiuo.html", "灯魚図鑑"), ("akashi.html", "灯の証 Wiki")]),
+        ("Wiki", [("wiki.html", "Wiki のはじめ"), ("wiki.html#all", "すべての技を探す"), ("wiki.html#trials", "奥義の試練"), ("wiki.html#tasks", "今日の務め"), ("wiki-hiuo.html", "灯魚図鑑"), ("wiki-build.html", "技の組み立て"), ("akashi.html", "灯の証 Wiki")]),
         ("灯原", [("events.html", "夜祭"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
     ]
     cm = ""
@@ -188,6 +189,7 @@ def cd(kind, label):
 </div>'''
 
 
+_CMD_N = [0]
 _CMDS = [
     ("灯", "#F2B544", "灯籠と灯路", "Tomoshibi", "灯籠を素手で右クリックしても、同じメニューが開きます。", [
         ("/tomoshibi", "", "メニューを開く。<b>これだけ覚えれば大丈夫</b>（<span class=\"kbd\">/tomo</span> でも同じ）"),
@@ -392,6 +394,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <button type="button" class="tab" role="tab" id="t-win" aria-controls="p-win" aria-selected="false" tabindex="-1">Windows（統合版）</button>
       <button type="button" class="tab" role="tab" id="t-con" aria-controls="p-con" aria-selected="false" tabindex="-1">Switch・PS・Xbox</button>
     </div>
+    <p class="mu dev-note" data-device-note hidden>お使いの端末に合わせて、タブを選んでおきました。</p>
     <div class="tabpanel" role="tabpanel" id="p-java" aria-labelledby="t-java">
       <ol class="steps">
         <li><div><h3>マインクラフトを起動して「マルチプレイ」を選ぶ</h3><p>バージョンは最新版（26.2）にしてください。</p></div></li>
@@ -1271,6 +1274,7 @@ def _wiki_side(cur):
     for i, p in enumerate(HW["paths"]):
         items += f'<a href="wiki-{p["id"]}.html" style="--c:{_PCOL[i]}"{" aria-current=\"page\"" if cur == p["id"] else ""}><span class="ws-k">{p["k"]}</span>{p["name"]}</a>'
     items += f'<a href="wiki-hiuo.html" style="--c:#4FD8C8"{" aria-current=\"page\"" if cur == "hiuo" else ""}><span class="ws-k">魚</span>灯魚図鑑</a>'
+    items += f'<a href="wiki-build.html" style="--c:var(--amber)"{" aria-current=\"page\"" if cur == "build" else ""}><span class="ws-k">組</span>技の組み立て</a>'
     items += '<a href="akashi.html" class="ws-x" style="--c:#F29BB8"><span class="ws-k">証</span>灯の証 Wiki へ</a>'
     return f'<nav class="wside" aria-label="Wiki の目次"><p class="dot wside-h">灯技 Wiki</p>{items}</nav>'
 
@@ -1446,6 +1450,8 @@ def wiki_index():
       <h2 class="disp h2 wk-h" id="paths">10の道</h2>
       <div class="wpcs">{cards}</div>
 
+      <a href="wiki-build.html" class="wiki-band cmd-band" style="margin-top:28px"><span class="wb-k dot">BUILD</span><span class="wb-b"><b class="disp">技の組み立て</b><span>道の Lv を決めて技を選ぶと、技点と条件をその場で計算。組み立てはリンクで共有できます。</span></span><span class="wb-go">組み立てる<i></i></span></a>
+
       <h2 class="disp h2 wk-h" id="all">すべての技を探す</h2>
       <div class="finder">
         <label class="find"><span class="sr">技を探す</span><input type="search" id="wq" placeholder="名前・効き目で探す（例：まとめ、灯力、落下）" autocomplete="off"><kbd class="dot">/</kbd></label>
@@ -1496,7 +1502,7 @@ def wiki_fish():
         secret = f["name"] is None
         cond = "・".join(f["cond"]) if f["cond"] else ("手がかりなし" if secret else "どこでも")
         name = "？？？" if secret else _E(f["name"])
-        cards += f'''<li class="fc{" secret" if secret else ""}" style="--c:{rc[r]}" data-g="{f["group"]}" data-r="{r}">
+        cards += f'''<li class="fc{" secret" if secret else ""}"{"" if secret else f' id="f-{f["id"]}"'} style="--c:{rc[r]}" data-g="{f["group"]}" data-r="{r}">
         <span class="fc-r dot">{"◆" * r}<s>{"◇" * (5 - r)}</s> {rar[r]}</span>
         <b class="fc-n">{name}</b>
         <span class="fc-g">{_E(groups[f["group"]])}</span>
@@ -1802,6 +1808,52 @@ AK_PAGES = [("akashi.html", "灯の証 完全解説｜灯原", f"灯の証（あ
 AK_PAGES += [(f"akashi-{_AK_SLUG[i]}.html", f"{c['name']}｜灯の証 Wiki｜灯原", f"{c['name']}の{len(_ak_defs(i))}の証。{c['desc'][0]}段の道、目標、報酬、秘められた証の手がかり。", akashi_cat(i)) for i, c in enumerate(AK["cats"])]
 
 
+# ───────────────────────── 技の組み立て ─────────────────────────
+def wiki_build():
+    data = {"capNeeds": HW["capNeeds"], "kind": _KIND, "paths": [
+        {"id": p["id"], "k": p["k"], "name": p["name"], "c": _PCOL[i], "branches": p["branches"], "trial": p["trial"],
+         "nodes": [{"id": n["id"], "name": n["name"], "b": n["branch"], "t": n["tier"], "kind": n["kind"], "req": n["req"], "cost": n["cost"], "eff": n["effect"], "parent": n["parent"]} for n in p["nodes"]]}
+        for i, p in enumerate(HW["paths"])]}
+    js = _wj.dumps(data, ensure_ascii=False).replace("</", "<\\/")
+    tabs = "".join(f'<button type="button" class="bd-tab" data-p="{i}" style="--c:{_PCOL[i]}"><span class="ws-k">{p["k"]}</span><span class="bd-tn">{p["name"]}</span><small class="dot" data-sum="{i}">Lv25</small></button>' for i, p in enumerate(HW["paths"]))
+    hero = _wiki_hero("技の組み立て", "道の Lv を決めて技を選ぶと、使う技点と覚える条件をその場で計算します。組み立てはリンクにして、そのまま Discord に貼れます。", "#F2B544", '<span aria-hidden="true">›</span><span>技の組み立て</span>', CH_ICONS["hiwaza"], "SKILL BUILDER")
+    return hero + f'''
+<section class="stratum s-deep wk">
+  <div class="edge"></div>
+  <div class="wrap wk-in">
+    {_wiki_side("build")}
+    <div class="wk-main bd" data-builder>
+      <noscript><p class="note">この道具は JavaScript を使います。</p></noscript>
+      <div class="bd-tabs" role="tablist" aria-label="道">{tabs}</div>
+      <div class="bd-top">
+        <label class="bd-lv"><span>Lv</span><input type="range" min="1" max="50" value="25" data-lv aria-label="道の Lv"><b class="dot" data-lvn>25</b></label>
+        <div class="bd-pts"><span>技点</span><b class="dot" data-used>0</b><span>/</span><b class="dot" data-have>25</b><em data-left>残り 25</em></div>
+        <label class="bd-trial"><input type="checkbox" data-trial checked> 奥義の試練を終えた</label>
+      </div>
+      <div class="bd-bar"><i data-barfill></i></div>
+      <div class="bd-grid">
+        <div class="tg bd-tree" data-tree></div>
+        <aside class="bd-info" data-info aria-live="polite"><p class="mu">技を押すと、ここに説明と「覚える／外す」が出ます。</p></aside>
+      </div>
+      <div class="bd-acts">
+        <button type="button" class="pbtn sm" data-share>組み立てのリンクをコピー</button>
+        <button type="button" class="gbtn sm" data-resetp>この道をはじめから</button>
+        <button type="button" class="gbtn sm" data-resetall>すべての道をはじめから</button>
+        <span class="bd-msg mu" data-msg role="status"></span>
+      </div>
+      <h2 class="disp h2 wk-h">選んだ技</h2>
+      <div class="bd-sum" data-summary></div>
+      <p class="mu wk-small">数字はゲームと同じです。奥義は、三の段の技を {HW["capNeeds"]} つ覚え、奥義の試練を果たすと覚えられます（試練の進み具合は、ここでは数えません）。</p>
+    </div>
+  </div>
+</section>
+<script type="application/json" id="bd-data">{js}</script>
+<script src="assets/build.js" defer></script>'''
+
+
+WIKI_PAGES += [("wiki-build.html", "技の組み立て｜灯技 Wiki｜灯原", "灯技の組み立てシミュレーター。道の Lv と技を選ぶと、技点と覚える条件を計算。組み立てはリンクで共有できます。", wiki_build())]
+
+
 # ───────────────────────── 支える（寄付） ─────────────────────────
 import json as _json, html as _html
 
@@ -2085,10 +2137,11 @@ characters = sub_hero("characters.html", "灯原の、ひとびと。", "予告�
 def _cmd_rows(rows):
     out = ""
     for r in rows:
+        _CMD_N[0] += 1
         c, a, d = r[0], r[1], r[2]
         need = f'<span class="need" title="この道の技を覚えると使えます">{r[3]}の技</span>' if len(r) > 3 else ""
         q = _E(c + " " + a + " " + _re0.sub("<[^>]+>", "", d))
-        out += f'<div class="cr" data-q="{q}"><code>{_E(c)}{" <i>" + _E(a) + "</i>" if a else ""}</code><span>{d}{need}</span></div>'
+        out += f'<div class="cr" id="k{_CMD_N[0]}" data-q="{q}"><code>{_E(c)}{" <i>" + _E(a) + "</i>" if a else ""}</code><span>{d}{need}</span></div>'
     return out
 
 
@@ -2185,6 +2238,28 @@ def finish(html):
 
 for f, t, d, b in PAGES:
     (out / f).write_text(finish(page(f, t, d, b)), encoding="utf-8")
+# サイト内検索の索引（Ctrl+K）
+_idx = []
+for f, t, d, b in PAGES:
+    if f == "404.html":
+        continue
+    _idx.append({"k": "ページ", "t": t.split("｜")[0], "s": d[:60], "u": f})
+for i, p in enumerate(HW["paths"]):
+    for n in p["nodes"]:
+        _idx.append({"k": "技", "t": n["name"], "s": p["name"] + "・" + _desc(n)[:40], "u": f"wiki-{p['id']}.html#{n['id']}", "c": _PCOL[i]})
+_RN = ["", "並", "良", "珍", "稀", "秘"]
+for fsh in HW["fish"]:
+    if fsh.get("name") and fsh["rarity"] <= 4:
+        _idx.append({"k": "灯魚", "t": fsh["name"], "s": _RN[fsh["rarity"]] + "・" + "・".join(fsh["cond"][:1 if fsh["rarity"] == 4 else 3]), "u": f"wiki-hiuo.html#f-{fsh['id']}", "c": "#4FD8C8"})
+for x in AK["defs"]:
+    if not x["hidden"]:
+        _idx.append({"k": "証", "t": x["name"], "s": AK["cats"][x["cat"]]["name"] + "・" + x["desc"][0], "u": f"akashi-{_AK_SLUG[x['cat']]}.html#{x['id']}", "c": _TCOL[x["tier"]]})
+_kn = 0
+for g in _CMDS:
+    for r in g[5]:
+        _kn += 1
+        _idx.append({"k": "コマンド", "t": (r[0] + " " + r[1]).strip(), "s": _re0.sub("<[^>]+>", "", r[2])[:50], "u": f"commands.html#k{_kn}", "c": g[1]})
+(out / "assets" / "search.json").write_text(_wj.dumps(_idx, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 today = datetime.date.today().isoformat()
 (out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE}/{'' if f == 'index.html' else f}</loc><lastmod>{today}</lastmod></url>\n" for f, *_ in PAGES if f != "404.html") + "</urlset>\n", encoding="utf-8")
 (out / "robots.txt").write_text(f"User-agent: *\nAllow: /\nSitemap: {SITE}/sitemap.xml\n", encoding="utf-8")

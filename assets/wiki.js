@@ -90,7 +90,7 @@
     var id = decodeURIComponent(location.hash.slice(1));
     if (!id) return;
     var el = document.getElementById(id);
-    if (!el || !(el.classList.contains('nc') || el.classList.contains('ac'))) return;
+    if (!el || !/(^| )(nc|ac|fc|cr)( |$)/.test(el.className)) return;
     el.classList.remove('flash');
     void el.offsetWidth;
     el.classList.add('flash');
