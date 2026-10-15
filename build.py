@@ -134,8 +134,9 @@ def page(file, title, desc, body, hero_min=""):
     body = _with_ridge(file, body)
     url = SITE + ("/" if file == "index.html" else "/" + file)
     return f'''<!doctype html>
-<html lang="ja">
+<html lang="ja" class="nojs">
 <head>
+<script>document.documentElement.className="js";if(matchMedia("(prefers-reduced-motion: reduce)").matches)document.documentElement.className+=" rm"</script>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#070E20">
@@ -166,6 +167,7 @@ def page(file, title, desc, body, hero_min=""):
 <div class="alt" aria-hidden="true"><i class="alt-r"></i><b class="alt-l"></b><span class="alt-t dot"></span></div>
 <div class="glow" aria-hidden="true"></div>
 <script src="assets/site.js" defer></script>
+<script src="assets/fx.js" defer></script>
 </body>
 </html>
 '''

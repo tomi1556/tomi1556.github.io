@@ -860,12 +860,7 @@ main>section:not([style*="position"]){position:relative}
 .scene .who.foe .eat{width:calc(var(--u)*4.4);height:calc(var(--u)*6.6);opacity:.9}
 
 /* 読みはじめの動き：中身だけをそっと上げる（背景はつながったまま） */
-@supports (animation-timeline:view()){
-@media (prefers-reduced-motion:no-preference){
-.stratum>.wrap>*,.foot .wrap>*{animation:rise linear both;animation-timeline:view();animation-range:entry 0% entry 200px}
-@keyframes rise{from{opacity:0;transform:translateY(26px)}to{opacity:1;transform:none}}
-}
-}
+/* （動きは assets/fx.js と、下の「動きの仕組み」へ） */
 
 /* ひとことの吹き出し */
 .say{--sc:var(--amber);display:flex;align-items:flex-end;gap:18px;margin:0 0 44px;max-width:780px}
@@ -1343,3 +1338,50 @@ body.qs-open{overflow:hidden}
 .fc{--t:var(--c)}
 .bdn small{position:static;order:3}
 .bdn .tn-r{order:4}
+
+/* ═════════ 動きの仕組み（fx.js） ═════════ */
+:root{--ease-out:cubic-bezier(.16,1,.3,1);--ease-spring:cubic-bezier(.34,1.56,.64,1)}
+/* 現れる */
+.js .rv{opacity:0;transform:translateY(24px);transition:opacity .8s var(--ease-out) var(--d,0ms),transform .9s var(--ease-out) var(--d,0ms)}
+.js .rv.in{opacity:1;transform:none}
+.js.rm .rv{opacity:1;transform:none;transition:none}
+/* 見出しが一文字ずつ灯る */
+.js .lit-h .ltr{opacity:.08;transition:opacity .5s ease calc(var(--i)*28ms),text-shadow 1.2s ease calc(var(--i)*28ms)}
+.js .lit-h.in .ltr{opacity:1;animation:ltrGlow 1.4s ease calc(var(--i)*28ms) both}
+@keyframes ltrGlow{0%{text-shadow:0 0 0 rgba(255,214,140,0)}30%{text-shadow:0 0 18px rgba(255,214,140,.95),0 0 4px rgba(255,236,190,.9);color:#FFF4D6}100%{text-shadow:0 0 0 rgba(255,214,140,0)}}
+.js.rm .lit-h .ltr{opacity:1;animation:none}
+/* 見出しの下に、灯路が引かれる */
+.stratum .h2.lit-h{position:relative}
+.stratum .h2.lit-h::after{content:'';position:absolute;left:0;bottom:-10px;width:72px;height:4px;background:repeating-linear-gradient(90deg,var(--amber) 0 8px,transparent 8px 12px);box-shadow:0 0 10px rgba(242,181,68,.5);transform-origin:0 50%;transform:scaleX(0);transition:transform 1s var(--ease-out) .35s}
+.stratum .h2.lit-h.in::after{transform:scaleX(1)}
+.js.rm .stratum .h2.lit-h::after{transform:none}
+/* 札：傾きと照り返し */
+.tilt{position:relative;will-change:transform}
+.tilt:hover{transform:perspective(900px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg)) translate(-3px,-3px)!important;transition:transform .14s ease-out,box-shadow .2s,border-color .2s!important}
+.glare{position:absolute;inset:0;z-index:2;pointer-events:none;background:radial-gradient(circle at var(--gx,50%) var(--gy,50%),rgba(255,232,180,.16),rgba(255,232,180,0) 55%);opacity:0;transition:opacity .25s;font-style:normal}
+.tilt:hover .glare{opacity:1}
+/* 火の粉 */
+.spark{position:fixed;z-index:120;width:5px;height:5px;margin:-2px 0 0 -2px;background:var(--amber);box-shadow:0 0 8px 2px rgba(242,181,68,.8);pointer-events:none;animation:spark .65s cubic-bezier(.2,.7,.3,1) forwards}
+@keyframes spark{to{transform:translate(var(--dx),var(--dy)) scale(.2);opacity:0}}
+/* ボタンの押し心地 */
+.pbtn,.gbtn,.chip-f,.tab,.bd-tab,.qs-btn{transition:transform .18s var(--ease-spring),background .2s,border-color .2s,box-shadow .2s,color .2s}
+.gbtn:hover,.chip-f:hover,.qs-btn:hover{transform:translateY(-2px)}
+.pbtn:hover{transform:translateY(-2px);box-shadow:inset 0 -5px 0 var(--amber-lo),inset 0 3px 0 var(--amber-hi),0 10px 24px rgba(242,181,68,.28)}
+.dbtn:hover{box-shadow:inset 0 -5px 0 #3C45B0,inset 0 3px 0 #8E97FF,0 10px 24px rgba(88,101,242,.35)}
+.pbtn:active,.gbtn:active,.chip-f:active{transform:translateY(2px) scale(.98)}
+/* トップの天灯 */
+.hero-top{cursor:default}
+.tento{position:absolute;z-index:6;width:14px;height:18px;margin:-9px 0 0 -7px;background:var(--h);border:3px solid #2A1E16;box-shadow:0 0 18px 6px color-mix(in srgb,var(--h) 55%,transparent);pointer-events:none;animation:tento 8.5s cubic-bezier(.3,.1,.4,1) forwards}
+.tento::after{content:'';position:absolute;left:50%;top:100%;width:2px;height:6px;margin-left:-1px;background:#FFF1C4;opacity:.8}
+@keyframes tento{0%{transform:translate(0,8px) scale(.4);opacity:0}8%{transform:translate(0,0) scale(1);opacity:1}50%{transform:translate(calc(var(--sw)*40px),-36vh) scale(.8)}100%{transform:translate(calc(var(--sw)*-30px),-78vh) scale(.35);opacity:0}}
+.sky-hint{position:absolute;right:28px;bottom:calc(var(--u,13px)*0 + 24px);z-index:7;margin:0;font-size:13px;color:#E9EEF6;padding:6px 12px;background:rgba(7,11,24,.6);border:1px solid rgba(233,238,246,.18);opacity:0;transform:translateY(6px);transition:opacity .8s,transform .8s;pointer-events:none}
+.sky-hint.on{opacity:.9;transform:none}
+.sky-hint.gone{opacity:0!important}
+@media (max-width:760px){.sky-hint{right:12px;bottom:12px;font-size:11px}}
+/* 体験：灯りの輪 */
+.ripple{position:absolute;z-index:2;width:12px;height:12px;margin:-6px 0 0 -6px;border:3px solid #FFE3A3;border-radius:50%;pointer-events:none;animation:ripple .85s var(--ease-out) forwards}
+@keyframes ripple{to{transform:scale(14);opacity:0;border-width:1px}}
+/* ナビ：現在地の線が伸びる */
+.nl[aria-current]::after{animation:navLine .7s var(--ease-out) .2s both}
+@keyframes navLine{from{transform:scaleX(0)}}
+@media (prefers-reduced-motion:reduce){.nl[aria-current]::after,.tento{animation:none}.sky-hint{display:none}}
