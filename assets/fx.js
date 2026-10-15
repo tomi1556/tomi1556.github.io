@@ -149,6 +149,7 @@
     setTimeout(function () { hint.classList.add('on'); }, 4200);
     var n = 0;
     hero.addEventListener('click', function (e) {
+      if (hero.classList.contains('webgl')) return;
       if (e.target.closest('a,button,input,label,.addr,.chip,.scene')) return;
       if (hero.querySelectorAll('.tento').length > 14) return;
       hint.classList.remove('on'); hint.classList.add('gone');

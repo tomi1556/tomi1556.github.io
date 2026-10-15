@@ -1385,3 +1385,44 @@ body.qs-open{overflow:hidden}
 .nl[aria-current]::after{animation:navLine .7s var(--ease-out) .2s both}
 @keyframes navLine{from{transform:scaleX(0)}}
 @media (prefers-reduced-motion:reduce){.nl[aria-current]::after,.tento{animation:none}.sky-hint{display:none}}
+
+/* ═════════ トップの開幕（WebGL） ═════════ */
+.gl-cv{position:absolute;inset:0;width:100%;height:100%;z-index:-1;display:block;background:#05070F}
+.hero-top.webgl{background:#05070F}
+.hero-top.webgl .sky,.hero-top.webgl .stars,.hero-top.webgl .moon,.hero-top.webgl .dusk{display:none}
+.hero-top.webgl .scene{visibility:hidden;animation:none}
+/* 題字の読みやすさ（左と上を少し暗く） */
+.hero-top.webgl .hero-body::before{content:'';position:absolute;z-index:-1;pointer-events:none;inset:-60px -10vw -60px -50vw;background:radial-gradient(ellipse 62% 66% at 36% 52%,rgba(3,5,14,.82) 0%,rgba(3,5,14,.55) 50%,rgba(3,5,14,0) 100%)}
+.hero-top.webgl .lead-hero,.hero-top.webgl .addr-note{text-shadow:0 1px 2px #000,0 2px 14px rgba(0,0,0,.95)}
+.hero-top.webgl .h1{text-shadow:0 4px 30px rgba(0,0,0,.6)}
+/* 題字：灯りがともると同時に、一文字ずつ */
+.hero-top.webgl .h1.reveal{animation:none}
+.hero-top.webgl .hc{display:inline-block;opacity:0}
+.hero-top.webgl.lit .hc{animation:hcIn 1.3s cubic-bezier(.2,.7,.2,1) calc(.25s + var(--i) * 55ms) both}
+@keyframes hcIn{0%{opacity:0;filter:blur(12px);transform:translateY(.18em) scale(1.12);text-shadow:0 0 60px rgba(242,181,68,1)}
+45%{opacity:1;filter:blur(0);color:#FFF1C4;text-shadow:0 0 34px rgba(242,181,68,.95),0 0 4px rgba(255,241,196,.9)}
+100%{opacity:1;filter:none;transform:none;text-shadow:0 0 22px rgba(242,181,68,.28)}}
+.hero-top.webgl .chip.fadein{animation-delay:.6s}
+.hero-top.webgl .lead-hero.fadein,.hero-top.webgl .hero-body>.fadein{animation-delay:2.9s}
+/* 右下の数（灯籠と灯路） */
+.gl-hud{position:absolute;right:28px;top:calc(100svh - 64px);z-index:4;display:flex;flex-wrap:wrap;justify-content:flex-end;align-items:center;gap:6px 18px;max-width:calc(100% - 56px);font-size:15px;color:#E9EEF6;pointer-events:none;opacity:0;transition:opacity 1s ease .2s;text-shadow:0 2px 8px #000}
+.hero-top.lit .gl-hud{opacity:1}
+.gl-hud span{display:inline-flex;align-items:center;gap:8px;padding:5px 10px;background:rgba(5,8,18,.55);border:1px solid rgba(242,181,68,.28)}
+.gl-hud span::before{content:'';width:7px;height:7px;background:var(--amber);box-shadow:0 0 10px 2px rgba(242,181,68,.7)}
+.gl-hud span+span::before{width:14px;height:2px;box-shadow:0 0 8px 1px rgba(242,181,68,.6)}
+.gl-hud b{font-weight:400;color:#FFE3A3;min-width:2ch;text-align:right;font-variant-numeric:tabular-nums}
+.gl-hud em{flex-basis:100%;text-align:right;font-style:normal;color:#E7D7FF;opacity:0;transform:translateY(6px);transition:opacity .4s,transform .4s}
+.gl-hud em.on{opacity:1;transform:none}
+@media (max-width:760px){.gl-hud{right:14px;top:auto;bottom:12px;font-size:12px;gap:4px 8px}.gl-hud span{padding:3px 7px}}
+.hero-top.webgl .sky-hint{z-index:4;bottom:auto;top:calc(100svh - 108px)}
+@media (max-width:760px){.hero-top.webgl .sky-hint{bottom:48px}}
+.hero-top.webgl{cursor:crosshair}
+.hero-top.webgl .hero-body a,.hero-top.webgl .hero-body button{cursor:pointer}
+.hero-top.webgl .hero-body h1,.hero-top.webgl .hero-body p{cursor:auto}
+.hero-top.webgl{min-height:100svh!important}
+.hero-top.webgl .scene{height:60px}
+@media (max-width:760px){.hero-top.webgl .scene{height:90px}}
+@media (min-width:761px) and (orientation:portrait){.hero-top.webgl .scene{height:300px}}
+.hero-top.webgl::before,.hero-top.webgl::after{display:none}
+@media (max-width:760px){.hero-top.webgl .hero-body::before{inset:-30px -30px -30px -30px;background:linear-gradient(180deg,rgba(3,5,14,.25) 0%,rgba(3,5,14,.6) 45%,rgba(3,5,14,.72) 75%,rgba(3,5,14,.2) 100%)}}
+@media (max-width:760px){.hero-top.webgl .sky-hint{display:none}}

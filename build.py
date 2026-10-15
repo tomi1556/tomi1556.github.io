@@ -133,6 +133,7 @@ def page(file, title, desc, body, hero_min=""):
     cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki", "akashi")) else "start.html" if file == "commands.html" else "")
     body = _with_ridge(file, body)
     url = SITE + ("/" if file == "index.html" else "/" + file)
+    is_top = file == "index.html"
     return f'''<!doctype html>
 <html lang="ja" class="nojs">
 <head>
@@ -167,7 +168,7 @@ def page(file, title, desc, body, hero_min=""):
 <div class="alt" aria-hidden="true"><i class="alt-r"></i><b class="alt-l"></b><span class="alt-t dot"></span></div>
 <div class="glow" aria-hidden="true"></div>
 <script src="assets/site.js" defer></script>
-<script src="assets/fx.js" defer></script>
+<script src="assets/fx.js" defer></script>{"<script src=\"assets/hero.js\" defer></script>" if is_top else ""}
 </body>
 </html>
 '''
