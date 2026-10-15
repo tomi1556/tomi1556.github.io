@@ -355,7 +355,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
       <p class="depth">次の夜祭</p>
       <h2 class="disp h2" style="margin-bottom:8px" data-fest-date>毎週土曜 21:00</h2>
       <p class="mu" style="margin-bottom:22px" data-fest-lead>21時になると、120秒の募集が始まります。何もしなければ参加です。</p>
-      {cd("fest", "次の夜祭まで")}
+      <div data-twin-hide>{cd("fest", "次の夜祭まで")}</div>
     </div>
     <div class="pn" style="flex:1 1 360px;min-width:0">
       <p class="mu" style="font-size:14px;font-weight:700">この日のゲーム</p>
@@ -1529,6 +1529,7 @@ def wiki_fish():
         <p class="find-n mu" aria-live="polite"><b class="dot" id="fn">{len(HW["fish"])}</b> 種 <button type="button" class="clear" id="fclear" hidden>しぼりこみを消す</button></p>
         <ul class="fcs" id="fl">{cards}</ul>
       </div>
+      <h2 class="sr">灯魚のしくみ</h2>
       <div class="three">
         <div><h3 class="h3 disp">逃げる確率</h3><p class="mu">並 0% ・ 珍 {int(HW["escape"][2] * 100)}% ・ 稀 {int(HW["escape"][3] * 100)}% ・ 秘 {int(HW["escape"][4] * 100)}% ・ 幻 {int(HW["escape"][5] * 100)}%。釣の道「糸さばき」で、段ごとに2割ずつ下がります。逃げられた魚は、図鑑に姿と手がかりが残ります。</p></div>
         <div><h3 class="h3 disp">釣れる見込み</h3><p class="mu">釣りをしたとき、灯魚がかかるかどうかは「灯釣り」・夜・灯りの中で上がります。釣の道「魚読み」を覚えると、その場で釣れる灯魚の数がわかります。</p></div>

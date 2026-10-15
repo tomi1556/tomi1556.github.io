@@ -620,7 +620,7 @@ th,td{padding:12px 10px}
 .qr,.qr-ph{width:168px;height:168px}
 .mock-row{grid-template-columns:1fr;gap:2px}
 .wall{grid-template-columns:repeat(auto-fill,minmax(104px,1fr));gap:10px}
-.nl{font-size:10px}
+.nl{font-size:11px}
 }
 @media (prefers-reduced-motion:reduce){.nametag,.ch-ic.heart .l{animation:none}}
 
@@ -1426,3 +1426,33 @@ body.qs-open{overflow:hidden}
 .hero-top.webgl::before,.hero-top.webgl::after{display:none}
 @media (max-width:760px){.hero-top.webgl .hero-body::before{inset:-30px -30px -30px -30px;background:linear-gradient(180deg,rgba(3,5,14,.25) 0%,rgba(3,5,14,.6) 45%,rgba(3,5,14,.72) 75%,rgba(3,5,14,.2) 100%)}}
 @media (max-width:760px){.hero-top.webgl .sky-hint{display:none}}
+
+/* ═════════ 監査での直し（読みやすさ・押しやすさ） ═════════ */
+/* 押すと文字が背景に溶けていた：黄色いボタンのリンク */
+a.pbtn:hover,a.pbtn:focus-visible{color:#24180A}
+.dbtn:hover{background:#4752C4}
+.pbtn.paypay:hover{background:#E0103A}
+/* 色つきの小さな文字は、少し明るくして読めるように */
+.ch-go,.ch-big,.pg small,.wpc-b small,.br-h span,.nc-need a,.fc-r,.rar-n b{color:color-mix(in srgb,var(--c) 76%,#fff)}
+.ch-no{color:color-mix(in srgb,var(--c) 85%,#fff)}
+.band-go{color:var(--amber-hi)}
+/* 10px を下回る文字をなくす */
+.fact-n small{font-size:max(12px,.45em)}
+.gt b small{font-size:max(11px,.5em)}
+/* 指で押す場所は 44px 以上 */
+.foot-map a{display:inline-flex;align-items:center;min-height:44px}
+.wside a{min-height:44px}
+.qs-btn{min-width:44px}
+@media (pointer:coarse){.chip-f{min-height:44px}.tile{min-width:36px;min-height:36px}}
+th a{display:inline-flex;align-items:center;min-height:32px}
+/* 予告編：再生ボタンが題字に重なっていたので、左下に */
+.film-play{place-content:end start;justify-items:start;padding:clamp(16px,3vw,32px);grid-auto-flow:column;align-items:center;background:linear-gradient(0deg,rgba(0,0,0,.6),rgba(0,0,0,0) 45%)}
+.film-play i{width:clamp(40px,6vw,76px);height:clamp(40px,6vw,76px)}
+.cd[hidden],[data-twin-hide] .cd[hidden]{display:none}
+@media (min-width:1000px){.foot-cta .btns{margin-bottom:calc(1.7em + 10px)}}
+a.skip:hover,a.skip:focus{color:#24180A}
+a.dbtn:hover,a.dbtn:focus-visible{color:#fff}
+.band-go,.band .lead a{color:var(--amber-hi)}
+.s-stone time{color:var(--amber-hi)}
+table th[style*="color"],table td a[style*="color"]{filter:brightness(1.22)}
+#reds .pf-role{background:#C4231A}

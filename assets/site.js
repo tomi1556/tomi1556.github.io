@@ -99,8 +99,10 @@
     $$('[data-season-live]').forEach(function (el) { el.hidden = left > 0; });
     var f = nextFest(now), fc = split(f.at - now), live = now >= f.at;
     $$('[data-fest-date]').forEach(function (el) { el.textContent = f.month + '月' + f.day + '日（土）21:00'; });
-    $$('[data-fest-lead]').forEach(function (el) { el.textContent = live ? 'ただいま開催中です。今すぐログインして参加できます。' : '21時になると、120秒の募集が始まります。何もしなければ参加です。'; });
-    $$('[data-fest-cd]').forEach(function (el) { ['d', 'h', 'm', 's'].forEach(function (k) { var b = $('[data-u="' + k + '"]', el); if (b) b.textContent = fc[k]; }); });
+    // 開幕の夜がそのまま最初の夜祭のときは、同じ秒読みを2回並べない（シーズンの秒読みがあるページだけ）
+    var twin = !live && Math.abs(f.at - SEASON_START) < 60000 && !!$('[data-season-cd]');
+    $$('[data-fest-lead]').forEach(function (el) { el.textContent = live ? 'ただいま開催中です。今すぐログインして参加できます。' : twin ? '開幕の夜が、最初の夜祭です。21時の開幕と同時に、120秒の募集が始まります。' : '21時になると、120秒の募集が始まります。何もしなければ参加です。'; });
+    $$('[data-fest-cd]').forEach(function (el) { if (twin && el.closest('[data-twin-hide]')) { el.hidden = true; return; } el.hidden = false; ['d', 'h', 'm', 's'].forEach(function (k) { var b = $('[data-u="' + k + '"]', el); if (b) b.textContent = fc[k]; }); });
     $$('[data-fest-game]').forEach(function (el) { el.textContent = f.game.name; });
     $$('[data-fest-desc]').forEach(function (el) { el.textContent = f.game.desc; });
     liveBar(f, now);
