@@ -15,7 +15,7 @@ def addr_box(extra=""):
   <span class="addr-t"><small>サーバーアドレス（Java版・統合版 共通）</small><b>{ADDR}</b></span>
   <button type="button" class="pbtn" data-copy="{ADDR}">アドレスをコピー</button>
 </div>
-<p class="addr-note" data-note role="status">統合版のポートは 19132（最初から入っている数字のまま）です。</p>'''
+<p class="addr-note" data-note role="status">統合版のポートは <b>5156</b> です（最初に入っている 19132 を書きかえてください）。</p>'''
 
 
 # ナビのアイコン（16×16 のドット絵。# は線、o は灯りの色）
@@ -411,7 +411,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <ol class="steps">
         <li><div><h3>マインクラフトを開いて「遊ぶ」を押す</h3><p>Microsoft アカウントでサインインしておいてください。</p></div></li>
         <li><div><h3>「サーバー」のタブを開き、いちばん下の「サーバーを追加」を押す</h3><p>一覧を下までスクロールすると出てきます。</p></div></li>
-        <li><div><h3>3つの欄を入れる</h3><p>サーバー名：<span class="kbd">灯原</span>　サーバーアドレス：<span class="kbd">{ADDR}</span>　ポート：<span class="kbd">19132</span></p></div></li>
+        <li><div><h3>3つの欄を入れる</h3><p>サーバー名：<span class="kbd">灯原</span>　サーバーアドレス：<span class="kbd">{ADDR}</span>　ポート：<span class="kbd">5156</span>（最初の 19132 から書きかえる）</p></div></li>
         <li><div><h3>「保存」を押し、一覧から「灯原」を選ぶ</h3><p>統合版の人には、押しやすい専用のメニューが出ます。</p></div></li>
       </ol>
     </div>
@@ -419,7 +419,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <ol class="steps">
         <li><div><h3>Minecraft（統合版）を開いて「遊ぶ」を押す</h3><p>Minecraft Launcher では「Minecraft for Windows」を選びます。Java版とは別のものです。</p></div></li>
         <li><div><h3>「サーバー」のタブを開き、いちばん下の「サーバーを追加」を押す</h3><p>一覧を下までスクロールすると出てきます。</p></div></li>
-        <li><div><h3>3つの欄を入れる</h3><p>サーバー名：<span class="kbd">灯原</span>　サーバーアドレス：<span class="kbd">{ADDR}</span>　ポート：<span class="kbd">19132</span></p></div></li>
+        <li><div><h3>3つの欄を入れる</h3><p>サーバー名：<span class="kbd">灯原</span>　サーバーアドレス：<span class="kbd">{ADDR}</span>　ポート：<span class="kbd">5156</span>（最初の 19132 から書きかえる）</p></div></li>
         <li><div><h3>「保存」を押し、一覧から「灯原」を選ぶ</h3><p>Java版を持っているなら、Java版から入ってもかまいません。同じ世界です。</p></div></li>
       </ol>
     </div>
@@ -428,7 +428,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <ol class="steps" style="margin-top:20px">
         <li><div><h3>Discord に参加する</h3><p>「はじめての方」に、機種ごとの手順を画像つきで置いています。わからないところは、その場で聞けます。</p></div></li>
         <li><div><h3>手順どおりに本体の設定を変える</h3><p>設定は、いつでも元に戻せます。保護者の方といっしょに行ってください。</p></div></li>
-        <li><div><h3>マインクラフトの「サーバー」から灯原を選ぶ</h3><p>アドレスは <span class="kbd">{ADDR}</span>、ポートは <span class="kbd">19132</span> です。</p></div></li>
+        <li><div><h3>マインクラフトの「サーバー」から灯原を選ぶ</h3><p>アドレスは <span class="kbd">{ADDR}</span>、ポートは <span class="kbd">5156</span> です。</p></div></li>
       </ol>
       <div class="btns" style="margin-top:20px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord で手順を見る</a></div>
     </div>
