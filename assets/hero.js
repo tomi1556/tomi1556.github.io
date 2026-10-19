@@ -263,17 +263,26 @@
     'void main(){vec3 c=vec3(0.0);for(int i=0;i<4;i++){vec2 d=vec2(float(i%2)-0.5,float(i/2)-0.5)*uPx*2.0;vec3 s=texture(uT,vU+d).rgb;float l=max(s.r,max(s.g,s.b));c+=s*smoothstep(0.55,0.95,l);}o=vec4(c*0.25,1.0);}');
   var pBlur = prog(VQ, HDR + 'in vec2 vU;uniform sampler2D uT;uniform vec2 uDir;out vec4 o;\n' +
     'void main(){vec3 c=texture(uT,vU).rgb*0.227;c+=(texture(uT,vU+uDir*1.385).rgb+texture(uT,vU-uDir*1.385).rgb)*0.316;c+=(texture(uT,vU+uDir*3.23).rgb+texture(uT,vU-uDir*3.23).rgb)*0.07;o=vec4(c,1.0);}');
-  var pComp = prog(VQ, HDR + 'in vec2 vU;uniform sampler2D uT;uniform sampler2D uB;uniform sampler2D uB2;uniform float uTime;uniform float uK;uniform vec2 uAsp;uniform float uDig;uniform float uGY;uniform float uCell;uniform vec2 uRes;out vec4 o;\n' + HASH +
+  var pComp = prog(VQ, HDR + 'in vec2 vU;uniform sampler2D uT;uniform sampler2D uB;uniform sampler2D uB2;uniform float uTime;uniform float uK;uniform vec2 uAsp;uniform float uDig;uniform float uGY;uniform float uCell;uniform vec2 uRes;uniform float uOff;uniform float uTun;uniform float uR0;out vec4 o;\n' + HASH +
     'void main(){vec2 c0=vU-0.5;float r2=dot(c0*uAsp,c0*uAsp);\n' +
     ' vec2 ca=c0*r2*0.006;vec3 c=vec3(texture(uT,vU+ca).r,texture(uT,vU).g,texture(uT,vU-ca).b);\n' +
     ' vec3 b=texture(uB,vU).rgb*1.1+texture(uB2,vU).rgb*1.5;c+=b*uK;\n' +
     ' c=mix(c,c*vec3(0.92,0.97,1.12),smoothstep(0.35,0.0,max(c.r,max(c.g,c.b))));\n' +
     ' c*=1.0-r2*0.55;\n' +
     ' c+=(h21(vU*vec2(1913.0,1771.0)+fract(uTime*7.0)*91.0)-0.5)*0.035*(1.0-uDig);\n' +
-    ' if(uDig>0.0){vec2 px=vec2(gl_FragCoord.x,uRes.y-gl_FragCoord.y);vec2 q=vec2(px.x,px.y-uGY);vec2 cell=floor(q/uCell);vec2 f=q-cell*uCell;\n' +
-    '  float yb=clamp((uRes.y-(cell.y*uCell+uGY))/uRes.y,0.0,1.0);float th=h21(cell+7.0)*0.55+yb*0.45;\n' +
+    ' if(uDig>0.0){vec2 px=vec2(gl_FragCoord.x,uRes.y-gl_FragCoord.y);vec2 q=vec2(px.x,px.y-uGY-uOff);vec2 cell=floor(q/uCell);vec2 f=q-cell*uCell;\n' +
+    '  float yb=clamp((uRes.y-(cell.y*uCell+uGY+uOff))/uRes.y,0.0,1.0);float th=h21(cell+7.0)*0.55+yb*0.45;\n' +
     '  float k=smoothstep(th*0.9,th*0.9+0.12,uDig*1.1);\n' +
-    '  vec3 soil=vec3(0.2275,0.1647,0.1255);float ln=(f.x<uCell/26.0||f.y<uCell/26.0)?0.91:1.0;soil*=ln;\n' +
+    '  vec3 soil=vec3(0.2275,0.1647,0.1255);float ln=(f.x<uCell/26.0||f.y<uCell/26.0)?0.91:1.0;\n' +
+    '  if(cell.y<-uR0){vec2 sp=floor(f/(uCell/8.0));float n=h21(sp+cell*17.3);float ty=h21(cell*3.7+1.3);float deep=clamp((-cell.y-uR0)/10.0,0.0,1.0);\n' +
+    '   vec3 b=soil*(0.82+0.3*n);float em=0.0;\n' +
+    '   if(ty<0.42*deep+0.08){b=vec3(0.36,0.37,0.39)*(0.8+0.35*n);}\n' +
+    '   else if(ty<0.5*deep+0.12){b=vec3(0.42,0.38,0.35)*(0.75+0.5*n);}\n' +
+    '   float ore=h21(cell*9.1+4.0);\n' +
+    '   if(ty<0.42*deep+0.08&&ore>0.86&&n>0.62){b=ore>0.95?vec3(0.95,0.68,0.25):(ore>0.91?vec3(0.78,0.62,0.48):vec3(0.08,0.08,0.09));em=ore>0.95?1.0:0.0;}\n' +
+    '   float sky=exp(-px.y/uRes.y*3.0)*(1.0-uTun)*0.6;\n' +
+    '   soil=b*(0.55+0.45*(1.0-uTun*0.6))+vec3(0.9,0.6,0.25)*sky*0.25+vec3(1.0,0.7,0.3)*em*(0.6+0.4*sin(uTime*3.0+ore*40.0));}\n' +
+    '  soil*=ln;\n' +
     '  float pre=smoothstep(th*0.9-0.2,th*0.9,uDig*1.1);c*=1.0-0.45*pre;\n' +
     '  c=mix(c,soil,k);}\n' +
     ' o=vec4(c,1.0);}');
@@ -323,7 +332,9 @@
     pass(pBlur, b, [a], function (u) { gl.uniform1i(u.uT, 0); gl.uniform2f(u.uDir, 1 / a.w, 0); });
     pass(pBlur, a, [b], function (u) { gl.uniform1i(u.uT, 0); gl.uniform2f(u.uDir, 0, 1 / a.h); });
   }
+  function compU(t) { return function (u) { gl.uniform1i(u.uT, 0); gl.uniform1i(u.uB, 1); gl.uniform1i(u.uB2, 2); gl.uniform1f(u.uTime, t); gl.uniform1f(u.uK, 1.0); gl.uniform2f(u.uAsp, Math.min(1, aspect), Math.min(1, 1 / aspect)); gl.uniform1f(u.uDig, dig); gl.uniform1f(u.uGY, gridY); gl.uniform1f(u.uOff, tunOff); gl.uniform1f(u.uTun, tun); gl.uniform1f(u.uR0, rowsR0); gl.uniform1f(u.uCell, 52 * dpr0); gl.uniform2f(u.uRes, cw, ch); }; }
   function post(t) {
+    if (dig >= 1) { gl.disable(gl.DEPTH_TEST); gl.disable(gl.BLEND); pass(pComp, null, [RT.a, RT.b1, RT.c1], compU(t)); return; }
     if (RT.ms) {
       gl.bindFramebuffer(gl.READ_FRAMEBUFFER, RT.ms); gl.bindFramebuffer(gl.DRAW_FRAMEBUFFER, RT.a.f);
       gl.blitFramebuffer(0, 0, cw, ch, 0, 0, cw, ch, gl.COLOR_BUFFER_BIT, gl.NEAREST);
@@ -334,7 +345,7 @@
     blur(RT.b1, RT.b2); blur(RT.b1, RT.b2);
     pass(pBlur, RT.c1, [RT.b1], function (u) { gl.uniform1i(u.uT, 0); gl.uniform2f(u.uDir, 0, 0); });
     blur(RT.c1, RT.c2); blur(RT.c1, RT.c2);
-    pass(pComp, null, [RT.a, RT.b1, RT.c1], function (u) { gl.uniform1i(u.uT, 0); gl.uniform1i(u.uB, 1); gl.uniform1i(u.uB2, 2); gl.uniform1f(u.uTime, t); gl.uniform1f(u.uK, 1.0); gl.uniform2f(u.uAsp, Math.min(1, aspect), Math.min(1, 1 / aspect)); gl.uniform1f(u.uDig, dig); gl.uniform1f(u.uGY, gridY); gl.uniform1f(u.uCell, 52 * dpr0); gl.uniform2f(u.uRes, cw, ch); });
+    pass(pComp, null, [RT.a, RT.b1, RT.c1], compU(t));
   }
 
   // ───────── 行列 ─────────
@@ -351,7 +362,8 @@
   // 掘り進む：トップのあとの余白（.dive）と、その下の土の章
   var dive = hero.nextElementSibling && hero.nextElementSibling.classList.contains('dive') ? hero.nextElementSibling : null;
   var soil = dive ? dive.nextElementSibling : null;
-  var dig = 0, gridY = 0;
+  var dig = 0, gridY = 0, tun = 0, tunOff = 0, rowsR0 = 20;
+  var depthEl = null;
   function size() {
     var w = cv.clientWidth || window.innerWidth, h = cv.clientHeight || window.innerHeight;
     var dpr = Math.min(window.devicePixelRatio || 1, coarse ? 1.5 : 1.75) * quality;
@@ -431,7 +443,7 @@
     if (!coarse) { ex += ptr.sx * 2.2; ey -= ptr.sy * 1.0; }
     var ty = 1;
     // 下へ：最初の灯籠の足もとへ降りていき、真上から見下ろす
-    var dp = scrollP < 0.04 ? 0 : Math.min(1, (scrollP - 0.04) / 0.8), de = dp * dp * (3 - 2 * dp);
+    var dp = scrollP < 0.03 ? 0 : Math.min(1, (scrollP - 0.03) / 0.37), de = dp * dp * (3 - 2 * dp);
     if (de > 0) {
       var L0 = LAN[startI];
       var dx = L0.cx + 0.2, dy = L0.y + 2.6, dz = L0.cz - 1.1;
@@ -535,6 +547,7 @@
     var dt = Math.min(0.05, Math.max(0, t - last)); last = t;
     if (!RM) step(t, dt);
     camera(t);
+    if (dig >= 1) { gl.bindVertexArray(null); post(t); return; }
     lightMap(t);
     var amb = RM ? 1 : Math.min(1, Math.max(0.12, (t - 0.5) / 1.6));
     var litN = 0;
@@ -653,6 +666,7 @@
   try {
     hero.insertBefore(cv, hero.firstChild);
     hero.appendChild(hud);
+    if (dive) { depthEl = document.createElement('div'); depthEl.className = 'dive-y dot'; depthEl.setAttribute('aria-hidden', 'true'); depthEl.innerHTML = '<b>Y=64</b><span>掘りすすむ</span>'; dive.appendChild(depthEl); }
     hero.classList.add('webgl');
     // 題字を一文字ずつにする（灯りと同時にともる）
     var h1 = hero.querySelector('.h1');
@@ -689,11 +703,23 @@
   function onScroll() {
     var vh = window.innerHeight || 800, y = window.scrollY;
     var span = hero.offsetHeight + (dive ? dive.offsetHeight : 0);
-    scrollP = Math.min(1, Math.max(0, y / Math.max(1, span - vh * 0.35)));
+    // 1 = 土の章の上端が画面の下に届くとき
+    scrollP = Math.min(1, Math.max(0, y / Math.max(1, span - vh)));
     // 土の章の上端（画面上の位置）。掘った土の目地を、章の目地とそろえる
     var top = soil ? soil.getBoundingClientRect().top : span - y;
     gridY = top * dpr0;
-    dig = RM || !dive ? 0 : Math.min(1, Math.max(0, (scrollP - 0.62) / 0.34));
+    dig = RM || !dive ? 0 : Math.min(1, Math.max(0, (scrollP - 0.38) / 0.16));
+    // 掘り抜けたあと：土と石の層を落ちていく。最後はゆっくり止まり、章の目地にぴたりと合う
+    var tr = RM || !dive ? 0 : Math.min(1, Math.max(0, (scrollP - 0.52) / 0.48));
+    tun = 1 - (1 - tr) * (1 - tr);
+    tunOff = (1 - tun) * vh * dpr0 * 5;
+    rowsR0 = Math.ceil(vh / 52) + 2;
+    if (depthEl) {
+      var show = dig > 0.7 && top > vh * 0.55;
+      depthEl.style.opacity = show ? Math.min(1, (dig - 0.7) / 0.3) * Math.min(1, (top - vh * 0.55) / (vh * 0.3)) : 0;
+      var yv = Math.round(64 - 16 * tun);
+      if (depthEl._v !== yv) { depthEl._v = yv; depthEl.firstChild.textContent = 'Y=' + yv; }
+    }
     var fade = Math.max(0, 1 - scrollP * 2.2);
     hud.style.opacity = fade < 1 ? fade : '';
     if (hint) hint.style.opacity = fade < 1 ? fade * 0.9 : '';
