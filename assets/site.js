@@ -98,7 +98,7 @@
     });
     $$('[data-season-live]').forEach(function (el) { el.hidden = left > 0; });
     var f = nextFest(now), fc = split(f.at - now), live = now >= f.at;
-    $$('[data-fest-date]').forEach(function (el) { el.textContent = f.month + '月' + f.day + '日（土）21:00'; });
+    $$('[data-fest-date]').forEach(function (el) { el.innerHTML = '次の夜祭は <span style="white-space:nowrap">' + f.month + '月' + f.day + '日（土）21:00</span>'; });
     // 開幕の夜がそのまま最初の夜祭のときは、同じ秒読みを2回並べない（シーズンの秒読みがあるページだけ）
     var twin = !live && Math.abs(f.at - SEASON_START) < 60000 && !!$('[data-season-cd]');
     $$('[data-fest-lead]').forEach(function (el) { el.textContent = live ? 'ただいま開催中です。今すぐログインして参加できます。' : twin ? '開幕の夜が、最初の夜祭です。21時の開幕と同時に、120秒の募集が始まります。' : '21時になると、120秒の募集が始まります。何もしなければ参加です。'; });
@@ -252,6 +252,10 @@
       });
     });
   });
+
+  // ── #名前 でそのタブを開く（遊び方を選ぶ など） ──
+  var openHash = function () { var h = location.hash.slice(1); if (!h) return; var t = document.getElementById('t-' + h); if (t && t.getAttribute('role') === 'tab') t.click(); };
+  openHash(); window.addEventListener('hashchange', openHash);
 
   // ── はじめる：スマホ・ゲーム機で開いたら、その機種のタブを先に開く ──
   (function () {

@@ -274,14 +274,10 @@
     '  float yb=clamp((uRes.y-(cell.y*uCell+uGY+uOff))/uRes.y,0.0,1.0);float th=h21(cell+7.0)*0.55+yb*0.45;\n' +
     '  float k=smoothstep(th*0.9,th*0.9+0.12,uDig*1.1);\n' +
     '  vec3 soil=vec3(0.2275,0.1647,0.1255);float ln=(f.x<uCell/26.0||f.y<uCell/26.0)?0.91:1.0;\n' +
-    '  if(cell.y<-uR0){vec2 sp=floor(f/(uCell/8.0));float n=h21(sp+cell*17.3);float ty=h21(cell*3.7+1.3);float deep=clamp((-cell.y-uR0)/10.0,0.0,1.0);\n' +
-    '   vec3 b=soil*(0.82+0.3*n);float em=0.0;\n' +
-    '   if(ty<0.42*deep+0.08){b=vec3(0.36,0.37,0.39)*(0.8+0.35*n);}\n' +
-    '   else if(ty<0.5*deep+0.12){b=vec3(0.42,0.38,0.35)*(0.75+0.5*n);}\n' +
-    '   float ore=h21(cell*9.1+4.0);\n' +
-    '   if(ty<0.42*deep+0.08&&ore>0.86&&n>0.62){b=ore>0.95?vec3(0.95,0.68,0.25):(ore>0.91?vec3(0.78,0.62,0.48):vec3(0.08,0.08,0.09));em=ore>0.95?1.0:0.0;}\n' +
-    '   float sky=exp(-px.y/uRes.y*3.0)*(1.0-uTun)*0.6;\n' +
-    '   soil=b*(0.55+0.45*(1.0-uTun*0.6))+vec3(0.9,0.6,0.25)*sky*0.25+vec3(1.0,0.7,0.3)*em*(0.6+0.4*sin(uTime*3.0+ore*40.0));}\n' +
+    '  if(cell.y<-uR0){float band=floor(cell.y/3.0);float bt=h21(vec2(band,5.0));float deep=clamp((-cell.y-uR0)/12.0,0.0,1.0);\n' +
+    '   vec2 sp=floor(f/(uCell/8.0));float n=h21(sp+cell*17.3);\n' +
+    '   vec3 b=bt<0.4?soil:(bt<0.75?vec3(0.27,0.28,0.3):vec3(0.2,0.21,0.23));b=mix(soil,b,deep)*(0.92+0.1*n);\n' +
+    '   soil=b;}\n' +
     '  soil*=ln;\n' +
     '  float pre=smoothstep(th*0.9-0.2,th*0.9,uDig*1.1);c*=1.0-0.45*pre;\n' +
     '  c=mix(c,soil,k);}\n' +
@@ -666,7 +662,7 @@
   try {
     hero.insertBefore(cv, hero.firstChild);
     hero.appendChild(hud);
-    if (dive) { depthEl = document.createElement('div'); depthEl.className = 'dive-y dot'; depthEl.setAttribute('aria-hidden', 'true'); depthEl.innerHTML = '<b>Y=64</b><span>掘りすすむ</span>'; dive.appendChild(depthEl); }
+    if (dive) { depthEl = document.createElement('div'); depthEl.className = 'dive-y dot'; depthEl.setAttribute('aria-hidden', 'true'); depthEl.innerHTML = '<b>Y=64</b>'; dive.appendChild(depthEl); }
     hero.classList.add('webgl');
     // 題字を一文字ずつにする（灯りと同時にともる）
     var h1 = hero.querySelector('.h1');
@@ -712,7 +708,7 @@
     // 掘り抜けたあと：土と石の層を落ちていく。最後はゆっくり止まり、章の目地にぴたりと合う
     var tr = RM || !dive ? 0 : Math.min(1, Math.max(0, (scrollP - 0.52) / 0.48));
     tun = 1 - (1 - tr) * (1 - tr);
-    tunOff = (1 - tun) * vh * dpr0 * 5;
+    tunOff = (1 - tun) * vh * dpr0 * 3;
     rowsR0 = Math.ceil(vh / 52) + 2;
     if (depthEl) {
       var show = dig > 0.7 && top > vh * 0.55;

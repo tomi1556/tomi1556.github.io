@@ -1461,7 +1461,7 @@ table th[style*="color"],table td a[style*="color"]{filter:brightness(1.22)}
 .hero-top.webgl{background:transparent}
 .hero-top.webgl .gl-cv{position:fixed;left:0;top:0;width:100vw;height:100lvh;z-index:-1}
 .dive{height:0;pointer-events:none}
-.hero-top.webgl+.dive{height:160svh}
+.hero-top.webgl+.dive{height:130svh}
 html.rm .hero-top.webgl+.dive{height:0}
 html{background:#05070F}
 /* ═════════ 下のページの夜空：トップの3Dの空とそろえる ═════════ */
@@ -1484,3 +1484,51 @@ html{background:#05070F}
 .dive-y{position:fixed;left:50%;top:46%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none;opacity:0;transition:opacity .25s;color:#FFE3A3;text-shadow:0 0 24px rgba(242,181,68,.6),0 3px 0 rgba(0,0,0,.6)}
 .dive-y b{font-weight:400;font-size:clamp(54px,9vw,120px);line-height:1;font-variant-numeric:tabular-nums}
 .dive-y span{font-size:14px;letter-spacing:.5em;padding-left:.5em;color:#E9D9C2}
+
+/* ═════════ 洗練：引き算の層（見やすさを最優先に） ═════════ */
+/* 見出しの上の小さなラベルと番号は使わない（HTML からも取り除いている） */
+.depth,.band-y{display:none}
+/* 余白：見出しの上を広く、下を狭く。段落は読みやすい幅に */
+.stratum{padding:120px 0 136px}
+@media (max-width:760px){.stratum{padding:80px 0 96px}}
+.h2{margin:0 0 20px;letter-spacing:.01em}
+.h3{letter-spacing:.01em}
+.lead{max-width:34em}
+p,li,dd{line-height:1.9}
+/* 注意書き：太い左線をやめ、静かな面に */
+.note,.note.cold,.note.warn{border:1px solid rgba(255,255,255,.1);border-left:1px solid rgba(255,255,255,.1);background:rgba(0,0,0,.2);padding:18px 22px}
+.note.warn{border-color:rgba(255,120,110,.3)}
+.note b{display:block;margin-bottom:4px}
+/* 現れ方は、控えめに一度だけ */
+.rv{transition-duration:.6s!important}
+/* トップ：右下の数と案内は出さない */
+.gl-hud{display:none!important}
+/* 下のページの景色：吹き出しはなし（人物と灯りだけ） */
+.ridge .bub{display:none}
+/* 深さの数字：小さく、静かに */
+.dive-y b{font-size:clamp(36px,5vw,64px);opacity:.9}
+.dive-y{text-shadow:0 2px 12px rgba(0,0,0,.6)}
+/* 選択とスクロールバーも、世界の色で */
+::selection{background:rgba(242,181,68,.35);color:#fff}
+html{scrollbar-color:#3A3F48 #101215}
+
+/* ═════════ 遊び方を選ぶ（タブ） ═════════ */
+.ps-tabs{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-bottom:56px}
+.ps-tab{--c:var(--amber);display:flex;align-items:center;gap:14px;min-height:88px;padding:12px 16px;text-align:left;background:rgba(0,0,0,.18);border:1px solid rgba(255,255,255,.1);color:#D7DCE6;cursor:pointer;transition:border-color .2s,background .2s}
+.ps-tab:hover{border-color:color-mix(in srgb,var(--c) 50%,transparent)}
+.ps-tab[aria-selected="true"]{border-color:var(--c);background:color-mix(in srgb,var(--c) 10%,rgba(0,0,0,.2));color:#fff}
+.ps-tab .ps-fig{flex:none;width:40px;height:57px;margin:0}
+.ps-tt{display:flex;flex-direction:column;gap:2px;min-width:0}
+.ps-tt b{font-size:18px;font-weight:700;color:inherit}
+.ps-tt small{font-size:13px;color:var(--mu);line-height:1.5}
+@media (max-width:760px){.ps-tabs{grid-template-columns:1fr;gap:8px;margin-bottom:40px}.ps-tab{min-height:72px}}
+.ps-panel .h2{color:#fff}
+.ps-panel .steps{margin-top:32px}
+.ps-cmds{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:2px 32px;margin:40px 0 0;padding:20px 0;border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+.ps-cmds div{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:8px 0}
+.ps-cmds dd{margin:0;color:var(--mu);font-size:15px;text-align:right}
+@media (max-width:760px){.ps-cmds{grid-template-columns:1fr}}
+.ps-note{margin-top:24px;font-size:15px;color:var(--mu);max-width:40em}
+.ps-more{margin-top:56px;font-size:15px;color:var(--mu)}
+.ps .h2{text-shadow:none}
+@media (max-width:760px){.ps-tabs{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.ps-tab{flex-direction:column;justify-content:center;gap:4px;min-height:64px;padding:8px 4px;text-align:center}.ps-tab .ps-fig{width:24px;height:34px}.ps-tt small{display:none}.ps-tt b{font-size:15px}}

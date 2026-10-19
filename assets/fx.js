@@ -19,26 +19,6 @@
     kids.forEach(function (k, i) { items.push([k, Math.min(i, 9)]); });
   });
   items.forEach(function (it) { it[0].classList.add('rv'); it[0].style.setProperty('--d', (it[1] * 70) + 'ms'); });
-  // 見出しは一文字ずつ灯す
-  $$('.stratum .h2, .phead .h1-sub, .foot-cta h2').forEach(function (h) {
-    var n = 0;
-    (function walk(node) {
-      Array.prototype.slice.call(node.childNodes).forEach(function (c) {
-        if (c.nodeType === 3) {
-          var frag = document.createDocumentFragment();
-          Array.from(c.textContent).forEach(function (ch) {
-            if (/\s/.test(ch)) { frag.appendChild(document.createTextNode(ch)); return; }
-            var s = document.createElement('span');
-            s.className = 'ltr'; s.style.setProperty('--i', n++); s.textContent = ch;
-            frag.appendChild(s);
-          });
-          c.parentNode.replaceChild(frag, c);
-        } else if (c.nodeType === 1 && !/^(BR|WBR|SVG)$/i.test(c.tagName)) walk(c);
-      });
-    })(h);
-    h.classList.add('lit-h');
-    h.setAttribute('aria-label', h.textContent);
-  });
   var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
     es.forEach(function (e) {
       if (!e.isIntersecting) return;
@@ -50,10 +30,8 @@
   }, { rootMargin: '0px 0px -3% 0px', threshold: 0.02 }) : null;
   if (io) {
     items.forEach(function (it) { io.observe(it[0]); });
-    $$('.lit-h').forEach(function (h) { io.observe(h); });
   } else {
     items.forEach(function (it) { it[0].classList.add('in'); });
-    $$('.lit-h').forEach(function (h) { h.classList.add('in'); });
   }
 
   // いちばん下まで来たら、残りを全部灯す（それ以上スクロールできないため）
@@ -63,7 +41,7 @@
     endT = setTimeout(function () {
       endT = 0;
       if (window.innerHeight + window.scrollY < document.documentElement.scrollHeight - 8) return;
-      $$('.rv:not(.in), .lit-h:not(.in)').forEach(function (el) {
+      $$('.rv:not(.in)').forEach(function (el) {
         if (el.getBoundingClientRect().top < window.innerHeight) { el.classList.add('in'); $$('[data-count]', el).forEach(count); }
       });
     }, 200);
@@ -95,49 +73,6 @@
       if (k < 1) requestAnimationFrame(step);
     })(t0);
   }
-
-  // ── 3. 札が手に吸いつく（PC）：傾きと、灯りの照り返し ──
-  if (fine) {
-    $$('.ch,.wpc,.akc,.cc,.pg,.perk,.wiki-band,.path,.tt').forEach(function (el) {
-      el.classList.add('tilt');
-      var g = document.createElement('i');
-      g.className = 'glare'; g.setAttribute('aria-hidden', 'true');
-      el.appendChild(g);
-      var raf = 0, ev = null;
-      el.addEventListener('pointermove', function (e) {
-        ev = e;
-        if (raf) return;
-        raf = requestAnimationFrame(function () {
-          raf = 0;
-          var r = el.getBoundingClientRect(), x = (ev.clientX - r.left) / r.width, y = (ev.clientY - r.top) / r.height;
-          el.style.setProperty('--rx', ((0.5 - y) * 7).toFixed(2) + 'deg');
-          el.style.setProperty('--ry', ((x - 0.5) * 9).toFixed(2) + 'deg');
-          el.style.setProperty('--gx', (x * 100).toFixed(1) + '%');
-          el.style.setProperty('--gy', (y * 100).toFixed(1) + '%');
-        });
-      });
-      el.addEventListener('pointerleave', function () { el.style.removeProperty('--rx'); el.style.removeProperty('--ry'); });
-    });
-  }
-
-  // ── 4. 押すと火の粉が散る ──
-  document.addEventListener('pointerdown', function (e) {
-    var b = e.target.closest('.pbtn,.gbtn,.chip-f,.tab,.bd-tab,.qs-k button,.live-c,.film-play');
-    if (!b) return;
-    var r = b.getBoundingClientRect();
-    var x = e.clientX || r.left + r.width / 2, y = e.clientY || r.top + r.height / 2;
-    for (var i = 0; i < 9; i++) {
-      var s = document.createElement('i');
-      s.className = 'spark';
-      var a = Math.random() * Math.PI * 2, d = 26 + Math.random() * 34;
-      s.style.left = x + 'px'; s.style.top = y + 'px';
-      s.style.setProperty('--dx', (Math.cos(a) * d).toFixed(1) + 'px');
-      s.style.setProperty('--dy', (Math.sin(a) * d - 14).toFixed(1) + 'px');
-      if (i % 3 === 0) s.style.background = '#FFF1C4';
-      document.body.appendChild(s);
-      setTimeout(function (n) { n.remove(); }.bind(null, s), 700);
-    }
-  }, { passive: true });
 
   // ── 5. トップの夜空：押すと天灯（てんとう）が上っていく ──
   var hero = document.querySelector('.hero-top');

@@ -165,8 +165,6 @@ def page(file, title, desc, body, hero_min=""):
 {body}
 </main>
 {footer()}
-<div class="alt" aria-hidden="true"><i class="alt-r"></i><b class="alt-l"></b><span class="alt-t dot"></span></div>
-<div class="glow" aria-hidden="true"></div>
 <script src="assets/site.js" defer></script>
 <script src="assets/fx.js" defer></script>{"<script src=\"assets/hero.js\" defer></script>" if is_top else ""}
 </body>
@@ -181,7 +179,7 @@ def sub_hero(cur, h1, lead, toc):
   <div class="wrap phead" id="content">
     <h1 class="disp h1-sub">{h1}</h1>
     <p class="lead">{lead}</p>
-    <nav class="toc" aria-label="このページの内容">{t}</nav>
+    {f'<nav class="toc" aria-label="このページの内容">{t}</nav>' if t else ''}
   </div>
 </div>'''
 
@@ -259,7 +257,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
     <a href="#season" class="chip fadein"><i></i><span>シーズン1「灯ノ海」</span><b data-season-short>11月7日（土）21:00 開幕</b></a>
     <span class="online" data-online><i></i>いま <b>0</b> 人が参加中</span>
     <h1 class="disp h1 reveal">灯りをつないで、<br>夜の果てまで。</h1>
-    <p class="lead lead-hero fadein">灯原は、夜が24分つづくサバイバルサーバーです。灯籠を置いた場所だけが安全で、灯籠どうしがつながると道になります。Java版でも統合版（スマホ・Switch・PC）でも、同じ世界に入れます。参加は無料です。</p>
+    <p class="lead lead-hero fadein">夜が24分つづくサバイバルサーバー。灯籠を置いた場所だけが安全で、つなぐと道になります。Java版でも統合版でも、無料で同じ世界に入れます。</p>
     <div class="fadein" style="margin-top:32px">
       {addr_box()}
       <div class="btns" style="margin-top:6px"><a href="start.html" class="gbtn">はじめての方へ</a><a href="#film" class="gbtn">予告編を見る</a></div>
@@ -280,6 +278,18 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
       <div class="fact"><div class="fact-n">10<small>ブロック</small></div><div><h3 class="h3 disp">灯りの中は安全。</h3><p>灯籠を置くと、まわり半径10ブロックには敵が入れず、灯りの中の人は狙われません。爆発で壊れず、倒れても持ち物を失いません。近くの灯籠どうしは灯路でつながり、その上は足が速くなります。</p></div></div>
       <div class="fact"><div class="fact-n" style="color:var(--violet)">灯喰い</div><div><h3 class="h3 disp">夜は、灯りを消しに来る。</h3><p>灯りの守りを破れるのは「灯喰い」だけ。夜になると灯籠を狙い、喰われた灯籠は青い冷たい火になって、守りも道も途切れます。倒して守るか、あとで灯し直すか。つながりの多い灯籠ほど、喰われにくくなります。</p></div></div>
     </div>
+  </div>
+</section>
+
+<section class="stratum s-rock" id="film">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">Y=−72</p>
+    <h2 class="disp h2">予告編</h2>
+    <p class="lead">62秒。音が出ます。長い夜、灯喰い、加護、灯技と灯魚と灯の証。</p>
+    <div class="film" data-film><video preload="none" playsinline poster="assets/trailer-poster.jpg"><source src="assets/trailer.mp4" type="video/mp4">お使いのブラウザでは動画を再生できません。</video>
+      <button type="button" class="film-play" aria-label="予告編を再生する"><i aria-hidden="true"></i><span class="dot">PLAY</span></button></div>
+    <p class="film-note mu">再生すると、まわりが暗くなります。Esc か画面の外を押すと戻ります。</p>
   </div>
 </section>
 
@@ -313,48 +323,13 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
 </section>
 
 
-<section class="stratum s-dusk" id="cast">
-  <div class="edge"></div>
-  <div class="wrap">
-    <p class="depth">Y=12</p>
-    <h2 class="disp h2">灯原の、ひとびと。</h2>
-    <p class="lead">予告編に出てくる6人の旅人が、このサイトの案内役です。えりまきの色で見分けてください。</p>
-    <div class="castrow">{"".join(f'''<a href="characters.html#{c["id"]}" class="cc" style="--sc:{SCARF[c["k"] % 6]}"><span class="cc-st">{fig(c["id"], True)}</span><b>{c["n"]}</b><small>{c["role"]}</small><q>{c["line"]}</q></a>''' for c in CAST)}</div>
-    <p style="margin-top:28px"><a href="characters.html" class="gbtn">ひとびとと、灯喰いのこと</a></p>
-  </div>
-</section>
-<section class="s-stone" style="position:relative">
-  <div class="edge"></div>
-  <div class="wrap" style="padding-top:96px;padding-bottom:36px">
-    <p class="depth">Y=0</p>
-    <h2 class="disp h2">つづきは、こちらから。</h2>
-  </div>
-  <a href="start.html" class="band" style="background:#50555C"><div class="wrap band-in"><span class="band-y">Y=−12</span><div class="band-body"><h3 class="disp h3">はじめる</h3><p class="lead">機種ごとの入り方と、最初の夜の過ごし方。3分で入れます。</p><span class="band-go"><i></i>入り方を見る</span></div></div></a>
-  <a href="guide.html" class="band" style="background:#474C53"><div class="wrap band-in"><span class="band-y">Y=−24</span><div class="band-body"><h3 class="disp h3">遊び方</h3><p class="lead">灯籠と灯路、長い夜、灯喰い、欠片で解放する加護、263の「灯の証」、130の技と106種の灯魚「灯技」。</p><span class="band-go"><i></i>しくみを読む</span></div></div></a>
-  <a href="events.html" class="band" style="background:#3E4249"><div class="wrap band-in"><span class="band-y">Y=−36</span><div class="band-body"><h3 class="disp h3">夜祭</h3><p class="lead">毎週土曜21時。人数がそろうと、週替わりのゲームが自動で始まります。</p><span class="band-go"><i></i>今週のゲームを見る</span></div></div></a>
-  <a href="rules.html" class="band" style="background:#34383E"><div class="wrap band-in"><span class="band-y">Y=−48</span><div class="band-body"><h3 class="disp h3">きまり</h3><p class="lead">してはいけないこと、守られていること、困ったときの連絡先。</p><span class="band-go"><i></i>きまりを読む</span></div></div></a>
-  <a href="support.html" class="band" style="background:#2E3137;padding-bottom:40px"><div class="wrap band-in"><span class="band-y">Y=−60</span><div class="band-body"><h3 class="disp h3">支える</h3><p class="lead">灯原を続けるための寄付。PayPay で、金額は自由。お礼は名前の ❤ と、支え手の壁。</p><span class="band-go"><i></i>支え方を見る</span></div></div></a>
-</section>
-
-<section class="stratum s-rock" id="film">
-  <div class="edge"></div>
-  <div class="wrap">
-    <p class="depth">Y=−72</p>
-    <h2 class="disp h2">予告編</h2>
-    <p class="lead">62秒。音が出ます。長い夜、灯喰い、加護、灯技と灯魚と灯の証。</p>
-    <div class="film" data-film><video preload="none" playsinline poster="assets/trailer-poster.jpg"><source src="assets/trailer.mp4" type="video/mp4">お使いのブラウザでは動画を再生できません。</video>
-      <button type="button" class="film-play" aria-label="予告編を再生する"><i aria-hidden="true"></i><span class="dot">PLAY</span></button></div>
-    <p class="film-note mu">再生すると、まわりが暗くなります。Esc か画面の外を押すと戻ります。</p>
-  </div>
-</section>
-
 <section class="stratum s-dusk" id="fest" style="padding-top:72px">
   <div class="edge"></div>
   <div class="garland" data-garland aria-hidden="true"></div>
   <div class="wrap" style="display:flex;flex-wrap:wrap;gap:40px 64px;align-items:flex-end">
     <div style="flex:1 1 440px;min-width:0">
       <p class="depth">次の夜祭</p>
-      <h2 class="disp h2" style="margin-bottom:8px" data-fest-date>毎週土曜 21:00</h2>
+      <h2 class="disp h2" style="margin-bottom:8px" data-fest-date>夜祭は毎週土曜 21:00</h2>
       <p class="mu" style="margin-bottom:22px" data-fest-lead>21時になると、120秒の募集が始まります。何もしなければ参加です。</p>
       <div data-twin-hide>{cd("fest", "次の夜祭まで")}</div>
     </div>
@@ -382,6 +357,19 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
     </div>
   </div>
 </section>
+<section class="s-stone" style="position:relative">
+  <div class="edge"></div>
+  <div class="wrap" style="padding-top:96px;padding-bottom:36px">
+    <p class="depth">Y=0</p>
+    <h2 class="disp h2">つづきは、こちらから。</h2>
+  </div>
+  <a href="start.html" class="band" style="background:#50555C"><div class="wrap band-in"><span class="band-y">Y=−12</span><div class="band-body"><h3 class="disp h3">はじめる</h3><p class="lead">機種ごとの入り方と、最初の夜の過ごし方。3分で入れます。</p><span class="band-go"><i></i>入り方を見る</span></div></div></a>
+  <a href="guide.html" class="band" style="background:#474C53"><div class="wrap band-in"><span class="band-y">Y=−24</span><div class="band-body"><h3 class="disp h3">遊び方</h3><p class="lead">灯籠と灯路、長い夜、灯喰い、欠片で解放する加護、263の「灯の証」、130の技と106種の灯魚「灯技」。</p><span class="band-go"><i></i>しくみを読む</span></div></div></a>
+  <a href="events.html" class="band" style="background:#3E4249"><div class="wrap band-in"><span class="band-y">Y=−36</span><div class="band-body"><h3 class="disp h3">夜祭</h3><p class="lead">毎週土曜21時。人数がそろうと、週替わりのゲームが自動で始まります。</p><span class="band-go"><i></i>今週のゲームを見る</span></div></div></a>
+  <a href="rules.html" class="band" style="background:#34383E"><div class="wrap band-in"><span class="band-y">Y=−48</span><div class="band-body"><h3 class="disp h3">きまり</h3><p class="lead">してはいけないこと、守られていること、困ったときの連絡先。</p><span class="band-go"><i></i>きまりを読む</span></div></div></a>
+  <a href="support.html" class="band" style="background:#2E3137;padding-bottom:40px"><div class="wrap band-in"><span class="band-y">Y=−60</span><div class="band-body"><h3 class="disp h3">支える</h3><p class="lead">灯原を続けるための寄付。PayPay で、金額は自由。お礼は名前の ❤ と、支え手の壁。</p><span class="band-go"><i></i>支え方を見る</span></div></div></a>
+</section>
+
 '''
 
 # ───────────────────────── はじめる ─────────────────────────
@@ -1050,7 +1038,7 @@ events = f'''<div class="hero">
     <h1 class="disp h1-sub">毎週土曜21時は、夜祭。</h1>
     <p class="lead">この時間にログインすれば、かならずだれかがいます。人数がそろうと、週替わりのゲームが自動で始まります。</p>
     <div style="display:flex;flex-wrap:wrap;gap:32px 56px;align-items:flex-end;margin-top:32px">
-      <div><p class="depth">次の夜祭</p><p class="disp" style="font-size:clamp(26px,3.4vw,40px);line-height:1.3;margin:6px 0 14px" data-fest-date>毎週土曜 21:00</p>{cd("fest", "次の夜祭まで")}</div>
+      <div><p class="depth">次の夜祭</p><p class="disp" style="font-size:clamp(26px,3.4vw,40px);line-height:1.3;margin:6px 0 14px" data-fest-date>夜祭は毎週土曜 21:00</p>{cd("fest", "次の夜祭まで")}</div>
       <div class="pn" style="flex:1 1 320px;min-width:0;background:rgba(10,8,30,.6)"><p class="mu" style="font-size:14px;font-weight:700">この日のゲーム</p><h2 class="disp" style="margin:6px 0 8px;font-size:30px;line-height:1.3;color:#F6B8CE" data-fest-game>週替わりで4種類</h2><p style="font-size:16px" data-fest-desc>灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。</p></div>
     </div>
   </div>
@@ -2169,104 +2157,68 @@ commands = sub_hero("commands.html", "コマンド一覧", "ふだんはメニ�
 
 
 # ───────────────────── 遊び方を選ぶ（みんなで・身内で・ひとりで） ─────────────────────
-def _ps_rows(rows):
-    return "".join(f'<tr><th>{a}</th><td>{b}</td><td>{("<span class=" + chr(34) + "kbd" + chr(34) + ">" + c + "</span>") if c else "—"}</td></tr>' for a, b, c in rows)
-
-
 _K = lambda c: f'<span class="kbd">{c}</span>'
 
 _PS = [
-    {"id": "all", "no": "01", "who": "momo", "c": "#F29BB8", "t": "みんなで遊ぶ", "bg": "s-dusk",
-     "sum": "知らない人とも、灯りをつないで広く遊びたい人へ。",
-     "facts": ["人の灯路につなぐほど楽になる", "毎週土曜21時の夜祭", "招待で灯りの色がふえる"],
-     "lead": "灯原は、人の灯路につなぐほど楽になるように作ってあります。話しかけなくても、だれかの灯路のそばに灯籠を置けば、もういっしょに遊んでいます。",
-     "say": "土曜の21時は、夜祭で会おうね！",
+    {"id": "all", "who": "momo", "c": "#F29BB8", "t": "みんなで", "sub": "知らない人とも、広く",
+     "lead": "人の灯路につなぐほど楽になる世界です。話しかけなくても、だれかの灯路のそばに置けば、もういっしょに遊んでいます。",
      "steps": [
-         ("最初の広場のまわりから始める", "広場のまわりは灯喰いに狙われません。まわりの灯路を見て、どこに住むかを決めましょう。"),
-         ("だれかの灯路の、16ブロック以内に灯籠を置く", "だれの灯籠とでも灯路はつながります。つながった基数が5基で「二ノ灯」、15基で「三ノ灯」、40基で「四ノ灯」になり、守られる範囲が広がります。"),
-         ("灯標で行き来する", "二ノ灯より上の灯路網では、名前のついた灯籠（灯標）へ、3秒じっとしているだけで移動できます。"),
-         ("土曜21時の夜祭に出る", "何もしなければ参加です。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまでの4種類が毎週かわります。"),
-         ("友達を呼ぶ", "自分の招待コードを友達に伝えます。1人で「白銀」、3人で「藤」、5人で「曙」の灯りの色がもらえます。"),
+         ("最初の広場のまわりで始める", "広場のまわりは、灯喰いに狙われません。"),
+         ("だれかの灯路の16ブロック以内に置く", "灯路はだれの灯籠とでもつながり、5基で「二ノ灯」、15基で「三ノ灯」に上がります。"),
+         ("灯標で行き来する", "二ノ灯より上なら、名前のついた灯籠へ3秒で移動できます。"),
+         ("土曜21時の夜祭に出る", "何もしなければ参加です。ゲームは毎週かわります。"),
+         ("友達を呼ぶ", "招待1人で「白銀」、3人で「藤」、5人で「曙」の色がもらえます。"),
      ],
-     "rows": [("灯路網に加わる", "人の灯籠の16ブロック以内に置く", ""), ("行ける灯標を見る", "同じ灯路網の灯標の一覧", "/tomoshibi list"), ("灯渡り", "灯標へ移動する", "/tomoshibi go 名前"),
-              ("夜祭", "次の夜祭と、自分の参加回数", "/yomatsuri"), ("番付", "灯籠の多い人", "/tomoshibi top"), ("招待", "自分の招待コードを見る", "/tomoshibi invite")],
-     "tips": [("集まるほど、守れる", "灯喰いが灯籠を喰うのにかかる時間は「5秒 ＋ 灯路1本ごとに5秒 ＋ 灯りの中の人ひとりごとに3秒」。人が多い灯路ほど、喰われにくくなります。"),
-              ("加護は、格とのかけ算", "解放した加護は、いまいる灯路網の格までしか働きません。大きな灯路網にいるほど、自分の加護がそのまま働きます。"),
-              ("困ったら、Discord で", "入り方、遊び方、いやなことをされた、どれでも聞けます。")],
-     "note": "<b>人の建物には、手を出さない。</b>灯籠は本人と仲間しか壊せませんが、建物は壊せてしまいます。人の拠点の近くに建てるときは、ひとこと声をかけましょう。"},
-    {"id": "crew", "no": "02", "who": "waka", "c": "#8BD18F", "t": "身内で遊ぶ", "bg": "s-soil tex",
-     "sum": "友達や家族と、自分たちの場所をつくりたい人へ。",
-     "facts": ["招待コードで、呼んだ人に色が届く", "「仲間」で灯籠をいっしょに管理", "集合場所の灯標をつくる"],
-     "lead": "友達や家族と、自分たちの拠点をつくって遊ぶ人のための手順です。Java版と統合版がまざっていても、同じ世界に入れます。",
-     "say": "拠点は、みんなの灯籠でひとつの灯路網にしよう。",
+     "cmds": [("/tomoshibi list", "行ける灯標"), ("/tomoshibi go 名前", "灯標へ移動"), ("/yomatsuri", "次の夜祭"), ("/tomoshibi invite", "招待コード")],
+     "note": "人の建物には手を出さないでください。灯籠は守られていますが、建物は守られていません。"},
+    {"id": "crew", "who": "waka", "c": "#8BD18F", "t": "身内で", "sub": "友達や家族と、自分たちの場所を",
+     "lead": "友達や家族と、ひとつの拠点を育てる遊び方です。Java版と統合版がまざっていても、同じ世界に入れます。",
      "steps": [
-         ("全員が、同じアドレスで入る", f"アドレスは {_K(ADDR)}。統合版の人はポートを {_K('5156')} に書きかえます。"),
-         ("呼んだ人の招待コードを入れる", f"入ってから7日以内に {_K('/tomoshibi code コード')}。呼んだ人の招待が1人ふえ、灯りの色がもらえます。"),
-         ("おたがいを「仲間」にする", f"{_K('/tomoshibi trust 名前')}（相手がサーバーにいるときだけ）。仲間は、あなたの灯籠に名前をつけたり、取り除いたりできます。"),
-         ("拠点を、ひとつの灯路網にする", "16ブロック以内に置けばつながります。みんなで置けば、5基の「二ノ灯」、15基の「三ノ灯」にすぐ届きます。"),
-         ("集合場所の灯標をつくる", f"拠点の灯籠に {_K('/tomoshibi name 集合')} と名前をつけると、全員が {_K('/tomoshibi go 集合')} で集まれます。それぞれ「帰る場所」に決めておくと便利です。"),
+         ("全員が同じアドレスで入る", f"{_K(ADDR)}。統合版はポートを {_K('5156')} に。"),
+         ("呼んだ人の招待コードを入れる", f"入ってから7日以内に {_K('/tomoshibi code コード')}。"),
+         ("おたがいを「仲間」にする", f"{_K('/tomoshibi trust 名前')}。仲間は、あなたの灯籠に名前をつけたり、取り除いたりできます。"),
+         ("拠点をひとつの灯路網にする", "16ブロック以内に置けばつながります。みんなで置けば、すぐ二ノ灯です。"),
+         ("集合場所の灯標をつくる", f"{_K('/tomoshibi name 集合')} で名前をつければ、全員 {_K('/tomoshibi go 集合')} で集まれます。"),
      ],
-     "rows": [("招待コードを見る", "呼ぶ人が見る", "/tomoshibi invite"), ("招待コードを使う", "呼ばれた人が、7日以内に", "/tomoshibi code コード"), ("仲間にする・外す", "もう一度打つと外れる", "/tomoshibi trust 名前"),
-              ("灯標にする", "近くの自分の灯籠に名前をつける", "/tomoshibi name 名前"), ("帰る", "「帰る場所」の灯標へ", "/tomoshibi home"), ("灯りの色", "持っている色に変える", "/tomoshibi color 色")],
-     "tips": [("色をそろえる", "全員で同じ灯りの色にすると、遠くからでも自分たちの拠点だとわかります。"),
-              ("夜は、いっしょに", "灯りの中の人が1人ふえるごとに、灯喰いが喰うのに3秒余計にかかります。夜は拠点に集まるほど守れます。"),
-              ("自分たちだけで遊ぶなら", "灯路は、だれの灯籠とでも16ブロック以内でつながります。ほかの人とつなげたくなければ、人の灯路から16ブロックより離れた場所に建てましょう。")],
-     "note": "<b>「仲間」は、灯籠を取り除ける強い権利です。</b>本当に信頼できる人だけにしてください。建物は灯籠とちがって守られていないので、こわされたときは<a href=\"rules.html\">きまり</a>の手順で知らせてください。"},
-    {"id": "solo", "no": "03", "who": "sora", "c": "#8FC3E8", "t": "ひとりで遊ぶ", "bg": "s-deep",
-     "sum": "自分のペースで、黙々と遊びたい人へ。",
-     "facts": ["小さな拠点は狙われない", "130の技と106種の灯魚", "夜祭は出なくてもいい"],
-     "lead": "ひとりでも、灯原は最後まで遊べます。小さな拠点は守られていて、技と図鑑と証は、自分のペースで埋めていけます。",
-     "say": "灯標があれば、どこへでも。",
+     "cmds": [("/tomoshibi trust 名前", "仲間にする・外す"), ("/tomoshibi name 名前", "灯標にする"), ("/tomoshibi home", "帰る場所へ"), ("/tomoshibi color 色", "灯りの色")],
+     "note": "「仲間」は灯籠を取り除ける権利です。本当に信頼できる人だけにしてください。ほかの人とつなげたくなければ、人の灯路から16ブロック以上離れて建てます。"},
+    {"id": "solo", "who": "sora", "c": "#8FC3E8", "t": "ひとりで", "sub": "自分のペースで、黙々と",
+     "lead": "ひとりでも、最後まで遊べます。小さな拠点は守られていて、技と図鑑と証は自分のペースで埋められます。",
      "steps": [
-         ("来てから24時間は、守られている", "はじめて入ってから24時間は、まわりに灯喰いが来ません。この間に拠点をつくりましょう。"),
-         ("小さな拠点は、狙われない", "灯籠が3基より少ない灯路網は、灯喰いに狙われません。地下や高い塔の灯籠も狙われません。"),
-         ("自分の灯籠を5基つなぐ", "自分だけでも5基つなげば「二ノ灯」です。灯標どうしを行き来できるようになり、守られる範囲も広がります。"),
-         ("灯技を育てる", f"{_K('/waza')} で開きます。掘る・切る・釣る・旅をする、遊んだ道の Lv が上がり、技点で技を覚えます。毎日3つの「今日の務め」もあります。"),
-         ("図鑑と証を埋める", "灯魚図鑑は106種、灯の証は263個。すぐ届くものから、季節をまたぐものまであります。"),
+         ("最初の24時間で拠点をつくる", "来てから24時間は、まわりに灯喰いが来ません。"),
+         ("小さな拠点は狙われない", "灯籠が3基より少ない灯路網と、地下や高い塔の灯籠は狙われません。"),
+         ("自分の灯籠を5基つなぐ", "ひとりでも二ノ灯になり、灯標どうしを行き来できます。"),
+         ("灯技を育てる", f"{_K('/waza')}。遊んだ道の Lv が上がり、毎日3つの「今日の務め」もあります。"),
+         ("図鑑と証を埋める", "灯魚は106種、灯の証は263個あります。"),
      ],
-     "rows": [("灯技", "10の道と130の技", "/waza"), ("灯魚図鑑", "釣った灯魚と手がかり", "/waza fish"), ("灯の証", "進み具合と報酬", "/akashi"),
-              ("加護", "欠片で解放する", "/tomoshibi buffs"), ("帰る", "「帰る場所」の灯標へ", "/tomoshibi home"), ("夜祭を見送る", "今回は参加しない", "/yomatsuri out")],
-     "tips": [("夜祭は、出なくてもいい", f"{_K('/yomatsuri out')} で、その回は見送れます。気が変わったら {_K('/yomatsuri in')}。"),
-              ("迷ったら、画面の下", "灯りの外に出ると「闇の中」と出て、いちばん近い灯りの方角を教えてくれます。"),
-              ("人の灯路を、借りてもいい", "話さなくても、人の灯路のそばに1基置くだけで、大きな灯路網の格の恩恵を受けられます。")],
-     "note": "<b>ひとりでも、困ったら Discord へ。</b>聞くだけでもかまいません。"},
+     "cmds": [("/waza", "灯技"), ("/waza fish", "灯魚図鑑"), ("/akashi", "灯の証"), ("/yomatsuri out", "夜祭を見送る")],
+     "note": "迷ったら画面の下を見てください。灯りの外では、いちばん近い灯りの方角が出ます。"},
 ]
 
 
 def playstyle():
-    cards = ""
-    for m in _PS:
-        facts = "".join(f"<li>{x}</li>" for x in m["facts"])
-        cards += (f'<a href="#{m["id"]}" class="ch" style="--c:{m["c"]}">'
-                  f'<span class="ch-top"><span class="ch-no">{m["no"]}</span><span class="ps-fig">{fig(m["who"], True, "", "")}</span></span>'
-                  f'<h3 class="disp">{m["t"]}</h3><p>{m["sum"]}</p><ul>{facts}</ul><span class="ch-go">マニュアルを読む<i></i></span></a>')
-    body = sub_hero("playstyle.html", "だれと、遊ぶ？", "みんなで、身内で、ひとりで。どの遊び方でも、灯原はちゃんと楽しめます。あなたに合うマニュアルを選んでください。",
-                    [(m["id"], m["t"]) for m in _PS] + [("compare", "くらべる")])
-    body += ('\n<section class="stratum s-stone"><div class="wrap"><p class="depth">3つのマニュアル</p>'
-             f'<h2 class="disp h2">遊び方を、えらぶ。</h2><div class="chs ps-chs">{cards}</div></div></section>')
-    for m in _PS:
+    tabs = "".join(f'''<button type="button" class="tab ps-tab" role="tab" id="t-{m["id"]}" aria-controls="{m["id"]}" aria-selected="{"true" if i == 0 else "false"}"{"" if i == 0 else ' tabindex="-1"'} style="--c:{m["c"]}"><span class="ps-fig">{fig(m["who"], True, "", "")}</span><span class="ps-tt"><b>{m["t"]}</b><small>{m["sub"]}</small></span></button>''' for i, m in enumerate(_PS))
+    panels = ""
+    for i, m in enumerate(_PS):
         steps = "".join(f'<li><div><h3>{a}</h3><p>{b}</p></div></li>' for a, b in m["steps"])
-        tips = "".join(f'<div><h3 class="h3 disp">{a}</h3><p class="mu">{b}</p></div>' for a, b in m["tips"])
-        body += (f'\n<section class="stratum {m["bg"]} ps" id="{m["id"]}" style="--c:{m["c"]}"><div class="edge"></div><div class="wrap">'
-                 f'<p class="depth">マニュアル {m["no"]}</p><h2 class="disp h2">{m["t"]}。</h2><p class="lead">{m["lead"]}</p>'
-                 f'{say_box(m["who"], m["say"])}'
-                 f'<h3 class="h3 disp" style="margin-top:48px">はじめの5つ</h3><ol class="steps" style="margin-top:16px">{steps}</ol>'
-                 '<h3 class="h3 disp" style="margin-top:56px">よく使うもの</h3><div class="tbl-wrap"><table>'
-                 f'<thead><tr><th>できること</th><th>くわしく</th><th>コマンド</th></tr></thead><tbody>{_ps_rows(m["rows"])}</tbody></table></div>'
-                 f'<p class="mu" style="font-size:15px;margin-top:10px">コマンドを打たなくても、{_K("/tomoshibi")} のメニューから同じことができます。</p>'
-                 f'<h3 class="h3 disp" style="margin-top:56px">コツ</h3><div class="three">{tips}</div>'
-                 f'<p class="note">{m["note"]}</p></div></section>')
-    rows = [("拠点の場所", "だれかの灯路のそば", "自分たちで決めた場所", "好きな場所（地下でも）"),
-            ("灯路網の育て方", "人とつないで大きく", "みんなで置いてひとつに", "自分の5基で二ノ灯"),
-            ("夜の過ごし方", "人の多い灯路で", "拠点に集まって", "灯りの中で、技と図鑑"),
-            ("夜祭", "毎週出る", "みんなで出る", "出たいときだけ"),
-            ("まず使うコマンド", _K("/tomoshibi list"), _K("/tomoshibi trust"), _K("/waza"))]
-    trs = "".join(f"<tr><th>{a}</th><td>{b}</td><td>{c}</td><td>{d}</td></tr>" for a, b, c, d in rows)
-    body += ('\n<section class="stratum s-rock" id="compare"><div class="edge"></div><div class="wrap">'
-             '<p class="depth">くらべる</p><h2 class="disp h2">3つの遊び方の、ちがい。</h2>'
-             f'<div class="tbl-wrap"><table><thead><tr><th>項目</th><th>みんなで</th><th>身内で</th><th>ひとりで</th></tr></thead><tbody>{trs}</tbody></table></div>'
-             '<p style="margin-top:28px"><a href="start.html" class="gbtn">入り方を見る</a></p></div></section>')
-    return body
+        cmds = "".join(f'<div><dt>{_K(a)}</dt><dd>{b}</dd></div>' for a, b in m["cmds"])
+        panels += f'''<div class="ps-panel" role="tabpanel" id="{m["id"]}" aria-labelledby="t-{m["id"]}" style="--c:{m["c"]}"{"" if i == 0 else " hidden"}>
+      <h2 class="disp h2">{m["t"]}遊ぶ。</h2>
+      <p class="lead">{m["lead"]}</p>
+      <ol class="steps">{steps}</ol>
+      <dl class="ps-cmds">{cmds}</dl>
+      <p class="ps-note">{m["note"]}</p>
+    </div>'''
+    hero = sub_hero("playstyle.html", "だれと、遊ぶ？", "遊び方に合わせて、最初にやることを5つにまとめました。", [])
+    return hero + f'''
+<section class="stratum s-deep ps">
+  <div class="edge"></div>
+  <div class="wrap narrow">
+    <div class="ps-tabs" role="tablist" aria-label="遊び方">{tabs}</div>
+    {panels}
+    <p class="ps-more">コマンドを打たなくても、{_K("/tomoshibi")} のメニューから同じことができます。<a href="commands.html">すべてのコマンド</a></p>
+  </div>
+</section>'''
 
 
 PAGES = [
@@ -2296,6 +2248,8 @@ SKIP = {"script", "style", "code", "svg", "title"}
 def finish(html):
     """日本語を文節の切れ目でだけ改行させる（<wbr> を入れ、CSS で keep-all にする）。幅の狭い画面では表を縦に積む。"""
     soup = BeautifulSoup(html, "html.parser")
+    for el in soup.select(".depth, .band-y, .ch-big, .wb-k, .ch > ul, .say"):
+        el.decompose()
     for el in soup.select(PHRASE):
         for node in list(el.descendants):
             if not isinstance(node, NavigableString) or node.parent is None:
