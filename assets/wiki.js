@@ -75,6 +75,7 @@
   setup({ list: '#fl', item: '.fc', count: '#fn', clear: '#fclear' });
   setup({ list: '#al', item: '.ak', input: '#aq', count: '#an', clear: '#aclear', empty: '#aempty' });
   setup({ list: '#cl', item: '.cr', input: '#cq', count: '#cn', clear: '#cclear', empty: '#cempty' });
+  setup({ list: '#hl', item: '.hm', input: '#hq', count: '#hn', clear: '#hclear', empty: '#hempty' });
   // コマンド：見出しの下が全部隠れたら、見出しも隠す
   var cl = $('#cl');
   if (cl) {
