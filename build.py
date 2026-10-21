@@ -1870,7 +1870,7 @@ def _hm_rules():
     return f'''<ol class="hm-steps">
         <li><b>「刻む」を開く</b><span>画面の「刻む」か <span class="kbd">/himon engrave</span>。</span></li>
         <li><b>道具と紋書を置く</b><span>持ち物をクリックすると、道具と紋書がそれぞれの場所に入ります。刻めるかどうかは、その場で表示。</span></li>
-        <li><b>刻む</b><span>段に応じた経験値（1〜10 Lv）を払います。紋書はなくなります。</span></li>
+        <li><b>刻む</b><span>段に応じた経験値（{HM["rarity"][0]["engrave"]}〜{HM["rarity"][-1]["engrave"]} Lv）を払います。紋書はなくなります。</span></li>
       </ol>
       <div class="three hm-rules">
         <div><h3 class="h3 disp">重ねて強く</h3><p class="mu">同じ紋を同じ Lv で重ねると、1つ上がります（Lv1＋Lv1 → Lv2）。Lv がちがうときは、高い方が残ります。</p></div>
