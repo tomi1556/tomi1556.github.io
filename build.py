@@ -12,10 +12,11 @@ LOGO = '<svg width="30" height="36" viewBox="0 0 10 12" aria-hidden="true" style
 
 def addr_box(extra=""):
     return f'''<div class="addr"{extra}>
-  <span class="addr-t"><small>サーバーアドレス（Java版・統合版 共通）</small><b>{ADDR}</b></span>
+  <span class="addr-t"><small>アドレス（Java版・統合版 共通）</small><b>{ADDR}</b></span>
+  <span class="addr-p"><small>統合版のポート</small><b>5156</b></span>
   <button type="button" class="pbtn" data-copy="{ADDR}">アドレスをコピー</button>
 </div>
-<p class="addr-note" data-note role="status">統合版のポートは <b>5156</b> です（最初に入っている 19132 を書きかえてください）。</p>'''
+<p class="addr-note" data-note role="status">統合版は、ポートの 19132 を <b class="port">5156</b> に書きかえてください。Java版はアドレスだけで入れます。</p>'''
 
 
 # ナビのアイコン（16×16 のドット絵。# は線、o は灯りの色）
