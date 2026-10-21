@@ -84,7 +84,7 @@ def footer():
 # 夜空の下に敷く景色の縁（ページごとに、立っている人とひとことが変わる）
 RIDGE = {
     "start.html": dict(seed=2, cast=[("hino", 9, True)], say=("hino", "最初の1基は、ここに置こう。")),
-    "guide.html": dict(seed=3, cast=[("hino", 7, True), ("yuki", 37, False)], say=("yuki", "8つの章に、ぜんぶ書いたよ。")),
+    "guide.html": dict(seed=3, cast=[("hino", 7, True), ("yuki", 37, False)], say=("yuki", "9つの章に、ぜんぶ書いたよ。")),
     "events.html": dict(seed=4, cast=[("momo", 10, True), ("hino", 13, False), ("sora", 34, True)], say=("momo", "土曜の21時、広場でね！")),
     "rules.html": dict(seed=5, cast=[("shino", 9, True)], say=("shino", "人の灯りは、守るもの。")),
     "support.html": dict(seed=6, cast=[("yuki", 9, True), ("hino", 12, False)], say=("yuki", "名前は、ちゃんと残すからね。")),
@@ -94,7 +94,7 @@ RIDGE = {
     "wiki.html": dict(seed=10, cast=[("yuki", 9, True), ("waka", 36, False)], say=("yuki", "130の技、ぜんぶ書きとめたよ。")),
     "wiki-hiuo.html": dict(seed=11, cast=[("sora", 10, True)], say=("sora", "「秘」の魚は、まだ見つからない……")),
 }
-_CH_WHO = {"lantern": "hino", "night": "shino", "higui": "shino", "buff": "momo", "hiwaza": "waka", "fish": "sora", "akashi": "yuki", "more": "sora"}
+_CH_WHO = {"lantern": "hino", "night": "shino", "higui": "shino", "buff": "momo", "hiwaza": "waka", "fish": "sora", "himon": "yuki", "akashi": "yuki", "more": "sora"}
 _PATH_WHO = {"light": "hino", "night": "shino", "mine": "momo", "wood": "waka", "farm": "waka", "fish": "sora", "craft": "yuki", "travel": "sora", "ranch": "momo", "arcane": "hino"}
 
 
@@ -732,6 +732,7 @@ CH_ICONS = {
     "hiwaza": ["................", "..####....####..", "..#oo#....#oo#..", "..#oo#....#oo#..", "..####....####..", "....#......#....", "....#......#....", "....########....", ".......#........", ".......#........", "......####......", "......#oo#......", "......#oo#......", "......####......", "................", "................"],
     "fish": ["................", "................", "................", "......#####.....", "....##ooooo##...", "...#ooooooooo#.#", "..#o#oooooooo###", "..#ooooooooooo##", "..#ooooooooooo##", "...#ooooooooo#.#", "....##ooooo##...", "......#####.....", "................", "................", "................", "................"],
     "akashi": ["................", "...##......##...", "....##....##....", ".....##..##.....", "......####......", ".....######.....", "....#oooooo#....", "...#oooooooo#...", "...#ooo##ooo#...", "...#oo####oo#...", "...#ooo##ooo#...", "...#oooooooo#...", "....#oooooo#....", ".....######.....", "................", "................"],
+    "himon": ["................", ".......##.......", "......#oo#......", ".....#o##o#.....", "....#o#..#o#....", "...#o#.##.#o#...", "..#o#.#oo#.#o#..", ".#o#.#o##o#.#o#.", ".#o#.#o##o#.#o#.", "..#o#.#oo#.#o#..", "...#o#.##.#o#...", "....#o#..#o#....", ".....#o##o#.....", "......#oo#......", ".......##.......", "................"],
     "more": ["................", ".......##.......", "..##########....", "..#oooooooo##...", "..#oooooooo###..", "..#oooooooo##...", "..##########....", ".......##.......", "....##########..", "...##oooooooo#..", "..###oooooooo#..", "...##oooooooo#..", "....##########..", ".......##.......", ".......##.......", "......####......"],
 }
 
@@ -773,6 +774,9 @@ CH = [
     {"id": "fish", "t": "灯魚", "c": "#4FD8C8", "layer": 1, "sec": [],
      "sum": "時と場所と月でかわる、106種の魚。珍しいほど逃げる。", "facts": ["106種", "5つの珍しさ", "ヌシ"],
      "desc": "灯魚（ひうお）106種。珍しさ、かかる条件（水辺・時刻・天気・月・季節・朱月・灯り）、図鑑と灯原一。"},
+    {"id": "himon", "t": "灯紋", "c": "#E9C46A", "layer": 1, "sec": [],
+     "sum": "経験値で紋書を引き、道具に刻む。ふつうの付呪にはない力。", "facts": ["92の紋", "5つの段", "1つの道具に3つ"],
+     "desc": "灯紋（ひもん）。経験値で紋書を引く5つの段、道具への刻み方・重ね方・外し方、暮らし・戦い・移動・守りのおすすめの紋。"},
     {"id": "akashi", "t": "灯の証", "c": "#F29BB8", "layer": 2, "sec": ["akashi"],
      "sum": "この世界で過ごしたことが、そのまま証になる。", "facts": ["263の証", "位階10段", "称号69種"],
      "desc": "灯原だけの進捗「灯の証」263個。難度、段と秘められた証、報酬、証点と位階。"},
@@ -942,6 +946,8 @@ def _body(k):
         return _hiwaza_sec()
     if c["id"] == "fish":
         return _fish_sec()
+    if c["id"] == "himon":
+        return _himon_sec()
     return "\n".join(_clean(_SEC[s]) for s in c["sec"])
 
 
@@ -952,6 +958,7 @@ _CH_SAY = {
     "buff": "欠片が集まったら、加護をひらこう！ 灯りの中だけで効くからね。",
     "hiwaza": "急がなくていいよ。1日ちょっとずつ、毎日育てるのがいちばん。",
     "fish": "同じ水辺でも、時刻と月で、かかる魚が変わるんだ。",
+    "himon": "段が上がるほど、くじは高い。でも1冊で、遊び方が変わることもあるよ。",
     "akashi": "やったことは、ぜんぶ証になるよ。秘められた証もあるからね。",
     "more": "灯標に名前をつけたら、灯渡りでひとっ飛び。",
 }
@@ -979,7 +986,7 @@ def chapter_page(k):
 
     def pg(x, i, cls, label):
         if x is None:
-            return f'<a href="guide.html" class="pg {cls}" style="--c:var(--amber)"><small class="dot">{label}</small><b>目次にもどる</b><span class="mu">8つの章の一覧へ</span></a>'
+            return f'<a href="guide.html" class="pg {cls}" style="--c:var(--amber)"><small class="dot">{label}</small><b>目次にもどる</b><span class="mu">{len(CH)}つの章の一覧へ</span></a>'
         return f'<a href="guide-{x["id"]}.html" class="pg {cls}" style="--c:{x["c"]}"><small class="dot">{label} {i + 1:02d}</small><b>{x["t"]}</b><span class="mu">{x["sum"]}</span></a>'
 
     pager = f'''<section class="stratum s-rock pager-s">
@@ -1017,7 +1024,7 @@ def _guide_index():
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
   <div class="wrap phead" id="content">
     <h1 class="disp h1-sub">遊び方</h1>
-    <p class="lead">灯りを置き、つなぎ、夜から守り、育てて、残す。灯原のしくみを8つの章にまとめました。気になる章から開いてください。</p>
+    <p class="lead">灯りを置き、つなぎ、夜から守り、育てて、残す。灯原のしくみを9つの章にまとめました。気になる章から開いてください。</p>
     {_rail(-1)}
   </div>
 </div>
@@ -1811,9 +1818,9 @@ AK_PAGES += [(f"akashi-{_AK_SLUG[i]}.html", f"{c['name']}｜灯の証 Wiki｜灯
 # ───────────────────────── 灯紋 ─────────────────────────
 # data/himon.json（プラグインの定義から書き出したもの）から作る。
 HM = _wj.loads((pathlib.Path(__file__).parent / "data" / "himon.json").read_text(encoding="utf-8"))
-HM_ICON = ["................", ".......##.......", "......#oo#......", ".....#o##o#.....", "....#o#..#o#....", "...#o#.##.#o#...", "..#o#.#oo#.#o#..", ".#o#.#o##o#.#o#.", ".#o#.#o##o#.#o#.", "..#o#.#oo#.#o#..", "...#o#.##.#o#...", "....#o#..#o#....", ".....#o##o#.....", "......#oo#......", ".......##.......", "................"]
+HM_ICON = CH_ICONS["himon"]
 _HM_G = [("w", "武器", {"SWORD", "AXE", "MACE"}), ("b", "弓・クロスボウ", {"BOW", "XBOW"}), ("t", "三叉槍", {"TRIDENT"}), ("s", "盾", {"SHIELD"}),
-         ("a", "防具", {"HEAD", "CHEST", "LEGS", "FEET"}), ("e", "エリトラ", {"ELYTRA"}), ("g", "掘る・切る・耕す", {"PICK", "SHOVEL", "HOE", "AXE"}), ("r", "釣り竿", {"ROD"})]
+         ("a", "防具", {"HEAD", "CHEST", "LEGS", "FEET"}), ("e", "エリトラ", {"ELYTRA"}), ("g", "掘る・切る", {"PICK", "SHOVEL", "AXE"}), ("r", "釣り竿", {"ROD"})]
 _re_n = _re.compile(r"(\d+(?:\.\d+)?)")
 
 
@@ -1834,13 +1841,76 @@ def _hm_desc(ds):
     return out
 
 
-def himon_page():
+def _hm_tiers():
     R = HM["rarity"]
     up = int(round(HM["upgrade"] * 100))
-    tiers = ""
+    out = ""
     for i, r in enumerate(R):
         nxt = f'{up}%で「{R[i + 1]["jp"]}」が出る' if i + 1 < len(R) else "いちばん上の段"
-        tiers += f'''<div class="hm-tier" style="--c:{r["hex"]}"><span class="hm-r disp">{r["jp"]}</span><b class="dot">{r["book"]}<small>Lv</small></b><span>紋書を1冊引く</span><ul><li><b class="dot">{r["n"]}</b> 種</li><li>刻むとき <b class="dot">{r["engrave"]}</b> Lv</li><li>{nxt}</li></ul></div>'''
+        out += f'''<div class="hm-tier" style="--c:{r["hex"]}"><span class="hm-r disp">{r["jp"]}</span><b class="dot">{r["book"]}<small>Lv</small></b><span>紋書を1冊引く</span><ul><li><b class="dot">{r["n"]}</b> 種</li><li>刻むとき <b class="dot">{r["engrave"]}</b> Lv</li><li>{nxt}</li></ul></div>'''
+    return f'<div class="hm-tiers">{out}</div>'
+
+
+def _hm_rules():
+    return f'''<ol class="hm-steps">
+        <li><b>「刻む」を開く</b><span>画面の「刻む」か <span class="kbd">/himon engrave</span>。</span></li>
+        <li><b>道具と紋書を置く</b><span>持ち物をクリックすると、道具と紋書がそれぞれの場所に入ります。刻めるかどうかは、その場で表示。</span></li>
+        <li><b>刻む</b><span>段に応じた経験値（1〜10 Lv）を払います。紋書はなくなります。</span></li>
+      </ol>
+      <div class="three hm-rules">
+        <div><h3 class="h3 disp">重ねて強く</h3><p class="mu">同じ紋を同じ Lv で重ねると、1つ上がります（Lv1＋Lv1 → Lv2）。Lv がちがうときは、高い方が残ります。</p></div>
+        <div><h3 class="h3 disp">1つの道具に{HM["slots"]}つまで</h3><p class="mu">秘の紋は1つだけ。閃光と陣立て、不屈と不死鳥は、同じ道具に刻めません。ふつうの付呪とはいっしょに使えます。</p></div>
+        <div><h3 class="h3 disp">外すこともできる</h3><p class="mu">刻む画面で、紋をしゃがみクリック。経験値 2 Lv で外せます（紋書は戻りません）。</p></div>
+      </div>'''
+
+
+# 遊び方の章で見せる、場面ごとのおすすめ
+_HM_PICKS = [("暮らし", "#8BD18F", ["yorite", "suiyose", "miteate", "sunanuki", "itabiki"]),
+             ("戦い", "#E0453A", ["kaishaku", "kamaitachi", "fuiuchi", "ikkitousen", "yaame"]),
+             ("移動", "#8FC3E8", ["nidantobi", "kamikaze", "kaginawa", "hanegasa", "koorizuri"]),
+             ("守り", "#F2B544", ["hokora", "kizuna", "makimodoshi", "tetsuheki", "inugami"])]
+
+
+def _himon_sec():
+    by = {d["id"]: d for d in HM["defs"]}
+    R = HM["rarity"]
+    picks = ""
+    for t, col, ids in _HM_PICKS:
+        lis = "".join(f'<li><a href="himon.html#m-{i}"><span class="hm-r disp" style="--c:{R[by[i]["r"]]["hex"]}">{R[by[i]["r"]]["jp"]}</span><span><b>{_E(by[i]["name"])}</b><small>{_E(by[i]["desc"][-1])}</small></span></a></li>' for i in ids)
+        picks += f'<div class="hm-pick" style="--c:{col}"><h3 class="h3 disp">{t}</h3><ul>{lis}</ul></div>'
+    n = len(HM["defs"])
+    return f'''<section class="stratum s-deep" id="himon">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">経験値で引いて、道具に刻む。</h2>
+    <p class="lead"><span class="kbd">/himon</span> で開きます。経験値 Lv を払って「紋書」を引き、道具や防具に刻むと、ふつうの付呪にはない力が宿ります。全部で{n}種。ふつうの付呪とも、灯技とも重なりません。</p>
+    {_hm_tiers()}
+    <p class="mu" style="font-size:14px;margin-top:12px">どの紋が出るかは、段の中でくじ引きです。最大 Lv2 の紋は 85% で Lv1、最大 Lv3 の紋は 75%・20%・5%。見つけた紋は <span class="kbd">/himon book</span> の紋帳に残ります。</p>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="engrave">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">刻む・重ねる・外す。</h2>
+    {_hm_rules()}
+  </div>
+</section>
+
+<section class="stratum s-stone" id="picks">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">まず、どれを狙うか。</h2>
+    <p class="lead">場面ごとに、効き目のわかりやすい紋を選びました。安い段の紋も、毎日の手間をはっきり減らします。</p>
+    <div class="hm-picks">{picks}</div>
+    <a href="himon.html" class="wiki-band" style="margin-top:28px"><span class="wb-k dot">LIST</span><span class="wb-b"><b class="disp">{n}の紋を、ひとつずつ</b><span>段・効き目・刻めるもの。名前や効き目で探せて、段と道具でしぼりこめます。</span></span><span class="wb-go">灯紋の一覧へ<i></i></span></a>
+  </div>
+</section>
+'''
+
+
+def himon_page():
+    R = HM["rarity"]
     rows = ""
     for d in HM["defs"]:
         r = R[d["r"]]
@@ -1857,14 +1927,14 @@ def himon_page():
     rchips = "".join(f'<button type="button" class="chip-f" data-f="r" data-v="{i}" style="--c:{r["hex"]}">{r["jp"]}</button>' for i, r in enumerate(R))
     gchips = "".join(f'<button type="button" class="chip-f" data-f="g" data-v="{k}" style="--c:#E9EEF6">{t}</button>' for k, t, _ in _HM_G)
     side = "".join(f'<a href="#{a}" style="--c:{c}"><span class="ws-k">{k}</span>{t}</a>' for a, k, t, c in [
-        ("draw", "引", "紋書を引く", "#F2B544"), ("engrave", "刻", "道具に刻む", "#8FC3E8"), ("all", "紋", "70の紋", "#B79CF2"), ("cmd", "令", "コマンド", "#C9D0DC")])
-    side += '<a href="wiki.html" class="ws-x" style="--c:#5AAAFF"><span class="ws-k">技</span>灯技 Wiki へ</a>'
+        ("draw", "引", "紋書を引く", "#F2B544"), ("engrave", "刻", "道具に刻む", "#8FC3E8"), ("all", "紋", f"{len(HM['defs'])}の紋", "#B79CF2"), ("cmd", "令", "コマンド", "#C9D0DC")])
+    side += '<a href="guide-himon.html" class="ws-x" style="--c:#E9C46A"><span class="ws-k">章</span>遊び方の章へ</a><a href="wiki.html" class="ws-x" style="--c:#5AAAFF"><span class="ws-k">技</span>灯技 Wiki へ</a>'
     hero = f'''<div class="hero ch-hero wk-hero" style="--c:#F2B544">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div>
   <div class="wrap phead" id="content">
-    <nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><span>灯紋</span></nav>
+    <nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><a href="guide-himon.html">灯紋</a><span aria-hidden="true">›</span><span>一覧</span></nav>
     <div class="ch-head">{pix(HM_ICON, "ch-ic big")}<div><h1 class="disp h1-sub">灯紋</h1></div></div>
-    <p class="lead">経験値で紋書を引き、道具に刻む、70の特別な付呪。ふつうの付呪とも灯技とも重ならない、灯原だけの力です。</p>
+    <p class="lead">経験値で紋書を引き、道具に刻む、{len(HM["defs"])}の特別な付呪。ふつうの付呪とも灯技とも重ならない、灯原だけの力です。</p>
   </div>
 </div>'''
     return hero + f'''
@@ -1879,22 +1949,13 @@ def himon_page():
 
       <h2 class="disp h2 wk-h" id="draw">紋書を引く</h2>
       <p class="mu wk-p"><span class="kbd">/himon</span> で画面を開き、段を選んで経験値 Lv を払うと、その段の紋書が1冊出ます。どの紋が出るかは、段の中でくじ引きです。</p>
-      <div class="hm-tiers">{tiers}</div>
+      {_hm_tiers()}
       <p class="mu wk-small">紋の Lv：最大 Lv2 の紋は 85% で Lv1・15% で Lv2。最大 Lv3 の紋は 75%・20%・5%。見つけた紋は <span class="kbd">/himon book</span>（紋帳）に残ります。</p>
 
       <h2 class="disp h2 wk-h" id="engrave">道具に刻む</h2>
-      <ol class="hm-steps">
-        <li><b>「刻む」を開く</b><span>画面の「刻む」か <span class="kbd">/himon engrave</span>。</span></li>
-        <li><b>道具と紋書を置く</b><span>持ち物をクリックすると、道具と紋書がそれぞれの場所に入ります。刻めるかどうかは、その場で表示。</span></li>
-        <li><b>刻む</b><span>段に応じた経験値（1〜10 Lv）を払います。紋書はなくなります。</span></li>
-      </ol>
-      <div class="three hm-rules">
-        <div><h3 class="h3 disp">重ねて強く</h3><p class="mu">同じ紋を同じ Lv で重ねると、1つ上がります（Lv1＋Lv1 → Lv2）。Lv がちがうときは、高い方が残ります。</p></div>
-        <div><h3 class="h3 disp">1つの道具に{HM["slots"]}つまで</h3><p class="mu">秘の紋は1つだけ。分かれ矢と星流、不屈と不死鳥は、同じ道具に刻めません。ふつうの付呪とはいっしょに使えます。</p></div>
-        <div><h3 class="h3 disp">外すこともできる</h3><p class="mu">刻む画面で、紋をしゃがみクリック。経験値 2 Lv で外せます（紋書は戻りません）。</p></div>
-      </div>
+      {_hm_rules()}
 
-      <h2 class="disp h2 wk-h" id="all">70の紋</h2>
+      <h2 class="disp h2 wk-h" id="all">{len(HM["defs"])}の紋</h2>
       <div class="finder">
         <label class="find"><span class="sr">紋を探す</span><input type="search" id="hq" placeholder="名前・効き目で探す（例：夜、矢、滑空）" autocomplete="off"><kbd class="dot">/</kbd></label>
         <div class="filters"><div class="fg"><span class="fl-l">段</span>{rchips}</div><div class="fg"><span class="fl-l">道具</span>{gchips}</div></div>
@@ -2341,7 +2402,7 @@ def playstyle():
 PAGES = [
     ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1は2026年11月7日21時開幕。", index),
     ("start.html", "はじめる｜灯原", "灯原への入り方を機種別に。Java版、スマホ、Windows、Switch・PS・Xbox。最初の夜の過ごし方と、よくある質問。", start),
-    ("guide.html", "遊び方｜灯原", "灯原のしくみを8つの章で。灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、8つの加護、10の道・130の技「灯技」、106種の灯魚、263の進捗「灯の証」、灯標と灯りの色。", guide),
+    ("guide.html", "遊び方｜灯原", f"灯原のしくみを9つの章で。灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、8つの加護、10の道・130の技「灯技」、106種の灯魚、{len(HM['defs'])}の特別な付呪「灯紋」、263の進捗「灯の証」、灯標と灯りの色。", guide),
 ] + [(f"guide-{c['id']}.html", f"{c['t']}｜遊び方｜灯原", c['desc'], chapter_page(k)) for k, c in enumerate(CH)] + [
     ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり4種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。", events),
     ("playstyle.html", "遊び方を選ぶ｜灯原", "みんなで・身内で・ひとりで。3つの遊び方ごとのマニュアル。はじめの5つ、よく使うコマンド、コツ、気をつけること。", playstyle()),
