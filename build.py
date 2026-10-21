@@ -771,12 +771,12 @@ CH = [
     {"id": "hiwaza", "t": "灯技", "c": "#5AAAFF", "layer": 1, "sec": [],
      "sum": "遊ぶほど育つ10の道。技点で130の技を覚える。", "facts": ["10の道", "130の技", "奥義まで約1か月"],
      "desc": "灯技（ひわざ）。10の道・130の技、技の木の見方、灯力、主技と副技、今日の務めと極み。"},
-    {"id": "fish", "t": "灯魚", "c": "#4FD8C8", "layer": 1, "sec": [],
+    {"id": "himon", "t": "灯紋", "c": "#E9C46A", "layer": 1, "sec": [],
+     "sum": "遊んだ時間でたまる灯札で紋書を引き、道具に刻む。ふつうの付呪にはない力。", "facts": ["92の紋", "灯札は遊んだ時間で", "秘は無銘の紋書だけ"],
+     "desc": "灯紋（ひもん）。経験値と灯札で紋書を引く4つの段と無銘の紋書、道具への刻み方・重ね方・外し方、暮らし・戦い・移動・守りのおすすめの紋。"},
+    {"id": "fish", "t": "灯魚", "c": "#4FD8C8", "layer": 2, "sec": [],
      "sum": "時と場所と月でかわる、106種の魚。珍しいほど逃げる。", "facts": ["106種", "5つの珍しさ", "ヌシ"],
      "desc": "灯魚（ひうお）106種。珍しさ、かかる条件（水辺・時刻・天気・月・季節・朱月・灯り）、図鑑と灯原一。"},
-    {"id": "himon", "t": "灯紋", "c": "#E9C46A", "layer": 1, "sec": [],
-     "sum": "経験値で紋書を引き、道具に刻む。ふつうの付呪にはない力。", "facts": ["92の紋", "5つの段", "1つの道具に3つ"],
-     "desc": "灯紋（ひもん）。経験値で紋書を引く5つの段、道具への刻み方・重ね方・外し方、暮らし・戦い・移動・守りのおすすめの紋。"},
     {"id": "akashi", "t": "灯の証", "c": "#F29BB8", "layer": 2, "sec": ["akashi"],
      "sum": "この世界で過ごしたことが、そのまま証になる。", "facts": ["263の証", "位階10段", "称号69種"],
      "desc": "灯原だけの進捗「灯の証」263個。難度、段と秘められた証、報酬、証点と位階。"},
@@ -1843,12 +1843,27 @@ def _hm_desc(ds):
 
 def _hm_tiers():
     R = HM["rarity"]
+    M = HM["mumei"]
     up = int(round(HM["upgrade"] * 100))
     out = ""
-    for i, r in enumerate(R):
-        nxt = f'{up}%で「{R[i + 1]["jp"]}」が出る' if i + 1 < len(R) else "いちばん上の段"
-        out += f'''<div class="hm-tier" style="--c:{r["hex"]}"><span class="hm-r disp">{r["jp"]}</span><b class="dot">{r["book"]}<small>Lv</small></b><span>紋書を1冊引く</span><ul><li><b class="dot">{r["n"]}</b> 種</li><li>刻むとき <b class="dot">{r["engrave"]}</b> Lv</li><li>{nxt}</li></ul></div>'''
-    return f'<div class="hm-tiers">{out}</div>'
+    shelf = [r for r in R if r["shelf"]]
+    for i, r in enumerate(shelf):
+        nxt = f'{up}%で「{shelf[i + 1]["jp"]}」が出る' if i + 1 < len(shelf) else "秘へは上がらない"
+        out += f'''<div class="hm-tier" style="--c:{r["hex"]}"><span class="hm-r disp">{r["jp"]}</span><b class="dot">{r["book"]}<small>Lv</small></b><span>＋ 灯札 {r["fuda"]} 枚</span><ul><li><b class="dot">{r["n"]}</b> 種</li><li>刻むとき <b class="dot">{r["engrave"]}</b> Lv</li><li>{nxt}</li></ul></div>'''
+    tot = sum(M["weight"])
+    hi = R[-1]
+    odds = "・".join(f'{x["jp"]} {round(w / tot * 100)}%' for x, w in zip(R, M["weight"]))
+    out += f'''<div class="hm-tier mumei" style="--c:{hi["hex"]}"><span class="hm-r disp">無銘</span><b class="dot">{M["lv"]}<small>Lv</small></b><span>＋ 灯札 {M["fuda"]} 枚</span><ul><li>すべての段から出る</li><li><b class="dot">秘 {M["weight"][-1]}%</b>（{hi["n"]}種）</li><li>{M["pity"]}冊で必ず秘</li></ul></div>'''
+    return f'<div class="hm-tiers">{out}</div><p class="mu hm-odds">無銘の紋書の出かた：{odds}。秘が出ないまま {M["pity"]} 冊引くと、次の1冊は必ず秘になります。</p>'
+
+
+def _hm_fuda():
+    M = HM["mumei"]
+    return f'''<div class="three hm-rules">
+        <div><h3 class="h3 disp">灯札は、遊んだ時間でたまる</h3><p class="mu">紋書を引くには、経験値に加えて「灯札」が要ります。動いて遊んだ {HM["fudaMin"]} 分で1枚、{HM["fudaMax"]} 枚まで持てます。はじめて来たときに {HM["fudaStart"]} 枚もらえます。</p></div>
+        <div><h3 class="h3 disp">放置ではたまらない</h3><p class="mu">数えるのは、視点が動き、そのうえで歩くか、ブロックを掘る・置くかした1分だけ。経験値トラップの前で立っているだけ、乗り物や水流で運ばれているだけでは、たまりません。</p></div>
+        <div><h3 class="h3 disp">秘は、無銘の紋書からだけ</h3><p class="mu">段の紋書から秘は出ません。無銘の紋書を引いて、5%を引き当てるか、{M["pity"]} 冊目の天井まで。秘を引き当てると、サーバーのみんなに知らされます。</p></div>
+      </div>'''
 
 
 def _hm_rules():
@@ -1883,9 +1898,10 @@ def _himon_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">経験値で引いて、道具に刻む。</h2>
-    <p class="lead"><span class="kbd">/himon</span> で開きます。経験値 Lv を払って「紋書」を引き、道具や防具に刻むと、ふつうの付呪にはない力が宿ります。全部で{n}種。ふつうの付呪とも、灯技とも重なりません。</p>
+    <p class="lead"><span class="kbd">/himon</span> で開きます。経験値と「灯札」を払って紋書を引き、道具や防具に刻むと、ふつうの付呪にはない力が宿ります。全部で{n}種。ふつうの付呪とも、灯技とも重なりません。</p>
     {_hm_tiers()}
-    <p class="mu" style="font-size:14px;margin-top:12px">どの紋が出るかは、段の中でくじ引きです。最大 Lv2 の紋は 85% で Lv1、最大 Lv3 の紋は 75%・20%・5%。見つけた紋は <span class="kbd">/himon book</span> の紋帳に残ります。</p>
+    {_hm_fuda()}
+    <p class="mu" style="font-size:14px;margin-top:20px">どの紋が出るかは、段の中でくじ引きです。最大 Lv2 の紋は 85% で Lv1、最大 Lv3 の紋は 75%・20%・5%。見つけた紋は <span class="kbd">/himon book</span> の紋帳に残ります。紋書は渡したり交換したりできます。</p>
   </div>
 </section>
 
@@ -1944,12 +1960,13 @@ def himon_page():
     <nav class="wside" aria-label="灯紋の目次"><p class="dot wside-h">灯紋</p>{side}</nav>
     <div class="wk-main">
       <div class="wk-stats big">
-        <div><b class="dot">{len(HM["defs"])}</b><span>紋</span></div><div><b class="dot">{len(R)}</b><span>段</span></div><div><b class="dot">{HM["slots"]}</b><span>1つの道具に刻める数</span></div><div><b class="dot">/himon</b><span>画面を開く</span></div>
+        <div><b class="dot">{len(HM["defs"])}</b><span>紋</span></div><div><b class="dot">{len(R)}</b><span>段</span></div><div><b class="dot">{HM["slots"]}</b><span>1つの道具に刻める数</span></div><div><b class="dot">{HM["fudaMin"]}<small>分</small></b><span>灯札1枚に要る、遊んだ時間</span></div>
       </div>
 
       <h2 class="disp h2 wk-h" id="draw">紋書を引く</h2>
-      <p class="mu wk-p"><span class="kbd">/himon</span> で画面を開き、段を選んで経験値 Lv を払うと、その段の紋書が1冊出ます。どの紋が出るかは、段の中でくじ引きです。</p>
+      <p class="mu wk-p"><span class="kbd">/himon</span> で画面を開き、紋書を選んで経験値と灯札を払うと、1冊出ます。どの紋が出るかは、段の中でくじ引きです。</p>
       {_hm_tiers()}
+      {_hm_fuda()}
       <p class="mu wk-small">紋の Lv：最大 Lv2 の紋は 85% で Lv1・15% で Lv2。最大 Lv3 の紋は 75%・20%・5%。見つけた紋は <span class="kbd">/himon book</span>（紋帳）に残ります。</p>
 
       <h2 class="disp h2 wk-h" id="engrave">道具に刻む</h2>

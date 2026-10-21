@@ -1573,3 +1573,8 @@ html{scrollbar-color:#3A3F48 #101215}
 .hm-pick a small{display:block;font-size:12.5px;line-height:1.6;color:var(--mu)}
 @media (max-width:980px){.hm-picks{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:560px){.hm-picks{grid-template-columns:minmax(0,1fr)}}
+.hm-tier.mumei{background:linear-gradient(160deg,#2B2618 0%,#1F2228 70%);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--c) 30%,transparent)}
+.hm-tier.mumei .hm-r{text-shadow:0 0 14px color-mix(in srgb,var(--c) 55%,transparent)}
+.hm-odds{font-size:13.5px;margin:12px 0 0}
+@media (max-width:980px){.hm-tier.mumei{grid-column:span 2}}
+@media (max-width:760px){.hm-tier.mumei{grid-column:1 / -1}}
