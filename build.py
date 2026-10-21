@@ -1,5 +1,5 @@
 # 灯原サイトの組み立て（ヘッダーとフッターを各ページに入れて、静的な HTML を書き出す）
-import datetime, pathlib, re as _re0
+import datetime, math, pathlib, re as _re0
 from cast import CAST, BY, SCARF, CLOAK, fig, eater, reds, ridge, say_box
 
 ADDR = "tomoshibara.life"
@@ -54,7 +54,7 @@ def footer():
     cols = [
         ("はじめる", [("start.html#join", "入り方"), ("start.html#first", "最初の夜"), ("playstyle.html", "遊び方を選ぶ"), ("commands.html", "コマンド一覧"), ("start.html#faq", "よくある質問")]),
         ("遊び方", None),
-        ("Wiki", [("wiki.html", "Wiki のはじめ"), ("wiki.html#all", "すべての技を探す"), ("wiki.html#trials", "奥義の試練"), ("wiki.html#tasks", "今日の務め"), ("wiki-hiuo.html", "灯魚図鑑"), ("wiki-build.html", "技の組み立て"), ("akashi.html", "灯の証 Wiki"), ("himon.html", "灯紋")]),
+        ("Wiki", [("wiki.html", "Wiki のはじめ"), ("wiki.html#all", "すべての技を探す"), ("wiki.html#trials", "奥義の試練"), ("wiki.html#tasks", "今日の務め"), ("wiki-hiuo.html", "灯魚図鑑"), ("wiki-build.html", "技の組み立て"), ("akashi.html", "灯の証 Wiki"), ("himon.html", "灯紋"), ("hisato.html", "灯里")]),
         ("灯原", [("events.html", "夜祭"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
     ]
     cm = ""
@@ -84,7 +84,7 @@ def footer():
 # 夜空の下に敷く景色の縁（ページごとに、立っている人とひとことが変わる）
 RIDGE = {
     "start.html": dict(seed=2, cast=[("hino", 9, True)], say=("hino", "最初の1基は、ここに置こう。")),
-    "guide.html": dict(seed=3, cast=[("hino", 7, True), ("yuki", 37, False)], say=("yuki", "9つの章に、ぜんぶ書いたよ。")),
+    "guide.html": dict(seed=3, cast=[("hino", 7, True), ("yuki", 37, False)], say=("yuki", "12の章に、ぜんぶ書いたよ。")),
     "events.html": dict(seed=4, cast=[("momo", 10, True), ("hino", 13, False), ("sora", 34, True)], say=("momo", "土曜の21時、広場でね！")),
     "rules.html": dict(seed=5, cast=[("shino", 9, True)], say=("shino", "人の灯りは、守るもの。")),
     "support.html": dict(seed=6, cast=[("yuki", 9, True), ("hino", 12, False)], say=("yuki", "名前は、ちゃんと残すからね。")),
@@ -94,7 +94,7 @@ RIDGE = {
     "wiki.html": dict(seed=10, cast=[("yuki", 9, True), ("waka", 36, False)], say=("yuki", "130の技、ぜんぶ書きとめたよ。")),
     "wiki-hiuo.html": dict(seed=11, cast=[("sora", 10, True)], say=("sora", "「秘」の魚は、まだ見つからない……")),
 }
-_CH_WHO = {"lantern": "hino", "night": "shino", "higui": "shino", "buff": "momo", "hiwaza": "waka", "fish": "sora", "himon": "yuki", "akashi": "yuki", "more": "sora"}
+_CH_WHO = {"lantern": "hino", "night": "shino", "higui": "shino", "buff": "momo", "hiwaza": "waka", "fish": "sora", "himon": "yuki", "akashi": "yuki", "more": "sora", "sato": "hino", "shoku": "waka", "musubi": "momo"}
 _PATH_WHO = {"light": "hino", "night": "shino", "mine": "momo", "wood": "waka", "farm": "waka", "fish": "sora", "craft": "yuki", "travel": "sora", "ranch": "momo", "arcane": "hino"}
 
 
@@ -209,6 +209,21 @@ _CMDS = [
         ("/tomoshibi code", "<コード>", "友達の招待コードを使う"),
         ("/tomoshibi particles", "<off|low|normal>", "自分に見える光の粒の量（重いときは low）"),
         ("/tomoshibi top", "", "灯籠の多い人"),
+    ]),
+    ("里", "#E9824A", "灯里", "Hisato", "<span class=\"kbd\">/sato</span> は <span class=\"kbd\">/hisato</span> でも同じ。里の灯帳を手に持って右クリックするか、里灯を素手で右クリックしても、同じホームが開きます。", [
+        ("/sato", "", "里のホームを開く。<b>これだけ覚えれば大丈夫</b>（里のない人は、里を探す・開く画面）"),
+        ("/sato job", "", "職の画面（位・バフ・匠の試し・転職の試し・弟子）"),
+        ("/sato board", "", "掲示板（日課・週課・里の頼み・大事業）"),
+        ("/sato kura", "", "蔵（棚・納める・出し入れの記録）"),
+        ("/sato map", "", "里の地図（土地・屋敷・建築中の区画・喰われた灯籠）"),
+        ("/sato musubi", "", "灯結（縁・一団・合流・手紙・合図・配信中・離れる）"),
+        ("/sato mail", "", "受信箱（手紙・小包・里の知らせ・里の便り）"),
+        ("/sato home", "", "帰里：里灯へ帰る（待ち時間あり）"),
+        ("/sato party", "[言葉]", "一団の画面を開く。言葉をつけると、一団にだけ話す"),
+        ("/sato c", "<言葉>", "里の民にだけ話す"),
+        ("/sato accept", "", "誘い・申し込み・合流の頼みを受ける（チャットの［受ける］を押しても同じ）"),
+        ("/sato deny", "", "断る"),
+        ("/sato book", "", "里の灯帳をもう一度もらう"),
     ]),
     ("証", "#F29BB8", "灯の証", "Akashi", "報酬の受け取り、称号・足跡の選択は、画面からもできます。", [
         ("/akashi", "", "証の一覧を開く"),
@@ -369,7 +384,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
     <h2 class="disp h2">つづきは、こちらから。</h2>
   </div>
   <a href="start.html" class="band" style="background:#50555C"><div class="wrap band-in"><span class="band-y">Y=−12</span><div class="band-body"><h3 class="disp h3">はじめる</h3><p class="lead">機種ごとの入り方と、最初の夜の過ごし方。3分で入れます。</p><span class="band-go"><i></i>入り方を見る</span></div></div></a>
-  <a href="guide.html" class="band" style="background:#474C53"><div class="wrap band-in"><span class="band-y">Y=−24</span><div class="band-body"><h3 class="disp h3">遊び方</h3><p class="lead">灯籠と灯路、長い夜、灯喰い、欠片で解放する加護、263の「灯の証」、130の技と106種の灯魚「灯技」。</p><span class="band-go"><i></i>しくみを読む</span></div></div></a>
+  <a href="guide.html" class="band" style="background:#474C53"><div class="wrap band-in"><span class="band-y">Y=−24</span><div class="band-body"><h3 class="disp h3">遊び方</h3><p class="lead">灯籠と灯路、長い夜、灯喰い、欠片で解放する加護、263の「灯の証」、130の技と106種の灯魚「灯技」、仲間と開く里と5つの職「灯里」。</p><span class="band-go"><i></i>しくみを読む</span></div></div></a>
   <a href="events.html" class="band" style="background:#3E4249"><div class="wrap band-in"><span class="band-y">Y=−36</span><div class="band-body"><h3 class="disp h3">夜祭</h3><p class="lead">毎週土曜21時。人数がそろうと、週替わりのゲームが自動で始まります。</p><span class="band-go"><i></i>今週のゲームを見る</span></div></div></a>
   <a href="rules.html" class="band" style="background:#34383E"><div class="wrap band-in"><span class="band-y">Y=−48</span><div class="band-body"><h3 class="disp h3">きまり</h3><p class="lead">してはいけないこと、守られていること、困ったときの連絡先。</p><span class="band-go"><i></i>きまりを読む</span></div></div></a>
   <a href="support.html" class="band" style="background:#2E3137;padding-bottom:40px"><div class="wrap band-in"><span class="band-y">Y=−60</span><div class="band-body"><h3 class="disp h3">支える</h3><p class="lead">灯原を続けるための寄付。PayPay で、金額は自由。お礼は名前の ❤ と、支え手の壁。</p><span class="band-go"><i></i>支え方を見る</span></div></div></a>
@@ -734,6 +749,9 @@ CH_ICONS = {
     "akashi": ["................", "...##......##...", "....##....##....", ".....##..##.....", "......####......", ".....######.....", "....#oooooo#....", "...#oooooooo#...", "...#ooo##ooo#...", "...#oo####oo#...", "...#ooo##ooo#...", "...#oooooooo#...", "....#oooooo#....", ".....######.....", "................", "................"],
     "himon": ["................", ".......##.......", "......#oo#......", ".....#o##o#.....", "....#o#..#o#....", "...#o#.##.#o#...", "..#o#.#oo#.#o#..", ".#o#.#o##o#.#o#.", ".#o#.#o##o#.#o#.", "..#o#.#oo#.#o#..", "...#o#.##.#o#...", "....#o#..#o#....", ".....#o##o#.....", "......#oo#......", ".......##.......", "................"],
     "more": ["................", ".......##.......", "..##########....", "..#oooooooo##...", "..#oooooooo###..", "..#oooooooo##...", "..##########....", ".......##.......", "....##########..", "...##oooooooo#..", "..###oooooooo#..", "...##oooooooo#..", "....##########..", ".......##.......", ".......##.......", "......####......"],
+    "sato": ["................", ".......##.......", ".....##oo##.....", "...##oooooo##...", ".##oooooooooo##.", "################", "..#oo#....#oo#..", "..#oo#.##.#oo#..", "..####.##.####..", "..#....##....#..", "..#..######..#..", "..#..#oooo#..#..", "..#..#oooo#..#..", "################", "................", "................"],
+    "shoku": ["................", "..##########....", ".#oooooooooo#...", ".#oooooooooo#...", "..####oo####....", ".....#oo#.......", ".....#oo#....##.", ".....#oo#...#oo#", ".....#oo#..#oo#.", ".....#oo#.#oo#..", ".....#oo##oo#...", ".....#oo#oo#....", "....#oooooo#....", "....########....", "................", "................"],
+    "musubi": ["................", "...###....###...", "..#ooo#..#ooo#..", "..#ooo#..#ooo#..", "...###....###...", "................", "..#####..#####..", ".#ooooo##ooooo#.", ".#oooooooooooo#.", ".#oo#oooooo#oo#.", ".#oo#oooooo#oo#.", "..##.######.##..", "....#oo##oo#....", "....#oo##oo#....", "....###..###....", "................"],
 }
 
 
@@ -783,10 +801,20 @@ CH = [
     {"id": "more", "t": "灯標・色・招待", "c": "#C9D0DC", "layer": 2, "sec": ["more"],
      "sum": "名前をつけて行き来し、灯りの色を変え、友を呼ぶ。", "facts": ["灯渡り 3秒", "灯りの色 17色", "招待コード"],
      "desc": "灯標と灯渡り、仲間、17の灯りの色の手に入れ方、友達の招待のしかた。"},
+    {"id": "sato", "t": "灯里", "c": "#E9824A", "layer": 3, "sec": [],
+     "sum": "3人で開き、灯りで土地を広げ、集落から都へ。仲間と育てる、小さな国。", "facts": ["4つの格", "土地は灯路網", "屋敷は持ち主だけ"],
+     "desc": "灯里（ひさと）の里。開く条件と礎、仮の里の7日、里灯と土地、屋敷と掟、蔵、4つの格と毎週の灯油。"},
+    {"id": "shoku", "t": "職と依頼", "c": "#EE9A4A", "layer": 3, "sec": [],
+     "sum": "5つの職から1つ。里に足りないものが依頼で届き、働くほど位が上がる。", "facts": ["5つの職", "見習い→匠", "鑑定は見た目だけ"],
+     "desc": "大工・灯守・衛士・商人・旅人の5つの職とバフ、見習いから匠までの位、日課・週課・大事業、建築の依頼と鑑定、転職の試し。"},
+    {"id": "musubi", "t": "灯結と暮らし", "c": "#F29BB8", "layer": 3, "sec": [],
+     "sum": "縁・一団・合流・手紙・合図。名所めぐりと市の日で、里の外ともつながる。", "facts": ["一団 12人", "名所めぐり", "すべて画面で"],
+     "desc": "灯結（ひむすび）の縁・一団・合流・手紙と小包・合図・配信中・離れる。名所めぐり、旅の依頼、屋台と市、里の便り、感謝の灯、画面のきまり。"},
 ]
 LAYERS = [("第一層", "はじめに知ること", "ここまで読めば、最初の夜を越えられます。"),
           ("第二層", "強くなる", "慣れてきたら。育てるほど、暮らしが楽になります。"),
-          ("第三層", "残す・つなぐ", "長く遊ぶほど、残るものがふえます。")]
+          ("第三層", "残す・つなぐ", "長く遊ぶほど、残るものがふえます。"),
+          ("第四層", "里で暮らす", "仲間ができたら。里を開き、職について、街を育てます。")]
 
 _SEC = {m.group(1): m.group(0) for m in _re.finditer(r'<section class="stratum[^"]*" id="(\w+)">.*?\n</section>', _guide_src, _re.S)}
 
@@ -948,6 +976,12 @@ def _body(k):
         return _fish_sec()
     if c["id"] == "himon":
         return _himon_sec()
+    if c["id"] == "sato":
+        return _sato_sec() + '\n<script src="assets/sato.js" defer></script>'
+    if c["id"] == "shoku":
+        return _shoku_sec()
+    if c["id"] == "musubi":
+        return _musubi_sec()
     return "\n".join(_clean(_SEC[s]) for s in c["sec"])
 
 
@@ -961,6 +995,9 @@ _CH_SAY = {
     "himon": "段が上がるほど、くじは高い。でも1冊で、遊び方が変わることもあるよ。",
     "akashi": "やったことは、ぜんぶ証になるよ。秘められた証もあるからね。",
     "more": "灯標に名前をつけたら、灯渡りでひとっ飛び。",
+    "sato": "里の土地は、灯りでできてる。灯籠をつなぐほど、里は広がるよ。",
+    "shoku": "職のいちばん上の力は、自分じゃなくて、仲間のために使う力なんだ。",
+    "musubi": "里がちがっても、縁は結べる。手紙は、いない人にも届くよ。",
 }
 
 
@@ -986,7 +1023,7 @@ def chapter_page(k):
 
     def pg(x, i, cls, label):
         if x is None:
-            return f'<a href="guide.html" class="pg {cls}" style="--c:var(--amber)"><small class="dot">{label}</small><b>目次にもどる</b><span class="mu">{len(CH)}つの章の一覧へ</span></a>'
+            return f'<a href="guide.html" class="pg {cls}" style="--c:var(--amber)"><small class="dot">{label}</small><b>目次にもどる</b><span class="mu">{len(CH)}の章の一覧へ</span></a>'
         return f'<a href="guide-{x["id"]}.html" class="pg {cls}" style="--c:{x["c"]}"><small class="dot">{label} {i + 1:02d}</small><b>{x["t"]}</b><span class="mu">{x["sum"]}</span></a>'
 
     pager = f'''<section class="stratum s-rock pager-s">
@@ -1024,7 +1061,7 @@ def _guide_index():
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>
   <div class="wrap phead" id="content">
     <h1 class="disp h1-sub">遊び方</h1>
-    <p class="lead">灯りを置き、つなぎ、夜から守り、育てて、残す。灯原のしくみを9つの章にまとめました。気になる章から開いてください。</p>
+    <p class="lead">灯りを置き、つなぎ、夜から守り、育てて、残す。灯原のしくみを{len(CH)}の章にまとめました。気になる章から開いてください。</p>
     {_rail(-1)}
   </div>
 </div>
@@ -1035,7 +1072,8 @@ def _guide_index():
     {layers}
     <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯技 完全解説 Wiki</b><span>130の技の効き目・要る Lv・技点・待ち時間、技の木、奥義の試練、務め、灯魚図鑑。ぜんぶ、ゲームと同じ数字で。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯の証 完全解説 Wiki</b><span>263の証の目標と報酬、段の道、10の位階、称号・灯りの色・足跡の手に入れ方。秘められた証は手がかりだけ。</span></span><span class="wb-go">開く<i></i></span></a>
-    <a href="commands.html" class="wiki-band cmd-band"><span class="wb-k dot">CMD</span><span class="wb-b"><b class="disp">コマンド一覧</b><span>/tomoshibi・/akashi・/waza・/himon・/yomatsuri・/tokoyo のすべて。探して、すぐ見つかる。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">LIST</span><span class="wb-b"><b class="disp">灯里のすべての数字</b><span>4つの格、5つの職のバフと日課・週課、位と匠の試し、施設の素材、礎、ずるの防ぎ方。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="commands.html" class="wiki-band cmd-band"><span class="wb-k dot">CMD</span><span class="wb-b"><b class="disp">コマンド一覧</b><span>/tomoshibi・/sato・/akashi・/waza・/himon・/yomatsuri・/tokoyo のすべて。探して、すぐ見つかる。</span></span><span class="wb-go">開く<i></i></span></a>
   </div>
 </section>'''
 
@@ -1997,6 +2035,454 @@ def himon_page():
 HM_PAGES = [("himon.html", "灯紋｜灯原", f"灯紋（ひもん）{len(HM['defs'])}種のすべて。経験値で紋書を引く5つの段（並・良・珍・稀・秘）、道具への刻み方、重ね方、効き目と刻めるもの。", himon_page())]
 
 
+# ───────────────────────── 灯里（里・職・灯結） ─────────────────────────
+HS = _wj.loads((pathlib.Path(__file__).parent / "data" / "hisato.json").read_text(encoding="utf-8"))
+HSN = HS["num"]
+_HS_JC = {"daiku": "#EE9A4A", "himori": "#F2CB4E", "eji": "#E8574A", "shonin": "#72D69C", "tabibito": "#6AA8FF"}
+_HS_JK = {"daiku": "大", "himori": "灯", "eji": "衛", "shonin": "商", "tabibito": "旅"}
+_HS_JG = {"daiku": "土地にブロックを置く。数えるのは新しい場所だけで、土や丸石を積むだけ、壊して置き直すだけは数えない。",
+          "himori": "喰われた里の灯籠を灯し直す。新しい灯籠をつないで土地を広げる。夜に里の灯籠を見回る。",
+          "eji": "夜、土地の中で、自然に湧いた敵を倒す。灯喰いを退ける。スポナーや敵トラップの敵は数えない。",
+          "shonin": "屋台で取引が成り立つ。同じ相手ほど少なく、ほかの里の人との取引は多めに数える。",
+          "tabibito": "里の外で集めた建材を蔵へ。まだ誰も歩いていない土地を自分の足で歩く（滑空・船・乗り物は数えない）。遺跡を見聞録に記す。"}
+_HS_GC = ["#C9B48A", "#8FCB6A", "#6AB8E8", "#E9824A"]
+# 格のドット絵（16×16）：集落・村・町・都
+_HS_GI = [
+    ["................", "................", "................", "................", "................", "................", ".......##.......", "......#oo#......", ".....#oooo#.....", "....#oooooo#....", "...##########...", "....#o####o#....", "....#o#oo#o#....", "....#o#oo#o#....", "...##########...", "................"],
+    ["................", "................", "................", "...##...........", "..#oo#..........", ".#oooo#....##...", "########..#oo#..", ".#o##o#..#oooo#.", ".#o##o#.########", ".#o##o#..#o##o#.", ".######..#o##o#.", "#########o##o##.", "................", "................", "................", "................"],
+    ["................", ".......##.......", "......#oo#......", ".....######.....", "......#oo#......", ".##...#oo#...##.", "#oo#..#oo#..#oo#", "####.######.####", "#o##.#o##o#.#o##", "#o##.#o##o#.#o##", "#o##.#o##o#.#o##", "################", "................", "................", "................", "................"],
+    [".......##.......", "......#oo#......", "....########....", ".....#oooo#.....", "...##########...", "....#oo##oo#....", "..############..", "...#oo#oo#oo#...", ".##############.", "..#oo#oooo#oo#..", "..#oo#o##o#oo#..", "..#oo#o##o#oo#..", "################", "................", "................", "................"],
+]
+
+
+def _hs_merge(vals):
+    """段ごとの文を1行に。数字だけがちがうなら「+1／+2／+3」とまとめる。"""
+    return _hm_desc(vals)
+
+
+def _hs_mat(d):
+    return "".join(f'<span class="hs-mat"><b class="dot">{v:,}</b>{_E(k)}</span>' for k, v in d.items())
+
+
+def _hs_land_demo():
+    return '''<div class="demo hs-demo" data-sato>
+      <div class="pn demo-main hs-demo-main">
+        <div class="btns" style="margin-bottom:14px"><button type="button" class="pbtn sm" data-eat>灯喰いの夜</button><button type="button" class="gbtn sm" data-far>遠灯し（灯守の匠）</button><button type="button" class="gbtn sm" data-reset>最初の形に戻す</button></div>
+        <div class="grid-scroll"><div class="grid hs-grid"></div></div>
+        <div class="legend">
+          <span><i style="background:#8A6A3A"></i>里の土地</span>
+          <span><i style="background:#3D5E2C"></i>灯りの中（里の土地ではない）</span>
+          <span><i style="background:#16241A;border:1px solid #6F7D6A"></i>灯りの外</span>
+          <span><i style="background:#F2B544"></i>民の灯籠</span>
+          <span><i style="background:#5AAAFF"></i>喰われた灯籠</span>
+          <span><i style="background:#E9824A;box-shadow:0 0 0 2px #FFE3A3"></i>里灯</span>
+          <span><i style="background:transparent;outline:2px dashed #FFE3A3;outline-offset:-2px"></i>屋敷</span>
+        </div>
+      </div>
+      <div class="demo-side">
+        <div class="stat"><span>土地に数える灯籠</span><b><i data-s="lan" style="font-style:normal">0</i><small> / 40</small></b></div>
+        <div class="stat"><span>里の土地</span><b><i data-s="land" style="font-style:normal">0</i><small> マス</small></b></div>
+        <div class="stat"><span>欠けた土地</span><b data-s="lost">0</b></div>
+        <p class="demo-msg" data-msg role="status">マスを押すと灯籠を置けます。灯籠を押すと喰わせられます。里灯から灯路でつながっている灯籠の守りだけが、里の土地です。</p>
+      </div>
+    </div>'''
+
+
+def _hs_found_steps():
+    f = HS["foundation"]
+    steps = [
+        ("創設者", f'動いて遊んだ時間 <b class="dot">{HSN["founderHours"]}</b> 時間以上、灯の証の位階 <b class="dot">{HSN["founderRank"]}</b> 以上、どの里にも属していないこと。'),
+        ("発起人", f'創設者を含めて <b class="dot">{HSN["founders"]}</b> 人。それぞれ <b class="dot">{HSN["cofounderHours"]}</b> 時間以上遊んでいて、14日以内に里を抜けていないこと。誘いは画面から送ります。'),
+        ("礎を納める", f'礎の祭壇に、発起人それぞれが<b>2割以上</b>を自分で納めます。誰がどれだけ納めたかは画面に出ます。<span class="hs-mats">{_hs_mat(f)}</span>'),
+        ("里灯を立てる", f'灯路網の格2以上で、発起人の灯籠10基以上につながっている場所。ほかの里の土地から <b class="dot">{HSN["gap"]}</b> ブロック以上離れていること。'),
+        ("仮の里の7日", f'{HSN["provisionalDays"]}日のうちに礎を納めきり、最初の大事業「里開き」を果たします。発起人3人がそれぞれ日課を3つ、蔵へ木材256・食料128。'),
+    ]
+    lis = "".join(f'<li><span class="hs-st-n dot">{i + 1}</span><b class="disp">{t}</b><p>{d}</p></li>' for i, (t, d) in enumerate(steps))
+    return f'''<ol class="hs-steps">{lis}<li class="end"><span class="hs-st-n dot">✦</span><b class="disp">集落になる</b><p>里の名がサーバー全体に知らされ、掲示板・蔵・日課が動き出します。</p></li></ol>'''
+
+
+def _hs_grades():
+    G = HS["grades"]
+    mx = G[-1]["lanterns"]
+    cols = ""
+    for i, g in enumerate(G):
+        up = "・".join(f"{k} {v}" for k, v in g["upkeep"].items())
+        cols += f'''<div class="hs-g" style="--c:{_HS_GC[i]};--i:{len(G) - 1 - i}">
+        <div class="hs-g-top">{pix(_HS_GI[i], "ch-ic hs-g-ic")}<span class="hs-g-no dot">格 {i + 1}</span><h3 class="disp">{g["jp"]}</h3><p class="hs-g-pw"><b class="dot">{g["power"]:,}</b><small>里の力</small></p></div>
+        <dl>
+          <div><dt>民</dt><dd class="dot">{g["people"]}<small>人</small></dd></div>
+          <div><dt>土地の灯籠</dt><dd class="dot">{g["lanterns"]}<small>基</small></dd></div>
+          <div><dt>補佐</dt><dd class="dot">{g["aides"]}<small>人</small></dd></div>
+          <div><dt>施設</dt><dd class="dot">{g["facilities"]}</dd></div>
+          <div><dt>名所</dt><dd class="dot">{g["landmarks"]}</dd></div>
+          <div><dt>里の力の上限</dt><dd class="dot">{g["weekCap"]:,}<small>／週</small></dd></div>
+        </dl>
+        <p class="hs-g-open"><span>開くもの</span>{_E(g["opens"])}</p>
+        <p class="hs-g-up"><span>毎週の灯油</span>{_E(up)}</p>
+        <div class="hs-g-bar" aria-hidden="true"><i style="width:{g["lanterns"] / mx * 100:.0f}%"></i></div>
+      </div>'''
+    return f'<div class="hs-grades">{cols}</div>'
+
+
+def _sato_sec():
+    return f'''<section class="stratum s-deep" id="sato">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">灯りが、そのまま里の土地になる。</h2>
+    <p class="lead"><span class="kbd">/sato</span> で開きます。里は、仲間と開く小さな国です。里の中心に立てる大きな灯籠「里灯（さとび）」から、灯路でつながっている民の灯籠。その守りの範囲が、里の<b>土地</b>です。囲いの道具はありません。灯りを広げれば、土地が広がります。</p>
+    {_hs_land_demo()}
+    <div class="three">
+      <div><h3 class="h3 disp">里灯は喰われない</h3><p class="mu">里灯は灯喰いに喰われず、壊せるのは里長だけ。動かすときは「移築」で、3日かけて移ります。右クリックで里のホームが開きます。</p></div>
+      <div><h3 class="h3 disp">喰われると、土地が欠ける</h3><p class="mu">灯籠が喰われると、そこから先の土地が欠けます。欠けているあいだも、屋敷と認められた建物の守りは持ち主に残ります。灯し直せば、土地は戻ります。</p></div>
+      <div><h3 class="h3 disp">外の人は、通れるが建てられない</h3><p class="mu">土地の中で建てる・壊す・箱を開けるのは民だけ。ほかの里の人や里のない人は、歩いて通り抜けられますが、土地には手を出せません。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="found">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">3人と、重い礎と、7日。</h2>
+    <p class="lead">里は、ひとりでもサブのアカウントでも開けないようにしてあります。来たばかりの人が開いて、すぐ消える里が並ばないように。開くまでの道のりそのものが、最初の共同作業です。</p>
+    {_hs_found_steps()}
+    <p class="note warn"><b>7日のうちに果たせなかったときは、解散します。</b>納めた礎は、納めた人それぞれに半分ずつ手紙で戻ります。正式な里を解散したときは、礎は戻りません。開いて消してをくり返しても、得をしないようにしてあります。</p>
+  </div>
+</section>
+
+<section class="stratum s-stone" id="grade">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">集落から、都へ。</h2>
+    <p class="lead">依頼を果たすと「里の力」が貯まり、格が上がります。里の力は使っても減りません。格を上げるには、里の力に加えて、大事業「格上げの普請」を果たします。点数だけでは上がりません。</p>
+    {_hs_grades()}
+    <p class="mu hs-small">よく遊ぶ10人ほどの里で、村まで約2週、町まで約6週、都まで約3か月が目安です。里の力には、格ごとに1週間の上限があります。</p>
+  </div>
+</section>
+
+<section class="stratum s-rock" id="yashiki">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">屋敷は持ち主のもの。共有地は、掟で決める。</h2>
+    <div class="hs-roles">
+      <div class="hs-role" style="--c:#F2B544"><span class="hs-role-k disp">長</span><h3 class="disp">里長 <small class="dot">1人</small></h3><p>建物の鑑定、蔵、施設の普請、民の出入り、補佐の任命、里の設定。</p></div>
+      <div class="hs-role" style="--c:#C9D0DC"><span class="hs-role-k disp">補</span><h3 class="disp">補佐 <small class="dot">0〜3人</small></h3><p>鑑定（自分の依頼はのぞく）、民を迎える、蔵。人数は格で決まります。</p></div>
+      <div class="hs-role" style="--c:#8FCB6A"><span class="hs-role-k disp">民</span><h3 class="disp">民 <small class="dot">格の上限まで</small></h3><p>職につく、依頼を受ける、土地で建てる。里は1人1つまで。</p></div>
+    </div>
+    <div class="three">
+      <div><h3 class="h3 disp">屋敷（家の区画）</h3><p class="mu">里長が民ごとに区画を割り当てます。屋敷の中で建てる・壊す・箱を開けるのは、持ち主と、持ち主が許した人だけ。<b>里長も入れません。</b></p></div>
+      <div><h3 class="h3 disp">掟（共有地のきまり）</h3><p class="mu">屋敷の外の土地で、誰が何をできるかを、立場と職ごとにオン・オフします。はじめは、大工と里長・補佐だけが共有地で建てられ、民は共有の箱を開けられます。</p></div>
+      <div><h3 class="h3 disp">入る・抜ける</h3><p class="mu">招待か、申し込みの承認で入ります。入って{HSN["newcomerDays"]}日は「新入り」で報酬が半分。抜けるのはいつでもでき、抜けたあと{HSN["leaveLock"]}日はほかの里に入れません。申し込む前に{HSN["guestDays"]}日だけ「客人」として入ってみることもできます。</p></div>
+    </div>
+    <div class="facts">
+      <div class="fact"><p class="fact-n">蔵</p><p>里の共有の倉庫。建材・食料・鉱物・珍品・雑貨の5つの棚に分かれ、棚ごとに出せる人を決めます。出し入れはすべて記録に残り、補佐が1日に持ち出せる量には上限があります。</p></div>
+      <div class="fact"><p class="fact-n">灯油</p><p>毎週月曜、格ごとに決まった維持費を蔵から自動で払います。2週続けて払えないと里全体のバフが止まり、4週続くと格が1つ下がります。</p></div>
+      <div class="fact"><p class="fact-n">30<small>日</small></p><p>民が誰も来ない里は「眠る里」になり、依頼とバフが止まります。90日で里灯が消え、蔵の中身は里長に手紙で届きます。</p></div>
+      <div class="fact"><p class="fact-n">21<small>日</small></p><p>里長が来ないときは、いちばんよく来ている補佐に、いなければ職の位がいちばん高い民に、自動で引き継ぎます。運営が里を片付ける必要はありません。</p></div>
+    </div>
+  </div>
+</section>
+'''
+
+
+def _hs_job_card(j):
+    c = _HS_JC[j["key"]]
+    rows = ""
+    for i in range(len(j["buffs"][0])):
+        vals = [b[i] for b in j["buffs"]]
+        rows += f"<li>{_hs_merge(vals)}</li>"
+    return f'''<article class="hs-job" style="--c:{c}" id="j-{j["key"]}">
+        <header><span class="hs-job-k disp">{_HS_JK[j["key"]]}</span><div><h3 class="disp">{j["jp"]}</h3><p>{_E(j["role"])}</p></div></header>
+        <p class="hs-job-g"><span>育つこと</span>{_E(_HS_JG[j["key"]])}</p>
+        <ul class="hs-job-b">{rows}</ul>
+        <p class="hs-job-s"><span class="dot">匠の奉仕</span><b>{_E(j["service"])}</b>{_E(j["serviceText"])}</p>
+      </article>'''
+
+
+def _hs_ranks():
+    R = HS["ranks"]
+    mx = math.sqrt(R[-1]["xp"])
+    hrs = ["―", "約5時間", "約20時間", "約50時間", "約100時間"]
+    nodes = ""
+    for i, r in enumerate(R):
+        x = math.sqrt(r["xp"]) / mx * 100
+        nodes += f'''<li style="--x:{x:.1f}%"><i></i><b class="disp">{r["jp"]}</b><span class="dot">{r["xp"]:,}</span><small>{hrs[i]}</small><em>{_E(r["opens"])}</em></li>'''
+    return f'<ol class="hs-ranks">{nodes}</ol>'
+
+
+def _hs_hud():
+    return '''<div class="hs-hud" role="img" aria-label="建築の依頼のとき、画面の上に出るバーの例">
+      <p class="hs-hud-t">民の家 <span>|</span> <b>✔ブロック 300/300</b> ・ <b>✔種類 10/5</b> ・ <b>✔高さ 7/6</b> ・ 時間 48分/1時間</p>
+      <div class="hs-hud-bar"><i style="width:88%"></i></div>
+    </div>'''
+
+
+def _shoku_sec():
+    jobs = "".join(_hs_job_card(j) for j in HS["jobs"])
+    trials = "".join(f'<li style="--c:{_HS_JC[j["key"]]}"><b>{j["jp"]}</b>{_E(j["trial"])}</li>' for j in HS["jobs"])
+    return f'''<section class="stratum s-deep" id="jobs">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">5つの職で、里が回る。</h2>
+    <p class="lead">建てる・守る・広げる・つなぐ・運ぶ。里に要る役目を、5つの職で分けました。灯技の「道」が自分の腕を育てるのに対して、職は「里での役目」を育てます。バフは里の土地の中で働き（旅人は外で）、いちばん上の力は仲間のために使う「奉仕」です。</p>
+    <div class="hs-jobs">{jobs}</div>
+    <p class="mu hs-small">数字は段ごとの値です（見習い・一人前 ／ 熟練 ／ 名人・匠）。職は里に入ったときに選び、新入りの{HSN["newcomerDays"]}日のあいだに限り、1回だけ無料で選び直せます。</p>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="rank">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">見習いから、匠へ。</h2>
+    <p class="lead">職の経験は、依頼からおよそ7割、職の行動から3割。行動から入るのは1日 {HSN["actionCap"]} までで、放置や稼ぎ場では伸びません。毎日2時間ほど遊んで、匠まで約2か月です。</p>
+    {_hs_ranks()}
+    <div class="hs-two">
+      <div><h3 class="h3 disp">匠の試し</h3><p class="mu">匠になるには、経験に加えて職ごとの試しを1つ果たします。匠になると、サーバー全体に知らされ、サイトの匠の名簿に載ります。</p><ul class="hs-trials">{trials}</ul></div>
+      <div><h3 class="h3 disp">弟子</h3><p class="mu">名人と匠は、同じ職の見習い・一人前を弟子にできます（2人まで）。弟子の依頼の報酬が +20%、師匠にもその1割が入ります。</p>
+        <h3 class="h3 disp" style="margin-top:28px">五職そろい</h3><p class="mu">5つの職にそれぞれ1人以上、最近7日に来た民がいると、土地の中で民全員の灯力（灯技）がたまりやすくなります。同じ職が民の半分を超えると、その職の報酬は下がり、少ない職には「人手不足」の印と +25% がつきます。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stratum s-stone" id="quest">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">依頼は、里に足りないものから届く。</h2>
+    <p class="lead">依頼は里の様子を見て、自動で出る仕事です。喰われた灯籠が多ければ灯守の灯し直し、建材の棚がさみしければ旅人の運び、という具合。量や数はプラグインが数え、里長が見るのは建物の見た目だけです。</p>
+    <div class="hs-kinds">
+      <div style="--c:#F2B544"><span class="dot">毎日0時</span><h3 class="disp">日課</h3><p>民ごとに職の依頼が{3}つ。30分ほど。</p><b class="dot">経験 {HSN["dailyXp"]}・里の力 10</b></div>
+      <div style="--c:#8FCB6A"><span class="dot">毎週月曜</span><h3 class="disp">週課</h3><p>民ごとに2つ。一人前から。2〜4時間。</p><b class="dot">経験 {HSN["weeklyXp"]}・里の力 80・欠片 2</b></div>
+      <div style="--c:#6AB8E8"><span class="dot">里長・補佐が出す</span><h3 class="disp">里の頼み</h3><p>形を選んで数を決めるだけ。報酬は蔵から先に預けます。</p><b class="dot">蔵の品＋職の経験</b></div>
+      <div style="--c:#E9824A"><span class="dot">格上げ・施設のたびに</span><h3 class="disp">大事業</h3><p>ひとつの目標を職ごとの分担に分けて、みんなで果たします。</p><b class="dot">里の力・格・施設</b></div>
+    </div>
+    <h3 class="h3 disp hs-sub">建築の依頼</h3>
+    <p class="mu hs-p">「ここを角にする」で区画を決めると、光の線で枠が見え、画面の上のバーに条件の進み具合が出続けます。</p>
+    {_hs_hud()}
+    <div class="hs-judge">
+      <div class="hs-checks"><p class="dot">プラグインが数えること</p><ul>
+        <li>置いたブロックの数（土・砂・丸石など埋め立て用は数えない。その里で30日以内に置いたことのない場所だけ）</li>
+        <li>使ったブロックの種類（5種以上）</li>
+        <li>建てた時間（動いて遊んだ時間で数える）</li>
+        <li>形：高さ、屋根、扉、ベッド、灯り、床の広さ</li>
+      </ul></div>
+      <div class="hs-verdicts"><p class="dot">里長が見ること（見た目だけ）</p>
+        <div class="hs-v" style="--c:#F2B544"><b class="disp">見事</b><span>報酬 1.5倍</span></div>
+        <div class="hs-v" style="--c:#8FCB6A"><b class="disp">良し</b><span>報酬 1倍</span></div>
+        <div class="hs-v" style="--c:#E8574A"><b class="disp">やり直し</b><span>理由をひとこと</span></div>
+        <p class="mu">{HSN["autoHours"]}時間たっても鑑定されないときは、条件を満たしていれば自動で「良し」。認めた建物は{HSN["watchDays"]}日見守り、3割以上壊されると報酬が取り消されます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stratum s-rock" id="change">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">職は、試しを越えて変える。</h2>
+    <p class="lead">職は簡単には変えられません。職をなくすこともできません。里を移っても、職と位はそのまま持っていきます。</p>
+    <ol class="hm-steps hs-five">
+      <li><b>申し出る</b><span>職の画面の「転職の試し」で、なりたい職を選ぶ。里長に知らせが届く。</span></li>
+      <li><b>引き継ぐ</b><span>いまの職の依頼を終えるか手放す。弟子がいれば解く。</span></li>
+      <li><b>奉公する</b><span>{HSN["hokoDays"]}日のうちに、新しい職の「奉公の依頼」を{HSN["hokoNeed"]}つ果たす（週に3つ届く）。</span></li>
+      <li><b>師の許し</b><span>新しい職の熟練以上か里長が許す。{72}時間返事がなければ自動で許される。</span></li>
+      <li><b>転職する</b><span>新しい職の見習いから。前の職の経験と位は残り、{HSN["lockDays"]}日は変えられない。</span></li>
+    </ol>
+    <p class="mu hs-small">前の職に戻るときは、奉公が7日と3つで済みます。人手不足の職へ移るときは、奉公の依頼が4つで済みます。</p>
+    <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">LIST</span><span class="wb-b"><b class="disp">灯里のすべての数字</b><span>職ごとの日課と週課、バフの段、位、格、施設の素材、礎、ずるの防ぎ方。ゲームと同じ数字で。</span></span><span class="wb-go">灯里の一覧へ<i></i></span></a>
+  </div>
+</section>
+'''
+
+
+_HS_MUSUBI = [
+    ("縁", "#F29BB8", f"{HSN['friendsMax']}人まで", "フレンド。来ている・いないが一覧で見え、同じ里の民は「里の縁」として別の段に並びます。"),
+    ("一団", "#F2B544", f"{HSN['partyMax']}人まで", "パーティ。仲間の方角と体力が見え、一団だけのチャットと一団の箱が使えます。里の中でも外でも組めます。"),
+    ("合流・呼ぶ", "#8FCB6A", "3秒", "相手が承認すると、相手の近くの灯りへ移ります。民は里灯へ帰る「帰里」も使えます（待ち時間あり）。"),
+    ("手紙と小包", "#6AB8E8", f"{HSN['mailDays']}日で戻る", "いない人にも届く置き手紙。品を添えた小包は、受け取られないと送り主に戻ります。里の知らせ・便りもここへ。"),
+    ("合図", "#E9824A", "8つまで", "空中に言葉の札を立てます。見せる相手は自分・一団・里・みんな。里長は「普請の予定地」を立てられます。"),
+    ("配信中", "#B46CFF", "3つの強さ", "配信や録画のときに。座標・名前・チャットを伏せる範囲を、ゆるく／しっかり／完全から選びます。"),
+    ("離れる", "#C9D0DC", "お互いに", "合わない相手と、お互いに見えず、言葉も届かなくなります。同じ里の民にも使え、その人の依頼の鑑定は回ってきません。"),
+    ("おかえり", "#FFE3A3", "留守のあいだ", "入ったとき、留守のあいだの手紙・鑑定の結果・喰われた里の灯籠・大事業の進み具合をまとめて見せます。"),
+]
+_HS_LIFE = [
+    ("名所めぐり", "#F2B544", "「見事」になった建物を、里長が名所に登録します。誰でも名所の前へ灯渡りで見学でき、訪れるとはんこが押されます。10か所・30か所で灯の証。月に一度、みんなの投票で「今月の名所」を選びます。"),
+    ("旅の依頼", "#6AB8E8", "里長が掲示板に「鉄インゴット128を求む」のように出す依頼。報酬は蔵から先に預け、里のない人やほかの里の人が受けられます。ひとりで遊ぶ人にも出番ができます。"),
+    ("屋台と市の日", "#72D69C", "商人はエメラルドと品を交換する屋台を出せます。持ち主がいなくても売り買いでき、売り上げは手紙で届きます。週に一度の市の日は、ほかの里の人も灯渡りで来られます。"),
+    ("里の便り", "#F29BB8", "毎週月曜、里ごとに1冊の本が届きます。果たした依頼の数、職ごとにいちばん働いた人、新しい建物、灯し直してくれた人、格の進み。"),
+    ("感謝の灯", "#FFE3A3", f"鑑定・灯し直し・取引など、人の役に立つことが起きると「ありがとうを送る」が出ます。1日{HSN['thanks']}回まで、同じ相手には1日1回。週にいちばん感謝された人は、称号「里の灯」。"),
+    ("朝の灯と里の顔", "#E9824A", "その日はじめて土地に入ると、里灯が強く灯り、灯路を渡って里中に光が走ります。里の旗、名前の色、入口のあいさつ、広場に住み着く里人。強さではなく、名前と見た目を配ります。"),
+]
+
+
+def _hs_gui():
+    # 6段のチェスト画面の見本（ホーム）
+    S = {0: ("職", "#EE9A4A", "大工 一人前"), 2: ("板", "#F2B544", "掲示板 日課 2/3"), 3: ("蔵", "#C9B48A", "蔵"), 4: ("里", "#E9824A", "灯の里（村）"), 5: ("図", "#8FCB6A", "里の地図"), 6: ("結", "#F29BB8", "灯結"), 8: ("✉", "#6AB8E8", "受信箱 3通"),
+         20: ("普", "#E9824A", "普請"), 21: ("鑑", "#F2B544", "鑑定の箱"), 22: ("民", "#8FCB6A", "民"), 23: ("掟", "#C9D0DC", "掟"), 24: ("名", "#F2B544", "名所めぐり"), 30: ("市", "#72D69C", "市と屋台"), 31: ("旅", "#6AB8E8", "旅の依頼"), 32: ("暦", "#B46CFF", "季節の大事業"),
+         45: ("←", "#BFC9DB", "戻る"), 46: ("◀", "#BFC9DB", "前のページ"), 49: ("⌂", "#F2B544", "ホーム"), 52: ("▶", "#BFC9DB", "次のページ"), 53: ("✕", "#E8574A", "閉じる")}
+    cells = ""
+    for i in range(54):
+        if i in S:
+            k, c, t = S[i]
+            cells += f'<span class="hs-slot on" style="--c:{c}" title="{t}"><i class="disp">{k}</i></span>'
+        else:
+            cells += '<span class="hs-slot"></span>'
+    return f'''<div class="hs-gui">
+      <div class="hs-chest" role="img" aria-label="里のホームの画面の見本。上の段が見出し、下の段が固定の操作。"><p class="hs-chest-t">里のホーム ― 灯の里</p><div class="hs-slots">{cells}</div></div>
+      <dl class="hs-gui-rules">
+        <div><dt class="dot">上の段</dt><dd>見出し。いまの画面、自分の職と位、未読の手紙。</dd></div>
+        <div><dt class="dot">下の段</dt><dd>どの画面でも同じ位置に、戻る・前・ホーム・次・閉じる。</dd></div>
+        <div><dt class="dot">押し方</dt><dd>左クリックが主な操作、シフト＋クリックが2つ目。右クリックだけの隠れた操作はありません。</dd></div>
+        <div><dt class="dot">取り消せないこと</dt><dd>解散・追放・転職などは、1回目で札が赤くなり、もう一度押すと実行します。</dd></div>
+        <div><dt class="dot">生きている画面</dt><dd>進み具合・残り時間・人数は、開いたまま1秒ごとに変わります。</dd></div>
+        <div><dt class="dot">統合版</dt><dd>同じ中身を、押しやすいフォームで。文字は金床（Java）かフォームで入れます。</dd></div>
+      </dl>
+    </div>'''
+
+
+def _musubi_sec():
+    tiles = "".join(f'<div class="hs-tile" style="--c:{c}"><span class="dot">{n}</span><h3 class="disp">{t}</h3><p>{d}</p></div>' for t, c, n, d in _HS_MUSUBI)
+    life = "".join(f'<div class="hs-life" style="--c:{c}"><h3 class="disp">{t}</h3><p>{d}</p></div>' for t, c, d in _HS_LIFE)
+    return f'''<section class="stratum s-deep" id="musubi">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">仲間と、ほどよくつながる。</h2>
+    <p class="lead">灯結（ひむすび）は、里の暮らしの道具です。<span class="kbd">/sato musubi</span> か、里のホームの「灯結」から。里がなくても使えます。近づく人を押し戻す結界はありません。里の土地には、すでに建てる・壊すの守りがあるからです。</p>
+    <div class="hs-tiles">{tiles}</div>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="life">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">来るたびに、小さな楽しみを。</h2>
+    <p class="lead">里は、働く場所だけでは使われません。作ったものが人に見られ、里の外の人ともつながるように。どれも強さは配らず、名前と見た目と話題を配ります。</p>
+    <div class="hs-lifes">{life}</div>
+    <p class="note"><b>季節の大事業。</b>シーズンに1回、サーバー全体でひとつのものを作ります。すべての里が分担を受け、進み具合は全員に見えます。完成すると全員に記念の品、いちばん力を尽くした里に称号。</p>
+  </div>
+</section>
+
+<section class="stratum s-stone" id="gui">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">コマンドを覚えなくていい。</h2>
+    <p class="lead">はじめて来たときに「里の灯帳」を渡します。手に持って右クリックするか、里灯を素手で右クリック。どちらも同じホームに着き、すべての操作が画面で終わります。</p>
+    {_hs_gui()}
+  </div>
+</section>
+'''
+
+
+# ── 灯里の一覧（数字のすべて） ──
+def _hs_quest_rows(j):
+    out = ""
+    for q in j["quests"]:
+        out += f'<tr><th class="n">{q["kind"]}</th><td>{_E(q["text"])}</td><td class="dot">{q["xp"]}</td></tr>'
+    return out
+
+
+def hisato_page():
+    G, J, R, F = HS["grades"], HS["jobs"], HS["ranks"], HS["facilities"]
+    side = "".join(f'<a href="#{a}" style="--c:{c}"><span class="ws-k">{k}</span>{t}</a>' for a, k, t, c in [
+        ("open", "開", "里を開く", "#E9824A"), ("grades", "格", "4つの格", "#8FCB6A"), ("jobs", "職", "5つの職", "#EE9A4A"), ("ranks", "位", "位", "#F2B544"),
+        ("quests", "依", "依頼", "#6AB8E8"), ("facilities", "施", "施設", "#C9B48A"), ("fair", "守", "ずるの防ぎ方", "#E8574A"), ("musubi", "結", "灯結", "#F29BB8"), ("cmd", "令", "コマンド", "#C9D0DC")])
+    side += '<a href="guide-sato.html" class="ws-x" style="--c:#E9824A"><span class="ws-k">章</span>遊び方の章へ</a>'
+    hero = f'''<div class="hero ch-hero wk-hero" style="--c:#E9824A">
+  <div class="sky"></div><div class="stars" aria-hidden="true"></div>
+  <div class="wrap phead" id="content">
+    <nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><a href="guide-sato.html">灯里</a><span aria-hidden="true">›</span><span>一覧</span></nav>
+    <div class="ch-head">{pix(CH_ICONS["sato"], "ch-ic big")}<div><h1 class="disp h1-sub">灯里</h1></div></div>
+    <p class="lead">里・職・依頼・灯結。灯里（ひさと）のすべての数字を、ゲームと同じ値で。</p>
+  </div>
+</div>'''
+    grow = "".join(f'<tr><th class="n">{g["jp"]}</th><td class="dot">{g["power"]:,}</td><td class="dot">{g["people"]}</td><td class="dot">{g["lanterns"]}</td><td class="dot">{g["aides"]}</td><td class="dot">{g["facilities"]}</td><td class="dot">{g["weekCap"]:,}</td><td class="dot">{g["kura"]:,}</td></tr>' for g in G)
+    upk = "".join(f'<tr><th class="n">{g["jp"]}</th><td>{_E("・".join(f"{k} {v}" for k, v in g["upkeep"].items()))}</td><td>{_E(g["opens"])}</td></tr>' for g in G)
+    jobs = ""
+    for j in J:
+        c = _HS_JC[j["key"]]
+        buffs = "".join(f"<li>{_hs_merge([b[i] for b in j['buffs']])}</li>" for i in range(len(j["buffs"][0])))
+        jobs += f'''<div class="hs-wj" style="--c:{c}" id="w-{j["key"]}">
+        <h3 class="disp"><span class="hs-job-k disp">{_HS_JK[j["key"]]}</span>{j["jp"]}<small>{_E(j["role"])}</small></h3>
+        <div class="hs-wj-in">
+          <div><p class="dot hs-wj-h">バフ（見習い・一人前 ／ 熟練 ／ 名人・匠）</p><ul class="hs-job-b">{buffs}</ul>
+          <p class="dot hs-wj-h">匠の奉仕</p><p><b>{_E(j["service"])}</b>：{_E(j["serviceText"])}</p>
+          <p class="dot hs-wj-h">匠の試し</p><p>{_E(j["trial"])}</p></div>
+          <div class="tbl-wrap"><table><thead><tr><th>種類</th><th>依頼</th><th>経験</th></tr></thead><tbody>{_hs_quest_rows(j)}</tbody></table></div>
+        </div>
+      </div>'''
+    ranks = "".join(f'<tr><th class="n">{r["jp"]}</th><td class="dot">{r["xp"]:,}</td><td>{_E(r["opens"])}</td></tr>' for r in R)
+    fac = ""
+    for f in F:
+        cost = "・".join(f"{k} {v:,}" for k, v in f["cost"].items()) or "（格上げの普請で建てる）"
+        fac += f'<tr><th class="n">{f["jp"]}</th><td>{f["grade"]}</td><td>{_E(f["text"])}</td><td>{_E("・".join(f["need"]))}</td><td>{_E(cost)}</td></tr>'
+    fair = [("身内どうしで、手抜きの建物を「見事」にする", "量・種類・時間・形はプラグインが数えるので、鑑定で変わるのは倍率（最大1.5倍）だけ。建てたブロックは本人の持ち物から減る。里の力には1週間の上限がある"),
+            ("建てて、壊して、また建てる", "数えるのは、その里で30日以内に置いたことのない場所だけ。認めた建物は7日見守り、3割以上壊れたら報酬を取り消す"),
+            ("サブのアカウントで人数を水増しする", f"人数・五職そろい・人手不足に数えるのは、最近7日に2時間以上動いて遊んだ民だけ。入って{HSN['newcomerDays']}日は報酬が半分"),
+            ("ひとりの資本とサブのアカウントで里を開く", f"発起人それぞれに {HSN['founderHours']}時間・{HSN['cofounderHours']}時間の遊んだ時間が要り、礎の2割以上を自分で納める"),
+            ("転職をくり返して、おいしい日課だけを受ける", f"転職には{HSN['hokoDays']}日の奉公が要り、変えたあとは{HSN['lockDays']}日変えられない"),
+            ("里を渡り歩いて、日課を何度も受ける", f"日課と週課は人ごとに出るので、里を変えても同じ日に2回は出ない。抜けたら{HSN['leaveLock']}日はほかの里に入れない"),
+            ("敵トラップ・品の往復・乗り物で職を育てる", f"衛士は自然に湧いた敵だけ、商人は同じ相手ほど少なく、旅人は自分の足で新しく歩いた場所だけ。行動から入る経験は1日 {HSN['actionCap']} まで"),
+            ("蔵の持ち逃げ", "出し入れはすべて記録に残る。補佐が1日に持ち出せる量には上限があり、多く持ち出すと里長に知らせる"),
+            ("里長の意地悪な鑑定", f"やり直しには理由が要る。同じ人を3回続けてやり直しにすると、次の鑑定は補佐に回る。{HSN['autoHours']}時間たつと自動で「良し」"),
+            ("里を開いて消して、資本を回す", "仮の里の解散では礎が半分戻るだけ。正式な里の解散では礎は戻らない")]
+    fair_rows = "".join(f"<tr><th>{_E(a)}</th><td>{_E(b)}</td></tr>" for a, b in fair)
+    mus = "".join(f'<tr><th class="n">{t}</th><td>{_E(n)}</td><td>{_E(d)}</td></tr>' for t, c, n, d in _HS_MUSUBI)
+    cmd = next(g for g in _CMDS if g[3] == "Hisato")
+    cmd_rows = "".join(f'<tr><th class="n">{_E((r[0] + " " + r[1]).strip())}</th><td>{r[2]}</td></tr>' for r in cmd[5])
+    return hero + f'''
+<section class="stratum s-deep wk">
+  <div class="edge"></div>
+  <div class="wrap wk-in">
+    <nav class="wside" aria-label="灯里の目次"><p class="dot wside-h">灯里</p>{side}</nav>
+    <div class="wk-main">
+      <div class="wk-stats big">
+        <div><b class="dot">4</b><span>格</span></div><div><b class="dot">5</b><span>職</span></div><div><b class="dot">5</b><span>位（見習い〜匠）</span></div><div><b class="dot">{len(F)}</b><span>施設</span></div><div><b class="dot">{sum(len(j["quests"]) for j in J)}</b><span>依頼の型</span></div>
+      </div>
+
+      <h2 class="disp h2 wk-h" id="open">里を開く</h2>
+      {_hs_found_steps()}
+
+      <h2 class="disp h2 wk-h" id="grades">4つの格</h2>
+      <div class="tbl-wrap"><table><thead><tr><th>格</th><th>要る里の力</th><th>民の上限</th><th>土地の灯籠</th><th>補佐</th><th>施設</th><th>里の力の上限／週</th><th>蔵の容量</th></tr></thead><tbody>{grow}</tbody></table></div>
+      <div class="tbl-wrap" style="margin-top:16px"><table><thead><tr><th>格</th><th>毎週の灯油</th><th>開くもの</th></tr></thead><tbody>{upk}</tbody></table></div>
+      <p class="mu wk-small">格を上げるには、要る里の力に加えて大事業「格上げの普請」を果たします。村へは集会所、町へは蔵屋敷、都へは大門を建てます。</p>
+
+      <h2 class="disp h2 wk-h" id="jobs">5つの職</h2>
+      {jobs}
+
+      <h2 class="disp h2 wk-h" id="ranks">位</h2>
+      <div class="tbl-wrap"><table><thead><tr><th>位</th><th>要る職の経験</th><th>開くもの</th></tr></thead><tbody>{ranks}</tbody></table></div>
+      <p class="mu wk-small">日課1つで経験 {HSN["dailyXp"]}、週課1つで {HSN["weeklyXp"]}。行動から入る経験は1日 {HSN["actionCap"]} まで。人手不足の職は報酬 +25%、民の半分を超える職は −30%、弟子は +20%、学び舎のある里の見習い・一人前は +20%。</p>
+
+      <h2 class="disp h2 wk-h" id="quests">依頼のきまり</h2>
+      <div class="tbl-wrap"><table><thead><tr><th>種類</th><th>出かた</th><th>報酬</th></tr></thead><tbody>
+        <tr><th class="n">日課</th><td>毎日0時、民ごとに3つ。里に足りないものから選ばれる</td><td>経験 {HSN["dailyXp"]}・里の力 10</td></tr>
+        <tr><th class="n">週課</th><td>毎週月曜、民ごとに2つ（一人前から）</td><td>経験 {HSN["weeklyXp"]}・里の力 80・加護の欠片 2</td></tr>
+        <tr><th class="n">里の頼み</th><td>里長・補佐が掲示板に出す</td><td>蔵から預けた品＋経験</td></tr>
+        <tr><th class="n">旅の依頼</th><td>里長が出し、里の外の人も受けられる</td><td>蔵から預けた品</td></tr>
+        <tr><th class="n">大事業</th><td>格上げ・施設の普請のたび。職ごとの分担。いない職の分は「手伝い」で埋められる（報酬は半分）</td><td>里の力・格・施設</td></tr>
+        <tr><th class="n">建築の依頼</th><td>区画を決めて建て、鑑定に出す。見事 1.5倍・良し 1倍・やり直し</td><td>{HSN["autoHours"]}時間で自動の「良し」、{HSN["watchDays"]}日の見守り</td></tr>
+      </tbody></table></div>
+
+      <h2 class="disp h2 wk-h" id="facilities">施設</h2>
+      <div class="tbl-wrap"><table><thead><tr><th>施設</th><th>要る格</th><th>効き目</th><th>中に置くもの</th><th>普請の素材</th></tr></thead><tbody>{fac}</tbody></table></div>
+      <p class="mu wk-small">施設も建物なので、大工が建てて里長が鑑定します。中に置くもの（鐘・書見台など）は自動で数えます。大工がいる里は、普請の素材が 10〜20% 減ります。</p>
+
+      <h2 class="disp h2 wk-h" id="fair">ずるの防ぎ方</h2>
+      <p class="mu wk-p">身内の八百長は「止める」のではなく「しても得をしない」形にしてあります。量は機械が数え、素材は本当に減り、報酬の多くは本人の職の経験と里の力です。怪しい動きは週に一度、自動で運営に知らされます。</p>
+      <div class="tbl-wrap"><table><thead><tr><th>起きそうなこと</th><th>防ぎ方</th></tr></thead><tbody>{fair_rows}</tbody></table></div>
+
+      <h2 class="disp h2 wk-h" id="musubi">灯結</h2>
+      <div class="tbl-wrap"><table><thead><tr><th>道具</th><th>数</th><th>できること</th></tr></thead><tbody>{mus}</tbody></table></div>
+
+      <h2 class="disp h2 wk-h" id="cmd">コマンド</h2>
+      <div class="tbl-wrap"><table><thead><tr><th>コマンド</th><th>すること</th></tr></thead><tbody>{cmd_rows}</tbody></table></div>
+    </div>
+  </div>
+</section>'''
+
+
+HS_PAGES = [("hisato.html", "灯里｜灯原", "灯里（ひさと）のすべての数字。里を開く条件と礎、4つの格、5つの職のバフと依頼、位と匠の試し、施設、ずるの防ぎ方、灯結、コマンド。", hisato_page())]
+
+
 # ───────────────────────── 技の組み立て ─────────────────────────
 def wiki_build():
     data = {"capNeeds": HW["capNeeds"], "kind": _KIND, "paths": [
@@ -2345,7 +2831,7 @@ commands = sub_hero("commands.html", "コマンド一覧", "ふだんはメニ�
       <div id="cl">{"".join(f'''<div class="cmdg" id="c{i}"><div class="cmdg-h" style="--c:{g[1]}"><span class="k">{g[0]}</span><h2 class="disp">{g[2]}</h2><p>{g[4]}</p></div>{_cmd_rows(g[5])}</div>''' for i, g in enumerate(_CMDS))}</div>
       <p class="wk-empty" id="cempty" hidden>見つかりませんでした。ことばを短くしてみてください。</p>
     </div>
-    <p class="note" style="margin-top:44px"><b>統合版（スマホ・Switch など）の人へ。</b>コマンドを打たなくても、<span class="kbd">/tomoshibi</span>・<span class="kbd">/akashi</span>・<span class="kbd">/waza</span> で押しやすい専用のメニューが開きます。</p>
+    <p class="note" style="margin-top:44px"><b>統合版（スマホ・Switch など）の人へ。</b>コマンドを打たなくても、<span class="kbd">/tomoshibi</span>・<span class="kbd">/sato</span>・<span class="kbd">/akashi</span>・<span class="kbd">/waza</span> で押しやすい専用のメニューが開きます。</p>
   </div>
 </section>
 <script src="assets/wiki.js" defer></script>'''
@@ -2419,15 +2905,15 @@ def playstyle():
 PAGES = [
     ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1は2026年11月7日21時開幕。", index),
     ("start.html", "はじめる｜灯原", "灯原への入り方を機種別に。Java版、スマホ、Windows、Switch・PS・Xbox。最初の夜の過ごし方と、よくある質問。", start),
-    ("guide.html", "遊び方｜灯原", f"灯原のしくみを9つの章で。灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、8つの加護、10の道・130の技「灯技」、106種の灯魚、{len(HM['defs'])}の特別な付呪「灯紋」、263の進捗「灯の証」、灯標と灯りの色。", guide),
+    ("guide.html", "遊び方｜灯原", f"灯原のしくみを{len(CH)}の章で。灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、8つの加護、10の道・130の技「灯技」、106種の灯魚、{len(HM['defs'])}の特別な付呪「灯紋」、263の進捗「灯の証」、灯標と灯りの色、仲間と開く里と5つの職「灯里」、灯結。", guide),
 ] + [(f"guide-{c['id']}.html", f"{c['t']}｜遊び方｜灯原", c['desc'], chapter_page(k)) for k, c in enumerate(CH)] + [
     ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり4種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。", events),
     ("playstyle.html", "遊び方を選ぶ｜灯原", "みんなで・身内で・ひとりで。3つの遊び方ごとのマニュアル。はじめの5つ、よく使うコマンド、コツ、気をつけること。", playstyle()),
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
-] + WIKI_PAGES + AK_PAGES + HM_PAGES + [
+] + WIKI_PAGES + AK_PAGES + HM_PAGES + HS_PAGES + [
     ("support.html", "支える｜灯原", "灯原を支える（寄付）。PayPay で金額は自由、100円から。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
     ("characters.html", "ひとびと｜灯原", "灯原の案内役、6人の旅人（ヒノ・モモ・ソラ・ワカ・シノ・ユキ）と、灯りを喰う灯喰い、夜の敵。予告編に出てくるドット絵の登場人物たち。", characters),
-    ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯籠と灯路（/tomoshibi）、灯の証（/akashi）、灯技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
+    ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯籠と灯路（/tomoshibi）、灯里（/sato）、灯の証（/akashi）、灯技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
 ]
 out = pathlib.Path(__file__).parent
@@ -2519,6 +3005,10 @@ for g in _CMDS:
         _idx.append({"k": "コマンド", "t": (r[0] + " " + r[1]).strip(), "s": _re0.sub("<[^>]+>", "", r[2])[:50], "u": f"commands.html#k{_kn}", "c": g[1]})
 for x in HM["defs"]:
     _idx.append({"k": "紋", "t": x["name"], "s": HM["rarity"][x["r"]]["jp"] + "・" + x["on"] + "・" + x["desc"][0][:36], "u": f"himon.html#m-{x['id']}", "c": HM["rarity"][x["r"]]["hex"]})
+for j in HS["jobs"]:
+    _idx.append({"k": "職", "t": j["jp"], "s": j["role"] + "・匠の奉仕「" + j["service"] + "」", "u": f"guide-shoku.html#j-{j['key']}", "c": _HS_JC[j["key"]]})
+for f in HS["facilities"]:
+    _idx.append({"k": "施設", "t": f["jp"], "s": f["grade"] + "・" + f["text"][:40], "u": "hisato.html#facilities", "c": "#E9824A"})
 (out / "assets" / "search.json").write_text(_wj.dumps(_idx, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 today = datetime.date.today().isoformat()
 (out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE}/{'' if f == 'index.html' else f}</loc><lastmod>{today}</lastmod></url>\n" for f, *_ in PAGES if f != "404.html") + "</urlset>\n", encoding="utf-8")
