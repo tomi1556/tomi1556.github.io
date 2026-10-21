@@ -193,6 +193,10 @@ def cd(kind, label):
 
 _CMD_N = [0]
 _CMDS = [
+    ("導", "#FFE3A3", "灯原のメニュー", "Hishirube", "はじめて来たときに渡す「灯しるべ」を右クリックしても、同じメニューが開きます。", [
+        ("/menu", "", "灯原のメニューを開く。<b>迷ったらこれ</b>。灯籠・灯技・灯紋・灯の証・里・灯結のすべてへ（<span class=\"kbd\">/tomoshibara</span> でも同じ）"),
+        ("/menu item", "", "灯しるべ（右クリックでメニューが開く品）をもう一度もらう"),
+    ]),
     ("灯", "#F2B544", "灯籠と灯路", "Tomoshibi", "灯籠を素手で右クリックしても、同じメニューが開きます。", [
         ("/tomoshibi", "", "メニューを開く。<b>これだけ覚えれば大丈夫</b>（<span class=\"kbd\">/tomo</span> でも同じ）"),
         ("/tomoshibi info", "", "いま立っている灯路網と、灯籠の数"),
@@ -455,7 +459,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <li><time>0分</time><div><h3>灯籠を3基受け取る</h3><p>はじめて入ると、持ち物に光る「灯籠」が3基入ります。ふつうのランタンとは別のもので、ふつうのランタンは飾りにしかなりません。灯籠は作業台で作れます（アメジストの欠片2・金インゴット2・ランタン1）。</p></div></li>
       <li><time>1分</time><div><h3>1基目を置く</h3><p>置いた場所のまわり半径10ブロックが「灯りの中」になります。敵は入ってこられず、中にいる人を狙えません。爆発で壊れず、倒れても持ち物を失いません。最初の1基は無料です。</p></div></li>
       <li><time>3分</time><div><h3>2基目を、16ブロック以内に置く</h3><p>2基が「灯路」でつながります。灯路の上は足が速くなり、つなげて置くと経験値ももらえます。</p></div></li>
-      <li><time>5分</time><div><h3>メニューを開く</h3><p>チャットに <span class="kbd">/tomoshibi</span> と打つか、何も持たずに灯籠を右クリック（統合版は長押し）します。「はじめの一歩」が6つあり、1つ達成するたびに灯籠を2基もらえます。</p></div></li>
+      <li><time>5分</time><div><h3>メニューを開く</h3><p>持ち物の「灯しるべ」を右クリックするか、チャットに <span class="kbd">/menu</span> と打つと、灯原のメニューが開きます。灯籠・灯技・灯紋・灯の証・里・灯結の、すべての画面へここから行けます。灯籠の画面（<span class="kbd">/tomoshibi</span>）には「はじめの一歩」が6つあり、1つ達成するたびに灯籠を2基もらえます。</p></div></li>
       <li><time>夜</time><div><h3>灯りの中で過ごす</h3><p>画面の下に「灯りの中」と出ていれば安全です。灯りの外に出ると「闇の中」と出て、いちばん近い灯りの方角を教えてくれます。</p></div></li>
       <li><time>いつでも</time><div><h3>灯の証を見る</h3><p><span class="kbd">/akashi</span> で、灯原だけの進捗「灯の証」が開きます。全部で263個。すぐ届くものから、季節をまたぐものまであります。</p></div></li>
       <li><time>いつでも</time><div><h3>技を育てる</h3><p><span class="kbd">/waza</span> で「灯技」が開きます。掘る・切る・釣る・旅をする…遊んだ道の Lv が上がり、技点で技を覚えます。毎日3つの「今日の務め」もあります。</p></div></li>
@@ -1077,7 +1081,7 @@ def _guide_index():
     <a href="himon.html" class="wiki-band hm-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯紋 Wiki</b><span>{len(HM["defs"])}の紋の段・効き目・刻めるもの、紋書の引き方、刻み方と重ね方。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯里 Wiki</b><span>4つの格、5つの職のバフと日課・週課、位と匠の試し、施設の素材、礎、ずるの防ぎ方。</span></span><span class="wb-go">開く<i></i></span></a>
     </div>
-    <a href="commands.html" class="wiki-band cmd-band"><span class="wb-k dot">CMD</span><span class="wb-b"><b class="disp">コマンド一覧</b><span>/tomoshibi・/sato・/akashi・/waza・/himon・/yomatsuri・/tokoyo のすべて。探して、すぐ見つかる。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="commands.html" class="wiki-band cmd-band"><span class="wb-k dot">CMD</span><span class="wb-b"><b class="disp">コマンド一覧</b><span>/menu・/tomoshibi・/sato・/akashi・/waza・/himon・/yomatsuri・/tokoyo のすべて。探して、すぐ見つかる。</span></span><span class="wb-go">開く<i></i></span></a>
   </div>
 </section>'''
 
@@ -1936,12 +1940,12 @@ def _hm_rules():
     return f'''<ol class="hm-steps">
         <li><b>「刻む」を開く</b><span>画面の「刻む」か <span class="kbd">/himon engrave</span>。</span></li>
         <li><b>道具と紋書を置く</b><span>持ち物をクリックすると、道具と紋書がそれぞれの場所に入ります。刻めるかどうかは、その場で表示。</span></li>
-        <li><b>刻む</b><span>段に応じた経験値（{HM["rarity"][0]["engrave"]}〜{HM["rarity"][-1]["engrave"]} Lv）を払います。紋書はなくなります。</span></li>
+        <li><b>刻む</b><span>段に応じた経験値（{HM["rarity"][0]["engrave"]}〜{HM["rarity"][-1]["engrave"]} Lv）を払います。重ねて Lv2 にするときは1.5倍、Lv3 は2倍。紋書はなくなります。</span></li>
       </ol>
       <div class="three hm-rules">
         <div><h3 class="h3 disp">重ねて強く</h3><p class="mu">同じ紋を同じ Lv で重ねると、1つ上がります（Lv1＋Lv1 → Lv2）。Lv がちがうときは、高い方が残ります。</p></div>
         <div><h3 class="h3 disp">1つの道具に{HM["slots"]}つまで</h3><p class="mu">秘の紋は1つだけ。閃光と陣立て、不屈と不死鳥は、同じ道具に刻めません。ふつうの付呪とはいっしょに使えます。</p></div>
-        <div><h3 class="h3 disp">外すこともできる</h3><p class="mu">刻む画面で、紋をしゃがみクリック。経験値 2 Lv で外せます（紋書は戻りません）。</p></div>
+        <div><h3 class="h3 disp">外すこともできる</h3><p class="mu">刻む画面で、紋をしゃがみクリック。段に応じた経験値（2〜9 Lv）で外せます（紋書は戻りません）。</p></div>
       </div>'''
 
 
@@ -2854,7 +2858,7 @@ commands = sub_hero("commands.html", "コマンド一覧", "ふだんはメニ�
                     [(f"c{i}", g[2]) for i, g in enumerate(_CMDS)]) + f'''
 <section class="stratum s-deep" id="cmds">
   <div class="wrap">
-    {say_box("hino", "迷ったら <span class=\"kbd\">/tomoshibi</span>。統合版なら、押しやすいメニューが出るよ。")}
+    {say_box("hino", "迷ったら <span class=\"kbd\">/menu</span>。統合版なら、押しやすいメニューが出るよ。")}
     <div class="finder">
       <label class="find"><span class="sr">コマンドを探す</span><input type="search" id="cq" placeholder="コマンド・できることで探す（例：灯渡り、色、番付）" autocomplete="off"><kbd class="dot">/</kbd></label>
       <p class="find-n mu" aria-live="polite"><b class="dot" id="cn">{sum(len(g[5]) for g in _CMDS)}</b> のコマンド <button type="button" class="clear" id="cclear" hidden>探すのをやめる</button></p>
@@ -2945,7 +2949,7 @@ PAGES = [
 ] + WIKI_PAGES + AK_PAGES + HM_PAGES + HS_PAGES + [
     ("support.html", "支える｜灯原", "灯原を支える（寄付）。PayPay で金額は自由、100円から。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
     ("characters.html", "ひとびと｜灯原", "灯原の案内役、6人の旅人（ヒノ・モモ・ソラ・ワカ・シノ・ユキ）と、灯りを喰う灯喰い、夜の敵。予告編に出てくるドット絵の登場人物たち。", characters),
-    ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯籠と灯路（/tomoshibi）、灯里（/sato）、灯の証（/akashi）、灯技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
+    ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯原のメニュー（/menu）、灯籠と灯路（/tomoshibi）、灯里（/sato）、灯の証（/akashi）、灯技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
 ]
 out = pathlib.Path(__file__).parent
