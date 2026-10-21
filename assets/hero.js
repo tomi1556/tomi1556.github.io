@@ -439,7 +439,7 @@
     if (!coarse) { ex += ptr.sx * 2.2; ey -= ptr.sy * 1.0; }
     var ty = 1;
     // 下へ：最初の灯籠の足もとへ降りていき、真上から見下ろす
-    var dp = scrollP < 0.03 ? 0 : Math.min(1, (scrollP - 0.03) / 0.37), de = dp * dp * (3 - 2 * dp);
+    var dp = !dive || scrollP < 0.03 ? 0 : Math.min(1, (scrollP - 0.03) / 0.37), de = dp * dp * (3 - 2 * dp);
     if (de > 0) {
       var L0 = LAN[startI];
       var dx = L0.cx + 0.2, dy = L0.y + 2.6, dz = L0.cz - 1.1;

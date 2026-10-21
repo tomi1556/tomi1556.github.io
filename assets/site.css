@@ -1456,13 +1456,8 @@ a.dbtn:hover,a.dbtn:focus-visible{color:#fff}
 .s-stone time{color:var(--amber-hi)}
 table th[style*="color"],table td a[style*="color"]{filter:brightness(1.22)}
 #reds .pf-role{background:#C4231A}
-/* ═════════ トップ → 土の章：掘って降りる ═════════ */
-/* 景色は画面に止まり、文字と章がその上を流れる */
-.hero-top.webgl{background:transparent}
-.hero-top.webgl .gl-cv{position:fixed;left:0;top:0;width:100vw;height:100lvh;z-index:-1}
-.dive{height:0;pointer-events:none}
-.hero-top.webgl+.dive{height:130svh}
-html.rm .hero-top.webgl+.dive{height:0}
+/* ═════════ トップの景色：トップの中だけに描く ═════════ */
+.hero-top.webgl{background:transparent;position:relative;isolation:isolate}
 html{background:#05070F}
 /* ═════════ 下のページの夜空：トップの3Dの空とそろえる ═════════ */
 .sky{background:linear-gradient(180deg,#070C1D 0%,#0C1530 34%,#18264A 64%,#2E3456 84%,#4A3E55 100%)}
@@ -1480,10 +1475,6 @@ html{background:#05070F}
 .ps .depth::before{background:var(--c)}
 .ps .h2{text-shadow:0 0 28px color-mix(in srgb,var(--c) 35%,transparent)}
 .ps .steps li::before{border-color:var(--c)}
-.dive{position:relative}
-.dive-y{position:fixed;left:50%;top:46%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:10px;pointer-events:none;opacity:0;transition:opacity .25s;color:#FFE3A3;text-shadow:0 0 24px rgba(242,181,68,.6),0 3px 0 rgba(0,0,0,.6)}
-.dive-y b{font-weight:400;font-size:clamp(54px,9vw,120px);line-height:1;font-variant-numeric:tabular-nums}
-.dive-y span{font-size:14px;letter-spacing:.5em;padding-left:.5em;color:#E9D9C2}
 
 /* ═════════ 洗練：引き算の層（見やすさを最優先に） ═════════ */
 /* 見出しの上の小さなラベルと番号は使わない（HTML からも取り除いている） */
@@ -1505,9 +1496,6 @@ p,li,dd{line-height:1.9}
 .gl-hud{display:none!important}
 /* 下のページの景色：吹き出しはなし（人物と灯りだけ） */
 .ridge .bub{display:none}
-/* 深さの数字：小さく、静かに */
-.dive-y b{font-size:clamp(36px,5vw,64px);opacity:.9}
-.dive-y{text-shadow:0 2px 12px rgba(0,0,0,.6)}
 /* 選択とスクロールバーも、世界の色で */
 ::selection{background:rgba(242,181,68,.35);color:#fff}
 html{scrollbar-color:#3A3F48 #101215}

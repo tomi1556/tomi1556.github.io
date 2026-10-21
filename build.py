@@ -271,9 +271,9 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <div class="scene" data-scene aria-hidden="true"></div>
   <template id="tpl-cast"><span class="who">{fig("hino", True)}</span><span class="who foe">{eater()}</span></template>
 </div>
-<div class="dive" aria-hidden="true"></div>
 
-<section class="stratum tex s-soil">
+<section class="stratum tex s-soil" id="facts">
+  <div class="edge"></div>
   <div class="wrap">
     <p class="depth">Y=48</p>
     <h2 class="disp h2">この世界の、三つのこと。</h2>
