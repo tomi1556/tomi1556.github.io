@@ -54,7 +54,7 @@ def footer():
     cols = [
         ("はじめる", [("start.html#join", "入り方"), ("start.html#first", "最初の夜"), ("playstyle.html", "遊び方を選ぶ"), ("commands.html", "コマンド一覧"), ("start.html#faq", "よくある質問")]),
         ("遊び方", None),
-        ("Wiki", [("wiki.html", "Wiki のはじめ"), ("wiki.html#all", "すべての技を探す"), ("wiki.html#trials", "奥義の試練"), ("wiki.html#tasks", "今日の務め"), ("wiki-hiuo.html", "灯魚図鑑"), ("wiki-build.html", "技の組み立て"), ("akashi.html", "灯の証 Wiki"), ("himon.html", "灯紋"), ("hisato.html", "灯里")]),
+        ("Wiki", [("wiki.html", "Wiki のはじめ"), ("wiki.html#all", "すべての技を探す"), ("wiki.html#trials", "奥義の試練"), ("wiki.html#tasks", "今日の務め"), ("wiki-hiuo.html", "灯魚図鑑"), ("wiki-build.html", "技の組み立て"), ("akashi.html", "灯の証 Wiki"), ("himon.html", "灯紋 Wiki"), ("hisato.html", "灯里 Wiki")]),
         ("灯原", [("events.html", "夜祭"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
     ]
     cm = ""
@@ -1070,15 +1070,17 @@ def _guide_index():
   <div class="wrap">
     <div class="gi-start">{pix(CH_ICONS["lantern"], "ch-ic lit")}<p><b>はじめての人は、第一層の3章だけで大丈夫です。</b>灯籠を置き、夜を知り、灯喰いから守れれば、最初の夜は越えられます。ほかの章は、遊びながらでどうぞ。</p><a href="guide-lantern.html" class="pbtn">第1章から読む</a></div>
     {layers}
-    <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯技 完全解説 Wiki</b><span>130の技の効き目・要る Lv・技点・待ち時間、技の木、奥義の試練、務め、灯魚図鑑。ぜんぶ、ゲームと同じ数字で。</span></span><span class="wb-go">開く<i></i></span></a>
-    <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯の証 完全解説 Wiki</b><span>263の証の目標と報酬、段の道、10の位階、称号・灯りの色・足跡の手に入れ方。秘められた証は手がかりだけ。</span></span><span class="wb-go">開く<i></i></span></a>
-    <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">LIST</span><span class="wb-b"><b class="disp">灯里のすべての数字</b><span>4つの格、5つの職のバフと日課・週課、位と匠の試し、施設の素材、礎、ずるの防ぎ方。</span></span><span class="wb-go">開く<i></i></span></a>
+    <div class="wk-bands">
+    <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯技 Wiki</b><span>130の技の効き目・要る Lv・技点・待ち時間、技の木、奥義の試練、務め、灯魚図鑑、技の組み立て。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯の証 Wiki</b><span>263の証の目標と報酬、段の道、10の位階、称号・灯りの色・足跡の手に入れ方。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="himon.html" class="wiki-band hm-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯紋 Wiki</b><span>{len(HM["defs"])}の紋の段・効き目・刻めるもの、紋書の引き方、刻み方と重ね方。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯里 Wiki</b><span>4つの格、5つの職のバフと日課・週課、位と匠の試し、施設の素材、礎、ずるの防ぎ方。</span></span><span class="wb-go">開く<i></i></span></a>
+    </div>
     <a href="commands.html" class="wiki-band cmd-band"><span class="wb-k dot">CMD</span><span class="wb-b"><b class="disp">コマンド一覧</b><span>/tomoshibi・/sato・/akashi・/waza・/himon・/yomatsuri・/tokoyo のすべて。探して、すぐ見つかる。</span></span><span class="wb-go">開く<i></i></span></a>
   </div>
 </section>'''
 
 
-guide = _guide_index()
 
 # ───────────────────────── 夜祭 ─────────────────────────
 events = f'''<div class="hero">
@@ -1312,14 +1314,37 @@ def _xp_rows(i):
     }[i]
 
 
+_WIKIS = [("waza", "技", "灯技", "wiki.html", "#5AAAFF", "guide-hiwaza.html"), ("akashi", "証", "灯の証", "akashi.html", "#F29BB8", "guide-akashi.html"),
+          ("himon", "紋", "灯紋", "himon.html", "#F2B544", "guide-himon.html"), ("hisato", "里", "灯里", "hisato.html", "#E9824A", "guide-sato.html")]
+
+
+def _wiki_switch(cur):
+    """どの Wiki にも、同じ場所に同じ切り替えを出す。"""
+    tabs = "".join(f'<a href="{u}" style="--c:{c}"{" aria-current=\"page\"" if k == cur else ""}><span class="ws-k">{ch}</span>{t}<small>Wiki</small></a>' for k, ch, t, u, c, _ in _WIKIS)
+    tabs += f'<a href="commands.html" class="wsw-cmd" style="--c:#C9D0DC"{" aria-current=\"page\"" if cur == "cmd" else ""}><span class="ws-k">令</span>コマンド</a>'
+    return f'<nav class="wsw" aria-label="Wiki の切り替え">{tabs}</nav>'
+
+
+def _wiki_crumb(cur, tail=""):
+    w = next(x for x in _WIKIS if x[0] == cur)
+    return f'<nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><a href="{w[3]}">{w[2]} Wiki</a>{tail}</nav>'
+
+
+def _wiki_others(cur):
+    w = next(x for x in _WIKIS if x[0] == cur)
+    out = f'<p class="dot wside-h wside-x">ほかの Wiki</p>'
+    out += "".join(f'<a href="{u}" class="ws-o" style="--c:{c}"><span class="ws-k">{ch}</span>{t} Wiki</a>' for k, ch, t, u, c, _ in _WIKIS if k != cur)
+    out += f'<a href="{w[5]}" class="ws-o" style="--c:{w[4]}"><span class="ws-k">章</span>遊び方の「{w[2]}」の章</a>'
+    return out
+
+
 def _wiki_side(cur):
     items = f'<a href="wiki.html"{" aria-current=\"page\"" if cur == "top" else ""}><span class="ws-k" style="--c:var(--amber)">≡</span>Wiki のはじめ</a>'
     for i, p in enumerate(HW["paths"]):
         items += f'<a href="wiki-{p["id"]}.html" style="--c:{_PCOL[i]}"{" aria-current=\"page\"" if cur == p["id"] else ""}><span class="ws-k">{p["k"]}</span>{p["name"]}</a>'
     items += f'<a href="wiki-hiuo.html" style="--c:#4FD8C8"{" aria-current=\"page\"" if cur == "hiuo" else ""}><span class="ws-k">魚</span>灯魚図鑑</a>'
     items += f'<a href="wiki-build.html" style="--c:var(--amber)"{" aria-current=\"page\"" if cur == "build" else ""}><span class="ws-k">組</span>技の組み立て</a>'
-    items += '<a href="akashi.html" class="ws-x" style="--c:#F29BB8"><span class="ws-k">証</span>灯の証 Wiki へ</a>'
-    items += '<a href="himon.html" class="ws-x" style="--c:#F2B544"><span class="ws-k">紋</span>灯紋へ</a>'
+    items += _wiki_others("waza")
     return f'<nav class="wside" aria-label="Wiki の目次"><p class="dot wside-h">灯技 Wiki</p>{items}</nav>'
 
 
@@ -1328,7 +1353,8 @@ def _wiki_hero(title, lead, color, crumb, icon_rows=None, sub=""):
     return f'''<div class="hero ch-hero wk-hero" style="--c:{color}">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div>
   <div class="wrap phead" id="content">
-    <nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><a href="wiki.html">灯技 Wiki</a>{crumb}</nav>
+    {_wiki_switch("waza")}
+    {_wiki_crumb("waza", crumb)}
     <div class="ch-head">{ic}<div><p class="ch-big dot">{sub}</p><h1 class="disp h1-sub">{title}</h1></div></div>
     <p class="lead">{lead}</p>
   </div>
@@ -1661,7 +1687,7 @@ def _ak_side(cur):
     items = f'<a href="akashi.html"{" aria-current=\"page\"" if cur == "top" else ""}><span class="ws-k" style="--c:var(--pink)">≡</span>証 Wiki のはじめ</a>'
     for i, c in enumerate(AK["cats"]):
         items += f'<a href="akashi-{_AK_SLUG[i]}.html" style="--c:{_AK_COL[i]}"{" aria-current=\"page\"" if cur == i else ""}><span class="ws-k">{c["k"]}</span>{c["name"]}<small class="dot">{len(_ak_defs(i))}</small></a>'
-    items += '<a href="wiki.html" class="ws-x" style="--c:#5AAAFF"><span class="ws-k">技</span>灯技 Wiki へ</a>'
+    items += _wiki_others("akashi")
     return f'<nav class="wside" aria-label="証 Wiki の目次"><p class="dot wside-h">灯の証 Wiki</p>{items}</nav>'
 
 
@@ -1670,7 +1696,8 @@ def _ak_hero(title, lead, color, crumb, icon_rows, sub):
     return f'''<div class="hero ch-hero wk-hero" style="--c:{color}">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div>
   <div class="wrap phead" id="content">
-    <nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><a href="akashi.html">灯の証 Wiki</a>{crumb}</nav>
+    {_wiki_switch("akashi")}
+    {_wiki_crumb("akashi", crumb)}
     <div class="ch-head">{ic}<div><p class="ch-big dot">{sub}</p><h1 class="disp h1-sub">{title}</h1></div></div>
     <p class="lead">{lead}</p>
   </div>
@@ -1982,11 +2009,12 @@ def himon_page():
     gchips = "".join(f'<button type="button" class="chip-f" data-f="g" data-v="{k}" style="--c:#E9EEF6">{t}</button>' for k, t, _ in _HM_G)
     side = "".join(f'<a href="#{a}" style="--c:{c}"><span class="ws-k">{k}</span>{t}</a>' for a, k, t, c in [
         ("draw", "引", "紋書を引く", "#F2B544"), ("engrave", "刻", "道具に刻む", "#8FC3E8"), ("all", "紋", f"{len(HM['defs'])}の紋", "#B79CF2"), ("cmd", "令", "コマンド", "#C9D0DC")])
-    side += '<a href="guide-himon.html" class="ws-x" style="--c:#E9C46A"><span class="ws-k">章</span>遊び方の章へ</a><a href="wiki.html" class="ws-x" style="--c:#5AAAFF"><span class="ws-k">技</span>灯技 Wiki へ</a>'
+    side += _wiki_others("himon")
     hero = f'''<div class="hero ch-hero wk-hero" style="--c:#F2B544">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div>
   <div class="wrap phead" id="content">
-    <nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><a href="guide-himon.html">灯紋</a><span aria-hidden="true">›</span><span>一覧</span></nav>
+    {_wiki_switch("himon")}
+    {_wiki_crumb("himon", f'<span aria-hidden="true">›</span><span>{len(HM["defs"])}の紋</span>')}
     <div class="ch-head">{pix(HM_ICON, "ch-ic big")}<div><h1 class="disp h1-sub">灯紋</h1></div></div>
     <p class="lead">経験値で紋書を引き、道具に刻む、{len(HM["defs"])}の特別な付呪。ふつうの付呪とも灯技とも重ならない、灯原だけの力です。</p>
   </div>
@@ -1995,7 +2023,7 @@ def himon_page():
 <section class="stratum s-deep wk">
   <div class="edge"></div>
   <div class="wrap wk-in">
-    <nav class="wside" aria-label="灯紋の目次"><p class="dot wside-h">灯紋</p>{side}</nav>
+    <nav class="wside" aria-label="灯紋の目次"><p class="dot wside-h">灯紋 Wiki</p>{side}</nav>
     <div class="wk-main">
       <div class="wk-stats big">
         <div><b class="dot">{len(HM["defs"])}</b><span>紋</span></div><div><b class="dot">{len(R)}</b><span>段</span></div><div><b class="dot">{HM["slots"]}</b><span>1つの道具に刻める数</span></div><div><b class="dot">{HM["fudaMin"]}<small>分</small></b><span>灯札1枚に要る、遊んだ時間</span></div>
@@ -2032,7 +2060,7 @@ def himon_page():
 <script src="assets/wiki.js" defer></script>'''
 
 
-HM_PAGES = [("himon.html", "灯紋｜灯原", f"灯紋（ひもん）{len(HM['defs'])}種のすべて。経験値で紋書を引く5つの段（並・良・珍・稀・秘）、道具への刻み方、重ね方、効き目と刻めるもの。", himon_page())]
+HM_PAGES = [("himon.html", "灯紋 Wiki｜灯原", f"灯紋（ひもん）{len(HM['defs'])}種のすべて。経験値で紋書を引く5つの段（並・良・珍・稀・秘）、道具への刻み方、重ね方、効き目と刻めるもの。", himon_page())]
 
 
 # ───────────────────────── 灯里（里・職・灯結） ─────────────────────────
@@ -2287,7 +2315,7 @@ def _shoku_sec():
       <li><b>転職する</b><span>新しい職の見習いから。前の職の経験と位は残り、{HSN["lockDays"]}日は変えられない。</span></li>
     </ol>
     <p class="mu hs-small">前の職に戻るときは、奉公が7日と3つで済みます。人手不足の職へ移るときは、奉公の依頼が4つで済みます。</p>
-    <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">LIST</span><span class="wb-b"><b class="disp">灯里のすべての数字</b><span>職ごとの日課と週課、バフの段、位、格、施設の素材、礎、ずるの防ぎ方。ゲームと同じ数字で。</span></span><span class="wb-go">灯里の一覧へ<i></i></span></a>
+    <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">LIST</span><span class="wb-b"><b class="disp">灯里 Wiki</b><span>職ごとの日課と週課、バフの段、位、格、施設の素材、礎、ずるの防ぎ方。ゲームと同じ数字で。</span></span><span class="wb-go">灯里の一覧へ<i></i></span></a>
   </div>
 </section>
 '''
@@ -2384,11 +2412,12 @@ def hisato_page():
     side = "".join(f'<a href="#{a}" style="--c:{c}"><span class="ws-k">{k}</span>{t}</a>' for a, k, t, c in [
         ("open", "開", "里を開く", "#E9824A"), ("grades", "格", "4つの格", "#8FCB6A"), ("jobs", "職", "5つの職", "#EE9A4A"), ("ranks", "位", "位", "#F2B544"),
         ("quests", "依", "依頼", "#6AB8E8"), ("facilities", "施", "施設", "#C9B48A"), ("fair", "守", "ずるの防ぎ方", "#E8574A"), ("musubi", "結", "灯結", "#F29BB8"), ("cmd", "令", "コマンド", "#C9D0DC")])
-    side += '<a href="guide-sato.html" class="ws-x" style="--c:#E9824A"><span class="ws-k">章</span>遊び方の章へ</a>'
+    side += _wiki_others("hisato")
     hero = f'''<div class="hero ch-hero wk-hero" style="--c:#E9824A">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div>
   <div class="wrap phead" id="content">
-    <nav class="crumb" aria-label="現在地"><a href="guide.html">遊び方</a><span aria-hidden="true">›</span><a href="guide-sato.html">灯里</a><span aria-hidden="true">›</span><span>一覧</span></nav>
+    {_wiki_switch("hisato")}
+    {_wiki_crumb("hisato", '<span aria-hidden="true">›</span><span>すべての数字</span>')}
     <div class="ch-head">{pix(CH_ICONS["sato"], "ch-ic big")}<div><h1 class="disp h1-sub">灯里</h1></div></div>
     <p class="lead">里・職・依頼・灯結。灯里（ひさと）のすべての数字を、ゲームと同じ値で。</p>
   </div>
@@ -2431,7 +2460,7 @@ def hisato_page():
 <section class="stratum s-deep wk">
   <div class="edge"></div>
   <div class="wrap wk-in">
-    <nav class="wside" aria-label="灯里の目次"><p class="dot wside-h">灯里</p>{side}</nav>
+    <nav class="wside" aria-label="灯里の目次"><p class="dot wside-h">灯里 Wiki</p>{side}</nav>
     <div class="wk-main">
       <div class="wk-stats big">
         <div><b class="dot">4</b><span>格</span></div><div><b class="dot">5</b><span>職</span></div><div><b class="dot">5</b><span>位（見習い〜匠）</span></div><div><b class="dot">{len(F)}</b><span>施設</span></div><div><b class="dot">{sum(len(j["quests"]) for j in J)}</b><span>依頼の型</span></div>
@@ -2480,7 +2509,7 @@ def hisato_page():
 </section>'''
 
 
-HS_PAGES = [("hisato.html", "灯里｜灯原", "灯里（ひさと）のすべての数字。里を開く条件と礎、4つの格、5つの職のバフと依頼、位と匠の試し、施設、ずるの防ぎ方、灯結、コマンド。", hisato_page())]
+HS_PAGES = [("hisato.html", "灯里 Wiki｜灯原", "灯里（ひさと）のすべての数字。里を開く条件と礎、4つの格、5つの職のバフと依頼、位と匠の試し、施設、ずるの防ぎ方、灯結、コマンド。", hisato_page())]
 
 
 # ───────────────────────── 技の組み立て ─────────────────────────
@@ -2835,6 +2864,7 @@ commands = sub_hero("commands.html", "コマンド一覧", "ふだんはメニ�
   </div>
 </section>
 <script src="assets/wiki.js" defer></script>'''
+commands = commands.replace('<div class="wrap phead" id="content">', '<div class="wrap phead" id="content">\n    ' + _wiki_switch("cmd"), 1)
 
 
 # ───────────────────── 遊び方を選ぶ（みんなで・身内で・ひとりで） ─────────────────────
@@ -2902,6 +2932,7 @@ def playstyle():
 </section>'''
 
 
+guide = _guide_index()
 PAGES = [
     ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1は2026年11月7日21時開幕。", index),
     ("start.html", "はじめる｜灯原", "灯原への入り方を機種別に。Java版、スマホ、Windows、Switch・PS・Xbox。最初の夜の過ごし方と、よくある質問。", start),
