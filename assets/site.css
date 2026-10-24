@@ -1807,3 +1807,29 @@ html{scrollbar-color:#3A3F48 #101215}
 .hero-top .h1{font-size:clamp(28px,8vw,34px);margin-top:12px}
 .hero-top .lead-hero{font-size:14px;line-height:1.7}
 }
+
+/* きまり：違反の表（灯律） */
+.rt-ladder{grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
+.rt-ladder div:nth-child(1){border-color:#86C96F}
+.rt-ladder div:nth-child(2){border-color:#D9C96A}
+.rt-ladder div:nth-child(3){border-color:var(--amber)}
+.rt-ladder div:nth-child(4){border-color:#E08A3A}
+.rt-ladder div:nth-child(5){border-color:#D9643A}
+.rt-ladder div:nth-child(6){border-color:var(--blood)}
+.rt-ladder div:nth-child(7){border-color:#8E1F2A;background:rgba(142,31,42,.18)}
+.rt-ladder b{font-size:16px;line-height:1.45}
+.rt-two{margin-top:48px}
+.rt-tier{margin-top:14px;border-left:6px solid rgba(255,255,255,.2);background:rgba(255,255,255,.035)}
+.rt-tier.s16{border-color:#8E1F2A}.rt-tier.s9{border-color:#E08A3A}.rt-tier.s4{border-color:var(--amber)}.rt-tier.s1{border-color:#86C96F}
+.rt-tier summary{cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:16px;padding:16px 20px;font-size:19px}
+.rt-tier summary::-webkit-details-marker{display:none}
+.rt-tier summary::after{content:'＋';margin-left:auto;color:var(--mu);font-size:18px}
+.rt-tier[open] summary::after{content:'－'}
+.rt-tier summary span{font-size:14px;color:var(--mu);font-family:var(--dot)}
+.rt-tier .tbl-wrap{margin:0;padding:0 20px 12px}
+.rt-tbl td:nth-child(3){color:var(--mu);font-size:15px}
+.rt-list{margin:14px 0 0;padding-left:1.2em;color:var(--mu);font-size:16px;display:grid;gap:8px}
+.rt-kinds{list-style:none;margin:20px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:10px}
+.rt-kinds li{padding:14px 18px;background:rgba(0,0,0,.22);border-left:4px solid var(--amber)}
+.rt-kinds b{display:block;font-size:16px}
+.rt-kinds span{display:block;color:var(--mu);font-size:14px;margin-top:4px}

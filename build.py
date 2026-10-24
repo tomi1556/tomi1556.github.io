@@ -1178,9 +1178,96 @@ events = f'''<div class="hero">
 </section>
 '''
 
+
+# ───────── きまり：違反の表（data/ritsu.json ＝ 灯律の rules.yaml から作る。数字は手で書かない） ─────────
+import json as _rj, html as _rh
+
+RITSU = _rj.loads((pathlib.Path(__file__).parent / "data" / "ritsu.json").read_text(encoding="utf-8"))
+
+
+def _ritsu_html():
+    R = RITSU
+    e = _rh.escape
+    steps = "".join(f'<div><b>{e(x["label"])}</b><span>レベル {x["min"]}{"〜" + str(x["max"]) if x["max"] else " 以上"}</span></div>' for x in R["steps"])
+    tiers = [("重度", "16〜20", "s16"), ("中度", "9〜15", "s9"), ("軽度", "4〜8", "s4"), ("注意", "1〜3", "s1")]
+    tb = ""
+    for t, rng, cls in tiers:
+        rows = "".join(f'<tr><th class="n">{e(v["code"])}</th><td data-label="行為"><b>{e(v["name"])}</b></td><td data-label="ここから">{e(v["from"])}</td>'
+                       f'<td data-label="レベル" class="n">{v["level"]}</td></tr>' for v in R["violations"] if v["tier"] == t)
+        n = sum(1 for v in R["violations"] if v["tier"] == t)
+        tb += (f'<details class="rt-tier {cls}"><summary><b>{t}</b><span>レベル {rng}・{n}項目</span></summary>'
+               f'<div class="tbl-wrap"><table class="stack rt-tbl"><thead><tr><th>番号</th><th>行為</th><th>ここから</th><th>レベル</th></tr></thead><tbody>{rows}</tbody></table></div></details>')
+    mods = "".join(f'<tr><th class="n">{e(m["code"])}</th><td data-label="内容">{e(m["name"])}</td><td data-label="補正" class="n">{"+" if m["add"] > 0 else "−"}{abs(m["add"])}</td></tr>' for m in R["modifiers"])
+    notv = "".join(f"<li>{e(x)}</li>" for x in R["not_violations"])
+    sp = "".join(f"<li>{e(x)}</li>" for x in R["special"])
+    kinds = "".join(f'<li><b>{e(r["label"])}</b><span>{e("・".join(r["need"]))}</span></li>' for r in R["report_types"])
+    monthly = ""
+    md = sorted((pathlib.Path(__file__).parent / "data").glob("ritsu-monthly-*.json"))
+    if md:
+        m = _rj.loads(md[-1].read_text(encoding="utf-8"))
+        items = "".join(f'<tr><th class="n">{e(x["code"])}</th><td>{e(x["name"])}</td><td class="n">{x["n"]}</td></tr>' for x in m["by_code"][:12])
+        monthly = (f'<h3 class="h3 disp" style="margin-top:56px">{e(m["month"])} のまとめ</h3><p class="mu">通報 {m["reports"]} 件・罰 {m["punished"]} 件・違反なし {m["no_violation"]} 件・取り消し {m["revoked"]} 件（名前は出しません）</p>'
+                   f'<div class="tbl-wrap"><table><thead><tr><th>番号</th><th>違反</th><th>件数</th></tr></thead><tbody>{items}</tbody></table></div>')
+    return f"""<section class="stratum s-deep" id="penalty">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">対応の流れ</p>
+    <h2 class="disp h2">きまりをやぶったとき</h2>
+    <p class="lead">してしまったことを、下の表で「レベル」にして、その合計で罰が決まります。だれに対しても同じ表を使います。まちがいはだれにでもあるので、軽いものは注意から。わざと人を傷つけたり、人のものを大きくこわしたりしたときは、すぐに止めます。</p>
+    <div class="ladder rt-ladder">{steps}</div>
+    <div class="two rt-two">
+      <div><h3 class="h3 disp">制限のあいだ</h3><p class="mu">ことばの違反（暴言・連投・煽りなど）は、チャット・里と一団のチャット・手紙・看板・本・合図と Discord の発言が止まります。それ以外の違反は、他人の土地で建てる・壊す、他人の箱を開ける、取引・屋台・小包・旅の依頼、PvP、合流・呼ぶが止まります。<b>自分の土地で遊ぶこと・灯渡り・帰里は止まりません。</b></p></div>
+      <div><h3 class="h3 disp">入ったときに分かる</h3><p class="mu">罰を受けた人には、画面のまん中とチャットに、理由・件の番号・いつまでか・異議の出し方が出ます。制限中は画面の上に残り時間が出ます。BAN のときは、入ろうとした画面に同じことが出ます。注意は「わかった」を押すまで、入るたびに出ます。</p></div>
+    </div>
+    <div class="two rt-two">
+      <div><h3 class="h3 disp">こわされた物は戻す</h3><p class="mu">罰とは別に、こわされた建物はゲームの記録から元に戻し、持ち去られた物と、こわされた灯籠は持ち主に返します。</p></div>
+      <div><h3 class="h3 disp">名前を出すのは、永久BANだけ</h3><p class="mu">運営が確かめて永久BANに決まった人だけを、Discord の #処罰の記録 に名前と番号で載せます。それ以外は、本人と通報した人にだけ知らせます。毎月、名前なしの件数をこのページと Discord で公開します。</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="stratum s-rock" id="levels">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">違反の表</p>
+    <h2 class="disp h2">どこからが、どのレベルか</h2>
+    <p class="lead">迷わないように、数で決めてあります。表にないことは、いちばん近いものに当てはめて、かならず運営が確かめます。</p>
+    {tb}
+    <h3 class="h3 disp" style="margin-top:56px">足す・引く</h3>
+    <div class="tbl-wrap"><table class="stack"><thead><tr><th>番号</th><th>内容</th><th>補正</th></tr></thead><tbody>{mods}</tbody></table></div>
+    <p class="note">いくつも重なったときは、いちばん重いものに、ほか1つごとに +2。合計は1より下がりません。16以上には引く補正をかけません。同じ違反の3回目は、罰を1段上げます。軽い違反だけで永久BANにはなりません。違反の回数は90日で数え直します（BAN の歴は残ります）。</p>
+    <div class="two rt-two">
+      <div><h3 class="h3 disp">違反にならないこと</h3><ul class="rt-list">{notv}</ul></div>
+      <div><h3 class="h3 disp">特別なきまり</h3><ul class="rt-list">{sp}</ul></div>
+    </div>
+    {monthly}
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="help">
+  <div class="edge"></div>
+  <div class="wrap">
+    <p class="depth">連絡先</p>
+    <h2 class="disp h2">困ったとき：通報と異議</h2>
+    <p class="lead">こわされた、とられた、いやなことを言われた、ずるをしている人を見た。どれも Discord の <b>/通報</b> で知らせてください。やり返さないことが、いちばん早く解決します。</p>
+    <ol class="steps" style="margin-top:28px">
+      <li><div><h3>その場をはなれて、画面を写す</h3><p>言い返したり、こわし返したりしないでください。相手の名前・言葉・場所が分かるように、画面を写しておきます（F3 で座標が出ます）。</p></div></li>
+      <li><div><h3>Discord で /通報</h3><p>必ず入れるのは3つ：<b>相手の MCID</b>（候補から選ぶ）・<b>証拠の画像</b>（1〜5枚）・<b>何をされたか</b>（いつ・どこ・何を）。送る前に確認が出ます。</p></div></li>
+      <li><div><h3>専用のスレッドで待つ</h3><p>あなたとボット・運営だけが見えるスレッドができます。ゲームの記録と照らして調べ、結果をそこで知らせます。足りないものがあれば聞くので、すべて載せてから「足し終えたので判断する」を押してください。</p></div></li>
+    </ol>
+    <h3 class="h3 disp" style="margin-top:56px">種類ごとに、あるとよいもの</h3>
+    <ul class="rt-kinds">{kinds}</ul>
+    <div class="two rt-two">
+      <div><h3 class="h3 disp">罰が違うと思ったら</h3><p class="mu">Discord の <b>#異議</b> で「異議を出す」を押し、ゲームの画面に出た<b>件の番号</b>（#0123）と<b>異議の印</b>（6文字）を入れてください。異議は1つの罰に1回、運営が72時間を目安にお返事します。異議のあいだも罰は続きます。取り消しになったときは、記録からも消します。</p></div>
+      <div><h3 class="h3 disp">うその通報は違反です</h3><p class="mu">作った画像やうその説明で人を罰させようとすることは、それ自体が重い違反（16-C）です。画像だけでは罰を出さず、かならずゲームの記録と照らします。通報は1人1日5件までです。</p></div>
+    </div>
+    <div class="btns" style="margin-top:24px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord を開く</a></div>
+  </div>
+</section>"""
+
 # ───────────────────────── きまり ─────────────────────────
 rules = sub_hero("rules.html", "きまり", "むずかしいことはありません。人のものをこわさない。人をいやな気持ちにさせない。この二つです。",
-                 [("dont", "してはいけないこと"), ("safe", "守られていること"), ("penalty", "やぶったとき"), ("help", "困ったとき"), ("parents", "保護者の方へ")]) + f'''
+                 [("dont", "してはいけないこと"), ("safe", "守られていること"), ("penalty", "やぶったとき"), ("levels", "違反の表"), ("help", "通報と異議"), ("parents", "保護者の方へ")]) + f'''
 <section class="stratum tex s-soil" id="dont">
   <div class="wrap narrow">
     <p class="depth">6つのきまり</p>
@@ -1215,36 +1302,7 @@ rules = sub_hero("rules.html", "きまり", "むずかしいことはありま�
   </div>
 </section>
 
-<section class="stratum s-deep" id="penalty">
-  <div class="edge"></div>
-  <div class="wrap">
-    <p class="depth">対応の流れ</p>
-    <h2 class="disp h2">きまりをやぶったとき</h2>
-    <p class="lead">まちがいは、だれにでもあります。はじめは注意から始めます。ただし、わざと人のものをこわす、ずるをする、人を傷つけることばを使う、といった場合は、すぐに参加を止めることがあります。</p>
-    <div class="ladder">
-      <div><b>注意</b><span>何がいけなかったかを伝えます。</span></div>
-      <div><b>一時的に止める</b><span>数日のあいだ、入れなくなります。</span></div>
-      <div><b>長く止める</b><span>くり返した場合、期間がのびます。</span></div>
-      <div><b>無期限に止める</b><span>悪質な場合、または何度もくり返した場合。</span></div>
-    </div>
-    <p class="note">止められた理由に納得がいかないときは、Discord で運営に伝えてください。記録を見直して、返事をします。</p>
-  </div>
-</section>
-
-<section class="stratum s-dusk" id="help">
-  <div class="edge"></div>
-  <div class="wrap">
-    <p class="depth">連絡先</p>
-    <h2 class="disp h2">困ったとき</h2>
-    <p class="lead">こわされた、とられた、いやなことを言われた、ずるをしている人を見た。どれも Discord で運営に知らせてください。やり返さないことが、いちばん早く解決します。</p>
-    <ol class="steps" style="margin-top:28px">
-      <li><div><h3>その場をはなれる</h3><p>言い返したり、こわし返したりしないでください。あなたまで注意されてしまいます。</p></div></li>
-      <li><div><h3>4つのことをメモする</h3><p>いつ（日にちと、だいたいの時間）。どこで（F3 キーや設定で出る座標）。だれが（相手の名前）。何をされたか。画面の写真があれば、なお助かります。</p></div></li>
-      <li><div><h3>Discord で運営に送る</h3><p>ほかの人に見られたくない内容は、運営あての個別の連絡で送れます。</p></div></li>
-    </ol>
-    <div class="btns" style="margin-top:24px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord を開く</a></div>
-  </div>
-</section>
+{_ritsu_html()}
 
 <section class="stratum s-rock" id="parents">
   <div class="edge"></div>
@@ -1255,7 +1313,8 @@ rules = sub_hero("rules.html", "きまり", "むずかしいことはありま�
       <details open><summary>費用はかかりますか</summary><p>かかりません。サーバーへの参加は無料で、ゲーム内に課金の仕組みはありません。マインクラフト本体と、機種によってはオンラインプレイの加入が別に必要です。</p></details>
       <details><summary>知らない人と話すことになりますか</summary><p>ほかの参加者と文字で会話できます。本名や住所、学校などを書いたり聞いたりすることは禁止しており、見つけた場合は運営が対応します。マインクラフトの設定で、チャットを表示しないようにもできます。</p></details>
       <details><summary>Discord は必要ですか</summary><p>遊ぶだけなら必要ありません。お知らせと問い合わせに使っています。Discord は利用規約で13歳以上が対象です。13歳未満のお子さまの場合は、保護者の方が代わりにご連絡ください。</p></details>
-      <details><summary>どんな情報が保存されますか</summary><p>ゲーム内の名前、接続の記録（IPアドレスを含みます）、ゲーム内での行動の記録です。運営と不正への対応のためだけに使い、外部に提供しません。</p></details>
+      <details><summary>どんな情報が保存されますか</summary><p>ゲーム内の名前、接続の記録（IPアドレスを含みます）、ゲーム内での行動の記録（チャット・看板・本・箱の出し入れ・ブロックなど）です。細かい記録は30日で消え、処罰に使った記録だけを残します。運営と不正への対応のためだけに使い、外部に提供しません。</p></details>
+      <details><summary>通報は AI が判断するのですか</summary><p>通報された件では、関係するゲーム内の記録（その時間・その場所・関係する人の分だけ）と通報の文章・画像を、AI（Anthropic 社の Claude）に送って、きまりの表に当てはめます。IP アドレスや、関係のない人の記録は送りません。数を数える・罰の重さを決めるのはプログラムで、重い件や迷う件は運営が確かめます。永久BANは、かならず運営が決めます。</p></details>
       <details><summary>ゲーム機から入るときの設定変更は安全ですか</summary><p>本体のネットワーク設定のうち、DNS という項目を変更します。いつでも元に戻せますが、かならず保護者の方が内容を確かめたうえで行ってください。</p></details>
       <details><summary>このサーバーは公式のものですか</summary><p>いいえ。灯原は有志が運営する非公式のサーバーで、Mojang Studios および Microsoft とは関係ありません。</p></details>
     </div>
