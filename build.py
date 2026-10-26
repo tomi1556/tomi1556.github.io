@@ -196,7 +196,7 @@ _CMDS = [
     ("導", "#FFE3A3", "灯原のメニュー", "Hishirube", "はじめて来たときに渡す「灯しるべ」を右クリックしても、同じメニューが開きます。", [
         ("/menu", "", "灯原のメニューを開く。<b>迷ったらこれ</b>。灯籠・灯技・灯紋・灯の証・里・灯結のすべてへ（<span class=\"kbd\">/tomoshibara</span> でも同じ）"),
         ("/menu item", "", "灯しるべ（右クリックでメニューが開く品）をもう一度もらう"),
-        ("/hud", "", "上のバー（ボスバー）と下の文字（アクションバー）の表示を切りかえる。<span class=\"kbd\">/hud bar off</span>・<span class=\"kbd\">/hud action off</span>・<span class=\"kbd\">/hud on</span>。メニューのいちばん上、自分の名前の両どなりの札でも切りかえられる"),
+        ("/hud", "", "上のバー（ボスバー）・下の文字（アクションバー）・効果音を切りかえる。<span class=\"kbd\">/hud bar off</span>・<span class=\"kbd\">/hud action off</span>・<span class=\"kbd\">/hud sound off</span>・<span class=\"kbd\">/hud on</span>。メニューのいちばん上、自分の名前の右の3つの札でも切りかえられる"),
     ]),
     ("灯", "#F2B544", "灯籠と灯路", "Tomoshibi", "灯籠を素手で右クリックしても、同じメニューが開きます。", [
         ("/tomoshibi", "", "メニューを開く。<b>これだけ覚えれば大丈夫</b>（<span class=\"kbd\">/tomo</span> でも同じ）"),
