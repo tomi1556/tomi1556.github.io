@@ -201,6 +201,13 @@ _CMDS = [
         ("/link off", "", "Discord との連携を外す"),
         ("/hud", "", "上のバー（ボスバー）・下の文字（アクションバー）・効果音を切りかえる。<span class=\"kbd\">/hud bar off</span>・<span class=\"kbd\">/hud action off</span>・<span class=\"kbd\">/hud sound off</span>・<span class=\"kbd\">/hud on</span>。メニューのいちばん上、自分の名前の右の3つの札でも切りかえられる"),
     ]),
+    ("話", "#8EA2FF", "Discord で使うもの", "灯原ボット", "灯原の Discord で打つコマンドです。「はじめての方へ」のボタンからでも、同じことができます。", [
+        ("/link", "<数字>", "ゲームで出た6けたの数字で、マイクラとつなぐ（<span class=\"kbd\">/連携</span> でも同じ）"),
+        ("/知らせ", "", "Discord に届く知らせ（手紙・夜祭・ログイン）を選ぶ"),
+        ("/カード", "[MCID]", "灯原のカード（証点・灯技・灯魚・灯紋・里・過ごした時間を1枚の絵に）"),
+        ("/番付", "[種類]", "灯の証・灯技・灯魚の上位10人"),
+        ("/通報", "", "困ったことを運営に知らせる（窓口のボタンからでも）"),
+    ]),
     ("灯", "#F2B544", "灯籠と灯路", "Tomoshibi", "灯籠を素手で右クリックしても、同じメニューが開きます。", [
         ("/tomoshibi", "", "メニューを開く。<b>これだけ覚えれば大丈夫</b>（<span class=\"kbd\">/tomo</span> でも同じ）"),
         ("/tomoshibi info", "", "いま立っている灯路網と、灯籠の数"),
@@ -2774,14 +2781,24 @@ support = f'''<div class="hero sp-hero">
 <section class="stratum s-stone" id="how">
   <div class="edge"></div>
   <div class="wrap">
-    <h2 class="disp h2">支え方は、3つの手順。</h2>
+    <h2 class="disp h2">支え方は、Discord で。</h2>
+    <p class="lead">灯原の Discord の「はじめての方へ」→「<b>支える</b>」を押すと、あなたにだけ見える案内が開きます。金額を選んで、PayPay で送るだけです。</p>
+    <div class="tbl-wrap"><table class="cmd">
+      <thead><tr><th>段</th><th>金額</th><th>お礼（見た目だけ）</th></tr></thead>
+      <tbody>
+        <tr><td class="n">灯の芽</td><td>300円</td><td>名前に白い ❤</td></tr>
+        <tr><td class="n">灯明</td><td>500円</td><td>名前に灯色の ❤</td></tr>
+        <tr><td class="n">大灯籠</td><td>1000円</td><td>名前に金の ❤✦</td></tr>
+        <tr><td class="n">好きな金額</td><td>100円から</td><td>金額に近い段の ❤</td></tr>
+      </tbody>
+    </table></div>
+    <p class="mu" style="margin-top:10px">どの段も、Discord の支え手ロールと、このページの「支え手の壁」への掲載つき。お礼は<b>シーズンの終わりまで</b>続きます。シーズンが終わって ❤ が外れても、壁の名前は残ります。</p>
     <ol class="flow">
-      <li><span class="fl-n dot">1</span><div><h3>PayPay で送る</h3><p>下のボタンかQRコードから。金額は自由。メッセージ欄に <b>MCID</b> を書いてください。</p></div></li>
-      <li><span class="fl-n dot">2</span><div><h3>Discord で知らせる</h3><p>灯原の Discord の <span class="kbd">{SUPPORT_CH}</span> に「送りました」と、MCID をひとこと。送ったときの画面の写しがあると、確かめるのが早くなります。</p></div></li>
-      <li><span class="fl-n dot">3</span><div><h3>名前に ❤ がつく</h3><p>運営が確かめて、たいてい24時間以内に ❤ がつきます。ついたときは、画面にお礼が出ます。支え手の壁には、サイトの次の更新で載ります。</p></div></li>
+      <li><span class="fl-n dot">1</span><div><h3>Discord で金額を選び、PayPay で送る</h3><p>メッセージ欄に <b>MCID</b> を書いてください（統合版の人は「.」もそのまま）。</p></div></li>
+      <li><span class="fl-n dot">2</span><div><h3>「送りました」を押す</h3><p>送った画面のスクショを出します。あなたと運営だけが見えます。</p></div></li>
+      <li><span class="fl-n dot">3</span><div><h3>運営がたしかめて、❤ がつく</h3><p>たいてい1日以内。ついたら Discord の DM と、ゲームの画面でお知らせします。</p></div></li>
     </ol>
-    {_pay_panel()}
-    <div class="btns" style="margin-top:20px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord を開く</a></div>
+    <div class="btns" style="margin-top:20px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord で支える</a></div>
   </div>
 </section>
 
@@ -3013,7 +3030,7 @@ PAGES = [
     ("playstyle.html", "遊び方を選ぶ｜灯原", "みんなで・身内で・ひとりで。3つの遊び方ごとのマニュアル。はじめの5つ、よく使うコマンド、コツ、気をつけること。", playstyle()),
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
 ] + WIKI_PAGES + AK_PAGES + HM_PAGES + HS_PAGES + [
-    ("support.html", "支える｜灯原", "灯原を支える（寄付）。PayPay で金額は自由、100円から。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
+    ("support.html", "支える｜灯原", "灯原を支える（寄付）。Discord から PayPay で、300円・500円・1000円・好きな金額。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
     ("characters.html", "ひとびと｜灯原", "灯原の案内役、6人の旅人（ヒノ・モモ・ソラ・ワカ・シノ・ユキ）と、灯りを喰う灯喰い、夜の敵。予告編に出てくるドット絵の登場人物たち。", characters),
     ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯原のメニュー（/menu）、灯籠と灯路（/tomoshibi）、灯里（/sato）、灯の証（/akashi）、灯技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
