@@ -201,11 +201,11 @@ _CMDS = [
         ("/link off", "", "Discord との連携を外す"),
         ("/hud", "", "上のバー（ボスバー）・下の文字（アクションバー）・効果音を切りかえる。<span class=\"kbd\">/hud bar off</span>・<span class=\"kbd\">/hud action off</span>・<span class=\"kbd\">/hud sound off</span>・<span class=\"kbd\">/hud on</span>。メニューのいちばん上、自分の名前の右の3つの札でも切りかえられる"),
     ]),
-    ("話", "#8EA2FF", "Discord で使うもの", "灯原ボット", "灯原の Discord で打つコマンドです。「はじめての方へ」のボタンからでも、同じことができます。", [
+    ("話", "#8EA2FF", "Discord で使うもの", "灯原ボット", "灯原の Discord で打つコマンドです。「はじめての方へ」のボタンからでも、同じことができます。<b>使うには、先に /link で連携してください。</b>", [
         ("/link", "<数字>", "ゲームで出た6けたの数字で、マイクラとつなぐ（<span class=\"kbd\">/連携</span> でも同じ）"),
-        ("/知らせ", "", "Discord に届く知らせ（手紙・夜祭・ログイン）を選ぶ"),
+        ("/通知", "", "Discord に届く通知（手紙・夜祭・ログイン）を選ぶ"),
         ("/カード", "[MCID]", "灯原のカード（証点・灯技・灯魚・灯紋・里・過ごした時間を1枚の絵に）"),
-        ("/番付", "[種類]", "灯の証・灯技・灯魚の上位10人"),
+        ("/番付", "[種類]", "9つの番付（証・時間・夜・灯技・灯魚・灯原一・灯紋・灯籠・里）の上位10人と、自分の順位"),
         ("/通報", "", "困ったことを運営に知らせる（窓口のボタンからでも）"),
     ]),
     ("灯", "#F2B544", "灯籠と灯路", "Tomoshibi", "灯籠を素手で右クリックしても、同じメニューが開きます。", [
@@ -475,7 +475,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <li><time>夜</time><div><h3>灯りの中で過ごす</h3><p>画面の下に「灯りの中」と出ていれば安全です。灯りの外に出ると「闇の中」と出て、いちばん近い灯りの方角を教えてくれます。</p></div></li>
       <li><time>いつでも</time><div><h3>灯の証を見る</h3><p><span class="kbd">/akashi</span> で、灯原だけの進捗「灯の証」が開きます。全部で263個。すぐ届くものから、季節をまたぐものまであります。</p></div></li>
       <li><time>いつでも</time><div><h3>技を育てる</h3><p><span class="kbd">/waza</span> で「灯技」が開きます。掘る・切る・釣る・旅をする…遊んだ道の Lv が上がり、技点で技を覚えます。毎日3つの「今日の務め」もあります。</p></div></li>
-      <li><time>いつでも</time><div><h3>Discord とつなぐ</h3><p>ゲームで <span class="kbd">/link</span> と打つと6けたの数字が出ます。Discord の「はじめての方へ」→「Discord と連携」に入れるとつながり、はじめての人はお礼に灯籠を5基もらえます。手紙や夜祭の知らせも、Discord で受け取れるようになります。</p></div></li>
+      <li><time>いつでも</time><div><h3>Discord とつなぐ</h3><p>ゲームで <span class="kbd">/link</span> と打つと6けたの数字が出ます。Discord の「はじめての方へ」→「Discord と連携」に入れるとつながり、はじめての人はお礼に灯籠を5基もらえます。手紙や夜祭の通知も Discord で受け取れるようになり、寄付・カード・番付などの Discord の機能が使えるようになります。</p></div></li>
       <li><time>慣れたら</time><div><h3>人の灯りと、つなぐ</h3><p>だれの灯籠とでも灯路はつながります。5基つながると「二ノ灯」になり、守られる範囲が広がって、灯標どうしを行き来できるようになります。</p></div></li>
     </ol>
     <p class="note cold"><b>来たばかりの人は守られています。</b>はじめて入ってから24時間は、あなたのまわりに灯喰いは来ません。灯籠が3基より少ない拠点も狙われません。</p>
@@ -529,7 +529,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <details><summary>夜の敵が強すぎます</summary><p>そのとおりで、最初は勝てないように作ってあります。灯りの中にいれば襲われません。敵は灯りに入れず、外から狙うこともできません。敵や灯喰いが落とす「欠片」を集めて加護を解放していくと、少しずつ戦えるようになります。</p></details>
       <details><summary>動きが重いです</summary><p><span class="kbd">/tomoshibi particles low</span> で光の粒が半分になり、<span class="kbd">off</span> で消えます。統合版の人は、最初から少なめになっています。</p></details>
       <details><summary>動画や配信にしてもいいですか</summary><p>かまいません。許可はいりません。ほかの人の名前が映るので、いやがる人がいたら映さないようにしてください。</p></details>
-      <details><summary>Discord と連携すると、何ができますか</summary><p>ゲームで <span class="kbd">/link</span> と打って出た数字を、Discord の「はじめての方へ」に入れるとつながります。はじめての人には灯籠5基。処罰の知らせや異議を本人として受け取れ、手紙・夜祭・ログインの知らせも順に Discord へ届くようになります。外すときは <span class="kbd">/link off</span>。</p></details>
+      <details><summary>Discord と連携すると、何ができますか</summary><p>ゲームで <span class="kbd">/link</span> と打って出た数字を、Discord の「はじめての方へ」に入れるとつながります。はじめての人には灯籠5基。処罰の通知や異議を本人として受け取れ、手紙・夜祭・ログインの通知も Discord へ届きます。寄付・カード・番付など、Discord の機能は連携した人だけが使えます。外すときは <span class="kbd">/link off</span>。</p></details>
       <details><summary>困ったときは、どこに聞けばいいですか</summary><p>Discord で聞いてください。入り方、遊び方、こわされた・いやなことをされた、どれでも受けつけています。</p></details>
     </div>
   </div>
@@ -2782,21 +2782,20 @@ support = f'''<div class="hero sp-hero">
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">支え方は、Discord で。</h2>
-    <p class="lead">灯原の Discord の「はじめての方へ」→「<b>支える</b>」を押すと、あなたにだけ見える案内が開きます。金額を選んで、PayPay で送るだけです。</p>
+    <p class="lead">灯原の Discord の「はじめての方へ」→「<b>支える</b>」→「<b>寄付する</b>」から。PayPay の送金リンクを貼るだけです。寄付は、Discord と連携（<span class="kbd">/link</span>）している人だけが使えます。</p>
     <div class="tbl-wrap"><table class="cmd">
       <thead><tr><th>段</th><th>金額</th><th>お礼（見た目だけ）</th></tr></thead>
       <tbody>
-        <tr><td class="n">灯の芽</td><td>300円</td><td>名前に白い ❤</td></tr>
-        <tr><td class="n">灯明</td><td>500円</td><td>名前に灯色の ❤</td></tr>
-        <tr><td class="n">大灯籠</td><td>1000円</td><td>名前に金の ❤✦</td></tr>
-        <tr><td class="n">好きな金額</td><td>100円から</td><td>金額に近い段の ❤</td></tr>
+        <tr><td class="n">灯の芽</td><td>100円から</td><td>名前に白い ❤</td></tr>
+        <tr><td class="n">灯明</td><td>500円から</td><td>名前に灯色の ❤</td></tr>
+        <tr><td class="n">大灯籠</td><td>1000円から</td><td>名前に金の ❤✦</td></tr>
       </tbody>
     </table></div>
     <p class="mu" style="margin-top:10px">どの段も、Discord の支え手ロールと、このページの「支え手の壁」への掲載つき。お礼は<b>シーズンの終わりまで</b>続きます。シーズンが終わって ❤ が外れても、壁の名前は残ります。</p>
     <ol class="flow">
-      <li><span class="fl-n dot">1</span><div><h3>Discord で金額を選び、PayPay で送る</h3><p>メッセージ欄に <b>MCID</b> を書いてください（統合版の人は「.」もそのまま）。</p></div></li>
-      <li><span class="fl-n dot">2</span><div><h3>「送りました」を押す</h3><p>送った画面のスクショを出します。あなたと運営だけが見えます。</p></div></li>
-      <li><span class="fl-n dot">3</span><div><h3>運営がたしかめて、❤ がつく</h3><p>たいてい1日以内。ついたら Discord の DM と、ゲームの画面でお知らせします。</p></div></li>
+      <li><span class="fl-n dot">1</span><div><h3>PayPay で送金リンクを作る</h3><p>PayPay アプリの「送る」で、金額を入れて<b>送金リンク</b>を作り、コピーします。</p></div></li>
+      <li><span class="fl-n dot">2</span><div><h3>Discord の「寄付する」に貼る</h3><p>MCID・金額・コピーしたリンクを入れて送ります（統合版の人は「.」もそのまま）。リンクは運営だけが見ます。</p></div></li>
+      <li><span class="fl-n dot">3</span><div><h3>運営が受け取って、❤ がつく</h3><p>たいてい1日以内。ついたら Discord の DM と、ゲームの画面でお知らせします。リンクの期限が切れていたら、作り直してもう一度どうぞ。</p></div></li>
     </ol>
     <div class="btns" style="margin-top:20px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord で支える</a></div>
   </div>
@@ -2816,7 +2815,8 @@ support = f'''<div class="hero sp-hero">
   <div class="wrap narrow">
     <h2 class="disp h2">よくある質問</h2>
     <div class="faq">
-      <details><summary>いくらから送れますか？</summary><p>100円からです。上限はありません。お礼はどの金額でも同じです。</p></details>
+      <details><summary>いくらから送れますか？</summary><p>100円からです。上限はありません。金額で ❤ の色が変わります（100円から白・500円から灯色・1000円から金）。</p></details>
+      <details><summary>送金リンクは、だれかに見られませんか？</summary><p>リンクが届くのは、運営だけが見えるチャンネルです。運営が受け取ったら、リンクはそこからも消えます。</p></details>
       <details><summary>❤ はいつまでつきますか？</summary><p>ずっとです。シーズンが変わっても残ります。</p></details>
       <details><summary>名前を変えたら、❤ は消えますか？</summary><p>消えません。一度入ったあとは、マインクラフトのアカウントでつながっているので、名前を変えてもそのままです。支え手の壁の名前も、次の更新で新しい名前になります。</p></details>
       <details><summary>統合版（スマホ・Switch など）でもつきますか？</summary><p>つきます。MCID は、名前の前の「.」も含めて書いてください。統合版の人は、支え手の壁ではスキンの代わりに灯原の顔が出ることがあります。</p></details>
