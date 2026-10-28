@@ -196,6 +196,9 @@ _CMDS = [
     ("導", "#FFE3A3", "灯原のメニュー", "Hishirube", "はじめて来たときに渡す「灯しるべ」を右クリックしても、同じメニューが開きます。", [
         ("/menu", "", "灯原のメニューを開く。<b>迷ったらこれ</b>。灯籠・灯技・灯紋・灯の証・里・灯結のすべてへ（<span class=\"kbd\">/tomoshibara</span> でも同じ）"),
         ("/menu item", "", "灯しるべ（右クリックでメニューが開く品）をもう一度もらう"),
+        ("/link", "", "Discord とつなぐ。出た6けたの数字を、Discord の「はじめての方へ」→「Discord と連携」か <span class=\"kbd\">/link 数字</span> に入れる。はじめてつなぐと灯籠5基"),
+        ("/link status", "", "いまつながっている Discord を見る"),
+        ("/link off", "", "Discord との連携を外す"),
         ("/hud", "", "上のバー（ボスバー）・下の文字（アクションバー）・効果音を切りかえる。<span class=\"kbd\">/hud bar off</span>・<span class=\"kbd\">/hud action off</span>・<span class=\"kbd\">/hud sound off</span>・<span class=\"kbd\">/hud on</span>。メニューのいちばん上、自分の名前の右の3つの札でも切りかえられる"),
     ]),
     ("灯", "#F2B544", "灯籠と灯路", "Tomoshibi", "灯籠を素手で右クリックしても、同じメニューが開きます。", [
@@ -438,13 +441,14 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       </ol>
     </div>
     <div class="tabpanel" role="tabpanel" id="p-con" aria-labelledby="t-con" hidden>
-      <p class="note warn"><b>ゲーム機は、ひと手間かかります。</b>Switch・PlayStation・Xbox のマインクラフトには「サーバーを追加」のボタンがありません。本体のネットワーク設定（DNS）を変える方法で入れますが、手順が機種ごとにちがいます。</p>
+      <p class="note warn"><b>ゲーム機は、ひと手間かかります。</b>Switch・PlayStation・Xbox のマインクラフトには「サーバーを追加」がありません。本体の「DNS」という設定を変えて、入り口のサーバー（BedrockConnect）をとおして入ります。設定はいつでも元に戻せます。保護者の方といっしょに行ってください。</p>
       <ol class="steps" style="margin-top:20px">
-        <li><div><h3>Discord に参加する</h3><p>「はじめての方」に、機種ごとの手順を画像つきで置いています。わからないところは、その場で聞けます。</p></div></li>
-        <li><div><h3>手順どおりに本体の設定を変える</h3><p>設定は、いつでも元に戻せます。保護者の方といっしょに行ってください。</p></div></li>
-        <li><div><h3>マインクラフトの「サーバー」から灯原を選ぶ</h3><p>アドレスは <span class="kbd">{ADDR}</span>、ポートは <span class="kbd">5156</span> です。</p></div></li>
+        <li><div><h3>本体の DNS を「手動」にして、2つの数字を入れる</h3><p><b>Switch・Xbox</b>：優先（プライマリ）<span class="kbd">104.238.130.180</span>　代替（セカンダリ）<span class="kbd">8.8.8.8</span><br><b>PlayStation</b>：プライマリー <span class="kbd">45.55.68.52</span>　セカンダリー <span class="kbd">8.8.8.8</span><br><small class="mu">Switch：設定 → インターネット → インターネット設定 → 使っているネットワーク → 設定の変更 → DNS設定。PS5：設定 → ネットワーク → 設定 → インターネット接続を設定する → 詳細設定。Xbox：設定 → 全般 → ネットワーク設定 → 詳細設定 → DNS 設定。</small></p></div></li>
+        <li><div><h3>マインクラフトの「サーバー」で、特集サーバーをどれか1つ選ぶ</h3><p>The Hive などに入ろうとすると、代わりに <b>BedrockConnect の画面</b> が開きます。開かないときは、本体を再起動してもう一度。</p></div></li>
+        <li><div><h3>「Connect to a Server」で灯原を入れる</h3><p>Server Address：<span class="kbd">{ADDR}</span>　Port：<span class="kbd">5156</span>。「Add to server list」にチェックを入れておくと、次からは一覧から選ぶだけです。</p></div></li>
       </ol>
-      <div class="btns" style="margin-top:20px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord で手順を見る</a></div>
+      <p class="mu" style="margin-top:12px">オンラインで遊ぶには、Switch は Nintendo Switch Online、PlayStation は PlayStation Plus、Xbox はオンラインつきの Game Pass が要ります。</p>
+      <div class="btns" style="margin-top:20px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord で1つずつ見る</a></div>
     </div>
     <p class="note"><b>入れないときは。</b>アドレスの打ちまちがい、バージョンが古い、の2つがほとんどです。それでも入れなければ、Discord で機種と表示された文を教えてください。</p>
   </div>
@@ -464,6 +468,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <li><time>夜</time><div><h3>灯りの中で過ごす</h3><p>画面の下に「灯りの中」と出ていれば安全です。灯りの外に出ると「闇の中」と出て、いちばん近い灯りの方角を教えてくれます。</p></div></li>
       <li><time>いつでも</time><div><h3>灯の証を見る</h3><p><span class="kbd">/akashi</span> で、灯原だけの進捗「灯の証」が開きます。全部で263個。すぐ届くものから、季節をまたぐものまであります。</p></div></li>
       <li><time>いつでも</time><div><h3>技を育てる</h3><p><span class="kbd">/waza</span> で「灯技」が開きます。掘る・切る・釣る・旅をする…遊んだ道の Lv が上がり、技点で技を覚えます。毎日3つの「今日の務め」もあります。</p></div></li>
+      <li><time>いつでも</time><div><h3>Discord とつなぐ</h3><p>ゲームで <span class="kbd">/link</span> と打つと6けたの数字が出ます。Discord の「はじめての方へ」→「Discord と連携」に入れるとつながり、はじめての人はお礼に灯籠を5基もらえます。手紙や夜祭の知らせも、Discord で受け取れるようになります。</p></div></li>
       <li><time>慣れたら</time><div><h3>人の灯りと、つなぐ</h3><p>だれの灯籠とでも灯路はつながります。5基つながると「二ノ灯」になり、守られる範囲が広がって、灯標どうしを行き来できるようになります。</p></div></li>
     </ol>
     <p class="note cold"><b>来たばかりの人は守られています。</b>はじめて入ってから24時間は、あなたのまわりに灯喰いは来ません。灯籠が3基より少ない拠点も狙われません。</p>
@@ -517,6 +522,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <details><summary>夜の敵が強すぎます</summary><p>そのとおりで、最初は勝てないように作ってあります。灯りの中にいれば襲われません。敵は灯りに入れず、外から狙うこともできません。敵や灯喰いが落とす「欠片」を集めて加護を解放していくと、少しずつ戦えるようになります。</p></details>
       <details><summary>動きが重いです</summary><p><span class="kbd">/tomoshibi particles low</span> で光の粒が半分になり、<span class="kbd">off</span> で消えます。統合版の人は、最初から少なめになっています。</p></details>
       <details><summary>動画や配信にしてもいいですか</summary><p>かまいません。許可はいりません。ほかの人の名前が映るので、いやがる人がいたら映さないようにしてください。</p></details>
+      <details><summary>Discord と連携すると、何ができますか</summary><p>ゲームで <span class="kbd">/link</span> と打って出た数字を、Discord の「はじめての方へ」に入れるとつながります。はじめての人には灯籠5基。処罰の知らせや異議を本人として受け取れ、手紙・夜祭・ログインの知らせも順に Discord へ届くようになります。外すときは <span class="kbd">/link off</span>。</p></details>
       <details><summary>困ったときは、どこに聞けばいいですか</summary><p>Discord で聞いてください。入り方、遊び方、こわされた・いやなことをされた、どれでも受けつけています。</p></details>
     </div>
   </div>
