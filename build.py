@@ -371,7 +371,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <div class="wrap" style="display:flex;flex-wrap:wrap;gap:40px 64px;align-items:flex-end">
     <div style="flex:1 1 440px;min-width:0">
       <p class="depth">次の夜祭</p>
-      <h2 class="disp h2" style="margin-bottom:8px" data-fest-date>夜祭は毎週土曜 21:00</h2>
+      <h2 class="disp h2" style="margin-bottom:8px"><span data-fest-date>夜祭は毎週土曜 21:00</span></h2>
       <p class="mu" style="margin-bottom:22px" data-fest-lead>21時になると、120秒の募集が始まります。何もしなければ参加です。</p>
       <div data-twin-hide>{cd("fest", "次の夜祭まで")}</div>
     </div>

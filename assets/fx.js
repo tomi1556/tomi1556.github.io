@@ -149,7 +149,7 @@
       layer.hidden = !wide;
       if (!wide) return;
       var sy = window.scrollY;
-      var vis = nodes.filter(function (n) { return n.getBoundingClientRect().height > 0; });
+      var vis = nodes.filter(function (n) { return n.isConnected && n.getBoundingClientRect().height > 0; });
       var pts = vis.map(function (n) { var r = n.getBoundingClientRect(); return [r.left + r.width / 2 + window.scrollX, r.top + sy + r.height / 2]; });
       for (var i = 0; i < pts.length - 1; i++) {
         var a = pts[i], b = pts[i + 1];
