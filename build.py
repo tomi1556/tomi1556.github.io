@@ -131,6 +131,10 @@ def _with_ridge(file, body):
     return head + rest
 
 
+# 灯路の背骨（読み進めるほど節がともり、点線がのびる）をつけるページ
+SPINED = {"index.html", "start.html", "rules.html", "events.html", "support.html", "playstyle.html"}
+
+
 def page(file, title, desc, body, hero_min=""):
     cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki", "akashi")) else "start.html" if file in ("commands.html", "playstyle.html") else "")
     body = _with_ridge(file, body)
@@ -161,7 +165,7 @@ def page(file, title, desc, body, hero_min=""):
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=DotGothic16&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 </head>
-<body>
+<body{' class="spined"' if file in SPINED else ''}>
 {header(cur)}
 <main>
 {body}
@@ -2547,7 +2551,7 @@ support = f'''<div class="hero sp-hero">
           <div class="ground"></div>
         </div>
         <div class="perk-body">
-          <p class="perk-k dot">01</p>
+          
           <h3 class="disp h3">名前に <span class="hrt">❤</span> がつく</h3>
           <p class="mu">頭の上の名前、タブの一覧、チャットに、灯色の ❤ がつきます。灯籠のそばに立つあなたが、遠くからでもわかります。</p>
           <div class="mock">
@@ -2561,7 +2565,7 @@ support = f'''<div class="hero sp-hero">
           <span class="ws"></span><span class="ws on"></span><span class="ws"></span><span class="ws on"></span><span class="ws"></span><span class="ws"></span><span class="ws on"></span><span class="ws"></span>
         </div>
         <div class="perk-body">
-          <p class="perk-k dot">02</p>
+          
           <h3 class="disp h3">支え手の壁に、顔と名前が載る</h3>
           <p class="mu">このページのいちばん下の「支え手の壁」に、スキンの顔と MCID が並びます。載りたくなければ、ゲームの中で <span class="kbd">/akashi supporter hide</span> と打つだけ。名前の ❤ はそのまま残ります。</p>
         </div>

@@ -1480,7 +1480,7 @@ html{background:#05070F}
 /* 見出しの上の小さなラベルと番号は使わない（HTML からも取り除いている） */
 .depth,.band-y{display:none}
 /* 余白：見出しの上を広く、下を狭く。段落は読みやすい幅に */
-.stratum{padding:120px 0 136px}
+.stratum{padding:88px 0 120px}
 @media (max-width:760px){.stratum{padding:80px 0 96px}}
 .h2{margin:0 0 20px;letter-spacing:.01em}
 .h3{letter-spacing:.01em}
@@ -1881,7 +1881,7 @@ a.vc:hover{transform:translateY(-3px);background:linear-gradient(180deg,rgba(255
 .vb-t{height:18px;background:rgba(255,255,255,.06);position:relative}
 .vb-t i{position:absolute;inset:0 auto 0 0;width:var(--w);background:linear-gradient(90deg,color-mix(in srgb,var(--c) 70%,#000),var(--c));box-shadow:0 0 14px color-mix(in srgb,var(--c) 40%,transparent)}
 .vb-v{font-size:18px;color:var(--c);min-width:3.5em;text-align:right}
-.vb-n{grid-column:2/4;font-size:13px;color:var(--mu);margin-top:-4px}
+.vb-n{grid-column:2/4;font-size:13px;color:var(--mu);margin:-6px 0 -8px;line-height:1.3}
 
 .vscale{list-style:none;margin:24px 0 0;padding:0;display:flex;gap:3px}
 .vscale li{min-width:0;display:flex;flex-direction:column;gap:4px;padding:12px 10px 10px;background:color-mix(in srgb,var(--c) 22%,#0B0F1C);border-top:6px solid var(--c)}
@@ -2017,3 +2017,58 @@ a.vc:hover{transform:translateY(-3px);background:linear-gradient(180deg,rgba(255
   a.vc{padding-right:36px}
 }
 @media (max-width:760px){.vcs{grid-template-columns:1fr}}
+
+/* ───────── 灯路の背骨（方向 A「灯路がつなぐ」）：.spined のページ ───────── */
+@property --lc{syntax:'<color>';inherits:true;initial-value:#F2B544}
+.sp-h{position:relative}
+.sp-n{display:inline-grid;place-items:center;width:30px;height:30px;margin:0 12px 0 0;vertical-align:.08em;background:#0B1230;border:2px solid #3A4672;flex:none}
+.sp-n svg{width:18px;height:18px;shape-rendering:crispEdges;fill:#C9D0DC}
+.sp-n svg .o{fill:#3B4466}
+.sp-n.on{border-color:var(--amber);animation:spGlow .6s cubic-bezier(.2,.8,.2,1) forwards}
+.sp-n.on svg .o{animation:spLit .24s steps(4) forwards}
+@keyframes spLit{from{fill:#3B4466}to{fill:var(--amber)}}
+@keyframes spGlow{to{box-shadow:0 0 22px 2px rgba(242,181,68,.5)}}
+@media (min-width:1280px){
+  .sp-h .sp-n{position:absolute;left:-58px;top:.14em;margin:0}
+  .foot-cta .sp-h .sp-n{top:.3em}
+}
+.sp-layer{position:absolute;left:0;top:0;width:0;height:0;pointer-events:none;z-index:7}
+.sp-s{position:absolute;width:3px;background:repeating-linear-gradient(to bottom,rgba(201,208,220,.22) 0 3px,transparent 3px 10px)}
+.sp-s b{position:absolute;inset:0;background:repeating-linear-gradient(to bottom,var(--amber-hi) 0 3px,transparent 3px 10px);transform:scaleY(0);transform-origin:50% 0;transition:transform .6s cubic-bezier(.2,.8,.2,1)}
+.sp-s.on b{transform:scaleY(1)}
+.foot-cta.arrived .addr .pbtn{animation:spArrive .6s cubic-bezier(.2,.8,.2,1) 1}
+@keyframes spArrive{0%{box-shadow:0 0 0 0 rgba(242,181,68,0)}40%{box-shadow:0 0 0 6px rgba(242,181,68,.35)}100%{box-shadow:0 0 0 0 rgba(242,181,68,0)}}
+
+/* ともる前（JS が ldim をつけたときだけ。はじめから画面にあるものはすぐともる） */
+.ldim .vi:not(.on) .o{fill:#3B4466}
+.vi.on .o{animation:viLit .24s steps(4) var(--ld,0ms) both}
+@keyframes viLit{from{fill:#3B4466}to{fill:var(--c,var(--amber))}}
+.ldim .vc:not(.on),.ldim .vtl>li:not(.on),.ldim .vgames>li:not(.on),.ldim .vfact:not(.on){border-top-color:#2A3558}
+.ldim .vscale>li:not(.on){border-top-color:#2A3558}
+.ldim .vstats>li:not(.on){border-left-color:#2A3558}
+.vc,.vtl>li,.vgames>li,.vfact,.vscale>li{transition:border-color .24s steps(4) var(--ld,0ms),transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .16s cubic-bezier(.2,.8,.2,1),background .16s}
+.vstats>li{transition:border-color .24s steps(4) var(--ld,0ms)}
+.ldim .vbars>li:not(.on) .vb-t i{transform:scaleX(0)}
+.vb-t i{transform-origin:0 50%;transition:transform .6s cubic-bezier(.2,.8,.2,1) var(--ld,0ms)}
+.ldim .vsteps>li:not(.on)::after{transform:scaleX(0)}
+.vsteps>li::after{transform-origin:0 50%;transition:transform .6s cubic-bezier(.2,.8,.2,1) calc(var(--ld,0ms) + 240ms)}
+.ldim .vsteps>li:not(.on) .vs-i{border-color:#2A3558;box-shadow:none}
+.vs-i{transition:border-color .24s steps(4) var(--ld,0ms),box-shadow .6s cubic-bezier(.2,.8,.2,1) var(--ld,0ms)}
+@media (max-width:760px){.ldim .vsteps>li:not(.on)::after{transform:scaleY(0)}.vsteps>li::after{transform-origin:50% 0}}
+
+/* 触れる・押す：2px 上がり、上の線の灯りが強まる（160ms）。押すと 1px（80ms） */
+a.vc{transition:border-color .24s steps(4) var(--ld,0ms),transform .16s cubic-bezier(.2,.8,.2,1),box-shadow .16s cubic-bezier(.2,.8,.2,1),background .16s}
+a.vc:hover,a.vc:focus-visible{transform:translateY(-2px);box-shadow:0 12px 26px rgba(0,0,0,.38),0 -10px 22px -14px var(--c),0 0 0 1px color-mix(in srgb,var(--c) 45%,transparent) inset}
+a.vc:active{transform:translateY(-1px);transition-duration:80ms}
+a.vc:hover .vc-go,a.vc:focus-visible .vc-go{transform:translateX(3px) rotate(45deg)}
+.vc-go{transition:transform .16s cubic-bezier(.2,.8,.2,1)}
+
+.rm .sp-n.on,.rm .sp-n.on svg .o,.rm .vi.on .o{animation:none}
+.rm .sp-n svg .o{fill:var(--amber)}.rm .sp-n{border-color:var(--amber)}
+.rm .sp-s b{transform:none;transition:none}
+@media (prefers-reduced-motion:reduce){.sp-s b{transform:none!important;transition:none!important}.vi .o{animation:none!important}}
+
+/* 見直し round 1（仕上がり） */
+@media (min-width:1280px){.spined .stratum>.wrap.narrow{max-width:1160px}.spined .stratum>.wrap.narrow>.faq{max-width:772px}}
+@media (min-width:1024px){.vcs.c3{grid-template-columns:repeat(3,minmax(0,1fr))}.vcs.c4:not(.row){grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media (max-width:1279px){.sp-h{padding-left:42px}.sp-h .sp-n{position:absolute;left:0;top:.12em;margin:0}}
