@@ -1,6 +1,7 @@
 # 灯原サイトの組み立て（ヘッダーとフッターを各ページに入れて、静的な HTML を書き出す）
 import datetime, math, pathlib, re as _re0
 from cast import CAST, BY, SCARF, CLOAK, fig, eater, reds, ridge, say_box
+from viz import ic, more, cards, steps, stats, bars, scale, dodont, timeline, daynight, lantern_map, craft, chain, swatches, eq
 
 ADDR = "tomoshibara.life"
 DISCORD = "https://discord.gg/wAKGQBHmPS"
@@ -309,11 +310,12 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
     <p class="depth">Y=48</p>
     <h2 class="disp h2">この世界の、三つのこと。</h2>
     <p class="lead">灯原がふつうのサバイバルとちがうのは、この三つだけです。</p>
-    <div class="facts">
-      <div class="fact"><div class="fact-n">24<small>分</small></div><div><h3 class="h3 disp">夜が長い。</h3><p>昼は4分、夜は24分。夜の敵は体力が2.5倍、攻撃が2倍で、夜を重ねるほど強くなります。来たばかりでは、まず勝てません。</p></div></div>
-      <div class="fact"><div class="fact-n">10<small>ブロック</small></div><div><h3 class="h3 disp">灯りの中は安全。</h3><p>灯籠を置くと、まわり半径10ブロックには敵が入れず、灯りの中の人は狙われません。爆発で壊れず、倒れても持ち物を失いません。近くの灯籠どうしは灯路でつながり、その上は足が速くなります。</p></div></div>
-      <div class="fact"><div class="fact-n" style="color:var(--violet)">灯喰い</div><div><h3 class="h3 disp">夜は、灯りを消しに来る。</h3><p>灯りの守りを破れるのは「灯喰い」だけ。夜になると灯籠を狙い、喰われた灯籠は青い冷たい火になって、守りも道も途切れます。倒して守るか、あとで灯し直すか。つながりの多い灯籠ほど、喰われにくくなります。</p></div></div>
+    <div class="vfacts">
+      <div class="vfact" style="--c:#9C8CFF">{daynight()}<h3 class="disp">夜が長い。</h3><p>昼4分・夜24分。夜の敵は<b>体力2.5倍・攻撃2倍</b>。</p></div>
+      <div class="vfact" style="--c:#F2B544">{lantern_map()}<h3 class="disp">灯りの中は安全。</h3><p>半径10ブロックに敵は入れない。つなぐと道になる。</p></div>
+      <div class="vfact" style="--c:#B46CFF"><div class="vfact-art">{eater()}<span class="vfact-lan">{ic("lantern", "#5AAAFF", 56)}</span></div><h3 class="disp">灯喰いが、灯りを消しに来る。</h3><p>守りを破れるのは灯喰いだけ。倒すか、あとで灯し直す。</p></div>
     </div>
+    {more("くわしく：夜・灯り・灯喰い", "<p>夜の敵は夜を重ねるほど強くなり、7夜に一度は朱月の夜になります。来たばかりでは、まず勝てません。</p><p>灯りの中の人は狙われず、爆発で壊れず、倒れても持ち物を失いません。近くの灯籠どうしは灯路でつながり、その上は足が速くなります。</p><p>喰われた灯籠は青い冷たい火になって、守りも道も途切れます。つながりの多い灯籠ほど、喰われにくくなります。</p>")}
   </div>
 </section>
 
@@ -386,11 +388,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
     <p class="lead">2026年11月7日（土）21時。まっさらな世界に、全員が同じ場所から入ります。最初の夜祭も、この夜です。</p>
     <div style="margin-top:28px" data-season-cd>{cd("season", "開幕まで").replace(' data-season-cd', '')}</div>
     <p class="note" data-season-live hidden><b>シーズン1は開催中です。</b>いまから入っても、小さな拠点は灯喰いに狙われないので、落ち着いて始められます。</p>
-    <div class="three">
-      <div><h3 class="h3 disp">開幕の夜の色</h3><p class="mu">開幕の夜に参加した全員に、この夜だけの灯りの色「はじまりの灯」を配ります。</p></div>
-      <div><h3 class="h3 disp">3か月でひと区切り</h3><p class="mu">シーズンは約3か月。終わると世界を新しく作り直し、また全員が同じ場所から始めます。</p></div>
-      <div><h3 class="h3 disp">引き継がれるもの</h3><p class="mu">灯りの色と、夜祭・招待の記録は次のシーズンへ持ち越す予定です。建物と持ち物は持ち越しません。</p></div>
-    </div>
+    {cards([("gift", "#F29BB8", "開幕の夜の色", "参加した全員に「はじまりの灯」"), ("clock", "#9C8CFF", "3か月でひと区切り", "終わると、世界を作り直す"), ("chest", "#F2B544", "持ち越すもの", "灯りの色・夜祭と招待の記録")])}
   </div>
 </section>
 <section class="s-stone" style="position:relative">
@@ -399,11 +397,13 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
     <p class="depth">Y=0</p>
     <h2 class="disp h2">つづきは、こちらから。</h2>
   </div>
-  <a href="start.html" class="band" style="background:#50555C"><div class="wrap band-in"><span class="band-y">Y=−12</span><div class="band-body"><h3 class="disp h3">はじめる</h3><p class="lead">機種ごとの入り方と、最初の夜の過ごし方。3分で入れます。</p><span class="band-go"><i></i>入り方を見る</span></div></div></a>
-  <a href="guide.html" class="band" style="background:#474C53"><div class="wrap band-in"><span class="band-y">Y=−24</span><div class="band-body"><h3 class="disp h3">遊び方</h3><p class="lead">灯籠と灯路、長い夜、灯喰い、欠片で解放する加護、263の「灯の証」、130の技と106種の灯魚「灯技」、仲間と開く里と5つの職「灯里」。</p><span class="band-go"><i></i>しくみを読む</span></div></div></a>
-  <a href="events.html" class="band" style="background:#3E4249"><div class="wrap band-in"><span class="band-y">Y=−36</span><div class="band-body"><h3 class="disp h3">夜祭</h3><p class="lead">毎週土曜21時。人数がそろうと、週替わりのゲームが自動で始まります。</p><span class="band-go"><i></i>今週のゲームを見る</span></div></div></a>
-  <a href="rules.html" class="band" style="background:#34383E"><div class="wrap band-in"><span class="band-y">Y=−48</span><div class="band-body"><h3 class="disp h3">きまり</h3><p class="lead">してはいけないこと、守られていること、困ったときの連絡先。</p><span class="band-go"><i></i>きまりを読む</span></div></div></a>
-  <a href="support.html" class="band" style="background:#2E3137;padding-bottom:40px"><div class="wrap band-in"><span class="band-y">Y=−60</span><div class="band-body"><h3 class="disp h3">支える</h3><p class="lead">灯原を続けるための寄付。PayPay で、金額は自由。お礼は名前の ❤ と、支え手の壁。</p><span class="band-go"><i></i>支え方を見る</span></div></div></a>
+  <div class="wrap" style="padding-bottom:96px">
+    {cards([("lantern", "#F2B544", "はじめる", "3分で入れる。機種ごとの入り方", "start.html"),
+            ("book", "#5AAAFF", "遊び方", "灯籠・夜・灯技・里…12の章", "guide.html"),
+            ("star", "#F29BB8", "夜祭", "毎週土曜21時、週替わりのゲーム", "events.html"),
+            ("shield", "#6FD39A", "きまり", "してはいけないこと・困ったとき", "rules.html"),
+            ("heart", "#F29BB8", "支える", "寄付。お礼は名前の ❤ だけ", "support.html")], cols=5)}
+  </div>
 </section>
 
 '''
@@ -424,40 +424,26 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
     </div>
     <p class="mu dev-note" data-device-note hidden>お使いの端末に合わせて、タブを選んでおきました。</p>
     <div class="tabpanel" role="tabpanel" id="p-java" aria-labelledby="t-java">
-      <ol class="steps">
-        <li><div><h3>マインクラフトを起動して「マルチプレイ」を選ぶ</h3><p>バージョンは最新版（26.2）にしてください。</p></div></li>
-        <li><div><h3>「サーバーを追加」を押す</h3><p>サーバー名は「灯原」など、わかりやすい名前でかまいません。</p></div></li>
-        <li><div><h3>サーバーアドレスに <span class="kbd">{ADDR}</span> を入れる</h3><p>上の「アドレスをコピー」を押してから貼り付けると、まちがえません。</p></div></li>
-        <li><div><h3>「完了」を押し、一覧から選んで「サーバーに接続」</h3><p>入ると、灯籠を3基受け取れます。</p></div></li>
-      </ol>
+      {steps([("pc", "#5AAAFF", "「マルチプレイ」", "最新版（26.2）で起動"), ("ok", "#6FD39A", "「サーバーを追加」", "名前は「灯原」で OK"), ("pin", "#F2B544", f"<span class=\"kbd\">{ADDR}</span>", "上の「コピー」を貼る"), ("lantern", "#F2B544", "「サーバーに接続」", "灯籠を3基もらえる")])}
     </div>
     <div class="tabpanel" role="tabpanel" id="p-mob" aria-labelledby="t-mob" hidden>
-      <ol class="steps">
-        <li><div><h3>マインクラフトを開いて「遊ぶ」を押す</h3><p>Microsoft アカウントでサインインしておいてください。</p></div></li>
-        <li><div><h3>「サーバー」のタブを開き、いちばん下の「サーバーを追加」を押す</h3><p>一覧を下までスクロールすると出てきます。</p></div></li>
-        <li><div><h3>3つの欄を入れる</h3><p>サーバー名：<span class="kbd">灯原</span>　サーバーアドレス：<span class="kbd">{ADDR}</span>　ポート：<span class="kbd">5156</span>（最初の 19132 から書きかえる）</p></div></li>
-        <li><div><h3>「保存」を押し、一覧から「灯原」を選ぶ</h3><p>統合版の人には、押しやすい専用のメニューが出ます。</p></div></li>
-      </ol>
+      {steps([('phone', '#F29BB8', '「遊ぶ」→「サーバー」', 'Microsoft でサインイン'), ("ok", "#6FD39A", "いちばん下の「サーバーを追加」", "下までスクロール"), ("pin", "#F2B544", "アドレスとポート", f"<span class=\"kbd\">{ADDR}</span>・ポート <span class=\"kbd\">5156</span>"), ('lantern', '#F2B544', '「保存」→「灯原」', '押しやすい専用メニュー')])}
     </div>
     <div class="tabpanel" role="tabpanel" id="p-win" aria-labelledby="t-win" hidden>
-      <ol class="steps">
-        <li><div><h3>Minecraft（統合版）を開いて「遊ぶ」を押す</h3><p>Minecraft Launcher では「Minecraft for Windows」を選びます。Java版とは別のものです。</p></div></li>
-        <li><div><h3>「サーバー」のタブを開き、いちばん下の「サーバーを追加」を押す</h3><p>一覧を下までスクロールすると出てきます。</p></div></li>
-        <li><div><h3>3つの欄を入れる</h3><p>サーバー名：<span class="kbd">灯原</span>　サーバーアドレス：<span class="kbd">{ADDR}</span>　ポート：<span class="kbd">5156</span>（最初の 19132 から書きかえる）</p></div></li>
-        <li><div><h3>「保存」を押し、一覧から「灯原」を選ぶ</h3><p>Java版を持っているなら、Java版から入ってもかまいません。同じ世界です。</p></div></li>
-      </ol>
+      {steps([('pc', '#5AAAFF', '「遊ぶ」→「サーバー」', 'Minecraft for Windows'), ("ok", "#6FD39A", "いちばん下の「サーバーを追加」", "下までスクロール"), ("pin", "#F2B544", "アドレスとポート", f"<span class=\"kbd\">{ADDR}</span>・ポート <span class=\"kbd\">5156</span>"), ('lantern', '#F2B544', '「保存」→「灯原」', 'Java版と同じ世界')])}
     </div>
     <div class="tabpanel" role="tabpanel" id="p-con" aria-labelledby="t-con" hidden>
-      <p class="note warn"><b>ゲーム機は、ひと手間かかります。</b>Switch・PlayStation・Xbox のマインクラフトには「サーバーを追加」がありません。本体の「DNS」という設定を変えて、入り口のサーバー（BedrockConnect）をとおして入ります。設定はいつでも元に戻せます。保護者の方といっしょに行ってください。</p>
-      <ol class="steps" style="margin-top:20px">
-        <li><div><h3>本体の DNS を「手動」にして、2つの数字を入れる</h3><p><b>Switch・Xbox</b>：優先（プライマリ）<span class="kbd">104.238.130.180</span>　代替（セカンダリ）<span class="kbd">8.8.8.8</span><br><b>PlayStation</b>：プライマリー <span class="kbd">45.55.68.52</span>　セカンダリー <span class="kbd">8.8.8.8</span><br><small class="mu">Switch：設定 → インターネット → インターネット設定 → 使っているネットワーク → 設定の変更 → DNS設定。PS5：設定 → ネットワーク → 設定 → インターネット接続を設定する → 詳細設定。Xbox：設定 → 全般 → ネットワーク設定 → 詳細設定 → DNS 設定。</small></p></div></li>
-        <li><div><h3>マインクラフトの「サーバー」で、特集サーバーをどれか1つ選ぶ</h3><p>The Hive などに入ろうとすると、代わりに <b>BedrockConnect の画面</b> が開きます。開かないときは、本体を再起動してもう一度。</p></div></li>
-        <li><div><h3>「Connect to a Server」で灯原を入れる</h3><p>Server Address：<span class="kbd">{ADDR}</span>　Port：<span class="kbd">5156</span>。「Add to server list」にチェックを入れておくと、次からは一覧から選ぶだけです。</p></div></li>
-      </ol>
-      <p class="mu" style="margin-top:12px">オンラインで遊ぶには、Switch は Nintendo Switch Online、PlayStation は PlayStation Plus、Xbox はオンラインつきの Game Pass が要ります。</p>
+      <p class="note warn"><b>ゲーム機は、ひと手間かかります。</b>本体の「DNS」を変えて入ります（いつでも戻せます）。保護者の方といっしょに。</p>
+      {steps([("pad", "#B46CFF", "本体の DNS を手動に", "下の数字を入れる"), ("star", "#F2B544", "特集サーバーを1つ選ぶ", "BedrockConnect の画面が開く"), ("pin", "#F2B544", "「Connect to a Server」", f"<span class=\"kbd\">{ADDR}</span>・<span class=\"kbd\">5156</span>")])}
+      <div class="vdns">
+        <div style="--c:#E0453A"><b>Switch・Xbox</b><span>優先 <span class="kbd">104.238.130.180</span></span><span>代替 <span class="kbd">8.8.8.8</span></span></div>
+        <div style="--c:#5AAAFF"><b>PlayStation</b><span>プライマリー <span class="kbd">45.55.68.52</span></span><span>セカンダリー <span class="kbd">8.8.8.8</span></span></div>
+      </div>
+      {more("DNS の設定の場所", "<p><b>Switch</b>：設定 → インターネット → インターネット設定 → 使っているネットワーク → 設定の変更 → DNS設定</p><p><b>PS5</b>：設定 → ネットワーク → 設定 → インターネット接続を設定する → 詳細設定</p><p><b>Xbox</b>：設定 → 全般 → ネットワーク設定 → 詳細設定 → DNS 設定</p><p>BedrockConnect の画面が開かないときは、本体を再起動してもう一度。「Add to server list」にチェックを入れておくと、次からは一覧から選ぶだけです。</p>")}
+      <p class="mu" style="margin-top:12px;font-size:14px">オンラインの加入（Switch Online・PS Plus・Game Pass）が要ります。</p>
       <div class="btns" style="margin-top:20px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord で1つずつ見る</a></div>
     </div>
-    <p class="note"><b>入れないときは。</b>アドレスの打ちまちがい、バージョンが古い、の2つがほとんどです。それでも入れなければ、Discord で機種と表示された文を教えてください。</p>
+    <p class="note"><b>入れないときは</b>アドレスの打ちまちがいか、バージョンが古いかがほとんど。それでもだめなら Discord へ。</p>
   </div>
 </section>
 
@@ -466,19 +452,16 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
   <div class="wrap">
     <p class="depth">手順 2</p>
     <h2 class="disp h2">最初の夜を、越える。</h2>
-    <p class="lead">夜は24分つづき、夜の敵には、来たばかりでは勝てません。だから最初にやることは、たたかうことではなく、灯りをともすことです。</p>
-    <ol class="night">
-      <li><time>0分</time><div><h3>灯籠を3基受け取る</h3><p>はじめて入ると、持ち物に光る「灯籠」が3基入ります。ふつうのランタンとは別のもので、ふつうのランタンは飾りにしかなりません。灯籠は作業台で作れます（アメジストの欠片2・金インゴット2・ランタン1）。</p></div></li>
-      <li><time>1分</time><div><h3>1基目を置く</h3><p>置いた場所のまわり半径10ブロックが「灯りの中」になります。敵は入ってこられず、中にいる人を狙えません。爆発で壊れず、倒れても持ち物を失いません。最初の1基は無料です。</p></div></li>
-      <li><time>3分</time><div><h3>2基目を、16ブロック以内に置く</h3><p>2基が「灯路」でつながります。灯路の上は足が速くなり、つなげて置くと経験値ももらえます。</p></div></li>
-      <li><time>5分</time><div><h3>メニューを開く</h3><p>持ち物の「灯しるべ」を右クリックするか、チャットに <span class="kbd">/menu</span> と打つと、灯原のメニューが開きます。灯籠・灯技・灯紋・灯の証・里・灯結の、すべての画面へここから行けます。灯籠の画面（<span class="kbd">/tomoshibi</span>）には「はじめの一歩」が6つあり、1つ達成するたびに灯籠を2基もらえます。</p></div></li>
-      <li><time>夜</time><div><h3>灯りの中で過ごす</h3><p>画面の下に「灯りの中」と出ていれば安全です。灯りの外に出ると「闇の中」と出て、いちばん近い灯りの方角を教えてくれます。</p></div></li>
-      <li><time>いつでも</time><div><h3>灯の証を見る</h3><p><span class="kbd">/akashi</span> で、灯原だけの進捗「灯の証」が開きます。全部で263個。すぐ届くものから、季節をまたぐものまであります。</p></div></li>
-      <li><time>いつでも</time><div><h3>技を育てる</h3><p><span class="kbd">/waza</span> で「灯技」が開きます。掘る・切る・釣る・旅をする…遊んだ道の Lv が上がり、技点で技を覚えます。毎日3つの「今日の務め」もあります。</p></div></li>
-      <li><time>いつでも</time><div><h3>Discord とつなぐ</h3><p>ゲームで <span class="kbd">/link</span> と打つと6けたの数字が出ます。Discord の「はじめての方へ」→「Discord と連携」に入れるとつながり、はじめての人はお礼に灯籠を5基もらえます。手紙や夜祭の通知も Discord で受け取れるようになり、寄付・カード・番付などの Discord の機能が使えるようになります。</p></div></li>
-      <li><time>慣れたら</time><div><h3>人の灯りと、つなぐ</h3><p>だれの灯籠とでも灯路はつながります。5基つながると「二ノ灯」になり、守られる範囲が広がって、灯標どうしを行き来できるようになります。</p></div></li>
-    </ol>
-    <p class="note cold"><b>来たばかりの人は守られています。</b>はじめて入ってから24時間は、あなたのまわりに灯喰いは来ません。灯籠が3基より少ない拠点も狙われません。</p>
+    <p class="lead">夜の敵には、まだ勝てません。最初は<b>灯りをともす</b>ことから。</p>
+    {timeline([("0分", "lantern", "#F2B544", "灯籠を3基もらう", "ふつうのランタンとは別もの"),
+               ("1分", "shield", "#6FD39A", "1基目を置く", "半径10が安全になる"),
+               ("3分", "path", "#FFD98A", "16ブロック以内に2基目", "灯路でつながり、足が速く"),
+               ("5分", "book", "#5AAAFF", "<span class=\"kbd\">/menu</span> を開く", "すべての画面はここから"),
+               ("夜", "moon", "#9C8CFF", "灯りの中で過ごす", "画面の下に「灯りの中」"),
+               ("いつでも", "link", "#8EA2FF", "Discord とつなぐ", "<span class=\"kbd\">/link</span> で灯籠5基"),
+               ("慣れたら", "people", "#F29BB8", "人の灯りとつなぐ", "5基で「二ノ灯」")])}
+    {more("くわしく：最初の夜にやること", "<p><b>灯籠</b>は作業台で作れます（アメジストの欠片2・金インゴット2・ランタン1）。灯りの中は敵が入れず、爆発で壊れず、倒れても持ち物を失いません。最初の1基は無料です。</p><p><b>メニュー</b>は持ち物の「灯しるべ」を右クリックしても開きます。灯籠の画面（<span class=\"kbd\">/tomoshibi</span>）の「はじめの一歩」を1つ達成するたびに、灯籠を2基もらえます。</p><p>灯りの外に出ると、画面の下に「闇の中」と、いちばん近い灯りの方角が出ます。</p><p><span class=\"kbd\">/akashi</span> で灯原だけの進捗「灯の証」（263個）、<span class=\"kbd\">/waza</span> で技を育てる「灯技」と毎日3つの「今日の務め」が開きます。</p><p>Discord とつなぐと、手紙や夜祭の通知が届き、寄付・カード・番付などが使えるようになります。</p>")}
+    <p class="note cold"><b>来たばかりの人は守られています。</b>はじめの24時間は、灯喰いが来ません。</p>
     <p style="margin-top:24px"><a href="playstyle.html" class="gbtn">だれと遊ぶかで選ぶ：みんなで・身内で・ひとりで</a></p>
   </div>
 </section>
@@ -488,29 +471,11 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
   <div class="wrap">
     <p class="depth">早見表</p>
     <h2 class="disp h2">おぼえるコマンドは、ひとつ。</h2>
-    <p class="lead"><span class="kbd">/tomoshibi</span> でメニューが開き、あとは押すだけです。下の表は、直接打ちたい人むけです。</p>
-    <div class="tbl-wrap"><table class="cmd">
-      <thead><tr><th>打つもの</th><th>できること</th></tr></thead>
-      <tbody>
-        <tr><td class="n">/tomoshibi</td><td>メニューを開く（<span class="kbd">/tomo</span> でも同じ）</td></tr>
-        <tr><td class="n">/tomoshibi buffs</td><td>加護を見る、欠片で解放する</td></tr>
-        <tr><td class="n">/tomoshibi recipe</td><td>灯籠の作り方</td></tr>
-        <tr><td class="n">/tomoshibi go 名前</td><td>名前のついた灯籠（灯標）へ移動する</td></tr>
-        <tr><td class="n">/tomoshibi home</td><td>「帰る場所」に決めた灯標へ戻る</td></tr>
-        <tr><td class="n">/tomoshibi invite</td><td>自分の招待コードを見る</td></tr>
-        <tr><td class="n">/tomoshibi particles low</td><td>光の粒を減らす（動きが重いとき）</td></tr>
-        <tr><td class="n">/akashi</td><td>灯の証（進捗）を開く。報酬の受け取り、称号・足跡の選択も</td></tr>
-        <tr><td class="n">/akashi claim</td><td>証の報酬をまとめて受け取る</td></tr>
-        <tr><td class="n">/akashi top</td><td>証の番付</td></tr>
-        <tr><td class="n">/waza</td><td>灯技（技の木・使う技・今日の務め・灯魚図鑑）を開く</td></tr>
-        <tr><td class="n">/waza use</td><td>使う技の一覧（しゃがみ2回で主技、しゃがんで F で副技）</td></tr>
-        <tr><td class="n">/waza tasks</td><td>今日の務め</td></tr>
-        <tr><td class="n">/waza fish</td><td>灯魚図鑑</td></tr>
-        <tr><td class="n">/tokoyo</td><td>いまが昼か夜か、夜明けまでの時間、敵の強さ</td></tr>
-        <tr><td class="n">/yomatsuri</td><td>次の夜祭と、自分の参加回数</td></tr>
-        <tr><td class="n">/yomatsuri out</td><td>募集中の夜祭に、今回は参加しない</td></tr>
-      </tbody>
-    </table></div>
+    <p class="lead"><span class="kbd">/menu</span> でメニューが開き、あとは押すだけ。</p>
+    <div class="vbig-cmd">{ic("book", "#F2B544", 56)}<span class="kbd">/menu</span><span class="mu">灯籠・灯技・灯紋・灯の証・里・灯結の、すべての画面へ</span></div>
+    {cards([("lantern", "#F2B544", "<span class=\"kbd\">/tomoshibi</span>", "灯籠と加護"), ("sword", "#5AAAFF", "<span class=\"kbd\">/waza</span>", "灯技・今日の務め"), ("trophy", "#F29BB8", "<span class=\"kbd\">/akashi</span>", "灯の証"),
+            ("house", "#E9824A", "<span class=\"kbd\">/sato</span>", "灯里"), ("moon", "#9C8CFF", "<span class=\"kbd\">/tokoyo</span>", "夜明けまでの時間"), ("star", "#F29BB8", "<span class=\"kbd\">/yomatsuri</span>", "次の夜祭"),
+            ("link", "#8EA2FF", "<span class=\"kbd\">/link</span>", "Discord とつなぐ"), ("eye", "#BFC9DB", "<span class=\"kbd\">/hud</span>", "上と下の表示を切りかえ")], cols=4, cls="row")}
     <p style="margin-top:24px"><a href="commands.html" class="gbtn">すべてのコマンドを見る（{sum(len(g[5]) for g in _CMDS)}）</a></p>
   </div>
 </section>
@@ -542,44 +507,21 @@ _guide_src = f'''
   <div class="wrap">
     <p class="depth">1</p>
     <h2 class="disp h2">灯籠を置くと、そこが安全になる。</h2>
-    <p class="lead">光る「灯籠」を置くと、灯路網に登録されます。ふつうのランタンは飾りで、灯りにはなりません。</p>
-    <div class="pn" style="margin-top:28px">
-      <p class="mu" style="font-size:14px;font-weight:700">灯籠の作り方（作業台）</p>
-      <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;max-width:380px;margin:12px 0 14px">
-        <span></span><span class="kbd" style="display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;font-size:13px;line-height:1.4;padding:8px 4px;min-height:48px">アメジストの欠片</span><span></span>
-        <span class="kbd" style="display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;font-size:13px;line-height:1.4;padding:8px 4px;min-height:48px">金インゴット</span><span class="kbd" style="display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;font-size:13px;line-height:1.4;padding:8px 4px;min-height:48px;color:var(--amber)">ランタン</span><span class="kbd" style="display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;font-size:13px;line-height:1.4;padding:8px 4px;min-height:48px">金インゴット</span>
-        <span></span><span class="kbd" style="display:flex;align-items:center;justify-content:center;text-align:center;white-space:normal;font-size:13px;line-height:1.4;padding:8px 4px;min-height:48px">アメジストの欠片</span><span></span>
-      </div>
-      <p class="mu" style="font-size:16px">はじめて入ったときに3基もらえます。「はじめの一歩」や毎日の灯守り、灯の証の報酬でも手に入ります。壊すと灯籠のまま戻るので、置き直してもむだになりません。</p>
+    <p class="lead">光る「灯籠」だけが灯りになります。ふつうのランタンは飾りです。</p>
+    <div class="vgrid2">
+      {lantern_map()}
+      <div><h3 class="disp vh3" style="margin-top:28px">作り方（作業台）</h3>
+        <div style="margin-top:14px">{craft([None, ("アメジスト", "#A57BE8"), None, ("金", "#F7D84A"), ("ランタン", "#F2B544"), ("金", "#F7D84A"), None, ("アメジスト", "#A57BE8"), None])}</div>
+        <p class="mu" style="font-size:14px;margin-top:10px">はじめに3基もらえる。壊すと灯籠のまま戻る。</p></div>
     </div>
-    <div class="two">
-      <div><h3 class="h3 disp">灯りの中で起きること</h3><p class="mu">敵は入ってこられない。入りこんだ敵は外へ押し返され、居座ると灯りに焼かれる。灯りの中の人は狙われないので、外からの矢や爆発も来ない。敵が湧かない。爆発でブロックが壊れない。倒れても持ち物と経験値を失わない。画面の下に、いま灯りの中か外かが出ます。</p></div>
-      <div><h3 class="h3 disp">灯路</h3><p class="mu">16ブロック以内の灯籠どうしは、自動で灯路につながります（1基につき4本まで）。灯路の上は足が速くなります。だれの灯籠とでもつながります。</p></div>
-    </div>
-    <h3 class="h3 disp" style="margin-top:56px">つながるほど、格が上がる。</h3>
-    <p class="lead">灯路でつながった灯籠のまとまりを「灯路網」と呼びます。基数がふえると格が上がり、守られる範囲が広がって、まわりが本当に明るくなります。</p>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>格</th><th>つながった基数</th><th>守られる半径</th><th>できること</th></tr></thead>
-      <tbody>
-        <tr><th>一ノ灯</th><td class="n">1〜4基</td><td class="n">10</td><td>基本の守り。加護は Lv1 まで働く</td></tr>
-        <tr><th>二ノ灯</th><td class="n">5〜14基</td><td class="n">12</td><td>灯標どうしを行き来できる。加護は Lv2 まで</td></tr>
-        <tr><th>三ノ灯</th><td class="n">15〜39基</td><td class="n">14</td><td>灯路の上がさらに速くなる。加護は Lv3 まで</td></tr>
-        <tr><th>四ノ灯</th><td class="n">40基〜</td><td class="n">16</td><td>いちばん広く守られる</td></tr>
-      </tbody>
-    </table></div>
-    <h3 class="h3 disp" style="margin-top:56px">置くときのきまり</h3>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>置き方</th><th>かかるもの・もらえるもの</th></tr></thead>
-      <tbody>
-        <tr><th>最初の1基</th><td>無料</td></tr>
-        <tr><th>いまある灯籠から16ブロック以内</th><td>無料。灯路1本につき経験値がもらえる（3本まで）</td></tr>
-        <tr><th>どの灯籠ともつながらない場所</th><td>経験値レベル 2 がかかる</td></tr>
-        <tr><th>同じチャンクに3基目</th><td>置けない（1チャンク2基まで）。灯籠は手もとに残る</td></tr>
-        <tr><th>ふつうのランタン</th><td>飾りとして置かれる。灯路網にはつながらない</td></tr>
-      </tbody>
-    </table></div>
-    <p class="note">ぎゅうぎゅうに置くより、少しはなして外へのばすほうが得になるようにしてあります。</p>
-    <p class="note warn"><b>灯りの守りが効かないもの。</b>灯喰いと、ウィザー・エンダードラゴン・ウォーデン・エルダーガーディアン。灯喰いに喰われた灯籠のまわりも、守りが消えます。</p>
+    <h3 class="disp vh3">灯りの中では</h3>
+    {cards([("shield", "#6FD39A", "敵が入れない", "入りこんだ敵は押し返される"), ("eye", "#6FD39A", "狙われない", "外からの矢や爆発も来ない"), ("fire", "#6FD39A", "爆発で壊れない", ""),
+            ("chest", "#6FD39A", "倒れても失わない", "持ち物も経験値も"), ("x", "#6FD39A", "敵が湧かない", ""), ("bolt", "#FFD98A", "灯路の上は速い", "16ブロック以内で自動でつながる")], cols=3, cls="row")}
+    <h3 class="disp vh3">つながるほど、守りが広がる</h3>
+    {bars([("一ノ灯", 10, "#B47A1E", "1〜4基・加護 Lv1 まで"), ("二ノ灯", 12, "#D89A30", "5〜14基・灯標を行き来できる・加護 Lv2"), ("三ノ灯", 14, "#F2B544", "15〜39基・灯路がさらに速い・加護 Lv3"), ("四ノ灯", 16, "#FFD98A", "40基〜・いちばん広い")], unit=" ブロック", maxv=16)}
+    <h3 class="disp vh3">置くときのきまり</h3>
+    {cards([("lantern", "#6FD39A", "最初の1基", "無料"), ("path", "#6FD39A", "16ブロック以内", "無料・灯路1本ごとに経験値"), ("coin", "#E9C46A", "つながらない場所", "経験値 Lv2"), ("x", "#E0453A", "同じチャンクに3基目", "置けない（2基まで）")], cols=4, cls="row")}
+    <p class="note warn"><b>守りが効かないもの</b>灯喰い・ウィザー・エンダードラゴン・ウォーデン・エルダーガーディアン</p>
   </div>
 </section>
 
@@ -588,24 +530,16 @@ _guide_src = f'''
   <div class="wrap">
     <p class="depth">2</p>
     <h2 class="disp h2">昼は4分、夜は24分。</h2>
-    <p class="lead">灯原では、ほとんどの時間が夜です。ベッドで寝ても夜は飛ばせません（リスポーン地点は決められます）。日没と夜明けには、画面の真ん中に知らせが出ます。</p>
-    <h3 class="h3 disp" style="margin-top:44px">夜に湧く敵</h3>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>ふつうのマインクラフトとくらべて</th><th>倍率</th></tr></thead>
-      <tbody>
-        <tr><th>体力</th><td class="n">×2.5</td></tr>
-        <tr><th>攻撃</th><td class="n">×2.0</td></tr>
-        <tr><th>矢・爆発</th><td class="n">×1.8</td></tr>
-        <tr><th>足の速さ</th><td class="n">×1.15</td></tr>
-        <tr><th>気づく距離</th><td class="n">×1.5</td></tr>
-      </tbody>
-    </table></div>
-    <div class="two">
-      <div><h3 class="h3 disp">さらに強くなるとき</h3><p class="mu">夜を1つ重ねるごとに+4%（最大で2倍）。真夜中は+25%。そして、あなたの防具が固いほど敵も強くなります。育っても、夜は楽になりません。</p></div>
-      <div><h3 class="h3 disp">精鋭と群れ</h3><p class="mu">10体に1体は、名前のついた「精鋭」です。体力も攻撃もさらに高いかわりに、経験値は4倍、欠片も6割の確率で落とします。3回に1回は、もう1体いっしょに湧きます。</p></div>
+    <p class="lead">ほとんどが夜。ベッドで寝ても飛ばせません。</p>
+    <div class="vgrid2">
+      <div>{daynight()}</div>
+      <div><h3 class="disp vh3" style="margin-top:20px">夜の敵（ふつうとくらべて）</h3>
+        {bars([("体力", 2.5, "#E0453A"), ("攻撃", 2.0, "#E0453A"), ("矢・爆発", 1.8, "#EE9A4A"), ("気づく距離", 1.5, "#E9C46A"), ("足の速さ", 1.15, "#E9C46A")], unit="倍", maxv=2.5)}</div>
     </div>
-    <p class="note warn"><b>朱月（しゅげつ）の夜。</b>7夜に一度、月が赤くなります。敵は1.4倍強く、群れと精鋭がふえます。ひとりで外にいる夜ではありません。</p>
-    <p class="note">昼に湧いた敵と、スポナーから出た敵は、ふつうの強さのままです。いまの時刻と敵の強さは <span class="kbd">/tokoyo</span> で見られます。</p>
+    {cards([("moon", "#9C8CFF", "夜を重ねるほど", "1夜ごとに +4%（最大2倍）"), ("clock", "#9C8CFF", "真夜中", "+25%"), ("shield", "#9C8CFF", "防具が固いほど", "敵も強くなる"),
+            ("star", "#F2B544", "精鋭（10体に1体）", "経験値4倍・欠片60%"), ("people", "#F2B544", "群れ", "3回に1回、もう1体")], cols=5)}
+    <p class="note warn"><b>朱月の夜</b>7夜に一度、月が赤くなる。敵は1.4倍、群れと精鋭がふえる。</p>
+    {more("くわしく", "<p>昼に湧いた敵と、スポナーから出た敵は、ふつうの強さのままです。日没と夜明けには、画面の真ん中に知らせが出ます。いまの時刻と敵の強さは <span class=\"kbd\">/tokoyo</span> で見られます。</p>")}
   </div>
 </section>
 
@@ -614,24 +548,15 @@ _guide_src = f'''
   <div class="wrap">
     <p class="depth">3</p>
     <h2 class="disp h2">灯喰いは、灯りを消しに来る。</h2>
-    <p class="lead">黒い体に白い面。灯りの守りを破れる、ただひとつの敵です。人には目もくれず、灯籠へまっすぐ向かってきます。道をふさいでも、闇を渡って灯籠のそばに現れます。</p>
-    <ol class="steps" style="margin-top:36px">
-      <li><div><h3>狙われる</h3><p>夜、人の近く（48ブロック以内）にある灯籠のうち、灯路がいちばん少ない「端」の1基が狙われます。</p></div></li>
-      <li><div><h3>知らせが出る</h3><p>灯喰いがいるあいだ、画面の下に「灯喰いが灯を狙っている｜北東 32m・灯まであと 12m」と出つづけます。灯喰いの体は光っていて、暗がりでも見えます。</p></div></li>
-      <li><div><h3>喰いはじめる</h3><p>灯籠に取りつくと、灯籠から光を吸いはじめます。画面の下に、どこまで喰われたかが ■■■■□□ のように出ます。喰い終わるまでの時間は、下の式のとおりです。</p></div></li>
-      <li><div><h3>守る</h3><p>たたくと喰うのが2秒ぶん戻り、たたいた人にだけ、しばらくやり返してきます。倒せば守りきりです。3回に1回ほど、欠片を落とします。</p></div></li>
-      <li><div><h3>喰われたら</h3><p>灯籠は青い冷たい火になり、守りも灯路も止まります。途中の1基が消えると、灯路網が2つに分かれて格が下がることもあります。</p></div></li>
-      <li><div><h3>灯し直す</h3><p>青い灯籠を、何も持たずに右クリックすると、だれでも灯し直せます。ほかの人の灯籠を灯し直すと、経験値がもらえます。</p></div></li>
-    </ol>
-    <div class="pn" style="margin-top:32px">
-      <p class="mu" style="font-size:14px;font-weight:700">喰い終わるまでの時間</p>
-      <p class="dot" style="font-size:clamp(19px,2.6vw,28px);line-height:1.6;color:#FFE3A3;margin-top:6px">5秒 ＋ 灯路1本ごとに5秒 ＋ 灯りの中の人ひとりごとに3秒</p>
-      <p class="mu" style="margin-top:10px;font-size:16px">ぽつんと1基だけの灯籠は5秒。灯路が3本つながり、そばに2人いれば26秒。つなぐほど、集まるほど、守れます。</p>
-    </div>
-    <div class="two">
-      <div><h3 class="h3 disp">夜明けに起きること</h3><p class="mu">まだ灯っている灯籠とつながっている灯籠には、火が移って自然に戻ります。つながりのない灯籠は、だれかが行くまで消えたままです。ひとつも消させなかった夜は「無欠の夜」として、経験値がもらえます。</p></div>
-      <div><h3 class="h3 disp">狙われないもの</h3><p class="mu">3基より少ない灯路網。名前をつけた灯標。最初の広場のまわり。来てから24時間以内の人のまわり。地下や高い塔の灯籠。そして、近くにだれもいない灯籠。</p></div>
-    </div>
+    <div class="vrow" style="margin-top:18px"><div class="vfact-art" style="width:200px;height:190px;flex:none">{eater()}<span class="vfact-lan">{ic("lantern", "#5AAAFF", 56)}</span></div>
+      <p class="lead vgrow">灯りの守りを破れる、ただひとつの敵。人ではなく<b>灯籠</b>を狙い、闇を渡って現れます。</p></div>
+    {timeline([("1", "eye", "#B46CFF", "狙われる", "人の近くの、灯路がいちばん少ない「端」"), ("2", "warn", "#B46CFF", "知らせが出る", "画面の下に方角と距離"), ("3", "clock", "#B46CFF", "喰いはじめる", "■■■■□□ で進み具合"),
+               ("4", "sword", "#F2B544", "たたいて守る", "倒せば守りきり・欠片も"), ("5", "fire", "#5AAAFF", "喰われると青い火", "守りも灯路も止まる"), ("6", "lantern", "#6FD39A", "灯し直す", "素手で右クリック")])}
+    <h3 class="disp vh3">喰い終わるまでの時間</h3>
+    {eq([("5秒", "#B46CFF"), "+", ("灯路1本ごとに 5秒", "#F2B544"), "+", ("灯りの中の人ごとに 3秒", "#6FD39A")])}
+    {bars([("ぽつんと1基", 5, "#B46CFF"), ("灯路3本", 20, "#F2B544"), ("灯路3本＋2人", 26, "#6FD39A")], unit="秒", maxv=26)}
+    <p class="mu" style="font-size:15px;margin-top:10px">つなぐほど、集まるほど、守れる。</p>
+    {cards([("sun", "#F2B544", "夜明けに戻る", "灯っている灯籠とつながっていれば、火が移る"), ("shield", "#6FD39A", "狙われないもの", "3基未満・灯標・広場・来て24時間・地下や塔・人がいない")], cols=2)}
   </div>
 </section>
 
@@ -640,46 +565,15 @@ _guide_src = f'''
   <div class="wrap">
     <p class="depth">4</p>
     <h2 class="disp h2">倒して、集めて、強くなる。</h2>
-    <p class="lead">敵はときどき「欠片」を落とします。右クリックで取り込み（しゃがむと全部）、<span class="kbd">/tomoshibi buffs</span> で加護を解放します。加護は、灯りの中にいるあいだだけ働きます。</p>
-    <div class="two">
-      <div>
-        <h3 class="h3 disp">欠片が落ちる確率</h3>
-        <div class="tbl-wrap" style="margin-top:8px"><table style="min-width:0">
-          <tbody>
-            <tr><th>ふつうの敵</th><td class="n">5%</td></tr>
-            <tr><th>夜に強くなった敵</th><td class="n">12%</td></tr>
-            <tr><th>灯喰い</th><td class="n">35%</td></tr>
-            <tr><th>精鋭</th><td class="n">60%</td></tr>
-          </tbody>
-        </table></div>
-      </div>
-      <div>
-        <h3 class="h3 disp">解放に要る欠片</h3>
-        <div class="tbl-wrap" style="margin-top:8px"><table style="min-width:0">
-          <tbody>
-            <tr><th>Lv1</th><td class="n">4個</td></tr>
-            <tr><th>Lv2</th><td class="n">さらに10個</td></tr>
-            <tr><th>Lv3</th><td class="n">さらに20個</td></tr>
-          </tbody>
-        </table></div>
-        <p class="mu" style="font-size:15px;margin-top:10px">欠片は加護の種類ごとに別です。再生の欠片は、再生の加護にだけ使えます。</p>
-      </div>
+    <p class="lead">敵が落とす「欠片」で加護を解放（<span class="kbd">/tomoshibi buffs</span>）。加護は<b>灯りの中だけ</b>で働きます。</p>
+    <div class="vgrid2">
+      <div><h3 class="disp vh3" style="margin-top:24px">欠片が落ちる確率</h3>{bars([("ふつうの敵", 5, "#6FD39A"), ("夜に強い敵", 12, "#6FD39A"), ("灯喰い", 35, "#B46CFF"), ("精鋭", 60, "#F2B544")], unit="%", maxv=60)}</div>
+      <div><h3 class="disp vh3" style="margin-top:24px">解放に要る欠片</h3>{stats([("star", "#6FD39A", "4", "個", "Lv1"), ("star", "#5AAAFF", "+10", "個", "Lv2"), ("star", "#F2B544", "+20", "個", "Lv3")])}</div>
     </div>
-    <h3 class="h3 disp" style="margin-top:56px">8つの加護</h3>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>加護</th><th>働く場所</th><th>Lv1</th><th>Lv2</th><th>Lv3</th></tr></thead>
-      <tbody>
-        <tr><th><span class="sw" style="background:#F29BB8"></span>再生</th><td>灯りの中</td><td colspan="3">体力が少しずつ戻る。Lv が上がるほど速い</td></tr>
-        <tr><th><span class="sw" style="background:#F2D544"></span>採掘速度</th><td>灯りの中</td><td colspan="3">掘るのが速くなる</td></tr>
-        <tr><th><span class="sw" style="background:#C9D0DC"></span>耐性</th><td>灯りの中</td><td colspan="3">受けるダメージが減る</td></tr>
-        <tr><th><span class="sw" style="background:#E0453A"></span>攻撃力</th><td>灯りの中</td><td colspan="3">攻撃が強くなる</td></tr>
-        <tr><th><span class="sw" style="background:#8BD18F"></span>幸運</th><td>灯りの中</td><td colspan="3">戦利品や釣りの運が上がる</td></tr>
-        <tr><th><span class="sw" style="background:#8FC3E8"></span>跳躍</th><td>灯路の上</td><td colspan="3">高く跳べる</td></tr>
-        <tr><th><span class="sw" style="background:#F2B544"></span>満腹</th><td>灯りの中</td><td class="n">空腹 −50%</td><td class="n">−75%</td><td>腹が減らない</td></tr>
-        <tr><th><span class="sw" style="background:#6FD39A"></span>経験</th><td>灯りの中</td><td class="n">経験値 +15%</td><td class="n">+30%</td><td class="n">+50%</td></tr>
-      </tbody>
-    </table></div>
-    <p class="note"><b>格とのかけ算。</b>働くのは「いまいる灯路網の格まで」の Lv です。Lv3 を解放していても、一ノ灯の灯りの中では Lv1 しか働きません。自分が強くなることと、みんなで灯路網を育てることの、両方が要ります。</p>
+    <h3 class="disp vh3">8つの加護</h3>
+    {cards([("heart", "#F29BB8", "再生", "体力が戻る"), ("pick", "#F2D544", "採掘速度", "掘るのが速い"), ("shield", "#C9D0DC", "耐性", "ダメージが減る"), ("sword", "#E0453A", "攻撃力", "攻撃が強い"),
+            ("star", "#8BD18F", "幸運", "戦利品・釣り"), ("bolt", "#8FC3E8", "跳躍", "灯路の上で高く"), ("gift", "#F2B544", "満腹", "空腹 −50% → 減らない"), ("book", "#6FD39A", "経験", "経験値 +15〜50%")], cols=4, cls="row")}
+    <p class="note"><b>格とのかけ算</b>働くのは「いまの灯路網の格まで」。Lv3 でも、一ノ灯では Lv1。</p>
   </div>
 </section>
 
@@ -688,26 +582,13 @@ _guide_src = f'''
   <div class="wrap">
     <p class="depth">5</p>
     <h2 class="disp h2">灯の証。263の、灯原だけの進捗。</h2>
-    <p class="lead"><span class="kbd">/akashi</span> で開きます。灯籠、夜、狩り、旅、ものづくり、暮らし、夜祭、灯技。この世界で過ごしたことが、そのまま証になります。すべて集めるには、季節をまたぐほどの時間がかかります。</p>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>難度</th><th>数</th><th>目安</th><th>例</th></tr></thead>
-      <tbody>
-        <tr><th style="color:#55FF55">◆ 易</th><td class="n">43</td><td>その日のうちに</td><td>灯籠をひとつ灯す、最初の夜を越える</td></tr>
-        <tr><th style="color:#55FFFF">◆◆ 並</th><td class="n">77</td><td>何日か続ければ</td><td>15基の灯路網に加わる、朱月の夜を越える</td></tr>
-        <tr><th style="color:#FF55FF">◆◆◆ 難</th><td class="n">81</td><td>腰を据えて</td><td>100回の夜を越える、ウィザーを倒す</td></tr>
-        <tr><th style="color:#FFAA00">◆◆◆◆ 極</th><td class="n">43</td><td>何週間も</td><td>灯籠を300基持つ、ウォーデンを倒す</td></tr>
-        <tr><th style="color:#FF5555">◆◆◆◆◆ 伝</th><td class="n">19</td><td>季節をまたいで</td><td>500回の夜を越える、8つの加護をすべて Lv3 にする</td></tr>
-      </tbody>
-    </table></div>
-    <div class="three">
-      <div><h3 class="h3 disp">段になっている</h3><p class="mu">同じ種類の証は段になっていて、前の段を得ると次が現れます。ひとつ選んで「追跡」すると、画面の上のバーで進み具合を見られます。</p></div>
-      <div><h3 class="h3 disp">秘められた証</h3><p class="mu">条件が隠されていて、ヒントだけが読める証が12個あります。だれかが見つけると、その証の札に「初達成」の名前が残ります。</p></div>
-      <div><h3 class="h3 disp">報酬は、強さの差がつかない量</h3><p class="mu">経験値、加護の欠片、名前の前に出る称号（69種）、歩くと光が残る足跡（12種）、証でしか手に入らない灯りの色（5色）。</p></div>
-    </div>
-    <h3 class="h3 disp" style="margin-top:56px">証点と位階</h3>
-    <p class="lead">証を得るたびに、難度に応じて証点がたまります（易10・並25・難50・極100・伝250）。証点で位階が上がり、称号や足跡がもらえます。</p>
-    <p class="dot" style="font-size:clamp(16px,2.2vw,22px);line-height:2;color:#FFE3A3;margin-top:10px">灯見習い → 灯守 → 灯師 → 灯匠 → 灯司 → 夜番 → 夜渡り → 宵の主 → 暁の灯 → 灯原の伝説</p>
-    <p class="note">放置している時間（5分間、視点が動かない）と、クリエイティブでの行動は数えません。「夜を越える」は、夜のはじめから夜明けまで、地上の世界で倒れずに過ごすことです。</p>
+    <p class="lead"><span class="kbd">/akashi</span> で開く。過ごしたことが、そのまま証になります。</p>
+    {bars([("◆ 易", 43, "#55FF55", "その日のうちに・最初の夜を越える"), ("◆◆ 並", 77, "#55FFFF", "何日か・朱月の夜を越える"), ("◆◆◆ 難", 81, "#FF55FF", "腰を据えて・ウィザーを倒す"), ("◆◆◆◆ 極", 43, "#FFAA00", "何週間も・灯籠を300基"), ("◆◆◆◆◆ 伝", 19, "#FF5555", "季節をまたいで・夜を500回")], unit="個")}
+    {cards([("trophy", "#F29BB8", "段になっている", "前の段を得ると次が出る。追跡で進み具合"), ("q", "#B46CFF", "秘められた証 12個", "ヒントだけ。初達成の名前が残る"), ("gift", "#F2B544", "報酬は見た目中心", "称号69・足跡12・灯りの色5")])}
+    <h3 class="disp vh3">証点で、位階が上がる</h3>
+    <div class="vtags">{"".join(f'<span class="vtag" style="border-color:{c}"><b style="color:{c}">{d}</b>{p}点</span>' for d, p, c in [("易", 10, "#55FF55"), ("並", 25, "#55FFFF"), ("難", 50, "#FF55FF"), ("極", 100, "#FFAA00"), ("伝", 250, "#FF5555")])}</div>
+    {chain(["灯見習い", "灯守", "灯師", "灯匠", "灯司", "夜番", "夜渡り", "宵の主", "暁の灯", "灯原の伝説"])}
+    {more("くわしく", "<p>放置している時間（5分間、視点が動かない）と、クリエイティブでの行動は数えません。「夜を越える」は、夜のはじめから夜明けまで、地上の世界で倒れずに過ごすことです。</p>")}
   </div>
 </section>
 
@@ -717,37 +598,12 @@ _guide_src = f'''
   <div class="wrap">
     <p class="depth">7</p>
     <h2 class="disp h2">灯標、灯りの色、招待。</h2>
-    <div class="two">
-      <div><h3 class="h3 disp">灯標と灯渡り</h3><p class="mu">灯籠に名前をつけると「灯標（とうひょう）」になります。二ノ灯より上の灯路網では、同じ灯路網の灯標へ、3秒じっとしているだけで移動できます（つぎに使えるまで30秒）。灯標は灯喰いに喰われません。ひとつを「帰る場所」に決めておけます。</p></div>
-      <div><h3 class="h3 disp">仲間</h3><p class="mu">メニューの「仲間」に加えた人は、あなたの灯籠に名前をつけたり、取り除いたりできます。ほかの人は、あなたの灯籠を壊せません。</p></div>
-    </div>
-    <h3 class="h3 disp" style="margin-top:56px">灯りの色は、17色。</h3>
-    <p class="lead">灯籠の光と灯路の色を変えられます。強さは変わりません。手に入れ方は、遊ぶことだけです。</p>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>色</th><th>手に入れ方</th></tr></thead>
-      <tbody>
-        <tr><th><span class="sw" style="background:#F2B544"></span>山吹</th><td>最初から</td></tr>
-        <tr><th><span class="sw" style="background:#F29BB8"></span>桜</th><td>夜祭に5回参加する</td></tr>
-        <tr><th><span class="sw" style="background:#8FC3E8"></span>水縹（みはなだ）</th><td>夜祭に10回参加する</td></tr>
-        <tr><th><span class="sw" style="background:#8BD18F"></span>若竹</th><td>夜祭に20回参加する</td></tr>
-        <tr><th><span class="sw" style="background:#C9D0DC"></span>白銀</th><td>友達を1人招待する</td></tr>
-        <tr><th><span class="sw" style="background:#B79CF2"></span>藤</th><td>友達を3人招待する</td></tr>
-        <tr><th><span class="sw" style="background:#F2A07A"></span>曙</th><td>友達を5人招待する</td></tr>
-        <tr><th><span class="sw" style="background:#FFF1C4"></span>はじまりの灯</th><td>シーズン1の開幕の夜（11月7日）に参加する</td></tr>
-        <tr><th><span class="sw" style="background:#FF7624"></span>篝火</th><td>証「夜を貫く灯路」（300基の灯路網に加わる）</td></tr>
-        <tr><th><span class="sw" style="background:#40D6A0"></span>翡翠</th><td>証「八徳の灯」（8つの加護をすべて Lv3）</td></tr>
-        <tr><th><span class="sw" style="background:#D62448"></span>紅</th><td>証「一年の灯守」（灯守りを365日続ける）</td></tr>
-        <tr><th><span class="sw" style="background:#FF6ED2"></span>花火</th><td>証「祭神」（夜祭で50回勝つ）</td></tr>
-        <tr><th><span class="sw" style="background:#BAAAFF"></span>天の川</th><td>位階「灯原の伝説」に届く</td></tr>
-      </tbody>
-    </table></div>
-    <p class="mu" style="font-size:15px;margin-top:12px">ほかの色は、メニューの「灯りの色」に手に入れ方が書いてあります。</p>
-    <h3 class="h3 disp" style="margin-top:56px">友達を呼ぶ</h3>
-    <ol class="steps" style="margin-top:16px">
-      <li><div><h3><span class="kbd">/tomoshibi invite</span> で、自分の招待コードを見る</h3><p>メニューの「招待」からも見られます。</p></div></li>
-      <li><div><h3>友達に、サーバーのアドレスとコードを伝える</h3><p>アドレスは <span class="kbd">{ADDR}</span> です。</p></div></li>
-      <li><div><h3>友達が、入ってから7日以内に <span class="kbd">/tomoshibi code コード</span> と打つ</h3><p>呼んだ人の招待が1人ふえます。10人呼ぶと、番付の「灯友の碑」に名前が載ります。</p></div></li>
-    </ol>
+    {cards([("flag", "#C9D0DC", "灯標と灯渡り", "名前をつけた灯籠へ、3秒で移動（二ノ灯から）"), ("house", "#C9D0DC", "帰る場所", "灯標をひとつ決めておける"), ("people", "#C9D0DC", "仲間", "あなたの灯籠に名前をつけ、取り除ける")])}
+    <h3 class="disp vh3">灯りの色は17色（強さは変わらない）</h3>
+    {swatches([("#F2B544", "山吹", "最初から"), ("#F29BB8", "桜", "夜祭 5回"), ("#8FC3E8", "水縹", "夜祭 10回"), ("#8BD18F", "若竹", "夜祭 20回"), ("#C9D0DC", "白銀", "招待 1人"), ("#B79CF2", "藤", "招待 3人"), ("#F2A07A", "曙", "招待 5人"),
+               ("#FFF1C4", "はじまりの灯", "開幕の夜"), ("#FF7624", "篝火", "証「夜を貫く灯路」"), ("#40D6A0", "翡翠", "証「八徳の灯」"), ("#D62448", "紅", "証「一年の灯守」"), ("#FF6ED2", "花火", "証「祭神」"), ("#BAAAFF", "天の川", "灯原の伝説")])}
+    <h3 class="disp vh3">友達を呼ぶ</h3>
+    {steps([("gift", "#F29BB8", "<span class=\"kbd\">/tomoshibi invite</span>", "自分の招待コード"), ("chat", "#8EA2FF", "アドレスとコードを伝える", f"<span class=\"kbd\">{ADDR}</span>"), ("ok", "#6FD39A", "7日以内に入力してもらう", "<span class=\"kbd\">/tomoshibi code コード</span>")])}
   </div>
 </section>
 '''
@@ -918,14 +774,9 @@ def _hiwaza_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">灯りで蓄えて、闇へ持ち出す。</h2>
-    <div class="facts">
-      <div class="fact"><p class="fact-n">灯力</p><p>使う技の力です。灯籠の灯りの中でたまり、灯路網の格が高いほど早くたまります。灯りの外ではほとんどたまりません。画面の上のバーに出ます。</p></div>
-      <div class="fact"><p class="fact-n">3<small>つ／日</small></p><p>毎日0時に「今日の務め」が3つ出ます。果たすと経験値と灯力、3つすべて果たすと加護の欠片がもらえます。</p></div>
-      <div class="fact"><p class="fact-n">★10</p><p>Lv50 を超えた経験値は「極み」の★になります。道ごとに★10まで。番付にも出ます。</p></div>
-      <div class="fact"><p class="fact-n">4,000<small>／日</small></p><p>「今日の伸び」。道ごとに1日 4,000 まではふつうに育ち、その先は1割になります。遊べなかった日の分は3日ぶんまで貯まるので、毎日入れなくても置いていかれません。まとめ掘りや一本切りで技がいっしょに壊した分は、経験値が半分です。</p></div>
-      <div class="fact"><p class="fact-n">約1<small>か月</small></p><p>ひとつの奥義までの目安です（毎日遊んで）。奥義には Lv と三の段2つに加えて「奥義の試練」が要ります。たとえば掘の道は鉱石3,000個、釣の道は灯魚60種、旅の道は40種の土地。</p></div>
-      <div class="fact"><p class="fact-n">1<small>回目は無料</small></p><p>技は振り直せます。はじめの1回は無料、そのあとは経験値 Lv10 と24時間の待ちがかかります。</p></div>
-    </div>
+    {stats([("lantern", "#5AAAFF", "灯力", "", "技の力。灯りの中でたまる"), ("ok", "#6FD39A", "3", "つ／日", "今日の務め"), ("star", "#F2B544", "★10", "", "Lv50 の先の「極み」"),
+            ("bolt", "#E9C46A", "4,000", "／日", "ふつうに育つ量（3日分ためられる）"), ("trophy", "#F29BB8", "約1", "か月", "奥義までの目安"), ("x", "#BFC9DB", "1回目", "無料", "技の振り直し")])}
+    {more("くわしく：灯力・務め・極み・伸び", "<p><b>灯力</b>は灯籠の灯りの中でたまり、灯路網の格が高いほど早くたまります。灯りの外ではほとんどたまりません。画面の上のバーに出ます。</p><p><b>今日の務め</b>は毎日0時に3つ。果たすと経験値と灯力、3つすべてで加護の欠片。</p><p><b>極み</b>：Lv50 を超えた経験値は★になり、道ごとに★10まで。番付にも出ます。</p><p><b>今日の伸び</b>：道ごとに1日4,000まではふつうに育ち、その先は1割。遊べなかった日の分は3日ぶんまで貯まります。まとめ掘りや一本切りで技がいっしょに壊した分は、経験値が半分です。</p><p><b>奥義</b>には Lv と三の段2つに加えて「奥義の試練」が要ります（掘の道は鉱石3,000個、釣の道は灯魚60種、旅の道は40種の土地など）。</p><p><b>振り直し</b>：2回目からは経験値 Lv10 と24時間の待ち。</p>")}
     <p class="note cold"><b>ずるはできないようにしてあります。</b>放置（視点が5分動かない）中は育ちません。自分で置いたブロック、石の製造機、同じ場所を回る・瞬間移動では経験値が入りません。保護された場所では技も働きません。</p>
   </div>
 </section>
@@ -1119,21 +970,9 @@ events = f'''<div class="hero">
   <div class="wrap">
     <p class="depth">始まり方</p>
     <h2 class="disp h2">何もしなければ、参加です。</h2>
-    <ol class="steps" style="margin-top:28px">
-      <li><div><h3>21時に、120秒の募集が始まる</h3><p>画面の上に、残り時間と参加人数のバーが出ます。</p></div></li>
-      <li><div><h3>参加する人は、そのまま待つ</h3><p>何も打たなくてかまいません。今回は見送りたい人だけ <span class="kbd">/yomatsuri out</span> と打ちます。気が変わったら <span class="kbd">/yomatsuri in</span>。</p></div></li>
-      <li><div><h3>人数がそろっていれば、自動で始まる</h3><p>必要な人数は、そのときサーバーにいる人数の4割（上限8人）です。届かなければ、その回は見送りになります。</p></div></li>
-      <li><div><h3>会場へ移動して、終わったら元の場所へ戻る</h3><p>灯籠リレーと闇かくれんぼは、参加者を会場へ運びます。終わると、もといた場所に戻ります。</p></div></li>
-    </ol>
-    <div class="tbl-wrap"><table>
-      <thead><tr><th>サーバーにいる人数</th><th>始まるのに必要な人数</th></tr></thead>
-      <tbody>
-        <tr><td class="n">5人</td><td class="n">2〜4人（ゲームによる）</td></tr>
-        <tr><td class="n">10人</td><td class="n">4人</td></tr>
-        <tr><td class="n">15人</td><td class="n">6人</td></tr>
-        <tr><td class="n">20人〜</td><td class="n">8人</td></tr>
-      </tbody>
-    </table></div>
+    {steps([("clock", "#F29BB8", "21時、120秒の募集", "画面の上にバー"), ("people", "#F2B544", "そのまま待つ", "見送るなら <span class=\"kbd\">/yomatsuri out</span>"), ("bolt", "#6FD39A", "そろえば自動で開始", "いる人の4割（最大8人）"), ("house", "#5AAAFF", "終われば元の場所へ", "会場へは自動で運ばれる")])}
+    <h3 class="disp vh3">始まるのに必要な人数</h3>
+    {bars([("5人いるとき", 3, "#F29BB8", "2〜4人（ゲームによる）"), ("10人", 4, "#F29BB8"), ("15人", 6, "#F29BB8"), ("20人〜", 8, "#F29BB8")], unit="人", maxv=8)}
   </div>
 </section>
 
@@ -1143,16 +982,13 @@ events = f'''<div class="hero">
     <p class="depth">4週でひとまわり</p>
     <h2 class="disp h2">ゲームは、毎週かわる。</h2>
     <p class="lead">苦手なゲームの週があっても、次の週は別の遊びです。</p>
-    <div class="tbl-wrap" data-rot><table>
-      <thead><tr><th>ゲーム</th><th>どんな遊び</th><th>長さ</th><th>最少人数</th></tr></thead>
-      <tbody>
-        <tr data-g="0"><th>灯籠リレー</th><td>紅組と藍組に分かれ、出発点から終点まで、自分の組の灯籠だけで先に灯路を通した組の勝ち。「祭の灯籠」が16個ずつ配られます。祭の灯籠は、祭が終わると置いたものも手もとのものも消えます。</td><td class="n">12分</td><td class="n">4人</td></tr>
-        <tr data-g="1"><th>闇かくれんぼ</th><td>5人に1人が鬼。鬼は最初の30秒、動けません。触れられたら負けで、範囲の外に出ても負け。灯籠を置くと10秒間、体が光ります。朝まで隠れきれば勝ち。</td><td class="n">8分</td><td class="n">4人</td></tr>
-        <tr data-g="2"><th>建築早押し</th><td>お題（灯台、橋、屋台など）の建物を15分で建てます。最後に <span class="kbd">/yomatsuri vote 名前</span> で、いちばん良いと思う人に投票します。途中参加できます。</td><td class="n">15分</td><td class="n">3人</td></tr>
-        <tr data-g="3"><th>夜明けまで</th><td>朱月の夜を呼びます。倒れたら脱落。朝まで生き延びた人の勝ち。全員で灯りを守りきる夜です。途中参加できます。</td><td class="n">10分</td><td class="n">2人</td></tr>
-      </tbody>
-    </table></div>
-    <style>[data-rot] tr.cur{{background:rgba(242,181,68,.12)}}[data-rot] tr.cur th::after{{content:'次回';display:inline-block;margin-left:10px;padding:0 8px;background:var(--amber);color:#24180A;font-size:12px;line-height:1.8}}</style>
+    <ul class="vgames" data-rot>
+      <li data-g="0" style="--c:#F2B544">{ic("lantern", "#F2B544", 56)}<h3 class="disp">灯籠リレー</h3><p>紅組と藍組。先に灯路を通した組の勝ち</p><span class="vtags"><span class="vtag">{ic("clock", "#F2B544")}12分</span><span class="vtag">{ic("people", "#F2B544")}4人から</span></span></li>
+      <li data-g="1" style="--c:#9C8CFF">{ic("eye", "#9C8CFF", 56)}<h3 class="disp">闇かくれんぼ</h3><p>5人に1人が鬼。朝まで隠れきれば勝ち</p><span class="vtags"><span class="vtag">{ic("clock", "#9C8CFF")}8分</span><span class="vtag">{ic("people", "#9C8CFF")}4人から</span></span></li>
+      <li data-g="2" style="--c:#6FD39A">{ic("hammer", "#6FD39A", 56)}<h3 class="disp">建築早押し</h3><p>お題を15分で建てて、投票で決める</p><span class="vtags"><span class="vtag">{ic("clock", "#6FD39A")}15分</span><span class="vtag">{ic("people", "#6FD39A")}3人から</span></span></li>
+      <li data-g="3" style="--c:#E0453A">{ic("moon", "#E0453A", 56)}<h3 class="disp">夜明けまで</h3><p>朱月の夜。倒れたら脱落、朝まで生き延びる</p><span class="vtags"><span class="vtag">{ic("clock", "#E0453A")}10分</span><span class="vtag">{ic("people", "#E0453A")}2人から</span></span></li>
+    </ul>
+    {more("くわしく：4つのゲーム", "<p><b>灯籠リレー</b>：出発点から終点まで、自分の組の灯籠だけで灯路を通します。「祭の灯籠」が16個ずつ配られ、祭が終わると消えます。</p><p><b>闇かくれんぼ</b>：鬼は最初の30秒動けません。触れられたら負け、範囲の外に出ても負け。灯籠を置くと10秒間、体が光ります。</p><p><b>建築早押し</b>：お題（灯台・橋・屋台など）。最後に <span class=\"kbd\">/yomatsuri vote 名前</span> で投票。途中参加できます。</p><p><b>夜明けまで</b>：全員で灯りを守りきる夜。途中参加できます。</p>")}
   </div>
 </section>
 
@@ -1161,18 +997,12 @@ events = f'''<div class="hero">
   <div class="wrap">
     <p class="depth">ごほうび</p>
     <h2 class="disp h2">強くはならない。だから、だれでも同じ条件。</h2>
-    <p class="lead">夜祭でもらえるのは、灯りの色と、名前の横の印だけです。はじめての人も、ずっといる人も、同じ条件で遊べます。</p>
-    <div class="two">
-      <div>
-        <h3 class="h3 disp">参加した回数で、色がふえる</h3>
-        <div class="tbl-wrap" style="margin-top:8px"><table style="min-width:0"><tbody>
-          <tr><th><span class="sw" style="background:#F29BB8"></span>桜</th><td class="n">5回</td></tr>
-          <tr><th><span class="sw" style="background:#8FC3E8"></span>水縹</th><td class="n">10回</td></tr>
-          <tr><th><span class="sw" style="background:#8BD18F"></span>若竹</th><td class="n">20回</td></tr>
-        </tbody></table></div>
-        <p class="mu" style="font-size:15px;margin-top:10px">勝ち負けは関係ありません。参加した回数だけで数えます。</p>
-      </div>
-      <div><h3 class="h3 disp">勝った人には、印</h3><p class="mu">勝者は次の夜祭まで、プレイヤー一覧の名前の横に ✦ がつきます。次の夜祭でだれかが勝つと、印はその人に移ります。</p><h3 class="h3 disp" style="margin-top:28px">灯の証「祭の章」</h3><p class="mu">参加と勝利は、灯の証にも記録されます。4つの遊びすべてで勝つ、50回勝つ、といった証があります。</p></div>
+    <p class="lead">もらえるのは、灯りの色と名前の印だけ。だれでも同じ条件です。</p>
+    <div class="vrow" style="margin-top:28px;align-items:flex-start">
+      <div class="vgrow"><h3 class="disp vh3" style="margin-top:0">参加した回数で、色がふえる</h3>
+        <div class="vcolors"><span style="--c:#F29BB8"><i></i><b>桜</b><small>5回</small></span><span style="--c:#8FC3E8"><i></i><b>水縹</b><small>10回</small></span><span style="--c:#8BD18F"><i></i><b>若竹</b><small>20回</small></span></div>
+        <p class="mu" style="font-size:14px;margin-top:10px">勝ち負けは関係なし。参加した回数だけ。</p></div>
+      <div class="vgrow">{cards([("star", "#F2B544", "勝った人に ✦", "次の夜祭まで、名前の横に"), ("trophy", "#F29BB8", "灯の証「祭の章」", "全種で勝つ・50回勝つ など")], cols=2)}</div>
     </div>
   </div>
 </section>
@@ -1182,12 +1012,7 @@ events = f'''<div class="hero">
   <div class="wrap">
     <p class="depth">シーズン1の予定</p>
     <h2 class="disp h2">おぼえておく夜。</h2>
-    <ol class="night">
-      <li><time>11月7日</time><div><h3>開幕の夜</h3><p>21時、まっさらな世界に全員が同じ場所から入ります。参加した全員に、灯りの色「はじまりの灯」。最初の夜祭もこの夜です。</p></div></li>
-      <li><time>毎週土曜</time><div><h3>夜祭</h3><p>21時から。4つのゲームが週替わりで回ります。</p></div></li>
-      <li><time>7夜ごと</time><div><h3>朱月の夜</h3><p>ゲームの中の7夜に一度（現実ではおよそ3時間ごと）、月が赤くなります。敵は強く、群れと精鋭がふえます。</p></div></li>
-      <li><time>6週目</time><div><h3>大夜祭</h3><p>12月12日（土）の予定。全員でひとつの灯路をのばす、シーズンの山場です。くわしい内容は Discord で知らせます。</p></div></li>
-    </ol>
+    {timeline([("11月7日", "flag", "#F2B544", "開幕の夜", "全員に「はじまりの灯」"), ("毎週土曜", "star", "#F29BB8", "夜祭", "21時から、週替わり"), ("7夜ごと", "moon", "#E0453A", "朱月の夜", "現実でおよそ3時間ごと"), ("12月12日", "trophy", "#FFD98A", "大夜祭", "全員でひとつの灯路を")])}
   </div>
 </section>
 '''
@@ -1202,7 +1027,8 @@ RITSU = _rj.loads((pathlib.Path(__file__).parent / "data" / "ritsu.json").read_t
 def _ritsu_html():
     R = RITSU
     e = _rh.escape
-    steps = "".join(f'<div><b>{e(x["label"])}</b><span>レベル {x["min"]}{"〜" + str(x["max"]) if x["max"] else " 以上"}</span></div>' for x in R["steps"])
+    _cols = ["#6FD39A", "#B7D36F", "#E9C46A", "#EE9A4A", "#E9824A", "#E0603A", "#B0233A"]
+    _scale = [(e(x["label"]), f'レベル {x["min"]}{"〜" + str(x["max"]) if x["max"] else "〜"}', _cols[min(i, 6)], 1) for i, x in enumerate(R["steps"])]
     tiers = [("重度", "16〜20", "s16"), ("中度", "9〜15", "s9"), ("軽度", "4〜8", "s4"), ("注意", "1〜3", "s1")]
     tb = ""
     for t, rng, cls in tiers:
@@ -1227,16 +1053,13 @@ def _ritsu_html():
   <div class="wrap">
     <p class="depth">対応の流れ</p>
     <h2 class="disp h2">きまりをやぶったとき</h2>
-    <p class="lead">してしまったことを、下の表で「レベル」にして、その合計で罰が決まります。だれに対しても同じ表を使います。まちがいはだれにでもあるので、軽いものは注意から。わざと人を傷つけたり、人のものを大きくこわしたりしたときは、すぐに止めます。</p>
-    <div class="ladder rt-ladder">{steps}</div>
-    <div class="two rt-two">
-      <div><h3 class="h3 disp">制限のあいだ</h3><p class="mu">ことばの違反（暴言・連投・煽りなど）は、チャット・里と一団のチャット・手紙・看板・本・合図と Discord の発言が止まります。それ以外の違反は、他人の土地で建てる・壊す、他人の箱を開ける、取引・屋台・小包・旅の依頼、PvP、合流・呼ぶが止まります。<b>自分の土地で遊ぶこと・灯渡り・帰里は止まりません。</b></p></div>
-      <div><h3 class="h3 disp">入ったときに分かる</h3><p class="mu">罰を受けた人には、画面のまん中とチャットに、理由・件の番号・いつまでか・異議の出し方が出ます。制限中は画面の上に残り時間が出ます。BAN のときは、入ろうとした画面に同じことが出ます。注意は「わかった」を押すまで、入るたびに出ます。</p></div>
-    </div>
-    <div class="two rt-two">
-      <div><h3 class="h3 disp">こわされた物は戻す</h3><p class="mu">罰とは別に、こわされた建物はゲームの記録から元に戻し、持ち去られた物と、こわされた灯籠は持ち主に返します。</p></div>
-      <div><h3 class="h3 disp">名前を出すのは、永久BANだけ</h3><p class="mu">運営が確かめて永久BANに決まった人だけを、Discord の #処罰の記録 に名前と番号で載せます。それ以外は、本人と通報した人にだけ知らせます。毎月、名前なしの件数をこのページと Discord で公開します。</p></div>
-    </div>
+    <p class="lead">したことを「レベル」にして、合計で罰が決まります。だれにでも同じ表です。</p>
+    {scale(_scale)}
+    {cards([("lock", "#E9C46A", "制限のあいだ", "<b>自分の土地では遊べる</b>。人とのやりとりが止まる"),
+            ("warn", "#FF8A80", "入ったときに分かる", "理由・番号・いつまで・異議の出し方"),
+            ("hammer", "#6FD39A", "こわされた物は戻す", "建物は記録から、物と灯籠は持ち主へ"),
+            ("eye", "#BFC9DB", "名前が出るのは永久BANだけ", "毎月、名前なしの件数を公開")], cols=4)}
+    {more("くわしく：制限で止まるもの・表示", "<p><b>ことばの違反</b>（暴言・連投・煽りなど）：チャット・里と一団のチャット・手紙・看板・本・合図と Discord の発言が止まります。</p><p><b>それ以外の違反</b>：他人の土地で建てる・壊す、他人の箱を開ける、取引・屋台・小包・旅の依頼、PvP、合流・呼ぶが止まります。自分の土地で遊ぶこと・灯渡り・帰里は止まりません。</p><p>罰を受けた人には、画面のまん中とチャットに、理由・件の番号・いつまでか・異議の出し方が出ます。制限中は画面の上に残り時間。BAN は入ろうとした画面に出ます。注意は「わかった」を押すまで、入るたびに出ます。</p><p>永久BANに決まった人だけを、Discord の #処罰の記録 に名前と番号で載せます。</p>")}
   </div>
 </section>
 
@@ -1245,15 +1068,10 @@ def _ritsu_html():
   <div class="wrap">
     <p class="depth">違反の表</p>
     <h2 class="disp h2">どこからが、どのレベルか</h2>
-    <p class="lead">迷わないように、数で決めてあります。表にないことは、いちばん近いものに当てはめて、かならず運営が確かめます。</p>
+    <p class="lead">数で決めてあります。表にないことは、近いものに当てはめて運営が確かめます。</p>
     {tb}
-    <h3 class="h3 disp" style="margin-top:56px">足す・引く</h3>
-    <div class="tbl-wrap"><table class="stack"><thead><tr><th>番号</th><th>内容</th><th>補正</th></tr></thead><tbody>{mods}</tbody></table></div>
-    <p class="note">いくつも重なったときは、いちばん重いものに、ほか1つごとに +2。合計は1より下がりません。16以上には引く補正をかけません。同じ違反の3回目は、罰を1段上げます。軽い違反だけで永久BANにはなりません。違反の回数は90日で数え直します（BAN の歴は残ります）。</p>
-    <div class="two rt-two">
-      <div><h3 class="h3 disp">違反にならないこと</h3><ul class="rt-list">{notv}</ul></div>
-      <div><h3 class="h3 disp">特別なきまり</h3><ul class="rt-list">{sp}</ul></div>
-    </div>
+    {more("足す・引く（補正）と、重なったとき", f'<div class="tbl-wrap"><table class="stack"><thead><tr><th>番号</th><th>内容</th><th>補正</th></tr></thead><tbody>{mods}</tbody></table></div><p style="margin-top:14px">いくつも重なったときは、いちばん重いものに、ほか1つごとに +2。合計は1より下がりません。16以上には引く補正をかけません。同じ違反の3回目は、罰を1段上げます。軽い違反だけで永久BANにはなりません。違反の回数は90日で数え直します（BAN の歴は残ります）。</p>')}
+    {more("違反にならないこと・特別なきまり", f'<h3 class="dot" style="font-size:15px;color:var(--paper)">違反にならないこと</h3><ul class="rt-list">{notv}</ul><h3 class="dot" style="font-size:15px;color:var(--paper);margin-top:18px">特別なきまり</h3><ul class="rt-list">{sp}</ul>')}
     {monthly}
   </div>
 </section>
@@ -1263,18 +1081,10 @@ def _ritsu_html():
   <div class="wrap">
     <p class="depth">連絡先</p>
     <h2 class="disp h2">困ったとき：通報と異議</h2>
-    <p class="lead">こわされた、とられた、いやなことを言われた、ずるをしている人を見た。どれも Discord の <b>/通報</b> で知らせてください。やり返さないことが、いちばん早く解決します。</p>
-    <ol class="steps" style="margin-top:28px">
-      <li><div><h3>その場をはなれて、画面を写す</h3><p>言い返したり、こわし返したりしないでください。相手の名前・言葉・場所が分かるように、画面を写しておきます（F3 で座標が出ます）。</p></div></li>
-      <li><div><h3>Discord で /通報</h3><p>必ず入れるのは3つ：<b>相手の MCID</b>（候補から選ぶ）・<b>証拠の画像</b>（1〜5枚）・<b>何をされたか</b>（いつ・どこ・何を）。送る前に確認が出ます。</p></div></li>
-      <li><div><h3>専用のスレッドで待つ</h3><p>あなたとボット・運営だけが見えるスレッドができます。ゲームの記録と照らして調べ、結果をそこで知らせます。足りないものがあれば聞くので、すべて載せてから「足し終えたので判断する」を押してください。</p></div></li>
-    </ol>
-    <h3 class="h3 disp" style="margin-top:56px">種類ごとに、あるとよいもの</h3>
-    <ul class="rt-kinds">{kinds}</ul>
-    <div class="two rt-two">
-      <div><h3 class="h3 disp">罰が違うと思ったら</h3><p class="mu">Discord の <b>#異議</b> で「異議を出す」を押し、ゲームの画面に出た<b>件の番号</b>（#0123）と<b>異議の印</b>（6文字）を入れてください。異議は1つの罰に1回、運営が72時間を目安にお返事します。異議のあいだも罰は続きます。取り消しになったときは、記録からも消します。</p></div>
-      <div><h3 class="h3 disp">うその通報は違反です</h3><p class="mu">作った画像やうその説明で人を罰させようとすることは、それ自体が重い違反（16-C）です。画像だけでは罰を出さず、かならずゲームの記録と照らします。通報は1人1日5件までです。</p></div>
-    </div>
+    <p class="lead">こわされた・とられた・いやなことをされた。どれも Discord の <b>/通報</b> へ。<b>やり返さない</b>のが、いちばん早い解決です。</p>
+    {steps([("camera", "#5AAAFF", "その場をはなれて、画面を写す", "名前・言葉・場所が分かるように"), ("chat", "#8EA2FF", "Discord で /通報", "相手の MCID・画像1〜5枚・何をされたか"), ("house", "#6FD39A", "専用のスレッドで待つ", "記録と照らして、結果をそこで")])}
+    {more("種類ごとに、あるとよいもの", f'<ul class="rt-kinds">{kinds}</ul>')}
+    {cards([("flag", "#F2B544", "罰が違うと思ったら", "#異議 で「異議を出す」。1つの罰に1回、72時間を目安に返事"), ("warn", "#FF8A80", "うその通報は違反", "画像だけでは罰を出さず、かならず記録と照らす。1日5件まで")], cols=2)}
     <div class="btns" style="margin-top:24px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord を開く</a></div>
   </div>
 </section>"""
@@ -1283,36 +1093,33 @@ def _ritsu_html():
 rules = sub_hero("rules.html", "きまり", "むずかしいことはありません。人のものをこわさない。人をいやな気持ちにさせない。この二つです。",
                  [("dont", "してはいけないこと"), ("safe", "守られていること"), ("penalty", "やぶったとき"), ("levels", "違反の表"), ("help", "通報と異議"), ("parents", "保護者の方へ")]) + f'''
 <section class="stratum tex s-soil" id="dont">
-  <div class="wrap narrow">
+  <div class="wrap">
     <p class="depth">6つのきまり</p>
     <h2 class="disp h2">してはいけないこと</h2>
-    <ul class="rules">
-      <li><div><h3>人の建物やものを、こわさない・とらない</h3><p>ほかの人が建てたもの、チェストの中身、畑や動物に、ことわりなく手を出さないでください。「だれのものかわからない」ときは、さわらないのが正解です。</p></div></li>
-      <li><div><h3>ずるをしない</h3><p>地面が透けて見える、自動で動く、ふつうより速く動くなどの改造や道具は使えません。不具合を見つけたら、使わずに Discord で知らせてください。見た目を変えるだけのものや、動きを軽くするものはかまいません。</p></div></li>
-      <li><div><h3>人をいやな気持ちにさせない</h3><p>悪口、からかい、仲間はずれ、しつこくつきまとうこと、差別的なことばは禁止です。チャットでも、Discord でも同じです。</p></div></li>
-      <li><div><h3>自分や人のことを、くわしく書かない・聞かない</h3><p>本名、住所、学校、電話番号、SNSのアカウントなどを、チャットに書いたり聞いたりしないでください。</p></div></li>
-      <li><div><h3>宣伝や勧誘をしない</h3><p>ほかのサーバーや商品の宣伝、お金や物のやりとりの持ちかけは禁止です。</p></div></li>
-      <li><div><h3>招待を水増ししない</h3><p>自分で別のアカウントを作って自分を招待するなど、招待の数をごまかすことは禁止です。見つかった場合、色と記録を取り消します。</p></div></li>
-    </ul>
-    <p class="note">ここに書いていないことでも、「これをされたら自分はいやだな」と思うことは、しないでください。迷ったら Discord で聞いてください。</p>
+    {cards([("hammer", "#E0453A", "人のものを、こわさない・とらない", "だれのものか分からないなら、さわらない"),
+            ("eye", "#E0453A", "ずるをしない", "透視・自動・速く動く改造は使えない"),
+            ("chat", "#E0453A", "人をいやな気持ちにさせない", "悪口・仲間はずれ・つきまとい・差別"),
+            ("lock", "#E0453A", "くわしく書かない・聞かない", "本名・住所・学校・電話・SNS"),
+            ("coin", "#E0453A", "宣伝や勧誘をしない", "ほかのサーバー・商品・お金のやりとり"),
+            ("people", "#E0453A", "招待を水増ししない", "別のアカウントで自分を招待しない")])}
+    <p class="note">書いていないことでも、「されたらいやだな」と思うことはしない。迷ったら Discord で。</p>
+    {more("くわしく", "<p>ほかの人が建てたもの、チェストの中身、畑や動物に、ことわりなく手を出さないでください。</p><p>不具合を見つけたら、使わずに Discord で知らせてください。見た目を変えるだけのものや、動きを軽くするものはかまいません。</p><p>チャットでも Discord でも同じです。招待の水増しが見つかった場合、色と記録を取り消します。</p>")}
   </div>
 </section>
 
 <section class="stratum s-stone" id="safe">
   <div class="edge"></div>
-  <div class="wrap narrow">
+  <div class="wrap">
     <p class="depth">しくみで守られていること</p>
     <h2 class="disp h2">守られていること</h2>
-    <ul class="rules ok">
-      <li><div><h3>ほかの人は、あなたの灯籠を壊せない</h3><p>壊せるのは、置いた本人と、本人が「仲間」に加えた人だけです。</p></div></li>
-      <li><div><h3>灯りの中では、敵に襲われない</h3><p>敵は灯りに入れず、灯りの中の人を狙えません（灯喰いとボスをのぞく）。</p></div></li>
-      <li><div><h3>灯りの中は、爆発で壊れない</h3><p>クリーパーやTNTの爆発で、灯りの中のブロックは壊れません。</p></div></li>
-      <li><div><h3>灯りの中で倒れても、持ち物を失わない</h3><p>持ち物も経験値も、そのまま残ります。</p></div></li>
-      <li><div><h3>いない間に、灯りは消されない</h3><p>灯喰いが狙うのは、近くに人がいる灯籠だけです。</p></div></li>
-      <li><div><h3>来たばかりの人は、狙われない</h3><p>はじめて入ってから24時間と、灯籠が3基より少ない拠点には、灯喰いは来ません。</p></div></li>
-      <li><div><h3>強さは、売っていない</h3><p>お金で強くなる仕組みはありません。色や印は、見た目だけです。</p></div></li>
-    </ul>
-    <p class="note cold"><b>建物は、灯籠とちがって「壊せない」ようにはなっていません。</b>こわされたときは、運営が記録を調べて、できるかぎり元に戻します。下の「困ったとき」の手順で知らせてください。</p>
+    {cards([("lantern", "#6FD39A", "灯籠は、人に壊されない", "壊せるのは本人と仲間だけ"),
+            ("shield", "#6FD39A", "灯りの中は、襲われない", "灯喰いとボスをのぞく"),
+            ("fire", "#6FD39A", "灯りの中は、爆発で壊れない", "クリーパーも TNT も"),
+            ("chest", "#6FD39A", "倒れても、持ち物が残る", "灯りの中なら経験値も"),
+            ("moon", "#6FD39A", "いない間は、灯りが消えない", "灯喰いは人のそばだけ"),
+            ("seed", "#6FD39A", "来たばかりは、狙われない", "はじめの24時間"),
+            ("coin", "#6FD39A", "強さは、売っていない", "色や印は見た目だけ")], cols=4)}
+    <p class="note cold"><b>建物は「壊せない」ようにはなっていません。</b>こわされたら、運営が記録から元に戻します。</p>
   </div>
 </section>
 
@@ -2002,11 +1809,7 @@ def _hm_tiers():
 
 def _hm_fuda():
     M = HM["mumei"]
-    return f'''<div class="three hm-rules">
-        <div><h3 class="h3 disp">灯札は、遊んだ時間でたまる</h3><p class="mu">紋書を引くには、経験値に加えて「灯札」が要ります。動いて遊んだ {HM["fudaMin"]} 分で1枚、{HM["fudaMax"]} 枚まで持てます。はじめて来たときに {HM["fudaStart"]} 枚もらえます。</p></div>
-        <div><h3 class="h3 disp">放置ではたまらない</h3><p class="mu">数えるのは、視点が動き、そのうえで歩くか、ブロックを掘る・置くかした1分だけ。経験値トラップの前で立っているだけ、乗り物や水流で運ばれているだけでは、たまりません。</p></div>
-        <div><h3 class="h3 disp">秘は、無銘の紋書からだけ</h3><p class="mu">段の紋書から秘は出ません。無銘の紋書を引いて、5%を引き当てるか、{M["pity"]} 冊目の天井まで。秘を引き当てると、サーバーのみんなに知らされます。</p></div>
-      </div>'''
+    return f'''{cards([("clock", "#E9C46A", "灯札は、遊んだ時間で", f"{HM['fudaMin']}分で1枚・{HM['fudaMax']}枚まで・はじめに{HM['fudaStart']}枚"), ("x", "#E0453A", "放置ではたまらない", "視点が動き、歩くか掘る・置くかした1分だけ"), ("star", "#FF55FF", "秘は無銘の紋書からだけ", f"5%か、{M['pity']}冊目の天井")])}'''
 
 
 def _hm_rules():
@@ -2015,11 +1818,7 @@ def _hm_rules():
         <li><b>道具と紋書を置く</b><span>持ち物をクリックすると、道具と紋書がそれぞれの場所に入ります。刻めるかどうかは、その場で表示。</span></li>
         <li><b>刻む</b><span>段に応じた経験値（{HM["rarity"][0]["engrave"]}〜{HM["rarity"][-1]["engrave"]} Lv）を払います。重ねて Lv2 にするときは1.5倍、Lv3 は2倍。紋書はなくなります。</span></li>
       </ol>
-      <div class="three hm-rules">
-        <div><h3 class="h3 disp">重ねて強く</h3><p class="mu">同じ紋を同じ Lv で重ねると、1つ上がります（Lv1＋Lv1 → Lv2）。Lv がちがうときは、高い方が残ります。</p></div>
-        <div><h3 class="h3 disp">1つの道具に{HM["slots"]}つまで</h3><p class="mu">秘の紋は1つだけ。閃光と陣立て、不屈と不死鳥は、同じ道具に刻めません。ふつうの付呪とはいっしょに使えます。</p></div>
-        <div><h3 class="h3 disp">外すこともできる</h3><p class="mu">刻む画面で、紋をしゃがみクリック。段に応じた経験値（2〜9 Lv）で外せます（紋書は戻りません）。</p></div>
-      </div>'''
+      {cards([("star", "#E9C46A", "重ねて強く", "同じ紋・同じ Lv で1つ上がる"), ("lock", "#E9C46A", f"1つの道具に{HM['slots']}つまで", "秘は1つ・ふつうの付呪と併用できる"), ("hammer", "#E9C46A", "外せる", "経験値 2〜9 Lv（紋書は戻らない）")])}'''
 
 
 # 遊び方の章で見せる、場面ごとのおすすめ
@@ -2235,13 +2034,9 @@ def _sato_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">灯りが、そのまま里の土地になる。</h2>
-    <p class="lead"><span class="kbd">/sato</span> で開きます。里は、仲間と開く小さな国です。里の中心に立てる大きな灯籠「里灯（さとび）」から、灯路でつながっている民の灯籠。その守りの範囲が、里の<b>土地</b>です。囲いの道具はありません。灯りを広げれば、土地が広がります。</p>
+    <p class="lead"><span class="kbd">/sato</span> で開く、仲間との小さな国。<b>里灯から灯路でつながる灯りの範囲が、そのまま土地</b>です。</p>
     {_hs_land_demo()}
-    <div class="three">
-      <div><h3 class="h3 disp">里灯は喰われない</h3><p class="mu">里灯は灯喰いに喰われず、壊せるのは里長だけ。動かすときは「移築」で、3日かけて移ります。右クリックで里のホームが開きます。</p></div>
-      <div><h3 class="h3 disp">喰われると、土地が欠ける</h3><p class="mu">灯籠が喰われると、そこから先の土地が欠けます。欠けているあいだも、屋敷と認められた建物の守りは持ち主に残ります。灯し直せば、土地は戻ります。</p></div>
-      <div><h3 class="h3 disp">外の人は、通れるが建てられない</h3><p class="mu">土地の中で建てる・壊す・箱を開けるのは民だけ。ほかの里の人や里のない人は、歩いて通り抜けられますが、土地には手を出せません。</p></div>
-    </div>
+    {cards([("shield", "#6FD39A", "里灯は喰われない", "壊せるのは里長だけ・移築は3日"), ("fire", "#5AAAFF", "喰われると土地が欠ける", "灯し直せば戻る・屋敷の守りは残る"), ("lock", "#E9824A", "外の人は通れるが建てられない", "建てる・壊す・箱は民だけ")])}
   </div>
 </section>
 
@@ -2279,12 +2074,8 @@ def _sato_sec():
       <div><h3 class="h3 disp">掟（共有地のきまり）</h3><p class="mu">屋敷の外の土地で、誰が何をできるかを、立場と職ごとにオン・オフします。はじめは、大工と里長・補佐だけが共有地で建てられ、民は共有の箱を開けられます。</p></div>
       <div><h3 class="h3 disp">入る・抜ける</h3><p class="mu">招待か、申し込みの承認で入ります。入って{HSN["newcomerDays"]}日は「新入り」で報酬が半分。抜けるのはいつでもでき、抜けたあと{HSN["leaveLock"]}日はほかの里に入れません。申し込む前に{HSN["guestDays"]}日だけ「客人」として入ってみることもできます。</p></div>
     </div>
-    <div class="facts">
-      <div class="fact"><p class="fact-n">蔵</p><p>里の共有の倉庫。建材・食料・鉱物・珍品・雑貨の5つの棚に分かれ、棚ごとに出せる人を決めます。出し入れはすべて記録に残り、補佐が1日に持ち出せる量には上限があります。</p></div>
-      <div class="fact"><p class="fact-n">灯油</p><p>毎週月曜、格ごとに決まった維持費を蔵から自動で払います。2週続けて払えないと里全体のバフが止まり、4週続くと格が1つ下がります。</p></div>
-      <div class="fact"><p class="fact-n">30<small>日</small></p><p>民が誰も来ない里は「眠る里」になり、依頼とバフが止まります。90日で里灯が消え、蔵の中身は里長に手紙で届きます。</p></div>
-      <div class="fact"><p class="fact-n">21<small>日</small></p><p>里長が来ないときは、いちばんよく来ている補佐に、いなければ職の位がいちばん高い民に、自動で引き継ぎます。運営が里を片付ける必要はありません。</p></div>
-    </div>
+    {cards([("chest", "#E9824A", "蔵", "5つの棚・出し入れは記録に残る"), ("coin", "#F2B544", "灯油", "毎週月曜に維持費。払えないと止まる"), ("moon", "#9C8CFF", "30日だれも来ない", "眠る里（90日で里灯が消える）"), ("people", "#6FD39A", "21日里長が来ない", "補佐へ自動で引き継ぎ")], cols=4)}
+    {more("くわしく：蔵・灯油・眠る里・引き継ぎ", "<p><b>蔵</b>：建材・食料・鉱物・珍品・雑貨の5つの棚に分かれ、棚ごとに出せる人を決めます。補佐が1日に持ち出せる量には上限があります。</p><p><b>灯油</b>：格ごとに決まった維持費を蔵から自動で払います。2週続けて払えないと里全体のバフが止まり、4週続くと格が1つ下がります。</p><p><b>眠る里</b>：依頼とバフが止まります。90日で里灯が消え、蔵の中身は里長に手紙で届きます。</p><p><b>引き継ぎ</b>：いちばんよく来ている補佐に、いなければ職の位がいちばん高い民に。</p>")}
   </div>
 </section>
 '''
@@ -2329,7 +2120,7 @@ def _shoku_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">5つの職で、里が回る。</h2>
-    <p class="lead">建てる・守る・広げる・つなぐ・運ぶ。里に要る役目を、5つの職で分けました。灯技の「道」が自分の腕を育てるのに対して、職は「里での役目」を育てます。バフは里の土地の中で働き（旅人は外で）、いちばん上の力は仲間のために使う「奉仕」です。</p>
+    <p class="lead">建てる・守る・広げる・つなぐ・運ぶ。灯技は自分の腕、職は<b>里での役目</b>を育てます。</p>
     <div class="hs-jobs">{jobs}</div>
     <p class="mu hs-small">数字は段ごとの値です（見習い・一人前 ／ 熟練 ／ 名人・匠）。職は里に入ったときに選び、新入りの{HSN["newcomerDays"]}日のあいだに限り、1回だけ無料で選び直せます。</p>
   </div>
@@ -2339,12 +2130,12 @@ def _shoku_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">見習いから、匠へ。</h2>
-    <p class="lead">職の経験は、依頼からおよそ7割、職の行動から3割。行動から入るのは1日 {HSN["actionCap"]} までで、放置や稼ぎ場では伸びません。毎日2時間ほど遊んで、匠まで約2か月です。</p>
+    <p class="lead">経験は依頼から7割・行動から3割。毎日2時間ほどで、匠まで約2か月。</p>
     {_hs_ranks()}
     <div class="hs-two">
-      <div><h3 class="h3 disp">匠の試し</h3><p class="mu">匠になるには、経験に加えて職ごとの試しを1つ果たします。匠になると、サーバー全体に知らされ、サイトの匠の名簿に載ります。</p><ul class="hs-trials">{trials}</ul></div>
-      <div><h3 class="h3 disp">弟子</h3><p class="mu">名人と匠は、同じ職の見習い・一人前を弟子にできます（2人まで）。弟子の依頼の報酬が +20%、師匠にもその1割が入ります。</p>
-        <h3 class="h3 disp" style="margin-top:28px">五職そろい</h3><p class="mu">5つの職にそれぞれ1人以上、最近7日に来た民がいると、土地の中で民全員の灯力（灯技）がたまりやすくなります。同じ職が民の半分を超えると、その職の報酬は下がり、少ない職には「人手不足」の印と +25% がつきます。</p></div>
+      <div><h3 class="h3 disp">匠の試し</h3><p class="mu">経験に加えて、職ごとの試しを1つ。</p><ul class="hs-trials">{trials}</ul></div>
+      <div><h3 class="h3 disp">弟子</h3><p class="mu">名人と匠は2人まで。弟子の報酬 +20%、師匠にも1割。</p>
+        <h3 class="h3 disp" style="margin-top:28px">五職そろい</h3><p class="mu">5つの職がそろうと、民全員の灯力がたまりやすい。少ない職は「人手不足」で +25%。</p></div>
     </div>
   </div>
 </section>
@@ -2353,7 +2144,7 @@ def _shoku_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">依頼は、里に足りないものから届く。</h2>
-    <p class="lead">依頼は里の様子を見て、自動で出る仕事です。喰われた灯籠が多ければ灯守の灯し直し、建材の棚がさみしければ旅人の運び、という具合。量や数はプラグインが数え、里長が見るのは建物の見た目だけです。</p>
+    <p class="lead">里の様子を見て、自動で出る仕事。数はプラグインが数え、里長は見た目だけを見ます。</p>
     <div class="hs-kinds">
       <div style="--c:#F2B544"><span class="dot">毎日0時</span><h3 class="disp">日課</h3><p>民ごとに職の依頼が{3}つ。30分ほど。</p><b class="dot">経験 {HSN["dailyXp"]}・里の力 10</b></div>
       <div style="--c:#8FCB6A"><span class="dot">毎週月曜</span><h3 class="disp">週課</h3><p>民ごとに2つ。一人前から。2〜4時間。</p><b class="dot">経験 {HSN["weeklyXp"]}・里の力 80・欠片 2</b></div>
@@ -2445,13 +2236,15 @@ def _hs_gui():
 
 
 def _musubi_sec():
-    tiles = "".join(f'<div class="hs-tile" style="--c:{c}"><span class="dot">{n}</span><h3 class="disp">{t}</h3><p>{d}</p></div>' for t, c, n, d in _HS_MUSUBI)
-    life = "".join(f'<div class="hs-life" style="--c:{c}"><h3 class="disp">{t}</h3><p>{d}</p></div>' for t, c, d in _HS_LIFE)
+    _mi = ["link", "people", "pin", "chest", "flag", "camera", "x", "house"]
+    _li = ["map", "book", "coin", "bell", "heart", "sun"]
+    tiles = "".join(f'<div class="hs-tile" style="--c:{c}">{ic(_mi[i % 8], c, 36)}<span class="dot">{n}</span><h3 class="disp">{t}</h3><p>{d}</p></div>' for i, (t, c, n, d) in enumerate(_HS_MUSUBI))
+    life = "".join(f'<div class="hs-life" style="--c:{c}">{ic(_li[i % 6], c, 36)}<h3 class="disp">{t}</h3><p>{d}</p></div>' for i, (t, c, d) in enumerate(_HS_LIFE))
     return f'''<section class="stratum s-deep" id="musubi">
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">仲間と、ほどよくつながる。</h2>
-    <p class="lead">灯結（ひむすび）は、里の暮らしの道具です。<span class="kbd">/sato musubi</span> か、里のホームの「灯結」から。里がなくても使えます。近づく人を押し戻す結界はありません。里の土地には、すでに建てる・壊すの守りがあるからです。</p>
+    <p class="lead">灯結（ひむすび）は暮らしの道具。<span class="kbd">/sato musubi</span> から。里がなくても使えます。</p>
     <div class="hs-tiles">{tiles}</div>
   </div>
 </section>
@@ -2460,9 +2253,9 @@ def _musubi_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">来るたびに、小さな楽しみを。</h2>
-    <p class="lead">里は、働く場所だけでは使われません。作ったものが人に見られ、里の外の人ともつながるように。どれも強さは配らず、名前と見た目と話題を配ります。</p>
+    <p class="lead">強さは配らず、名前と見た目と話題を配ります。</p>
     <div class="hs-lifes">{life}</div>
-    <p class="note"><b>季節の大事業。</b>シーズンに1回、サーバー全体でひとつのものを作ります。すべての里が分担を受け、進み具合は全員に見えます。完成すると全員に記念の品、いちばん力を尽くした里に称号。</p>
+    <p class="note"><b>季節の大事業</b>シーズンに1回、全員でひとつのものを作る。完成で全員に記念の品。</p>
   </div>
 </section>
 
@@ -2470,7 +2263,7 @@ def _musubi_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">コマンドを覚えなくていい。</h2>
-    <p class="lead">はじめて来たときに「里の灯帳」を渡します。手に持って右クリックするか、里灯を素手で右クリック。どちらも同じホームに着き、すべての操作が画面で終わります。</p>
+    <p class="lead">「里の灯帳」か里灯を右クリック。すべて画面で終わります。</p>
     {_hs_gui()}
   </div>
 </section>
@@ -2782,21 +2575,14 @@ support = f'''<div class="hero sp-hero">
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">支え方は、Discord で。</h2>
-    <p class="lead">灯原の Discord の「はじめての方へ」→「<b>支える</b>」→「<b>寄付する</b>」から。PayPay の送金リンクを貼るだけです。寄付は、Discord と連携（<span class="kbd">/link</span>）している人だけが使えます。</p>
-    <div class="tbl-wrap"><table class="cmd">
-      <thead><tr><th>段</th><th>金額</th><th>お礼（見た目だけ）</th></tr></thead>
-      <tbody>
-        <tr><td class="n">灯の芽</td><td>100円から</td><td>名前に白い ❤</td></tr>
-        <tr><td class="n">灯明</td><td>500円から</td><td>名前に灯色の ❤</td></tr>
-        <tr><td class="n">大灯籠</td><td>1000円から</td><td>名前に金の ❤✦</td></tr>
-      </tbody>
-    </table></div>
-    <p class="mu" style="margin-top:10px">どの段も、Discord の支え手ロールと、このページの「支え手の壁」への掲載つき。お礼は<b>シーズンの終わりまで</b>続きます。シーズンが終わって ❤ が外れても、壁の名前は残ります。</p>
-    <ol class="flow">
-      <li><span class="fl-n dot">1</span><div><h3>PayPay で送金リンクを作る</h3><p>PayPay アプリの「送る」で、金額を入れて<b>送金リンク</b>を作り、コピーします。</p></div></li>
-      <li><span class="fl-n dot">2</span><div><h3>Discord の「寄付する」に貼る</h3><p>MCID・金額・コピーしたリンクを入れて送ります（統合版の人は「.」もそのまま）。リンクは運営だけが見ます。</p></div></li>
-      <li><span class="fl-n dot">3</span><div><h3>運営が受け取って、❤ がつく</h3><p>たいてい1日以内。ついたら Discord の DM と、ゲームの画面でお知らせします。リンクの期限が切れていたら、作り直してもう一度どうぞ。</p></div></li>
-    </ol>
+    <p class="lead">Discord の「はじめての方へ」→「支える」→「寄付する」から。<b>連携（<span class="kbd">/link</span>）した人だけ</b>使えます。</p>
+    <ul class="vtiers">
+      <li style="--c:#FFFFFF">{ic("heart", "#FFFFFF", 64)}<b class="disp">灯の芽</b><span class="dot">100円から</span><small>名前に白い ❤</small></li>
+      <li style="--c:#F2B544">{ic("heart", "#F2B544", 64)}<b class="disp">灯明</b><span class="dot">500円から</span><small>名前に灯色の ❤</small></li>
+      <li style="--c:#FFE178">{ic("heart", "#FFE178", 64)}<b class="disp">大灯籠</b><span class="dot">1000円から</span><small>名前に金の ❤✦</small></li>
+    </ul>
+    <p class="mu" style="margin-top:12px;font-size:15px">どの段も：支え手ロール・支え手の壁。<b>シーズンの終わりまで</b>（壁の名前はずっと残る）。</p>
+    {steps([("phone", "#F29BB8", "PayPay で送金リンクを作る", "「送る」→ 金額 → リンクをコピー"), ("chat", "#8EA2FF", "Discord の「寄付する」に貼る", "MCID・金額・リンク"), ("heart", "#F2B544", "運営が受け取って ❤", "たいてい1日以内・DM でお知らせ")])}
     <div class="btns" style="margin-top:20px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord で支える</a></div>
   </div>
 </section>
@@ -2817,7 +2603,7 @@ support = f'''<div class="hero sp-hero">
     <div class="faq">
       <details><summary>いくらから送れますか？</summary><p>100円からです。上限はありません。金額で ❤ の色が変わります（100円から白・500円から灯色・1000円から金）。</p></details>
       <details><summary>送金リンクは、だれかに見られませんか？</summary><p>リンクが届くのは、運営だけが見えるチャンネルです。運営が受け取ったら、リンクはそこからも消えます。</p></details>
-      <details><summary>❤ はいつまでつきますか？</summary><p>ずっとです。シーズンが変わっても残ります。</p></details>
+      <details><summary>❤ はいつまでつきますか？</summary><p>寄付したシーズンの終わりまでです。❤ が外れても、支え手の壁の名前は残ります。</p></details>
       <details><summary>名前を変えたら、❤ は消えますか？</summary><p>消えません。一度入ったあとは、マインクラフトのアカウントでつながっているので、名前を変えてもそのままです。支え手の壁の名前も、次の更新で新しい名前になります。</p></details>
       <details><summary>統合版（スマホ・Switch など）でもつきますか？</summary><p>つきます。MCID は、名前の前の「.」も含めて書いてください。統合版の人は、支え手の壁ではスキンの代わりに灯原の顔が出ることがあります。</p></details>
       <details><summary>名前を出さずに支えたいです。</summary><p>できます。ゲームの中で <span class="kbd">/akashi supporter hide</span> と打つと、支え手の壁に載りません。Discord で知らせるときに「壁には載せないで」と書いてもらっても大丈夫です。</p></details>
@@ -2999,12 +2785,12 @@ def playstyle():
     tabs = "".join(f'''<button type="button" class="tab ps-tab" role="tab" id="t-{m["id"]}" aria-controls="{m["id"]}" aria-selected="{"true" if i == 0 else "false"}"{"" if i == 0 else ' tabindex="-1"'} style="--c:{m["c"]}"><span class="ps-fig">{fig(m["who"], True, "", "")}</span><span class="ps-tt"><b>{m["t"]}</b><small>{m["sub"]}</small></span></button>''' for i, m in enumerate(_PS))
     panels = ""
     for i, m in enumerate(_PS):
-        steps = "".join(f'<li><div><h3>{a}</h3><p>{b}</p></div></li>' for a, b in m["steps"])
+        _ics = {"all": ["house", "path", "map", "star", "people"], "crew": ["pin", "gift", "people", "path", "flag"], "solo": ["clock", "shield", "lantern", "sword", "book"]}[m["id"]]
         cmds = "".join(f'<div><dt>{_K(a)}</dt><dd>{b}</dd></div>' for a, b in m["cmds"])
         panels += f'''<div class="ps-panel" role="tabpanel" id="{m["id"]}" aria-labelledby="t-{m["id"]}" style="--c:{m["c"]}"{"" if i == 0 else " hidden"}>
       <h2 class="disp h2">{m["t"]}遊ぶ。</h2>
       <p class="lead">{m["lead"]}</p>
-      <ol class="steps">{steps}</ol>
+      {timeline([(str(j + 1), _ics[j], m["c"], a, b) for j, (a, b) in enumerate(m["steps"])])}
       <dl class="ps-cmds">{cmds}</dl>
       <p class="ps-note">{m["note"]}</p>
     </div>'''
@@ -3012,7 +2798,7 @@ def playstyle():
     return hero + f'''
 <section class="stratum s-deep ps">
   <div class="edge"></div>
-  <div class="wrap narrow">
+  <div class="wrap">
     <div class="ps-tabs" role="tablist" aria-label="遊び方">{tabs}</div>
     {panels}
     <p class="ps-more">コマンドを打たなくても、{_K("/tomoshibi")} のメニューから同じことができます。<a href="commands.html">すべてのコマンド</a></p>
