@@ -104,7 +104,8 @@ def bars(rows, unit="", maxv=None, cls=""):
     for r in rows:
         label, v, color = r[:3]
         note = r[3] if len(r) > 3 else ""
-        out.append(f'<li style="--c:{color};--w:{max(3, v / m * 100):.1f}%"><span class="vb-l">{label}</span><span class="vb-t"><i></i></span><b class="vb-v dot">{v:g}{unit}</b>' + (f'<span class="vb-n">{note}</span>' if note else "") + "</li>")
+        vt = r[4] if len(r) > 4 else f"{v:g}{unit}"
+        out.append(f'<li style="--c:{color};--w:{max(3, v / m * 100):.1f}%"><span class="vb-l">{label}</span><span class="vb-t"><i></i></span><b class="vb-v dot">{vt}</b>' + (f'<span class="vb-n">{note}</span>' if note else "") + "</li>")
     return f'<ul class="vbars {cls}">' + "".join(out) + "</ul>"
 
 

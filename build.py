@@ -317,7 +317,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
     <div class="vfacts">
       <div class="vfact" style="--c:#9C8CFF">{daynight()}<h3 class="disp">夜が長い。</h3><p>昼4分・夜24分。夜の敵は<b>体力2.5倍・攻撃2倍</b>。</p></div>
       <div class="vfact" style="--c:#F2B544">{lantern_map()}<h3 class="disp">灯りの中は安全。</h3><p>半径10ブロックに敵は入れない。つなぐと道になる。</p></div>
-      <div class="vfact" style="--c:#B46CFF"><div class="vfact-art">{eater()}<span class="vfact-lan">{ic("lantern", "#5AAAFF", 56)}</span></div><h3 class="disp">灯喰いが、灯りを消しに来る。</h3><p>守りを破れるのは灯喰いだけ。倒すか、あとで灯し直す。</p></div>
+      <div class="vfact" style="--c:#B46CFF"><div class="vfact-art">{eater()}<span class="vfact-lan">{ic("lantern", "#5AAAFF", 56)}</span></div><h3 class="disp">灯喰いが、灯りを消しに来る。</h3><p>守りを破れるのは灯喰い（とボス）だけ。倒すか、あとで灯し直す。</p></div>
     </div>
     {more("くわしく：夜・灯り・灯喰い", "<p>夜の敵は夜を重ねるほど強くなり、7夜に一度は朱月の夜になります。来たばかりでは、まず勝てません。</p><p>灯りの中の人は狙われず、爆発で壊れず、倒れても持ち物を失いません。近くの灯籠どうしは灯路でつながり、その上は足が速くなります。</p><p>喰われた灯籠は青い冷たい火になって、守りも道も途切れます。つながりの多い灯籠ほど、喰われにくくなります。</p>")}
   </div>
@@ -392,7 +392,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
     <p class="lead">2026年11月7日（土）21時。まっさらな世界に、全員が同じ場所から入ります。最初の夜祭も、この夜です。</p>
     <div style="margin-top:28px" data-season-cd>{cd("season", "開幕まで").replace(' data-season-cd', '')}</div>
     <p class="note" data-season-live hidden><b>シーズン1は開催中です。</b>いまから入っても、小さな拠点は灯喰いに狙われないので、落ち着いて始められます。</p>
-    {cards([("gift", "#F29BB8", "開幕の夜の色", "参加した全員に「はじまりの灯」"), ("clock", "#9C8CFF", "3か月でひと区切り", "終わると、世界を作り直す"), ("chest", "#F2B544", "持ち越すもの", "灯りの色・夜祭と招待の記録")])}
+    {cards([("gift", "#F29BB8", "開幕の夜の色", "参加した全員に「はじまりの灯」"), ("clock", "#9C8CFF", "3か月でひと区切り", "終わると、世界を作り直す"), ("chest", "#F2B544", "持ち越す予定", "灯りの色・夜祭と招待の記録（建物・持ち物は×）")])}
   </div>
 </section>
 <section class="s-stone" style="position:relative">
@@ -406,7 +406,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
             ("book", "#5AAAFF", "遊び方", "灯籠・夜・灯技・里…12の章", "guide.html"),
             ("star", "#F29BB8", "夜祭", "毎週土曜21時、週替わりのゲーム", "events.html"),
             ("shield", "#6FD39A", "きまり", "してはいけないこと・困ったとき", "rules.html"),
-            ("heart", "#F29BB8", "支える", "寄付。お礼は名前の ❤ だけ", "support.html")], cols=5)}
+            ("heart", "#F29BB8", "支える", "寄付。お礼は見た目だけ（❤ と壁）", "support.html")], cols=5)}
   </div>
 </section>
 
@@ -462,7 +462,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
                ("3分", "path", "#FFD98A", "16ブロック以内に2基目", "灯路でつながり、足が速く"),
                ("5分", "book", "#5AAAFF", "<span class=\"kbd\">/menu</span> を開く", "すべての画面はここから"),
                ("夜", "moon", "#9C8CFF", "灯りの中で過ごす", "画面の下に「灯りの中」"),
-               ("いつでも", "link", "#8EA2FF", "Discord とつなぐ", "<span class=\"kbd\">/link</span> で灯籠5基"),
+               ("いつでも", "link", "#8EA2FF", "Discord とつなぐ", "はじめての <span class=\"kbd\">/link</span> で灯籠5基"),
                ("慣れたら", "people", "#F29BB8", "人の灯りとつなぐ", "5基で「二ノ灯」")])}
     {more("くわしく：最初の夜にやること", "<p><b>灯籠</b>は作業台で作れます（アメジストの欠片2・金インゴット2・ランタン1）。灯りの中は敵が入れず、爆発で壊れず、倒れても持ち物を失いません。最初の1基は無料です。</p><p><b>メニュー</b>は持ち物の「灯しるべ」を右クリックしても開きます。灯籠の画面（<span class=\"kbd\">/tomoshibi</span>）の「はじめの一歩」を1つ達成するたびに、灯籠を2基もらえます。</p><p>灯りの外に出ると、画面の下に「闇の中」と、いちばん近い灯りの方角が出ます。</p><p><span class=\"kbd\">/akashi</span> で灯原だけの進捗「灯の証」（263個）、<span class=\"kbd\">/waza</span> で技を育てる「灯技」と毎日3つの「今日の務め」が開きます。</p><p>Discord とつなぐと、手紙や夜祭の通知が届き、寄付・カード・番付などが使えるようになります。</p>")}
     <p class="note cold"><b>来たばかりの人は守られています。</b>はじめの24時間は、灯喰いが来ません。</p>
@@ -974,9 +974,9 @@ events = f'''<div class="hero">
   <div class="wrap">
     <p class="depth">始まり方</p>
     <h2 class="disp h2">何もしなければ、参加です。</h2>
-    {steps([("clock", "#F29BB8", "21時、120秒の募集", "画面の上にバー"), ("people", "#F2B544", "そのまま待つ", "見送るなら <span class=\"kbd\">/yomatsuri out</span>"), ("bolt", "#6FD39A", "そろえば自動で開始", "いる人の4割（最大8人）"), ("house", "#5AAAFF", "終われば元の場所へ", "会場へは自動で運ばれる")])}
+    {steps([("clock", "#F29BB8", "21時、120秒の募集", "画面の上にバー"), ("people", "#F2B544", "そのまま待つ", "見送るなら <span class=\"kbd\">/yomatsuri out</span>"), ("bolt", "#6FD39A", "そろえば自動で開始", "いる人の4割（最大8人）"), ("house", "#5AAAFF", "終われば元の場所へ", "リレーとかくれんぼは会場へ運ばれる")])}
     <h3 class="disp vh3">始まるのに必要な人数</h3>
-    {bars([("5人いるとき", 3, "#F29BB8", "2〜4人（ゲームによる）"), ("10人", 4, "#F29BB8"), ("15人", 6, "#F29BB8"), ("20人〜", 8, "#F29BB8")], unit="人", maxv=8)}
+    {bars([("5人いるとき", 4, "#F29BB8", "ゲームによる", "2〜4人"), ("10人", 4, "#F29BB8"), ("15人", 6, "#F29BB8"), ("20人〜", 8, "#F29BB8")], unit="人", maxv=8)}
   </div>
 </section>
 
@@ -1001,7 +1001,7 @@ events = f'''<div class="hero">
   <div class="wrap">
     <p class="depth">ごほうび</p>
     <h2 class="disp h2">強くはならない。だから、だれでも同じ条件。</h2>
-    <p class="lead">もらえるのは、灯りの色と名前の印だけ。だれでも同じ条件です。</p>
+    <p class="lead">もらえるのは、灯りの色と名前の印だけ。</p>
     <div class="vrow" style="margin-top:28px;align-items:flex-start">
       <div class="vgrow"><h3 class="disp vh3" style="margin-top:0">参加した回数で、色がふえる</h3>
         <div class="vcolors"><span style="--c:#F29BB8"><i></i><b>桜</b><small>5回</small></span><span style="--c:#8FC3E8"><i></i><b>水縹</b><small>10回</small></span><span style="--c:#8BD18F"><i></i><b>若竹</b><small>20回</small></span></div>
@@ -1016,7 +1016,7 @@ events = f'''<div class="hero">
   <div class="wrap">
     <p class="depth">シーズン1の予定</p>
     <h2 class="disp h2">おぼえておく夜。</h2>
-    {timeline([("11月7日", "flag", "#F2B544", "開幕の夜", "全員に「はじまりの灯」"), ("毎週土曜", "star", "#F29BB8", "夜祭", "21時から、週替わり"), ("7夜ごと", "moon", "#E0453A", "朱月の夜", "現実でおよそ3時間ごと"), ("12月12日", "trophy", "#FFD98A", "大夜祭", "全員でひとつの灯路を")])}
+    {timeline([("11月7日", "flag", "#F2B544", "開幕の夜", "全員に「はじまりの灯」"), ("毎週土曜", "star", "#F29BB8", "夜祭", "21時から、週替わり"), ("7夜ごと", "moon", "#E0453A", "朱月の夜", "現実でおよそ3時間ごと"), ("12月12日（予定）", "trophy", "#FFD98A", "大夜祭", "全員でひとつの灯路を")])}
   </div>
 </section>
 '''
@@ -1088,7 +1088,7 @@ def _ritsu_html():
     <p class="lead">こわされた・とられた・いやなことをされた。どれも Discord の <b>/通報</b> へ。<b>やり返さない</b>のが、いちばん早い解決です。</p>
     {steps([("camera", "#5AAAFF", "その場をはなれて、画面を写す", "名前・言葉・場所が分かるように"), ("chat", "#8EA2FF", "Discord で /通報", "相手の MCID・画像1〜5枚・何をされたか"), ("house", "#6FD39A", "専用のスレッドで待つ", "記録と照らして、結果をそこで")])}
     {more("種類ごとに、あるとよいもの", f'<ul class="rt-kinds">{kinds}</ul>')}
-    {cards([("flag", "#F2B544", "罰が違うと思ったら", "#異議 で「異議を出す」。1つの罰に1回、72時間を目安に返事"), ("warn", "#FF8A80", "うその通報は違反", "画像だけでは罰を出さず、かならず記録と照らす。1日5件まで")], cols=2)}
+    {cards([("flag", "#F2B544", "罰が違うと思ったら", "#異議 で「異議を出す」。1つの罰に1回、72時間を目安に返事"), ("warn", "#FF8A80", "うその通報は違反", "画像だけでは罰を出さず、かならず記録と照らす。通報は1人1日5件まで")], cols=2)}
     <div class="btns" style="margin-top:24px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord を開く</a></div>
   </div>
 </section>"""
@@ -1119,7 +1119,7 @@ rules = sub_hero("rules.html", "きまり", "むずかしいことはありま�
     {cards([("lantern", "#6FD39A", "灯籠は、人に壊されない", "壊せるのは本人と仲間だけ"),
             ("shield", "#6FD39A", "灯りの中は、襲われない", "灯喰いとボスをのぞく"),
             ("fire", "#6FD39A", "灯りの中は、爆発で壊れない", "クリーパーも TNT も"),
-            ("chest", "#6FD39A", "倒れても、持ち物が残る", "灯りの中なら経験値も"),
+            ("chest", "#6FD39A", "灯りの中で倒れても、失わない", "持ち物も経験値も"),
             ("moon", "#6FD39A", "いない間は、灯りが消えない", "灯喰いは人のそばだけ"),
             ("seed", "#6FD39A", "来たばかりは、狙われない", "はじめの24時間"),
             ("coin", "#6FD39A", "強さは、売っていない", "色や印は見た目だけ")], cols=4)}
@@ -2754,7 +2754,7 @@ _PS = [
      "steps": [
          ("最初の広場のまわりで始める", "広場のまわりは、灯喰いに狙われません。"),
          ("だれかの灯路の16ブロック以内に置く", "灯路はだれの灯籠とでもつながり、5基で「二ノ灯」、15基で「三ノ灯」に上がります。"),
-         ("灯標で行き来する", "二ノ灯より上なら、名前のついた灯籠へ3秒で移動できます。"),
+         ("灯標で行き来する", "二ノ灯になれば、名前のついた灯籠へ3秒で移動できます。"),
          ("土曜21時の夜祭に出る", "何もしなければ参加です。ゲームは毎週かわります。"),
          ("友達を呼ぶ", "招待1人で「白銀」、3人で「藤」、5人で「曙」の色がもらえます。"),
      ],
@@ -2820,7 +2820,7 @@ PAGES = [
     ("playstyle.html", "遊び方を選ぶ｜灯原", "みんなで・身内で・ひとりで。3つの遊び方ごとのマニュアル。はじめの5つ、よく使うコマンド、コツ、気をつけること。", playstyle()),
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
 ] + WIKI_PAGES + AK_PAGES + HM_PAGES + HS_PAGES + [
-    ("support.html", "支える｜灯原", "灯原を支える（寄付）。Discord から PayPay で、300円・500円・1000円・好きな金額。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
+    ("support.html", "支える｜灯原", "灯原を支える（寄付）。Discord から PayPay で、100円から（500円・1000円で ❤ の色が変わる）。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
     ("characters.html", "ひとびと｜灯原", "灯原の案内役、6人の旅人（ヒノ・モモ・ソラ・ワカ・シノ・ユキ）と、灯りを喰う灯喰い、夜の敵。予告編に出てくるドット絵の登場人物たち。", characters),
     ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯原のメニュー（/menu）、灯籠と灯路（/tomoshibi）、灯里（/sato）、灯の証（/akashi）、灯技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),

@@ -2,8 +2,10 @@
 (function () {
   'use strict';
   var root = document.documentElement;
-  if (root.classList.contains('rm')) return;
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var RM = root.classList.contains('rm');
+  // 動きを減らす設定でも、灯路の背骨は「ともった状態」で出す（動きはなし）
+  if (RM) { if (document.body.classList.contains('spined') && 'IntersectionObserver' in window) spine(); return; }
   var fine = window.matchMedia('(pointer: fine)').matches;
 
   // ── 1. 現れる：画面に入ったものから、順に灯る ──
@@ -165,6 +167,15 @@
     }
     // 光るもの：アイコン・カード・手順・時系列・棒・数字
     var lights = $$('main .vi, main .vc, main .vsteps > li, main .vtl > li, main .vbars > li, main .vstats > li, main .vgames > li, main .vtiers > li, main .vfact, main .vscale > li');
+    if (RM) {
+      nodes.forEach(function (n, i) { n.classList.add('on'); if (i > 0) n.parentElement.classList.add('lit'); });
+      layout();
+      segs.forEach(function (sg) { sg.classList.add('on'); });
+      var rt0 = 0;
+      window.addEventListener('resize', function () { clearTimeout(rt0); rt0 = setTimeout(function () { layout(); segs.forEach(function (sg) { sg.classList.add('on'); }); }, 150); }, { passive: true });
+      window.addEventListener('load', function () { layout(); segs.forEach(function (sg) { sg.classList.add('on'); }); });
+      return;
+    }
     body.classList.add('ldim');
     // はじめから画面にあるものは、すぐともす（待たせない）
     var vh = window.innerHeight;

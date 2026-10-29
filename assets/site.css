@@ -2099,3 +2099,7 @@ a.vc:hover .vc-go,a.vc:focus-visible .vc-go{transform:translateX(3px) rotate(45d
   .rm .sp-h::before{transform:none;transition:none}
 }
 .ps-all{display:inline-flex;align-items:center;min-height:44px}
+
+/* 見直し round 1（事実と作り） */
+.s-stone .vtl time{color:var(--amber-hi)}
+@media (max-width:760px){.vgames h3{color:color-mix(in srgb,var(--c) 70%,#fff)}}
