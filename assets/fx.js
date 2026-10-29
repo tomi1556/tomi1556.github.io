@@ -207,6 +207,7 @@
       var n = nodes[i];
       if (n.classList.contains('on')) return;
       n.classList.add('on');
+      if (n.parentElement && i > 0) n.parentElement.classList.add('lit');
       setTimeout(function () { segs.forEach(function (sg) { if (sg._from === n) sg.classList.add('on'); }); }, 240);
       if (n.classList.contains('end')) { var ft = n.closest('.foot-cta'); if (ft) ft.classList.add('arrived'); }
     }

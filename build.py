@@ -62,7 +62,7 @@ def footer():
     cm = ""
     for h, items in cols:
         lis = ch if items is None else "".join(f'<li><a href="{u}"{" target=\"_blank\" rel=\"noopener\"" if u.startswith("http") else ""}>{t}</a></li>' for u, t in items)
-        cm += f'<div class="fm"><h3>{h}</h3><ul>{lis}</ul></div>'
+        cm += f'<details class="fm" open><summary><h3>{h}</h3></summary><ul>{lis}</ul></details>'
     # 灯りの輪：6人と灯籠、闇の端に灯喰い
     xs = [14, 25, 38, 55, 68, 80]
     camp = "".join(f'<span class="cm" style="left:{x}%">{fig(c["id"], i % 2 == 0)}</span>' for i, (x, c) in enumerate(zip(xs, CAST)))
@@ -2805,7 +2805,7 @@ def playstyle():
   <div class="wrap">
     <div class="ps-tabs" role="tablist" aria-label="遊び方">{tabs}</div>
     {panels}
-    <p class="ps-more">コマンドを打たなくても、{_K("/tomoshibi")} のメニューから同じことができます。<a href="commands.html">すべてのコマンド</a></p>
+    <p class="ps-more">コマンドを打たなくても、{_K("/tomoshibi")} のメニューから同じことができます。<a class="ps-all" href="commands.html">すべてのコマンド</a></p>
   </div>
 </section>'''
 

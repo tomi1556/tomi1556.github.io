@@ -461,3 +461,9 @@
     draw();
   }
 })();
+// スマホでは、いちばん下のサイトの地図を閉じておく（見出しを押すと開く）
+(function () {
+  if (!window.matchMedia('(max-width: 760px)').matches) return;
+  Array.prototype.forEach.call(document.querySelectorAll('details.fm'), function (d) { d.open = false; });
+})();
+
