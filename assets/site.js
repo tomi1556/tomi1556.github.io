@@ -87,6 +87,14 @@
     return { at: f.getTime() - J, month: f.getUTCMonth() + 1, day: f.getUTCDate(), game: GAMES[week % 4], week: week };
   }
 
+  // 秒読みの数字：変わったときだけ書きかえ、小さく灯らせる
+  function setU(b, v) {
+    if (!b || b.textContent === v) return;
+    var first = !b.textContent || b.textContent.indexOf('–') > -1;
+    b.textContent = v;
+    if (first) return;
+    b.classList.remove('tk'); void b.offsetWidth; b.classList.add('tk');
+  }
   function tick() {
     var now = Date.now();
     var left = SEASON_START - now;
@@ -94,7 +102,7 @@
     $$('[data-season-short]').forEach(function (el) { el.textContent = left <= 0 ? '開催中' : '開幕まで ' + sc.d + '日 ' + sc.h + ':' + sc.m + ':' + sc.s; });
     $$('[data-season-cd]').forEach(function (el) {
       if (left <= 0) { el.hidden = true; return; }
-      ['d', 'h', 'm', 's'].forEach(function (k) { var b = $('[data-u="' + k + '"]', el); if (b) b.textContent = sc[k]; });
+      ['d', 'h', 'm', 's'].forEach(function (k) { setU($('[data-u="' + k + '"]', el), sc[k]); });
     });
     $$('[data-season-live]').forEach(function (el) { el.hidden = left > 0; });
     var f = nextFest(now), fc = split(f.at - now), live = now >= f.at;
@@ -102,7 +110,7 @@
     // 開幕の夜がそのまま最初の夜祭のときは、同じ秒読みを2回並べない（シーズンの秒読みがあるページだけ）
     var twin = !live && Math.abs(f.at - SEASON_START) < 60000 && !!$('[data-season-cd]');
     $$('[data-fest-lead]').forEach(function (el) { el.textContent = live ? 'ただいま開催中です。今すぐログインして参加できます。' : twin ? '開幕の夜が、最初の夜祭です。21時の開幕と同時に、120秒の募集が始まります。' : '21時になると、120秒の募集が始まります。何もしなければ参加です。'; });
-    $$('[data-fest-cd]').forEach(function (el) { if (twin && el.closest('[data-twin-hide]')) { el.hidden = true; return; } el.hidden = false; ['d', 'h', 'm', 's'].forEach(function (k) { var b = $('[data-u="' + k + '"]', el); if (b) b.textContent = fc[k]; }); });
+    $$('[data-fest-cd]').forEach(function (el) { if (twin && el.closest('[data-twin-hide]')) { el.hidden = true; return; } el.hidden = false; ['d', 'h', 'm', 's'].forEach(function (k) { setU($('[data-u="' + k + '"]', el), fc[k]); }); });
     $$('[data-fest-game]').forEach(function (el) { el.textContent = f.game.name; });
     $$('[data-fest-desc]').forEach(function (el) { el.textContent = f.game.desc; });
     liveBar(f, now);
@@ -467,3 +475,52 @@
   Array.prototype.forEach.call(document.querySelectorAll('details.fm'), function (d) { d.open = false; });
 })();
 
+// 並びをそろえる：カードの最後の段が半端になるとき、列の数を均して、残りを真ん中に寄せる（大きさはすべて同じ）
+(function () {
+  var SEL = '.vcs,.vstats,.wk-stats,.hs-jobs,.rt-kinds,.vgames,.vfacts,.vdns,.vtl,.three,.two,.facts,.perks,.paths,.wpcs,.ncs,.tts,.rks,.tks,.rars,.conds,.cmdg,.gtiles,.lvsteps,.bd-sum,.hm-tiers,.hs-grades';
+  var grids = Array.prototype.slice.call(document.querySelectorAll(SEL));
+  function kidsOf(g) {
+    return Array.prototype.filter.call(g.children, function (k) { return k.offsetWidth > 0 && getComputedStyle(k).position !== 'absolute'; });
+  }
+  function balance(g) {
+    var kids = kidsOf(g);
+    if (g.dataset.bal) { g.style.gridTemplateColumns = ''; kids.forEach(function (k) { k.style.gridColumn = ''; }); delete g.dataset.bal; }
+    var n = kids.length;
+    if (n < 3 || n > 16 || getComputedStyle(g).display !== 'grid') return;
+    var top = kids[0].offsetTop, c = 0;
+    while (c < n && Math.abs(kids[c].offsetTop - top) < 2) c++;
+    if (c < 2 || c >= n) return;
+    var r = Math.ceil(n / c), c2 = Math.ceil(n / r), last = n - c2 * (r - 1);
+    if (c2 === c && last === c) return;
+    g.dataset.bal = '1';
+    if (last === c2) { g.style.gridTemplateColumns = 'repeat(' + c2 + ',minmax(0,1fr))'; return; }
+    g.style.gridTemplateColumns = 'repeat(' + (c2 * 2) + ',minmax(0,1fr))';
+    kids.forEach(function (k, i) { k.style.gridColumn = (i === c2 * (r - 1) ? (c2 - last + 1) + ' / ' : '') + 'span 2'; });
+  }
+  function all() { grids.forEach(balance); }
+  all();
+  var t = 0, w = window.innerWidth;
+  window.addEventListener('resize', function () {
+    if (window.innerWidth === w) return;
+    w = window.innerWidth; clearTimeout(t); t = setTimeout(all, 120);
+  });
+  document.addEventListener('toggle', function (e) { if (e.target.open) grids.forEach(function (g) { if (e.target.contains(g)) balance(g); }); }, true);
+  document.addEventListener('click', function (e) { if (e.target.closest('[role=tab]')) setTimeout(all, 0); });
+})();
+// いちばん上へ戻る（長いページで、ある程度下まで読んだら出す）
+(function () {
+  if (document.documentElement.scrollHeight < window.innerHeight * 3) return;
+  var b = document.createElement('button');
+  b.type = 'button'; b.className = 'totop'; b.setAttribute('aria-label', 'いちばん上へ戻る');
+  b.innerHTML = '<svg viewBox="0 0 12 12" aria-hidden="true" fill="currentColor"><rect x="5" y="2" width="2" height="1"/><rect x="4" y="3" width="4" height="1"/><rect x="3" y="4" width="6" height="1"/><rect x="2" y="5" width="8" height="1"/><rect x="5" y="6" width="2" height="5"/></svg>';
+  document.body.appendChild(b);
+  var on = false, raf = 0;
+  window.addEventListener('scroll', function () {
+    if (raf) return;
+    raf = requestAnimationFrame(function () { raf = 0; var v = window.scrollY > window.innerHeight * 1.5; if (v !== on) { on = v; b.classList.toggle('on', v); } });
+  }, { passive: true });
+  b.addEventListener('click', function () {
+    var rm = document.documentElement.classList.contains('rm');
+    window.scrollTo({ top: 0, behavior: rm ? 'auto' : 'smooth' });
+  });
+})();
