@@ -5,7 +5,7 @@ from viz import ic, more, cards, steps, stats, bars, scale, dodont, timeline, da
 
 ADDR = "tomoshibara.life"
 DISCORD = "https://discord.gg/wAKGQBHmPS"
-SITE = "https://tomoshibara.life"
+SITE = "https://site.tomoshibara.life"
 NAV = [("index.html", "トップ"), ("start.html", "はじめる"), ("guide.html", "遊び方"), ("events.html", "夜祭"), ("rules.html", "きまり"), ("support.html", "支える")]
 
 LOGO = '<svg width="30" height="36" viewBox="0 0 10 12" aria-hidden="true" style="display:block;shape-rendering:crispEdges"><rect x="2" y="0" width="6" height="1" fill="currentColor"/><rect x="1" y="1" width="8" height="1" fill="currentColor"/><rect x="1" y="2" width="1" height="6" fill="currentColor"/><rect x="8" y="2" width="1" height="6" fill="currentColor"/><rect x="2" y="2" width="6" height="6" fill="#F2B544"/><rect x="4" y="4" width="2" height="2" fill="#FFF1C4"/><rect x="1" y="8" width="8" height="1" fill="currentColor"/><rect x="4" y="9" width="2" height="3" fill="currentColor"/></svg>'
