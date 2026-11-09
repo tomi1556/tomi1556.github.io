@@ -86,7 +86,7 @@ def footer():
 # 夜空の下に敷く景色の縁（ページごとに、立っている人とひとことが変わる）
 RIDGE = {
     "start.html": dict(seed=2, cast=[("hino", 9, True)], say=("hino", "最初の1基は、ここに置こう。")),
-    "guide.html": dict(seed=3, cast=[("hino", 7, True), ("yuki", 37, False)], say=("yuki", "12の章に、ぜんぶ書いたよ。")),
+    "guide.html": dict(seed=3, cast=[("hino", 7, True), ("yuki", 37, False)], say=("yuki", "13の章に、ぜんぶ書いたよ。")),
     "events.html": dict(seed=4, cast=[("momo", 10, True), ("hino", 13, False), ("sora", 34, True)], say=("momo", "土曜の21時、広場でね！")),
     "rules.html": dict(seed=5, cast=[("shino", 9, True)], say=("shino", "人の灯りは、守るもの。")),
     "support.html": dict(seed=6, cast=[("yuki", 9, True), ("hino", 12, False)], say=("yuki", "名前は、ちゃんと残すからね。")),
@@ -96,7 +96,7 @@ RIDGE = {
     "wiki.html": dict(seed=10, cast=[("yuki", 9, True), ("waka", 36, False)], say=("yuki", "130の技、ぜんぶ書きとめたよ。")),
     "wiki-hiuo.html": dict(seed=11, cast=[("sora", 10, True)], say=("sora", "「秘」の魚は、まだ見つからない……")),
 }
-_CH_WHO = {"lantern": "hino", "night": "shino", "higui": "shino", "buff": "momo", "hiwaza": "waka", "fish": "sora", "himon": "yuki", "akashi": "yuki", "more": "sora", "sato": "hino", "shoku": "waka", "musubi": "momo"}
+_CH_WHO = {"lantern": "hino", "night": "shino", "higui": "shino", "buff": "momo", "hiwaza": "waka", "fish": "sora", "himon": "yuki", "akashi": "yuki", "more": "sora", "sato": "hino", "shoku": "waka", "musubi": "momo", "ichiba": "sora"}
 _PATH_WHO = {"light": "hino", "night": "shino", "mine": "momo", "wood": "waka", "farm": "waka", "fish": "sora", "craft": "yuki", "travel": "sora", "ranch": "momo", "arcane": "hino"}
 
 
@@ -278,6 +278,12 @@ _CMDS = [
         ("/himon engrave", "", "道具に紋を刻む・外す画面を開く"),
         ("/himon book", "", "紋帳（見つけた紋と回数）"),
     ]),
+    ("市", "#F0C35A", "灯市", "Ichiba", "操作はすべて画面で。<span class=\"kbd\">/market</span> は <span class=\"kbd\">/ichiba</span> でも同じ。", [
+        ("/ichiba", "", "灯市を開く（買う・売る・頼む・財布・受け取り箱・店・屋号）"),
+        ("/ichiba wallet", "", "財布（残高・最近の動き・人に渡す）"),
+        ("/ichiba shop", "", "灯銭の店（よそおい・札の枠・福引き）"),
+        ("/zeni", "", "灯銭の残高と最近の動きをチャットに"),
+    ]),
     ("祭", "#C79BFF", "夜祭", "Yomatsuri", "何もしなければ参加です。", [
         ("/yomatsuri", "", "次の夜祭と、自分の参加回数（<span class=\"kbd\">/matsuri</span> でも同じ）"),
         ("/yomatsuri out", "", "今回は参加しない"),
@@ -316,6 +322,7 @@ def teaser():
       <h2 class="disp h2">{t["title"]}</h2>
       <p class="lead">{t.get("lead", "")}</p>
       <ul class="teaser-pts">{pts}</ul>
+      {f'<div class="btns" style="margin-top:20px"><a href="{t["link"][0]}" class="pbtn">{t["link"][1]}</a></div>' if t.get("link") else ""}
       <p class="teaser-note mu">{t.get("note", "")}</p>
     </div>
   </div>
@@ -436,7 +443,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   </div>
   <div class="wrap" style="padding-bottom:96px">
     {cards([("lantern", "#F2B544", "はじめる", "3分で入れる。機種ごとの入り方", "start.html"),
-            ("book", "#5AAAFF", "遊び方", "灯籠・夜・灯技・里…12の章", "guide.html"),
+            ("book", "#5AAAFF", "遊び方", "灯籠・夜・灯技・里・市…13の章", "guide.html"),
             ("star", "#F29BB8", "夜祭", "毎週土曜21時、週替わりのゲーム", "events.html"),
             ("shield", "#6FD39A", "きまり", "してはいけないこと・困ったとき", "rules.html"),
             ("heart", "#F29BB8", "支える", "寄付。お礼は見た目だけ（❤ と壁）", "support.html")], cols=5)}
@@ -666,6 +673,7 @@ CH_ICONS = {
     "more": ["................", ".......##.......", "..##########....", "..#oooooooo##...", "..#oooooooo###..", "..#oooooooo##...", "..##########....", ".......##.......", "....##########..", "...##oooooooo#..", "..###oooooooo#..", "...##oooooooo#..", "....##########..", ".......##.......", ".......##.......", "......####......"],
     "sato": ["................", ".......##.......", ".....##oo##.....", "...##oooooo##...", ".##oooooooooo##.", "################", "..#oo#....#oo#..", "..#oo#.##.#oo#..", "..####.##.####..", "..#....##....#..", "..#..######..#..", "..#..#oooo#..#..", "..#..#oooo#..#..", "################", "................", "................"],
     "shoku": ["................", "..##########....", ".#oooooooooo#...", ".#oooooooooo#...", "..####oo####....", ".....#oo#.......", ".....#oo#....##.", ".....#oo#...#oo#", ".....#oo#..#oo#.", ".....#oo#.#oo#..", ".....#oo##oo#...", ".....#oo#oo#....", "....#oooooo#....", "....########....", "................", "................"],
+    "ichiba": ["................", "..############..", ".#oo##oo##oo##o#", ".#oo##oo##oo##o#", "..############..", "...#........#...", "...#..####..#...", "...#..#oo#..#...", "...#..####..#...", "..############..", "..#oooooooooo#..", "..#oooooooooo#..", "..############..", "...##......##...", "...##......##...", "................"],
     "musubi": ["................", "...###....###...", "..#ooo#..#ooo#..", "..#ooo#..#ooo#..", "...###....###...", "................", "..#####..#####..", ".#ooooo##ooooo#.", ".#oooooooooooo#.", ".#oo#oooooo#oo#.", ".#oo#oooooo#oo#.", "..##.######.##..", "....#oo##oo#....", "....#oo##oo#....", "....###..###....", "................"],
 }
 
@@ -725,11 +733,14 @@ CH = [
     {"id": "musubi", "t": "灯結と暮らし", "c": "#F29BB8", "layer": 3, "sec": [],
      "sum": "縁・一団・合流・手紙・合図。名所めぐりと市の日で、里の外ともつながる。", "facts": ["一団 12人", "名所めぐり", "すべて画面で"],
      "desc": "灯結（ひむすび）の縁・一団・合流・手紙と小包・合図・配信中・離れる。名所めぐり、旅の依頼、屋台と市、里の便り、感謝の灯、画面のきまり。"},
+    {"id": "ichiba", "t": "灯市と灯銭", "c": "#F0C35A", "layer": 3, "sec": [],
+     "sum": "人から買い、人に売り、人に頼む。灯銭は日々の務めでたまる。", "facts": ["1日100銭まで", "先に預かるから安心", "よそおい40品"],
+     "desc": "灯市（ともしびいち）の使い方。灯銭のため方、買う・売る（売り札の4歩）・頼む・手伝う、灯恩と★と屋号、よそおいの店、安心のしくみ。"},
 ]
 LAYERS = [("第一層", "はじめに知ること", "ここまで読めば、最初の夜を越えられます。"),
           ("第二層", "強くなる", "慣れてきたら。育てるほど、暮らしが楽になります。"),
           ("第三層", "残す・つなぐ", "長く遊ぶほど、残るものがふえます。"),
-          ("第四層", "里で暮らす", "仲間ができたら。里を開き、職について、街を育てます。")]
+          ("第四層", "人と暮らす", "仲間ができたら。里を開き、職につき、縁を結び、市で売り買いします。")]
 
 _SEC = {m.group(1): m.group(0) for m in _re.finditer(r'<section class="stratum[^"]*" id="(\w+)">.*?\n</section>', _guide_src, _re.S)}
 
@@ -874,6 +885,124 @@ def _fish_sec():
 '''
 
 
+# ── 灯市の章 ──
+def _shot(f, alt, cap):
+    return f'<figure class="ich-shot"><img src="assets/guide/{f}" alt="{alt}" width="1200" height="600" style="height:auto" loading="lazy" decoding="async"><figcaption>{cap}</figcaption></figure>'
+
+
+def _ichiba_sec():
+    return f'''<section class="stratum s-deep" id="ichiba">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">灯市は、人と人との市。</h2>
+    <p class="lead"><span class="kbd">/ichiba</span> で開きます（メニューの「灯市」からも）。サーバーは品を売りません。ほしい物は人から買い、余った物は人に売り、手が足りないときは人に頼みます。</p>
+    {cards([("chest", "#6FD39A", "買う", "人が売りに出した品を、灯銭で"), ("coin", "#F2B544", "売る", "売り札を出す・「ほしい」人に渡す"), ("bell", "#5AAAFF", "頼む・手伝う", "運ぶ・建てる・手伝う。お礼は灯銭で")])}
+    {_shot("ichiba-1_home.png", "灯市の入口の画面。買う・売る・頼むの大きな3つの札と、下の段の財布・自分の札・受け取り箱・店・屋号", "入口の画面。大きな3つの札が入口、下の段は道具です。")}
+    <p class="note"><b>操作は、ぜんぶ画面で。</b>コマンドを覚える必要はありません。統合版は、同じ画面がボタンのフォームになり、数や値段はスライダーで決めます。チャットで打つのは、残高を見る <span class="kbd">/zeni</span> だけです。</p>
+  </div>
+</section>
+
+<section class="stratum s-soil tex" id="zeni">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">灯銭は、日々の務めでたまる。</h2>
+    <p class="lead">灯銭（ともしぜに）は灯市のお金です。1日にたまる量が決まっているので、ためこみや荒稼ぎで値打ちが崩れません。</p>
+    {bars([("今日の務め（灯技）", 10, "#5AAAFF", "1つごと・1日3つ", "+10"), ("夜祭に参加", 10, "#C79BFF", "勝つと さらに +20", "+10"), ("里の日課（灯里）", 5, "#E9824A", "1つごと", "+5"), ("灯喰いを退ける", 5, "#E0453A", "1日 15 まで", "+5"), ("灯市のご褒美", 5, "#F2B544", "大きめの取引で", "+5")], maxv=20)}
+    {stats([("coin", "#F2B544", "100", "銭", "1日にたまる上限"), ("star", "#F29BB8", "30〜", "銭", "里の週課（上限の外）"), ("trophy", "#6FD39A", "5〜50", "銭", "灯の証の実績（1回きり）")])}
+    <p class="mu" style="font-size:14px;margin-top:16px">はじめて来て3日（遊んだ時間5時間）までは、1日30銭まで・人に渡すのはお休み。財布の「灯銭のもらい方」を押すと、それぞれの画面へ移れます。</p>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="buy">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">買う：札を押して、1組買う。</h2>
+    {steps([("chest", "#6FD39A", "「買う」を押す", "売り札が並ぶ"), ("map", "#6FD39A", "上の段で分類", "建材・鉱石・道具・食べ物…"), ("eye", "#6FD39A", "札を押す", "売り手・値段・残り"), ("ok", "#6FD39A", "「1組買う」", "品は持ち物へ")])}
+    <div class="ich-two">
+      {_shot("ichiba-2_browse.png", "品の一覧。上の段に分類のタブ、札の名前に品と数と値段", "札の名前に「品 ×数 ｜ 値段」。急ぎの札は光ります。")}
+      {_shot("ichiba-3_card.png", "札を詳しく見る画面。左に品、右に売り手・1組の値段・残り・ふだんの値段、下に1組買う・まとめて買うのボタン", "右の「ふだんの値段」で、高すぎないか確かめられます。")}
+    </div>
+    {more("くわしく：「1組」とは", "<p>札は「1組」ずつ売り買いします。たとえば石レンガ64個が1組、残り3組なら、1回の「1組買う」で64個が届きます。まとめて買うときは「まとめて買う」で組の数を選びます。</p><p>持ち物に入りきらない分は、<b>受け取り箱</b>（入口の下の段）に届きます。受け取り箱の品は消えません。</p>")}
+  </div>
+</section>
+
+<section class="stratum s-rock" id="sell">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">売る：2つのやり方。</h2>
+    {cards([("coin", "#F2B544", "ほしい札に渡す（すぐ売れる）", "「これがほしい」札に、持っている品を渡すと、すぐ灯銭が届く"), ("flag", "#F2B544", "売り札を出す（自分の値段で）", "品と値段を決めて並べる。売れたら灯銭が届く")], cols=2)}
+    <h3 class="disp vh3">売り札は、4歩で出せる</h3>
+    {steps([("chest", "#F2B544", "何を", "持ち物から選ぶ"), ("one", "#F2B544", "いくつ", "1組の数と、組の数"), ("coin", "#F2B544", "いくら", "ふだんの値段が最初から入っている"), ("ok", "#F2B544", "確かめて出す", "文章で言い切ってくれる")])}
+    <div class="ich-two">
+      {_shot("ichiba-4_howmany.png", "いくつを決める画面。1組の数を 1・8・16・32・64 の札から選び、組の数を ± で決める", "1組の数は札から選ぶだけ。組の数は ± で。")}
+      <div class="ich-side">
+        <p class="note"><b>品は、売れるまで灯市が預かります。</b>だれも買っていなければ、いつでも「下げる」で全部戻ります。期限（7日）が来たときも、残りは受け取り箱へ戻ります。</p>
+        <p class="note cold"><b>手数料は 5%。</b>売れた灯銭から5%が消えます（灯銭が増えすぎないため）。里の「市の日」は手数料なし。</p>
+        <p class="note"><b>値段に迷ったら、そのまま「次へ」。</b>ふだんの値段から大きく外れると「⚠ ふだんの約3倍」のように教えてくれます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stratum s-deep" id="job">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">頼む・手伝う：お礼は先に預ける。</h2>
+    <p class="lead">「運ぶ」「建てる・直す」「手伝う」の3種類。品を集めてほしいときは「ほしい札」のほうが早く集まります。</p>
+    <div class="ich-flow">
+      <div><h3 class="dot ich-flow-h" style="--c:#5AAAFF">頼む人</h3>{steps([("bell", "#5AAAFF", "頼みを出す", "お礼を預ける"), ("chat", "#5AAAFF", "引き受けた知らせ", "ゲームに届く"), ("ok", "#5AAAFF", "「受け取る」", "お礼が渡る")])}</div>
+      <div><h3 class="dot ich-flow-h" style="--c:#6FD39A">手伝う人</h3>{steps([("eye", "#6FD39A", "頼み札を見る", "「引き受ける」"), ("hammer", "#6FD39A", "頼みを果たす", "運ぶ・建てる・手伝う"), ("flag", "#6FD39A", "「終わりました」", "3日で自動でお礼も")])}</div>
+    </div>
+    {more("くわしく：うまくいかないとき", "<p><b>引き受けた人が動かない</b>：3日たつと、頼んだ人が「引き受けた人を外す」を押せます。札はまた開きます。</p><p><b>受け取ってもらえない</b>：「終わりました」から3日たつと、お礼は自動で届きます。</p><p><b>話がちがう</b>：札の画面の「相談所へ」を押すと、札の番号つきで運営に相談できます。</p>")}
+  </div>
+</section>
+
+<section class="stratum s-soil tex" id="renown">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">灯恩と★、屋号。</h2>
+    <p class="lead">取引が終わるたびに、お互いに★をつけ合います。★と取引の数は「灯恩（ありがとうの数）」になり、名前の横の印になります。灯恩は渡せず、買えず、減りません。</p>
+    {chain(["☆", "灯", "灯灯", "灯灯灯", "✦灯の主"], "#F2B544")}
+    {cards([("people", "#F2B544", "はじめての相手 +2", "知らない人との取引ほど、灯恩が増える"), ("house", "#F2B544", "ほかの里の人 +1", "里の外とつながるほど"), ("star", "#F2B544", "★ の数だけ", "★5 で +4、★1 は増えない")])}
+    <h3 class="disp vh3">屋号：自分の得意を名乗る</h3>
+    <p>石工・大工・庭師・農家・漁師・運び屋・付呪師など16から2つまで（7日に1回変えられます）。その屋号あての札が出ると知らせが届き、「得意な人を探す」で頼む相手を探せます。屋号ごとの灯恩も数えます。</p>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="shop">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">灯銭の使い道：よそおい。</h2>
+    <p class="lead">灯銭で買えるのは、見た目と少しの便利さだけ。強さには関係しません。</p>
+    {cards([("star", "#C79BFF", "破る", "ブロックを壊したとき"), ("path", "#C79BFF", "歩く", "足あと"), ("shield", "#C79BFF", "まとう", "立ち止まったとき"), ("sword", "#C79BFF", "倒す", "敵を倒したとき"), ("fish", "#C79BFF", "釣る", "魚が釣れたとき"), ("lantern", "#C79BFF", "灯す", "灯籠を置いたとき"), ("bolt", "#C79BFF", "降りる", "高いところから着地"), ("house", "#C79BFF", "来る", "サーバーに入ったとき")], cols=4)}
+    {scale([("一般", "150〜250銭", "#C9D0DC", 2), ("上等", "600〜900銭", "#8FC3E8", 2), ("特上", "1800銭〜", "#B79CF2", 2), ("季節", "その季節だけ", "#F2B544", 1)])}
+    <h3 class="disp vh3">そのほかの品</h3>
+    {cards([("chest", "#F2B544", "札の枠 +1", "300銭・最大10枚"), ("gift", "#F2B544", "福引き", "50銭・まだ持っていない品"), ("fire", "#F2B544", "光の花", "10銭・その場で光がひらく"), ("link", "#F2B544", "欠片の交換", "同じ欠片3つ＋20銭")], cols=4)}
+    <div class="ich-two">
+      {_shot("ichiba-8_scene.png", "よそおいの画面。5つのよそおいが横に並び、下の帯の色で付けている・持っている・値段がわかる", "下の帯の色で「付けている・持っている・値段」がわかります。")}
+      <div class="ich-side">
+        <p class="note"><b>買う前に、ためしに見られます。</b>シフト＋クリックで5秒だけ、自分にだけ見えます。</p>
+        <p class="note cold"><b>多いと感じたら、見え方を変えられます。</b>入口の「よそおいの見え方」で「少なめ」「見せない」。配信中は「配信モード」で、ほかの人のよそおいを全部かくせます。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stratum s-stone" id="safe">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">だまされない、なくならない。</h2>
+    {cards([("lock", "#6FD39A", "先に預かる", "品もお代もお礼も、灯市が預かってから"), ("eye", "#6FD39A", "ふだんの値段", "30日の真ん中の値を、札のとなりに"), ("clock", "#6FD39A", "期限で全部戻る", "7日（10銭で7日のばせる）"), ("chest", "#6FD39A", "受け取り箱", "入りきらない品は消えない"), ("shield", "#6FD39A", "大きな送金は見張り", "運営に知らせが届く"), ("book", "#6FD39A", "帳簿", "灯銭の動きは1つ残らず記録")])}
+    <h3 class="disp vh3">よくある質問</h3>
+    {more("灯銭はどこで見られる？", "<p>どの灯市の画面でも、左上に財布があります。チャットなら <span class=\"kbd\">/zeni</span>。メニュー（<span class=\"kbd\">/menu</span>）の「灯市」の札にも出ます。</p>")}
+    {more("エメラルドは使える？", "<p>灯市では使いません。灯里の屋台は、前から並んでいる品だけエメラルドのまま。新しく並べた品は灯銭になります。</p>")}
+    {more("灯銭を人にあげたい", "<p>財布の「人に渡す」で、相手を選んで額を決めます。1日500銭まで。はじめて3日までの人は渡せません。</p>")}
+    {more("季節が変わったら灯銭は？", "<p>灯銭も灯恩も、そのまま残ります。</p>")}
+  </div>
+</section>
+'''
+
+
 def _body(k):
     c = CH[k]
     if c["id"] == "akashi":
@@ -892,6 +1021,8 @@ def _body(k):
         return _shoku_sec()
     if c["id"] == "musubi":
         return _musubi_sec()
+    if c["id"] == "ichiba":
+        return _ichiba_sec()
     return "\n".join(_clean(_SEC[s]) for s in c["sec"])
 
 
@@ -908,6 +1039,7 @@ _CH_SAY = {
     "sato": "里の土地は、灯りでできてる。灯籠をつなぐほど、里は広がるよ。",
     "shoku": "職のいちばん上の力は、自分じゃなくて、仲間のために使う力なんだ。",
     "musubi": "里がちがっても、縁は結べる。手紙は、いない人にも届くよ。",
+    "ichiba": "ほしい物は、だれかが持ってる。お礼は灯銭で、ありがとうは★で。",
 }
 
 
@@ -963,9 +1095,10 @@ def _guide_index():
         <ul>{"".join(f"<li>{x}</li>" for x in c["facts"])}</ul>
         <span class="ch-go">読む<i></i></span>
       </a>'''
+        n = sum(1 for c in CH if c["layer"] == li)
         layers += f'''<div class="glayer">
       <div class="layer-h"><span class="dot">{no}</span><h2 class="disp">{name}</h2><p>{note}</p></div>
-      <div class="chs">{cards}</div>
+      <div class="chs n{n}">{cards}</div>
     </div>'''
     return f'''<div class="hero">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div>

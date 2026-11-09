@@ -2122,3 +2122,22 @@ a.vc:hover .vc-go,a.vc:focus-visible .vc-go{transform:translateX(3px) rotate(45d
 .teaser-note{font-size:13px;margin-top:16px;text-wrap-style:balance}
 @media (max-width:860px){.teaser .teaser-in{grid-template-columns:1fr}.teaser-pts li{grid-template-columns:1fr}.teaser-pts b{white-space:normal}}
 .nw{white-space:nowrap;text-wrap-mode:nowrap}
+
+/* ───── 遊び方の目次：層ごとの章の数で並べ方を変える（1つだけはみ出す行を作らない） ───── */
+.chs.n3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.chs.n4{grid-template-columns:repeat(4,minmax(0,1fr))}
+@media (max-width:1100px){.chs.n4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:1100px) and (min-width:700px){.chs.n3 .ch,.chs.n4 .ch{padding:18px 18px 16px}}
+@media (max-width:700px){.chs.n3,.chs.n4{grid-template-columns:1fr}}
+
+/* ───── 灯市の章 ───── */
+.ich-shot{margin:28px 0 0;border:3px solid rgba(0,0,0,.35);background:#18161e;box-shadow:6px 6px 0 rgba(0,0,0,.4)}
+.ich-shot img{display:block;width:100%;height:auto;image-rendering:pixelated}
+.ich-shot figcaption{padding:10px 14px;font-size:14px;color:var(--mu);text-wrap-style:balance}
+.ich-two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 28px;align-items:start}
+.ich-side{margin-top:28px}
+.ich-side .note:first-child{margin-top:0}
+.ich-flow{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 36px;margin-top:24px}
+.ich-flow-h{display:inline-block;background:var(--c);color:#14121c;padding:2px 12px;margin:0 0 10px;font-size:15px}
+@media (max-width:900px){.ich-two,.ich-flow{grid-template-columns:1fr}}
+#ichiba .ich-shot{max-width:880px}
