@@ -291,6 +291,38 @@ _CMDS = [
 
 
 # ───────────────────────── トップ ─────────────────────────
+# ───────────────────────── 予告（data/teaser.json の enabled で出し入れ） ─────────────────────────
+def teaser():
+    """トップの予告の枠。data/teaser.json がない・enabled が false なら何も出さない（すぐ外せるように）。"""
+    import json as _json
+    f = pathlib.Path(__file__).parent / "data" / "teaser.json"
+    if not f.exists():
+        return ""
+    t = _json.loads(f.read_text(encoding="utf-8"))
+    if not t.get("enabled"):
+        return ""
+    def nw(x):
+        # [[ことば]] は途中で改行しない（「よそ／おい」のように語の途中で切れないように）
+        return _re0.sub(r"\[\[(.+?)\]\]", r'<span class="nw">\1</span>', x or "")
+    t = {k: nw(v) if isinstance(v, str) and k not in ("image", "alt") else v for k, v in t.items()}
+    pts = "".join(f'<li><b>{nw(a)}</b><span>{nw(b)}</span></li>' for a, b in t.get("points", []))
+    return f'''
+<section class="stratum s-dusk teaser" id="teaser" aria-label="{t.get("label", "予告")}">
+  <div class="edge"></div>
+  <div class="wrap teaser-in">
+    <figure class="teaser-art"><img src="{t["image"]}" alt="{t.get("alt", "")}" width="1600" height="900" loading="lazy" decoding="async"></figure>
+    <div class="teaser-text">
+      <p class="teaser-kicker"><span>{t.get("label", "予告")}</span>{t.get("when", "")}</p>
+      <h2 class="disp h2">{t["title"]}</h2>
+      <p class="lead">{t.get("lead", "")}</p>
+      <ul class="teaser-pts">{pts}</ul>
+      <p class="teaser-note mu">{t.get("note", "")}</p>
+    </div>
+  </div>
+</section>
+'''
+
+
 index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <div class="bars" aria-hidden="true"><i></i><i></i></div>
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div><div class="dusk" aria-hidden="true"></div>
@@ -307,6 +339,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <div class="scene" data-scene aria-hidden="true"></div>
   <template id="tpl-cast"><span class="who">{fig("hino", True)}</span><span class="who foe">{eater()}</span></template>
 </div>
+{teaser()}
 
 <section class="stratum tex s-soil" id="facts">
   <div class="edge"></div>
@@ -2847,7 +2880,7 @@ def finish(html):
         for node in list(el.descendants):
             if not isinstance(node, NavigableString) or node.parent is None:
                 continue
-            if any(p.name in SKIP or "kbd" in (p.get("class") or []) for p in node.parents if p.name):
+            if any(p.name in SKIP or "kbd" in (p.get("class") or []) or "nw" in (p.get("class") or []) for p in node.parents if p.name):
                 continue
             text = str(node)
             if len(text.strip()) < 6 or "<wbr>" in text:
