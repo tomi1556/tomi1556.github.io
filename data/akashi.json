@@ -528,7 +528,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜の敵や灯喰いがときどき落とす「欠片」を右クリックで取り込み、/tomoshibi buffs で解放する。加護は8種・Lv3まで。"
   },
   {
    "id": "buff_6",
@@ -548,7 +549,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜の敵や灯喰いがときどき落とす「欠片」を右クリックで取り込み、/tomoshibi buffs で解放する。加護は8種・Lv3まで。"
   },
   {
    "id": "buff_12",
@@ -568,7 +570,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜の敵や灯喰いがときどき落とす「欠片」を右クリックで取り込み、/tomoshibi buffs で解放する。加護は8種・Lv3まで。"
   },
   {
    "id": "buff_18",
@@ -588,7 +591,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜の敵や灯喰いがときどき落とす「欠片」を右クリックで取り込み、/tomoshibi buffs で解放する。加護は8種・Lv3まで。"
   },
   {
    "id": "buff_24",
@@ -615,7 +619,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜の敵や灯喰いがときどき落とす「欠片」を右クリックで取り込み、/tomoshibi buffs で解放する。加護は8種・Lv3まで。"
   },
   {
    "id": "defend_1",
@@ -4789,7 +4794,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "/waza の「今日の務め」3つを、その日のうちに全部こなすと1日。続けてでなくてよい。"
   },
   {
    "id": "hwtask_30",
@@ -4809,7 +4815,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "/waza の「今日の務め」3つを、その日のうちに全部こなすと1日。続けてでなくてよい。"
   },
   {
    "id": null,
@@ -5060,7 +5067,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭は決まった時刻に募集が始まる。何もしなければ参加になり、遊びが始まると1回。途中参加も数える。"
   },
   {
    "id": "fest_5",
@@ -5080,7 +5088,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭は決まった時刻に募集が始まる。何もしなければ参加になり、遊びが始まると1回。途中参加も数える。"
   },
   {
    "id": "fest_15",
@@ -5100,7 +5109,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭は決まった時刻に募集が始まる。何もしなければ参加になり、遊びが始まると1回。途中参加も数える。"
   },
   {
    "id": "fest_30",
@@ -5120,7 +5130,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭は決まった時刻に募集が始まる。何もしなければ参加になり、遊びが始まると1回。途中参加も数える。"
   },
   {
    "id": "fest_60",
@@ -5140,7 +5151,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭は決まった時刻に募集が始まる。何もしなければ参加になり、遊びが始まると1回。途中参加も数える。"
   },
   {
    "id": "win_1",
@@ -5160,7 +5172,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭の終わりに、勝者として名前が出ると1回。組の勝ちや同着も数える。"
   },
   {
    "id": "win_5",
@@ -5180,7 +5193,8 @@
    "trail": "桜吹雪",
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭の終わりに、勝者として名前が出ると1回。組の勝ちや同着も数える。"
   },
   {
    "id": "win_20",
@@ -5200,7 +5214,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭の終わりに、勝者として名前が出ると1回。組の勝ちや同着も数える。"
   },
   {
    "id": "win_50",
@@ -5227,7 +5242,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭の終わりに、勝者として名前が出ると1回。組の勝ちや同着も数える。"
   },
   {
    "id": "relay_3",
@@ -5316,7 +5332,7 @@
    "name": "四芸に通ず",
    "icon": "FIREWORK_STAR",
    "desc": [
-    "夜祭の4つの遊びすべてで勝つ。"
+    "夜祭の遊びのうち、4種類で勝つ。"
    ],
    "goal": "4種",
    "stage": 1,
@@ -9764,7 +9780,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯市で売る・買う・依頼のどれかを、ほかの人と終えると、その相手を1人と数える。同じ相手は何度でも1人。"
   },
   {
    "id": "ichiba_p_10",
@@ -9784,7 +9801,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯市で売る・買う・依頼のどれかを、ほかの人と終えると、その相手を1人と数える。同じ相手は何度でも1人。"
   },
   {
    "id": "ichiba_p_30",
@@ -9804,7 +9822,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯市で売る・買う・依頼のどれかを、ほかの人と終えると、その相手を1人と数える。同じ相手は何度でも1人。"
   },
   {
    "id": "ichiba_p_80",
@@ -9824,7 +9843,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯市で売る・買う・依頼のどれかを、ほかの人と終えると、その相手を1人と数える。同じ相手は何度でも1人。"
   },
   {
    "id": "ichiba_r_10",
@@ -10512,7 +10532,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道を Lv50 にし、★でほかの極意を合わせて12段にすると、真髄（★5つ）が開く。"
   },
   {
    "id": "hwcore_5",
@@ -10532,7 +10553,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道を Lv50 にし、★でほかの極意を合わせて12段にすると、真髄（★5つ）が開く。"
   },
   {
    "id": "hwcore_10",
@@ -10552,7 +10574,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道を Lv50 にし、★でほかの極意を合わせて12段にすると、真髄（★5つ）が開く。"
   },
   {
    "id": "hwtask_100",
@@ -10572,7 +10595,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "/waza の「今日の務め」3つを、その日のうちに全部こなすと1日。続けてでなくてよい。"
   },
   {
    "id": "hwtask_300",
@@ -10592,7 +10616,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "/waza の「今日の務め」3つを、その日のうちに全部こなすと1日。続けてでなくてよい。"
   },
   {
    "id": "chest_500",
@@ -11166,7 +11191,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭は決まった時刻に募集が始まる。何もしなければ参加になり、遊びが始まると1回。途中参加も数える。"
   },
   {
    "id": "win_100",
@@ -11186,7 +11212,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜祭の終わりに、勝者として名前が出ると1回。組の勝ちや同着も数える。"
   },
   {
    "id": "tsuri_3",
