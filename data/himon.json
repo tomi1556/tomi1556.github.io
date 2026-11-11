@@ -1,1 +1,2313 @@
-{"rarity":[{"jp":"並","hex":"#C9D0DC","book":15,"fuda":1,"shelf":true,"engrave":5,"n":16},{"jp":"良","hex":"#8BD18F","book":25,"fuda":1,"shelf":true,"engrave":8,"n":22},{"jp":"珍","hex":"#8FC3E8","book":35,"fuda":2,"shelf":true,"engrave":12,"n":20},{"jp":"稀","hex":"#B79CF2","book":50,"fuda":6,"shelf":true,"engrave":18,"n":19},{"jp":"秘","hex":"#F2B544","book":0,"fuda":0,"shelf":false,"engrave":28,"n":15}],"mumei":{"lv":50,"fuda":3,"pity":30,"weight":[38, 28, 18, 11, 5]},"fudaMin":20,"fudaMax":12,"fudaStart":3,"upgrade":0.06,"slots":3,"defs":[{"id":"hijirushi","name":"灯印","r":0,"max":1,"on":"どの道具・防具にも","group":null,"cats":["SWORD","AXE","MACE","PICK","SHOVEL","HOE","BOW","XBOW","TRIDENT","ROD","SHIELD","ELYTRA","HEAD","CHEST","LEGS","FEET"],"desc":["落としても燃えず、消えず、光って見える"]},{"id":"kizukai","name":"気遣い","r":0,"max":1,"on":"剣・斧・メイス・弓・クロスボウ・三叉槍","group":null,"cats":["SWORD","AXE","MACE","BOW","XBOW","TRIDENT"],"desc":["自分の仲間の動物・村人・ゴーレムを、うっかり傷つけない（しゃがむと当たる）"]},{"id":"miteate","name":"見立て","r":0,"max":1,"on":"兜","group":null,"cats":["HEAD"],"desc":["見ている敵の名前と体力を出す。しゃがむと、見ている場所までの距離と明るさ"]},{"id":"itabiki","name":"板挽き","r":0,"max":1,"on":"斧","group":null,"cats":["AXE"],"desc":["切った丸太が、板4枚で落ちる（しゃがむと丸太のまま）"]},{"id":"yorite","name":"選り手","r":0,"max":1,"on":"つるはし・シャベル","group":null,"cats":["PICK","SHOVEL"],"desc":["丸石・土・砂利・ネザーラックなどの石くずを拾わない（しゃがむと拾う）"]},{"id":"sunanuki","name":"砂抜き","r":0,"max":1,"on":"シャベル","group":null,"cats":["SHOVEL"],"desc":["砂・砂利を掘ると、上に積もった砂・砂利もまとめて落とす"]},{"id":"taguri","name":"手繰り","r":0,"max":1,"on":"釣り竿","group":null,"cats":["ROD"],"desc":["何もかけずに巻き取ると、釣り針のまわり3ブロックの落とし物を手もとへ運ぶ"]},{"id":"omoshi","name":"重し","r":0,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["斬った敵を吹き飛ばさない。囲まれずに、続けて斬れる"]},{"id":"yoakenoiki","name":"夜明けの息","r":0,"max":1,"on":"胸当て","group":null,"cats":["CHEST"],"desc":["夜が明けた瞬間、体力と空腹がすべて戻る"]},{"id":"noborite","name":"登り手","r":0,"max":2,"on":"すね当て","group":null,"cats":["LEGS"],"desc":["はしご・ツタを登る速さが 1.5倍","はしご・ツタを登る速さが 2倍"]},{"id":"kumonuke","name":"蜘蛛抜け","r":0,"max":1,"on":"すね当て","group":null,"cats":["LEGS"],"desc":["クモの巣に触れると、すぐに払いのける。甘い実の茂みでけがをしない"]},{"id":"mushiyoke","name":"虫除け","r":0,"max":1,"on":"すね当て","group":null,"cats":["LEGS"],"desc":["シルバーフィッシュ・エンダーマイト・ハチに狙われない"]},{"id":"ashiato","name":"灯の足跡","r":0,"max":1,"on":"ブーツ","group":null,"cats":["FEET"],"desc":["夜に歩いた跡が、40秒のあいだ光の粒で残る（自分にだけ見える）"]},{"id":"koorizuri","name":"氷渡り","r":0,"max":2,"on":"ブーツ","group":null,"cats":["FEET"],"desc":["氷の上を走ると、速さ +20%","氷の上を走ると、速さ +40%"]},{"id":"kazamuki","name":"風向き","r":0,"max":1,"on":"エリトラ","group":null,"cats":["ELYTRA"],"desc":["滑空中、高さ・速さ・地面までの距離を画面に出す"]},{"id":"fukuroba","name":"梟の羽","r":0,"max":1,"on":"エリトラ","group":null,"cats":["ELYTRA"],"desc":["滑空中に壁へぶつかっても、滑空のまま降りても、けがをしない"]},{"id":"yaiba","name":"夜刃","r":1,"max":3,"on":"剣・斧・メイス・弓・クロスボウ","group":null,"cats":["SWORD","AXE","MACE","BOW","XBOW"],"desc":["夜のあいだ、与えるダメージ +10%（矢にも）","夜のあいだ、与えるダメージ +20%（矢にも）","夜のあいだ、与えるダメージ +30%（矢にも）"]},{"id":"haisui","name":"背水","r":1,"max":2,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["体力が3割を切っているあいだ、与えるダメージ +25%","体力が3割を切っているあいだ、与えるダメージ +40%"]},{"id":"zanshin","name":"残心","r":1,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["敵を倒してから3秒以内の一撃が、1.3倍"]},{"id":"kirikaeshi","name":"切り返し","r":1,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["攻撃を受けてから1.5秒以内の一撃が、1.5倍になる"]},{"id":"kushizashi","name":"串刺し","r":1,"max":2,"on":"剣","group":null,"cats":["SWORD"],"desc":["斬った敵の後ろ3ブロックにいる敵にも、40%のダメージ","斬った敵の後ろ3ブロックにいる敵にも、70%のダメージ"]},{"id":"hayatachi","name":"早太刀","r":1,"max":2,"on":"剣","group":null,"cats":["SWORD"],"desc":["振りが速くなり、次の一撃までの待ちが短い（+15%）","振りが速くなり、次の一撃までの待ちが短い（+30%）"]},{"id":"fumikomi","name":"踏み込み","r":1,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["しゃがむを素早く2回で、前へ大きく踏み込む（3秒に1回）"]},{"id":"hayanuki","name":"早抜き","r":1,"max":2,"on":"弓","group":null,"cats":["BOW"],"desc":["引き絞りが浅くても、70%の力の矢になる","引き絞りが浅くても、100%の力の矢になる"]},{"id":"chikaraya","name":"力溜め","r":1,"max":1,"on":"弓","group":null,"cats":["BOW"],"desc":["引き絞ったまま3秒ためて放つと、矢のダメージ1.5倍"]},{"id":"kazayomi","name":"風読み","r":1,"max":2,"on":"弓・クロスボウ","group":null,"cats":["BOW","XBOW"],"desc":["放った矢が1秒のあいだ落ちず、まっすぐ遠くまで飛ぶ","放った矢が2秒のあいだ落ちず、まっすぐ遠くまで飛ぶ"]},{"id":"kusabi","name":"楔","r":1,"max":1,"on":"クロスボウ","group":null,"cats":["XBOW"],"desc":["当たった敵を、1秒のあいだその場に縫い止める"]},{"id":"tateuchi","name":"盾打ち","r":1,"max":2,"on":"盾","group":null,"cats":["SHIELD"],"desc":["構えて受けた敵を、4ブロックほど押し返す","構えて受けた敵を、7ブロックほど押し返す"]},{"id":"senkou","name":"閃光","r":1,"max":1,"on":"盾","group":"shield","cats":["SHIELD"],"desc":["構えた瞬間、まわり5ブロックの敵がひるんで止まる（8秒に1回）"]},{"id":"jindate","name":"陣立て","r":1,"max":1,"on":"盾","group":"shield","cats":["SHIELD"],"desc":["構えた瞬間、まわり10ブロックの敵の狙いを自分に集める。仲間を守る盾役に（10秒に1回）"]},{"id":"mabushi","name":"眩し除け","r":1,"max":1,"on":"兜","group":null,"cats":["HEAD"],"desc":["盲目と、ウォーデンの暗闇にかからない"]},{"id":"gedoku","name":"解毒","r":1,"max":1,"on":"兜","group":null,"cats":["HEAD"],"desc":["毒・空腹・吐き気にかからない"]},{"id":"kyuusoku","name":"休息","r":1,"max":2,"on":"胸当て","group":null,"cats":["CHEST"],"desc":["しゃがんで動かずにいると、3秒後から体力が早く戻る（1段）","しゃがんで動かずにいると、3秒後から体力が早く戻る（2段）"]},{"id":"funbari","name":"踏ん張り","r":1,"max":2,"on":"すね当て","group":null,"cats":["LEGS"],"desc":["吹き飛ばされにくい（ノックバック −30%）","吹き飛ばされにくい（ノックバック −60%）"]},{"id":"suiyose","name":"吸い寄せ","r":1,"max":2,"on":"すね当て","group":null,"cats":["LEGS"],"desc":["まわり4ブロックの落とし物が、ひとりでに寄ってくる（人が捨てた物は除く）","まわり6ブロックの落とし物が、ひとりでに寄ってくる（人が捨てた物は除く）"]},{"id":"mizuharai","name":"水払い","r":1,"max":1,"on":"シャベル","group":null,"cats":["SHOVEL"],"desc":["しゃがんで水に向けて右クリックすると、まわり5×5×5の水を払う"]},{"id":"hanegasa","name":"羽傘","r":1,"max":2,"on":"エリトラ","group":null,"cats":["ELYTRA"],"desc":["滑空が落ちにくく、長く続く（1段）","滑空が落ちにくく、長く続く（2段）"]},{"id":"nagabi","name":"長火","r":1,"max":2,"on":"エリトラ","group":null,"cats":["ELYTRA"],"desc":["ロケット花火で加速する時間が 1.5倍","ロケット花火で加速する時間が 2倍"]},{"id":"suibi","name":"吸い灯","r":2,"max":3,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["与えたダメージの 4% だけ、体力が戻る","与えたダメージの 8% だけ、体力が戻る","与えたダメージの 12% だけ、体力が戻る"]},{"id":"kaishin","name":"会心の灯","r":2,"max":2,"on":"剣・斧","group":null,"cats":["SWORD","AXE"],"desc":["跳ばなくても、10%で会心（1.5倍）になる","跳ばなくても、20%で会心（1.5倍）になる"]},{"id":"fuiuchi","name":"不意打ち","r":2,"max":2,"on":"剣・斧","group":null,"cats":["SWORD","AXE"],"desc":["自分を狙っていない敵への一撃が 1.5倍","自分を狙っていない敵への一撃が 2倍"]},{"id":"ikkitousen","name":"一騎当千","r":2,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["まわり6ブロックの敵1体ごとに、与えるダメージ +5%（最大 +30%）"]},{"id":"tsukimichi","name":"月満ち","r":2,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["夜、月が満ちているほど与えるダメージが上がる（満月で +30%）"]},{"id":"shibire","name":"痺れ","r":2,"max":2,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["当てた敵が 10% でしびれ、1秒のあいだ動けない","当てた敵が 20% でしびれ、1秒のあいだ動けない"]},{"id":"hyakkigiri","name":"百鬼斬り","r":2,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["この武器で倒した数を刻み、100体ごとに与えるダメージ +1%（最大 +10%）"]},{"id":"hikiya","name":"引き矢","r":2,"max":1,"on":"弓","group":null,"cats":["BOW"],"desc":["しゃがんで放った矢が当たると、敵を手もとへ引き寄せる"]},{"id":"gyorai","name":"魚雷","r":2,"max":1,"on":"三叉槍","group":null,"cats":["TRIDENT"],"desc":["水の中で投げると、沈まずまっすぐ速く進み、ダメージ1.5倍"]},{"id":"uzubiki","name":"渦引き","r":2,"max":2,"on":"三叉槍","group":null,"cats":["TRIDENT"],"desc":["投げて当たった場所へ、まわり5ブロックの敵を引き寄せる","投げて当たった場所へ、まわり8ブロックの敵を引き寄せる"]},{"id":"kaginawa","name":"鉤縄","r":2,"max":2,"on":"釣り竿","group":null,"cats":["ROD"],"desc":["釣り針が刺さった場所へ、1段の強さで飛んでいく","釣り針が刺さった場所へ、2段の強さで飛んでいく"]},{"id":"kakeotoshi","name":"掛け落とし","r":2,"max":1,"on":"釣り竿","group":null,"cats":["ROD"],"desc":["釣り針をかけた敵の武器を取り上げる（スケルトンは矢を撃てなくなる）"]},{"id":"ukekaeshi","name":"受け返し","r":2,"max":1,"on":"盾","group":null,"cats":["SHIELD"],"desc":["構えて受けた矢の傷を、撃った相手にそのまま返す"]},{"id":"tatenokabe","name":"盾の壁","r":2,"max":1,"on":"盾","group":null,"cats":["SHIELD"],"desc":["構えているあいだ、まわり4ブロックの仲間が受けるダメージ −30%"]},{"id":"gokou","name":"後光","r":2,"max":1,"on":"兜","group":null,"cats":["HEAD"],"desc":["まわり4ブロックのアンデッド（ゾンビ・スケルトンなど）が、毎秒少しずつ焼ける"]},{"id":"kemuridama","name":"煙玉","r":2,"max":1,"on":"胸当て","group":null,"cats":["CHEST"],"desc":["体力が3割を切ると、煙に包まれて姿が消え、まわりの敵が見失う（10分に1回）"]},{"id":"kachidoki","name":"勝鬨","r":2,"max":1,"on":"胸当て","group":null,"cats":["CHEST"],"desc":["敵を倒すたびに、守りの体力（黄色いハート）+2。最大 +8、15秒で消える"]},{"id":"mikiri","name":"見切り","r":2,"max":2,"on":"すね当て","group":null,"cats":["LEGS"],"desc":["走っているあいだ、敵の攻撃と矢を 15% でかわす","走っているあいだ、敵の攻撃と矢を 25% でかわす"]},{"id":"jiyurashi","name":"地揺らし","r":2,"max":1,"on":"ブーツ","group":null,"cats":["FEET"],"desc":["4ブロック以上の高さから着地すると、まわり4ブロックの敵に衝撃"]},{"id":"makibishi","name":"撒菱","r":2,"max":1,"on":"ブーツ","group":null,"cats":["FEET"],"desc":["走った跡に4秒のあいだ撒菱が残り、踏んだ敵は遅くなってけがをする"]},{"id":"rengeki","name":"連撃","r":3,"max":1,"on":"剣・斧","group":null,"cats":["SWORD","AXE"],"desc":["同じ敵に3回続けて当てると、3回目が2倍になる"]},{"id":"tobikiri","name":"飛び斬り","r":3,"max":1,"on":"剣","group":null,"cats":["SWORD"],"desc":["落ちながらの一撃（会心）が、まわり2.5ブロックの敵にも当たる"]},{"id":"kamaitachi","name":"鎌鼬","r":3,"max":1,"on":"剣","group":null,"cats":["SWORD"],"desc":["力を溜めきって空を斬ると、風の刃が飛び、前8ブロックの敵を斬る（ダメージ半分）"]},{"id":"ukenagashi","name":"受け流し","r":3,"max":1,"on":"剣","group":null,"cats":["SWORD"],"desc":["しゃがんで剣を持っていると、近くからの攻撃を 25% で受け流す（けがなし）"]},{"id":"kaitengiri","name":"回転斬り","r":3,"max":1,"on":"斧","group":null,"cats":["AXE"],"desc":["しゃがんで攻撃すると、まわり3ブロックの敵をすべて斬る（耐久を多く使う）"]},{"id":"nageono","name":"投げ斧","r":3,"max":1,"on":"斧","group":null,"cats":["AXE"],"desc":["空に向けてしゃがんで右クリックすると、斧を投げる。当たった敵に斧のダメージ。斧は手もとに残る（3秒に1回）"]},{"id":"shugetsu","name":"朱月の刃","r":3,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["朱月の夜、与えるダメージ +50%"]},{"id":"oiya","name":"追い矢","r":3,"max":1,"on":"弓・クロスボウ","group":null,"cats":["BOW","XBOW"],"desc":["放った矢が、前にいるいちばん近い敵へ曲がっていく"]},{"id":"bakuya","name":"爆矢","r":3,"max":1,"on":"弓・クロスボウ","group":null,"cats":["BOW","XBOW"],"desc":["当たった場所で小さく爆ぜ、まわり3ブロックの敵にダメージ。地形は壊れない"]},{"id":"rensha","name":"連射","r":3,"max":1,"on":"クロスボウ","group":null,"cats":["XBOW"],"desc":["撃ったあと、持ち物の矢ですぐに次を込める"]},{"id":"yorozu","name":"万能","r":3,"max":1,"on":"つるはし","group":null,"cats":["PICK"],"desc":["つるはし1本で、土・砂・木・葉などもすぐに掘れる"]},{"id":"kizuna","name":"絆","r":3,"max":1,"on":"どの道具・防具にも","group":null,"cats":["SWORD","AXE","MACE","PICK","SHOVEL","HOE","BOW","XBOW","TRIDENT","ROD","SHIELD","ELYTRA","HEAD","CHEST","LEGS","FEET"],"desc":["倒れても、この道具だけは手もとに残る"]},{"id":"hokora","name":"祠","r":3,"max":1,"on":"兜","group":null,"cats":["HEAD"],"desc":["灯りの外で倒れると、持ち物が散らばらずに祠（箱）へ収まる。開けられるのは自分だけ"]},{"id":"fukutsu","name":"不屈","r":3,"max":1,"on":"胸当て","group":"save","cats":["CHEST"],"desc":["倒れるはずの一撃を、体力1で耐える（1夜に1回）"]},{"id":"tetsuheki","name":"鉄壁","r":3,"max":1,"on":"胸当て","group":null,"cats":["CHEST"],"desc":["10秒けがをしないと守りが張られ、次に受ける一撃を 6 まで防ぐ"]},{"id":"nidantobi","name":"二段跳び","r":3,"max":1,"on":"ブーツ","group":null,"cats":["FEET"],"desc":["空中で、もう一度跳べる（着地するまで1回）"]},{"id":"honoowatari","name":"炎渡り","r":3,"max":1,"on":"ブーツ","group":null,"cats":["FEET"],"desc":["溶岩の上を歩くと、足もとが固まって歩ける（10秒で元に戻る）"]},{"id":"kabenobori","name":"壁登り","r":3,"max":1,"on":"ブーツ","group":null,"cats":["FEET"],"desc":["壁に向かってしゃがみ続けると、ゆっくり登れる"]},{"id":"kaeridori","name":"帰り鳥","r":3,"max":1,"on":"エリトラ","group":null,"cats":["ELYTRA"],"desc":["滑空中にしゃがみ続けると、「帰る場所」の灯標（なければベッド）へ舵を切る"]},{"id":"kaishaku","name":"介錯","r":4,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["体力が15%を切った敵を、一撃で倒す（ボスは除く）"]},{"id":"yamidachi","name":"闇断ち","r":4,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["灯りの外で敵を倒すたび、まわり8ブロックの敵が5秒のあいだ光って弱る"]},{"id":"kokuu","name":"虚空","r":4,"max":1,"on":"剣・斧・メイス","group":null,"cats":["SWORD","AXE","MACE"],"desc":["当たった敵を、2秒のあいだ宙に浮かせる（10秒に1回）"]},{"id":"shinsoku","name":"神速","r":4,"max":1,"on":"剣","group":null,"cats":["SWORD"],"desc":["しゃがんで攻撃すると、敵の背後へ回り込む（5秒に1回）"]},{"id":"ikazuchi","name":"雷","r":4,"max":1,"on":"メイス","group":null,"cats":["MACE"],"desc":["落ちながらの一撃で雷が落ち、まわり4ブロックの敵に 6 のダメージと2秒のしびれ（3秒に1回）"]},{"id":"seiryuu","name":"星流","r":4,"max":1,"on":"弓","group":null,"cats":["BOW"],"desc":["しゃがんで満月まで引いて放つと、敵を貫く光の矢が5本、扇に飛ぶ（減るのは1本）"]},{"id":"yaame","name":"矢雨","r":4,"max":1,"on":"クロスボウ","group":null,"cats":["XBOW"],"desc":["撃った矢が落ちた場所に、1秒後、矢の雨が降る（まわり4ブロックに10本・3秒に1回）"]},{"id":"ryuugu","name":"竜宮","r":4,"max":1,"on":"三叉槍","group":null,"cats":["TRIDENT"],"desc":["三叉槍を持って水の中にいると、まわり6ブロックの仲間も息が続き、水の中の敵が遅くなる"]},{"id":"tenbin","name":"天秤","r":4,"max":1,"on":"盾","group":null,"cats":["SHIELD"],"desc":["構えて受けた傷を溜め、次の一撃に上乗せして返す（20まで）"]},{"id":"chinonushi","name":"地の主","r":4,"max":1,"on":"つるはし","group":null,"cats":["PICK"],"desc":["黒曜石・泣く黒曜石・古代の残骸・深層岩なども、石と同じ速さで掘れる"]},{"id":"fushichou","name":"不死鳥","r":4,"max":1,"on":"胸当て","group":"save","cats":["CHEST"],"desc":["倒れたとき、炎とともに体力全快で蘇る（現実の1日に1回）"]},{"id":"inugami","name":"犬神","r":4,"max":1,"on":"胸当て","group":null,"cats":["CHEST"],"desc":["体力が4割を切ると、光る狼が2匹あらわれ、30秒のあいだ共に戦う（5分に1回）"]},{"id":"hougyoku","name":"宝玉","r":4,"max":1,"on":"胸当て","group":null,"cats":["CHEST"],"desc":["身につけているほかの灯紋が、すべて1段強くなる"]},{"id":"makimodoshi","name":"巻き戻し","r":4,"max":1,"on":"ブーツ","group":null,"cats":["FEET"],"desc":["溶岩・奈落に落ちたとき、落ちて倒れるとき、5秒前の場所へ戻る（10分に1回）"]},{"id":"kamikaze","name":"神風","r":4,"max":1,"on":"エリトラ","group":null,"cats":["ELYTRA"],"desc":["しゃがんだまま跳ぶと、空高く舞い上がる。そのまま滑空へ（10秒に1回）"]}]}
+{
+ "rarity": [
+  {
+   "jp": "並",
+   "hex": "#C9D0DC",
+   "book": 15,
+   "fuda": 1,
+   "shelf": true,
+   "engrave": 5,
+   "n": 34
+  },
+  {
+   "jp": "良",
+   "hex": "#8BD18F",
+   "book": 25,
+   "fuda": 1,
+   "shelf": true,
+   "engrave": 8,
+   "n": 43
+  },
+  {
+   "jp": "珍",
+   "hex": "#8FC3E8",
+   "book": 35,
+   "fuda": 2,
+   "shelf": true,
+   "engrave": 12,
+   "n": 31
+  },
+  {
+   "jp": "稀",
+   "hex": "#B79CF2",
+   "book": 50,
+   "fuda": 6,
+   "shelf": true,
+   "engrave": 18,
+   "n": 23
+  },
+  {
+   "jp": "秘",
+   "hex": "#F2B544",
+   "book": 0,
+   "fuda": 0,
+   "shelf": false,
+   "engrave": 28,
+   "n": 20
+  }
+ ],
+ "mumei": {
+  "lv": 50,
+  "fuda": 3,
+  "pity": 30,
+  "weight": [
+   38,
+   28,
+   18,
+   11,
+   5
+  ]
+ },
+ "fudaMin": 20,
+ "fudaMax": 12,
+ "fudaStart": 3,
+ "upgrade": 0.06,
+ "slots": 3,
+ "defs": [
+  {
+   "id": "hijirushi",
+   "name": "灯印",
+   "r": 0,
+   "max": 1,
+   "on": "どの道具・防具にも",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE",
+    "PICK",
+    "SHOVEL",
+    "HOE",
+    "BOW",
+    "XBOW",
+    "TRIDENT",
+    "ROD",
+    "SHIELD",
+    "ELYTRA",
+    "HEAD",
+    "CHEST",
+    "LEGS",
+    "FEET"
+   ],
+   "desc": [
+    "落としても燃えず、消えず、光って見える"
+   ]
+  },
+  {
+   "id": "kizukai",
+   "name": "気遣い",
+   "r": 0,
+   "max": 1,
+   "on": "剣・斧・メイス・弓・クロスボウ・三叉槍",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE",
+    "BOW",
+    "XBOW",
+    "TRIDENT"
+   ],
+   "desc": [
+    "自分の仲間の動物・村人・ゴーレムを、うっかり傷つけない（しゃがむと当たる）"
+   ]
+  },
+  {
+   "id": "miteate",
+   "name": "見立て",
+   "r": 0,
+   "max": 1,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "見ている敵の名前と体力を出す。しゃがむと、見ている場所までの距離と明るさ"
+   ]
+  },
+  {
+   "id": "itabiki",
+   "name": "板挽き",
+   "r": 0,
+   "max": 1,
+   "on": "斧",
+   "group": null,
+   "cats": [
+    "AXE"
+   ],
+   "desc": [
+    "切った丸太が、板4枚で落ちる（しゃがむと丸太のまま）"
+   ]
+  },
+  {
+   "id": "yorite",
+   "name": "選り手",
+   "r": 0,
+   "max": 1,
+   "on": "つるはし・シャベル",
+   "group": null,
+   "cats": [
+    "PICK",
+    "SHOVEL"
+   ],
+   "desc": [
+    "丸石・土・砂利・ネザーラックなどの石くずを拾わない（しゃがむと拾う）"
+   ]
+  },
+  {
+   "id": "sunanuki",
+   "name": "砂抜き",
+   "r": 0,
+   "max": 1,
+   "on": "シャベル",
+   "group": null,
+   "cats": [
+    "SHOVEL"
+   ],
+   "desc": [
+    "砂・砂利を掘ると、上に積もった砂・砂利もまとめて落とす"
+   ]
+  },
+  {
+   "id": "taguri",
+   "name": "手繰り",
+   "r": 0,
+   "max": 1,
+   "on": "釣り竿",
+   "group": null,
+   "cats": [
+    "ROD"
+   ],
+   "desc": [
+    "何もかけずに巻き取ると、釣り針のまわり3ブロックの落とし物を手もとへ運ぶ"
+   ]
+  },
+  {
+   "id": "omoshi",
+   "name": "重し",
+   "r": 0,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "斬った敵を吹き飛ばさない。囲まれずに、続けて斬れる"
+   ]
+  },
+  {
+   "id": "yoakenoiki",
+   "name": "夜明けの息",
+   "r": 0,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "夜が明けた瞬間、体力と空腹がすべて戻る"
+   ]
+  },
+  {
+   "id": "noborite",
+   "name": "登り手",
+   "r": 0,
+   "max": 2,
+   "on": "すね当て",
+   "group": null,
+   "cats": [
+    "LEGS"
+   ],
+   "desc": [
+    "はしご・ツタを登る速さが 1.5倍",
+    "はしご・ツタを登る速さが 2倍"
+   ]
+  },
+  {
+   "id": "kumonuke",
+   "name": "蜘蛛抜け",
+   "r": 0,
+   "max": 1,
+   "on": "すね当て",
+   "group": null,
+   "cats": [
+    "LEGS"
+   ],
+   "desc": [
+    "クモの巣に触れると、すぐに払いのける。甘い実の茂みでけがをしない"
+   ]
+  },
+  {
+   "id": "mushiyoke",
+   "name": "虫除け",
+   "r": 0,
+   "max": 1,
+   "on": "すね当て",
+   "group": null,
+   "cats": [
+    "LEGS"
+   ],
+   "desc": [
+    "シルバーフィッシュ・エンダーマイト・ハチに狙われない"
+   ]
+  },
+  {
+   "id": "ashiato",
+   "name": "灯の足跡",
+   "r": 0,
+   "max": 1,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "夜に歩いた跡が、40秒のあいだ光の粒で残る（自分にだけ見える）"
+   ]
+  },
+  {
+   "id": "koorizuri",
+   "name": "氷渡り",
+   "r": 0,
+   "max": 2,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "氷の上を走ると、速さ +20%",
+    "氷の上を走ると、速さ +40%"
+   ]
+  },
+  {
+   "id": "kazamuki",
+   "name": "風向き",
+   "r": 0,
+   "max": 1,
+   "on": "エリトラ",
+   "group": null,
+   "cats": [
+    "ELYTRA"
+   ],
+   "desc": [
+    "滑空中、高さ・速さ・地面までの距離を画面に出す"
+   ]
+  },
+  {
+   "id": "fukuroba",
+   "name": "梟の羽",
+   "r": 0,
+   "max": 1,
+   "on": "エリトラ",
+   "group": null,
+   "cats": [
+    "ELYTRA"
+   ],
+   "desc": [
+    "滑空中に壁へぶつかっても、滑空のまま降りても、けがをしない"
+   ]
+  },
+  {
+   "id": "kusakari",
+   "name": "草刈り",
+   "r": 0,
+   "max": 1,
+   "on": "クワ",
+   "group": null,
+   "cats": [
+    "HOE"
+   ],
+   "desc": [
+    "草・シダ・花・枯れ木を刈ると、まわり3×3もまとめて刈る（しゃがむと1つだけ）"
+   ]
+  },
+  {
+   "id": "tsuchimodoshi",
+   "name": "土戻し",
+   "r": 0,
+   "max": 1,
+   "on": "クワ",
+   "group": null,
+   "cats": [
+    "HOE"
+   ],
+   "desc": [
+    "しゃがんで右クリックで、耕した土・土の道を土へ、土を草ブロックへ戻す"
+   ]
+  },
+  {
+   "id": "kokemushi",
+   "name": "苔むし",
+   "r": 0,
+   "max": 1,
+   "on": "クワ",
+   "group": null,
+   "cats": [
+    "HOE"
+   ],
+   "desc": [
+    "右クリックで、丸石・石レンガ（階段・ハーフ・塀も）を苔むした姿に変える"
+   ]
+  },
+  {
+   "id": "kawamodoshi",
+   "name": "皮戻し",
+   "r": 0,
+   "max": 1,
+   "on": "斧",
+   "group": null,
+   "cats": [
+    "AXE"
+   ],
+   "desc": [
+    "しゃがんで右クリックで、皮を剥いだ丸太を、皮つきに戻す"
+   ]
+  },
+  {
+   "id": "sabitsuke",
+   "name": "錆び付け",
+   "r": 0,
+   "max": 1,
+   "on": "斧",
+   "group": null,
+   "cats": [
+    "AXE"
+   ],
+   "desc": [
+    "しゃがんで右クリックで、銅を1段錆びさせる（磨くのと逆）"
+   ]
+  },
+  {
+   "id": "yukikaki",
+   "name": "雪かき",
+   "r": 0,
+   "max": 1,
+   "on": "シャベル",
+   "group": null,
+   "cats": [
+    "SHOVEL"
+   ],
+   "desc": [
+    "雪・雪ブロック・粉雪を掘ると、まわり3×3もまとめてかく（しゃがむと1つだけ）"
+   ]
+  },
+  {
+   "id": "mochinushi",
+   "name": "持ち主",
+   "r": 0,
+   "max": 1,
+   "on": "どの道具・防具にも",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE",
+    "PICK",
+    "SHOVEL",
+    "HOE",
+    "BOW",
+    "XBOW",
+    "TRIDENT",
+    "ROD",
+    "SHIELD",
+    "ELYTRA",
+    "HEAD",
+    "CHEST",
+    "LEGS",
+    "FEET"
+   ],
+   "desc": [
+    "落としたとき・倒れて散ったとき、60秒のあいだ自分にしか拾えない"
+   ]
+  },
+  {
+   "id": "sundome",
+   "name": "寸止め",
+   "r": 0,
+   "max": 1,
+   "on": "剣・斧・メイス・つるはし・シャベル・クワ・弓・クロスボウ・三叉槍・釣り竿",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE",
+    "PICK",
+    "SHOVEL",
+    "HOE",
+    "BOW",
+    "XBOW",
+    "TRIDENT",
+    "ROD"
+   ],
+   "desc": [
+    "耐久が残り1になると、壊れずに止まる（直すまで使えない）"
+   ]
+  },
+  {
+   "id": "yamodoshi",
+   "name": "矢戻し",
+   "r": 0,
+   "max": 1,
+   "on": "弓",
+   "group": null,
+   "cats": [
+    "BOW"
+   ],
+   "desc": [
+    "外れて刺さった矢が、10秒後に持ち物へ戻る（効果つきの矢も）"
+   ]
+  },
+  {
+   "id": "entou",
+   "name": "遠投",
+   "r": 0,
+   "max": 1,
+   "on": "釣り竿",
+   "group": null,
+   "cats": [
+    "ROD"
+   ],
+   "desc": [
+    "釣り針を、1.5倍遠くまで投げられる"
+   ]
+  },
+  {
+   "id": "tsunawatashi",
+   "name": "綱渡し",
+   "r": 0,
+   "max": 1,
+   "on": "釣り竿",
+   "group": null,
+   "cats": [
+    "ROD"
+   ],
+   "desc": [
+    "釣り針をかけた自分の動物を、そのまま綱でつないで連れて歩ける"
+   ]
+  },
+  {
+   "id": "tenkiyomi",
+   "name": "天気読み",
+   "r": 0,
+   "max": 1,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "雨が降り出す1分前と、止む1分前に知らせる"
+   ]
+  },
+  {
+   "id": "migaru",
+   "name": "身軽",
+   "r": 0,
+   "max": 1,
+   "on": "すね当て",
+   "group": null,
+   "cats": [
+    "LEGS"
+   ],
+   "desc": [
+    "空腹で走れないとき（空腹6以下）でも、走るのと同じ速さで動ける"
+   ]
+  },
+  {
+   "id": "doroashi",
+   "name": "泥足",
+   "r": 0,
+   "max": 1,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "ハチミツブロック・ソウルサンドの上でも、遅くならない"
+   ]
+  },
+  {
+   "id": "mineuchi",
+   "name": "峰打ち",
+   "r": 0,
+   "max": 1,
+   "on": "剣",
+   "group": null,
+   "cats": [
+    "SWORD"
+   ],
+   "desc": [
+    "しゃがんで斬ると、敵を倒さずに体力1で止める（捕まえたいとき・名札をつけたいとき）"
+   ]
+  },
+  {
+   "id": "oikaze",
+   "name": "追い風",
+   "r": 0,
+   "max": 1,
+   "on": "エリトラ",
+   "group": null,
+   "cats": [
+    "ELYTRA"
+   ],
+   "desc": [
+    "滑空を始めた瞬間、前へひと押しされる（5秒に1回）"
+   ]
+  },
+  {
+   "id": "tamuke",
+   "name": "手向け",
+   "r": 0,
+   "max": 1,
+   "on": "剣・斧・メイス・弓・クロスボウ・三叉槍",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE",
+    "BOW",
+    "XBOW",
+    "TRIDENT"
+   ],
+   "desc": [
+    "倒した敵の経験値が、落ちずにそのまま自分に入る"
+   ]
+  },
+  {
+   "id": "mori",
+   "name": "銛",
+   "r": 0,
+   "max": 1,
+   "on": "三叉槍",
+   "group": null,
+   "cats": [
+    "TRIDENT"
+   ],
+   "desc": [
+    "投げて倒した獲物の落とし物が、手もとへ届く"
+   ]
+  },
+  {
+   "id": "yaiba",
+   "name": "夜刃",
+   "r": 1,
+   "max": 3,
+   "on": "剣・斧・メイス・弓・クロスボウ",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE",
+    "BOW",
+    "XBOW"
+   ],
+   "desc": [
+    "夜のあいだ、与えるダメージ +10%（矢にも）",
+    "夜のあいだ、与えるダメージ +20%（矢にも）",
+    "夜のあいだ、与えるダメージ +30%（矢にも）"
+   ]
+  },
+  {
+   "id": "haisui",
+   "name": "背水",
+   "r": 1,
+   "max": 2,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "体力が3割を切っているあいだ、与えるダメージ +25%",
+    "体力が3割を切っているあいだ、与えるダメージ +40%"
+   ]
+  },
+  {
+   "id": "zanshin",
+   "name": "残心",
+   "r": 1,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "敵を倒してから3秒以内の一撃が、1.3倍"
+   ]
+  },
+  {
+   "id": "kirikaeshi",
+   "name": "切り返し",
+   "r": 1,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "攻撃を受けてから1.5秒以内の一撃が、1.5倍になる"
+   ]
+  },
+  {
+   "id": "kushizashi",
+   "name": "串刺し",
+   "r": 1,
+   "max": 2,
+   "on": "剣",
+   "group": null,
+   "cats": [
+    "SWORD"
+   ],
+   "desc": [
+    "斬った敵の後ろ3ブロックにいる敵にも、40%のダメージ",
+    "斬った敵の後ろ3ブロックにいる敵にも、70%のダメージ"
+   ]
+  },
+  {
+   "id": "hayatachi",
+   "name": "早太刀",
+   "r": 1,
+   "max": 2,
+   "on": "剣",
+   "group": null,
+   "cats": [
+    "SWORD"
+   ],
+   "desc": [
+    "振りが速くなり、次の一撃までの待ちが短い（+15%）",
+    "振りが速くなり、次の一撃までの待ちが短い（+30%）"
+   ]
+  },
+  {
+   "id": "fumikomi",
+   "name": "踏み込み",
+   "r": 1,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "しゃがむを素早く2回で、前へ大きく踏み込む（3秒に1回）"
+   ]
+  },
+  {
+   "id": "hayanuki",
+   "name": "早抜き",
+   "r": 1,
+   "max": 2,
+   "on": "弓",
+   "group": null,
+   "cats": [
+    "BOW"
+   ],
+   "desc": [
+    "引き絞りが浅くても、70%の力の矢になる",
+    "引き絞りが浅くても、100%の力の矢になる"
+   ]
+  },
+  {
+   "id": "chikaraya",
+   "name": "力溜め",
+   "r": 1,
+   "max": 1,
+   "on": "弓",
+   "group": null,
+   "cats": [
+    "BOW"
+   ],
+   "desc": [
+    "引き絞ったまま3秒ためて放つと、矢のダメージ1.5倍"
+   ]
+  },
+  {
+   "id": "kazayomi",
+   "name": "風読み",
+   "r": 1,
+   "max": 2,
+   "on": "弓・クロスボウ",
+   "group": null,
+   "cats": [
+    "BOW",
+    "XBOW"
+   ],
+   "desc": [
+    "放った矢が1秒のあいだ落ちず、まっすぐ遠くまで飛ぶ",
+    "放った矢が2秒のあいだ落ちず、まっすぐ遠くまで飛ぶ"
+   ]
+  },
+  {
+   "id": "kusabi",
+   "name": "楔",
+   "r": 1,
+   "max": 1,
+   "on": "クロスボウ",
+   "group": null,
+   "cats": [
+    "XBOW"
+   ],
+   "desc": [
+    "当たった敵を、1秒のあいだその場に縫い止める"
+   ]
+  },
+  {
+   "id": "tateuchi",
+   "name": "盾打ち",
+   "r": 1,
+   "max": 2,
+   "on": "盾",
+   "group": null,
+   "cats": [
+    "SHIELD"
+   ],
+   "desc": [
+    "構えて受けた敵を、4ブロックほど押し返す",
+    "構えて受けた敵を、7ブロックほど押し返す"
+   ]
+  },
+  {
+   "id": "senkou",
+   "name": "閃光",
+   "r": 1,
+   "max": 1,
+   "on": "盾",
+   "group": "shield",
+   "cats": [
+    "SHIELD"
+   ],
+   "desc": [
+    "構えた瞬間、まわり5ブロックの敵がひるんで止まる（8秒に1回）"
+   ]
+  },
+  {
+   "id": "jindate",
+   "name": "陣立て",
+   "r": 1,
+   "max": 1,
+   "on": "盾",
+   "group": "shield",
+   "cats": [
+    "SHIELD"
+   ],
+   "desc": [
+    "構えた瞬間、まわり10ブロックの敵の狙いを自分に集める。仲間を守る盾役に（10秒に1回）"
+   ]
+  },
+  {
+   "id": "mabushi",
+   "name": "眩し除け",
+   "r": 1,
+   "max": 1,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "盲目と、ウォーデンの暗闇にかからない"
+   ]
+  },
+  {
+   "id": "gedoku",
+   "name": "解毒",
+   "r": 1,
+   "max": 1,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "毒・空腹・吐き気にかからない"
+   ]
+  },
+  {
+   "id": "kyuusoku",
+   "name": "休息",
+   "r": 1,
+   "max": 2,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "しゃがんで動かずにいると、3秒後から体力が早く戻る（1段）",
+    "しゃがんで動かずにいると、3秒後から体力が早く戻る（2段）"
+   ]
+  },
+  {
+   "id": "funbari",
+   "name": "踏ん張り",
+   "r": 1,
+   "max": 2,
+   "on": "すね当て",
+   "group": null,
+   "cats": [
+    "LEGS"
+   ],
+   "desc": [
+    "吹き飛ばされにくい（ノックバック −30%）",
+    "吹き飛ばされにくい（ノックバック −60%）"
+   ]
+  },
+  {
+   "id": "suiyose",
+   "name": "吸い寄せ",
+   "r": 1,
+   "max": 2,
+   "on": "すね当て",
+   "group": null,
+   "cats": [
+    "LEGS"
+   ],
+   "desc": [
+    "まわり4ブロックの落とし物が、ひとりでに寄ってくる（人が捨てた物は除く）",
+    "まわり6ブロックの落とし物が、ひとりでに寄ってくる（人が捨てた物は除く）"
+   ]
+  },
+  {
+   "id": "mizuharai",
+   "name": "水払い",
+   "r": 1,
+   "max": 1,
+   "on": "シャベル",
+   "group": null,
+   "cats": [
+    "SHOVEL"
+   ],
+   "desc": [
+    "しゃがんで水に向けて右クリックすると、まわり5×5×5の水を払う"
+   ]
+  },
+  {
+   "id": "hanegasa",
+   "name": "羽傘",
+   "r": 1,
+   "max": 2,
+   "on": "エリトラ",
+   "group": null,
+   "cats": [
+    "ELYTRA"
+   ],
+   "desc": [
+    "滑空が落ちにくく、長く続く（1段）",
+    "滑空が落ちにくく、長く続く（2段）"
+   ]
+  },
+  {
+   "id": "nagabi",
+   "name": "長火",
+   "r": 1,
+   "max": 2,
+   "on": "エリトラ",
+   "group": null,
+   "cats": [
+    "ELYTRA"
+   ],
+   "desc": [
+    "ロケット花火で加速する時間が 1.5倍",
+    "ロケット花火で加速する時間が 2倍"
+   ]
+  },
+  {
+   "id": "shizume",
+   "name": "鎮め",
+   "r": 1,
+   "max": 1,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "エンダーマンと目が合っても、怒らせない"
+   ]
+  },
+  {
+   "id": "kinnokehai",
+   "name": "金の気配",
+   "r": 1,
+   "max": 1,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "金を身につけていなくても、ピグリンに襲われない（こちらから手を出せば別）"
+   ]
+  },
+  {
+   "id": "hayagamae",
+   "name": "早構え",
+   "r": 1,
+   "max": 1,
+   "on": "盾",
+   "group": null,
+   "cats": [
+    "SHIELD"
+   ],
+   "desc": [
+    "構えた瞬間から守れる。斧で崩されても、半分の時間で構え直せる"
+   ]
+  },
+  {
+   "id": "kamaearuki",
+   "name": "構え歩き",
+   "r": 1,
+   "max": 1,
+   "on": "盾",
+   "group": null,
+   "cats": [
+    "SHIELD"
+   ],
+   "desc": [
+    "構えたままでも、ほぼふだんの速さで歩ける"
+   ]
+  },
+  {
+   "id": "takatobi",
+   "name": "高跳び",
+   "r": 1,
+   "max": 1,
+   "on": "すね当て",
+   "group": null,
+   "cats": [
+    "LEGS"
+   ],
+   "desc": [
+    "しゃがんで2秒ためてから跳ぶと、3ブロックの高さまで跳べる"
+   ]
+  },
+  {
+   "id": "suberikomi",
+   "name": "滑り込み",
+   "r": 1,
+   "max": 1,
+   "on": "すね当て",
+   "group": null,
+   "cats": [
+    "LEGS"
+   ],
+   "desc": [
+    "走りながらしゃがむと、前へ滑り込む（4秒に1回）"
+   ]
+  },
+  {
+   "id": "jiyomi",
+   "name": "地読み",
+   "r": 1,
+   "max": 1,
+   "on": "つるはし",
+   "group": null,
+   "cats": [
+    "PICK"
+   ],
+   "desc": [
+    "しゃがんで右クリックすると、その奥5ブロックにある空洞・水・溶岩を知らせる"
+   ]
+  },
+  {
+   "id": "anaume",
+   "name": "穴埋め",
+   "r": 1,
+   "max": 1,
+   "on": "シャベル",
+   "group": null,
+   "cats": [
+    "SHOVEL"
+   ],
+   "desc": [
+    "しゃがんで右クリックで、足もとのまわり3×3の穴を、持ち物の土・丸石で埋める"
+   ]
+  },
+  {
+   "id": "kuwanome",
+   "name": "鍬の目",
+   "r": 1,
+   "max": 1,
+   "on": "クワ",
+   "group": null,
+   "cats": [
+    "HOE"
+   ],
+   "desc": [
+    "持っていると、水の届かない畑と、暗くて育たない作物が光って見える"
+   ]
+  },
+  {
+   "id": "sonae",
+   "name": "備え",
+   "r": 1,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "空腹が半分を切ると、持ち物の食べ物をひとりでに食べる"
+   ]
+  },
+  {
+   "id": "tettsui",
+   "name": "鉄槌",
+   "r": 1,
+   "max": 2,
+   "on": "メイス",
+   "group": null,
+   "cats": [
+    "MACE"
+   ],
+   "desc": [
+    "落ちていないふつうの一撃も、+30%",
+    "落ちていないふつうの一撃も、+45%"
+   ]
+  },
+  {
+   "id": "donjuu",
+   "name": "鈍重",
+   "r": 1,
+   "max": 1,
+   "on": "メイス",
+   "group": null,
+   "cats": [
+    "MACE"
+   ],
+   "desc": [
+    "当てた敵が、2秒のあいだ遅くなる"
+   ]
+  },
+  {
+   "id": "uminomamori",
+   "name": "海の守り",
+   "r": 1,
+   "max": 1,
+   "on": "三叉槍",
+   "group": null,
+   "cats": [
+    "TRIDENT"
+   ],
+   "desc": [
+    "持っていると、ガーディアンの呪い（採掘が遅くなる）にかからない"
+   ]
+  },
+  {
+   "id": "sukuiito",
+   "name": "救い糸",
+   "r": 1,
+   "max": 1,
+   "on": "釣り竿",
+   "group": null,
+   "cats": [
+    "ROD"
+   ],
+   "desc": [
+    "落ちているとき、上に刺さった釣り針の糸にぶら下がって止まる"
+   ]
+  },
+  {
+   "id": "kyuukouka",
+   "name": "急降下",
+   "r": 1,
+   "max": 1,
+   "on": "エリトラ",
+   "group": null,
+   "cats": [
+    "ELYTRA"
+   ],
+   "desc": [
+    "滑空中、下を向いてしゃがむと急降下する。その着地ではけがをしない"
+   ]
+  },
+  {
+   "id": "hinokoromo",
+   "name": "灯の衣",
+   "r": 1,
+   "max": 2,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "灯籠の灯りの中にいると、受けるダメージ −10%",
+    "灯籠の灯りの中にいると、受けるダメージ −15%"
+   ]
+  },
+  {
+   "id": "neraisumashi",
+   "name": "狙い澄まし",
+   "r": 1,
+   "max": 1,
+   "on": "弓",
+   "group": null,
+   "cats": [
+    "BOW"
+   ],
+   "desc": [
+    "しゃがんで引くと狙いが寄って見え、矢がぶれずにまっすぐ飛ぶ"
+   ]
+  },
+  {
+   "id": "mikaeri",
+   "name": "見返り",
+   "r": 1,
+   "max": 2,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "後ろからの攻撃で受けるダメージ −20%",
+    "後ろからの攻撃で受けるダメージ −30%"
+   ]
+  },
+  {
+   "id": "oiuchi",
+   "name": "追い討ち",
+   "r": 1,
+   "max": 2,
+   "on": "クロスボウ",
+   "group": null,
+   "cats": [
+    "XBOW"
+   ],
+   "desc": [
+    "遅くなっている敵・しびれている敵への矢が +25%",
+    "遅くなっている敵・しびれている敵への矢が +40%"
+   ]
+  },
+  {
+   "id": "hatsuya",
+   "name": "初矢",
+   "r": 1,
+   "max": 2,
+   "on": "弓",
+   "group": null,
+   "cats": [
+    "BOW"
+   ],
+   "desc": [
+    "まだ傷のない敵への矢が +30%",
+    "まだ傷のない敵への矢が +45%"
+   ]
+  },
+  {
+   "id": "ikiawase",
+   "name": "息合わせ",
+   "r": 1,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "まわり8ブロックに仲間がいると、5秒ごとに体力が少し戻る"
+   ]
+  },
+  {
+   "id": "suibi",
+   "name": "吸い灯",
+   "r": 2,
+   "max": 3,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "与えたダメージの 4% だけ、体力が戻る",
+    "与えたダメージの 8% だけ、体力が戻る",
+    "与えたダメージの 12% だけ、体力が戻る"
+   ]
+  },
+  {
+   "id": "kaishin",
+   "name": "会心の灯",
+   "r": 2,
+   "max": 2,
+   "on": "剣・斧",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE"
+   ],
+   "desc": [
+    "跳ばなくても、10%で会心（1.5倍）になる",
+    "跳ばなくても、20%で会心（1.5倍）になる"
+   ]
+  },
+  {
+   "id": "fuiuchi",
+   "name": "不意打ち",
+   "r": 2,
+   "max": 2,
+   "on": "剣・斧",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE"
+   ],
+   "desc": [
+    "自分を狙っていない敵への一撃が 1.5倍",
+    "自分を狙っていない敵への一撃が 2倍"
+   ]
+  },
+  {
+   "id": "ikkitousen",
+   "name": "一騎当千",
+   "r": 2,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "まわり6ブロックの敵1体ごとに、与えるダメージ +5%（最大 +30%）"
+   ]
+  },
+  {
+   "id": "tsukimichi",
+   "name": "月満ち",
+   "r": 2,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "夜、月が満ちているほど与えるダメージが上がる（満月で +30%）"
+   ]
+  },
+  {
+   "id": "shibire",
+   "name": "痺れ",
+   "r": 2,
+   "max": 2,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "当てた敵が 10% でしびれ、1秒のあいだ動けない",
+    "当てた敵が 20% でしびれ、1秒のあいだ動けない"
+   ]
+  },
+  {
+   "id": "hyakkigiri",
+   "name": "百鬼斬り",
+   "r": 2,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "この武器で倒した数を刻み、100体ごとに与えるダメージ +1%（最大 +10%）"
+   ]
+  },
+  {
+   "id": "hikiya",
+   "name": "引き矢",
+   "r": 2,
+   "max": 1,
+   "on": "弓",
+   "group": null,
+   "cats": [
+    "BOW"
+   ],
+   "desc": [
+    "しゃがんで放った矢が当たると、敵を手もとへ引き寄せる"
+   ]
+  },
+  {
+   "id": "gyorai",
+   "name": "魚雷",
+   "r": 2,
+   "max": 1,
+   "on": "三叉槍",
+   "group": null,
+   "cats": [
+    "TRIDENT"
+   ],
+   "desc": [
+    "水の中で投げると、沈まずまっすぐ速く進み、ダメージ1.5倍"
+   ]
+  },
+  {
+   "id": "uzubiki",
+   "name": "渦引き",
+   "r": 2,
+   "max": 2,
+   "on": "三叉槍",
+   "group": null,
+   "cats": [
+    "TRIDENT"
+   ],
+   "desc": [
+    "投げて当たった場所へ、まわり5ブロックの敵を引き寄せる",
+    "投げて当たった場所へ、まわり8ブロックの敵を引き寄せる"
+   ]
+  },
+  {
+   "id": "kaginawa",
+   "name": "鉤縄",
+   "r": 2,
+   "max": 2,
+   "on": "釣り竿",
+   "group": null,
+   "cats": [
+    "ROD"
+   ],
+   "desc": [
+    "釣り針が刺さった場所へ、1段の強さで飛んでいく",
+    "釣り針が刺さった場所へ、2段の強さで飛んでいく"
+   ]
+  },
+  {
+   "id": "kakeotoshi",
+   "name": "掛け落とし",
+   "r": 2,
+   "max": 1,
+   "on": "釣り竿",
+   "group": null,
+   "cats": [
+    "ROD"
+   ],
+   "desc": [
+    "釣り針をかけた敵の武器を取り上げる（スケルトンは矢を撃てなくなる）"
+   ]
+  },
+  {
+   "id": "ukekaeshi",
+   "name": "受け返し",
+   "r": 2,
+   "max": 1,
+   "on": "盾",
+   "group": null,
+   "cats": [
+    "SHIELD"
+   ],
+   "desc": [
+    "構えて受けた矢の傷を、撃った相手にそのまま返す"
+   ]
+  },
+  {
+   "id": "tatenokabe",
+   "name": "盾の壁",
+   "r": 2,
+   "max": 1,
+   "on": "盾",
+   "group": null,
+   "cats": [
+    "SHIELD"
+   ],
+   "desc": [
+    "構えているあいだ、まわり4ブロックの仲間が受けるダメージ −30%"
+   ]
+  },
+  {
+   "id": "gokou",
+   "name": "後光",
+   "r": 2,
+   "max": 1,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "まわり4ブロックのアンデッド（ゾンビ・スケルトンなど）が、毎秒少しずつ焼ける"
+   ]
+  },
+  {
+   "id": "kemuridama",
+   "name": "煙玉",
+   "r": 2,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "体力が3割を切ると、煙に包まれて姿が消え、まわりの敵が見失う（10分に1回）"
+   ]
+  },
+  {
+   "id": "kachidoki",
+   "name": "勝鬨",
+   "r": 2,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "敵を倒すたびに、守りの体力（黄色いハート）+2。最大 +8、15秒で消える"
+   ]
+  },
+  {
+   "id": "mikiri",
+   "name": "見切り",
+   "r": 2,
+   "max": 2,
+   "on": "すね当て",
+   "group": null,
+   "cats": [
+    "LEGS"
+   ],
+   "desc": [
+    "走っているあいだ、敵の攻撃と矢を 15% でかわす",
+    "走っているあいだ、敵の攻撃と矢を 25% でかわす"
+   ]
+  },
+  {
+   "id": "jiyurashi",
+   "name": "地揺らし",
+   "r": 2,
+   "max": 1,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "4ブロック以上の高さから着地すると、まわり4ブロックの敵に衝撃"
+   ]
+  },
+  {
+   "id": "makibishi",
+   "name": "撒菱",
+   "r": 2,
+   "max": 1,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "走った跡に4秒のあいだ撒菱が残り、踏んだ敵は遅くなってけがをする"
+   ]
+  },
+  {
+   "id": "nioudachi",
+   "name": "仁王立ち",
+   "r": 2,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "2秒動かずにいると、吹き飛ばされず、受けるダメージ −15%"
+   ]
+  },
+  {
+   "id": "gyakkyou",
+   "name": "逆境",
+   "r": 2,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "まわり6ブロックに敵が3体以上いると、受けるダメージ −15%"
+   ]
+  },
+  {
+   "id": "yakunou",
+   "name": "薬嚢",
+   "r": 2,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "体力が3割を切ると、持ち物の治癒・再生の薬をひとりでに飲む（3分に1回）"
+   ]
+  },
+  {
+   "id": "okimiyage",
+   "name": "置き土産",
+   "r": 2,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "倒れたとき、まわり5ブロックの敵を吹き飛ばし、3秒しびれさせる"
+   ]
+  },
+  {
+   "id": "minamobashiri",
+   "name": "水面走り",
+   "r": 2,
+   "max": 1,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "走っていれば、3秒まで水の上を走れる"
+   ]
+  },
+  {
+   "id": "hanekaeri",
+   "name": "跳ね返り",
+   "r": 2,
+   "max": 1,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "しゃがんで着地すると、落ちた高さの半分だけ跳ね返る（けがなし・30ブロックまで）"
+   ]
+  },
+  {
+   "id": "kazanori",
+   "name": "風乗り",
+   "r": 2,
+   "max": 1,
+   "on": "エリトラ",
+   "group": null,
+   "cats": [
+    "ELYTRA"
+   ],
+   "desc": [
+    "焚き火・溶岩・マグマの上を滑空すると、熱い風で舞い上がる"
+   ]
+  },
+  {
+   "id": "otori",
+   "name": "囮",
+   "r": 2,
+   "max": 1,
+   "on": "クロスボウ",
+   "group": null,
+   "cats": [
+    "XBOW"
+   ],
+   "desc": [
+    "外れた矢が落ちた場所で音が鳴り、まわり8ブロックの敵が5秒そちらへ向かう（6秒に1回）"
+   ]
+  },
+  {
+   "id": "jiware",
+   "name": "地割れ",
+   "r": 2,
+   "max": 1,
+   "on": "メイス",
+   "group": null,
+   "cats": [
+    "MACE"
+   ],
+   "desc": [
+    "落ちながらの一撃で、まわり3ブロックの敵を宙へ跳ね上げる（3秒に1回）"
+   ]
+  },
+  {
+   "id": "shiosai",
+   "name": "潮騒",
+   "r": 2,
+   "max": 1,
+   "on": "三叉槍",
+   "group": null,
+   "cats": [
+    "TRIDENT"
+   ],
+   "desc": [
+    "投げて当たった場所に波が立ち、まわり3ブロックの敵を押し流す"
+   ]
+  },
+  {
+   "id": "mejirushi",
+   "name": "目印",
+   "r": 2,
+   "max": 1,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "しゃがんで見た敵に10秒の印をつける。印の敵には、みんなの与えるダメージ +10%（15秒に1回）"
+   ]
+  },
+  {
+   "id": "rengeki",
+   "name": "連撃",
+   "r": 3,
+   "max": 1,
+   "on": "剣・斧",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE"
+   ],
+   "desc": [
+    "同じ敵に3回続けて当てると、3回目が2倍になる"
+   ]
+  },
+  {
+   "id": "tobikiri",
+   "name": "飛び斬り",
+   "r": 3,
+   "max": 1,
+   "on": "剣",
+   "group": null,
+   "cats": [
+    "SWORD"
+   ],
+   "desc": [
+    "落ちながらの一撃（会心）が、まわり2.5ブロックの敵にも当たる"
+   ]
+  },
+  {
+   "id": "kamaitachi",
+   "name": "鎌鼬",
+   "r": 3,
+   "max": 1,
+   "on": "剣",
+   "group": null,
+   "cats": [
+    "SWORD"
+   ],
+   "desc": [
+    "力を溜めきって空を斬ると、風の刃が飛び、前8ブロックの敵を斬る（ダメージ半分）"
+   ]
+  },
+  {
+   "id": "ukenagashi",
+   "name": "受け流し",
+   "r": 3,
+   "max": 1,
+   "on": "剣",
+   "group": null,
+   "cats": [
+    "SWORD"
+   ],
+   "desc": [
+    "しゃがんで剣を持っていると、近くからの攻撃を 25% で受け流す（けがなし）"
+   ]
+  },
+  {
+   "id": "kaitengiri",
+   "name": "回転斬り",
+   "r": 3,
+   "max": 1,
+   "on": "斧",
+   "group": null,
+   "cats": [
+    "AXE"
+   ],
+   "desc": [
+    "しゃがんで攻撃すると、まわり3ブロックの敵をすべて斬る（耐久を多く使う）"
+   ]
+  },
+  {
+   "id": "nageono",
+   "name": "投げ斧",
+   "r": 3,
+   "max": 1,
+   "on": "斧",
+   "group": null,
+   "cats": [
+    "AXE"
+   ],
+   "desc": [
+    "空に向けてしゃがんで右クリックすると、斧を投げる。当たった敵に斧のダメージ。斧は手もとに残る（3秒に1回）"
+   ]
+  },
+  {
+   "id": "shugetsu",
+   "name": "朱月の刃",
+   "r": 3,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "朱月の夜、与えるダメージ +50%"
+   ]
+  },
+  {
+   "id": "oiya",
+   "name": "追い矢",
+   "r": 3,
+   "max": 1,
+   "on": "弓・クロスボウ",
+   "group": null,
+   "cats": [
+    "BOW",
+    "XBOW"
+   ],
+   "desc": [
+    "放った矢が、前にいるいちばん近い敵へ曲がっていく"
+   ]
+  },
+  {
+   "id": "bakuya",
+   "name": "爆矢",
+   "r": 3,
+   "max": 1,
+   "on": "弓・クロスボウ",
+   "group": null,
+   "cats": [
+    "BOW",
+    "XBOW"
+   ],
+   "desc": [
+    "当たった場所で小さく爆ぜ、まわり3ブロックの敵にダメージ。地形は壊れない"
+   ]
+  },
+  {
+   "id": "rensha",
+   "name": "連射",
+   "r": 3,
+   "max": 1,
+   "on": "クロスボウ",
+   "group": null,
+   "cats": [
+    "XBOW"
+   ],
+   "desc": [
+    "撃ったあと、持ち物の矢ですぐに次を込める"
+   ]
+  },
+  {
+   "id": "yorozu",
+   "name": "万能",
+   "r": 3,
+   "max": 1,
+   "on": "つるはし",
+   "group": null,
+   "cats": [
+    "PICK"
+   ],
+   "desc": [
+    "つるはし1本で、土・砂・木・葉などもすぐに掘れる"
+   ]
+  },
+  {
+   "id": "kizuna",
+   "name": "絆",
+   "r": 3,
+   "max": 1,
+   "on": "どの道具・防具にも",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE",
+    "PICK",
+    "SHOVEL",
+    "HOE",
+    "BOW",
+    "XBOW",
+    "TRIDENT",
+    "ROD",
+    "SHIELD",
+    "ELYTRA",
+    "HEAD",
+    "CHEST",
+    "LEGS",
+    "FEET"
+   ],
+   "desc": [
+    "倒れても、この道具だけは手もとに残る"
+   ]
+  },
+  {
+   "id": "hokora",
+   "name": "祠",
+   "r": 3,
+   "max": 1,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "灯りの外で倒れると、持ち物が散らばらずに祠（箱）へ収まる。開けられるのは自分だけ"
+   ]
+  },
+  {
+   "id": "fukutsu",
+   "name": "不屈",
+   "r": 3,
+   "max": 1,
+   "on": "胸当て",
+   "group": "save",
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "倒れるはずの一撃を、体力1で耐える（1夜に1回）"
+   ]
+  },
+  {
+   "id": "tetsuheki",
+   "name": "鉄壁",
+   "r": 3,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "10秒けがをしないと守りが張られ、次に受ける一撃を 6 まで防ぐ"
+   ]
+  },
+  {
+   "id": "nidantobi",
+   "name": "二段跳び",
+   "r": 3,
+   "max": 1,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "空中で、もう一度跳べる（着地するまで1回）"
+   ]
+  },
+  {
+   "id": "honoowatari",
+   "name": "炎渡り",
+   "r": 3,
+   "max": 1,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "溶岩の上を歩くと、足もとが固まって歩ける（10秒で元に戻る）"
+   ]
+  },
+  {
+   "id": "kabenobori",
+   "name": "壁登り",
+   "r": 3,
+   "max": 1,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "壁に向かってしゃがみ続けると、ゆっくり登れる"
+   ]
+  },
+  {
+   "id": "kaeridori",
+   "name": "帰り鳥",
+   "r": 3,
+   "max": 1,
+   "on": "エリトラ",
+   "group": null,
+   "cats": [
+    "ELYTRA"
+   ],
+   "desc": [
+    "滑空中にしゃがみ続けると、「帰る場所」の灯標（なければベッド）へ舵を切る"
+   ]
+  },
+  {
+   "id": "mizukagami",
+   "name": "水鏡",
+   "r": 3,
+   "max": 1,
+   "on": "三叉槍",
+   "group": null,
+   "cats": [
+    "TRIDENT"
+   ],
+   "desc": [
+    "投げた三叉槍が刺さっているあいだ、しゃがみを素早く2回で、そこへ移る（10秒に1回）"
+   ]
+  },
+  {
+   "id": "chidori",
+   "name": "千鳥",
+   "r": 3,
+   "max": 1,
+   "on": "クロスボウ",
+   "group": null,
+   "cats": [
+    "XBOW"
+   ],
+   "desc": [
+    "当たった矢が、近くの別の敵へ跳ねる（2回まで・そのたびに半分）"
+   ]
+  },
+  {
+   "id": "daichinotsuchi",
+   "name": "大地の槌",
+   "r": 3,
+   "max": 1,
+   "on": "メイス",
+   "group": null,
+   "cats": [
+    "MACE"
+   ],
+   "desc": [
+    "しゃがんで地面を右クリックすると、前6ブロックへ衝撃が走り、敵を跳ね上げる（8秒に1回）"
+   ]
+  },
+  {
+   "id": "shinkirou",
+   "name": "蜃気楼",
+   "r": 3,
+   "max": 1,
+   "on": "すね当て",
+   "group": null,
+   "cats": [
+    "LEGS"
+   ],
+   "desc": [
+    "しゃがみを素早く2回で幻を残し、まわりの敵が3秒こちらを見失う（20秒に1回）"
+   ]
+  },
+  {
+   "id": "kaishaku",
+   "name": "介錯",
+   "r": 4,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "体力が15%を切った敵を、一撃で倒す（ボスは除く）"
+   ]
+  },
+  {
+   "id": "yamidachi",
+   "name": "闇断ち",
+   "r": 4,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "灯りの外で敵を倒すたび、まわり8ブロックの敵が5秒のあいだ光って弱る"
+   ]
+  },
+  {
+   "id": "kokuu",
+   "name": "虚空",
+   "r": 4,
+   "max": 1,
+   "on": "剣・斧・メイス",
+   "group": null,
+   "cats": [
+    "SWORD",
+    "AXE",
+    "MACE"
+   ],
+   "desc": [
+    "当たった敵を、2秒のあいだ宙に浮かせる（10秒に1回）"
+   ]
+  },
+  {
+   "id": "shinsoku",
+   "name": "神速",
+   "r": 4,
+   "max": 1,
+   "on": "剣",
+   "group": null,
+   "cats": [
+    "SWORD"
+   ],
+   "desc": [
+    "しゃがんで攻撃すると、敵の背後へ回り込む（5秒に1回）"
+   ]
+  },
+  {
+   "id": "ikazuchi",
+   "name": "雷",
+   "r": 4,
+   "max": 1,
+   "on": "メイス",
+   "group": null,
+   "cats": [
+    "MACE"
+   ],
+   "desc": [
+    "落ちながらの一撃で雷が落ち、まわり4ブロックの敵に 6 のダメージと2秒のしびれ（3秒に1回）"
+   ]
+  },
+  {
+   "id": "seiryuu",
+   "name": "星流",
+   "r": 4,
+   "max": 1,
+   "on": "弓",
+   "group": null,
+   "cats": [
+    "BOW"
+   ],
+   "desc": [
+    "しゃがんで満月まで引いて放つと、敵を貫く光の矢が5本、扇に飛ぶ（減るのは1本）"
+   ]
+  },
+  {
+   "id": "yaame",
+   "name": "矢雨",
+   "r": 4,
+   "max": 1,
+   "on": "クロスボウ",
+   "group": null,
+   "cats": [
+    "XBOW"
+   ],
+   "desc": [
+    "撃った矢が落ちた場所に、1秒後、矢の雨が降る（まわり4ブロックに10本・3秒に1回）"
+   ]
+  },
+  {
+   "id": "ryuugu",
+   "name": "竜宮",
+   "r": 4,
+   "max": 1,
+   "on": "三叉槍",
+   "group": null,
+   "cats": [
+    "TRIDENT"
+   ],
+   "desc": [
+    "三叉槍を持って水の中にいると、まわり6ブロックの仲間も息が続き、水の中の敵が遅くなる"
+   ]
+  },
+  {
+   "id": "tenbin",
+   "name": "天秤",
+   "r": 4,
+   "max": 1,
+   "on": "盾",
+   "group": null,
+   "cats": [
+    "SHIELD"
+   ],
+   "desc": [
+    "構えて受けた傷を溜め、次の一撃に上乗せして返す（20まで）"
+   ]
+  },
+  {
+   "id": "chinonushi",
+   "name": "地の主",
+   "r": 4,
+   "max": 1,
+   "on": "つるはし",
+   "group": null,
+   "cats": [
+    "PICK"
+   ],
+   "desc": [
+    "黒曜石・泣く黒曜石・古代の残骸・深層岩なども、石と同じ速さで掘れる"
+   ]
+  },
+  {
+   "id": "fushichou",
+   "name": "不死鳥",
+   "r": 4,
+   "max": 1,
+   "on": "胸当て",
+   "group": "save",
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "倒れたとき、炎とともに体力全快で蘇る（現実の1日に1回）"
+   ]
+  },
+  {
+   "id": "inugami",
+   "name": "犬神",
+   "r": 4,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "体力が4割を切ると、光る狼が2匹あらわれ、30秒のあいだ共に戦う（5分に1回）"
+   ]
+  },
+  {
+   "id": "hougyoku",
+   "name": "宝玉",
+   "r": 4,
+   "max": 1,
+   "on": "胸当て",
+   "group": null,
+   "cats": [
+    "CHEST"
+   ],
+   "desc": [
+    "身につけているほかの灯紋が、すべて1段強くなる"
+   ]
+  },
+  {
+   "id": "makimodoshi",
+   "name": "巻き戻し",
+   "r": 4,
+   "max": 1,
+   "on": "ブーツ",
+   "group": null,
+   "cats": [
+    "FEET"
+   ],
+   "desc": [
+    "溶岩・奈落に落ちたとき、落ちて倒れるとき、5秒前の場所へ戻る（10分に1回）"
+   ]
+  },
+  {
+   "id": "kamikaze",
+   "name": "神風",
+   "r": 4,
+   "max": 1,
+   "on": "エリトラ",
+   "group": null,
+   "cats": [
+    "ELYTRA"
+   ],
+   "desc": [
+    "しゃがんだまま跳ぶと、空高く舞い上がる。そのまま滑空へ（10秒に1回）"
+   ]
+  },
+  {
+   "id": "issen",
+   "name": "一閃",
+   "r": 4,
+   "max": 1,
+   "on": "剣",
+   "group": null,
+   "cats": [
+    "SWORD"
+   ],
+   "desc": [
+    "力を溜めきって走りながらしゃがむと、前6ブロックを駆け抜け、通り道の敵をすべて斬る（12秒に1回）"
+   ]
+  },
+  {
+   "id": "mamoribi",
+   "name": "守り灯",
+   "r": 4,
+   "max": 1,
+   "on": "兜",
+   "group": null,
+   "cats": [
+    "HEAD"
+   ],
+   "desc": [
+    "まわり8ブロックの仲間が倒れるはずの一撃を、自分の体力（ハート4つ）で肩代わりする（5分に1回）"
+   ]
+  },
+  {
+   "id": "hikagura",
+   "name": "灯神楽",
+   "r": 4,
+   "max": 1,
+   "on": "盾",
+   "group": null,
+   "cats": [
+    "SHIELD"
+   ],
+   "desc": [
+    "構えているあいだ、まわり6ブロックの仲間の体力が毎秒戻る（自分は遅くなる）"
+   ]
+  },
+  {
+   "id": "yamabiko",
+   "name": "山彦",
+   "r": 4,
+   "max": 1,
+   "on": "メイス",
+   "group": null,
+   "cats": [
+    "MACE"
+   ],
+   "desc": [
+    "落ちながらの一撃の1秒後、同じ場所にもう一度、半分の衝撃が走る（3秒に1回）"
+   ]
+  },
+  {
+   "id": "amanoami",
+   "name": "天の網",
+   "r": 4,
+   "max": 1,
+   "on": "釣り竿",
+   "group": null,
+   "cats": [
+    "ROD"
+   ],
+   "desc": [
+    "釣り針を敵にかけると網が広がり、まわり4ブロックの敵をまとめて3秒縛る（30秒に1回）"
+   ]
+  }
+ ]
+}

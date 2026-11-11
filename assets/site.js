@@ -106,7 +106,7 @@
     $$('[data-fest-game]').forEach(function (el) { el.textContent = f.game.name; });
     $$('[data-fest-desc]').forEach(function (el) { el.textContent = f.game.desc; });
     liveBar(f, now);
-    $$('[data-rot]').forEach(function (el) { el.setAttribute('data-now', String(f.week % 4)); $$('[data-g]', el).forEach(function (r) { r.classList.toggle('cur', r.getAttribute('data-g') === String(f.week % 4)); }); });
+    $$('[data-rot]').forEach(function (el) { el.setAttribute('data-now', String(f.week % 6)); $$('[data-g]', el).forEach(function (r) { r.classList.toggle('cur', r.getAttribute('data-g') === String(f.week % 6)); }); });
   }
   // ── 夜祭の帯：開始30分前から「まもなく」、開催中は「いま」 ──
   var bar = null, barOff = false;

@@ -1,7 +1,7 @@
 {
  "maxLevel": 50,
  "starNeed": 20000,
- "maxStar": 10,
+ "maxStar": 30,
  "dailyXp": 4000,
  "overflow": 0.1,
  "bankDays": 3,
