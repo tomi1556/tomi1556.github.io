@@ -105,7 +105,7 @@
    "frag": 6
   }
  ],
- "total": 41345,
+ "total": 41495,
  "defs": [
   {
    "id": "lantern_1",
@@ -247,7 +247,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠どうしを近くに置くとつながる。ほかの人の灯籠でもよい。"
   },
   {
    "id": "net_15",
@@ -267,7 +268,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠どうしを近くに置くとつながる。ほかの人の灯籠でもよい。"
   },
   {
    "id": "net_40",
@@ -287,7 +289,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠どうしを近くに置くとつながる。ほかの人の灯籠でもよい。"
   },
   {
    "id": "net_80",
@@ -307,7 +310,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠どうしを近くに置くとつながる。ほかの人の灯籠でもよい。"
   },
   {
    "id": "net_150",
@@ -327,7 +331,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠どうしを近くに置くとつながる。ほかの人の灯籠でもよい。"
   },
   {
    "id": "net_300",
@@ -355,7 +360,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠どうしを近くに置くとつながる。ほかの人の灯籠でもよい。"
   },
   {
    "id": "tier_2",
@@ -375,7 +381,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "つながった灯籠が 5基で二段・15基で三段・40基で最上段。"
   },
   {
    "id": "tier_3",
@@ -395,7 +402,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "つながった灯籠が 5基で二段・15基で三段・40基で最上段。"
   },
   {
    "id": "tier_4",
@@ -415,7 +423,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "つながった灯籠が 5基で二段・15基で三段・40基で最上段。"
   },
   {
    "id": "tints_3",
@@ -435,7 +444,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "位階・灯守り7日続け・一部の証で、色が増える。"
   },
   {
    "id": "tints_6",
@@ -455,7 +465,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "位階・灯守り7日続け・一部の証で、色が増える。"
   },
   {
    "id": "tints_10",
@@ -475,7 +486,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "位階・灯守り7日続け・一部の証で、色が増える。"
   },
   {
    "id": "tints_14",
@@ -495,7 +507,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "位階・灯守り7日続け・一部の証で、色が増える。"
   },
   {
    "id": "buff_1",
@@ -622,7 +635,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "defend_10",
@@ -642,7 +656,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "defend_50",
@@ -662,7 +677,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "defend_150",
@@ -682,7 +698,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "relit_1",
@@ -762,7 +779,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "higui_25",
@@ -782,7 +800,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "higui_100",
@@ -802,7 +821,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "higui_500",
@@ -822,7 +842,8 @@
    "trail": "灰燼",
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "invite_1",
@@ -902,7 +923,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "自分の灯籠を持って灯りの中にいる日が続くと数える（1日1回）。"
   },
   {
    "id": "keeper_30",
@@ -922,7 +944,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "自分の灯籠を持って灯りの中にいる日が続くと数える（1日1回）。"
   },
   {
    "id": "keeper_100",
@@ -942,7 +965,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "自分の灯籠を持って灯りの中にいる日が続くと数える（1日1回）。"
   },
   {
    "id": "keeper_365",
@@ -970,7 +994,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "自分の灯籠を持って灯りの中にいる日が続くと数える（1日1回）。"
   },
   {
    "id": "quests",
@@ -1271,7 +1296,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "朱月は7夜に一度の危険な夜。朝まで、その世界で起きたまま過ごす。"
   },
   {
    "id": "blood_10",
@@ -1291,7 +1317,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "朱月は7夜に一度の危険な夜。朝まで、その世界で起きたまま過ごす。"
   },
   {
    "id": "blood_30",
@@ -1311,7 +1338,52 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "朱月は7夜に一度の危険な夜。朝まで、その世界で起きたまま過ごす。"
+  },
+  {
+   "id": "flawless_blood",
+   "cat": 1,
+   "tier": 4,
+   "name": "無傷の灯守り",
+   "icon": "SHIELD",
+   "desc": [
+    "朱月の夜に、一度も倒れず、",
+    "灯喰いを3体倒して朝を迎える。"
+   ],
+   "goal": "1",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "夜の始まりから朝まで、その世界にいて、朱月のあいだに灯喰いを3体倒す。倒れたらやり直し。"
+  },
+  {
+   "id": "calm_3",
+   "cat": 1,
+   "tier": 3,
+   "name": "灯の三夜",
+   "icon": "SOUL_LANTERN",
+   "desc": [
+    "自分の灯籠を1基も喰われずに、",
+    "3夜続けて越える。"
+   ],
+   "goal": "3夜",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "灯籠を1基以上持って夜を迎え、朝まで1基も喰われないと1夜。喰われると数え直し。"
   },
   {
    "id": "nkill_50",
@@ -1411,7 +1483,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜にときどき湧く、名前つきの強い敵（約10%）。"
   },
   {
    "id": "elite_25",
@@ -1431,7 +1504,8 @@
    "trail": null,
    "item": "名札 ×1",
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜にときどき湧く、名前つきの強い敵（約10%）。"
   },
   {
    "id": "elite_150",
@@ -1451,7 +1525,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜にときどき湧く、名前つきの強い敵（約10%）。"
   },
   {
    "id": "elite_600",
@@ -1471,7 +1546,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜にときどき湧く、名前つきの強い敵（約10%）。"
   },
   {
    "id": "bkill_100",
@@ -3967,7 +4043,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯魚（ひうお）は釣りで釣れる特別な魚。灯技の画面の「灯魚図鑑」に載る。"
   },
   {
    "id": "hwfish_30",
@@ -3987,7 +4064,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯魚（ひうお）は釣りで釣れる特別な魚。灯技の画面の「灯魚図鑑」に載る。"
   },
   {
    "id": "hwfish_60",
@@ -4007,7 +4085,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯魚（ひうお）は釣りで釣れる特別な魚。灯技の画面の「灯魚図鑑」に載る。"
   },
   {
    "id": "hwfish_106",
@@ -4027,7 +4106,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯魚（ひうお）は釣りで釣れる特別な魚。灯技の画面の「灯魚図鑑」に載る。"
   },
   {
    "id": "play_10",
@@ -4688,7 +4768,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道の Lv が50に届いたあとは★が増え、★で「極意」を育てる。"
   },
   {
    "id": "hwtask_7",
@@ -4958,7 +5039,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "職の経験を積むと「匠の試し」が出る。合格すると匠。"
   },
   {
    "id": "fest_1",
@@ -5265,7 +5347,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "higui_5000",
@@ -5285,7 +5368,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "defend_500",
@@ -5305,7 +5389,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "灯籠を喰いに来る敵「灯喰い」を倒すと数える。"
   },
   {
    "id": "relit_400",
@@ -5425,7 +5510,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "朱月は7夜に一度の危険な夜。朝まで、その世界で起きたまま過ごす。"
   },
   {
    "id": "nkills_40000",
@@ -5465,7 +5551,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "夜にときどき湧く、名前つきの強い敵（約10%）。"
   },
   {
    "id": "bkills_5000",
@@ -5740,7 +5827,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "k_zombie_2000",
-   "title": null,
+   "title": "屍の王",
    "tint": null,
    "trail": null,
    "item": null,
@@ -5800,7 +5887,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "k_skeleton_2000",
-   "title": null,
+   "title": "骨の王",
    "tint": null,
    "trail": null,
    "item": null,
@@ -5840,7 +5927,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_spider_200",
-   "title": null,
+   "title": "蜘蛛狩り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -5880,7 +5967,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_cave_spider_200",
-   "title": null,
+   "title": "廃坑守",
    "tint": null,
    "trail": null,
    "item": null,
@@ -5920,7 +6007,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_drowned_300",
-   "title": null,
+   "title": "沈める者",
    "tint": null,
    "trail": null,
    "item": null,
@@ -5960,7 +6047,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_husk_200",
-   "title": null,
+   "title": "砂漠の狩人",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6000,7 +6087,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_stray_200",
-   "title": null,
+   "title": "氷原狩り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6040,7 +6127,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_bogged_100",
-   "title": null,
+   "title": "沼鎮め",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6100,7 +6187,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_slime_300",
-   "title": null,
+   "title": "粘液王",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6140,7 +6227,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_magma_cube_300",
-   "title": null,
+   "title": "熔岩割り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6180,7 +6267,7 @@
    "stage": 1,
    "stages": 1,
    "prev": null,
-   "title": null,
+   "title": "虫払い",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6200,7 +6287,7 @@
    "stage": 1,
    "stages": 1,
    "prev": null,
-   "title": null,
+   "title": "悪霊払い",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6240,7 +6327,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_pillager_300",
-   "title": null,
+   "title": "略奪封じ",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6280,7 +6367,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_vindicator_100",
-   "title": null,
+   "title": "館荒らし",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6320,7 +6407,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_hoglin_200",
-   "title": null,
+   "title": "猪狩り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6360,7 +6447,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "k_zombified_piglin_500",
-   "title": null,
+   "title": "亡者の将",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6380,7 +6467,7 @@
    "stage": 1,
    "stages": 1,
    "prev": null,
-   "title": null,
+   "title": "砦破り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6400,7 +6487,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "creeper_1500",
-   "title": null,
+   "title": "爆ぜ止め",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6480,7 +6567,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "k_blaze_1500",
-   "title": null,
+   "title": "炎絶ち",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6500,7 +6587,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "wskel_500",
-   "title": null,
+   "title": "骸砕き",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6540,7 +6627,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "k_ghast_300",
-   "title": null,
+   "title": "空の狩人",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6580,7 +6667,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "k_phantom_1000",
-   "title": null,
+   "title": "夜空払い",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6600,7 +6687,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "shulker_200",
-   "title": null,
+   "title": "殻割り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6640,7 +6727,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "k_breeze_500",
-   "title": null,
+   "title": "風凪",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6660,7 +6747,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "evoker_25",
-   "title": null,
+   "title": "呪い断ち",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6680,7 +6767,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "ravager_25",
-   "title": null,
+   "title": "荒獣狩り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6700,7 +6787,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "witch_100",
-   "title": null,
+   "title": "魔女狩り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6720,7 +6807,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "guardian_300",
-   "title": null,
+   "title": "海底番",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6740,7 +6827,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "brute_25",
-   "title": null,
+   "title": "猛者討ち",
    "tint": null,
    "trail": null,
    "item": null,
@@ -6820,7 +6907,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "elder_3",
-   "title": null,
+   "title": "古老討ち",
    "tint": null,
    "trail": null,
    "item": null,
@@ -7540,7 +7627,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "m_coal_3000",
-   "title": null,
+   "title": "炭掘り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -7600,7 +7687,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "m_iron_3000",
-   "title": null,
+   "title": "鉄掘り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -7660,7 +7747,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "m_copper_3000",
-   "title": null,
+   "title": "銅掘り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -7720,7 +7807,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "m_gold_1000",
-   "title": null,
+   "title": "黄金掘り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -7780,7 +7867,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "m_redstone_2000",
-   "title": null,
+   "title": "赤石掘り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -7840,7 +7927,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "m_lapis_1000",
-   "title": null,
+   "title": "瑠璃掘り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -7880,7 +7967,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "m_quartz_500",
-   "title": null,
+   "title": "水晶掘り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -7920,7 +8007,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "m_obsidian_100",
-   "title": null,
+   "title": "黒曜の番",
    "tint": null,
    "trail": null,
    "item": null,
@@ -7960,7 +8047,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "m_amethyst_200",
-   "title": null,
+   "title": "晶掘り",
    "tint": null,
    "trail": null,
    "item": null,
@@ -8020,7 +8107,7 @@
    "stage": 3,
    "stages": 3,
    "prev": "m_stone_150000",
-   "title": null,
+   "title": "山崩し",
    "tint": null,
    "trail": null,
    "item": null,
@@ -8060,7 +8147,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "m_netherrack_10000",
-   "title": null,
+   "title": "獄道",
    "tint": null,
    "trail": null,
    "item": null,
@@ -8100,7 +8187,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "m_sand_5000",
-   "title": null,
+   "title": "砂運び",
    "tint": null,
    "trail": null,
    "item": null,
@@ -8180,7 +8267,7 @@
    "stage": 4,
    "stages": 4,
    "prev": "m_log_30000",
-   "title": null,
+   "title": "樵王",
    "tint": null,
    "trail": null,
    "item": null,
@@ -8260,7 +8347,7 @@
    "stage": 4,
    "stages": 4,
    "prev": "m_crop_30000",
-   "title": null,
+   "title": "田守",
    "tint": null,
    "trail": null,
    "item": null,
@@ -8300,7 +8387,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "m_cane_2000",
-   "title": null,
+   "title": "砂糖屋",
    "tint": null,
    "trail": null,
    "item": null,
@@ -8340,7 +8427,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "m_gourd_1000",
-   "title": null,
+   "title": "瓜守",
    "tint": null,
    "trail": null,
    "item": null,
@@ -8380,7 +8467,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "m_wart_1000",
-   "title": null,
+   "title": "薬草守",
    "tint": null,
    "trail": null,
    "item": null,
@@ -8420,7 +8507,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "m_bamboo_2000",
-   "title": null,
+   "title": "竹林守",
    "tint": null,
    "trail": null,
    "item": null,
@@ -8460,7 +8547,7 @@
    "stage": 2,
    "stages": 2,
    "prev": "m_ice_1000",
-   "title": null,
+   "title": "氷室守",
    "tint": null,
    "trail": null,
    "item": null,
@@ -9425,7 +9512,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "紋書は灯紋の画面で、経験値Lvと灯札を使って引く。灯札は時間でたまる。"
   },
   {
    "id": "himon_b_30",
@@ -9445,7 +9533,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "紋書は灯紋の画面で、経験値Lvと灯札を使って引く。灯札は時間でたまる。"
   },
   {
    "id": "himon_b_150",
@@ -9465,7 +9554,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "紋書は灯紋の画面で、経験値Lvと灯札を使って引く。灯札は時間でたまる。"
   },
   {
    "id": "himon_b_500",
@@ -9485,7 +9575,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "紋書は灯紋の画面で、経験値Lvと灯札を使って引く。灯札は時間でたまる。"
   },
   {
    "id": "himon_f_10",
@@ -9505,7 +9596,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "紋書は灯紋の画面で、経験値Lvと灯札を使って引く。灯札は時間でたまる。"
   },
   {
    "id": "himon_f_40",
@@ -9525,7 +9617,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "紋書は灯紋の画面で、経験値Lvと灯札を使って引く。灯札は時間でたまる。"
   },
   {
    "id": "himon_f_80",
@@ -9545,7 +9638,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "紋書は灯紋の画面で、経験値Lvと灯札を使って引く。灯札は時間でたまる。"
   },
   {
    "id": "himon_f_120",
@@ -9565,7 +9659,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "紋書は灯紋の画面で、経験値Lvと灯札を使って引く。灯札は時間でたまる。"
   },
   {
    "id": "himon_f_151",
@@ -9585,7 +9680,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "紋書は灯紋の画面で、経験値Lvと灯札を使って引く。灯札は時間でたまる。"
   },
   {
    "id": "himon_h_1",
@@ -9605,7 +9701,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "秘の紋は「無銘の紋書」からだけ出る（経験値Lv50＋灯札3枚）。"
   },
   {
    "id": "himon_h_8",
@@ -9625,7 +9722,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "秘の紋は「無銘の紋書」からだけ出る（経験値Lv50＋灯札3枚）。"
   },
   {
    "id": "himon_h_20",
@@ -9645,7 +9743,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "秘の紋は「無銘の紋書」からだけ出る（経験値Lv50＋灯札3枚）。"
   },
   {
    "id": "ichiba_p_1",
@@ -10245,7 +10344,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道の Lv が50に届いたあとは★が増え、★で「極意」を育てる。"
   },
   {
    "id": "hwstar_100",
@@ -10265,7 +10365,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道の Lv が50に届いたあとは★が増え、★で「極意」を育てる。"
   },
   {
    "id": "hwstar_200",
@@ -10285,7 +10386,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道の Lv が50に届いたあとは★が増え、★で「極意」を育てる。"
   },
   {
    "id": "hwstar_300",
@@ -10305,7 +10407,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道の Lv が50に届いたあとは★が増え、★で「極意」を育てる。"
   },
   {
    "id": "hwgokui_1",
@@ -10325,7 +10428,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道の Lv が50に届いたあとは★が増え、★で「極意」を育てる。"
   },
   {
    "id": "hwgokui_30",
@@ -10345,7 +10449,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道の Lv が50に届いたあとは★が増え、★で「極意」を育てる。"
   },
   {
    "id": "hwgokui_100",
@@ -10365,7 +10470,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道の Lv が50に届いたあとは★が増え、★で「極意」を育てる。"
   },
   {
    "id": "hwgokui_210",
@@ -10385,7 +10491,8 @@
    "trail": null,
    "item": null,
    "hidden": false,
-   "hint": null
+   "hint": null,
+   "tip": "道の Lv が50に届いたあとは★が増え、★で「極意」を育てる。"
   },
   {
    "id": "hwcore_1",
@@ -12031,71 +12138,6 @@
    "how": "証「務めの人」"
   },
   {
-   "id": "fest_60",
-   "t": "祭の顔",
-   "how": "証「祭の顔」"
-  },
-  {
-   "id": "win_20",
-   "t": "夜祭の覇者",
-   "how": "証「夜祭の覇者」"
-  },
-  {
-   "id": "win_50",
-   "t": "祭神",
-   "how": "証「祭神」"
-  },
-  {
-   "id": "fest_all",
-   "t": "四芸",
-   "how": "証「四芸に通ず」"
-  },
-  {
-   "id": "count_all",
-   "t": "灯原の証人",
-   "how": "証「灯原の証人」"
-  },
-  {
-   "id": "chapter_0",
-   "t": "灯を極めし者",
-   "how": "証「灯の章 完遂」"
-  },
-  {
-   "id": "chapter_1",
-   "t": "夜を極めし者",
-   "how": "証「夜の章 完遂」"
-  },
-  {
-   "id": "chapter_2",
-   "t": "狩を極めし者",
-   "how": "証「狩の章 完遂」"
-  },
-  {
-   "id": "chapter_3",
-   "t": "旅を極めし者",
-   "how": "証「旅の章 完遂」"
-  },
-  {
-   "id": "chapter_4",
-   "t": "匠を極めし者",
-   "how": "証「匠の章 完遂」"
-  },
-  {
-   "id": "chapter_5",
-   "t": "暮を極めし者",
-   "how": "証「暮の章 完遂」"
-  },
-  {
-   "id": "chapter_6",
-   "t": "祭を極めし者",
-   "how": "証「祭の章 完遂」"
-  },
-  {
-   "id": "first_10",
-   "t": "先駆者",
-   "how": "証「先駆者」"
-  },
-  {
    "id": "sato_q_300",
    "t": "里の柱",
    "how": "証「里の柱」"
@@ -12114,6 +12156,26 @@
    "id": "sato_takumi",
    "t": "匠",
    "how": "証「匠」"
+  },
+  {
+   "id": "fest_60",
+   "t": "祭の顔",
+   "how": "証「祭の顔」"
+  },
+  {
+   "id": "win_20",
+   "t": "夜祭の覇者",
+   "how": "証「夜祭の覇者」"
+  },
+  {
+   "id": "win_50",
+   "t": "祭神",
+   "how": "証「祭神」"
+  },
+  {
+   "id": "fest_all",
+   "t": "四芸",
+   "how": "証「四芸に通ず」"
   },
   {
    "id": "higui_5000",
@@ -12196,9 +12258,154 @@
    "how": "証「村々の守り神」"
   },
   {
+   "id": "k_zombie_10000",
+   "t": "屍の王",
+   "how": "証「屍を統べる」"
+  },
+  {
+   "id": "k_skeleton_10000",
+   "t": "骨の王",
+   "how": "証「骨を統べる」"
+  },
+  {
+   "id": "k_spider_2000",
+   "t": "蜘蛛狩り",
+   "how": "証「蜘蛛の天敵」"
+  },
+  {
+   "id": "k_cave_spider_1500",
+   "t": "廃坑守",
+   "how": "証「廃坑の掃除人」"
+  },
+  {
+   "id": "k_drowned_2000",
+   "t": "沈める者",
+   "how": "証「溺れし者の主」"
+  },
+  {
+   "id": "k_husk_1500",
+   "t": "砂漠の狩人",
+   "how": "証「乾きを断つ」"
+  },
+  {
+   "id": "k_stray_1500",
+   "t": "氷原狩り",
+   "how": "証「氷原の狩人」"
+  },
+  {
+   "id": "k_bogged_800",
+   "t": "沼鎮め",
+   "how": "証「沼を鎮める」"
+  },
+  {
+   "id": "k_slime_2500",
+   "t": "粘液王",
+   "how": "証「粘液まみれ」"
+  },
+  {
+   "id": "k_magma_cube_2000",
+   "t": "熔岩割り",
+   "how": "証「熔岩を割る」"
+  },
+  {
+   "id": "k_endermite_50",
+   "t": "虫払い",
+   "how": "証「果ての虫」"
+  },
+  {
+   "id": "k_vex_100",
+   "t": "悪霊払い",
+   "how": "証「小さな悪霊」"
+  },
+  {
+   "id": "k_pillager_2500",
+   "t": "略奪封じ",
+   "how": "証「略奪を絶やす」"
+  },
+  {
+   "id": "k_vindicator_800",
+   "t": "館荒らし",
+   "how": "証「洋館の主」"
+  },
+  {
+   "id": "k_hoglin_1500",
+   "t": "猪狩り",
+   "how": "証「猪狩りの名手」"
+  },
+  {
+   "id": "k_zombified_piglin_5000",
+   "t": "亡者の将",
+   "how": "証「亡者の軍勢」"
+  },
+  {
+   "id": "k_piglin_500",
+   "t": "砦破り",
+   "how": "証「砦荒らし」"
+  },
+  {
+   "id": "k_creeper_5000",
+   "t": "爆ぜ止め",
+   "how": "証「爆ぜる前に」"
+  },
+  {
    "id": "k_enderman_12000",
    "t": "果ての刈り手",
    "how": "証「果ての刈り手」"
+  },
+  {
+   "id": "k_blaze_6000",
+   "t": "炎絶ち",
+   "how": "証「砦の炎を絶やす」"
+  },
+  {
+   "id": "k_wither_skeleton_2500",
+   "t": "骸砕き",
+   "how": "証「骸の軍勢を破る」"
+  },
+  {
+   "id": "k_ghast_1500",
+   "t": "空の狩人",
+   "how": "証「空の主」"
+  },
+  {
+   "id": "k_phantom_4000",
+   "t": "夜空払い",
+   "how": "証「夜空の主」"
+  },
+  {
+   "id": "k_shulker_1000",
+   "t": "殻割り",
+   "how": "証「殻の山」"
+  },
+  {
+   "id": "k_breeze_2000",
+   "t": "風凪",
+   "how": "証「試練の間の主」"
+  },
+  {
+   "id": "k_evoker_100",
+   "t": "呪い断ち",
+   "how": "証「呪いを断つ」"
+  },
+  {
+   "id": "k_ravager_100",
+   "t": "荒獣狩り",
+   "how": "証「荒獣を屠る」"
+  },
+  {
+   "id": "k_witch_500",
+   "t": "魔女狩り",
+   "how": "証「魔女の天敵」"
+  },
+  {
+   "id": "k_guardian_1500",
+   "t": "海底番",
+   "how": "証「海底を鎮める」"
+  },
+  {
+   "id": "k_piglin_brute_100",
+   "t": "猛者討ち",
+   "how": "証「砦の猛者を屠る」"
   },
   {
    "id": "k_ender_dragon_20",
@@ -12214,6 +12421,11 @@
    "id": "k_warden_20",
    "t": "深淵の覇者",
    "how": "証「深淵の覇者」"
+  },
+  {
+   "id": "k_elder_guardian_15",
+   "t": "古老討ち",
+   "how": "証「海の古老を討つ」"
   },
   {
    "id": "walk_5000000",
@@ -12289,6 +12501,101 @@
    "id": "fishx_30000",
    "t": "水辺の主",
    "how": "証「水辺の主」"
+  },
+  {
+   "id": "m_coal_15000",
+   "t": "炭掘り",
+   "how": "証「炭鉱夫」"
+  },
+  {
+   "id": "m_iron_15000",
+   "t": "鉄掘り",
+   "how": "証「鉄山の主」"
+  },
+  {
+   "id": "m_copper_15000",
+   "t": "銅掘り",
+   "how": "証「銅山の主」"
+  },
+  {
+   "id": "m_gold_6000",
+   "t": "黄金掘り",
+   "how": "証「黄金郷」"
+  },
+  {
+   "id": "m_redstone_10000",
+   "t": "赤石掘り",
+   "how": "証「赤石の主」"
+  },
+  {
+   "id": "m_lapis_5000",
+   "t": "瑠璃掘り",
+   "how": "証「瑠璃の主」"
+  },
+  {
+   "id": "m_quartz_5000",
+   "t": "水晶掘り",
+   "how": "証「水晶掘り」"
+  },
+  {
+   "id": "m_obsidian_1500",
+   "t": "黒曜の番",
+   "how": "証「黒曜の門番」"
+  },
+  {
+   "id": "m_amethyst_2000",
+   "t": "晶掘り",
+   "how": "証「晶洞の主」"
+  },
+  {
+   "id": "m_stone_600000",
+   "t": "山崩し",
+   "how": "証「山を平らげる」"
+  },
+  {
+   "id": "m_netherrack_100000",
+   "t": "獄道",
+   "how": "証「獄に道を通す」"
+  },
+  {
+   "id": "m_sand_50000",
+   "t": "砂運び",
+   "how": "証「砂漠を運ぶ」"
+  },
+  {
+   "id": "m_log_100000",
+   "t": "樵王",
+   "how": "証「千年の樵」"
+  },
+  {
+   "id": "m_crop_150000",
+   "t": "田守",
+   "how": "証「大地主」"
+  },
+  {
+   "id": "m_cane_20000",
+   "t": "砂糖屋",
+   "how": "証「砂糖長者」"
+  },
+  {
+   "id": "m_gourd_10000",
+   "t": "瓜守",
+   "how": "証「瓜の山」"
+  },
+  {
+   "id": "m_wart_10000",
+   "t": "薬草守",
+   "how": "証「薬草園」"
+  },
+  {
+   "id": "m_bamboo_20000",
+   "t": "竹林守",
+   "how": "証「竹林の主」"
+  },
+  {
+   "id": "m_ice_10000",
+   "t": "氷室守",
+   "how": "証「氷室の主」"
   },
   {
    "id": "diamondx_5000",
@@ -12439,6 +12746,51 @@
    "id": "count_450",
    "t": "証の極み",
    "how": "証「証の極み」"
+  },
+  {
+   "id": "count_all",
+   "t": "灯原の証人",
+   "how": "証「灯原の証人」"
+  },
+  {
+   "id": "chapter_0",
+   "t": "灯を極めし者",
+   "how": "証「灯の章 完遂」"
+  },
+  {
+   "id": "chapter_1",
+   "t": "夜を極めし者",
+   "how": "証「夜の章 完遂」"
+  },
+  {
+   "id": "chapter_2",
+   "t": "狩を極めし者",
+   "how": "証「狩の章 完遂」"
+  },
+  {
+   "id": "chapter_3",
+   "t": "旅を極めし者",
+   "how": "証「旅の章 完遂」"
+  },
+  {
+   "id": "chapter_4",
+   "t": "匠を極めし者",
+   "how": "証「匠の章 完遂」"
+  },
+  {
+   "id": "chapter_5",
+   "t": "暮を極めし者",
+   "how": "証「暮の章 完遂」"
+  },
+  {
+   "id": "chapter_6",
+   "t": "祭を極めし者",
+   "how": "証「祭の章 完遂」"
+  },
+  {
+   "id": "first_10",
+   "t": "先駆者",
+   "how": "証「先駆者」"
   },
   {
    "id": "first_30",

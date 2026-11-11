@@ -1111,6 +1111,7 @@ main>section:not([style*="position"]){position:relative}
 .ac-need a{color:var(--t)}
 .ac.hid{background:repeating-linear-gradient(135deg,#1C1E23 0 10px,#1F2228 10px 20px)}
 .ac.hid h3{color:#6B7282;letter-spacing:.2em}
+.ac-tip{margin-top:6px;font-size:14px;line-height:1.7;color:#B9C1D0}.ac-tip span{margin-right:8px;padding:1px 8px;border:1px solid #5A6070;border-radius:999px;font-size:12px;color:#E3E7EF}
 .ac-hint{margin-top:8px;font-size:16px;color:#E3E7EF;font-style:italic}
 .ac-foot{display:flex;flex-wrap:wrap;gap:4px 16px;margin-top:10px;font-size:12px}
 .ak-band{background:linear-gradient(110deg,rgba(242,155,184,.16),rgba(0,0,0,.2) 55%),#16191F;border-color:rgba(242,155,184,.45);margin-top:20px}

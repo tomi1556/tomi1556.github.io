@@ -628,7 +628,7 @@ _guide_src = f'''
   <div class="edge"></div>
   <div class="wrap">
     <p class="depth">5</p>
-    <h2 class="disp h2">灯の証。575の、灯原だけの進捗。</h2>
+    <h2 class="disp h2">灯の証。577の、灯原だけの進捗。</h2>
     <p class="lead"><span class="kbd">/akashi</span> で開く。過ごしたことが、そのまま証になります。</p>
     {bars([("◆ 易", 43, "#55FF55", "その日のうちに・最初の夜を越える"), ("◆◆ 並", 77, "#55FFFF", "何日か・朱月の夜を越える"), ("◆◆◆ 難", 81, "#FF55FF", "腰を据えて・ウィザーを倒す"), ("◆◆◆◆ 極", 43, "#FFAA00", "何週間も・灯喰いから150回守る"), ("◆◆◆◆◆ 伝", 19, "#FF5555", "季節をまたいで・夜を500回")], unit="個")}
     {cards([("trophy", "#F29BB8", "段になっている", "前の段を得ると次が出る。追跡で進み具合"), ("q", "#B46CFF", "秘められた証 12個", "ヒントだけ。初達成の名前が残る"), ("gift", "#F2B544", "報酬は見た目中心", "称号69・足跡12・灯りの色5")])}
@@ -719,8 +719,8 @@ CH = [
      "sum": "時と場所と月でかわる、106種の魚。珍しいほど逃げる。", "facts": ["106種", "5つの珍しさ", "ヌシ"],
      "desc": "灯魚（ひうお）106種。珍しさ、かかる条件（水辺・時刻・天気・月・季節・朱月・灯り）、図鑑と灯原一。"},
     {"id": "akashi", "t": "灯の証", "c": "#F29BB8", "layer": 2, "sec": ["akashi"],
-     "sum": "この世界で過ごしたことが、そのまま証になる。", "facts": ["575の証", "位階10段", "称号139種"],
-     "desc": "灯原だけの進捗「灯の証」575個。難度、段と秘められた証、報酬、証点と位階。"},
+     "sum": "この世界で過ごしたことが、そのまま証になる。", "facts": ["577の証", "位階10段", "称号188種"],
+     "desc": "灯原だけの進捗「灯の証」577個。難度、段と秘められた証、報酬、証点と位階。"},
     {"id": "more", "t": "灯標・色・招待", "c": "#C9D0DC", "layer": 2, "sec": ["more"],
      "sum": "名前をつけて行き来し、灯りの色を変え、友を呼ぶ。", "facts": ["灯渡り 3秒", "灯りの色 17色", "招待コード"],
      "desc": "灯標と灯渡り、仲間、17の灯りの色の手に入れ方、友達の招待のしかた。"},
@@ -1009,7 +1009,7 @@ def _body(k):
     if c["id"] == "akashi":
         b = "\n".join(_clean(_SEC[s]) for s in c["sec"])
         i = b.rfind("\n  </div>\n</section>")
-        return b[:i] + '\n    <a href="akashi.html" class="wiki-band ak-band" style="margin-top:44px"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">575の証を、ひとつずつ</b><span>目標・報酬・段の道・秘められた証の手がかり。名前や報酬で探せます。</span></span><span class="wb-go">灯の証 Wiki へ<i></i></span></a>' + b[i:]
+        return b[:i] + '\n    <a href="akashi.html" class="wiki-band ak-band" style="margin-top:44px"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">577の証を、ひとつずつ</b><span>目標・報酬・段の道・秘められた証の手がかり。名前や報酬で探せます。</span></span><span class="wb-go">灯の証 Wiki へ<i></i></span></a>' + b[i:]
     if c["id"] == "hiwaza":
         return _hiwaza_sec()
     if c["id"] == "fish":
@@ -1116,7 +1116,7 @@ def _guide_index():
     {layers}
     <div class="wk-bands">
     <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯技 Wiki</b><span>130の技の効き目・要る Lv・技点・待ち時間、技の木、奥義の試練、務め、灯魚図鑑、技の組み立て。</span></span><span class="wb-go">開く<i></i></span></a>
-    <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯の証 Wiki</b><span>575の証の目標と報酬、段の道、10の位階、称号・灯りの色・足跡の手に入れ方。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯の証 Wiki</b><span>577の証の目標と報酬、段の道、10の位階、称号・灯りの色・足跡の手に入れ方。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="himon.html" class="wiki-band hm-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯紋 Wiki</b><span>{len(HM["defs"])}の紋の段・効き目・刻めるもの、紋書の引き方、刻み方と重ね方。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯里 Wiki</b><span>4つの格、5つの職のバフと日課・週課、位と匠の試し、施設の素材、礎、ずるの防ぎ方。</span></span><span class="wb-go">開く<i></i></span></a>
     </div>
@@ -1782,6 +1782,7 @@ def _ak_card(x, c):
       <div class="ac-m">{_ak_medal(x["tier"])}</div>
       <div class="ac-b"><header><h3 class="disp">{_E(x["name"])}</h3>{_dia(x["tier"])}{stage}</header>
       <p class="ac-d">{"<br>".join(_E(s) for s in x["desc"])}</p>
+      {('<p class="ac-tip"><span>ヒント</span>' + _E(x["tip"]) + '</p>') if x.get("tip") else ""}
       <p class="ac-goal"><span>目標</span><b class="dot">{_E(x["goal"])}</b></p>
       <ul class="rw">{_rewards(x)}</ul>
       {need}</div>
@@ -2950,7 +2951,7 @@ _PS = [
          ("小さな拠点は狙われない", "灯籠が3基より少ない灯路網と、地下や高い塔の灯籠は狙われません。"),
          ("自分の灯籠を5基つなぐ", "ひとりでも二ノ灯になり、灯標どうしを行き来できます。"),
          ("灯技を育てる", f"{_K('/waza')}。遊んだ道の Lv が上がり、毎日3つの「今日の務め」もあります。"),
-         ("図鑑と証を埋める", "灯魚は106種、灯の証は575個あります。"),
+         ("図鑑と証を埋める", "灯魚は106種、灯の証は577個あります。"),
      ],
      "cmds": [("/waza", "灯技"), ("/waza fish", "灯魚図鑑"), ("/akashi", "灯の証"), ("/yomatsuri out", "夜祭を見送る")],
      "note": "迷ったら画面の下を見てください。灯りの外では、いちばん近い灯りの方角が出ます。"},
