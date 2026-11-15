@@ -105,7 +105,7 @@
    "frag": 6
   }
  ],
- "total": 41495,
+ "total": 44070,
  "defs": [
   {
    "id": "lantern_1",
@@ -4037,11 +4037,11 @@
    "icon": "TROPICAL_FISH",
    "desc": [
     "灯魚図鑑に10種を載せる。",
-    "（灯技プラグイン）"
+    "（漁火の灯魚図鑑）"
    ],
    "goal": "10種",
    "stage": 1,
-   "stages": 4,
+   "stages": 5,
    "prev": null,
    "title": null,
    "tint": null,
@@ -4049,7 +4049,7 @@
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "灯魚（ひうお）は釣りで釣れる特別な魚。灯技の画面の「灯魚図鑑」に載る。"
+   "tip": "釣れる魚は、ぜんぶ灯魚（ひうお）。漁場ごとに住む魚が決まっていて、時刻・天気・月・潮で変わる。漁火（/isaribi）の灯魚図鑑と漁場帳で、どこで・いつ がわかる。"
   },
   {
    "id": "hwfish_30",
@@ -4062,7 +4062,7 @@
    ],
    "goal": "30種",
    "stage": 2,
-   "stages": 4,
+   "stages": 5,
    "prev": "hwfish_10",
    "title": null,
    "tint": null,
@@ -4070,7 +4070,7 @@
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "灯魚（ひうお）は釣りで釣れる特別な魚。灯技の画面の「灯魚図鑑」に載る。"
+   "tip": "釣れる魚は、ぜんぶ灯魚（ひうお）。漁場ごとに住む魚が決まっていて、時刻・天気・月・潮で変わる。漁火（/isaribi）の灯魚図鑑と漁場帳で、どこで・いつ がわかる。"
   },
   {
    "id": "hwfish_60",
@@ -4083,7 +4083,7 @@
    ],
    "goal": "60種",
    "stage": 3,
-   "stages": 4,
+   "stages": 5,
    "prev": "hwfish_30",
    "title": "灯魚の博士",
    "tint": null,
@@ -4091,7 +4091,28 @@
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "灯魚（ひうお）は釣りで釣れる特別な魚。灯技の画面の「灯魚図鑑」に載る。"
+   "tip": "釣れる魚は、ぜんぶ灯魚（ひうお）。漁場ごとに住む魚が決まっていて、時刻・天気・月・潮で変わる。漁火（/isaribi）の灯魚図鑑と漁場帳で、どこで・いつ がわかる。"
+  },
+  {
+   "id": "hwfish_100",
+   "cat": 4,
+   "tier": 4,
+   "name": "灯魚の百",
+   "icon": "PUFFERFISH",
+   "desc": [
+    "灯魚図鑑に100種を載せる。"
+   ],
+   "goal": "100種",
+   "stage": 4,
+   "stages": 5,
+   "prev": "hwfish_60",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "釣れる魚は、ぜんぶ灯魚（ひうお）。漁場ごとに住む魚が決まっていて、時刻・天気・月・潮で変わる。漁火（/isaribi）の灯魚図鑑と漁場帳で、どこで・いつ がわかる。"
   },
   {
    "id": "hwfish_106",
@@ -4100,19 +4121,568 @@
    "name": "灯魚図鑑 完成",
    "icon": "NAUTILUS_SHELL",
    "desc": [
-    "灯魚図鑑の106種すべてを載せる。"
+    "灯魚図鑑の327種すべてを載せる。"
    ],
-   "goal": "106種",
-   "stage": 4,
-   "stages": 4,
-   "prev": "hwfish_60",
+   "goal": "327種",
+   "stage": 5,
+   "stages": 5,
+   "prev": "hwfish_100",
    "title": "灯魚の主",
    "tint": null,
    "trail": null,
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "灯魚（ひうお）は釣りで釣れる特別な魚。灯技の画面の「灯魚図鑑」に載る。"
+   "tip": "釣れる魚は、ぜんぶ灯魚（ひうお）。漁場ごとに住む魚が決まっていて、時刻・天気・月・潮で変わる。漁火（/isaribi）の灯魚図鑑と漁場帳で、どこで・いつ がわかる。"
+  },
+  {
+   "id": "isg_5",
+   "cat": 4,
+   "tier": 2,
+   "name": "漁場めぐり",
+   "icon": "FILLED_MAP",
+   "desc": [
+    "5か所の漁場で魚を釣る。",
+    "（漁火）"
+   ],
+   "goal": "5個",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "水のようすで漁場が変わる（川の浅い所・深い所、池、湖、海…）。釣った漁場は /isaribi の漁場帳に載る。沖・外洋・深海は舟に乗って。"
+  },
+  {
+   "id": "isg_12",
+   "cat": 4,
+   "tier": 3,
+   "name": "漁場の旅人",
+   "icon": "FILLED_MAP",
+   "desc": [
+    "12か所の漁場で魚を釣る。"
+   ],
+   "goal": "12個",
+   "stage": 2,
+   "stages": 3,
+   "prev": "isg_5",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "水のようすで漁場が変わる（川の浅い所・深い所、池、湖、海…）。釣った漁場は /isaribi の漁場帳に載る。沖・外洋・深海は舟に乗って。"
+  },
+  {
+   "id": "isg_all",
+   "cat": 4,
+   "tier": 5,
+   "name": "漁場帳 完成",
+   "icon": "NAUTILUS_SHELL",
+   "desc": [
+    "23か所すべての漁場で魚を釣る。",
+    "深海も、溶岩も、虚空も。"
+   ],
+   "goal": "23個",
+   "stage": 3,
+   "stages": 3,
+   "prev": "isg_12",
+   "title": "漁場の主",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "水のようすで漁場が変わる（川の浅い所・深い所、池、湖、海…）。釣った漁場は /isaribi の漁場帳に載る。沖・外洋・深海は舟に乗って。"
+  },
+  {
+   "id": "isl_1",
+   "cat": 4,
+   "tier": 3,
+   "name": "焔の釣り人",
+   "icon": "BLAZE_ROD",
+   "desc": [
+    "溶岩の池で灯魚を釣る。"
+   ],
+   "goal": "1匹",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/isaribi の「餌と小物」で焔の糸を買うと、ネザーの溶岩に糸を垂らせる。当たりが来たら、すぐ右クリック。"
+  },
+  {
+   "id": "isl_50",
+   "cat": 4,
+   "tier": 4,
+   "name": "焔を釣る者",
+   "icon": "MAGMA_CREAM",
+   "desc": [
+    "溶岩の池で灯魚を50匹釣る。"
+   ],
+   "goal": "50匹",
+   "stage": 2,
+   "stages": 2,
+   "prev": "isl_1",
+   "title": "焔を釣る者",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/isaribi の「餌と小物」で焔の糸を買うと、ネザーの溶岩に糸を垂らせる。当たりが来たら、すぐ右クリック。"
+  },
+  {
+   "id": "isv_1",
+   "cat": 4,
+   "tier": 4,
+   "name": "虚空の釣り人",
+   "icon": "ENDER_EYE",
+   "desc": [
+    "虚空で灯魚を釣る。"
+   ],
+   "goal": "1匹",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/isaribi の「餌と小物」で虚ろの浮きを買うと、エンドの島の縁から虚空へ糸を垂らせる。当たりが来たら、すぐ右クリック。"
+  },
+  {
+   "id": "isv_50",
+   "cat": 4,
+   "tier": 5,
+   "name": "虚空の主",
+   "icon": "DRAGON_BREATH",
+   "desc": [
+    "虚空で灯魚を50匹釣る。"
+   ],
+   "goal": "50匹",
+   "stage": 2,
+   "stages": 2,
+   "prev": "isv_1",
+   "title": "虚空の主",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/isaribi の「餌と小物」で虚ろの浮きを買うと、エンドの島の縁から虚空へ糸を垂らせる。当たりが来たら、すぐ右クリック。"
+  },
+  {
+   "id": "iss_1000",
+   "cat": 4,
+   "tier": 2,
+   "name": "魚河岸の常連",
+   "icon": "PRISMARINE_SHARD",
+   "desc": [
+    "魚河岸と注文で、鱗を合わせて1,000稼ぐ。"
+   ],
+   "goal": "1,000個",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "灯りの中か港で /isaribi の魚河岸を開き、魚を売ると鱗が入る。今日の注文のお礼も数える。"
+  },
+  {
+   "id": "iss_10000",
+   "cat": 4,
+   "tier": 3,
+   "name": "魚河岸の顔",
+   "icon": "PRISMARINE_CRYSTALS",
+   "desc": [
+    "鱗を合わせて10,000稼ぐ。"
+   ],
+   "goal": "10,000個",
+   "stage": 2,
+   "stages": 3,
+   "prev": "iss_1000",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "灯りの中か港で /isaribi の魚河岸を開き、魚を売ると鱗が入る。今日の注文のお礼も数える。"
+  },
+  {
+   "id": "iss_100000",
+   "cat": 4,
+   "tier": 4,
+   "name": "鱗長者",
+   "icon": "PRISMARINE",
+   "desc": [
+    "鱗を合わせて100,000稼ぐ。"
+   ],
+   "goal": "100,000個",
+   "stage": 3,
+   "stages": 3,
+   "prev": "iss_10000",
+   "title": "鱗長者",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "灯りの中か港で /isaribi の魚河岸を開き、魚を売ると鱗が入る。今日の注文のお礼も数える。"
+  },
+  {
+   "id": "isf_10",
+   "cat": 4,
+   "tier": 2,
+   "name": "掛け合い上手",
+   "icon": "FISHING_ROD",
+   "desc": [
+    "掛け合いで灯魚を10匹釣り上げる。"
+   ],
+   "goal": "10匹",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "稀より珍しい灯魚がかかると掛け合いになる。右クリック長押しで巻き、赤くなったら離す。"
+  },
+  {
+   "id": "isf_100",
+   "cat": 4,
+   "tier": 4,
+   "name": "大物師",
+   "icon": "FISHING_ROD",
+   "desc": [
+    "掛け合いで灯魚を100匹釣り上げる。"
+   ],
+   "goal": "100匹",
+   "stage": 2,
+   "stages": 2,
+   "prev": "isf_10",
+   "title": "大物師",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "稀より珍しい灯魚がかかると掛け合いになる。右クリック長押しで巻き、赤くなったら離す。"
+  },
+  {
+   "id": "iso_10",
+   "cat": 4,
+   "tier": 2,
+   "name": "港の頼れる人",
+   "icon": "PAPER",
+   "desc": [
+    "今日の注文を10回すませる。"
+   ],
+   "goal": "10回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/isaribi の今日の注文。毎日3つ届く。"
+  },
+  {
+   "id": "iso_100",
+   "cat": 4,
+   "tier": 4,
+   "name": "港の顔役",
+   "icon": "PAPER",
+   "desc": [
+    "今日の注文を100回すませる。"
+   ],
+   "goal": "100回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "iso_10",
+   "title": "港の顔役",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/isaribi の今日の注文。毎日3つ届く。"
+  },
+  {
+   "id": "isgear_25",
+   "cat": 4,
+   "tier": 3,
+   "name": "道具自慢",
+   "icon": "STRING",
+   "desc": [
+    "釣り具の Lv を合わせて25にする。"
+   ],
+   "goal": "25Lv",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/isaribi の釣り具と舟で、鱗を使って強くする（竿・糸・針・浮き・魚籠 各 Lv10）。"
+  },
+  {
+   "id": "isgear_50",
+   "cat": 4,
+   "tier": 4,
+   "name": "名人の道具",
+   "icon": "TRIPWIRE_HOOK",
+   "desc": [
+    "釣り具をすべて Lv10 にする。"
+   ],
+   "goal": "50Lv",
+   "stage": 2,
+   "stages": 2,
+   "prev": "isgear_25",
+   "title": "名人",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/isaribi の釣り具と舟で、鱗を使って強くする（竿・糸・針・浮き・魚籠 各 Lv10）。"
+  },
+  {
+   "id": "isb_3",
+   "cat": 4,
+   "tier": 4,
+   "name": "深海へ漕ぎ出す者",
+   "icon": "OAK_BOAT",
+   "desc": [
+    "舟を Lv3 にする。"
+   ],
+   "goal": "3段",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/isaribi の釣り具と舟で、鱗を使って舟を強くする。"
+  },
+  {
+   "id": "ism_1",
+   "cat": 4,
+   "tier": 2,
+   "name": "漁場を極める",
+   "icon": "NAUTILUS_SHELL",
+   "desc": [
+    "1つの漁場の魚を、すべて釣る（季節の魚はのぞく）。",
+    "その漁場にヌシが出る。"
+   ],
+   "goal": "1個",
+   "stage": 1,
+   "stages": 4,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "漁場の魚を、すべて釣ると「極めた」になる（季節の魚はのぞく）。竿を持つと、下に「ヌシまで ○/○」が出る。"
+  },
+  {
+   "id": "ism_5",
+   "cat": 4,
+   "tier": 3,
+   "name": "五つの水を知る",
+   "icon": "NAUTILUS_SHELL",
+   "desc": [
+    "5つの漁場を極める。"
+   ],
+   "goal": "5個",
+   "stage": 2,
+   "stages": 4,
+   "prev": "ism_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "漁場の魚を、すべて釣ると「極めた」になる（季節の魚はのぞく）。竿を持つと、下に「ヌシまで ○/○」が出る。"
+  },
+  {
+   "id": "ism_12",
+   "cat": 4,
+   "tier": 4,
+   "name": "水の目利き",
+   "icon": "HEART_OF_THE_SEA",
+   "desc": [
+    "12の漁場を極める。"
+   ],
+   "goal": "12個",
+   "stage": 3,
+   "stages": 4,
+   "prev": "ism_5",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "漁場の魚を、すべて釣ると「極めた」になる（季節の魚はのぞく）。竿を持つと、下に「ヌシまで ○/○」が出る。"
+  },
+  {
+   "id": "ism_all",
+   "cat": 4,
+   "tier": 5,
+   "name": "すべての水を極めた",
+   "icon": "HEART_OF_THE_SEA",
+   "desc": [
+    "23の漁場を、すべて極める。"
+   ],
+   "goal": "23個",
+   "stage": 4,
+   "stages": 4,
+   "prev": "ism_12",
+   "title": "灯原の網元",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "漁場の魚を、すべて釣ると「極めた」になる（季節の魚はのぞく）。竿を持つと、下に「ヌシまで ○/○」が出る。"
+  },
+  {
+   "id": "isn_1",
+   "cat": 4,
+   "tier": 3,
+   "name": "ヌシ釣り",
+   "icon": "TROPICAL_FISH_BUCKET",
+   "desc": [
+    "漁場のヌシを釣り上げる。"
+   ],
+   "goal": "1匹",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "漁場を極めると、その漁場にヌシ（幻）が出る。30匹に1匹ほど。掛け合いで釣り上げる。"
+  },
+  {
+   "id": "isn_10",
+   "cat": 4,
+   "tier": 4,
+   "name": "ヌシを知る者",
+   "icon": "TROPICAL_FISH_BUCKET",
+   "desc": [
+    "10の漁場のヌシを釣り上げる。"
+   ],
+   "goal": "10匹",
+   "stage": 2,
+   "stages": 3,
+   "prev": "isn_1",
+   "title": "ヌシ釣り",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "漁場を極めると、その漁場にヌシ（幻）が出る。30匹に1匹ほど。掛け合いで釣り上げる。"
+  },
+  {
+   "id": "isn_all",
+   "cat": 4,
+   "tier": 5,
+   "name": "ヌシ二十三",
+   "icon": "DRAGON_HEAD",
+   "desc": [
+    "23の漁場のヌシを、すべて釣り上げる。"
+   ],
+   "goal": "23匹",
+   "stage": 3,
+   "stages": 3,
+   "prev": "isn_10",
+   "title": "ヌシの上に立つ者",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "漁場を極めると、その漁場にヌシ（幻）が出る。30匹に1匹ほど。掛け合いで釣り上げる。"
+  },
+  {
+   "id": "isr_4",
+   "cat": 4,
+   "tier": 3,
+   "name": "釣りの名人",
+   "icon": "FISHING_ROD",
+   "desc": [
+    "釣り人の段を「名人」にする（図鑑80種）。"
+   ],
+   "goal": "4段",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "釣り人の段は、灯魚図鑑の種類で上がる（/isaribi の入口の左上）。"
+  },
+  {
+   "id": "isr_6",
+   "cat": 4,
+   "tier": 4,
+   "name": "漁火の名手",
+   "icon": "FISHING_ROD",
+   "desc": [
+    "釣り人の段を「漁火の名手」にする（図鑑170種）。"
+   ],
+   "goal": "6段",
+   "stage": 2,
+   "stages": 2,
+   "prev": "isr_4",
+   "title": "漁火の名手",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "釣り人の段は、灯魚図鑑の種類で上がる（/isaribi の入口の左上）。"
   },
   {
    "id": "play_10",
@@ -11544,7 +12114,7 @@
    "desc": [
     "ほかの証を、ひとつ残らず得る。"
    ],
-   "goal": "574個",
+   "goal": "603個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -11584,7 +12154,7 @@
    "desc": [
     "夜の章の証を、すべて得る。"
    ],
-   "goal": "43個",
+   "goal": "45個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -11644,7 +12214,7 @@
    "desc": [
     "匠の章の証を、すべて得る。"
    ],
-   "goal": "178個",
+   "goal": "205個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -11765,63 +12335,63 @@
   {
    "name": "灯守",
    "mc": "f",
-   "need": 600,
+   "need": 650,
    "trail": "灯の粉",
    "tint": null
   },
   {
    "name": "灯師",
    "mc": "e",
-   "need": 2050,
+   "need": 2200,
    "trail": null,
    "tint": null
   },
   {
    "name": "灯匠",
    "mc": "6",
-   "need": 4150,
+   "need": 4400,
    "trail": "蛍",
    "tint": null
   },
   {
    "name": "灯司",
    "mc": "a",
-   "need": 7050,
+   "need": 7500,
    "trail": null,
    "tint": null
   },
   {
    "name": "夜番",
    "mc": "b",
-   "need": 10750,
+   "need": 11450,
    "trail": "星屑",
    "tint": null
   },
   {
    "name": "夜渡り",
    "mc": "3",
-   "need": 15300,
+   "need": 16300,
    "trail": null,
    "tint": null
   },
   {
    "name": "宵の主",
    "mc": "d",
-   "need": 20650,
+   "need": 22050,
    "trail": "魂火",
    "tint": null
   },
   {
    "name": "暁の灯",
    "mc": "c",
-   "need": 27300,
+   "need": 29100,
    "trail": "暁",
    "tint": null
   },
   {
    "name": "灯原の伝説",
    "mc": "6l",
-   "need": 35150,
+   "need": 37450,
    "trail": "天の川",
    "tint": {
     "name": "天の川",
@@ -12823,6 +13393,61 @@
    "id": "first_30",
    "t": "道を拓く者",
    "how": "証「道を拓く者」"
+  },
+  {
+   "id": "isg_all",
+   "t": "漁場の主",
+   "how": "証「漁場帳 完成」"
+  },
+  {
+   "id": "isl_50",
+   "t": "焔を釣る者",
+   "how": "証「焔を釣る者」"
+  },
+  {
+   "id": "isv_50",
+   "t": "虚空の主",
+   "how": "証「虚空の主」"
+  },
+  {
+   "id": "iss_100000",
+   "t": "鱗長者",
+   "how": "証「鱗長者」"
+  },
+  {
+   "id": "isf_100",
+   "t": "大物師",
+   "how": "証「大物師」"
+  },
+  {
+   "id": "iso_100",
+   "t": "港の顔役",
+   "how": "証「港の顔役」"
+  },
+  {
+   "id": "isgear_50",
+   "t": "名人",
+   "how": "証「名人の道具」"
+  },
+  {
+   "id": "ism_all",
+   "t": "灯原の網元",
+   "how": "証「すべての水を極めた」"
+  },
+  {
+   "id": "isn_10",
+   "t": "ヌシ釣り",
+   "how": "証「ヌシを知る者」"
+  },
+  {
+   "id": "isn_all",
+   "t": "ヌシの上に立つ者",
+   "how": "証「ヌシ二十三」"
+  },
+  {
+   "id": "isr_6",
+   "t": "漁火の名手",
+   "how": "証「漁火の名手」"
   }
  ]
 }

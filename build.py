@@ -262,7 +262,8 @@ _CMDS = [
         ("/waza main", "<技>", "主技を決める（しゃがみ2回で使う）"),
         ("/waza sub", "<技>", "副技を決める（しゃがんで F で使う）"),
         ("/waza tasks", "", "今日の務め"),
-        ("/waza fish", "", "灯魚図鑑"),
+        ("/isaribi", "", "漁火（釣り）：次にやること・灯魚図鑑・漁場帳・魚河岸・釣り具"),
+        ("/isaribi dex", "", "灯魚図鑑"),
         ("/waza top", "", "番付"),
         ("/waza craft", "", "携帯作業台", "匠"),
         ("/waza ender", "", "携帯エンダーチェスト", "匠"),
@@ -628,7 +629,7 @@ _guide_src = f'''
   <div class="edge"></div>
   <div class="wrap">
     <p class="depth">5</p>
-    <h2 class="disp h2">灯の証。577の、灯原だけの進捗。</h2>
+    <h2 class="disp h2">灯の証。604の、灯原だけの進捗。</h2>
     <p class="lead"><span class="kbd">/akashi</span> で開く。過ごしたことが、そのまま証になります。</p>
     {bars([("◆ 易", 43, "#55FF55", "その日のうちに・最初の夜を越える"), ("◆◆ 並", 77, "#55FFFF", "何日か・朱月の夜を越える"), ("◆◆◆ 難", 81, "#FF55FF", "腰を据えて・ウィザーを倒す"), ("◆◆◆◆ 極", 43, "#FFAA00", "何週間も・灯喰いから150回守る"), ("◆◆◆◆◆ 伝", 19, "#FF5555", "季節をまたいで・夜を500回")], unit="個")}
     {cards([("trophy", "#F29BB8", "段になっている", "前の段を得ると次が出る。追跡で進み具合"), ("q", "#B46CFF", "秘められた証 12個", "ヒントだけ。初達成の名前が残る"), ("gift", "#F2B544", "報酬は見た目中心", "称号69・足跡12・灯りの色5")])}
@@ -716,11 +717,11 @@ CH = [
      "sum": "遊んだ時間でたまる灯札で紋書を引き、道具に刻む。ふつうの付呪にはない力。", "facts": ["151の紋", "灯札は遊んだ時間で", "秘は無銘の紋書だけ"],
      "desc": "灯紋（ひもん）。経験値と灯札で紋書を引く4つの段と無銘の紋書、道具への刻み方・重ね方・外し方、暮らし・戦い・移動・守りのおすすめの紋。"},
     {"id": "fish", "t": "灯魚", "c": "#4FD8C8", "layer": 2, "sec": [],
-     "sum": "時と場所と月でかわる、106種の魚。珍しいほど逃げる。", "facts": ["106種", "5つの珍しさ", "ヌシ"],
-     "desc": "灯魚（ひうお）106種。珍しさ、かかる条件（水辺・時刻・天気・月・季節・朱月・灯り）、図鑑と灯原一。"},
+     "sum": "釣れる魚は、ぜんぶ灯魚。漁場ごとに住む魚が変わり、極めるとヌシが出る。", "facts": ["327種", "23の漁場", "23のヌシ"],
+     "desc": "灯魚（ひうお）327種と漁火（/isaribi）。23の漁場、漁場を極めると出るヌシ、掛け合い、釣り人の段、魚河岸と鱗、いつ釣れるか。"},
     {"id": "akashi", "t": "灯の証", "c": "#F29BB8", "layer": 2, "sec": ["akashi"],
-     "sum": "この世界で過ごしたことが、そのまま証になる。", "facts": ["577の証", "位階10段", "称号188種"],
-     "desc": "灯原だけの進捗「灯の証」577個。難度、段と秘められた証、報酬、証点と位階。"},
+     "sum": "この世界で過ごしたことが、そのまま証になる。", "facts": ["604の証", "位階10段", "称号199種"],
+     "desc": "灯原だけの進捗「灯の証」604個。難度、段と秘められた証、報酬、証点と位階。"},
     {"id": "more", "t": "灯標・色・招待", "c": "#C9D0DC", "layer": 2, "sec": ["more"],
      "sum": "名前をつけて行き来し、灯りの色を変え、友を呼ぶ。", "facts": ["灯渡り 3秒", "灯りの色 17色", "招待コード"],
      "desc": "灯標と灯渡り、仲間、17の灯りの色の手に入れ方、友達の招待のしかた。"},
@@ -835,51 +836,85 @@ def _hiwaza_sec():
 
 
 # ── 灯魚の章 ──
-_RAR = [("並", 1, "#E9EEF6", 24, 0, "手がかりがすべて図鑑に出る"),
-        ("珍", 2, "#55FF55", 38, 10, "手がかりがすべて出る。1割ほど逃げる"),
-        ("稀", 3, "#55FFFF", 28, 25, "手がかりは一部だけ。4回に1回は逃げる"),
-        ("秘", 4, "#FF55FF", 10, 40, "手がかりなし。逃げると、姿と手がかりが図鑑に残る"),
-        ("幻", 5, "#FFAA00", 6, 55, "半分以上が逃げる。条件がいくつも重なったときだけ")]
-_CONDS = [("水辺", ["川", "海", "暖かい海", "冷たい海", "深い海", "沼", "マングローブ", "鍾乳洞", "繁茂した洞窟", "ディープダーク", "密林", "桜の林", "雪の地", "砂漠", "果ての地", "ほか"]),
-          ("時刻", ["昼", "夜", "夜明け", "夕暮れ", "真夜中", "真昼"]),
+_RAR = [("並", 1, "#E9EEF6", "どの漁場にもいて、いちばん多くかかる"),
+        ("珍", 2, "#55FF55", "1割ほど逃げる。夜・雨などの条件つきが多い"),
+        ("稀", 3, "#55FFFF", "かかると「掛け合い」。釣り上げれば記録に残る"),
+        ("秘", 4, "#FF55FF", "掛け合いが強い。条件がいくつも重なったときだけ"),
+        ("幻", 5, "#FFAA00", "漁場のヌシと、灯原の伝説の魚。釣ると全体に知らされる")]
+_CONDS = [("時刻", ["昼", "夜", "夜明け", "夕暮れ", "真夜中", "真昼"]),
           ("天気", ["晴れ", "雨", "雷雨"]),
           ("月", ["満月", "十三夜", "半月", "三日月", "新月"]),
+          ("潮", ["満ち潮", "ふつう", "引き潮"]),
           ("季節", ["春（3〜5月）", "夏（6〜8月）", "秋（9〜11月）", "冬（12〜2月）"]),
-          ("灯原だけ", ["朱月", "灯りの中", "格2〜4の灯り", "灯りの外", "深い水"])]
+          ("灯原だけ", ["朱月", "灯りの中", "格2〜4の灯り", "灯りの外"])]
+_GROUND_ROWS = [("川と池", ["spring", "brook", "shallows", "pool", "pond", "lake", "estuary"]),
+                ("海（舟で沖へ）", ["beach", "offshore", "opensea", "abyss"]),
+                ("沼と山", ["marsh", "mangrove", "mtlake", "icehole"]),
+                ("地底と特別", ["cavelake", "cavespring", "lush", "darkwater", "lanternpond", "endwater", "lavapool", "void"])]
 
 
 def _fish_sec():
-    mx = max(r[3] for r in _RAR)
+    fish = HW["fish"]
+    cnt = [sum(1 for f in fish if f["rarity"] == i) for i in range(6)]
+    mx = max(cnt)
     rows = "".join(f'''<div class="rar" style="--c:{c}">
         <span class="rar-n"><b class="dot">{"◆" * n}<s>{"◇" * (5 - n)}</s></b><span class="disp">{name}</span></span>
-        <span class="rar-count"><span class="bar"><i style="width:{cnt / mx * 100:.0f}%"></i></span><b class="dot">{cnt}<small>種</small></b></span>
-        <span class="rar-esc"><small>逃げる</small><span class="esc">{"".join(f'<i class="{"on" if k < esc // 10 else ""}"></i>' for k in range(6))}</span><b class="dot">{esc}%</b></span>
+        <span class="rar-count"><span class="bar"><i style="width:{cnt[n] / mx * 100:.0f}%"></i></span><b class="dot">{cnt[n]}<small>種</small></b></span>
         <p>{txt}</p>
-      </div>''' for name, n, c, cnt, esc, txt in _RAR)
+      </div>''' for name, n, c, txt in _RAR)
+    gd = {g["id"]: g for g in HW["grounds"]}
+    def _gs(v):
+        return "".join(f'<span title="{_E(gd[x]["how"])}">{_E(gd[x]["name"])} <small>{gd[x]["need"]}種＋ヌシ</small></span>' for x in v)
+    grounds = "".join(f'<div class="cond"><dt class="dot">{k}</dt><dd>{_gs(v)}</dd></div>' for k, v in _GROUND_ROWS)
     conds = "".join(f'<div class="cond"><dt class="dot">{k}</dt><dd>{"".join(f"<span>{x}</span>" for x in v)}</dd></div>' for k, v in _CONDS)
     return f'''<section class="stratum s-deep" id="fish">
   <div class="edge"></div>
   <div class="wrap">
-    <h2 class="disp h2">同じ場所でも、時がちがえば別の魚。</h2>
-    <p class="lead">釣りをしていると、ふつうの魚の代わりに「灯魚（ひうお）」がかかります。全部で106種。どこで、いつ、どんな空の下で釣るかで、かかる顔ぶれが変わります。</p>
+    <h2 class="disp h2">釣れる魚は、ぜんぶ灯魚。</h2>
+    <p class="lead">灯原の釣りでは、ふつうのタラやサケは出ません。かかるのはすべて「灯魚（ひうお）」、全部で{len(fish)}種。1匹ごとに名前・大きさ・値段があり、はじめての魚は図鑑に載ります。釣りの画面は <span class="kbd">/isaribi</span>（漁火・いさりび）。メニューの「漁火」からも開けます。</p>
     <div class="rars">{rows}</div>
-    <p class="mu" style="font-size:14px;margin-top:12px">逃げる確率は、釣の道「糸さばき」でさげられます。大きな灯りの中で釣ると、少し逃げにくくなります。</p>
+    {_shot("isaribi-1_home.png", "漁火の入口の画面。上に釣り人の段・次にやること・手引き、下に釣る・稼ぐ・整えるの3つの区画", "入口の画面。迷ったら、まん中の「次にやること」を押せば、次の一手がわかります。")}
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="grounds">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">水が変われば、住む魚が変わる。</h2>
+    <p class="lead">魚は「漁場」ごとに住んでいます。漁場は水のようすで決まります。川の浅い所は瀬、深い所は淵、流れのない水は池や湖、海は浜。舟に乗れば沖・外洋・深海へ。全部で{len(HW["grounds"])}の漁場があります。</p>
+    <dl class="conds">{grounds}</dl>
+    {cards([("fish", "#4FD8C8", "竿を持つと、下に出る", "いまの漁場・ヌシまでの数・いま釣れる魚（まだの数）"), ("map", "#4FD8C8", "漁場帳", "見つけた漁場と、そこに住む魚。まだの漁場はヒントつき"), ("clock", "#4FD8C8", "緑の札＝いま釣れる", "まだ釣っていない魚のうち、いまの時間に釣れる魚")])}
+    {_shot("isaribi-3_ground.png", "漁場「池」の画面。上に漁場・ヌシ・いまの時間、帯の下に住む魚の札", "漁場の画面。緑の札は、まだ釣っていないけれど、いま釣れる魚です。")}
+  </div>
+</section>
+
+<section class="stratum s-deep" id="nushi">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">漁場を極めると、ヌシが目を覚ます。</h2>
+    <p class="lead">その漁場の魚をすべて釣ると「極めた」になり、漁場のヌシ（幻）がかかるようになります（季節の魚は数えません）。ヌシは漁場の数だけ、{len(HW["grounds"])}匹。30匹に1匹ほど、掛け合いで釣り上げます。</p>
+    <div class="three">
+      <div><h3 class="h3 disp">掛け合い</h3><p class="mu">稀・秘・幻とヌシがかかると、掛け合いになります。右クリック長押しで巻き、張りが赤くなったら離す。上のバーが満ちたら釣り上げです。竿・糸・針を強くすると楽になります。</p></div>
+      <div><h3 class="h3 disp">釣り人の段</h3><p class="mu">図鑑の種類で、見習い → 釣り人 → 一人前 → 腕利き → 名人 → 達人 → 漁火の名手 → 灯原の釣り聖 → 海と灯の主 と上がります。上がるたびに鱗のごほうび。</p></div>
+      <div><h3 class="h3 disp">灯原一と大物</h3><p class="mu">種類ごとのいちばん大きな記録が「灯原一」として残り、Discord にも知らせが出ます。灯技の「大物の竿」や大物の餌で、倍の大きさの「大物」がかかります。</p></div>
+    </div>
+    {_shot("isaribi-2_grounds.png", "漁場帳の画面。左の色の帯が漁場の種類、光る札が極めた漁場", "漁場帳。光っている漁場は極めた漁場で、ヌシがかかります。")}
   </div>
 </section>
 
 <section class="stratum s-dusk" id="conds">
   <div class="edge"></div>
   <div class="wrap">
-    <h2 class="disp h2">かかる魚を決めるもの。</h2>
-    <p class="lead">灯魚にはそれぞれ条件があります。珍しい魚ほど、いくつもの条件が重なったときにしか現れません。季節は、現実の日本の暦です。</p>
+    <h2 class="disp h2">いつ釣るかでも、変わる。</h2>
+    <p class="lead">同じ漁場でも、夜だけ・雨の日だけ・満月だけの魚がいます。季節は現実の日本の暦です。漁場の画面で、それぞれの魚が「いつ」釣れるかがわかります。</p>
     <dl class="conds">{conds}</dl>
     <div class="three">
-      <div><h3 class="h3 disp">図鑑と灯原一</h3><p class="mu"><span class="kbd">/waza fish</span> で図鑑が開きます。川・海・沼・地底・野山・特別のつまみで分かれ、釣った・影だけ見た・まだ、の3つの状態で並びます。大きさ（cm）が記録され、種類ごとのいちばん大きな記録が「灯原一」として残ります。</p></div>
-      <div><h3 class="h3 disp">魚読み</h3><p class="mu">釣の道の「魚読み」を覚えると、竿を投げたとき、その場・その時に釣れる灯魚が何種いて、まだ図鑑にないものがいくつあるかがわかります。</p></div>
-      <div><h3 class="h3 disp">ヌシ</h3><p class="mu">釣の道の奥義「主の竿」を覚えると、倍ほどの大きさの「ヌシ」がかかります。秘と幻、そしてヌシを釣り上げると、全体に知らされます。</p></div>
+      <div><h3 class="h3 disp">魚河岸で鱗に</h3><p class="mu">灯りの中か港で、魚を「鱗」に換えます。珍しいほど・大きいほど・釣ってすぐほど高く売れます。今日の相場の3種は高値です。</p></div>
+      <div><h3 class="h3 disp">釣り具・舟・餌</h3><p class="mu">鱗で竿・糸・針（掛け合い）、浮き（何がかかったか）、魚籠を強くします。舟で沖・外洋・深海へ。餌は寄せ餌（珍しい魚）・新顔の餌（まだ釣っていない魚）・大物の餌。</p></div>
+      <div><h3 class="h3 disp">今日の注文と群れ</h3><p class="mu">毎日3つの注文が届き、済むと鱗。ときどき、ある漁場に群れが来て、珍しい魚がかかりやすくなります。焔の糸で溶岩、虚ろの浮きで虚空にも糸を垂らせます。</p></div>
     </div>
-    <a href="wiki-hiuo.html" class="wiki-band" style="margin-top:28px"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯魚図鑑</b><span>106種の珍しさ・大きさ・水辺・手がかり（珍しい魚は伏せてあります）。</span></span><span class="wb-go">図鑑を見る<i></i></span></a>
-    <p class="note cold"><b>放置した釣り場では、灯魚はかかりません。</b>視点が5分動かないあいだは、灯魚も経験値も出ません。</p>
+    <a href="wiki-hiuo.html" class="wiki-band" style="margin-top:28px"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯魚図鑑</b><span>{len(fish)}種の珍しさ・大きさ・どこで・いつ（秘・幻とヌシの名前は伏せてあります）。</span></span><span class="wb-go">図鑑を見る<i></i></span></a>
+    <p class="note cold"><b>放置した釣り場では、灯魚はかかりません。</b>視点が5分動かないあいだは、ふつうの魚しか釣れず、経験値も出ません。</p>
   </div>
 </section>
 '''
@@ -1009,7 +1044,7 @@ def _body(k):
     if c["id"] == "akashi":
         b = "\n".join(_clean(_SEC[s]) for s in c["sec"])
         i = b.rfind("\n  </div>\n</section>")
-        return b[:i] + '\n    <a href="akashi.html" class="wiki-band ak-band" style="margin-top:44px"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">577の証を、ひとつずつ</b><span>目標・報酬・段の道・秘められた証の手がかり。名前や報酬で探せます。</span></span><span class="wb-go">灯の証 Wiki へ<i></i></span></a>' + b[i:]
+        return b[:i] + '\n    <a href="akashi.html" class="wiki-band ak-band" style="margin-top:44px"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">604の証を、ひとつずつ</b><span>目標・報酬・段の道・秘められた証の手がかり。名前や報酬で探せます。</span></span><span class="wb-go">灯の証 Wiki へ<i></i></span></a>' + b[i:]
     if c["id"] == "hiwaza":
         return _hiwaza_sec()
     if c["id"] == "fish":
@@ -1033,7 +1068,7 @@ _CH_SAY = {
     "higui": "灯喰いは、人を見ない。灯籠だけを見る。端の灯籠から守れ。",
     "buff": "欠片が集まったら、加護をひらこう！ 灯りの中だけで効くからね。",
     "hiwaza": "急がなくていいよ。1日ちょっとずつ、毎日育てるのがいちばん。",
-    "fish": "同じ水辺でも、時刻と月で、かかる魚が変わるんだ。",
+    "fish": "竿を持つと、下に漁場が出るよ。迷ったら /isaribi の「次にやること」！",
     "himon": "段が上がるほど、くじは高い。でも1冊で、遊び方が変わることもあるよ。",
     "akashi": "やったことは、ぜんぶ証になるよ。秘められた証もあるからね。",
     "more": "灯標に名前をつけたら、灯渡りでひとっ飛び。",
@@ -1116,7 +1151,7 @@ def _guide_index():
     {layers}
     <div class="wk-bands">
     <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯技 Wiki</b><span>130の技の効き目・要る Lv・技点・待ち時間、技の木、奥義の試練、務め、灯魚図鑑、技の組み立て。</span></span><span class="wb-go">開く<i></i></span></a>
-    <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯の証 Wiki</b><span>577の証の目標と報酬、段の道、10の位階、称号・灯りの色・足跡の手に入れ方。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯の証 Wiki</b><span>604の証の目標と報酬、段の道、10の位階、称号・灯りの色・足跡の手に入れ方。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="himon.html" class="wiki-band hm-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯紋 Wiki</b><span>{len(HM["defs"])}の紋の段・効き目・刻めるもの、紋書の引き方、刻み方と重ね方。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">灯里 Wiki</b><span>4つの格、5つの職のバフと日課・週課、位と匠の試し、施設の素材、礎、ずるの防ぎ方。</span></span><span class="wb-go">開く<i></i></span></a>
     </div>
@@ -1161,7 +1196,7 @@ events = f'''<div class="hero">
       <li data-g="1" style="--c:#9C8CFF">{ic("eye", "#9C8CFF", 56)}<h3 class="disp">闇かくれんぼ</h3><p>5人に1人が鬼。朝まで隠れきれば勝ち</p><span class="vtags"><span class="vtag">{ic("clock", "#9C8CFF")}8分</span><span class="vtag">{ic("people", "#9C8CFF")}4人から</span></span></li>
       <li data-g="2" style="--c:#6FD39A">{ic("hammer", "#6FD39A", 56)}<h3 class="disp">建築早押し</h3><p>お題を15分で建てて、投票で決める</p><span class="vtags"><span class="vtag">{ic("clock", "#6FD39A")}15分</span><span class="vtag">{ic("people", "#6FD39A")}3人から</span></span></li>
       <li data-g="3" style="--c:#E0453A">{ic("moon", "#E0453A", 56)}<h3 class="disp">夜明けまで</h3><p>朱月の夜。倒れたら脱落、朝まで生き延びる</p><span class="vtags"><span class="vtag">{ic("clock", "#E0453A")}10分</span><span class="vtag">{ic("people", "#E0453A")}2人から</span></span></li>
-      <li data-g="4" style="--c:#4FD8C8">{ic("fish", "#4FD8C8", 56)}<h3 class="disp">釣り大会</h3><p>8分で、いちばん多く釣った人の勝ち。どこの水辺でも</p><span class="vtags"><span class="vtag">{ic("clock", "#4FD8C8")}8分</span><span class="vtag">{ic("people", "#4FD8C8")}2人から</span></span></li>
+      <li data-g="4" style="--c:#4FD8C8">{ic("fish", "#4FD8C8", 56)}<h3 class="disp">釣り大会</h3><p>珍しい魚ほど高い点。上位3人に灯銭の賞金。どこの水辺でも</p><span class="vtags"><span class="vtag">{ic("clock", "#4FD8C8")}8分</span><span class="vtag">{ic("people", "#4FD8C8")}2人から</span></span></li>
       <li data-g="5" style="--c:#E9824A">{ic("sword", "#E9824A", 56)}<h3 class="disp">夜狩り</h3><p>8分で、いちばん多く夜の敵を倒した人の勝ち</p><span class="vtags"><span class="vtag">{ic("clock", "#E9824A")}8分</span><span class="vtag">{ic("people", "#E9824A")}2人から</span></span></li>
     </ul>
     {more("くわしく：6つのゲーム", "<p><b>灯籠リレー</b>：出発点から終点まで、自分の組の灯籠だけで灯路を通します。「祭の灯籠」が16個ずつ配られ、祭が終わると消えます。</p><p><b>闇かくれんぼ</b>：鬼は最初の30秒動けません。触れられたら負け、範囲の外に出ても負け。灯籠を置くと10秒間、体が光ります。</p><p><b>建築早押し</b>：お題（灯台・橋・屋台など）。最後に、ひらく投票の画面で1票（<span class=\"kbd\">/yomatsuri</span> からも開けます）。途中参加できます。</p><p><b>夜明けまで</b>：全員で灯りを守りきる夜。途中参加できます。</p><p><b>釣り大会</b>：会場はありません。いまいる場所の水辺で釣ります。画面の上に、上位3人と数が出ます。途中参加できます。</p><p><b>夜狩り</b>：会場はありません。倒した夜の敵を数えます（スポナーから出た敵は数えません）。途中参加できます。</p>")}
@@ -1483,7 +1518,7 @@ def wiki_path(i):
     nb = HW["paths"]
     prev, nxt = nb[i - 1] if i > 0 else None, nb[i + 1] if i + 1 < len(nb) else None
     pg = lambda x, j, cls, lab: (f'<a href="wiki-{x["id"]}.html" class="pg {cls}" style="--c:{_PCOL[j]}"><small class="dot">{lab}</small><b>{x["name"]}</b><span class="mu">{_E(x["desc"][0])}</span></a>' if x else
-                                 f'<a href="wiki-hiuo.html" class="pg {cls}" style="--c:#4FD8C8"><small class="dot">{lab}</small><b>灯魚図鑑</b><span class="mu">106種の灯魚と、かかる条件。</span></a>' if cls == "next" else
+                                 f'<a href="wiki-hiuo.html" class="pg {cls}" style="--c:#4FD8C8"><small class="dot">{lab}</small><b>灯魚図鑑</b><span class="mu">327種の灯魚と、どこで・いつ。</span></a>' if cls == "next" else
                                  f'<a href="wiki.html" class="pg {cls}" style="--c:var(--amber)"><small class="dot">{lab}</small><b>Wiki のはじめ</b><span class="mu">すべての技の一覧と、育て方。</span></a>')
     hero = _wiki_hero(p["name"], _E(p["desc"][0] + p["desc"][1]), color, f'<span aria-hidden="true">›</span><span>{p["name"]}</span>', None, f'PATH {i + 1:02d} ／ 10')
     return hero + f'''
@@ -1567,7 +1602,7 @@ def wiki_index():
     trows = "".join(f'<tr><th style="color:{_PCOL[i]}">{p["name"]}</th><td>{_E(p["trial"])}</td><td>{_E(next(x for x in p["nodes"] if x["tier"] == 4)["name"])}</td></tr>' for i, p in enumerate(HW["paths"]))
     taskrows = "".join(f'<tr><th style="color:{_PCOL[t["path"]]}">{HW["paths"][t["path"]]["k"]}</th><td>{_E(t["text"])}</td><td class="n">+{t["xp"]}</td></tr>' for t in HW["tasks"])
     tot = HW["total"]
-    hero = _wiki_hero("灯技 完全解説", "10の道、130の技、106種の灯魚。プラグインの定義からそのまま作った、灯技のすべてです。数字はゲームと同じです。", "#5AAAFF", "", CH_ICONS["hiwaza"], "HIWAZA WIKI")
+    hero = _wiki_hero("灯技 完全解説", "10の道、130の技、327種の灯魚。プラグインの定義からそのまま作った、灯技のすべてです。数字はゲームと同じです。", "#5AAAFF", "", CH_ICONS["hiwaza"], "HIWAZA WIKI")
     return hero + f'''
 <section class="stratum s-deep wk">
   <div class="edge"></div>
@@ -1627,25 +1662,29 @@ def wiki_fish():
     groups = HW["groups"]
     rar = HW["rarity"]
     rc = ["", "#E9EEF6", "#55FF55", "#55FFFF", "#FF55FF", "#FFAA00"]
+    gname = {g["id"]: g["name"] for g in HW["grounds"]}
     cards = ""
     for f in HW["fish"]:
         r = f["rarity"]
         secret = f["name"] is None
-        cond = "・".join(f["cond"]) if f["cond"] else ("手がかりなし" if secret else "どこでも")
-        name = "？？？" if secret else _E(f["name"])
+        name = ("？？？（ヌシ）" if f["nushi"] else "？？？") if secret else _E(f["name"])
+        when = "この漁場の魚をすべて釣ったあと" if f["nushi"] else f["when"]
+        tags = ('<span class="fc-g" style="color:#FFAA00">ヌシ</span>' if f["nushi"] else "") + ('<span class="fc-g">季節の魚</span>' if f["seasonal"] else "")
         cards += f'''<li class="fc{" secret" if secret else ""}"{"" if secret else f' id="f-{f["id"]}"'} style="--c:{rc[r]}" data-g="{f["group"]}" data-r="{r}">
         <span class="fc-r dot">{"◆" * r}<s>{"◇" * (5 - r)}</s> {rar[r]}</span>
         <b class="fc-n">{name}</b>
-        <span class="fc-g">{_E(groups[f["group"]])}</span>
-        <p class="fc-c"><span>手がかり</span>{_E(cond)}</p>
+        <span class="fc-g">{_E(groups[f["group"]])}</span>{tags}
+        <p class="fc-c"><span>どこで</span>{_E(f["where"])}</p>
+        <p class="fc-c"><span>いつ</span>{_E(when)}</p>
         {"" if secret else f'<p class="fc-f mu">{_E(f["flavor"])}</p>'}
         <p class="fc-s dot">{("？" if secret else f'{f["min"]:g}〜{f["max"]:g}cm')}</p>
       </li>'''
     gchips = "".join(f'<button type="button" class="chip-f" data-f="g" data-v="{i}" style="--c:#4FD8C8">{_E(g)}</button>' for i, g in enumerate(groups))
     rchips = "".join(f'<button type="button" class="chip-f" data-f="r" data-v="{i}" style="--c:{rc[i]}">{rar[i]}</button>' for i in range(1, 6))
     counts = " ・ ".join(f'{rar[i]} {sum(1 for f in HW["fish"] if f["rarity"] == i)}' for i in range(1, 6))
-    hero = _wiki_hero("灯魚図鑑", f"全{len(HW['fish'])}種（{counts}）。手がかりはゲームの図鑑と同じだけ載せています。珍しい魚ほど、自分で見つけてください。", "#4FD8C8",
+    hero = _wiki_hero("灯魚図鑑", f"全{len(HW['fish'])}種（{counts}）・{len(HW['grounds'])}の漁場。どこで・いつ釣れるかは、ゲームの図鑑と同じだけ載せています。秘・幻とヌシの名前は、釣ってからのお楽しみ。", "#4FD8C8",
                       '<span aria-hidden="true">›</span><span>灯魚図鑑</span>', CH_ICONS["fish"], "HIUO")
+    esc = HW["escape"]
     return hero + f'''
 <section class="stratum s-deep wk">
   <div class="edge"></div>
@@ -1653,15 +1692,15 @@ def wiki_fish():
     {_wiki_side("hiuo")}
     <div class="wk-main">
       <div class="finder fishf">
-        <div class="filters"><div class="fg"><span class="fl-l">水辺</span>{gchips}</div><div class="fg"><span class="fl-l">珍しさ</span>{rchips}</div></div>
+        <div class="filters"><div class="fg"><span class="fl-l">群</span>{gchips}</div><div class="fg"><span class="fl-l">珍しさ</span>{rchips}</div></div>
         <p class="find-n mu" aria-live="polite"><b class="dot" id="fn">{len(HW["fish"])}</b> 種 <button type="button" class="clear" id="fclear" hidden>しぼりこみを消す</button></p>
         <ul class="fcs" id="fl">{cards}</ul>
       </div>
       <h2 class="sr">灯魚のしくみ</h2>
       <div class="three">
-        <div><h3 class="h3 disp">逃げる確率</h3><p class="mu">並 0% ・ 珍 {int(HW["escape"][2] * 100)}% ・ 稀 {int(HW["escape"][3] * 100)}% ・ 秘 {int(HW["escape"][4] * 100)}% ・ 幻 {int(HW["escape"][5] * 100)}%。釣の道「糸さばき」で、段ごとに2割ずつ下がります。逃げられた魚は、図鑑に姿と手がかりが残ります。</p></div>
-        <div><h3 class="h3 disp">釣れる見込み</h3><p class="mu">釣りをしたとき、灯魚がかかるかどうかは「灯釣り」・夜・灯りの中で上がります。釣の道「魚読み」を覚えると、その場で釣れる灯魚の数がわかります。</p></div>
-        <div><h3 class="h3 disp">季節は現実の暦</h3><p class="mu">春は3〜5月、夏は6〜8月、秋は9〜11月、冬は12〜2月（日本時間）。月の満ち欠けは、ゲームの中の月です。</p></div>
+        <div><h3 class="h3 disp">漁場とヌシ</h3><p class="mu">魚はそれぞれ住む漁場が決まっています（野山の魚はその土地の水ならどこでも、特別の魚はどこの水でも）。漁場の魚をすべて釣ると、その漁場のヌシがかかるようになります。季節の魚は数えません。</p></div>
+        <div><h3 class="h3 disp">逃げると掛け合い</h3><p class="mu">珍は {int(esc[2] * 100)}% ほど逃げます（灯技「糸さばき」で下がる）。稀・秘・幻とヌシは「掛け合い」：右クリック長押しで巻き、張りが赤くなったら離す。逃げられた魚は、名前が図鑑に残ります。</p></div>
+        <div><h3 class="h3 disp">珍しい魚を出すには</h3><p class="mu">灯技の「目利き」、竿の付呪「宝釣り」（1段 +20%）、灯りの中、漁火の明かり・群れ、寄せ餌で、珍しい魚がかかりやすくなります。まだ釣っていない魚は「灯釣り」と新顔の餌で。</p></div>
       </div>
     </div>
   </div>
@@ -2951,9 +2990,9 @@ _PS = [
          ("小さな拠点は狙われない", "灯籠が3基より少ない灯路網と、地下や高い塔の灯籠は狙われません。"),
          ("自分の灯籠を5基つなぐ", "ひとりでも二ノ灯になり、灯標どうしを行き来できます。"),
          ("灯技を育てる", f"{_K('/waza')}。遊んだ道の Lv が上がり、毎日3つの「今日の務め」もあります。"),
-         ("図鑑と証を埋める", "灯魚は106種、灯の証は577個あります。"),
+         ("図鑑と証を埋める", "灯魚は327種、灯の証は604個あります。"),
      ],
-     "cmds": [("/waza", "灯技"), ("/waza fish", "灯魚図鑑"), ("/akashi", "灯の証"), ("/yomatsuri out", "夜祭を見送る")],
+     "cmds": [("/waza", "灯技"), ("/isaribi", "漁火（釣り）"), ("/akashi", "灯の証"), ("/yomatsuri out", "夜祭を見送る")],
      "note": "迷ったら画面の下を見てください。灯りの外では、いちばん近い灯りの方角が出ます。"},
 ]
 
@@ -2987,7 +3026,7 @@ guide = _guide_index()
 PAGES = [
     ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1は2026年11月7日21時開幕。", index),
     ("start.html", "はじめる｜灯原", "灯原への入り方を機種別に。Java版、スマホ、Windows、Switch・PS・Xbox。最初の夜の過ごし方と、よくある質問。", start),
-    ("guide.html", "遊び方｜灯原", f"灯原のしくみを{len(CH)}の章で。灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、8つの加護、10の道・130の技「灯技」、106種の灯魚、{len(HM['defs'])}の特別な付呪「灯紋」、263の進捗「灯の証」、灯標と灯りの色、仲間と開く里と5つの職「灯里」、灯結。", guide),
+    ("guide.html", "遊び方｜灯原", f"灯原のしくみを{len(CH)}の章で。灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、8つの加護、10の道・130の技「灯技」、327種の灯魚と漁火、{len(HM['defs'])}の特別な付呪「灯紋」、604の進捗「灯の証」、灯標と灯りの色、仲間と開く里と5つの職「灯里」、灯結。", guide),
 ] + [(f"guide-{c['id']}.html", f"{c['t']}｜遊び方｜灯原", c['desc'], chapter_page(k)) for k, c in enumerate(CH)] + [
     ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり4種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。", events),
     ("playstyle.html", "遊び方を選ぶ｜灯原", "みんなで・身内で・ひとりで。3つの遊び方ごとのマニュアル。はじめの5つ、よく使うコマンド、コツ、気をつけること。", playstyle()),
@@ -3076,7 +3115,7 @@ for i, p in enumerate(HW["paths"]):
 _RN = ["", "並", "良", "珍", "稀", "秘"]
 for fsh in HW["fish"]:
     if fsh.get("name") and fsh["rarity"] <= 4:
-        _idx.append({"k": "灯魚", "t": fsh["name"], "s": _RN[fsh["rarity"]] + "・" + "・".join(fsh["cond"][:1 if fsh["rarity"] == 4 else 3]), "u": f"wiki-hiuo.html#f-{fsh['id']}", "c": "#4FD8C8"})
+        _idx.append({"k": "灯魚", "t": fsh["name"], "s": _RN[fsh["rarity"]] + "・" + fsh["where"] + "・" + fsh["when"], "u": f"wiki-hiuo.html#f-{fsh['id']}", "c": "#4FD8C8"})
 for x in AK["defs"]:
     if not x["hidden"]:
         _idx.append({"k": "証", "t": x["name"], "s": AK["cats"][x["cat"]]["name"] + "・" + x["desc"][0], "u": f"akashi-{_AK_SLUG[x['cat']]}.html#{x['id']}", "c": _TCOL[x["tier"]]})
