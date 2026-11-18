@@ -1669,11 +1669,10 @@ def wiki_fish():
         secret = f["name"] is None
         name = ("？？？（ヌシ）" if f["nushi"] else "？？？") if secret else _E(f["name"])
         when = "この漁場の魚をすべて釣ったあと" if f["nushi"] else f["when"]
-        tags = ('<span class="fc-g" style="color:#FFAA00">ヌシ</span>' if f["nushi"] else "") + ('<span class="fc-g">季節の魚</span>' if f["seasonal"] else "")
+        tags = ('<span class="fc-g nushi">ヌシ</span>' if f["nushi"] else "") + ('<span class="fc-g season">季節の魚</span>' if f["seasonal"] else "")
         cards += f'''<li class="fc{" secret" if secret else ""}"{"" if secret else f' id="f-{f["id"]}"'} style="--c:{rc[r]}" data-g="{f["group"]}" data-r="{r}">
-        <span class="fc-r dot">{"◆" * r}<s>{"◇" * (5 - r)}</s> {rar[r]}</span>
+        <div class="fc-top"><span class="fc-r dot">{"◆" * r}<s>{"◇" * (5 - r)}</s> {rar[r]}</span><span class="fc-tags"><span class="fc-g">{_E(groups[f["group"]])}</span>{tags}</span></div>
         <b class="fc-n">{name}</b>
-        <span class="fc-g">{_E(groups[f["group"]])}</span>{tags}
         <p class="fc-c"><span>どこで</span>{_E(f["where"])}</p>
         <p class="fc-c"><span>いつ</span>{_E(when)}</p>
         {"" if secret else f'<p class="fc-f mu">{_E(f["flavor"])}</p>'}

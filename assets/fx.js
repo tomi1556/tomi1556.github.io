@@ -31,7 +31,9 @@
       io.unobserve(el);
       $$('[data-count]', el).concat(el.hasAttribute('data-count') ? [el] : []).forEach(count);
     });
-  }, { rootMargin: '0px 0px -3% 0px', threshold: 0.02 }) : null;
+  }, { rootMargin: '0px 0px 15% 0px', threshold: 0 }) : null;
+  // 背の高いもの（図鑑の一覧など）も、少しでも見えたら出す（割合で待つと、スマホでは画面より高くて出てこない）。
+  // 画面より少し下に来た時点で灯しはじめるので、スクロールしても空白を待たない。
   if (io) {
     items.forEach(function (it) { io.observe(it[0]); });
   } else {
