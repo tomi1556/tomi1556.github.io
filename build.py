@@ -284,6 +284,7 @@ _CMDS = [
         ("/himon", "", "紋書を引く画面を開く（5つの段から、経験値で引く）"),
         ("/himon engrave", "", "道具に紋を刻む・外す画面を開く"),
         ("/himon book", "", "紋帳（見つけた紋と回数）"),
+        ("/himon kari", "", "旅立ちの紋（はじめに1つ選ぶ・よい道具へ移す）"),
     ]),
     ("市", "#F0C35A", "灯市", "Ichiba", "操作はすべて画面で。<span class=\"kbd\">/market</span> は <span class=\"kbd\">/ichiba</span> でも同じ。", [
         ("/ichiba", "", "灯市を開く（買う・売る・頼む・財布・受け取り箱・店・屋号）"),
@@ -507,6 +508,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
     <h2 class="disp h2">最初の夜を、越える。</h2>
     <p class="lead">夜の敵には、まだ勝てません。最初は<b>灯りをともす</b>ことから。</p>
     {timeline([("0分", "lantern", "#F2B544", "灯籠を3基もらう", "ふつうのランタンとは別もの"),
+               ("0分", "star", "#7FD3FF", "旅立ちの紋を1つ選ぶ", "弱い灯紋つきの道具がもらえる・育つと本物に"),
                ("1分", "shield", "#6FD39A", "1基目を置く", "半径10が安全になる"),
                ("3分", "path", "#FFD98A", "16ブロック以内に2基目", "灯路でつながり、足が速く"),
                ("5分", "book", "#5AAAFF", "<span class=\"kbd\">/menu</span> を開く", "すべての画面はここから"),
@@ -2037,6 +2039,20 @@ def _hm_fuda():
     return f'''{cards([("clock", "#E9C46A", "灯札は、遊んだ時間で", f"{HM['fudaMin']}分で1枚・{HM['fudaMax']}枚まで・はじめに{HM['fudaStart']}枚"), ("x", "#E0453A", "放置ではたまらない", "視点が動き、歩くか掘る・置くかした1分だけ"), ("star", "#FF55FF", "秘は無銘の紋書からだけ", f"5%か、{M['pity']}冊目の天井")])}'''
 
 
+_KARI = [("鉤縄", "旅", "釣り竿", "釣り針が刺さった場所へ飛ぶ（本物より弱く・5秒に1回）", "#4FD8C8"),
+         ("二段跳び", "移動", "革のブーツ", "空中でもう一度跳べる（8秒に1回）", "#8FC3E8"),
+         ("受け流し", "戦い", "石の剣", "しゃがんで剣を持つと、近くの攻撃を 15% で受け流す", "#E0453A"),
+         ("不屈", "守り", "革の胸当て", "倒れるはずの一撃を、体力1で耐える（現実の2時間に1回）", "#F2B544")]
+
+
+def _hm_kari():
+    """旅立ちの紋（仮紋）：はじめての人が1つ選ぶ、弱い灯紋の写し。"""
+    cs = "".join(f'<div class="kari" style="--c:{c}"><b class="disp">{n}</b><small>{who}の人に ・ {item}つき</small><p>{t}</p></div>' for n, who, item, t, c in _KARI)
+    return f'''<div class="karis">{cs}</div>
+      <p class="mu wk-small">はじめて入ると、4つから1つ選べます（<span class="kbd">/himon kari</span>・灯紋の画面の左下からも）。選ぶとその紋を刻んだ道具がもらえ、よい道具に替えたら「移す」で写せます。写しは持ち主にしか働きません。選び直しは1回だけ。
+      <b>最初の夜を越す・鉄の道具か防具を作る・里に入る（または遊んだ時間10時間）</b>の3つで育ち、そろうと本物の灯紋 Lv1 になります。</p>'''
+
+
 def _hm_rules():
     return f'''<ol class="hm-steps">
         <li><b>「刻む」を開く</b><span>画面の「刻む」か <span class="kbd">/himon engrave</span>。</span></li>
@@ -2069,6 +2085,14 @@ def _himon_sec():
     {_hm_tiers()}
     {_hm_fuda()}
     <p class="mu" style="font-size:14px;margin-top:20px">どの紋が出るかは、段の中でくじ引きです。最大 Lv2 の紋は 85% で Lv1、最大 Lv3 の紋は 75%・20%・5%。見つけた紋は <span class="kbd">/himon book</span> の紋帳に残ります。紋書は渡したり交換したりできます。</p>
+  </div>
+</section>
+
+<section class="stratum s-soil" id="kari">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">はじめに、旅立ちの紋を1つ。</h2>
+    {_hm_kari()}
   </div>
 </section>
 
@@ -2131,6 +2155,9 @@ def himon_page():
         <div><b class="dot">{len(HM["defs"])}</b><span>紋</span></div><div><b class="dot">{len(R)}</b><span>段</span></div><div><b class="dot">{HM["slots"]}</b><span>1つの道具に刻める数</span></div><div><b class="dot">{HM["fudaMin"]}<small>分</small></b><span>灯札1枚に要る、遊んだ時間</span></div>
       </div>
 
+      <h2 class="disp h2 wk-h" id="kari">旅立ちの紋</h2>
+      {_hm_kari()}
+
       <h2 class="disp h2 wk-h" id="draw">紋書を引く</h2>
       <p class="mu wk-p"><span class="kbd">/himon</span> で画面を開き、紋書を選んで経験値と灯札を払うと、1冊出ます。どの紋が出るかは、段の中でくじ引きです。</p>
       {_hm_tiers()}
@@ -2155,6 +2182,7 @@ def himon_page():
         <tr><th class="n">/himon</th><td>紋書を引く画面を開く（<span class="kbd">/mon</span> でも同じ）</td></tr>
         <tr><th class="n">/himon engrave</th><td>道具に刻む画面を開く</td></tr>
         <tr><th class="n">/himon book</th><td>紋帳（見つけた紋と回数）</td></tr>
+        <tr><th class="n">/himon kari</th><td>旅立ちの紋（はじめに1つ選ぶ・よい道具へ移す）</td></tr>
       </tbody></table></div>
     </div>
   </div>
@@ -3142,6 +3170,7 @@ _GUIDE = [
     ("自分の灯標に帰る", "/tomoshibi home　「帰る場所」に決めた灯標へ灯渡り", _cmd_at.get("/tomoshibi home", "commands.html"), "帰りたい 帰る 戻る 戻りたい 家 拠点 ホーム home"),
     ("里に帰る", "/sato home　里灯へ帰る（待ち時間あり）", _cmd_at.get("/sato home", "commands.html"), "帰りたい 帰る 戻る 戻りたい 里 ホーム home"),
     ("ランタンを置いても安全にならない", "ふつうのランタンは飾り。守るのは灯原の「灯籠」だけ（作り方・置き方）", "guide-lantern.html", "ランタン 安全 安全にならない 敵が湧く 湧く 守られない 灯籠"),
+    ("旅立ちの紋（はじめに選ぶ灯紋）", "/himon kari　弱い灯紋つきの道具を1つ。育つと本物の灯紋に", "himon.html#kari", "旅立ち 仮紋 はじめ 最初 初期 選ぶ 鉤縄 二段跳び 受け流し 不屈"),
     ("夜祭に出ない（見送る）", "/yomatsuri out　今回の夜祭を見送る", _cmd_at.get("/yomatsuri out", "events.html"), "見送る 出ない 参加しない 夜祭 不参加"),
 ]
 for t, s_, u, a in reversed(_GUIDE):
