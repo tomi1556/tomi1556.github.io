@@ -2,12 +2,14 @@
 (function () {
   'use strict';
   var ADDRESS = 'tomoshibara.life';
-  var SEASON_START = Date.parse('2026-11-07T21:00:00+09:00');
+  var SEASON_START = Date.parse('2026-11-07T18:00:00+09:00');
   var GAMES = [
     { name: '灯籠リレー', desc: '2組に分かれ、出発点から終点まで、自分の組の灯籠だけで先に灯路を通した組の勝ち。' },
     { name: '闇かくれんぼ', desc: '鬼に触れられたら負け。朝まで隠れきれば勝ち。灯籠を置くと、10秒間 体が光ります。' },
     { name: '建築早押し', desc: 'お題の建物を15分で建て、最後に参加者全員の投票で決めます。' },
-    { name: '夜明けまで', desc: '朱月の夜を呼び、倒れたら脱落。朝まで生き延びた人の勝ち。' }
+    { name: '夜明けまで', desc: '朱月の夜を呼び、倒れたら脱落。朝まで生き延びた人の勝ち。' },
+    { name: '釣り大会', desc: '珍しい魚ほど高い点。上位3人に灯銭の賞金。どこの水辺でも参加できます。' },
+    { name: '夜狩り', desc: '夜の敵を倒した数を競います。上位3人に灯銭の賞金。' }
   ];
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
@@ -84,7 +86,7 @@
     var first = Date.UTC(2026, 10, 7, 21, 0, 0); // 最初の夜祭は開幕の夜
     if (f.getTime() < first) f = new Date(first);
     var week = Math.max(0, Math.floor((Date.UTC(f.getUTCFullYear(), f.getUTCMonth(), f.getUTCDate()) - Date.UTC(2026, 0, 5)) / 604800000));
-    return { at: f.getTime() - J, month: f.getUTCMonth() + 1, day: f.getUTCDate(), game: GAMES[week % 4], week: week };
+    return { at: f.getTime() - J, month: f.getUTCMonth() + 1, day: f.getUTCDate(), game: GAMES[week % GAMES.length], week: week };
   }
 
   function tick() {
@@ -97,6 +99,7 @@
       ['d', 'h', 'm', 's'].forEach(function (k) { var b = $('[data-u="' + k + '"]', el); if (b) b.textContent = sc[k]; });
     });
     $$('[data-season-live]').forEach(function (el) { el.hidden = left > 0; });
+    $$('[data-season-pre]').forEach(function (el) { el.hidden = left <= 0; });
     var f = nextFest(now), fc = split(f.at - now), live = now >= f.at;
     $$('[data-fest-date]').forEach(function (el) { el.innerHTML = '次の夜祭は <span style="white-space:nowrap">' + f.month + '月' + f.day + '日（土）21:00</span>'; });
     // 開幕の夜がそのまま最初の夜祭のときは、同じ秒読みを2回並べない（シーズンの秒読みがあるページだけ）
@@ -271,7 +274,8 @@
   // ── サイト内を探す（Ctrl+K / ⌘K / 虫めがね） ──
   (function () {
     var IDX = null, box = null, input, list, cur = 0, kind = 'すべて', hits = [];
-    var KINDS = ['すべて', '技', '灯魚', '証', 'コマンド', 'ページ'];
+    // 種類のしぼりこみは、索引にある種類から作る（見つかる種類は、かならず選べる）
+    var KINDS = ['すべて'];
     var norm = function (s) {
       return (s || '').toLowerCase().replace(/[Ａ-Ｚａ-ｚ０-９]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 0xFEE0); })
         .replace(/[ァ-ヶ]/g, function (c) { return String.fromCharCode(c.charCodeAt(0) - 0x60); });
@@ -279,15 +283,15 @@
     function load() {
       if (IDX) return Promise.resolve(IDX);
       return fetch('assets/search.json').then(function (r) { return r.json(); }).then(function (d) {
-        IDX = d.map(function (x) { x._t = norm(x.t); x._s = norm(x.s); return x; }); return IDX;
+        IDX = d.map(function (x) { x._t = norm(x.t); x._s = norm(x.s); x._a = norm(x.a || ''); if (KINDS.indexOf(x.k) < 0) KINDS.push(x.k); return x; }); return IDX;
       });
     }
     function build() {
       box = document.createElement('div');
       box.className = 'qs'; box.hidden = true;
       box.setAttribute('role', 'dialog'); box.setAttribute('aria-modal', 'true'); box.setAttribute('aria-label', 'サイト内を探す');
-      box.innerHTML = '<div class="qs-in"><label class="qs-f"><span class="sr">探す</span><input type="search" placeholder="技・灯魚・証・コマンド・ページを探す" autocomplete="off"><kbd class="dot">Esc</kbd></label>' +
-        '<div class="qs-k">' + KINDS.map(function (k) { return '<button type="button" data-k="' + k + '"' + (k === kind ? ' aria-pressed="true"' : ' aria-pressed="false"') + '>' + k + '</button>'; }).join('') + '</div>' +
+      box.innerHTML = '<div class="qs-in"><label class="qs-f"><span class="sr">探す</span><input type="search" placeholder="ことばで探す（例：入れない・帰りたい・砂抜き）" autocomplete="off"><kbd class="dot">Esc</kbd></label>' +
+        '<div class="qs-k"></div>' +
         '<ul class="qs-l" role="listbox"></ul><p class="qs-h mu"><span>↑↓ でえらぶ</span><span>Enter でひらく</span><span>Esc で閉じる</span></p></div>';
       document.body.appendChild(box);
       input = box.querySelector('input'); list = box.querySelector('.qs-l');
@@ -306,20 +310,37 @@
       });
     }
     function esc(s) { return String(s).replace(/[&<>"]/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]; }); }
+    function score(x, words) {
+      var sc = 0;
+      for (var i = 0; i < words.length; i++) {
+        var w = words[i], a = x._t.indexOf(w), b = x._s.indexOf(w), c = x._a ? x._a.indexOf(w) : -1;
+        if (a < 0 && b < 0 && c < 0) return null;
+        sc += c >= 0 ? 60 : a === 0 ? 30 : a > 0 ? 15 : 4;
+      }
+      return sc - x.t.length * 0.1;
+    }
+    function kindsRow(all) {
+      // その言葉で見つかる種類だけを、数つきで出す（ないときは全部）
+      var n = {};
+      (all || []).forEach(function (x) { n[x.k] = (n[x.k] || 0) + 1; });
+      var ks = all === null ? KINDS : KINDS.filter(function (k) { return k === 'すべて' || n[k] || k === kind; });
+      all = all || [];
+      box.querySelector('.qs-k').innerHTML = ks.map(function (k) {
+        var c = k === 'すべて' ? all.length : (n[k] || 0);
+        return '<button type="button" data-k="' + k + '" aria-pressed="' + (k === kind) + '">' + k + (all.length ? ' <small>' + c + '</small>' : '') + '</button>';
+      }).join('');
+    }
     function run() {
       var q = norm(input.value.trim()), words = q.split(/\s+/).filter(Boolean);
-      var pool = IDX.filter(function (x) { return kind === 'すべて' || x.k === kind; });
-      if (!words.length) { hits = kind === 'すべて' ? IDX.filter(function (x) { return x.k === 'ページ'; }).slice(0, 12) : pool.slice(0, 40); }
-      else {
-        hits = pool.map(function (x) {
-          var sc = 0;
-          for (var i = 0; i < words.length; i++) {
-            var w = words[i], a = x._t.indexOf(w), b = x._s.indexOf(w);
-            if (a < 0 && b < 0) return null;
-            sc += a === 0 ? 30 : a > 0 ? 15 : 4;
-          }
-          return [sc - x.t.length * 0.1, x];
-        }).filter(Boolean).sort(function (a, b) { return b[0] - a[0]; }).slice(0, 40).map(function (a) { return a[1]; });
+      if (!words.length) {
+        var pool0 = IDX.filter(function (x) { return kind === 'すべて' || x.k === kind; });
+        hits = kind === 'すべて' ? IDX.filter(function (x) { return x.k === '案内' || x.k === 'ページ'; }).slice(0, 14) : pool0.slice(0, 40);
+        kindsRow(null);
+      } else {
+        var all = IDX.map(function (x) { var s = score(x, words); return s === null ? null : [s, x]; }).filter(Boolean)
+          .sort(function (a, b) { return b[0] - a[0]; }).map(function (a) { return a[1]; });
+        kindsRow(all);
+        hits = all.filter(function (x) { return kind === 'すべて' || x.k === kind; }).slice(0, 40);
       }
       list.innerHTML = hits.length ? hits.map(function (x, i) {
         return '<li data-i="' + i + '" role="option"><a href="' + x.u + '" style="--c:' + (x.c || 'var(--amber)') + '"><span class="qs-kd">' + x.k + '</span><b>' + esc(x.t) + '</b><small>' + esc(x.s) + '</small></a></li>';

@@ -51,12 +51,18 @@ def header(cur):
 </div></header>'''
 
 
+# シーズンの開幕（作った日で、開催前・開催中の文を出し分ける。ブラウザでは site.js が時刻で切り替える）
+_SEASON_LIVE = datetime.date.today() >= datetime.date(2026, 11, 7)
+_LIVE_H = "" if _SEASON_LIVE else " hidden"
+_PRE_H = " hidden" if _SEASON_LIVE else ""
+
+
 def footer():
     ch = "".join(f'<li><a href="guide-{c["id"]}.html">{c["t"]}</a></li>' for c in CH)
     cols = [
         ("はじめる", [("start.html#join", "入り方"), ("start.html#first", "最初の夜"), ("playstyle.html", "遊び方を選ぶ"), ("commands.html", "コマンド一覧"), ("start.html#faq", "よくある質問")]),
         ("遊び方", None),
-        ("Wiki", [("wiki.html", "Wiki のはじめ"), ("wiki.html#all", "すべての技を探す"), ("wiki.html#trials", "奥義の試練"), ("wiki.html#tasks", "今日の務め"), ("wiki-hiuo.html", "灯魚図鑑"), ("wiki-build.html", "技の組み立て"), ("akashi.html", "灯の証 Wiki"), ("himon.html", "灯紋 Wiki"), ("hisato.html", "灯里 Wiki")]),
+        ("Wiki", [("wiki.html", "灯技 Wiki"), ("himon.html", "灯紋 Wiki"), ("akashi.html", "灯の証 Wiki"), ("hisato.html", "灯里 Wiki"), ("wiki-hiuo.html", "灯魚 Wiki（図鑑）")]),
         ("灯原", [("events.html", "夜祭"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
     ]
     cm = ""
@@ -335,7 +341,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <div class="bars" aria-hidden="true"><i></i><i></i></div>
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div><div class="dusk" aria-hidden="true"></div>
   <div class="wrap hero-body" id="content">
-    <a href="#season" class="chip fadein"><i></i><span>シーズン1「灯ノ海」</span><b data-season-short>11月7日（土）21:00 開幕</b></a>
+    <a href="#season" class="chip fadein"><i></i><span>シーズン1「灯ノ海」</span><b data-season-short>{"開催中" if _SEASON_LIVE else "11月7日（土）18:00 開幕"}</b></a>
     <span class="online" data-online><i></i>いま <b>0</b> 人が参加中</span>
     <h1 class="disp h1 reveal">灯りをつないで、<br>夜の果てまで。</h1>
     <p class="lead lead-hero fadein">夜が24分つづくサバイバルサーバー。灯籠を置いた場所だけが安全で、つなぐと道になります。Java版でも統合版でも、無料で同じ世界に入れます。</p>
@@ -418,8 +424,8 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
     </div>
     <div class="pn" style="flex:1 1 360px;min-width:0">
       <p class="mu" style="font-size:14px;font-weight:700">この日のゲーム</p>
-      <h3 class="disp" style="margin:6px 0 10px;font-size:32px;line-height:1.3;color:#F6B8CE" data-fest-game>週替わりで4種類</h3>
-      <p style="margin-bottom:22px;font-size:16px" data-fest-desc>灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。</p>
+      <h3 class="disp" style="margin:6px 0 10px;font-size:32px;line-height:1.3;color:#F6B8CE" data-fest-game>週替わりで6種類</h3>
+      <p style="margin-bottom:22px;font-size:16px" data-fest-desc>灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで、釣り大会、夜狩り。</p>
       <a href="events.html" class="pbtn sm">夜祭について</a>
     </div>
   </div>
@@ -429,11 +435,13 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <div class="edge"></div>
   <div class="wrap">
     <p class="depth">シーズン1</p>
-    <h2 class="disp h2">「灯ノ海」は、<span style="white-space:nowrap">11月7日</span>の夜に始まる。</h2>
-    <p class="lead">2026年11月7日（土）21時。まっさらな世界に、全員が同じ場所から入ります。最初の夜祭も、この夜です。</p>
+    <h2 class="disp h2" data-season-pre{_PRE_H}>「灯ノ海」は、<span style="white-space:nowrap">11月7日</span>の夜に始まる。</h2>
+    <p class="lead" data-season-pre{_PRE_H}>2026年11月7日（土）18時。まっさらな世界に、全員が同じ場所から入ります。</p>
+    <h2 class="disp h2" data-season-live{_LIVE_H}>「灯ノ海」は、いま開催中。</h2>
+    <p class="lead" data-season-live{_LIVE_H}>2026年11月7日に始まりました。いまから入っても、小さな拠点は灯喰いに狙われないので、落ち着いて始められます。灯籠も3基もらえます。</p>
     <div style="margin-top:28px" data-season-cd>{cd("season", "開幕まで").replace(' data-season-cd', '')}</div>
-    <p class="note" data-season-live hidden><b>シーズン1は開催中です。</b>いまから入っても、小さな拠点は灯喰いに狙われないので、落ち着いて始められます。</p>
-    {cards([("gift", "#F29BB8", "開幕の夜の色", "参加した全員に「はじまりの灯」"), ("clock", "#9C8CFF", "3か月でひと区切り", "終わると、世界を作り直す"), ("chest", "#F2B544", "持ち越す予定", "灯りの色・夜祭と招待の記録（建物・持ち物は×）")])}
+    <div class="btns" data-season-live{_LIVE_H} style="margin:20px 0 8px"><a href="start.html" class="pbtn">いまから入る</a></div>
+    {cards([("gift", "#F29BB8", "開幕の夜の色", "参加した全員に「はじまりの灯」"), ("house", "#9C8CFF", "世界は、このまま続く", "いまのところ、作り直す予定はありません"), ("chest", "#F2B544", "建てたものは残る", "建物・持ち物・灯りの色・記録も、そのまま")])}
   </div>
 </section>
 <section class="s-stone" style="position:relative">
@@ -488,7 +496,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
       <p class="mu" style="margin-top:12px;font-size:14px">オンラインの加入（Switch Online・PS Plus・Game Pass）が要ります。</p>
       <div class="btns" style="margin-top:20px"><a href="{DISCORD}" class="pbtn dbtn" target="_blank" rel="noopener">Discord で1つずつ見る</a></div>
     </div>
-    <p class="note"><b>入れないときは</b>アドレスの打ちまちがいか、バージョンが古いかがほとんど。それでもだめなら Discord へ。</p>
+    <p class="note" id="trouble"><b>入れないときは</b>アドレスの打ちまちがいか、バージョンが古いかがほとんど。統合版はポート <span class="kbd">5156</span> も確かめて。それでもだめなら Discord へ。</p>
   </div>
 </section>
 
@@ -569,6 +577,7 @@ _guide_src = f'''
             ("coin", "#E9C46A", "たくさん持つと", "20基目から +Lv1・35基目から +Lv2"), ("x", "#E0453A", "同じチャンク・同じ高さに3基目", "置けない（2基まで。上下24ブロック離れた地下は別）"), ("x", "#E0453A", "1人 50基まで", "それより先は、仲間とつなぐ")], cols=3, cls="row")}
     <p class="note"><b>細る灯</b>灯りの中にだれも入らないまま7日たつと、その灯路網は細って消える。素手で右クリックすると、つながった分までまとめて戻る。人が通う灯りは消えない。</p>
     <p class="note warn"><b>守りが効かないもの</b>灯喰い・ウィザー・エンダードラゴン・ウォーデン・エルダーガーディアン</p>
+    <p class="note"><b>人の手は止めない</b>灯りが守るのは、敵と爆発から。ほかの人が建てる・壊すのは止めません。灯籠そのものは、本人と仲間しか壊せません。建物を守りたいときは里の土地（民だけが建てられる）、箱や扉は置くと自動で鍵がかかります（<span class="kbd">/kagi</span>）。</p>
   </div>
 </section>
 
@@ -596,7 +605,7 @@ _guide_src = f'''
     <p class="depth">3</p>
     <h2 class="disp h2">灯喰いは、灯りを消しに来る。</h2>
     <div class="vrow" style="margin-top:18px"><div class="vfact-art" style="width:200px;height:190px;flex:none">{eater()}<span class="vfact-lan">{ic("lantern", "#5AAAFF", 56)}</span></div>
-      <p class="lead vgrow">灯りの守りを破れる、ただひとつの敵。人ではなく<b>灯籠</b>を狙い、闇を渡って現れます。</p></div>
+      <p class="lead vgrow">灯籠を狙う、ただひとつの敵。人ではなく<b>灯籠</b>を狙い、闇を渡って現れます（ボスにも灯りの守りは効きません）。</p></div>
     {timeline([("1", "eye", "#B46CFF", "狙われる", "人の近くの、灯路がいちばん少ない「端」"), ("2", "warn", "#B46CFF", "知らせが出る", "画面の下に方角と距離"), ("3", "clock", "#B46CFF", "喰いはじめる", "■■■■□□ で進み具合"),
                ("4", "sword", "#F2B544", "たたいて守る", "倒せば守りきり・欠片も"), ("5", "fire", "#5AAAFF", "喰われると青い火", "守りも灯路も止まる"), ("6", "lantern", "#6FD39A", "灯し直す", "素手で右クリック")])}
     <h3 class="disp vh3">喰い終わるまでの時間</h3>
@@ -705,7 +714,7 @@ CH = [
      "sum": "昼は4分、夜は24分。夜を重ねるほど、敵は強くなる。", "facts": ["夜 24分", "敵の体力 ×2.5", "7夜に一度の朱月"],
      "desc": "昼4分・夜24分の灯原の夜。夜に湧く敵の強さ、精鋭と群れ、朱月の夜。"},
     {"id": "higui", "t": "灯喰い", "c": "#E0453A", "layer": 0, "sec": ["higui"],
-     "sum": "灯りの守りを破る、ただひとつの敵。人ではなく灯籠を狙う。", "facts": ["灯籠だけを狙う", "喰い終わるまで 5秒〜", "夜明けに火が戻る"],
+     "sum": "灯籠を狙う、ただひとつの敵。灯りの守りの中まで入ってくる。", "facts": ["灯籠だけを狙う", "喰い終わるまで 5秒〜", "夜明けに火が戻る"],
      "desc": "灯籠を喰いに来る灯喰い。狙われる灯籠、喰い終わるまでの時間、守り方と灯し直し方。"},
     {"id": "buff", "t": "加護と欠片", "c": "#6FD39A", "layer": 1, "sec": ["buff"],
      "sum": "敵が落とす欠片で、灯りの中だけで働く加護を解放する。", "facts": ["8つの加護", "Lv3 まで", "格とのかけ算"],
@@ -1170,7 +1179,7 @@ events = f'''<div class="hero">
     <p class="lead">この時間にログインすれば、かならずだれかがいます。人数がそろうと、週替わりのゲームが自動で始まります。</p>
     <div style="display:flex;flex-wrap:wrap;gap:32px 56px;align-items:flex-end;margin-top:32px">
       <div><p class="depth">次の夜祭</p><p class="disp" style="font-size:clamp(26px,3.4vw,40px);line-height:1.3;margin:6px 0 14px" data-fest-date>夜祭は毎週土曜 21:00</p>{cd("fest", "次の夜祭まで")}</div>
-      <div class="pn" style="flex:1 1 320px;min-width:0;background:rgba(10,8,30,.6)"><p class="mu" style="font-size:14px;font-weight:700">この日のゲーム</p><h2 class="disp" style="margin:6px 0 8px;font-size:30px;line-height:1.3;color:#F6B8CE" data-fest-game>週替わりで4種類</h2><p style="font-size:16px" data-fest-desc>灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。</p></div>
+      <div class="pn" style="flex:1 1 320px;min-width:0;background:rgba(10,8,30,.6)"><p class="mu" style="font-size:14px;font-weight:700">この日のゲーム</p><h2 class="disp" style="margin:6px 0 8px;font-size:30px;line-height:1.3;color:#F6B8CE" data-fest-game>週替わりで6種類</h2><p style="font-size:16px" data-fest-desc>灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで、釣り大会、夜狩り。</p></div>
     </div>
   </div>
 </div>
@@ -1197,7 +1206,7 @@ events = f'''<div class="hero">
       <li data-g="2" style="--c:#6FD39A">{ic("hammer", "#6FD39A", 56)}<h3 class="disp">建築早押し</h3><p>お題を15分で建てて、投票で決める</p><span class="vtags"><span class="vtag">{ic("clock", "#6FD39A")}15分</span><span class="vtag">{ic("people", "#6FD39A")}3人から</span></span></li>
       <li data-g="3" style="--c:#E0453A">{ic("moon", "#E0453A", 56)}<h3 class="disp">夜明けまで</h3><p>朱月の夜。倒れたら脱落、朝まで生き延びる</p><span class="vtags"><span class="vtag">{ic("clock", "#E0453A")}10分</span><span class="vtag">{ic("people", "#E0453A")}2人から</span></span></li>
       <li data-g="4" style="--c:#4FD8C8">{ic("fish", "#4FD8C8", 56)}<h3 class="disp">釣り大会</h3><p>珍しい魚ほど高い点。上位3人に灯銭の賞金。どこの水辺でも</p><span class="vtags"><span class="vtag">{ic("clock", "#4FD8C8")}8分</span><span class="vtag">{ic("people", "#4FD8C8")}2人から</span></span></li>
-      <li data-g="5" style="--c:#E9824A">{ic("sword", "#E9824A", 56)}<h3 class="disp">夜狩り</h3><p>8分で、いちばん多く夜の敵を倒した人の勝ち</p><span class="vtags"><span class="vtag">{ic("clock", "#E9824A")}8分</span><span class="vtag">{ic("people", "#E9824A")}2人から</span></span></li>
+      <li data-g="5" style="--c:#E9824A">{ic("sword", "#E9824A", 56)}<h3 class="disp">夜狩り</h3><p>夜の敵を倒した数を競う。上位3人に灯銭の賞金</p><span class="vtags"><span class="vtag">{ic("clock", "#E9824A")}8分</span><span class="vtag">{ic("people", "#E9824A")}2人から</span></span></li>
     </ul>
     {more("くわしく：6つのゲーム", "<p><b>灯籠リレー</b>：出発点から終点まで、自分の組の灯籠だけで灯路を通します。「祭の灯籠」が16個ずつ配られ、祭が終わると消えます。</p><p><b>闇かくれんぼ</b>：鬼は最初の30秒動けません。触れられたら負け、範囲の外に出ても負け。灯籠を置くと10秒間、体が光ります。</p><p><b>建築早押し</b>：お題（灯台・橋・屋台など）。最後に、ひらく投票の画面で1票（<span class=\"kbd\">/yomatsuri</span> からも開けます）。途中参加できます。</p><p><b>夜明けまで</b>：全員で灯りを守りきる夜。途中参加できます。</p><p><b>釣り大会</b>：会場はありません。いまいる場所の水辺で釣ります。画面の上に、上位3人と数が出ます。途中参加できます。</p><p><b>夜狩り</b>：会場はありません。倒した夜の敵を数えます（スポナーから出た敵は数えません）。途中参加できます。</p>")}
   </div>
@@ -1208,13 +1217,14 @@ events = f'''<div class="hero">
   <div class="wrap">
     <p class="depth">ごほうび</p>
     <h2 class="disp h2">強くはならない。だから、だれでも同じ条件。</h2>
-    <p class="lead">もらえるのは、灯りの色と名前の印だけ。</p>
+    <p class="lead">もらえるのは、見た目と少しの灯銭。強くなる品は出ません。</p>
     <div class="vrow" style="margin-top:28px;align-items:flex-start">
       <div class="vgrow"><h3 class="disp vh3" style="margin-top:0">参加した回数で、色がふえる</h3>
         <div class="vcolors"><span style="--c:#F29BB8"><i></i><b>桜</b><small>5回</small></span><span style="--c:#8FC3E8"><i></i><b>水縹</b><small>10回</small></span><span style="--c:#8BD18F"><i></i><b>若竹</b><small>20回</small></span></div>
         <p class="mu" style="font-size:14px;margin-top:10px">勝ち負けは関係なし。参加した回数だけ。</p></div>
-      <div class="vgrow">{cards([("star", "#F2B544", "勝った人に ✦", "次の夜祭まで、名前の横に"), ("trophy", "#F29BB8", "灯の証「祭の章」", "全種で勝つ・50回勝つ など")], cols=2)}</div>
+      <div class="vgrow">{cards([("people", "#6FD39A", "最後まで遊んだ全員に", "灯銭 10（どの種目でも）"), ("star", "#F2B544", "勝った人に", "灯銭 +20・次の夜祭まで名前の横に ✦"), ("fish", "#4FD8C8", "釣り大会・夜狩りだけ", "上位3人に賞金 300・150・80 銭（同じ数なら同じ順位）"), ("trophy", "#F29BB8", "灯の証「祭の章」", "全種で勝つ・50回勝つ など")], cols=2)}</div>
     </div>
+    <p class="mu" style="font-size:14px;margin-top:14px">参加と勝ちの灯銭は、1日に稼げる灯銭の上限（100）に数えます。賞金は上限の外です。</p>
   </div>
 </section>
 
@@ -1411,7 +1421,8 @@ def _xp_rows(i):
 
 
 _WIKIS = [("waza", "技", "灯技", "wiki.html", "#5AAAFF", "guide-hiwaza.html"), ("akashi", "証", "灯の証", "akashi.html", "#F29BB8", "guide-akashi.html"),
-          ("himon", "紋", "灯紋", "himon.html", "#F2B544", "guide-himon.html"), ("hisato", "里", "灯里", "hisato.html", "#E9824A", "guide-sato.html")]
+          ("himon", "紋", "灯紋", "himon.html", "#F2B544", "guide-himon.html"), ("hisato", "里", "灯里", "hisato.html", "#E9824A", "guide-sato.html"),
+          ("hiuo", "魚", "灯魚", "wiki-hiuo.html", "#4FD8C8", "guide-fish.html")]
 
 
 def _wiki_switch(cur):
@@ -1438,19 +1449,18 @@ def _wiki_side(cur):
     items = f'<a href="wiki.html"{" aria-current=\"page\"" if cur == "top" else ""}><span class="ws-k" style="--c:var(--amber)">≡</span>Wiki のはじめ</a>'
     for i, p in enumerate(HW["paths"]):
         items += f'<a href="wiki-{p["id"]}.html" style="--c:{_PCOL[i]}"{" aria-current=\"page\"" if cur == p["id"] else ""}><span class="ws-k">{p["k"]}</span>{p["name"]}</a>'
-    items += f'<a href="wiki-hiuo.html" style="--c:#4FD8C8"{" aria-current=\"page\"" if cur == "hiuo" else ""}><span class="ws-k">魚</span>灯魚図鑑</a>'
     items += f'<a href="wiki-build.html" style="--c:var(--amber)"{" aria-current=\"page\"" if cur == "build" else ""}><span class="ws-k">組</span>技の組み立て</a>'
     items += _wiki_others("waza")
     return f'<nav class="wside" aria-label="Wiki の目次"><p class="dot wside-h">灯技 Wiki</p>{items}</nav>'
 
 
-def _wiki_hero(title, lead, color, crumb, icon_rows=None, sub=""):
+def _wiki_hero(title, lead, color, crumb, icon_rows=None, sub="", wk="waza"):
     ic = pix(icon_rows, "ch-ic big") if icon_rows else ""
     return f'''<div class="hero ch-hero wk-hero" style="--c:{color}">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div>
   <div class="wrap phead" id="content">
-    {_wiki_switch("waza")}
-    {_wiki_crumb("waza", crumb)}
+    {_wiki_switch(wk)}
+    {_wiki_crumb(wk, crumb)}
     <div class="ch-head">{ic}<div><p class="ch-big dot">{sub}</p><h1 class="disp h1-sub">{title}</h1></div></div>
     <p class="lead">{lead}</p>
   </div>
@@ -1518,7 +1528,7 @@ def wiki_path(i):
     nb = HW["paths"]
     prev, nxt = nb[i - 1] if i > 0 else None, nb[i + 1] if i + 1 < len(nb) else None
     pg = lambda x, j, cls, lab: (f'<a href="wiki-{x["id"]}.html" class="pg {cls}" style="--c:{_PCOL[j]}"><small class="dot">{lab}</small><b>{x["name"]}</b><span class="mu">{_E(x["desc"][0])}</span></a>' if x else
-                                 f'<a href="wiki-hiuo.html" class="pg {cls}" style="--c:#4FD8C8"><small class="dot">{lab}</small><b>灯魚図鑑</b><span class="mu">327種の灯魚と、どこで・いつ。</span></a>' if cls == "next" else
+                                 f'<a href="wiki-build.html" class="pg {cls}" style="--c:var(--amber)"><small class="dot">{lab}</small><b>技の組み立て</b><span class="mu">技を選んで、組み立てを人に見せる。</span></a>' if cls == "next" else
                                  f'<a href="wiki.html" class="pg {cls}" style="--c:var(--amber)"><small class="dot">{lab}</small><b>Wiki のはじめ</b><span class="mu">すべての技の一覧と、育て方。</span></a>')
     hero = _wiki_hero(p["name"], _E(p["desc"][0] + p["desc"][1]), color, f'<span aria-hidden="true">›</span><span>{p["name"]}</span>', None, f'PATH {i + 1:02d} ／ 10')
     return hero + f'''
@@ -1682,20 +1692,20 @@ def wiki_fish():
     rchips = "".join(f'<button type="button" class="chip-f" data-f="r" data-v="{i}" style="--c:{rc[i]}">{rar[i]}</button>' for i in range(1, 6))
     counts = " ・ ".join(f'{rar[i]} {sum(1 for f in HW["fish"] if f["rarity"] == i)}' for i in range(1, 6))
     hero = _wiki_hero("灯魚図鑑", f"全{len(HW['fish'])}種（{counts}）・{len(HW['grounds'])}の漁場。どこで・いつ釣れるかは、ゲームの図鑑と同じだけ載せています。秘・幻とヌシの名前は、釣ってからのお楽しみ。", "#4FD8C8",
-                      '<span aria-hidden="true">›</span><span>灯魚図鑑</span>', CH_ICONS["fish"], "HIUO")
+                      '', CH_ICONS["fish"], "HIUO", wk="hiuo")
     esc = HW["escape"]
     return hero + f'''
 <section class="stratum s-deep wk">
   <div class="edge"></div>
   <div class="wrap wk-in">
-    {_wiki_side("hiuo")}
+    <nav class="wside" aria-label="Wiki の目次"><p class="dot wside-h">灯魚 Wiki</p><a href="#fl" aria-current="page"><span class="ws-k" style="--c:#4FD8C8">魚</span>灯魚図鑑</a><a href="#how" style="--c:#4FD8C8"><span class="ws-k">理</span>灯魚のしくみ</a>{_wiki_others("hiuo")}</nav>
     <div class="wk-main">
       <div class="finder fishf">
         <div class="filters"><div class="fg"><span class="fl-l">群</span>{gchips}</div><div class="fg"><span class="fl-l">珍しさ</span>{rchips}</div></div>
         <p class="find-n mu" aria-live="polite"><b class="dot" id="fn">{len(HW["fish"])}</b> 種 <button type="button" class="clear" id="fclear" hidden>しぼりこみを消す</button></p>
         <ul class="fcs" id="fl">{cards}</ul>
       </div>
-      <h2 class="sr">灯魚のしくみ</h2>
+      <h2 class="sr" id="how">灯魚のしくみ</h2>
       <div class="three">
         <div><h3 class="h3 disp">漁場とヌシ</h3><p class="mu">魚はそれぞれ住む漁場が決まっています（野山の魚はその土地の水ならどこでも、特別の魚はどこの水でも）。漁場の魚をすべて釣ると、その漁場のヌシがかかるようになります。季節の魚は数えません。</p></div>
         <div><h3 class="h3 disp">逃げると掛け合い</h3><p class="mu">珍は {int(esc[2] * 100)}% ほど逃げます（灯技「糸さばき」で下がる）。稀・秘・幻とヌシは「掛け合い」：右クリック長押しで巻き、張りが赤くなったら離す。逃げられた魚は、名前が図鑑に残ります。</p></div>
@@ -1710,7 +1720,7 @@ def wiki_fish():
 WIKI_PAGES = [("wiki.html", "灯技 完全解説｜灯原", "灯技（ひわざ）のすべて。10の道・130の技の効き目と要るLv・技点・灯力・待ち時間、奥義の試練、今日の務め、灯魚図鑑。", wiki_index())]
 WIKI_PAGES += [(f"wiki-{p['id']}.html", f"{p['name']}｜灯技 Wiki｜灯原", f"{p['name']}の13の技（{'・'.join(n['name'] for n in p['nodes'][:5])}…）の効き目、要るLv・技点、技の木、育つこと、奥義の試練。", wiki_path(i))
                for i, p in enumerate(HW["paths"])]
-WIKI_PAGES += [("wiki-hiuo.html", "灯魚図鑑｜灯技 Wiki｜灯原", f"灯魚（ひうお）{len(HW['fish'])}種の珍しさ・大きさ・水辺・手がかり。", wiki_fish())]
+WIKI_PAGES += [("wiki-hiuo.html", "灯魚図鑑｜灯魚 Wiki｜灯原", f"灯魚（ひうお）{len(HW['fish'])}種の珍しさ・大きさ・水辺・手がかり。", wiki_fish())]
 
 
 # ───────────────────────── 灯の証 Wiki ─────────────────────────
@@ -2019,7 +2029,7 @@ def _hm_tiers():
     hi = R[-1]
     odds = "・".join(f'{x["jp"]} {round(w / tot * 100)}%' for x, w in zip(R, M["weight"]))
     out += f'''<div class="hm-tier mumei" style="--c:{hi["hex"]}"><span class="hm-r disp">無銘</span><b class="dot">{M["lv"]}<small>Lv</small></b><span>＋ 灯札 {M["fuda"]} 枚</span><ul><li>すべての段から出る</li><li><b class="dot">秘 {M["weight"][-1]}%</b>（{hi["n"]}種）</li><li>{M["pity"]}冊で必ず秘</li></ul></div>'''
-    return f'<div class="hm-tiers">{out}</div><p class="mu hm-odds">無銘の紋書の出かた：{odds}。秘が出ないまま {M["pity"]} 冊引くと、次の1冊は必ず秘になります。</p>'
+    return f'<div class="hm-tiers">{out}</div><p class="mu hm-odds">無銘の紋書の出かた：{odds}。秘が出ないまま {M["pity"] - 1} 冊引くと、次の {M["pity"]} 冊目は必ず秘になります（秘が出ると、数えなおし）。</p>'
 
 
 def _hm_fuda():
@@ -2896,7 +2906,7 @@ characters = sub_hero("characters.html", "灯原の、ひとびと。", "予告�
       <div class="pf-st">{eater()}</div>
       <div class="pf-b">
         <div class="pf-h"><h3>灯喰い</h3><span>ひぐい　／　すみれ色の目</span></div>
-        <span class="pf-role">灯りの守りを破る、ただひとつの敵</span>
+        <span class="pf-role">灯籠を狙う、ただひとつの敵</span>
         <p class="pf-q">（なにも言わない）</p>
         <p class="pf-bio">黒い体に、白い面。夜になると、灯路のいちばん少ない「端」の灯籠へまっすぐ向かい、喰いはじめます。人には目もくれません。喰われた灯籠は青い冷たい火になり、守りも灯路も途切れます。倒せば欠片を落とし、夜明けには、つながっている灯籠へ火が戻ります。</p>
         <dl class="pf-dl"><div><dt>くわしく</dt><dd><a href="guide-higui.html">第3章 灯喰い</a></dd></div><div><dt>守りかた</dt><dd><a href="guide-lantern.html">灯籠どうしを、つなぐ</a></dd></div></dl>
@@ -3023,11 +3033,11 @@ def playstyle():
 
 guide = _guide_index()
 PAGES = [
-    ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1は2026年11月7日21時開幕。", index),
+    ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1「灯ノ海」開催中（2026年11月7日開幕）。", index),
     ("start.html", "はじめる｜灯原", "灯原への入り方を機種別に。Java版、スマホ、Windows、Switch・PS・Xbox。最初の夜の過ごし方と、よくある質問。", start),
     ("guide.html", "遊び方｜灯原", f"灯原のしくみを{len(CH)}の章で。灯籠と灯路、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、8つの加護、10の道・130の技「灯技」、327種の灯魚と漁火、{len(HM['defs'])}の特別な付呪「灯紋」、604の進捗「灯の証」、灯標と灯りの色、仲間と開く里と5つの職「灯里」、灯結。", guide),
 ] + [(f"guide-{c['id']}.html", f"{c['t']}｜遊び方｜灯原", c['desc'], chapter_page(k)) for k, c in enumerate(CH)] + [
-    ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり4種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで。", events),
+    ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり6種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで、釣り大会、夜狩り。", events),
     ("playstyle.html", "遊び方を選ぶ｜灯原", "みんなで・身内で・ひとりで。3つの遊び方ごとのマニュアル。はじめの5つ、よく使うコマンド、コツ、気をつけること。", playstyle()),
     ("rules.html", "きまり｜灯原", "灯原のきまり。してはいけないこと、しくみで守られていること、困ったときの連絡先、保護者の方へ。", rules),
 ] + WIKI_PAGES + AK_PAGES + HM_PAGES + HS_PAGES + [
@@ -3119,10 +3129,23 @@ for x in AK["defs"]:
     if not x["hidden"]:
         _idx.append({"k": "証", "t": x["name"], "s": AK["cats"][x["cat"]]["name"] + "・" + x["desc"][0], "u": f"akashi-{_AK_SLUG[x['cat']]}.html#{x['id']}", "c": _TCOL[x["tier"]]})
 _kn = 0
+_cmd_at = {}
 for g in _CMDS:
     for r in g[5]:
         _kn += 1
+        _cmd_at[r[0]] = f"commands.html#k{_kn}"
         _idx.append({"k": "コマンド", "t": (r[0] + " " + r[1]).strip(), "s": _re0.sub("<[^>]+>", "", r[2])[:50], "u": f"commands.html#k{_kn}", "c": g[1]})
+# よくある用事：攻略の名前を知らなくても、ことばで着く（a = 別の言い方。ここに当たると上に出る）
+_GUIDE = [
+    ("アドレスとポート（入り方）", f"アドレス {ADDR}・統合版のポート 5156。機種ごとの入り方", "start.html#join", "ポート 5156 アドレス 入り方 参加 接続 サーバー 入る つなぐ ip"),
+    ("入れないとき", "アドレスの打ちまちがい・古いバージョン・統合版はポート 5156。それでもだめなら Discord へ", "start.html#trouble", "入れない つながらない 繋がらない 接続できない 参加できない ログインできない 入れません"),
+    ("自分の灯標に帰る", "/tomoshibi home　「帰る場所」に決めた灯標へ灯渡り", _cmd_at.get("/tomoshibi home", "commands.html"), "帰りたい 帰る 戻る 戻りたい 家 拠点 ホーム home"),
+    ("里に帰る", "/sato home　里灯へ帰る（待ち時間あり）", _cmd_at.get("/sato home", "commands.html"), "帰りたい 帰る 戻る 戻りたい 里 ホーム home"),
+    ("ランタンを置いても安全にならない", "ふつうのランタンは飾り。守るのは灯原の「灯籠」だけ（作り方・置き方）", "guide-lantern.html", "ランタン 安全 安全にならない 敵が湧く 湧く 守られない 灯籠"),
+    ("夜祭に出ない（見送る）", "/yomatsuri out　今回の夜祭を見送る", _cmd_at.get("/yomatsuri out", "events.html"), "見送る 出ない 参加しない 夜祭 不参加"),
+]
+for t, s_, u, a in reversed(_GUIDE):
+    _idx.insert(0, {"k": "案内", "t": t, "s": s_, "u": u, "c": "#F2B544", "a": a})
 for x in HM["defs"]:
     _idx.append({"k": "紋", "t": x["name"], "s": HM["rarity"][x["r"]]["jp"] + "・" + x["on"] + "・" + x["desc"][0][:36], "u": f"himon.html#m-{x['id']}", "c": HM["rarity"][x["r"]]["hex"]})
 for j in HS["jobs"]:

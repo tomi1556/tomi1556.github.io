@@ -53,20 +53,7 @@
     }, 200);
   }, { passive: true });
 
-  // ── 2. 数が数え上がる ──
-  $$('.wk-stats b, .fact-n, .akc-n, .tt-n, .lvsteps b, .gt b, .wall-n b').forEach(function (el) {
-    var t = el.firstChild;
-    if (!t || t.nodeType !== 3) return;
-    var m = t.textContent.match(/^(\s*)([\d,]+)(.*)$/);
-    if (!m) return;
-    var v = parseInt(m[2].replace(/,/g, ''), 10);
-    if (!(v > 1)) return;
-    el.setAttribute('data-count', '');
-    el._c = { node: t, pre: m[1], post: m[3], v: v, comma: m[2].indexOf(',') >= 0 || v >= 1000 };
-    t.textContent = m[1] + (el._c.comma ? '0' : '0') + m[3];
-    // まわりの札が見張られていなければ、自分で見張る
-    if (io && !el.closest('.rv')) io.observe(el);
-  });
+  // ── 2. 数は、はじめから正しい値のまま出す（0 から数え上げると、途中の数を事実として読んでしまうため） ──
   function count(el) {
     var c = el._c;
     if (!c || c.done) return;

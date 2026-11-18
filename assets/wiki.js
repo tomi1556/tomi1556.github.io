@@ -22,6 +22,7 @@
     var on = {};
     items.forEach(function (el) { el._q = norm(el.getAttribute('data-q') || el.textContent); });
 
+    var keep = function () {};
     function apply() {
       var words = input ? norm(input.value).split(' ').filter(Boolean) : [];
       var n = 0;
@@ -54,7 +55,16 @@
       });
     });
     if (input) {
-      input.addEventListener('input', apply);
+      // 探した言葉を URL（?q=）に残す：そのまま友だちに送れる（戻る履歴は増やさない）
+      keep = function () {
+        try {
+          var u = new URL(location.href), v = input.value.trim();
+          if (v) u.searchParams.set('q', v); else u.searchParams.delete('q');
+          history.replaceState(history.state, '', u.pathname + u.search + u.hash);
+        } catch (e) {}
+      };
+      var kt = 0;
+      input.addEventListener('input', function () { apply(); clearTimeout(kt); kt = setTimeout(keep, 400); });
       document.addEventListener('keydown', function (e) {
         if (e.key === '/' && document.activeElement !== input && !/input|textarea/i.test(document.activeElement.tagName)) { e.preventDefault(); input.focus(); }
         if (e.key === 'Escape' && document.activeElement === input) { input.value = ''; apply(); input.blur(); }
@@ -67,6 +77,7 @@
       chips.forEach(function (b) { b.setAttribute('aria-pressed', 'false'); });
       if (input) input.value = '';
       apply();
+      keep();
     });
     apply();
   }
