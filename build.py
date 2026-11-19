@@ -1197,7 +1197,7 @@ events = f'''<div class="hero">
   <div class="wrap">
     <p class="depth">始まり方</p>
     <h2 class="disp h2">何もしなければ、参加です。</h2>
-    {steps([("clock", "#F29BB8", "21時、120秒の募集", "画面の上にバー"), ("people", "#F2B544", "そのまま待つ", "見送るなら <span class=\"kbd\">/yomatsuri out</span>"), ("bolt", "#6FD39A", "そろえば自動で開始", "いる人の4割（最大8人）"), ("house", "#5AAAFF", "終われば元の場所へ", "リレーとかくれんぼは会場へ運ばれる")])}
+    {steps([("clock", "#F29BB8", "21時、120秒の募集", "画面の上にバー"), ("people", "#F2B544", "そのまま待つ", "見送るなら <span class=\"kbd\">/yomatsuri out</span>"), ("bolt", "#6FD39A", "そろえば自動で開始", "いる人の4割（最大8人）"), ("house", "#5AAAFF", "終われば元どおり", "会場の4つは持ち物を預かり、同じ道具で")])}
     <h3 class="disp vh3">始まるのに必要な人数</h3>
     {bars([("5人いるとき", 4, "#F29BB8", "ゲームによる", "2〜4人"), ("10人", 4, "#F29BB8"), ("15人", 6, "#F29BB8"), ("20人〜", 8, "#F29BB8")], unit="人", maxv=8)}
   </div>
@@ -1212,12 +1212,12 @@ events = f'''<div class="hero">
     <ul class="vgames" data-rot>
       <li data-g="0" style="--c:#F2B544">{ic("lantern", "#F2B544", 56)}<h3 class="disp">灯籠リレー</h3><p>紅組と藍組。先に灯路を通した組の勝ち</p><span class="vtags"><span class="vtag">{ic("clock", "#F2B544")}12分</span><span class="vtag">{ic("people", "#F2B544")}4人から</span></span></li>
       <li data-g="1" style="--c:#9C8CFF">{ic("eye", "#9C8CFF", 56)}<h3 class="disp">闇かくれんぼ</h3><p>5人に1人が鬼。朝まで隠れきれば勝ち</p><span class="vtags"><span class="vtag">{ic("clock", "#9C8CFF")}8分</span><span class="vtag">{ic("people", "#9C8CFF")}4人から</span></span></li>
-      <li data-g="2" style="--c:#6FD39A">{ic("hammer", "#6FD39A", 56)}<h3 class="disp">建築早押し</h3><p>お題を15分で建てて、投票で決める</p><span class="vtags"><span class="vtag">{ic("clock", "#6FD39A")}15分</span><span class="vtag">{ic("people", "#6FD39A")}3人から</span></span></li>
-      <li data-g="3" style="--c:#E0453A">{ic("moon", "#E0453A", 56)}<h3 class="disp">夜明けまで</h3><p>朱月の夜。倒れたら脱落、朝まで生き延びる</p><span class="vtags"><span class="vtag">{ic("clock", "#E0453A")}10分</span><span class="vtag">{ic("people", "#E0453A")}2人から</span></span></li>
+      <li data-g="2" style="--c:#6FD39A">{ic("hammer", "#6FD39A", 56)}<h3 class="disp">建築早押し</h3><p>1人1区画・材料は好きなだけ。15分で建てて投票</p><span class="vtags"><span class="vtag">{ic("clock", "#6FD39A")}15分</span><span class="vtag">{ic("people", "#6FD39A")}3人から</span></span></li>
+      <li data-g="3" style="--c:#E0453A">{ic("moon", "#E0453A", 56)}<h3 class="disp">夜明けまで</h3><p>会場にだけ敵の波。倒れたら脱落、朝まで生き延びる</p><span class="vtags"><span class="vtag">{ic("clock", "#E0453A")}10分</span><span class="vtag">{ic("people", "#E0453A")}2人から</span></span></li>
       <li data-g="4" style="--c:#4FD8C8">{ic("fish", "#4FD8C8", 56)}<h3 class="disp">釣り大会</h3><p>珍しい魚ほど高い点。上位3人に灯銭の賞金。どこの水辺でも</p><span class="vtags"><span class="vtag">{ic("clock", "#4FD8C8")}8分</span><span class="vtag">{ic("people", "#4FD8C8")}2人から</span></span></li>
       <li data-g="5" style="--c:#E9824A">{ic("sword", "#E9824A", 56)}<h3 class="disp">夜狩り</h3><p>夜の敵を倒した数を競う。上位3人に灯銭の賞金</p><span class="vtags"><span class="vtag">{ic("clock", "#E9824A")}8分</span><span class="vtag">{ic("people", "#E9824A")}2人から</span></span></li>
     </ul>
-    {more("くわしく：6つのゲーム", "<p><b>灯籠リレー</b>：出発点から終点まで、自分の組の灯籠だけで灯路を通します。「祭の灯籠」が16個ずつ配られ、祭が終わると消えます。</p><p><b>闇かくれんぼ</b>：鬼は最初の30秒動けません。触れられたら負け、範囲の外に出ても負け。灯籠を置くと10秒間、体が光ります。</p><p><b>建築早押し</b>：お題（灯台・橋・屋台など）。最後に、ひらく投票の画面で1票（<span class=\"kbd\">/yomatsuri</span> からも開けます）。途中参加できます。</p><p><b>夜明けまで</b>：全員で灯りを守りきる夜。途中参加できます。</p><p><b>釣り大会</b>：会場はありません。いまいる場所の水辺で釣ります。画面の上に、上位3人と数が出ます。途中参加できます。</p><p><b>夜狩り</b>：会場はありません。倒した夜の敵を数えます（スポナーから出た敵は数えません）。途中参加できます。</p>")}
+    {more("くわしく：6つのゲーム", "<p><b>全員同じ条件で</b>：会場で遊ぶ4つ（灯籠リレー・闇かくれんぼ・建築早押し・夜明けまで）は、始まるときに持ち物を預かり、全員に同じ道具を配ります。灯技・灯紋・職のバフは止まり、コマンドは夜祭とあいさつだけ。終わる・抜ける・脱落すると、持ち物も場所も元に戻ります（サーバーが落ちても、次に入ったときに戻ります）。</p><p><b>灯籠リレー</b>：出発点から終点まで、自分の組の灯籠だけで灯路を通します。「祭の灯籠」が16個ずつ配られ、祭が終わると消えます。</p><p><b>闇かくれんぼ</b>：鬼は最初の30秒動けません。触れられたら負け、範囲の外に出ても負け。頭の上の名前は消えます。灯籠を置くと10秒間、体が光ります。</p><p><b>建築早押し</b>：広場のまわりに1人1区画（光のふちの中）。材料は好きなだけ使えます（クリエイティブ）。お題（灯台・橋・屋台など）を建て、最後は空を飛んで見て回り、投票の画面で1票（<span class=\"kbd\">/yomatsuri</span> からも開けます）。建物は投票のあとで片づきます。</p><p><b>夜明けまで</b>：全員同じ鉄の装備で。会場のまわりにだけ、時間がたつほど大きな敵の波が来ます（サーバー全体の朱月にはなりません）。倒れたら脱落、会場から離れても脱落。</p><p><b>釣り大会</b>：会場はありません。いまいる場所の水辺で釣ります。画面の上に、上位3人と数が出ます。途中参加できます。</p><p><b>夜狩り</b>：会場はありません。倒した夜の敵を数えます（スポナーから出た敵は数えません）。途中参加できます。</p>")}
   </div>
 </section>
 
@@ -2954,7 +2954,7 @@ characters = sub_hero("characters.html", "灯原の、ひとびと。", "予告�
         <span class="pf-role" style="color:#fff">灯りの外にいるもの</span>
         <p class="pf-q">灯りの外へ出たら、見られている。</p>
         <p class="pf-bio">24分の夜に湧く敵たち。体力は2.5倍、攻撃は2倍で、夜を重ねるほど強くなります。灯りの中には入れず、中にいる人を狙えません。7夜に一度の朱月の夜には、さらに強く、群れと精鋭がふえます。</p>
-        <dl class="pf-dl"><div><dt>くわしく</dt><dd><a href="guide-night.html">第2章 長い夜</a></dd></div><div><dt>朱月の夜</dt><dd><a href="events.html">夜祭「夜明けまで」</a></dd></div></dl>
+        <dl class="pf-dl"><div><dt>くわしく</dt><dd><a href="guide-night.html">第2章 長い夜</a></dd></div></dl>
       </div>
     </article>
   </div>
