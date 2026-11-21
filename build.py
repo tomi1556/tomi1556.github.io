@@ -205,12 +205,12 @@ def cd(kind, label):
 _CMD_N = [0]
 _CMDS = [
     ("導", "#FFE3A3", "灯原のメニュー", "Hishirube", "はじめて来たときに渡す「灯しるべ」を右クリックしても、同じメニューが開きます。", [
-        ("/menu", "", "灯原のメニューを開く。<b>迷ったらこれ</b>。はじめの画面に「いまやること」（知らせのあるものだけ）・「よく使う」（開いた回数で入れかわる5つ）・4つの棚（灯・育・里・暮）。押せば1回でその画面へ（<span class=\"kbd\">/tomoshibara</span> でも同じ）"),
+        ("/menu", "", "灯原のメニューを開く。<b>迷ったらこれ</b>。1枚の画面に、灯原のすべての行き先（育てる・暮らす・困ったら）。知らせのある札だけが光ります。押せば1回でその画面へ（<span class=\"kbd\">/tomoshibara</span> でも同じ）"),
         ("/menu item", "", "灯しるべ（右クリックでメニューが開く品）をもう一度もらう"),
         ("/link", "", "Discord とつなぐ。出た6けたの数字を、Discord の「はじめての方へ」→「Discord と連携」か <span class=\"kbd\">/link 数字</span> に入れる。はじめてつなぐと灯籠5基"),
         ("/link status", "", "いまつながっている Discord を見る"),
         ("/link off", "", "Discord との連携を外す"),
-        ("/hud", "", "上のバー（ボスバー）・下の文字（アクションバー）・効果音を切りかえる。<span class=\"kbd\">/hud bar off</span>・<span class=\"kbd\">/hud action off</span>・<span class=\"kbd\">/hud sound off</span>・<span class=\"kbd\">/hud on</span>。メニューの下の段の「表示と音」でも切りかえられる"),
+        ("/hud", "", "上のバー（ボスバー）・下の文字（アクションバー）・効果音を切りかえる。<span class=\"kbd\">/hud bar off</span>・<span class=\"kbd\">/hud action off</span>・<span class=\"kbd\">/hud sound off</span>・<span class=\"kbd\">/hud on</span>。メニューの「表示と音」でも切りかえられる"),
     ]),
     ("話", "#8EA2FF", "Discord で使うもの", "灯原ボット", "灯原の Discord で打つコマンドです。「はじめての方へ」のボタンからでも、同じことができます。<b>使うには、先に /link で連携してください。</b>", [
         ("/link", "<数字>", "ゲームで出た6けたの数字で、マイクラとつなぐ（<span class=\"kbd\">/連携</span> でも同じ）"),
