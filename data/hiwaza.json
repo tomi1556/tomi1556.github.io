@@ -193,7 +193,7 @@
       "半径8・90秒"
      ],
      "desc": [
-      "灯力を使い、闇に一時の結界を張る。",
+      "気力を使い、闇に一時の結界を張る。",
       "中には敵が入れず、中の人は狙われない。"
      ],
      "gauge": 40,
@@ -345,7 +345,7 @@
     },
     {
      "id": "roadspeed",
-     "name": "灯路の足",
+     "name": "光の道の足",
      "branch": 2,
      "tier": 2,
      "kind": 0,
@@ -359,11 +359,11 @@
       2
      ],
      "effect": [
-      "灯路の上で 速さⅠ",
-      "灯路の上で 速さⅡ"
+      "光の道の上で 速さⅠ",
+      "光の道の上で 速さⅡ"
      ],
      "desc": [
-      "灯籠と灯籠を結ぶ灯路の上を歩くと、",
+      "灯籠と灯籠を結ぶ光の道の上を歩くと、",
       "足が速くなる。"
      ],
      "gauge": 0,
@@ -449,7 +449,7 @@
     },
     {
      "id": "shard",
-     "name": "喰い跡の欠片",
+     "name": "喰い跡のかけら",
      "branch": 3,
      "tier": 3,
      "kind": 0,
@@ -463,11 +463,11 @@
       0
      ],
      "effect": [
-      "加護の欠片 25%",
-      "加護の欠片 50%"
+      "加護のかけら 25%",
+      "加護のかけら 50%"
      ],
      "desc": [
-      "灯喰いを倒すと、加護の欠片が落ちる。"
+      "灯喰いを倒すと、加護のかけらが落ちる。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -548,7 +548,7 @@
       "90秒"
      ],
      "desc": [
-      "灯力を使い、しばらく闇でも目が利く。"
+      "気力を使い、しばらく闇でも目が利く。"
      ],
      "gauge": 15,
      "cooldown": [
@@ -577,7 +577,7 @@
       "半径40・16秒"
      ],
      "desc": [
-      "灯力を使い、まわりの敵の居場所に",
+      "気力を使い、まわりの敵の居場所に",
       "印を浮かべる（自分にだけ見える）。"
      ],
      "gauge": 10,
@@ -666,7 +666,7 @@
      "desc": [
       "暗がりでしゃがんでいると、",
       "離れた敵に気づかれない。",
-      "そのあいだ、灯力が少しずつ減る。"
+      "そのあいだ、気力が少しずつ減る。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -773,8 +773,8 @@
       "次まで 10分"
      ],
      "desc": [
-      "灯力を使い、8秒の祈りで",
-      "「帰る場所」の灯標へ帰る（なければベッド）。",
+      "気力を使い、8秒の祈りで",
+      "「帰る場所」の名前つき灯籠へ帰る（なければベッド）。",
       "動く・殴られると途切れる。"
      ],
      "gauge": 60,
@@ -847,11 +847,11 @@
       2
      ],
      "effect": [
-      "朱月の夜、どこでも灯力 +1/秒・上限 +50"
+      "朱月の夜、どこでも気力 +1/秒・上限 +50"
      ],
      "desc": [
       "朱月の夜は、灯りの外でも",
-      "灯力がたまり、たくさん持てる。"
+      "気力がたまり、たくさん持てる。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -933,7 +933,7 @@
      "desc": [
       "しゃがんで鉱石を掘ると、つながった",
       "同じ鉱石もまとめて掘る。",
-      "灯りの外では、1個ごとに灯力を1使う。"
+      "灯りの外では、1個ごとに気力を1使う。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -962,7 +962,7 @@
       "半径9・10秒"
      ],
      "desc": [
-      "灯力を使い、近くの鉱石を",
+      "気力を使い、近くの鉱石を",
       "壁ごしに光らせる（自分にだけ見える）。"
      ],
      "gauge": 15,
@@ -1514,7 +1514,7 @@
       "まわり6ブロックの苗木が最大8本"
      ],
      "desc": [
-      "灯力を使い、まわりの苗木を",
+      "気力を使い、まわりの苗木を",
       "その場で育てる。"
      ],
      "gauge": 30,
@@ -1593,11 +1593,11 @@
       3
      ],
      "effect": [
-      "倒した幹1本ごとに灯力 +1"
+      "倒した幹1本ごとに気力 +1"
      ],
      "desc": [
       "木を倒すと、木霊の灯が宿り、",
-      "灯力がたまる。"
+      "気力がたまる。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -1889,7 +1889,7 @@
      ],
      "desc": [
       "骨粉を使うと、まわりの作物にも効く。",
-      "Lv2 からは、灯力を使ってまわりの作物も育てる。"
+      "Lv2 からは、気力を使ってまわりの作物も育てる。"
      ],
      "gauge": 30,
      "cooldown": [
@@ -1999,7 +1999,7 @@
      ],
      "desc": [
       "灯りの中にいると、まわりの作物が",
-      "早く育つ。灯路網の格が高いほどよく育つ。"
+      "早く育つ。灯籠のつながりの段が高いほどよく育つ。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -2110,13 +2110,13 @@
       0
      ],
      "effect": [
-      "逃げる −20%・掛け合いで魚 −8%",
+      "逃げる −20%・大物との勝負で魚 −8%",
       "逃げる −40%・魚 −16%",
       "逃げる −60%・魚 −24%"
      ],
      "desc": [
       "珍の灯魚に逃げられにくくなり、",
-      "掛け合い（稀より上）で魚が弱くなる。"
+      "大物との勝負（稀より上）で魚が弱くなる。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -2439,7 +2439,7 @@
      "desc": [
       "しゃがんで素手で箱を左クリックすると、",
       "中身を整頓する。",
-      "灯技の画面から、持ち物も整頓できる。"
+      "技の画面から、持ち物も整頓できる。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -2464,7 +2464,7 @@
      "desc": [
       "持ち物を、同じ物が入っている",
       "近くの箱へまとめて入れる（手持ちの段は残す）。",
-      "灯技の画面か /waza stash"
+      "技の画面か /waza stash"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -2512,7 +2512,7 @@
      ],
      "desc": [
       "どこでも作業台を開ける。",
-      "（灯技の画面か /waza craft）"
+      "（技の画面か /waza craft）"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -2536,7 +2536,7 @@
      ],
      "desc": [
       "どこでもエンダーチェストを開ける。",
-      "（灯技の画面か /waza ender）"
+      "（技の画面か /waza ender）"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -2566,7 +2566,7 @@
      ],
      "desc": [
       "自分だけの持ち物入れ。",
-      "（灯技の画面か /waza bag）"
+      "（技の画面か /waza bag）"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -2637,7 +2637,7 @@
       "手の道具を25%直す"
      ],
      "desc": [
-      "灯力を使い、手に持った道具を直す。"
+      "気力を使い、手に持った道具を直す。"
      ],
      "gauge": 50,
      "cooldown": [
@@ -2905,7 +2905,7 @@
       "15秒ゆっくり落ちる"
      ],
      "desc": [
-      "灯力を使い、綿毛のように",
+      "気力を使い、綿毛のように",
       "ゆっくり舞い降りる。"
      ],
      "gauge": 10,
@@ -2935,7 +2935,7 @@
      ],
      "desc": [
       "エリトラで滑空しているとき、",
-      "灯力で前へ飛び出す。"
+      "気力で前へ飛び出す。"
      ],
      "gauge": 15,
      "cooldown": [
@@ -2997,7 +2997,7 @@
     },
     {
      "id": "wanderer",
-     "name": "旅人の灯力",
+     "name": "旅人の気力",
      "branch": 2,
      "tier": 3,
      "kind": 0,
@@ -3011,12 +3011,12 @@
       2
      ],
      "effect": [
-      "20ブロックごとに灯力 +1",
-      "10ブロックごとに灯力 +1"
+      "20ブロックごとに気力 +1",
+      "10ブロックごとに気力 +1"
      ],
      "desc": [
       "灯りの外でも、旅をすると",
-      "灯力がたまる。"
+      "気力がたまる。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -3090,8 +3090,8 @@
       "家と里から遠く（初期は300ブロック）で方角を出す"
      ],
      "desc": [
-      "家（帰る場所の灯標・ベッド）や自分の里から",
-      "遠くにいると、方角と距離を灯力のバーに出す。",
+      "家（帰る場所の名前つき灯籠・ベッド）や自分の里から",
+      "遠くにいると、方角と距離を気力のバーに出す。",
       "（遠さは設定 homeward.distance）"
      ],
      "gauge": 0,
@@ -3503,7 +3503,7 @@
     "経験",
     "付呪",
     "霊薬",
-    "灯力"
+    "気力"
    ],
    "cost": 18,
    "trial": "付呪を120回する",
@@ -3585,7 +3585,7 @@
      ],
      "desc": [
       "持っているガラス瓶に、",
-      "自分の経験値を詰める（灯技の画面から）。"
+      "自分の経験値を詰める（技の画面から）。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -3665,7 +3665,7 @@
       "9ダメージ（灯喰いには倍）"
      ],
      "desc": [
-      "灯力を光の矢にして、見ている方へ放つ。",
+      "気力を光の矢にして、見ている方へ放つ。",
       "最初に当たった敵を射抜く。"
      ],
      "gauge": 25,
@@ -3746,7 +3746,7 @@
       "火に強くなる 60秒"
      ],
      "desc": [
-      "灯力を使い、火と溶岩から身を守る。"
+      "気力を使い、火と溶岩から身を守る。"
      ],
      "gauge": 40,
      "cooldown": [
@@ -3770,11 +3770,11 @@
       0
      ],
      "effect": [
-      "灯力の上限 125",
-      "灯力の上限 150"
+      "気力の上限 125",
+      "気力の上限 150"
      ],
      "desc": [
-      "灯力をたくさん持ち歩ける。"
+      "気力をたくさん持ち歩ける。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -3783,7 +3783,7 @@
     },
     {
      "id": "flow",
-     "name": "灯力の巡り",
+     "name": "気力の巡り",
      "branch": 3,
      "tier": 2,
      "kind": 0,
@@ -3801,7 +3801,7 @@
       "0.6/秒"
      ],
      "desc": [
-      "灯りの外でも、灯力がたまりやすい。"
+      "灯りの外でも、気力がたまりやすい。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -3810,7 +3810,7 @@
     },
     {
      "id": "thrift",
-     "name": "灯力の節約",
+     "name": "気力の節約",
      "branch": 3,
      "tier": 3,
      "kind": 0,
@@ -3824,11 +3824,11 @@
       0
      ],
      "effect": [
-      "使う灯力 −15%",
+      "使う気力 −15%",
       "−30%"
      ],
      "desc": [
-      "使う技の灯力が少なくてすむ。"
+      "使う技の気力が少なくてすむ。"
      ],
      "gauge": 0,
      "cooldown": null,
@@ -4055,14 +4055,14 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "いつでも",
    "time": "",
    "flavor": "鱗に光をためる川魚。"
   },
   {
    "id": "medaka",
-   "name": "灯路めだか",
+   "name": "光の道めだか",
    "mat": "TROPICAL_FISH",
    "rarity": 1,
    "min": 2.0,
@@ -4071,10 +4071,10 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "灯りの中",
    "time": "",
-   "flavor": "灯路の光に集まる、小さな魚。"
+   "flavor": "光の道の光に集まる、小さな魚。"
   },
   {
    "id": "haya",
@@ -4087,7 +4087,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "夜明け",
    "time": "夜明け",
    "flavor": "霧の立つ朝にだけ群れる。"
@@ -4103,7 +4103,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "夕暮れ",
    "time": "夕暮れ",
    "flavor": "夕焼けを鱗にうつす。"
@@ -4119,7 +4119,7 @@
    "ground": "icehole",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「氷の穴」",
+   "where": "釣り場「氷の穴」",
    "when": "いつでも",
    "time": "",
    "flavor": "冷たい川の石の陰に住む。"
@@ -4135,7 +4135,7 @@
    "ground": "pool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「淵」",
+   "where": "釣り場「淵」",
    "when": "夜",
    "time": "夜",
    "flavor": "背に星を散らしたような鱒。"
@@ -4151,7 +4151,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "夏（6〜8月）",
    "time": "夏（6〜8月）",
    "flavor": "夏の川を上る、香りのいい魚。"
@@ -4167,7 +4167,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "雨",
    "time": "雨",
    "flavor": "雨の日に、川面へ跳ねる。"
@@ -4183,7 +4183,7 @@
    "ground": "pool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「淵」",
+   "where": "釣り場「淵」",
    "when": "夜・灯りの中",
    "time": "夜",
    "flavor": "灯籠の下の淀みに潜む。"
@@ -4199,7 +4199,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "夏（6〜8月）・夜",
    "time": "夏（6〜8月）・夜",
    "flavor": "夏の夜、川辺で淡く光る。"
@@ -4215,7 +4215,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "秋（9〜11月）",
    "time": "秋（9〜11月）",
    "flavor": "秋風の吹くころ、よく釣れる。"
@@ -4231,7 +4231,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "春（3〜5月）",
    "time": "春（3〜5月）",
    "flavor": "春の川を、花びらと流れる。"
@@ -4247,7 +4247,7 @@
    "ground": "pool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「淵」",
+   "where": "釣り場「淵」",
    "when": "雷雨",
    "time": "雷雨",
    "flavor": "雷を呼ぶと言われる大鯰。"
@@ -4263,7 +4263,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "満月・夜",
    "time": "満月・夜",
    "flavor": "満月の夜にだけ、川をさかのぼる。"
@@ -4279,7 +4279,7 @@
    "ground": "estuary",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「汽水」",
+   "where": "釣り場「汽水」",
    "when": "夜明け・秋（9〜11月）",
    "time": "夜明け・秋（9〜11月）",
    "flavor": "秋の夜明け、群れで川を上る。"
@@ -4295,7 +4295,7 @@
    "ground": "icehole",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「氷の穴」",
+   "where": "釣り場「氷の穴」",
    "when": "冬（12〜2月）",
    "time": "冬（12〜2月）",
    "flavor": "冬の、凍える川でだけ。"
@@ -4311,7 +4311,7 @@
    "ground": "pool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「淵」",
+   "where": "釣り場「淵」",
    "when": "新月・夜",
    "time": "新月・夜",
    "flavor": null
@@ -4327,7 +4327,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "いつでも",
    "time": "",
    "flavor": "群れで海を照らす小魚。"
@@ -4343,7 +4343,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "夕暮れ",
    "time": "夕暮れ",
    "flavor": "夕凪の海で、よくかかる。"
@@ -4359,7 +4359,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "昼",
    "time": "昼",
    "flavor": "昼の海の、まっすぐな青。"
@@ -4375,7 +4375,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "暖かい海",
    "time": "",
    "flavor": "あたたかい海の、色とりどりの灯。"
@@ -4391,7 +4391,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "暖かい海",
    "time": "",
    "flavor": "ふくらむと、ほんのり光る。"
@@ -4407,7 +4407,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "冷たい海",
    "time": "",
    "flavor": "冷たい海で、灯りを抱いて泳ぐ。"
@@ -4423,7 +4423,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "春（3〜5月）",
    "time": "春（3〜5月）",
    "flavor": "春の浜で、透けて光る。"
@@ -4439,7 +4439,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "夜",
    "time": "夜",
    "flavor": "月の色をした、海の小魚。"
@@ -4455,7 +4455,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "暖かい海・晴れ",
    "time": "晴れ",
    "flavor": "珊瑚に住む、灯色の小魚。"
@@ -4471,7 +4471,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "暖かい海・夏（6〜8月）",
    "time": "夏（6〜8月）",
    "flavor": "夏の海で、ひらひら泳ぐ。"
@@ -4487,7 +4487,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "いつでも",
    "time": "",
    "flavor": "浜の砂にまぎれる。"
@@ -4503,7 +4503,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "夜明け",
    "time": "夜明け",
    "flavor": "朝焼けの海の、めでたい色。"
@@ -4519,7 +4519,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "冷たい海・春（3〜5月）",
    "time": "春（3〜5月）",
    "flavor": "春を告げる、北の海の魚。"
@@ -4535,7 +4535,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "夜・灯りの中",
    "time": "夜",
    "flavor": "灯りに寄ってくる、透きとおる魚。"
@@ -4551,7 +4551,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "晴れ・昼",
    "time": "晴れ・昼",
    "flavor": "晴れた海を、灯のように飛ぶ。"
@@ -4567,7 +4567,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "深い水（12ブロック以上）",
    "time": "",
    "flavor": "海底の岩陰から顔を出す。"
@@ -4583,7 +4583,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "夏（6〜8月）",
    "time": "夏（6〜8月）",
    "flavor": "夏のはじめの、勢いのいい魚。"
@@ -4599,7 +4599,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "秋（9〜11月）・夜",
    "time": "秋（9〜11月）・夜",
    "flavor": "秋の夜の海を、銀色に走る。"
@@ -4615,7 +4615,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "冬（12〜2月）",
    "time": "冬（12〜2月）",
    "flavor": "冬の荒れた海で脂がのる。"
@@ -4631,7 +4631,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "夜",
    "time": "夜",
    "flavor": "額の灯で、獲物を呼び寄せる。"
@@ -4647,7 +4647,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "雷雨",
    "time": "雷雨",
    "flavor": "嵐の海を、槍のように走る。"
@@ -4663,7 +4663,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "真昼",
    "time": "真昼",
    "flavor": "真昼の海面で、横になって眠る。"
@@ -4679,7 +4679,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "新月",
    "time": "新月",
    "flavor": "新月の深海の、ひとつ灯り。"
@@ -4695,7 +4695,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "夜・晴れ",
    "time": "夜・晴れ",
    "flavor": "晴れた夜の冷たい海で、星を背負う。"
@@ -4711,7 +4711,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "冬（12〜2月）",
    "time": "冬（12〜2月）",
    "flavor": "冬の深い氷の海に灯る。"
@@ -4727,7 +4727,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "満月",
    "time": "満月",
    "flavor": null
@@ -4743,7 +4743,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "いつでも",
    "time": "",
    "flavor": "泥の中で、ちろちろ光る。"
@@ -4759,7 +4759,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "雨",
    "time": "雨",
    "flavor": "雨の沼で、虹色に光る。"
@@ -4775,7 +4775,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "昼",
    "time": "昼",
    "flavor": "昼の沼の、のんびりした鯉。"
@@ -4791,7 +4791,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "夜",
    "time": "夜",
    "flavor": "青白く光りながら、沼の底をさまよう。"
@@ -4807,7 +4807,7 @@
    "ground": "mangrove",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「マングローブの水路」",
+   "where": "釣り場「マングローブの水路」",
    "when": "いつでも",
    "time": "",
    "flavor": "マングローブの根の間に住む。"
@@ -4823,7 +4823,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "夜明け",
    "time": "夜明け",
    "flavor": "朝霧の沼で、ゆっくり口をあける。"
@@ -4839,7 +4839,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "夏（6〜8月）",
    "time": "夏（6〜8月）",
    "flavor": "夏、蓮の葉の陰にいる。"
@@ -4855,7 +4855,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "雷雨",
    "time": "雷雨",
    "flavor": "雷の沼で、大口をあける。"
@@ -4871,7 +4871,7 @@
    "ground": "mangrove",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「マングローブの水路」",
+   "where": "釣り場「マングローブの水路」",
    "when": "真昼・夏（6〜8月）",
    "time": "真昼・夏（6〜8月）",
    "flavor": "夏の真昼、マングローブの水が揺らぐとき。"
@@ -4887,8 +4887,8 @@
    "ground": "marsh",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「沼」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「沼」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -4903,7 +4903,7 @@
    "ground": "cavelake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「地底湖」",
+   "where": "釣り場「地底湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "地の底の水に住む、目のない魚。"
@@ -4919,7 +4919,7 @@
    "ground": "cavespring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
+   "where": "釣り場「洞窟の泉」",
    "when": "深層（高さ0より下）",
    "time": "",
    "flavor": "光の届かない水で、自分で光る。"
@@ -4935,7 +4935,7 @@
    "ground": "lush",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「苔の洞」",
+   "where": "釣り場「苔の洞」",
    "when": "いつでも",
    "time": "",
    "flavor": "苔の洞窟で、淡い緑に光る。"
@@ -4951,7 +4951,7 @@
    "ground": "cavespring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
+   "where": "釣り場「洞窟の泉」",
    "when": "鍾乳洞",
    "time": "",
    "flavor": "しずくの洞窟の、尖った水たまりに。"
@@ -4967,7 +4967,7 @@
    "ground": "cavelake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「地底湖」",
+   "where": "釣り場「地底湖」",
    "when": "地の奥（高さ20より下）",
    "time": "",
    "flavor": "鉱石のかけらを、鱗に混ぜている。"
@@ -4983,7 +4983,7 @@
    "ground": "cavespring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
+   "where": "釣り場「洞窟の泉」",
    "when": "いつでも",
    "time": "",
    "flavor": "雪の地の下の、冷たい地底湖に。"
@@ -4999,7 +4999,7 @@
    "ground": "cavelake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「地底湖」",
+   "where": "釣り場「地底湖」",
    "when": "鍾乳洞",
    "time": "",
    "flavor": "深いしずくの洞窟の、大きな影。"
@@ -5015,7 +5015,7 @@
    "ground": "lush",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「苔の洞」",
+   "where": "釣り場「苔の洞」",
    "when": "灯りの中",
    "time": "",
    "flavor": "灯りを置いた苔の洞窟でだけ。"
@@ -5031,7 +5031,7 @@
    "ground": "cavelake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「地底湖」",
+   "where": "釣り場「地底湖」",
    "when": "地の底（高さ−30より下）",
    "time": "",
    "flavor": "ずっと深い水の底で、星のように光る。"
@@ -5047,7 +5047,7 @@
    "ground": "darkwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「闇の水」",
+   "where": "釣り場「闇の水」",
    "when": "いつでも",
    "time": "",
    "flavor": null
@@ -5063,7 +5063,7 @@
    "ground": "cavelake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「地底湖」",
+   "where": "釣り場「地底湖」",
    "when": "朱月",
    "time": "朱月",
    "flavor": null
@@ -5079,8 +5079,8 @@
    "ground": "cavelake",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「地底湖」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「地底湖」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -5143,7 +5143,7 @@
    "ground": "mtlake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「山の湖」",
+   "where": "釣り場「山の湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "高い山の水にひそむ。"
@@ -5223,7 +5223,7 @@
    "ground": "icehole",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「氷の穴」",
+   "where": "釣り場「氷の穴」",
    "when": "いつでも",
    "time": "",
    "flavor": "氷の下で、小さな灯をともす。"
@@ -5351,7 +5351,7 @@
    "ground": "mtlake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「山の湖」",
+   "where": "釣り場「山の湖」",
    "when": "雲の上（高さ150より上）",
    "time": "",
    "flavor": "雲より高い池に住む。"
@@ -5415,7 +5415,7 @@
    "ground": "mtlake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「山の湖」",
+   "where": "釣り場「山の湖」",
    "when": "夜・晴れ",
    "time": "夜・晴れ",
    "flavor": "晴れた夜、山の池に星を映す。"
@@ -5431,8 +5431,8 @@
    "ground": "icehole",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「氷の穴」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「氷の穴」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -5498,7 +5498,7 @@
    "where": "どこの水でも",
    "when": "格3以上の灯り",
    "time": "",
-   "flavor": "灯守りに飼われていた、と言われる金魚。"
+   "flavor": "灯りの中で過ごす日に飼われていた、と言われる金魚。"
   },
   {
    "id": "asagao",
@@ -5610,7 +5610,7 @@
    "where": "どこの水でも",
    "when": "夏（6〜8月）・夜・格4の灯り",
    "time": "夏（6〜8月）・夜",
-   "flavor": "夏の夜、大きな灯路網の下で花火のように光る。"
+   "flavor": "夏の夜、大きな灯籠のつながりの下で花火のように光る。"
   },
   {
    "id": "hate",
@@ -5623,7 +5623,7 @@
    "ground": "endwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「果ての水」",
+   "where": "釣り場「果ての水」",
    "when": "いつでも",
    "time": "",
    "flavor": null
@@ -5751,7 +5751,7 @@
    "ground": "spring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湧き水」",
+   "where": "釣り場「湧き水」",
    "when": "いつでも",
    "time": "",
    "flavor": "山の湧き水に、ひと粒ずつ生まれる。"
@@ -5767,7 +5767,7 @@
    "ground": "spring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湧き水」",
+   "where": "釣り場「湧き水」",
    "when": "夜明け",
    "time": "夜明け",
    "flavor": "夜明けの湧き水でだけ、姿を見せる。"
@@ -5783,7 +5783,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "いつでも",
    "time": "",
    "flavor": "小川の砂にもぐって、ひげだけ出す。"
@@ -5799,7 +5799,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "昼・晴れ",
    "time": "昼・晴れ",
    "flavor": "晴れた昼の小川を、矢のように走る。"
@@ -5815,7 +5815,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "いつでも",
    "time": "",
    "flavor": "瀬の白波にまぎれて、虫を待つ。"
@@ -5831,7 +5831,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "夏（6〜8月）",
    "time": "夏（6〜8月）",
    "flavor": "夏の早瀬で、石の苔をはむ。"
@@ -5847,7 +5847,7 @@
    "ground": "pool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「淵」",
+   "where": "釣り場「淵」",
    "when": "いつでも",
    "time": "",
    "flavor": "深い淵の底で、百年を数える。"
@@ -5863,7 +5863,7 @@
    "ground": "pool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「淵」",
+   "where": "釣り場「淵」",
    "when": "夜",
    "time": "夜",
    "flavor": "夜の淵で、ひげを灯にする。"
@@ -5879,7 +5879,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "いつでも",
    "time": "",
    "flavor": "どこの池にもいる、のんきなぶな。"
@@ -5895,7 +5895,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "夏（6〜8月）・昼",
    "time": "夏（6〜8月）・昼",
    "flavor": "夏の昼、蓮の葉の下でまどろむ。"
@@ -5911,7 +5911,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "満月",
    "time": "満月",
    "flavor": "満月の池に、月そのものの影を落とす。"
@@ -5927,7 +5927,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "広い湖を、白い背で渡る。"
@@ -5943,8 +5943,8 @@
    "ground": "lake",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「湖」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「湖」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -5959,7 +5959,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "冬（12〜2月）",
    "time": "冬（12〜2月）",
    "flavor": "冬の湖で、群れになってきらめく。"
@@ -5975,7 +5975,7 @@
    "ground": "mtlake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「山の湖」",
+   "where": "釣り場「山の湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "雲より高い湖で、冷たい水を好む。"
@@ -5991,7 +5991,7 @@
    "ground": "mtlake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「山の湖」",
+   "where": "釣り場「山の湖」",
    "when": "晴れ・夜",
    "time": "晴れ・夜",
    "flavor": null
@@ -6007,7 +6007,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "いつでも",
    "time": "",
    "flavor": "波打ちぎわの砂を、すべるように泳ぐ。"
@@ -6023,7 +6023,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "引き潮",
    "time": "引き潮",
    "flavor": "引き潮の磯に、取り残される。"
@@ -6039,7 +6039,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "いつでも",
    "time": "",
    "flavor": "沖の群れで、青い背をひるがえす。"
@@ -6055,7 +6055,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "満ち潮",
    "time": "満ち潮",
    "flavor": "満ち潮の沖を、まっすぐ通り過ぎる。"
@@ -6071,7 +6071,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "夜・灯りの中",
    "time": "夜",
    "flavor": "夜の沖の、舟の灯りに寄ってくる。"
@@ -6087,7 +6087,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "いつでも",
    "time": "",
    "flavor": "外洋の王者。糸ごと持っていこうとする。"
@@ -6103,7 +6103,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "昼",
    "time": "昼",
    "flavor": "昼の外洋を、群れでかけぬける。"
@@ -6119,7 +6119,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "雷雨",
    "time": "雷雨",
    "flavor": null
@@ -6135,7 +6135,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "いつでも",
    "time": "",
    "flavor": "光のない深みで、自分の灯をともす。"
@@ -6151,7 +6151,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "夜",
    "time": "夜",
    "flavor": null
@@ -6167,8 +6167,8 @@
    "ground": "abyss",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「深海」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「深海」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -6183,7 +6183,7 @@
    "ground": "estuary",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「汽水」",
+   "where": "釣り場「汽水」",
    "when": "いつでも",
    "time": "",
    "flavor": "川と海のまじる水を、行き来する。"
@@ -6199,7 +6199,7 @@
    "ground": "estuary",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「汽水」",
+   "where": "釣り場「汽水」",
    "when": "引き潮",
    "time": "引き潮",
    "flavor": "引き潮の干潟で、跳ねて呼ぶ。"
@@ -6215,7 +6215,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "夜",
    "time": "夜",
    "flavor": "沼の底で、とぐろを巻く。"
@@ -6231,7 +6231,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "夏（6〜8月）・夜",
    "time": "夏（6〜8月）・夜",
    "flavor": "夏の夜の沼で、水の中に光る。"
@@ -6247,7 +6247,7 @@
    "ground": "mangrove",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「マングローブの水路」",
+   "where": "釣り場「マングローブの水路」",
    "when": "いつでも",
    "time": "",
    "flavor": "マングローブの根を、すみかにする。"
@@ -6263,7 +6263,7 @@
    "ground": "mangrove",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「マングローブの水路」",
+   "where": "釣り場「マングローブの水路」",
    "when": "満ち潮",
    "time": "満ち潮",
    "flavor": "満ち潮の水路を、横向きに泳ぐ。"
@@ -6279,7 +6279,7 @@
    "ground": "icehole",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「氷の穴」",
+   "where": "釣り場「氷の穴」",
    "when": "いつでも",
    "time": "",
    "flavor": "氷の穴の下で、じっと春を待つ。"
@@ -6295,7 +6295,7 @@
    "ground": "icehole",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「氷の穴」",
+   "where": "釣り場「氷の穴」",
    "when": "夜・晴れ",
    "time": "夜・晴れ",
    "flavor": null
@@ -6311,7 +6311,7 @@
    "ground": "cavelake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「地底湖」",
+   "where": "釣り場「地底湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "光を知らない、透きとおった魚。"
@@ -6327,7 +6327,7 @@
    "ground": "cavelake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「地底湖」",
+   "where": "釣り場「地底湖」",
    "when": "深層（高さ0より下）",
    "time": "",
    "flavor": "深い地底湖の、眠らない主。"
@@ -6343,7 +6343,7 @@
    "ground": "cavespring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
+   "where": "釣り場「洞窟の泉」",
    "when": "いつでも",
    "time": "",
    "flavor": "洞窟の泉で、ひげをゆらす。"
@@ -6359,7 +6359,7 @@
    "ground": "lush",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「苔の洞」",
+   "where": "釣り場「苔の洞」",
    "when": "いつでも",
    "time": "",
    "flavor": "苔の洞の水で、緑に染まった鮒。"
@@ -6375,7 +6375,7 @@
    "ground": "lush",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「苔の洞」",
+   "where": "釣り場「苔の洞」",
    "when": "灯りの中",
    "time": "",
    "flavor": "苔の洞に灯りをともすと、花のように開く。"
@@ -6391,7 +6391,7 @@
    "ground": "darkwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「闇の水」",
+   "where": "釣り場「闇の水」",
    "when": "いつでも",
    "time": "",
    "flavor": "深い闇の水で、音だけを聞いている。"
@@ -6407,8 +6407,8 @@
    "ground": "darkwater",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「闇の水」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「闇の水」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -6423,7 +6423,7 @@
    "ground": "lanternpond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「灯の池」",
+   "where": "釣り場「灯の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "灯りに満ちた池で、色を変える。"
@@ -6439,7 +6439,7 @@
    "ground": "lanternpond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「灯の池」",
+   "where": "釣り場「灯の池」",
    "when": "夜",
    "time": "夜",
    "flavor": "夜、灯の池の光を目にためる。"
@@ -6455,7 +6455,7 @@
    "ground": "endwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「果ての水」",
+   "where": "釣り場「果ての水」",
    "when": "いつでも",
    "time": "",
    "flavor": "果ての地の水で、星くずを食む。"
@@ -6471,7 +6471,7 @@
    "ground": "endwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「果ての水」",
+   "where": "釣り場「果ての水」",
    "when": "引き潮",
    "time": "引き潮",
    "flavor": null
@@ -6487,7 +6487,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "満ち潮",
    "time": "満ち潮",
    "flavor": "満ち潮の海で、よく跳ねる。"
@@ -6503,7 +6503,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "引き潮",
    "time": "引き潮",
    "flavor": "引き潮の海底に、平たく隠れる。"
@@ -6519,7 +6519,7 @@
    "ground": "lavapool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「溶岩の池」",
+   "where": "釣り場「溶岩の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "溶岩の泡にまじって跳ねる、小さな火の魚。"
@@ -6535,7 +6535,7 @@
    "ground": "lavapool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「溶岩の池」",
+   "where": "釣り場「溶岩の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "煮えたぎる池の底で、熱をのむ。"
@@ -6551,7 +6551,7 @@
    "ground": "lavapool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「溶岩の池」",
+   "where": "釣り場「溶岩の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "尾びれが、炎のようにゆらめく。"
@@ -6567,8 +6567,8 @@
    "ground": "lavapool",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「溶岩の池」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「溶岩の池」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -6583,7 +6583,7 @@
    "ground": "void",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「虚空」",
+   "where": "釣り場「虚空」",
    "when": "いつでも",
    "time": "",
    "flavor": "なにもない所を、ふわりと泳ぐ。"
@@ -6599,7 +6599,7 @@
    "ground": "void",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「虚空」",
+   "where": "釣り場「虚空」",
    "when": "いつでも",
    "time": "",
    "flavor": "虚空にたゆたう、星をまとった鰻。"
@@ -6615,7 +6615,7 @@
    "ground": "void",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「虚空」",
+   "where": "釣り場「虚空」",
    "when": "いつでも",
    "time": "",
    "flavor": "虚空を、流れ星のように横切る。"
@@ -6631,8 +6631,8 @@
    "ground": "void",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「虚空」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「虚空」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -6647,7 +6647,7 @@
    "ground": "spring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湧き水」",
+   "where": "釣り場「湧き水」",
    "when": "いつでも",
    "time": "",
    "flavor": "湧き水のふちを、すいすい泳ぐ。"
@@ -6663,7 +6663,7 @@
    "ground": "spring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湧き水」",
+   "where": "釣り場「湧き水」",
    "when": "いつでも",
    "time": "",
    "flavor": "砂粒のように小さく、砂粒のように多い。"
@@ -6679,7 +6679,7 @@
    "ground": "spring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湧き水」",
+   "where": "釣り場「湧き水」",
    "when": "夜明け",
    "time": "夜明け",
    "flavor": "夜明けの露を、ひとしずくずつ飲む。"
@@ -6695,7 +6695,7 @@
    "ground": "spring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湧き水」",
+   "where": "釣り場「湧き水」",
    "when": "満月・夜",
    "time": "満月・夜",
    "flavor": "満月の夜、湧き水に月が生まれる。"
@@ -6711,7 +6711,7 @@
    "ground": "spring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湧き水」",
+   "where": "釣り場「湧き水」",
    "when": "雨",
    "time": "雨",
    "flavor": null
@@ -6727,8 +6727,8 @@
    "ground": "spring",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「湧き水」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「湧き水」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -6743,7 +6743,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "いつでも",
    "time": "",
    "flavor": "小川のよどみで、ちょろちょろ。"
@@ -6759,7 +6759,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "いつでも",
    "time": "",
    "flavor": "名前のない小魚。でも、灯原では名前がある。"
@@ -6775,7 +6775,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "夕暮れ",
    "time": "夕暮れ",
    "flavor": "夕ぐれの小川で、ひと跳ね。"
@@ -6791,7 +6791,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "雨・夜",
    "time": "雨・夜",
    "flavor": "雨の夜、蛙といっしょに鳴くという。"
@@ -6807,8 +6807,8 @@
    "ground": "brook",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「小川」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「小川」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -6823,7 +6823,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "いつでも",
    "time": "",
    "flavor": "瀬の白波に、虹色のひれ。"
@@ -6839,7 +6839,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "昼",
    "time": "昼",
    "flavor": "砂にもぐって、目だけ出す。"
@@ -6855,7 +6855,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "夏（6〜8月）・夜明け",
    "time": "夏（6〜8月）・夜明け",
    "flavor": "夏の夜明けの瀬で、群れを率いる。"
@@ -6871,7 +6871,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "夜・格2以上の灯り",
    "time": "夜",
    "flavor": null
@@ -6887,8 +6887,8 @@
    "ground": "shallows",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「瀬」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「瀬」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -6903,7 +6903,7 @@
    "ground": "pool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「淵」",
+   "where": "釣り場「淵」",
    "when": "いつでも",
    "time": "",
    "flavor": "淵の岩に、ぺたりとはりつく。"
@@ -6919,7 +6919,7 @@
    "ground": "pool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「淵」",
+   "where": "釣り場「淵」",
    "when": "いつでも",
    "time": "",
    "flavor": "淵の深みで、ゆったり回る。"
@@ -6935,7 +6935,7 @@
    "ground": "pool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「淵」",
+   "where": "釣り場「淵」",
    "when": "雨",
    "time": "雨",
    "flavor": "雨の淵で、水面を割る。"
@@ -6951,8 +6951,8 @@
    "ground": "pool",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「淵」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「淵」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -6967,7 +6967,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "湖の群れの、ひと粒。"
@@ -6983,7 +6983,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "湖の岸を、ぐるりと見回る。"
@@ -6999,7 +6999,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "晴れ",
    "time": "晴れ",
    "flavor": "晴れた湖の、紅い背。"
@@ -7015,7 +7015,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "夜明け",
    "time": "夜明け",
    "flavor": "朝霧の湖で、影だけ見せる。"
@@ -7031,7 +7031,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "夜・晴れ",
    "time": "夜・晴れ",
    "flavor": "晴れた夜、湖に星と並んで浮かぶ。"
@@ -7047,7 +7047,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "雷雨",
    "time": "雷雨",
    "flavor": null
@@ -7063,7 +7063,7 @@
    "ground": "estuary",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「汽水」",
+   "where": "釣り場「汽水」",
    "when": "いつでも",
    "time": "",
    "flavor": "川と海のさかいで、ぴょんと跳ねる。"
@@ -7079,7 +7079,7 @@
    "ground": "estuary",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「汽水」",
+   "where": "釣り場「汽水」",
    "when": "いつでも",
    "time": "",
    "flavor": "潮の香りの川を、群れで上る。"
@@ -7095,7 +7095,7 @@
    "ground": "estuary",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「汽水」",
+   "where": "釣り場「汽水」",
    "when": "満ち潮",
    "time": "満ち潮",
    "flavor": "満ち潮の河口で、岩をかじる。"
@@ -7111,7 +7111,7 @@
    "ground": "estuary",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「汽水」",
+   "where": "釣り場「汽水」",
    "when": "夜",
    "time": "夜",
    "flavor": "夜の河口で、海と川を行き来する。"
@@ -7127,7 +7127,7 @@
    "ground": "estuary",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「汽水」",
+   "where": "釣り場「汽水」",
    "when": "春（3〜5月）・夜",
    "time": "春（3〜5月）・夜",
    "flavor": "春の夜、河口が白く光る。"
@@ -7143,7 +7143,7 @@
    "ground": "estuary",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「汽水」",
+   "where": "釣り場「汽水」",
    "when": "引き潮・夕暮れ",
    "time": "引き潮・夕暮れ",
    "flavor": null
@@ -7159,8 +7159,8 @@
    "ground": "estuary",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「汽水」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「汽水」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -7175,7 +7175,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "昼",
    "time": "昼",
    "flavor": "昼の浜を、すべるように。"
@@ -7191,7 +7191,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "雨",
    "time": "雨",
    "flavor": "雨の浜で、ひょっこり顔を出す。"
@@ -7207,7 +7207,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "夜明け・晴れ",
    "time": "夜明け・晴れ",
    "flavor": "晴れた朝の磯で、縞を光らせる。"
@@ -7223,7 +7223,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "夜・雷雨",
    "time": "夜・雷雨",
    "flavor": null
@@ -7239,8 +7239,8 @@
    "ground": "beach",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「浜」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「浜」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -7255,7 +7255,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "いつでも",
    "time": "",
    "flavor": "沖の群れで、金の縞をひるがえす。"
@@ -7271,7 +7271,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "いつでも",
    "time": "",
    "flavor": "育ちざかりの、沖の魚。"
@@ -7287,7 +7287,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "晴れ・夜明け",
    "time": "晴れ・夜明け",
    "flavor": "晴れた夜明けの沖を、まっすぐ。"
@@ -7303,7 +7303,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "新月・夜",
    "time": "新月・夜",
    "flavor": null
@@ -7319,8 +7319,8 @@
    "ground": "offshore",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「沖」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「沖」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -7335,7 +7335,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "いつでも",
    "time": "",
    "flavor": "外洋の流れ藻の下に、いつもいる。"
@@ -7351,7 +7351,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "いつでも",
    "time": "",
    "flavor": "黄色いひれの、外洋の旅人。"
@@ -7367,7 +7367,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "夜",
    "time": "夜",
    "flavor": "夜の外洋を、灯のように飛ぶ。"
@@ -7383,7 +7383,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "満ち潮",
    "time": "満ち潮",
    "flavor": "満ち潮の外洋で、舟と並んで泳ぐ。"
@@ -7399,7 +7399,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "満月",
    "time": "満月",
    "flavor": null
@@ -7415,8 +7415,8 @@
    "ground": "opensea",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「外洋」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「外洋」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -7431,7 +7431,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "いつでも",
    "time": "",
    "flavor": "深海の、ふわふわの灯。"
@@ -7447,7 +7447,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "いつでも",
    "time": "",
    "flavor": "深みで、ぽつりと光る小魚。"
@@ -7463,7 +7463,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "昼",
    "time": "昼",
    "flavor": "昼も夜もない深みの、銀色の影。"
@@ -7479,7 +7479,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "満ち潮",
    "time": "満ち潮",
    "flavor": "満ち潮の深海から、迷い出る。"
@@ -7495,7 +7495,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "いつでも",
    "time": "",
    "flavor": "沼の泥色をした、ぶな。"
@@ -7511,7 +7511,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "雨",
    "time": "雨",
    "flavor": "雨の沼で、蛙と区別がつかない。"
@@ -7527,7 +7527,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "晴れ",
    "time": "晴れ",
    "flavor": "晴れた沼の底で、ひっそり。"
@@ -7543,7 +7543,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "夜・新月",
    "time": "夜・新月",
    "flavor": "新月の霧の沼に、白く浮かぶ。"
@@ -7559,7 +7559,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "冬（12〜2月）",
    "time": "冬（12〜2月）",
    "flavor": null
@@ -7575,7 +7575,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "いつでも",
    "time": "",
    "flavor": "どこの池にもいる、小さな灯。"
@@ -7591,7 +7591,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "灯りの中",
    "time": "",
    "flavor": "灯りのそばの池に、だれかが放した。"
@@ -7607,7 +7607,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "夜",
    "time": "夜",
    "flavor": "夜の池で、かみついたら離さない。"
@@ -7623,7 +7623,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "夜明け・晴れ",
    "time": "夜明け・晴れ",
    "flavor": "晴れた夜明けの池で、錦をまとう。"
@@ -7639,7 +7639,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "雷雨",
    "time": "雷雨",
    "flavor": null
@@ -7655,8 +7655,8 @@
    "ground": "pond",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「池」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「池」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -7671,7 +7671,7 @@
    "ground": "mangrove",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「マングローブの水路」",
+   "where": "釣り場「マングローブの水路」",
    "when": "いつでも",
    "time": "",
    "flavor": "根の上を、跳ねて歩く。"
@@ -7687,7 +7687,7 @@
    "ground": "mangrove",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「マングローブの水路」",
+   "where": "釣り場「マングローブの水路」",
    "when": "昼",
    "time": "昼",
    "flavor": "水を吹いて、虫を落とす。"
@@ -7703,7 +7703,7 @@
    "ground": "mangrove",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「マングローブの水路」",
+   "where": "釣り場「マングローブの水路」",
    "when": "夜",
    "time": "夜",
    "flavor": "夜の水路で、赤い目が光る。"
@@ -7719,7 +7719,7 @@
    "ground": "mangrove",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「マングローブの水路」",
+   "where": "釣り場「マングローブの水路」",
    "when": "引き潮",
    "time": "引き潮",
    "flavor": "引き潮の根の間で、はさみを振る。"
@@ -7735,7 +7735,7 @@
    "ground": "mangrove",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「マングローブの水路」",
+   "where": "釣り場「マングローブの水路」",
    "when": "夜明け・雨",
    "time": "夜明け・雨",
    "flavor": null
@@ -7751,8 +7751,8 @@
    "ground": "mangrove",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「マングローブの水路」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「マングローブの水路」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -7767,7 +7767,7 @@
    "ground": "cavelake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「地底湖」",
+   "where": "釣り場「地底湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "白く透けた、ちいさな魚。"
@@ -7783,7 +7783,7 @@
    "ground": "cavelake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「地底湖」",
+   "where": "釣り場「地底湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "光のない湖で、ひげで探る。"
@@ -7799,7 +7799,7 @@
    "ground": "cavelake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「地底湖」",
+   "where": "釣り場「地底湖」",
    "when": "灯りの外",
    "time": "",
    "flavor": "灯りのない湖でだけ、姿を見せる。"
@@ -7815,7 +7815,7 @@
    "ground": "cavespring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
+   "where": "釣り場「洞窟の泉」",
    "when": "いつでも",
    "time": "",
    "flavor": "しずくが落ちるたびに、ひとつ生まれる。"
@@ -7831,7 +7831,7 @@
    "ground": "cavespring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
+   "where": "釣り場「洞窟の泉」",
    "when": "いつでも",
    "time": "",
    "flavor": "岩の色をした、小さな魚。"
@@ -7847,7 +7847,7 @@
    "ground": "cavespring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
+   "where": "釣り場「洞窟の泉」",
    "when": "地の奥（高さ20より下）",
    "time": "",
    "flavor": "つららの先から、ぽとりと落ちてくる。"
@@ -7863,7 +7863,7 @@
    "ground": "cavespring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
+   "where": "釣り場「洞窟の泉」",
    "when": "灯りの中",
    "time": "",
    "flavor": "灯りをともすと、雲母のように光る。"
@@ -7879,7 +7879,7 @@
    "ground": "cavespring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
+   "where": "釣り場「洞窟の泉」",
    "when": "深層（高さ0より下）・晴れ",
    "time": "晴れ",
    "flavor": null
@@ -7895,8 +7895,8 @@
    "ground": "cavespring",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「洞窟の泉」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -7911,7 +7911,7 @@
    "ground": "lush",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「苔の洞」",
+   "where": "釣り場「苔の洞」",
    "when": "いつでも",
    "time": "",
    "flavor": "苔のあいだに、緑の粒。"
@@ -7927,7 +7927,7 @@
    "ground": "lush",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「苔の洞」",
+   "where": "釣り場「苔の洞」",
    "when": "いつでも",
    "time": "",
    "flavor": "苔をはむ、洞窟の鮎。"
@@ -7943,7 +7943,7 @@
    "ground": "lush",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「苔の洞」",
+   "where": "釣り場「苔の洞」",
    "when": "昼",
    "time": "昼",
    "flavor": "花の洞で、花の色に染まる。"
@@ -7959,7 +7959,7 @@
    "ground": "lush",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「苔の洞」",
+   "where": "釣り場「苔の洞」",
    "when": "夜",
    "time": "夜",
    "flavor": "夜、垂れ蔦の実を食べに来る。"
@@ -7975,7 +7975,7 @@
    "ground": "lush",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「苔の洞」",
+   "where": "釣り場「苔の洞」",
    "when": "春（3〜5月）",
    "time": "春（3〜5月）",
    "flavor": null
@@ -7991,8 +7991,8 @@
    "ground": "lush",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「苔の洞」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「苔の洞」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -8007,7 +8007,7 @@
    "ground": "darkwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「闇の水」",
+   "where": "釣り場「闇の水」",
    "when": "いつでも",
    "time": "",
    "flavor": "目がない。でも、音で見ている。"
@@ -8023,7 +8023,7 @@
    "ground": "darkwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「闇の水」",
+   "where": "釣り場「闇の水」",
    "when": "いつでも",
    "time": "",
    "flavor": "影だけが泳いでいるように見える。"
@@ -8039,7 +8039,7 @@
    "ground": "darkwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「闇の水」",
+   "where": "釣り場「闇の水」",
    "when": "夜",
    "time": "夜",
    "flavor": "夜、スカルクの声をまねる。"
@@ -8055,7 +8055,7 @@
    "ground": "darkwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「闇の水」",
+   "where": "釣り場「闇の水」",
    "when": "灯りの外",
    "time": "",
    "flavor": "古代都市の水で、昔の灯を覚えている。"
@@ -8071,7 +8071,7 @@
    "ground": "mtlake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「山の湖」",
+   "where": "釣り場「山の湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "山の湖の、すずしい魚。"
@@ -8087,7 +8087,7 @@
    "ground": "mtlake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「山の湖」",
+   "where": "釣り場「山の湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "紅い背の、山の鱒。"
@@ -8103,7 +8103,7 @@
    "ground": "mtlake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「山の湖」",
+   "where": "釣り場「山の湖」",
    "when": "雨",
    "time": "雨",
    "flavor": "雨の山の湖で、雲にまぎれる。"
@@ -8119,7 +8119,7 @@
    "ground": "mtlake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「山の湖」",
+   "where": "釣り場「山の湖」",
    "when": "夜明け",
    "time": "夜明け",
    "flavor": "夜明けの山の湖で、朝日をのむ。"
@@ -8135,8 +8135,8 @@
    "ground": "mtlake",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「山の湖」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「山の湖」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -8151,7 +8151,7 @@
    "ground": "icehole",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「氷の穴」",
+   "where": "釣り場「氷の穴」",
    "when": "いつでも",
    "time": "",
    "flavor": "氷の下の、ちいさな鱈。"
@@ -8167,7 +8167,7 @@
    "ground": "icehole",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「氷の穴」",
+   "where": "釣り場「氷の穴」",
    "when": "いつでも",
    "time": "",
    "flavor": "氷の穴から、次々と。"
@@ -8183,7 +8183,7 @@
    "ground": "icehole",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「氷の穴」",
+   "where": "釣り場「氷の穴」",
    "when": "夜",
    "time": "夜",
    "flavor": "夜の氷の下の、幻の大魚。"
@@ -8199,7 +8199,7 @@
    "ground": "icehole",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「氷の穴」",
+   "where": "釣り場「氷の穴」",
    "when": "晴れ・夜",
    "time": "晴れ・夜",
    "flavor": "晴れた夜、氷に星を閉じこめる。"
@@ -8215,7 +8215,7 @@
    "ground": "lanternpond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「灯の池」",
+   "where": "釣り場「灯の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "灯りの粒が、そのまま魚になった。"
@@ -8231,7 +8231,7 @@
    "ground": "lanternpond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「灯の池」",
+   "where": "釣り場「灯の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "灯りに慣れた、のんきな鮒。"
@@ -8247,7 +8247,7 @@
    "ground": "lanternpond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「灯の池」",
+   "where": "釣り場「灯の池」",
    "when": "昼",
    "time": "昼",
    "flavor": "昼の灯の池で、赤く揺れる。"
@@ -8263,7 +8263,7 @@
    "ground": "lanternpond",
    "nushi": false,
    "seasonal": true,
-   "where": "漁場「灯の池」",
+   "where": "釣り場「灯の池」",
    "when": "夏（6〜8月）・夜",
    "time": "夏（6〜8月）・夜",
    "flavor": "夏の夜、灯の池がもう一度灯る。"
@@ -8279,10 +8279,10 @@
    "ground": "lanternpond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「灯の池」",
+   "where": "釣り場「灯の池」",
    "when": "格4の灯り",
    "time": "",
-   "flavor": "大きな灯路網の池で、灯を食べる。"
+   "flavor": "大きな灯籠のつながりの池で、灯を食べる。"
   },
   {
    "id": "toumi_mamori",
@@ -8295,7 +8295,7 @@
    "ground": "lanternpond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「灯の池」",
+   "where": "釣り場「灯の池」",
    "when": "真夜中",
    "time": "真夜中",
    "flavor": null
@@ -8311,8 +8311,8 @@
    "ground": "lanternpond",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「灯の池」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「灯の池」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -8327,7 +8327,7 @@
    "ground": "endwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「果ての水」",
+   "where": "釣り場「果ての水」",
    "when": "いつでも",
    "time": "",
    "flavor": "果ての水で、光らない光を放つ。"
@@ -8343,7 +8343,7 @@
    "ground": "endwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「果ての水」",
+   "where": "釣り場「果ての水」",
    "when": "いつでも",
    "time": "",
    "flavor": "中身がないように見える。でも重い。"
@@ -8359,7 +8359,7 @@
    "ground": "endwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「果ての水」",
+   "where": "釣り場「果ての水」",
    "when": "晴れ",
    "time": "晴れ",
    "flavor": "星のかけらを、背に散らす。"
@@ -8375,7 +8375,7 @@
    "ground": "endwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「果ての水」",
+   "where": "釣り場「果ての水」",
    "when": "満ち潮",
    "time": "満ち潮",
    "flavor": null
@@ -8391,8 +8391,8 @@
    "ground": "endwater",
    "nushi": true,
    "seasonal": false,
-   "where": "漁場「果ての水」",
-   "when": "この漁場の魚をすべて釣ったあと",
+   "where": "釣り場「果ての水」",
+   "when": "この釣り場の魚をすべて釣ったあと",
    "time": "",
    "flavor": null
   },
@@ -8407,7 +8407,7 @@
    "ground": "lavapool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「溶岩の池」",
+   "where": "釣り場「溶岩の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "溶岩の泡と、区別がつかない。"
@@ -8423,7 +8423,7 @@
    "ground": "lavapool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「溶岩の池」",
+   "where": "釣り場「溶岩の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "黒く焦げた、熱い鮒。"
@@ -8439,7 +8439,7 @@
    "ground": "lavapool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「溶岩の池」",
+   "where": "釣り場「溶岩の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "ふくらむと、ぽんと火をふく。"
@@ -8455,7 +8455,7 @@
    "ground": "lavapool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「溶岩の池」",
+   "where": "釣り場「溶岩の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "長い体で、溶岩をくぐる。"
@@ -8471,7 +8471,7 @@
    "ground": "lavapool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「溶岩の池」",
+   "where": "釣り場「溶岩の池」",
    "when": "いつでも",
    "time": "",
    "flavor": null
@@ -8487,7 +8487,7 @@
    "ground": "void",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「虚空」",
+   "where": "釣り場「虚空」",
    "when": "いつでも",
    "time": "",
    "flavor": "虚空に浮かぶ、小さな星。"
@@ -8503,7 +8503,7 @@
    "ground": "void",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「虚空」",
+   "where": "釣り場「虚空」",
    "when": "いつでも",
    "time": "",
    "flavor": "向こうが透けて見える。"
@@ -8519,7 +8519,7 @@
    "ground": "void",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「虚空」",
+   "where": "釣り場「虚空」",
    "when": "いつでも",
    "time": "",
    "flavor": "月から落ちてきた、と言われる。"
@@ -8535,7 +8535,7 @@
    "ground": "void",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「虚空」",
+   "where": "釣り場「虚空」",
    "when": "いつでも",
    "time": "",
    "flavor": "背に、ひとつの銀河。"
@@ -8551,7 +8551,7 @@
    "ground": "void",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「虚空」",
+   "where": "釣り場「虚空」",
    "when": "いつでも",
    "time": "",
    "flavor": null
@@ -8919,7 +8919,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "いつでも",
    "time": "",
    "flavor": "瀬の小石のあいだに、虹色の腹。"
@@ -8935,7 +8935,7 @@
    "ground": "shallows",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「瀬」",
+   "where": "釣り場「瀬」",
    "when": "いつでも",
    "time": "",
    "flavor": "白波の下で、じっと流れを読む。"
@@ -8951,7 +8951,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "いつでも",
    "time": "",
    "flavor": "小川の砂に、縞の影。"
@@ -8967,7 +8967,7 @@
    "ground": "brook",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「小川」",
+   "where": "釣り場「小川」",
    "when": "いつでも",
    "time": "",
    "flavor": "小川にしては大きすぎる、銀の鮒。"
@@ -8983,7 +8983,7 @@
    "ground": "icehole",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「氷の穴」",
+   "where": "釣り場「氷の穴」",
    "when": "いつでも",
    "time": "",
    "flavor": "氷の穴の底で、黒く光る。"
@@ -8999,7 +8999,7 @@
    "ground": "pool",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「淵」",
+   "where": "釣り場「淵」",
    "when": "いつでも",
    "time": "",
    "flavor": "淵の岩の床に、どっしり。"
@@ -9015,7 +9015,7 @@
    "ground": "lake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湖」",
+   "where": "釣り場「湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "湖の真ん中で、ゆっくり口をあける。"
@@ -9031,7 +9031,7 @@
    "ground": "estuary",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「汽水」",
+   "where": "釣り場「汽水」",
    "when": "いつでも",
    "time": "",
    "flavor": "すずきの子。汽水で大きくなる。"
@@ -9047,7 +9047,7 @@
    "ground": "beach",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「浜」",
+   "where": "釣り場「浜」",
    "when": "いつでも",
    "time": "",
    "flavor": "浜の砂に、石のふりをしている。"
@@ -9063,7 +9063,7 @@
    "ground": "offshore",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沖」",
+   "where": "釣り場「沖」",
    "when": "いつでも",
    "time": "",
    "flavor": "沖の潮目で、群れの先頭を泳ぐ。"
@@ -9079,7 +9079,7 @@
    "ground": "opensea",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「外洋」",
+   "where": "釣り場「外洋」",
    "when": "いつでも",
    "time": "",
    "flavor": "外洋の流れで、ぴりりと光る。"
@@ -9095,7 +9095,7 @@
    "ground": "abyss",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「深海」",
+   "where": "釣り場「深海」",
    "when": "いつでも",
    "time": "",
    "flavor": "深海の、ガラスのように透けた魚。"
@@ -9111,7 +9111,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "いつでも",
    "time": "",
    "flavor": "がまの葉の陰に、背中だけ出す。"
@@ -9127,7 +9127,7 @@
    "ground": "marsh",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「沼」",
+   "where": "釣り場「沼」",
    "when": "いつでも",
    "time": "",
    "flavor": "口だけで、体の半分。"
@@ -9143,7 +9143,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "いつでも",
    "time": "",
    "flavor": "どこの池にもいるが、よく光る。"
@@ -9159,7 +9159,7 @@
    "ground": "pond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「池」",
+   "where": "釣り場「池」",
    "when": "いつでも",
    "time": "",
    "flavor": "甲羅のような背をした、ふしぎな魚。"
@@ -9175,7 +9175,7 @@
    "ground": "mangrove",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「マングローブの水路」",
+   "where": "釣り場「マングローブの水路」",
    "when": "いつでも",
    "time": "",
    "flavor": "泥の上を、ぴょんぴょん跳ねる。"
@@ -9191,7 +9191,7 @@
    "ground": "spring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湧き水」",
+   "where": "釣り場「湧き水」",
    "when": "いつでも",
    "time": "",
    "flavor": "湧き水の石の下に、はさみの影。"
@@ -9207,7 +9207,7 @@
    "ground": "spring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「湧き水」",
+   "where": "釣り場「湧き水」",
    "when": "いつでも",
    "time": "",
    "flavor": "湧き水の底で、白く光るめだか。"
@@ -9223,7 +9223,7 @@
    "ground": "endwater",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「果ての水」",
+   "where": "釣り場「果ての水」",
    "when": "いつでも",
    "time": "",
    "flavor": "果ての水の、ひとしずくが魚になった。"
@@ -9239,7 +9239,7 @@
    "ground": "lanternpond",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「灯の池」",
+   "where": "釣り場「灯の池」",
    "when": "いつでも",
    "time": "",
    "flavor": "灯の池で、腹を太鼓のように鳴らす。"
@@ -9255,7 +9255,7 @@
    "ground": "mtlake",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「山の湖」",
+   "where": "釣り場「山の湖」",
    "when": "いつでも",
    "time": "",
    "flavor": "山の湖の、いちばん深い岩の陰。"
@@ -9271,7 +9271,7 @@
    "ground": "cavespring",
    "nushi": false,
    "seasonal": false,
-   "where": "漁場「洞窟の泉」",
+   "where": "釣り場「洞窟の泉」",
    "when": "いつでも",
    "time": "",
    "flavor": "小さな泉に、なぜか大きな魚。"
