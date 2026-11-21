@@ -271,6 +271,7 @@ _CMDS = [
         ("/isaribi", "", "漁火（釣り）：次にやること・灯魚図鑑・漁場帳・魚河岸・釣り具"),
         ("/isaribi dex", "", "灯魚図鑑"),
         ("/waza top", "", "番付"),
+        ("/waza kata", "", "型（かた）を選ぶ：極めたい道を3つ（7日に1回変えられる）"),
         ("/waza craft", "", "携帯作業台", "匠"),
         ("/waza ender", "", "携帯エンダーチェスト", "匠"),
         ("/waza bag", "", "背負い籠（自分だけの入れ物）", "匠"),
@@ -732,7 +733,7 @@ CH = [
      "sum": "敵が落とす欠片で、灯りの中だけで働く加護を解放する。", "facts": ["8つの加護", "Lv3 まで", "格とのかけ算"],
      "desc": "欠片が落ちる確率、解放に要る数、8つの加護。灯路網の格とのかけ算。"},
     {"id": "hiwaza", "t": "灯技", "c": "#5AAAFF", "layer": 1, "sec": [],
-     "sum": "遊ぶほど育つ10の道。技点で130の技を覚える。", "facts": ["10の道", "130の技", "奥義まで約1か月"],
+     "sum": "遊ぶほど育つ10の道。130の技（うち38は Lv で自動の地力）。極める道を3つ「型」に。", "facts": ["10の道", "130の技", "奥義まで約1か月"],
      "desc": "灯技（ひわざ）。10の道・130の技、技の木の見方、灯力、主技と副技、今日の務め、極みと極意。"},
     {"id": "himon", "t": "灯紋", "c": "#E9C46A", "layer": 1, "sec": [],
      "sum": "遊んだ時間でたまる灯札で紋書を引き、道具に刻む。ふつうの付呪にはない力。", "facts": ["151の紋", "灯札は遊んだ時間で", "秘は無銘の紋書だけ"],
@@ -815,7 +816,7 @@ def _hiwaza_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">遊ぶほど、技が身につく。</h2>
-    <p class="lead"><span class="kbd">/waza</span> で開きます。掘る、切る、耕す、釣る、作る、旅をする、動物と暮らす、付呪する、灯籠を守る、夜を越える。遊んだ道の Lv が上がり（最大50）、Lv が1上がるごとに技点が1。技点で技を覚えます。戦うための技は少しだけで、ほとんどは暮らしと夜を越えるための技です。</p>
+    <p class="lead"><span class="kbd">/waza</span> で開きます。掘る、切る、耕す、釣る、作る、旅をする、動物と暮らす、付呪する、灯籠を守る、夜を越える。遊んだ道の Lv が上がり（最大50）、Lv が1上がるごとに技点が1。技点で技を覚えます。数字を少し上げるだけの38の技は「地力」で、道の Lv に合わせて自動で身につきます（技点は要りません）。極めたい道を3つ「型」に選ぶと、その道は育ちが1.5倍・使う技の待ち −10%・★の伸び ×1.25（7日に1回変えられる・ほかの道は弱くなりません）。戦うための技は少しだけで、ほとんどは暮らしと夜を越えるための技です。</p>
     <div class="paths">{cards}</div>
     <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">130の技を、ひとつずつ</b><span>効き目・要る Lv・技点・灯力・待ち時間。技の名前で探せます。</span></span><span class="wb-go">灯技 Wiki へ<i></i></span></a>
   </div>
@@ -1482,7 +1483,7 @@ def _wiki_hero(title, lead, color, crumb, icon_rows=None, sub="", wk="waza"):
 def _tile(n, color):
     k = n["kind"]
     ranks = "".join("<i></i>" for _ in range(len(n["req"])))
-    return f'''<a href="#{n["id"]}" class="tn k{k}" style="--c:{color}" title="{_E(n["name"])}"><span class="tn-k">{_KIND[k]}</span><b>{_E(n["name"])}</b><span class="tn-r">{ranks}</span><small class="dot">Lv{n["req"][0]}〜</small></a>'''
+    return f'''<a href="#{n["id"]}" class="tn k{k}" style="--c:{color}" title="{_E(n["name"])}"><span class="tn-k">{"地力" if n.get("ground") else _KIND[k]}</span><b>{_E(n["name"])}</b><span class="tn-r">{ranks}</span><small class="dot">Lv{n["req"][0]}〜</small></a>'''
 
 
 def _tree(p, color):
@@ -1511,17 +1512,20 @@ def _node_card(p, n, color):
     rows = ""
     for r in range(len(n["req"])):
         cd = f'<td class="n">{_sec(n["cooldown"][min(r, len(n["cooldown"]) - 1)])}</td>' if k == 2 else ""
-        rows += f'<tr><th class="n">{_ROMAN[r + 1] if len(n["req"]) > 1 else "—"}</th><td>{_E(n["effect"][r])}</td><td class="n">Lv{n["req"][r]}</td><td class="n">{n["cost"][r]}</td>{cd}</tr>'
+        rows += f'<tr><th class="n">{_ROMAN[r + 1] if len(n["req"]) > 1 else "—"}</th><td>{_E(n["effect"][r])}</td><td class="n">Lv{n["req"][r]}</td><td class="n">{"自動" if n.get("ground") else n["cost"][r]}</td>{cd}</tr>'
     act = f'<p class="nc-act"><span>灯力</span><b class="dot">{n["gauge"]}</b><span>待ち時間</span><b class="dot">{" → ".join(_sec(c) for c in n["cooldown"])}</b></p>' if k == 2 else ""
     total = sum(n["cost"])
     place = "奥義" if n["tier"] == 4 else f'{_E(p["branches"][n["branch"]])}の枝 ・ {_TIER[n["tier"]]}'
+    gr = n.get("ground")
+    if gr:
+        need = "なし（道の Lv で自動で身につく・技点は要らない）"
     return f'''<article class="nc t{n["tier"]}" id="{n["id"]}" style="--c:{color}" data-name="{_E(n["name"])}">
-      <header><span class="nc-tag k{k}">〔{_KIND[k]}〕</span><h3 class="disp">{_E(n["name"])}</h3><span class="nc-place dot">{place}</span></header>
+      <header><span class="nc-tag k{k}">〔{"地力" if gr else _KIND[k]}〕</span><h3 class="disp">{_E(n["name"])}</h3><span class="nc-place dot">{place}</span></header>
       <p class="nc-desc">{_E(_desc(n))}</p>
       {act}
       <div class="tbl-wrap"><table class="nc-t"><thead><tr><th>段</th><th>効き目</th><th>要る Lv</th><th>技点</th>{"<th>待ち</th>" if k == 2 else ""}</tr></thead><tbody>{rows}</tbody></table></div>
       <p class="nc-need"><span>覚える条件</span>{need}</p>
-      <p class="nc-foot mu"><span>{_KIND_HELP[k]}</span><span>すべての段で技点 {total}</span><span class="dot">id: {n["id"]}</span></p>
+      <p class="nc-foot mu"><span>{"地力：道の Lv が届くと、その段に自動でなる。前に技点で覚えた分は技点が戻った（4.1.0〜）" if gr else _KIND_HELP[k]}</span><span>{"技点は要らない" if gr else f"すべての段で技点 {total}"}</span><span class="dot">id: {n["id"]}</span></p>
     </article>'''
 
 
