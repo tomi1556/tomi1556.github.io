@@ -2154,3 +2154,11 @@ a.vc:hover .vc-go,a.vc:focus-visible .vc-go{transform:translateX(3px) rotate(45d
 .kari b{display:block;font-size:22px;color:#fff}
 .kari small{display:block;margin:2px 0 8px;font-size:12px;font-weight:700;color:color-mix(in srgb,var(--c) 76%,#fff)}
 .kari p{margin:0;font-size:14px;line-height:1.7;color:#D7DCE6}
+
+/* 灯の証：絵巻 */
+.emk{list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px;margin:14px 0 8px;padding:0}
+.emk li{position:relative;padding:14px 16px 14px 18px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-left:4px solid var(--c);border-radius:10px;display:flex;flex-direction:column;gap:4px}
+.emk .em-d{font-size:12px;color:var(--c);letter-spacing:.08em}
+.emk b{font-size:19px}
+.emk small{font-size:13px;color:rgba(255,255,255,.62);line-height:1.6}
+.emk em{font-style:normal;font-size:13px;color:var(--c)}

@@ -105,7 +105,7 @@
    "frag": 6
   }
  ],
- "total": 44070,
+ "total": 48800,
  "defs": [
   {
    "id": "lantern_1",
@@ -12451,6 +12451,50 @@
   {
    "name": "胞子",
    "how": "証「獣たちの主」"
+  },
+  {
+   "name": "火の粉",
+   "how": "絵巻「灯路の絵巻」"
+  },
+  {
+   "name": "泡",
+   "how": "絵巻「海の絵巻」"
+  },
+  {
+   "name": "旅の風",
+   "how": "絵巻「旅人の絵巻」"
+  },
+  {
+   "name": "雲",
+   "how": "絵巻「空の絵巻」"
+  },
+  {
+   "name": "魔文",
+   "how": "絵巻「秘術の絵巻」"
+  },
+  {
+   "name": "若葉",
+   "how": "絵巻「野の絵巻」"
+  },
+  {
+   "name": "大灯",
+   "how": "絵巻「大灯路の絵巻」"
+  },
+  {
+   "name": "宵闇",
+   "how": "絵巻「常夜の絵巻」"
+  },
+  {
+   "name": "匠の火",
+   "how": "絵巻「匠の大成」"
+  },
+  {
+   "name": "鱗光",
+   "how": "絵巻「漁火の極み」"
+  },
+  {
+   "name": "花火の尾",
+   "how": "絵巻「祭の主」"
   }
  ],
  "titles": [
@@ -13448,6 +13492,815 @@
    "id": "isr_6",
    "t": "漁火の名手",
    "how": "証「漁火の名手」"
+  },
+  {
+   "id": "e:hajime",
+   "t": "灯の旅人",
+   "how": "絵巻「はじめの灯」"
+  },
+  {
+   "id": "e:kurashi",
+   "t": "灯原の暮らし人",
+   "how": "絵巻「暮らしの絵巻」"
+  },
+  {
+   "id": "e:nora",
+   "t": "野良の人",
+   "how": "絵巻「野良の絵巻」"
+  },
+  {
+   "id": "e:kou",
+   "t": "坑の人",
+   "how": "絵巻「坑の絵巻」"
+  },
+  {
+   "id": "e:mizube",
+   "t": "水辺の人",
+   "how": "絵巻「水辺の絵巻」"
+  },
+  {
+   "id": "e:matsuri",
+   "t": "祭の人",
+   "how": "絵巻「祭の絵巻」"
+  },
+  {
+   "id": "e:ichi",
+   "t": "灯市の人",
+   "how": "絵巻「灯市の絵巻」"
+  },
+  {
+   "id": "e:tomoshiji",
+   "t": "灯路の守り手",
+   "how": "絵巻「灯路の絵巻」"
+  },
+  {
+   "id": "e:yoban",
+   "t": "夜番の誉れ",
+   "how": "絵巻「夜番の絵巻」"
+  },
+  {
+   "id": "e:akatsuki",
+   "t": "朱月を越える者",
+   "how": "絵巻「朱月の絵巻」"
+  },
+  {
+   "id": "e:kari",
+   "t": "狩人の誉れ",
+   "how": "絵巻「狩人の絵巻」"
+  },
+  {
+   "id": "e:goku",
+   "t": "獄を歩む者",
+   "how": "絵巻「獄の絵巻」"
+  },
+  {
+   "id": "e:hate",
+   "t": "果てを見た者",
+   "how": "絵巻「果ての絵巻」"
+  },
+  {
+   "id": "e:umi",
+   "t": "海の人",
+   "how": "絵巻「海の絵巻」"
+  },
+  {
+   "id": "e:tabi",
+   "t": "旅の人",
+   "how": "絵巻「旅人の絵巻」"
+  },
+  {
+   "id": "e:sora",
+   "t": "空を翔ける者",
+   "how": "絵巻「空の絵巻」"
+  },
+  {
+   "id": "e:kouzan",
+   "t": "鉱脈読み",
+   "how": "絵巻「鉱脈の絵巻」"
+  },
+  {
+   "id": "e:koubou",
+   "t": "工房の主",
+   "how": "絵巻「工房の絵巻」"
+  },
+  {
+   "id": "e:jujutsu",
+   "t": "秘術の人",
+   "how": "絵巻「秘術の絵巻」"
+  },
+  {
+   "id": "e:isaribi",
+   "t": "漁火の人",
+   "how": "絵巻「漁火の絵巻」"
+  },
+  {
+   "id": "e:waza",
+   "t": "技の人",
+   "how": "絵巻「灯技の絵巻」"
+  },
+  {
+   "id": "e:geitatsu",
+   "t": "祭の芸達者",
+   "how": "絵巻「祭芸の絵巻」"
+  },
+  {
+   "id": "e:no",
+   "t": "野の主",
+   "how": "絵巻「野の絵巻」"
+  },
+  {
+   "id": "e:kemono",
+   "t": "獣に好かれる者",
+   "how": "絵巻「獣の絵巻」"
+  },
+  {
+   "id": "e:fuuryu",
+   "t": "風流人",
+   "how": "絵巻「風流の絵巻」"
+  },
+  {
+   "id": "e:shoku",
+   "t": "食道楽",
+   "how": "絵巻「食の絵巻」"
+  },
+  {
+   "id": "e:daitouro",
+   "t": "大灯路の主",
+   "how": "絵巻「大灯路の絵巻」"
+  },
+  {
+   "id": "e:tokoyo",
+   "t": "常夜の主",
+   "how": "絵巻「常夜の絵巻」"
+  },
+  {
+   "id": "e:nushi",
+   "t": "主を討つ者",
+   "how": "絵巻「世界の主の絵巻」"
+  },
+  {
+   "id": "e:taisei",
+   "t": "大匠",
+   "how": "絵巻「匠の大成」"
+  },
+  {
+   "id": "e:sumibito",
+   "t": "灯原の住人",
+   "how": "絵巻「灯原の住人」"
+  },
+  {
+   "id": "e:ryoushi",
+   "t": "漁火の名手",
+   "how": "絵巻「漁火の極み」"
+  },
+  {
+   "id": "e:matsurinushi",
+   "t": "祭の主",
+   "how": "絵巻「祭の主」"
   }
- ]
+ ],
+ "emaki": [
+  {
+   "id": "hajime",
+   "name": "はじめの灯",
+   "depth": 0,
+   "desc": "灯原に来て、最初の数日でそろう絵巻。",
+   "icon": "LANTERN",
+   "points": 50,
+   "ids": [
+    "lantern_1",
+    "night_1",
+    "quests",
+    "walk_10",
+    "play_10"
+   ],
+   "title": "灯の旅人",
+   "tint": {
+    "name": "蛍火",
+    "rgb": [
+     186,
+     255,
+     120
+    ]
+   }
+  },
+  {
+   "id": "kurashi",
+   "name": "暮らしの絵巻",
+   "depth": 0,
+   "desc": "食べて、しまって、手なずける。",
+   "icon": "CAMPFIRE",
+   "points": 50,
+   "ids": [
+    "food_10",
+    "tame_1",
+    "c_bread_100",
+    "c_chest_50",
+    "days_7"
+   ],
+   "title": "灯原の暮らし人"
+  },
+  {
+   "id": "nora",
+   "name": "野良の絵巻",
+   "depth": 0,
+   "desc": "畑と森と牧場の、はじめの一歩。",
+   "icon": "WHEAT",
+   "points": 50,
+   "ids": [
+    "m_crop_500",
+    "bonemeal_500",
+    "bred_50",
+    "m_log_500",
+    "shear_500"
+   ],
+   "title": "野良の人"
+  },
+  {
+   "id": "kou",
+   "name": "坑の絵巻",
+   "depth": 0,
+   "desc": "地の下へ、最初のひと掘り。",
+   "icon": "IRON_PICKAXE",
+   "points": 50,
+   "ids": [
+    "m_coal_300",
+    "m_iron_300",
+    "m_copper_300",
+    "diamond_1",
+    "broken_1000"
+   ],
+   "title": "坑の人"
+  },
+  {
+   "id": "mizube",
+   "name": "水辺の絵巻",
+   "depth": 0,
+   "desc": "水に入り、舟を出し、糸を垂らす。",
+   "icon": "FISHING_ROD",
+   "points": 50,
+   "ids": [
+    "fish_50",
+    "swim_1",
+    "boat_10",
+    "hwfish_10",
+    "isg_5"
+   ],
+   "title": "水辺の人"
+  },
+  {
+   "id": "matsuri",
+   "name": "祭の絵巻",
+   "depth": 0,
+   "desc": "毎週の夜祭に集まる。",
+   "icon": "FIREWORK_ROCKET",
+   "points": 50,
+   "ids": [
+    "fest_1",
+    "fest_5",
+    "win_1",
+    "fest_15"
+   ],
+   "title": "祭の人",
+   "tint": {
+    "name": "祭火",
+    "rgb": [
+     255,
+     150,
+     70
+    ]
+   }
+  },
+  {
+   "id": "ichi",
+   "name": "灯市の絵巻",
+   "depth": 0,
+   "desc": "人と売り買いし、頼み、よそおう。",
+   "icon": "GOLD_NUGGET",
+   "points": 50,
+   "ids": [
+    "ichiba_p_1",
+    "ichiba_l_1",
+    "trade_50",
+    "ichiba_r_10"
+   ],
+   "title": "灯市の人"
+  },
+  {
+   "id": "tomoshiji",
+   "name": "灯路の絵巻",
+   "depth": 1,
+   "desc": "灯籠をつなぎ、守り、灯し直す。",
+   "icon": "SEA_LANTERN",
+   "points": 120,
+   "ids": [
+    "net_15",
+    "tier_3",
+    "buff_6",
+    "defend_10",
+    "relit_25",
+    "keeper_30"
+   ],
+   "title": "灯路の守り手",
+   "trail": "火の粉"
+  },
+  {
+   "id": "yoban",
+   "name": "夜番の絵巻",
+   "depth": 1,
+   "desc": "長い夜を、倒れずに越える。",
+   "icon": "CLOCK",
+   "points": 120,
+   "ids": [
+    "night_30",
+    "streak_5",
+    "blood_1",
+    "nkill_500",
+    "elite_25",
+    "close_1"
+   ],
+   "title": "夜番の誉れ"
+  },
+  {
+   "id": "akatsuki",
+   "name": "朱月の絵巻",
+   "depth": 1,
+   "desc": "七夜に一度の、いちばん危ない夜。",
+   "icon": "REDSTONE",
+   "points": 120,
+   "ids": [
+    "blood_10",
+    "bkill_1000",
+    "flawless_blood",
+    "calm_3",
+    "totem_1"
+   ],
+   "title": "朱月を越える者",
+   "tint": {
+    "name": "朱",
+    "rgb": [
+     235,
+     50,
+     40
+    ]
+   }
+  },
+  {
+   "id": "kari",
+   "name": "狩人の絵巻",
+   "depth": 1,
+   "desc": "地上の獣と魔を、ひと通り。",
+   "icon": "BOW",
+   "points": 120,
+   "ids": [
+    "mobs_1000",
+    "kinds_30",
+    "creeper_300",
+    "witch_100",
+    "k_spider_200",
+    "raid_1"
+   ],
+   "title": "狩人の誉れ"
+  },
+  {
+   "id": "goku",
+   "name": "獄の絵巻",
+   "depth": 1,
+   "desc": "ネザーを歩き、砦を荒らす。",
+   "icon": "NETHERRACK",
+   "points": 120,
+   "ids": [
+    "nether",
+    "blaze_300",
+    "ghast_50",
+    "k_hoglin_200",
+    "m_quartz_500",
+    "debris_4"
+   ],
+   "title": "獄を歩む者",
+   "tint": {
+    "name": "獄炎",
+    "rgb": [
+     255,
+     84,
+     20
+    ]
+   }
+  },
+  {
+   "id": "hate",
+   "name": "果ての絵巻",
+   "depth": 1,
+   "desc": "竜の島と、その先の都。",
+   "icon": "END_STONE",
+   "points": 120,
+   "ids": [
+    "end",
+    "dragon_1",
+    "enderman_500",
+    "shulker_200",
+    "e_chorus_100",
+    "pearl_100"
+   ],
+   "title": "果てを見た者",
+   "tint": {
+    "name": "果て紫",
+    "rgb": [
+     205,
+     150,
+     255
+    ]
+   }
+  },
+  {
+   "id": "umi",
+   "name": "海の絵巻",
+   "depth": 1,
+   "desc": "海の底の神殿と、宝。",
+   "icon": "HEART_OF_THE_SEA",
+   "points": 120,
+   "ids": [
+    "elder_3",
+    "guardian_300",
+    "k_drowned_300",
+    "swim_10",
+    "treasure_25",
+    "boat_100"
+   ],
+   "title": "海の人",
+   "trail": "泡"
+  },
+  {
+   "id": "tabi",
+   "name": "旅人の絵巻",
+   "depth": 1,
+   "desc": "歩き、乗り、登り、遠くへ。",
+   "icon": "COMPASS",
+   "points": 120,
+   "ids": [
+    "walk_100",
+    "biome_25",
+    "far_5000",
+    "ride_10",
+    "climb_1000",
+    "cart_1000"
+   ],
+   "title": "旅の人",
+   "trail": "旅の風"
+  },
+  {
+   "id": "sora",
+   "name": "空の絵巻",
+   "depth": 1,
+   "desc": "翼で空を渡る。",
+   "icon": "ELYTRA",
+   "points": 120,
+   "ids": [
+    "fly_10",
+    "fly_100",
+    "rocket_500",
+    "sky",
+    "fall_2000"
+   ],
+   "title": "空を翔ける者",
+   "trail": "雲"
+  },
+  {
+   "id": "kouzan",
+   "name": "鉱脈の絵巻",
+   "depth": 1,
+   "desc": "地の底の色を、ひと通り。",
+   "icon": "DIAMOND_ORE",
+   "points": 120,
+   "ids": [
+    "diamond_100",
+    "emerald_10",
+    "m_gold_1000",
+    "m_lapis_1000",
+    "m_redstone_2000",
+    "m_amethyst_200"
+   ],
+   "title": "鉱脈読み"
+  },
+  {
+   "id": "koubou",
+   "name": "工房の絵巻",
+   "depth": 1,
+   "desc": "作業台・かまど・金床。手を動かす。",
+   "icon": "SMITHING_TABLE",
+   "points": 120,
+   "ids": [
+    "bench_5000",
+    "furnace_3000",
+    "anvil_100",
+    "smith_50",
+    "stonecut_300",
+    "grind_200"
+   ],
+   "title": "工房の主"
+  },
+  {
+   "id": "jujutsu",
+   "name": "秘術の絵巻",
+   "depth": 1,
+   "desc": "付呪・薬・灯紋。目に見えない力。",
+   "icon": "ENCHANTING_TABLE",
+   "points": 120,
+   "ids": [
+    "enchant_100",
+    "lv30_1",
+    "brew_200",
+    "c_shelf_100",
+    "himon_b_30",
+    "himon_f_40"
+   ],
+   "title": "秘術の人",
+   "trail": "魔文"
+  },
+  {
+   "id": "isaribi",
+   "name": "漁火の絵巻",
+   "depth": 1,
+   "desc": "灯魚を集め、漁場をめぐり、港で働く。",
+   "icon": "TROPICAL_FISH_BUCKET",
+   "points": 120,
+   "ids": [
+    "hwfish_30",
+    "isg_12",
+    "isf_10",
+    "iso_10",
+    "iss_1000",
+    "isr_4"
+   ],
+   "title": "漁火の人",
+   "tint": {
+    "name": "鱗光",
+    "rgb": [
+     120,
+     232,
+     255
+    ]
+   }
+  },
+  {
+   "id": "waza",
+   "name": "灯技の絵巻",
+   "depth": 1,
+   "desc": "10の道を育て、務めを果たす。",
+   "icon": "EXPERIENCE_BOTTLE",
+   "points": 120,
+   "ids": [
+    "hw_50",
+    "hw_150",
+    "hwtask_7",
+    "hwtask_30"
+   ],
+   "title": "技の人"
+  },
+  {
+   "id": "geitatsu",
+   "name": "祭芸の絵巻",
+   "depth": 1,
+   "desc": "夜祭のゲームを、ひと通り勝つ。",
+   "icon": "JUKEBOX",
+   "points": 120,
+   "ids": [
+    "relay_3",
+    "hide_3",
+    "build_3",
+    "dawn_3",
+    "tsuri_3",
+    "kari_3"
+   ],
+   "title": "祭の芸達者",
+   "tint": {
+    "name": "宵宮",
+    "rgb": [
+     255,
+     196,
+     96
+    ]
+   }
+  },
+  {
+   "id": "no",
+   "name": "野の絵巻",
+   "depth": 1,
+   "desc": "森を拓き、畑を広げる。",
+   "icon": "OAK_SAPLING",
+   "points": 120,
+   "ids": [
+    "m_log_5000",
+    "m_crop_5000",
+    "m_cane_2000",
+    "m_gourd_1000",
+    "m_bamboo_2000",
+    "bonemeal_5000"
+   ],
+   "title": "野の主",
+   "trail": "若葉"
+  },
+  {
+   "id": "kemono",
+   "name": "獣の絵巻",
+   "depth": 1,
+   "desc": "動物と暮らす。",
+   "icon": "LEAD",
+   "points": 120,
+   "ids": [
+    "tame_20",
+    "bred_500",
+    "ride_50",
+    "e_milk_50",
+    "e_honey_50"
+   ],
+   "title": "獣に好かれる者"
+  },
+  {
+   "id": "fuuryu",
+   "name": "風流の絵巻",
+   "depth": 1,
+   "desc": "音と花と、ちょっとした遊び。",
+   "icon": "NOTE_BLOCK",
+   "points": 120,
+   "ids": [
+    "notes_1000",
+    "records_50",
+    "bell_100",
+    "potted_50",
+    "target_100",
+    "cake_100"
+   ],
+   "title": "風流人",
+   "tint": {
+    "name": "雅",
+    "rgb": [
+     232,
+     206,
+     150
+    ]
+   }
+  },
+  {
+   "id": "shoku",
+   "name": "食の絵巻",
+   "depth": 1,
+   "desc": "灯原の味を、ひと通り。",
+   "icon": "CAKE",
+   "points": 120,
+   "ids": [
+    "food_25",
+    "e_steak_1000",
+    "e_pie_100",
+    "e_kelp_500",
+    "e_berry_500",
+    "craft_cake_10"
+   ],
+   "title": "食道楽"
+  },
+  {
+   "id": "daitouro",
+   "name": "大灯路の絵巻",
+   "depth": 2,
+   "desc": "灯路を都にまで育てる。",
+   "icon": "BEACON",
+   "points": 300,
+   "ids": [
+    "net_80",
+    "lantern_150",
+    "buff_18",
+    "defend_150",
+    "keeper_100",
+    "tints_10"
+   ],
+   "title": "大灯路の主",
+   "tint": {
+    "name": "大灯",
+    "rgb": [
+     255,
+     244,
+     205
+    ]
+   },
+   "trail": "大灯"
+  },
+  {
+   "id": "tokoyo",
+   "name": "常夜の絵巻",
+   "depth": 2,
+   "desc": "夜そのものになる。",
+   "icon": "SCULK",
+   "points": 300,
+   "ids": [
+    "night_250",
+    "streak_15",
+    "blood_30",
+    "nkill_10000",
+    "elite_600",
+    "nbest_80"
+   ],
+   "title": "常夜の主",
+   "trail": "宵闇"
+  },
+  {
+   "id": "nushi",
+   "name": "世界の主の絵巻",
+   "depth": 2,
+   "desc": "竜・魔・深淵・海の古老・襲撃。",
+   "icon": "DRAGON_HEAD",
+   "points": 300,
+   "ids": [
+    "dragon_5",
+    "wither_1",
+    "warden_1",
+    "elder_3",
+    "raid_10"
+   ],
+   "title": "主を討つ者",
+   "tint": {
+    "name": "王者",
+    "rgb": [
+     255,
+     186,
+     30
+    ]
+   }
+  },
+  {
+   "id": "taisei",
+   "name": "匠の大成",
+   "depth": 2,
+   "desc": "掘り、築き、商い、天を照らす。",
+   "icon": "NETHERITE_PICKAXE",
+   "points": 300,
+   "ids": [
+    "broken_100000",
+    "placed_100000",
+    "diamond_500",
+    "enchant_500",
+    "trade_3000",
+    "craft_beacon_1"
+   ],
+   "title": "大匠",
+   "trail": "匠の火"
+  },
+  {
+   "id": "sumibito",
+   "name": "灯原の住人",
+   "depth": 2,
+   "desc": "季節をまたいで、ここで暮らす。",
+   "icon": "RED_BED",
+   "points": 300,
+   "ids": [
+    "days_100",
+    "play_200",
+    "dstreak_30",
+    "login_200",
+    "hwtask_100"
+   ],
+   "title": "灯原の住人",
+   "tint": {
+    "name": "年輪",
+    "rgb": [
+     196,
+     146,
+     96
+    ]
+   }
+  },
+  {
+   "id": "ryoushi",
+   "name": "漁火の極み",
+   "depth": 2,
+   "desc": "灯魚の百、漁場、ヌシ、焔の海。",
+   "icon": "NAUTILUS_SHELL",
+   "points": 300,
+   "ids": [
+    "hwfish_100",
+    "ism_5",
+    "isn_1",
+    "isl_1",
+    "isf_100",
+    "isgear_25"
+   ],
+   "title": "漁火の名手",
+   "trail": "鱗光"
+  },
+  {
+   "id": "matsurinushi",
+   "name": "祭の主",
+   "depth": 2,
+   "desc": "夜祭の顔として、勝ち続ける。",
+   "icon": "TOTEM_OF_UNDYING",
+   "points": 300,
+   "ids": [
+    "fest_60",
+    "win_20",
+    "fest_all6"
+   ],
+   "title": "祭の主",
+   "trail": "花火の尾"
+  }
+ ],
+ "depthStep": 400
 }

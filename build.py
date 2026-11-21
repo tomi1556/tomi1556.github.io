@@ -254,7 +254,8 @@ _CMDS = [
     ]),
     ("証", "#F29BB8", "灯の証", "Akashi", "報酬の受け取り、称号・足跡の選択は、画面からもできます。", [
         ("/akashi", "", "証の一覧を開く"),
-        ("/akashi claim", "", "報酬をまとめて受け取る"),
+        ("/akashi week", "", "今週の証（毎週3つ・得ると灯暦の点）とおすすめ"),
+        ("/akashi emaki", "", "絵巻（テーマで束ねた証。そろえると称号・灯りの色・足跡）"),
         ("/akashi top", "", "証の番付"),
         ("/akashi stats", "[名前]", "記録を見る"),
         ("/akashi track", "<id|off>", "証を追跡する（画面の上に進み具合が出る）"),
@@ -525,7 +526,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
                ("夜", "moon", "#9C8CFF", "灯りの中で過ごす", "はじめの5時間は「新人の夜」で敵が弱め"),
                ("いつでも", "link", "#8EA2FF", "Discord とつなぐ", "はじめての <span class=\"kbd\">/link</span> で灯籠5基"),
                ("慣れたら", "people", "#F29BB8", "人の灯りとつなぐ", "5基で「二ノ灯」")])}
-    {more("くわしく：最初の夜にやること", "<p><b>灯籠</b>は作業台で作れます（アメジストの欠片2・金インゴット2・ランタン1）。灯りの中は敵が入れず、爆発で壊れず、倒れても持ち物を失いません。最初の1基は無料です。</p><p><b>メニュー</b>は持ち物の「灯しるべ」を右クリックしても開きます。灯籠の画面（<span class=\"kbd\">/tomoshibi</span>）の「はじめの一歩」を1つ達成するたびに、灯籠を2基もらえます。</p><p>灯りの外に出ると、画面の下に「闇の中」と、いちばん近い灯りの方角が出ます。</p><p><span class=\"kbd\">/akashi</span> で灯原だけの進捗「灯の証」（263個）、<span class=\"kbd\">/waza</span> で技を育てる「灯技」と毎日3つの「今日の務め」が開きます。</p><p>Discord とつなぐと、手紙や夜祭の通知が届き、寄付・カード・番付などが使えるようになります。</p>")}
+    {more("くわしく：最初の夜にやること", "<p><b>灯籠</b>は作業台で作れます（アメジストの欠片2・金インゴット2・ランタン1）。灯りの中は敵が入れず、爆発で壊れず、倒れても持ち物を失いません。最初の1基は無料です。</p><p><b>メニュー</b>は持ち物の「灯しるべ」を右クリックしても開きます。灯籠の画面（<span class=\"kbd\">/tomoshibi</span>）の「はじめの一歩」を1つ達成するたびに、灯籠を2基もらえます。</p><p>灯りの外に出ると、画面の下に「闇の中」と、いちばん近い灯りの方角が出ます。</p><p><span class=\"kbd\">/akashi</span> で灯原だけの進捗「灯の証」（600をこえる）、<span class=\"kbd\">/waza</span> で技を育てる「灯技」と毎日3つの「今日の務め」が開きます。</p><p>Discord とつなぐと、手紙や夜祭の通知が届き、寄付・カード・番付などが使えるようになります。</p>")}
     <p class="note cold"><b>来たばかりの人は守られています。</b>はじめの24時間は、灯喰いが来ません。</p>
     <p style="margin-top:24px"><a href="playstyle.html" class="gbtn">だれと遊ぶかで選ぶ：みんなで・身内で・ひとりで</a></p>
   </div>
@@ -1955,7 +1956,16 @@ def akashi_index():
         ladder += f'''<li style="--r:{rc};--w:{max(1.2, r["need"] / mx * 100):.1f}%"><span class="rk-i dot">{i + 1:02d}</span><b class="disp">{_E(r["name"])}</b><span class="rk-b"><i></i></span><span class="rk-n dot">{_num(r["need"])}</span><span class="rk-w">{" ・ ".join(rw) or "はじまりの位"}</span></li>'''
     titles = "".join(f'<li{" class=hid" if t["id"] is None else ""}><b>{_E(t["t"]) if t["t"] else "？？？"}</b><span>{_E(t["how"])}</span></li>' for t in AK["titles"])
     trails = "".join(f'<li><b>{_E(t["name"])}</b><span>{_E(t["how"])}</span></li>' for t in AK["trails"])
-    tints = [(x["tint"]["name"], x["tint"]["rgb"], x["name"]) for x in ds if x.get("tint")] + [(r["tint"]["name"], r["tint"]["rgb"], "位階「" + r["name"] + "」") for r in AK["ranks"] if r.get("tint")]
+    tints = [(x["tint"]["name"], x["tint"]["rgb"], x["name"]) for x in ds if x.get("tint")] + [(r["tint"]["name"], r["tint"]["rgb"], "位階「" + r["name"] + "」") for r in AK["ranks"] if r.get("tint")] \
+        + [(e["tint"]["name"], e["tint"]["rgb"], "絵巻「" + e["name"] + "」") for e in AK.get("emaki", []) if e.get("tint")]
+    _by = {x["id"]: x for x in ds}
+    _ED = [("はじめ", "#8BD18F"), ("なかば", "#7FD3FF"), ("おく", "#C9A0FF")]
+    emk = ""
+    for e in AK.get("emaki", []):
+        nm, col = _ED[e["depth"]]
+        rw = [f'証点 +{e["points"]}'] + ([f'称号「{_E(e["title"])}」'] if e.get("title") else []) + ([f'灯りの色「{_E(e["tint"]["name"])}」'] if e.get("tint") else []) + ([f'足跡「{_E(e["trail"])}」'] if e.get("trail") else [])
+        items = "・".join(_E(_by[i]["name"]) for i in e["ids"] if i in _by)
+        emk += f'<li style="--c:{col}"><span class="em-d dot">{nm}</span><b class="disp">{_E(e["name"])}</b><span class="mu">{_E(e["desc"])}</span><small>{items}</small><em>{" ・ ".join(rw)}</em></li>'
     tintl = "".join(f'<li style="--rgb:rgb({c[0]},{c[1]},{c[2]})"><i></i><b>{_E(n)}</b><span>{_E(h)}</span></li>' for n, c, h in tints)
     hero = _ak_hero("灯の証 完全解説", f"灯原だけの進捗、{len(ds)}の証。8つの章・5つの難度・10の位階と、称号・灯りの色・足跡の手に入れ方。プラグインの定義からそのまま作りました。", "#F29BB8", "", CH_ICONS["akashi"], "AKASHI WIKI")
     return hero + f'''
@@ -1984,8 +1994,15 @@ def akashi_index():
       <p class="mu wk-p">報酬の証点・経験値・加護の欠片は難度で決まります。称号・灯りの色・足跡・品物は、証ごとに追加でつきます。</p>
       <div class="tts">{tiles}</div>
 
+      <h2 class="disp h2 wk-h" id="emaki">{len(AK.get("emaki", []))}の絵巻</h2>
+      <p class="mu wk-p">章をまたいで、テーマで束ねた証。束の証をすべて得ると、証点と、そこでしか手に入らない称号・灯りの色・足跡がもらえます。前から持っている証でそろっている絵巻は、入ったときにそろいます。<span class="kbd">/akashi emaki</span></p>
+      <ul class="emk">{emk}</ul>
+
+      <h2 class="disp h2 wk-h" id="week">今週の証と証の棚</h2>
+      <p class="mu wk-p">毎週月曜に、その人に合った3つの証が「今週の証」に選ばれます。得ると灯暦の点（1つ12点）。<span class="kbd">/akashi week</span> とメニューの「いまやること」から。自慢の証は「証の棚」に3つまで飾れて、番付・灯原のカード・Discord に出ます。どの証にも「持っている人 ○%」が出ます。報酬は得たときに自動で届きます。</p>
+
       <h2 class="disp h2 wk-h" id="ranks">10の位階</h2>
-      <p class="mu wk-p">証点がたまると位階が上がります。バーは、いちばん上の位階までの道のり。</p>
+      <p class="mu wk-p">証点がたまると位階が上がります。要る証点は決まっていて、証が増えても遠くなりません。灯原の伝説の先は、{AK.get("depthStep", 400)} 証点ごとに「灯の深さ」が深くなります。バーは、いちばん上の位階までの道のり。</p>
       <ol class="rks">{ladder}</ol>
 
       <h2 class="disp h2 wk-h" id="rewards">見た目の報酬</h2>
