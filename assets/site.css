@@ -2163,3 +2163,6 @@ a.vc:hover .vc-go,a.vc:focus-visible .vc-go{transform:translateX(3px) rotate(45d
 .emk small{font-size:13px;color:rgba(255,255,255,.62);line-height:1.6}
 .emk em{font-style:normal;font-size:13px;color:var(--c)}
 .emk .mu{font-size:14px;line-height:1.6}
+.chs.n2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.cz-plan{width:100%;height:auto;display:block;margin:8px 0 18px}
+@media (max-width:720px){.chs.n2{grid-template-columns:1fr}}

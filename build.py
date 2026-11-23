@@ -102,7 +102,7 @@ RIDGE = {
     "wiki.html": dict(seed=10, cast=[("yuki", 9, True), ("waka", 36, False)], say=("yuki", "130の技、ぜんぶ書きとめたよ。")),
     "wiki-hiuo.html": dict(seed=11, cast=[("sora", 10, True)], say=("sora", "「秘」の魚は、まだ見つからない……")),
 }
-_CH_WHO = {"lantern": "hino", "night": "shino", "higui": "shino", "buff": "momo", "hiwaza": "waka", "fish": "sora", "himon": "yuki", "akashi": "yuki", "more": "sora", "sato": "hino", "shoku": "waka", "musubi": "momo", "ichiba": "sora"}
+_CH_WHO = {"lantern": "hino", "night": "shino", "higui": "shino", "buff": "momo", "hiwaza": "waka", "fish": "sora", "himon": "yuki", "akashi": "yuki", "more": "sora", "sato": "hino", "shoku": "waka", "musubi": "momo", "ichiba": "sora", "boss": "shino", "casino": "momo"}
 _PATH_WHO = {"light": "hino", "night": "shino", "mine": "momo", "wood": "waka", "farm": "waka", "fish": "sora", "craft": "yuki", "travel": "sora", "ranch": "momo", "arcane": "hino"}
 
 
@@ -714,6 +714,8 @@ CH_ICONS = {
     "shoku": ["................", "..##########....", ".#oooooooooo#...", ".#oooooooooo#...", "..####oo####....", ".....#oo#.......", ".....#oo#....##.", ".....#oo#...#oo#", ".....#oo#..#oo#.", ".....#oo#.#oo#..", ".....#oo##oo#...", ".....#oo#oo#....", "....#oooooo#....", "....########....", "................", "................"],
     "ichiba": ["................", "..############..", ".#oo##oo##oo##o#", ".#oo##oo##oo##o#", "..############..", "...#........#...", "...#..####..#...", "...#..#oo#..#...", "...#..####..#...", "..############..", "..#oooooooooo#..", "..#oooooooooo#..", "..############..", "...##......##...", "...##......##...", "................"],
     "musubi": ["................", "...###....###...", "..#ooo#..#ooo#..", "..#ooo#..#ooo#..", "...###....###...", "................", "..#####..#####..", ".#ooooo##ooooo#.", ".#oooooooooooo#.", ".#oo#oooooo#oo#.", ".#oo#oooooo#oo#.", "..##.######.##..", "....#oo##oo#....", "....#oo##oo#....", "....###..###....", "................"],
+    "boss": ["................", "....########....", "...#oooooooo#...", "..#oooooooooo#..", "..#oooooooooo#..", "..#o###oo###o#..", "..#o###oo###o#..", "..#oooooooooo#..", "..#oooo##oooo#..", "...#oooooooo#...", "....#o#oo#o#....", "....#o#oo#o#....", ".....######.....", "................", "................", "................"],
+    "casino": ["................", ".############...", ".#oooooooooo#...", ".#oooooooooo#.##", ".#o##o##o##o#.##", ".#o##o##o##o#..#", ".#o##o##o##o#..#", ".#oooooooooo####", ".#oooooooooo#...", ".############...", ".#oooooooooo#...", ".#oo######oo#...", ".#oooooooooo#...", ".############...", "................", "................"]
 }
 
 
@@ -775,11 +777,18 @@ CH = [
     {"id": "ichiba", "t": "市場と灯銭", "c": "#F0C35A", "layer": 3, "sec": [],
      "sum": "人から買い、人に売り、人に頼む。灯銭は日々の務めでたまる。", "facts": ["1日100銭まで", "先に預かるから安心", "よそおい51種 × 8場面"],
      "desc": "市場（ともしびいち）の使い方。灯銭のため方、買う・売る（「売ります」の札の4歩）・頼む・手伝う、評判と★と店の名前、よそおいの店、安心のしくみ。"},
+    {"id": "boss", "t": "ボス", "c": "#FF6B6B", "layer": 4, "sec": [],
+     "sum": "章ごとのボスを順に倒し、深淵をこえて、最後に「夜そのもの」へ。", "facts": ["6つの章・29体", "技はかならず予告", "倒れても落とさない"],
+     "desc": "ボス（/boss）。5つの章と深淵、最後のボス「夜そのもの」。技の予告と必殺技のよけ方、落とす品と交換所、むずかしい、組で挑むしかた。"},
+    {"id": "casino", "t": "カジノ", "c": "#D98CFF", "layer": 4, "sec": [],
+     "sum": "会場で台を右クリックするだけ。スロット・大輪・灯魚レース。", "facts": ["コインは遊び専用", "Java も統合版も同じ", "毎日の福引きは無料"],
+     "desc": "カジノの会場（/casino）。会場の並び、スロット・大輪・灯魚レースの遊び方と配当、毎日の福引き、景品所、コインのため方。"},
 ]
 LAYERS = [("第一層", "はじめに知ること", "ここまで読めば、最初の夜を越えられます。"),
           ("第二層", "強くなる", "慣れてきたら。育てるほど、暮らしが楽になります。"),
           ("第三層", "残す・つなぐ", "長く遊ぶほど、残るものがふえます。"),
-          ("第四層", "人と暮らす", "仲間ができたら。里を開き、職につき、縁を結び、市で売り買いします。")]
+          ("第四層", "人と暮らす", "仲間ができたら。里を開き、職につき、縁を結び、市で売り買いします。"),
+          ("第五層", "挑む・遊ぶ", "はじめの道を進んだら。ボスに挑み、カジノで遊びます。")]
 
 _SEC = {m.group(1): m.group(0) for m in _re.finditer(r'<section class="stratum[^"]*" id="(\w+)">.*?\n</section>', _guide_src, _re.S)}
 
@@ -1077,6 +1086,166 @@ def _ichiba_sec():
 '''
 
 
+# ── ボスの章 ──
+def _gshot(f, alt, cap):
+    return f'<figure class="ich-shot"><img src="assets/guide/{f}" alt="{alt}" width="1600" height="900" style="height:auto" loading="lazy" decoding="async"><figcaption>{cap}</figcaption></figure>'
+
+
+def _boss_sec():
+    return f'''<section class="stratum s-deep" id="boss">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">順番に倒し、夜そのものへ。</h2>
+    <p class="lead"><span class="kbd">/boss</span> で開きます（メニューの「ボス」からも）。はじめの道を3段越えると開きます。前のボスを倒すと、次のボスが開きます。</p>
+    {chain(["森", "地の底", "海", "ネザー", "果て", "深淵", "夜そのもの"], "#FF6B6B")}
+    {cards([("map", "#FF6B6B", "5つの章 × 5体", "森・地の底・海・ネザー・果て。章の最後は「章の主」"), ("warn", "#B46CFF", "深淵 3体", "5つの章の主をすべて倒すと開く。1体1体がボスのボス"), ("moon", "#F2B544", "夜そのもの", "最後のボス。姿を2回変える、最強の相手")])}
+    {stats([("sword", "#FF6B6B", "3", "回", "1日に挑める数（0時に戻る）"), ("people", "#FF6B6B", "4", "人", "組で挑める人数"), ("shield", "#6FD39A", "0", "", "倒れても落とす持ち物・経験値")])}
+  </div>
+</section>
+
+<section class="stratum s-soil tex" id="boss-fight">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">挑み方：画面で選んで、闘技場へ。</h2>
+    {steps([("book", "#FF6B6B", "ボスを選ぶ", "/boss の章のページ"), ("one", "#FF6B6B", "ひとり か 組", "組は近くの人を誘う"), ("map", "#FF6B6B", "闘技場へ", "専用の丸い足場"), ("trophy", "#FF6B6B", "倒す", "コインと品")])}
+    <p class="note"><b>倒れても、持ち物は落ちません。</b>元の場所へ戻り、その回は負けになります。場の外に出ると入口へ戻ります。闘技場ではブロックを置けず、こわせません。</p>
+    <p class="note cold"><b>組で挑むとき。</b>誘われた人はチャットの［加わる］か <span class="kbd">/boss join 名前</span>。人数が多いほどボスの体力が増えます（1人ごとに +60%）。呼びかけた人は <span class="kbd">/boss start</span> で待たずに始められます。</p>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="boss-skill">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">技は、かならず予告がある。</h2>
+    <p class="lead">見てよけるのが、こつ。体力が減ると本気になり、技がふえます。</p>
+    {cards([("warn", "#E0453A", "赤い輪", "足もとを叩く。輪の外へ"), ("bolt", "#F2B544", "光る", "突進が来る。横へ"), ("eye", "#C9D0DC", "白い輪", "入ると遅くなる"), ("bolt", "#5AAAFF", "青い印", "落雷。印から離れる"), ("link", "#B46CFF", "紫の輪", "引きよせられる"), ("fire", "#FF9A3C", "橙の輪", "火の床"), ("map", "#9CA3AF", "灰色の輪", "落石"), ("moon", "#9C8CFF", "うなり声", "闇がくる"), ("star", "#FFFFFF", "白く広がる輪", "跳んでよける")], cols=3)}
+    <h3 class="disp vh3">必殺技：画面に「必殺「○○」」</h3>
+    {cards([("shield", "#6FD39A", "緑の輪に逃げこむ", "輪の中にいれば、ほとんど受けない"), ("sword", "#FF6B6B", "ためている間に攻めて止める", "ゲージぶん攻めると止まり、ボスは数秒動けない")], cols=2)}
+  </div>
+</section>
+
+<section class="stratum s-rock" id="boss-drop">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">倒すほど、いい品が落ちる。</h2>
+    {stats([("chest", "#F2B544", "100", "%", "ボスの素材（○○の核 など）"), ("gift", "#B79CF2", "10", "%", "そのボスだけの品（章の主 6%・最後 3%）"), ("star", "#F29BB8", "1", "%", "とてもまれな称号")])}
+    {scale([("緑", "森", "#6FD39A", 1), ("青", "地の底", "#5AAAFF", 1), ("紫", "海", "#B79CF2", 1), ("橙", "ネザー", "#FF9A3C", 1), ("赤", "果て", "#E0453A", 1), ("虹", "深淵・最後", "#F2B544", 1)])}
+    <div class="ich-two">
+      {_gshot("boss-2_drop.webp", "落とすものの確率と、むずかしいの説明", "素材は必ず落ちる。集めれば、運が悪くても品が手に入ります。")}
+      <div class="ich-side">
+        <p class="note"><b>交換所。</b>素材を集めて、ボスの画面の「交換所」で、そのボスの品と交換（ふつう20個・章の主30・最後40）。</p>
+        <p class="note cold"><b>むずかしい。</b>一度倒したボスだけ。体力1.5倍・攻め1.3倍・技が速い。そのかわり品が2倍、★つきの品（効き目が1段強い・持ち主だけに効く）も落ちます。</p>
+        <p class="note"><b>受け取り待ち。</b>持ち物に入らない品は、ボスの画面の左上にたまります。</p>
+      </div>
+    </div>
+    {more("くわしく：倒したときにもらえるもの", "<p>コイン（はじめて倒したときは3倍）と今週の点。章の主は称号つき。灯原ではじめて倒した人は、みんなに知らされます。ボスの画面には、ひとり・組それぞれのいちばん速い記録が残ります。</p><p>1日3回を使いきったら、カジノのコイン300枚で1回ふやせます（1日5回まで）。</p>")}
+  </div>
+</section>
+'''
+
+
+# ── カジノの章 ──
+def _casino_plan():
+    def X(lx):
+        return (lx + 13) * 20 + 10
+
+    def Y(lz):
+        return (25 - lz) * 20
+
+    r = ['<rect x="10" y="20" width="520" height="440" rx="6" fill="#1a1426" stroke="#D98CFF" stroke-width="3"/>']
+    r.append(f'<rect x="{X(-2)}" y="{Y(2) - 4}" width="100" height="8" fill="#E9C46A"/><text x="270" y="{Y(2) + 24}" text-anchor="middle" font-size="15" fill="#E9C46A">入口</text>')
+    for lx, t, c in [(-6, "福引き", "#F2B544"), (6, "景品所", "#6FD39A")]:
+        r.append(f'<rect x="{X(lx) - 10}" y="{Y(2) - 30}" width="20" height="20" fill="{c}"/><text x="{X(lx)}" y="{Y(2) - 38}" text-anchor="middle" font-size="13" fill="{c}">{t}</text>')
+    cols = ["#E0453A", "#3C6FE0", "#5BD34A", "#F2C230"]
+    for i, lx in enumerate([-4, -2, 2, 4]):
+        r.append(f'<rect x="{X(lx) - 9}" y="{Y(4) - 9}" width="18" height="18" fill="{cols[i]}"/>')
+    r.append(f'<text x="270" y="{Y(4) + 4}" text-anchor="middle" font-size="12" fill="#C9D0DC">大輪の札</text>')
+    r.append(f'<circle cx="270" cy="{Y(12)}" r="92" fill="none" stroke="#E0453A" stroke-width="40" stroke-dasharray="24 24"/><circle cx="270" cy="{Y(12)}" r="92" fill="none" stroke="#3C6FE0" stroke-width="40" stroke-dasharray="24 24" stroke-dashoffset="24"/>')
+    r.append(f'<circle cx="270" cy="{Y(12)}" r="114" fill="none" stroke="#E9C46A" stroke-width="4"/><text x="270" y="{Y(12) + 7}" text-anchor="middle" font-size="22" font-weight="700" fill="#F2B544">大輪</text>')
+    for side in (-1, 1):
+        for k in range(3):
+            lz = 5 + k * 6
+            r.append(f'<rect x="{X(12 * side) - 14}" y="{Y(lz) - 46}" width="28" height="92" rx="3" fill="#2a1f3d" stroke="#D98CFF" stroke-width="2"/>')
+        r.append(f'<text x="{X(12 * side) - side * 34}" y="{Y(11) + 5}" text-anchor="middle" font-size="13" fill="#D98CFF" transform="rotate({side * 90} {X(12 * side) - side * 34} {Y(11)})">スロット</text>')
+    for i, lz in enumerate([20, 21, 22, 23]):
+        r.append(f'<rect x="{X(-10) - 10}" y="{Y(lz) - 8}" width="{X(10) - X(-10)}" height="16" fill="#0c0a12" stroke="{cols[i]}" stroke-width="1.5"/><rect x="{X(-10) - 10}" y="{Y(lz) - 8}" width="20" height="16" fill="{cols[i]}"/>')
+        r.append(f'<rect x="{X(-9 + i * 2) - 8}" y="{Y(19) - 8}" width="16" height="16" fill="{cols[i]}"/>')
+    r.append(f'<rect x="{X(10) - 10}" y="{Y(23) - 8}" width="20" height="80" fill="#fff"/><text x="{X(10) - 20}" y="{Y(19) + 5}" text-anchor="end" font-size="13" fill="#4FD8C8">灯魚レース</text>')
+    return '<svg class="cz-plan" viewBox="0 0 540 470" role="img" aria-label="会場を上から見た図">' + "".join(r) + '</svg>'
+
+
+def _casino_sec():
+    return f'''<section class="stratum s-deep" id="casino">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">台を、右クリックするだけ。</h2>
+    <p class="lead"><span class="kbd">/casino</span> で近くの会場へ移動します（メニューの「カジノの会場へ」からも。3秒そのまま・30秒に1回）。はじめの道をすべて越えると開きます。遊び方と配当は、台の上の光る絵の看板と、近くに立つと出る下の文字に。Java 版も統合版も、同じに見えて同じに遊べます。</p>
+    <div class="ich-two">
+      {_casino_plan()}
+      <div class="ich-side">
+        {cards([("flag", "#E9C46A", "入口の壁", "左に毎日の福引き、右に景品所"), ("coin", "#D98CFF", "まん中", "手前に大輪の札、その奥に大輪"), ("star", "#D98CFF", "両わき", "スロット6台（10・100・1000）"), ("fish", "#4FD8C8", "いちばん奥", "灯魚レースの4本の水路")], cols=1)}
+      </div>
+    </div>
+    {stats([("coin", "#F2B544", "100", "枚", "毎日もらえるコイン"), ("star", "#D98CFF", "300", "枚", "ふだんの遊びで1日にたまる上限"), ("lock", "#C9D0DC", "0", "", "灯銭との交換（できません）")])}
+    <p class="note cold"><b>コインは遊び専用です。</b>灯銭とは交換できず、人にも渡せません。会場は運営のほかはこわせません。</p>
+  </div>
+</section>
+
+<section class="stratum s-dusk" id="slot">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">スロット：赤い印の段で、そろえる。</h2>
+    {steps([("one", "#D98CFF", "台を右クリック", "1回 10・100・1000"), ("eye", "#D98CFF", "リーチ", "2つそろうと最後がゆっくり"), ("clock", "#D98CFF", "ひと呼吸", "音も光も止まって…"), ("trophy", "#D98CFF", "当たり", "和音とコインの噴水")])}
+    <div class="ich-two">
+      {_gshot("casino-1_slot.webp", "スロットの遊び方：回す・リーチ・ひと呼吸・当たり、と灯り時間のメーター", "当たりは、赤い印のある、まん中の段だけ。")}
+      <div class="ich-side">
+        <p class="note"><b>左からそろうと当たり。</b>2つでも少し当たり、3つで大きく。<b>灯籠が3つ</b>そろうと、積み立てがまるごともらえます。</p>
+        <p class="note"><b>灯り時間。</b>回すたびにメーターがたまり、満ちるか（300回）、たまにいきなり始まります。8回無料で、ほとんど当たります。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stratum s-rock" id="wheel">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">大輪：みんなで回す、光の輪。</h2>
+    {cards([("coin", "#E0453A", "赤 ×2.2", "24マス中10"), ("coin", "#3C6FE0", "青 ×2.2", "24マス中10"), ("coin", "#5BD34A", "緑 ×7.5", "24マス中3"), ("coin", "#F2C230", "金 ×22", "24マス中1")], cols=4)}
+    <div class="ich-two">
+      {_gshot("casino-2_wheel.webp", "大輪の色と倍率、毎日の福引き、景品所", "色の札を右クリックで100、しゃがんで1000。")}
+      <div class="ich-side">
+        <p class="note"><b>最初の賭けから20秒で回ります。</b>上のバーに残りの秒と、色ごとの賭けの合計。だんだん遅くなって、止まる直前にひと呼吸。金なら会場じゅうが光ります。</p>
+        <p class="note cold">1回に賭けられるのは 10,000 まで。いくつの色に分けて賭けてもかまいません。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="stratum s-soil tex" id="race">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">灯魚レース：1着を、当てるだけ。</h2>
+    <p class="lead">会場のいちばん奥、4本の水路を4匹の灯魚が泳ぎます。当たると <b>×3.7</b>。会場にいるみんなで、同じレースを見て応援します。</p>
+    {cards([("fish", "#E0453A", "赤鯛", "いちばん左の札"), ("fish", "#3C6FE0", "青鰭", ""), ("fish", "#5BD34A", "若竹", ""), ("fish", "#F2C230", "金鱗", "いちばん右の札")], cols=4)}
+    {steps([("fish", "#4FD8C8", "魚を選ぶ", "水路の手前の色の札"), ("coin", "#4FD8C8", "賭ける", "右クリック 100・しゃがんで 1000"), ("clock", "#4FD8C8", "20秒後にドン", "3・2・1の合図"), ("trophy", "#4FD8C8", "1着なら ×3.7", "水路が光って花火")])}
+    <p class="note"><b>どの魚も、1着になる見こみは同じ（4分の1）。</b>調子はレースの中でふらふら変わるので、抜きつ抜かれつ。画面の下に、先頭と「自分の魚は何番手」が出ます。ゴールの前に、ひと呼吸。</p>
+  </div>
+</section>
+
+<section class="stratum s-stone" id="prize">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">福引きと景品所。</h2>
+    {cards([("gift", "#F2B544", "毎日の福引き", "1日1回無料。20〜10,000コイン"), ("lantern", "#F2B544", "灯籠の上限 +1", "最大 +20。1万〜8万コイン"), ("chest", "#F2B544", "市場の札の枠 +1", "1万コイン"), ("house", "#F2B544", "里・みんなの目標に奉納", "10枚で1"), ("fire", "#F2B544", "ふるまい花火", "まわりのみんなにお祝い"), ("star", "#F2B544", "称号", "遊び人・勝負好き・勝負師・大勝負師")])}
+    <h3 class="disp vh3">よくある質問</h3>
+    {more("コインはどこで見られる？", "<p><span class=\"kbd\">/casino coin</span> で残り、<span class=\"kbd\">/casino screen</span> で画面。会場の上のバーにも出ます。</p>")}
+    {more("会場がない／遠い", "<p><span class=\"kbd\">/casino</span> で、いちばん近い会場へ移動します。ボスの闘技場からは移動できません。</p>")}
+    {more("統合版でも遊べる？", "<p>はい。台や札をタップするだけで、絵の看板も同じに見えます。しゃがむ（1000賭け）は、スニークのボタンを押したままタップ。</p>")}
+  </div>
+</section>
+'''
+
+
 def _body(k):
     c = CH[k]
     if c["id"] == "akashi":
@@ -1097,6 +1266,10 @@ def _body(k):
         return _musubi_sec()
     if c["id"] == "ichiba":
         return _ichiba_sec()
+    if c["id"] == "boss":
+        return _boss_sec()
+    if c["id"] == "casino":
+        return _casino_sec()
     return "\n".join(_clean(_SEC[s]) for s in c["sec"])
 
 
@@ -1114,6 +1287,8 @@ _CH_SAY = {
     "shoku": "職のいちばん上の力は、自分じゃなくて、仲間のために使う力なんだ。",
     "musubi": "里がちがっても、縁は結べる。手紙は、いない人にも届くよ。",
     "ichiba": "ほしい物は、だれかが持ってる。お礼は灯銭で、ありがとうは★で。",
+    "boss": "赤い輪が見えたら、まず離れろ。技はかならず、先に知らせてくる。",
+    "casino": "迷ったら大輪の赤か青！ 灯魚レースは、みんなで応援するのがいちばん楽しいよ。",
 }
 
 
