@@ -60,7 +60,7 @@ _PRE_H = " hidden" if _SEASON_LIVE else ""
 def footer():
     ch = "".join(f'<li><a href="guide-{c["id"]}.html">{c["t"]}</a></li>' for c in CH)
     cols = [
-        ("はじめる", [("start.html#join", "入り方"), ("start.html#first", "最初の夜"), ("playstyle.html", "遊び方を選ぶ"), ("commands.html", "コマンド一覧"), ("start.html#faq", "よくある質問")]),
+        ("はじめる", [("start.html#join", "入り方"), ("start.html#first", "最初の夜"), ("playstyle.html", "遊び方を選ぶ"), ("commands.html", "コマンド一覧"), ("words.html", "ことばの辞典"), ("start.html#faq", "よくある質問")]),
         ("遊び方", None),
         ("Wiki", [("wiki.html", "技 Wiki"), ("himon.html", "紋 Wiki"), ("akashi.html", "実績 Wiki"), ("hisato.html", "里 Wiki"), ("wiki-hiuo.html", "灯魚 Wiki（図鑑）")]),
         ("灯原", [("events.html", "夜祭"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
@@ -98,6 +98,7 @@ RIDGE = {
     "support.html": dict(seed=6, cast=[("yuki", 9, True), ("hino", 12, False)], say=("yuki", "名前は、ちゃんと残すからね。")),
     "404.html": dict(seed=7, cast=[("hino", 12, True)], say=("hino", "あれ……こっちは闇の中だ。"), eaters=(40,)),
     "characters.html": dict(seed=8, cast=[("hino", 6, True), ("momo", 13, False), ("sora", 20, True), ("waka", 27, False), ("shino", 34, True), ("yuki", 41, False)], lamps=4),
+    "words.html": dict(seed=12, cast=[("yuki", 9, True)], say=("yuki", "分からないことばは、ここで探してね。")),
     "commands.html": dict(seed=9, cast=[("hino", 9, True)], say=("hino", "/tomoshibi だけ覚えれば大丈夫。")),
     "wiki.html": dict(seed=10, cast=[("yuki", 9, True), ("waka", 36, False)], say=("yuki", "130の技、ぜんぶ書きとめたよ。")),
     "wiki-hiuo.html": dict(seed=11, cast=[("sora", 10, True)], say=("sora", "「秘」の魚は、まだ見つからない……")),
@@ -142,7 +143,7 @@ SPINED = {"index.html", "start.html", "rules.html", "events.html", "support.html
 
 
 def page(file, title, desc, body, hero_min=""):
-    cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki", "akashi")) else "start.html" if file in ("commands.html", "playstyle.html") else "")
+    cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki", "akashi")) else "start.html" if file in ("commands.html", "playstyle.html", "words.html") else "")
     body = _with_ridge(file, body)
     url = SITE + ("/" if file == "index.html" else "/" + file)
     is_top = file == "index.html"
@@ -210,7 +211,7 @@ _CMDS = [
         ("/link", "", "Discord とつなぐ。出た6けたの数字を、Discord の「はじめての方へ」→「Discord と連携」か <span class=\"kbd\">/link 数字</span> に入れる。はじめてつなぐと灯籠5基"),
         ("/link status", "", "いまつながっている Discord を見る"),
         ("/link off", "", "Discord との連携を外す"),
-        ("/hud", "", "上のバー（ボスバー）・下の文字（アクションバー）・効果音を切りかえる。<span class=\"kbd\">/hud bar off</span>・<span class=\"kbd\">/hud action off</span>・<span class=\"kbd\">/hud sound off</span>・<span class=\"kbd\">/hud on</span>。メニューの「表示と音」でも切りかえられる"),
+        ("/hud", "", "上のバー（ボスバー）・下の文字（アクションバー）・効果音を切りかえる。<span class=\"kbd\">/hud bar off</span>・<span class=\"kbd\">/hud action off</span>・<span class=\"kbd\">/hud sound off</span>・<span class=\"kbd\">/hud on</span>・<span class=\"kbd\">/hud side</span>（右の小さな表示）・<span class=\"kbd\">/hud news less</span>（みんなの知らせを少なめに）。メニューの「表示と音」でも切りかえられる"),
     ]),
     ("話", "#8EA2FF", "Discord で使うもの", "灯原ボット", "灯原の Discord で打つコマンドです。「はじめての方へ」のボタンからでも、同じことができます。<b>使うには、先に /link で連携してください。</b>", [
         ("/link", "<数字>", "ゲームで出た6けたの数字で、マイクラとつなぐ（<span class=\"kbd\">/連携</span> でも同じ）"),
@@ -558,7 +559,7 @@ start = sub_hero("start.html", "はじめる", "マインクラフトを持っ�
     {cards([("lantern", "#F2B544", "<span class=\"kbd\">/tomoshibi</span>", "灯籠と加護"), ("sword", "#5AAAFF", "<span class=\"kbd\">/waza</span>", "技・今日の務め"), ("trophy", "#F29BB8", "<span class=\"kbd\">/akashi</span>", "実績"),
             ("house", "#E9824A", "<span class=\"kbd\">/sato</span>", "里"), ("moon", "#9C8CFF", "<span class=\"kbd\">/tokoyo</span>", "夜明けまでの時間"), ("star", "#F29BB8", "<span class=\"kbd\">/yomatsuri</span>", "次の夜祭"),
             ("link", "#8EA2FF", "<span class=\"kbd\">/link</span>", "Discord とつなぐ"), ("eye", "#BFC9DB", "<span class=\"kbd\">/hud</span>", "上と下の表示を切りかえ")], cols=4, cls="row")}
-    <p style="margin-top:24px"><a href="commands.html" class="gbtn">すべてのコマンドを見る（{sum(len(g[5]) for g in _CMDS)}）</a></p>
+    <p style="margin-top:24px"><a href="commands.html" class="gbtn">すべてのコマンドを見る（{sum(len(g[5]) for g in _CMDS)}）</a> <a href="words.html" class="gbtn">ことばの辞典</a></p>
   </div>
 </section>
 
@@ -3229,6 +3230,83 @@ commands = sub_hero("commands.html", "コマンド一覧", "ふだんはメニ�
 commands = commands.replace('<div class="wrap phead" id="content">', '<div class="wrap phead" id="content">\n    ' + _wiki_switch("cmd"), 1)
 
 
+# ───────────────────────── ことばの辞典 ─────────────────────────
+# (印, 色, 見出し, ひとこと, [(ことば, 読み, 説明, くわしいページ)])
+_WORDS = [
+    ("灯", "#F2B544", "灯りと夜", "灯原のいちばん大事なしくみ。", [
+        ("灯籠", "とうろう", "置いたまわりだけを夜の敵から守る、灯原の灯り。ふつうのランタンは飾りで、守りません。", "guide-lantern.html"),
+        ("光の道", "ひかりのみち", "16ブロック以内の灯籠どうしが、自動でつながったもの。だれの灯籠ともつながります。", "guide-lantern.html"),
+        ("格（二ノ灯〜四ノ灯）", "かく", "光の道の灯籠の数で上がる段。5・15・40基で上がり、守りが広くなります。", "guide-lantern.html"),
+        ("細る灯", "ほそるひ", "7日だれも灯りの中に入らない光の道は、消えていきます。使わない灯籠で埋めつくさないためのきまり。", "guide-lantern.html"),
+        ("長い夜", "ながいよる", "昼は4分、夜は24分。夜を重ねるほど敵が強くなります。ベッドで夜は飛ばせません。", "guide-night.html"),
+        ("朱月", "あかつき", "7夜に一度の、とくに敵が強い夜。", "guide-night.html"),
+        ("灯喰い", "ひぐい", "灯籠だけを狙ってくる敵。守りの中まで入ってきます。火は夜明けに戻ります。", "guide-higui.html"),
+        ("灯渡り", "ひわたり", "名前をつけた灯籠どうしを、3秒で行き来すること。", "guide-more.html"),
+    ]),
+    ("育", "#6FD39A", "育てるもの", "遊ぶほど、少しずつ強くなる。", [
+        ("加護", "かご", "灯りの中でだけ働く力。8つあり、加護のかけらで解放します。", "guide-buff.html"),
+        ("加護のかけら", "かごのかけら", "夜の敵が落とす、加護を解放する材料。", "guide-buff.html"),
+        ("道", "みち", "技の系統。採掘・釣り・旅など10の道があり、遊んだぶんだけその道の Lv が上がります。", "guide-hiwaza.html"),
+        ("技", "わざ", "道ごとに覚える力。全部で130。", "wiki.html"),
+        ("技の種", "わざのたね", "道の Lv が1上がるごとに1つ。技を覚えるのに使います。", "guide-hiwaza.html"),
+        ("極み・極意・真髄", "きわみ・ごくい・しんずい", "道を Lv の上まで育てたあとに続く、さらに先の育ち方。", "guide-hiwaza.html"),
+        ("紋", "もん", "紋書を引いて道具に刻む、ふつうの付呪にはない力。151種。", "himon.html"),
+        ("紋のかけら", "もんのかけら", "紋書をほどくと手に入る。紋の図鑑にある紋を写すのに使います。", "himon.html"),
+        ("実績・位・称号", "じっせき・くらい・しょうごう", "この世界で過ごしたことが実績になり、点がたまると位が上がり、名前に称号をつけられます。", "akashi.html"),
+    ]),
+    ("銭", "#F0C35A", "お金と材料", "お金は灯銭だけ。ほかは「材料」です。", [
+        ("灯銭", "ともしぜに", "灯原のお金。今日の務め・日課・週課などでもらえ、人との売り買いや見た目の品に使います。サーバーは品を売り買いしません。", "guide-ichiba.html"),
+        ("鱗", "うろこ", "魚からとれる、釣り道具と餌の材料。お金ではありません。", "guide-fish.html"),
+        ("鱗とり場", "うろことりば", "釣った魚を鱗にする場所。同じ魚を続けて鱗にすると、とれる鱗が少しずつ減ります。", "guide-fish.html"),
+        ("コイン", "こいん", "カジノの中だけで使う遊び用のコイン。灯銭には換えられません。", "guide-casino.html"),
+        ("札", "ふだ", "市場に出す「売ります・ほしい・頼み」のはり紙。", "guide-ichiba.html"),
+        ("受け取り箱", "うけとりばこ", "ごほうびや売れた品が届く箱。メニューのいちばん左。", "guide-ichiba.html"),
+    ]),
+    ("里", "#E9824A", "仲間と暮らし", "ひとりでも遊べて、仲間がいるともっと楽しい。", [
+        ("里", "さと", "3人で開く、仲間の土地。灯りで土地を広げ、集落から都へ育てます。", "guide-sato.html"),
+        ("職", "しょく", "里で選ぶ5つの仕事。働くほど見習いから匠へ上がります。", "guide-shoku.html"),
+        ("依頼", "いらい", "里に足りないものが届く、職の仕事。", "guide-shoku.html"),
+        ("縁・組", "えん・くみ", "仲よくなった人とのつながり（縁）と、いっしょに動く仲間（組・12人まで）。", "guide-musubi.html"),
+        ("鍵", "かぎ", "チェストやドアは置くと自動で鍵がかかり、持ち主と許した人だけが使えます。", "commands.html"),
+        ("落とし物", "おとしもの", "灯りの外で倒れたときの持ち物を預かるしくみ。倒れた場所でなら無料で受け取れます。", "commands.html"),
+        ("ブロック倉庫", "ぶろっくそうこ", "同じブロックは1山だけ持ち歩き、のこりは自分だけの倉庫へ。置けば手に補充されます。", "commands.html"),
+    ]),
+    ("祭", "#D98CFF", "遊びの場", "どれも、専用の会場へ飛んで遊びます。", [
+        ("夜祭", "よまつり", "毎週の決まった時刻に、人数がそろうと始まる週替わりのゲーム。", "events.html"),
+        ("ボス", "ぼす", "章ごとのボスを順に倒していく、強い敵との戦い。技はかならず予告されます。", "guide-boss.html"),
+        ("カジノ", "かじの", "スロット・大輪・灯魚レース。台を右クリックするだけで遊べます。", "guide-casino.html"),
+        ("はじめの道", "はじめのみち", "来たばかりの人のための5つの段。終えると、ふだんの遊びが週の点になります。", "commands.html"),
+        ("週の点・腕比べ", "しゅうのてん・うでくらべ", "ふだんの遊びでたまる週ごとの点と、週に1つの腕比べ。", "commands.html"),
+        ("相談所", "そうだんじょ", "困ったときに運営と直接話せる場所。ゲームでは /ticket。", "rules.html"),
+        ("灯しるべ（メニュー）", "ひしるべ", "全部の画面へつながるメニュー。/menu か、メニューの品を右クリック。", "commands.html"),
+        ("みんなの知らせ", "みんなのしらせ", "ほかの人の出来事のチャット。メニューの「表示と音」か /hud news less で「少なめ」にすると、だれでも加われることと、灯原ではじめての出来事だけになります。", "commands.html"),
+    ]),
+]
+
+
+def _word_rows(rows, gi):
+    out = ""
+    for k, (w, yomi, d, u) in enumerate(rows):
+        q = _E(w + " " + yomi + " " + d)
+        out += f'<div class="cr" id="w{gi}-{k}" data-q="{q}"><code>{_E(w)} <i>{_E(yomi)}</i></code><span>{d} <a href="{u}">くわしく</a></span></div>'
+    return out
+
+
+words = sub_hero("words.html", "ことばの辞典", "灯原だけのことばを、ひとことで。分からないことばがあったら、ここで探してください。",
+                 [(f"c{i}", g[2]) for i, g in enumerate(_WORDS)]) + f'''
+<section class="stratum s-deep" id="words">
+  <div class="wrap">
+    <div class="finder">
+      <label class="find"><span class="sr">ことばを探す</span><input type="search" id="cq" placeholder="ことば・読みで探す（例：うろこ、かけら、格）" autocomplete="off"><kbd class="dot">/</kbd></label>
+      <p class="find-n mu" aria-live="polite"><b class="dot" id="cn">{sum(len(g[4]) for g in _WORDS)}</b> のことば <button type="button" class="clear" id="cclear" hidden>探すのをやめる</button></p>
+      <div id="cl">{"".join(f'''<div class="cmdg" id="c{i}"><div class="cmdg-h" style="--c:{g[1]}"><span class="k">{g[0]}</span><h2 class="disp">{g[2]}</h2><p>{g[3]}</p></div>{_word_rows(g[4], i)}</div>''' for i, g in enumerate(_WORDS))}</div>
+      <p class="wk-empty" id="cempty" hidden>見つかりませんでした。ことばを短くしてみてください。</p>
+    </div>
+  </div>
+</section>
+<script src="assets/wiki.js" defer></script>'''
+
+
 # ───────────────────── 遊び方を選ぶ（みんなで・身内で・ひとりで） ─────────────────────
 _K = lambda c: f'<span class="kbd">{c}</span>'
 
@@ -3306,6 +3384,7 @@ PAGES = [
 ] + WIKI_PAGES + AK_PAGES + HM_PAGES + HS_PAGES + [
     ("support.html", "支える｜灯原", "灯原を支える（寄付）。Discord から PayPay で、100円から（500円・1000円で ❤ の色が変わる）。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
     ("characters.html", "ひとびと｜灯原", "灯原の案内役、6人の旅人（ヒノ・モモ・ソラ・ワカ・シノ・ユキ）と、灯りを喰う灯喰い、夜の敵。予告編に出てくるドット絵の登場人物たち。", characters),
+    ("words.html", "ことばの辞典｜灯原", "灯原だけのことばを、ひとことで。灯籠・光の道・格・細る灯・加護のかけら・技の種・紋のかけら・灯銭・鱗・鱗とり場・里・夜祭など。", words),
     ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯原のメニュー（/menu）、灯籠と光の道（/tomoshibi）、里（/sato）、実績（/akashi）、技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
 ]
@@ -3419,6 +3498,9 @@ for j in HS["jobs"]:
     _idx.append({"k": "職", "t": j["jp"], "s": j["role"] + "・匠の奉仕「" + j["service"] + "」", "u": f"guide-shoku.html#j-{j['key']}", "c": _HS_JC[j["key"]]})
 for f in HS["facilities"]:
     _idx.append({"k": "施設", "t": f["jp"], "s": f["grade"] + "・" + f["text"][:40], "u": "hisato.html#facilities", "c": "#E9824A"})
+for _gi, g in enumerate(_WORDS):
+    for _k, (w, yomi, d, u) in enumerate(g[4]):
+        _idx.append({"k": "ことば", "t": w, "s": yomi + "・" + d[:44], "u": f"words.html#w{_gi}-{_k}", "c": g[1], "a": yomi})
 (out / "assets" / "search.json").write_text(_wj.dumps(_idx, ensure_ascii=False, separators=(",", ":")), encoding="utf-8")
 today = datetime.date.today().isoformat()
 (out / "sitemap.xml").write_text('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' + "".join(f"  <url><loc>{SITE}/{'' if f == 'index.html' else f}</loc><lastmod>{today}</lastmod></url>\n" for f, *_ in PAGES if f != "404.html") + "</urlset>\n", encoding="utf-8")
