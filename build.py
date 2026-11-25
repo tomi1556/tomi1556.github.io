@@ -842,9 +842,9 @@ def _hiwaza_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">遊ぶほど、技が身につく。</h2>
-    <p class="lead"><span class="kbd">/waza</span> で開きます。掘る、切る、耕す、釣る、作る、旅をする、動物と暮らす、付呪する、灯籠を守る、夜を越える。遊んだ道の Lv が上がり（最大50）、Lv が1上がるごとに技点が1。技点で技を覚えます。数字を少し上げるだけの38の技は「自動で身につく技」で、道の Lv に合わせて自動で身につきます（技点は要りません）。極めたい道を3つ「型」に選ぶと、その道は育ちが1.5倍・使う技の待ち −10%・★の伸び ×1.25（7日に1回変えられる・ほかの道は弱くなりません）。戦うための技は少しだけで、ほとんどは暮らしと夜を越えるための技です。</p>
+    <p class="lead"><span class="kbd">/waza</span> で開きます。掘る、切る、耕す、釣る、作る、旅をする、動物と暮らす、付呪する、灯籠を守る、夜を越える。遊んだ道の Lv が上がり（最大50）、Lv が1上がるごとに技の種が1。技の種で技を覚えます。数字を少し上げるだけの38の技は「自動で身につく技」で、道の Lv に合わせて自動で身につきます（技の種は要りません）。極めたい道を3つ「型」に選ぶと、その道は育ちが1.5倍・使う技の待ち −10%・★の伸び ×1.25（7日に1回変えられる・ほかの道は弱くなりません）。戦うための技は少しだけで、ほとんどは暮らしと夜を越えるための技です。</p>
     <div class="paths">{cards}</div>
-    <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">130の技を、ひとつずつ</b><span>効き目・要る Lv・技点・気力・待ち時間。技の名前で探せます。</span></span><span class="wb-go">技 Wiki へ<i></i></span></a>
+    <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">130の技を、ひとつずつ</b><span>効き目・要る Lv・技の種・気力・待ち時間。技の名前で探せます。</span></span><span class="wb-go">技 Wiki へ<i></i></span></a>
   </div>
 </section>
 
@@ -858,7 +858,7 @@ def _hiwaza_sec():
       <dl class="marks">
         <div><dt class="ok">✔</dt><dd><b>覚えた</b>技は光っています。段の強さは Ⅰ〜Ⅲ。</dd></div>
         <div><dt class="go">▶</dt><dd><b>いま覚えられる</b>左クリックで覚えます。</dd></div>
-        <div><dt class="no">・</dt><dd><b>Lv か技点が足りない</b>道を育てると覚えられます。</dd></div>
+        <div><dt class="no">・</dt><dd><b>Lv か技の種が足りない</b>道を育てると覚えられます。</dd></div>
         <div><dt class="lock">✖</dt><dd><b>前の技が先</b>灰色で表示されます。</dd></div>
       </dl>
     </div>
@@ -1364,7 +1364,7 @@ def _guide_index():
     <div class="gi-start">{pix(CH_ICONS["lantern"], "ch-ic lit")}<p><b>はじめての人は、第一層の3章だけで大丈夫です。</b>灯籠を置き、夜を知り、灯喰いから守れれば、最初の夜は越えられます。ほかの章は、遊びながらでどうぞ。</p><a href="guide-lantern.html" class="pbtn">第1章から読む</a></div>
     {layers}
     <div class="wk-bands">
-    <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">技 Wiki</b><span>130の技の効き目・要る Lv・技点・待ち時間、技の木、奥義の試練、務め、灯魚図鑑、技の組み立て。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">技 Wiki</b><span>130の技の効き目・要る Lv・技の種・待ち時間、技の木、奥義の試練、務め、灯魚図鑑、技の組み立て。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">実績 Wiki</b><span>604の実績の目標と報酬、段の道、10の位、称号・灯りの色・足跡の手に入れ方。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="himon.html" class="wiki-band hm-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">紋 Wiki</b><span>{len(HM["defs"])}の紋の段・効き目・刻めるもの、紋書の引き方、刻み方と重ね方。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">里 Wiki</b><span>4つの格、5つの職のバフと日課・週課、位と匠の試し、施設の素材、礎、ずるの防ぎ方。</span></span><span class="wb-go">開く<i></i></span></a>
@@ -1710,14 +1710,14 @@ def _node_card(p, n, color):
     place = "奥義" if n["tier"] == 4 else f'{_E(p["branches"][n["branch"]])}の枝 ・ {_TIER[n["tier"]]}'
     gr = n.get("ground")
     if gr:
-        need = "なし（道の Lv で自動で身につく・技点は要らない）"
+        need = "なし（道の Lv で自動で身につく・技の種は要らない）"
     return f'''<article class="nc t{n["tier"]}" id="{n["id"]}" style="--c:{color}" data-name="{_E(n["name"])}">
       <header><span class="nc-tag k{k}">〔{"自動の技" if gr else _KIND[k]}〕</span><h3 class="disp">{_E(n["name"])}</h3><span class="nc-place dot">{place}</span></header>
       <p class="nc-desc">{_E(_desc(n))}</p>
       {act}
-      <div class="tbl-wrap"><table class="nc-t"><thead><tr><th>段</th><th>効き目</th><th>要る Lv</th><th>技点</th>{"<th>待ち</th>" if k == 2 else ""}</tr></thead><tbody>{rows}</tbody></table></div>
+      <div class="tbl-wrap"><table class="nc-t"><thead><tr><th>段</th><th>効き目</th><th>要る Lv</th><th>技の種</th>{"<th>待ち</th>" if k == 2 else ""}</tr></thead><tbody>{rows}</tbody></table></div>
       <p class="nc-need"><span>覚える条件</span>{need}</p>
-      <p class="nc-foot mu"><span>{"自動の技：道の Lv が届くと、その段に自動でなる。前に技点で覚えた分は技点が戻った（4.1.0〜）" if gr else _KIND_HELP[k]}</span><span>{"技点は要らない" if gr else f"すべての段で技点 {total}"}</span><span class="dot">id: {n["id"]}</span></p>
+      <p class="nc-foot mu"><span>{"自動の技：道の Lv が届くと、その段に自動でなる。前に技の種で覚えた分は技の種が戻った（4.1.0〜）" if gr else _KIND_HELP[k]}</span><span>{"技の種は要らない" if gr else f"すべての段で技の種 {total}"}</span><span class="dot">id: {n["id"]}</span></p>
     </article>'''
 
 
@@ -1746,7 +1746,7 @@ def wiki_path(i):
     {_wiki_side(p["id"])}
     <div class="wk-main">
       <div class="wk-stats" style="--c:{color}">
-        <div><b class="dot">13</b><span>技</span></div><div><b class="dot">{acts}</b><span>使う技（発動）</span></div><div><b class="dot">{p["cost"]}</b><span>すべて覚える技点</span></div><div><b class="dot">50</b><span>最大 Lv</span></div>
+        <div><b class="dot">13</b><span>技</span></div><div><b class="dot">{acts}</b><span>使う技（発動）</span></div><div><b class="dot">{p["cost"]}</b><span>すべて覚える技の種</span></div><div><b class="dot">50</b><span>最大 Lv</span></div>
       </div>
       <h2 class="disp h2 wk-h">技の木</h2>
       <p class="mu wk-p">上から順に開きます。技をおすと、その技の説明へ飛びます。</p>
@@ -1834,7 +1834,7 @@ def wiki_index():
       <h2 class="disp h2 wk-h" id="paths">10の道</h2>
       <div class="wpcs">{cards}</div>
 
-      <a href="wiki-build.html" class="wiki-band cmd-band" style="margin-top:28px"><span class="wb-k dot">BUILD</span><span class="wb-b"><b class="disp">技の組み立て</b><span>道の Lv を決めて技を選ぶと、技点と条件をその場で計算。組み立てはリンクで共有できます。</span></span><span class="wb-go">組み立てる<i></i></span></a>
+      <a href="wiki-build.html" class="wiki-band cmd-band" style="margin-top:28px"><span class="wb-k dot">BUILD</span><span class="wb-b"><b class="disp">技の組み立て</b><span>道の Lv を決めて技を選ぶと、技の種と条件をその場で計算。組み立てはリンクで共有できます。</span></span><span class="wb-go">組み立てる<i></i></span></a>
 
       <h2 class="disp h2 wk-h" id="all">すべての技を探す</h2>
       <div class="finder">
@@ -1847,7 +1847,7 @@ def wiki_index():
 
       <h2 class="disp h2 wk-h" id="grow">育て方</h2>
       <div class="grow2">
-        <div><h3 class="disp h3">Lv と経験値</h3><p class="mu">Lv が1上がるごとに、その道の技点が1。Lv50 で、その道の技はすべて覚えられます（余る道もあります）。Lv50 の先は「極み」の★（{_num(HW["starNeed"])} ごとに1つ・★10から先は重くなる・★{HW["maxStar"]} まで）。★は、道の先の「極意」を育てるのに使います。</p>{_curve_svg()}
+        <div><h3 class="disp h3">Lv と経験値</h3><p class="mu">Lv が1上がるごとに、その道の技の種が1。Lv50 で、その道の技はすべて覚えられます（余る道もあります）。Lv50 の先は「極み」の★（{_num(HW["starNeed"])} ごとに1つ・★10から先は重くなる・★{HW["maxStar"]} まで）。★は、道の先の「極意」を育てるのに使います。</p>{_curve_svg()}
           <div class="lvsteps">{"".join(f'<div><small>Lv{l} まで</small><b>{_num(tot[l])}</b></div>' for l in (10, 20, 40, 50))}</div></div>
         <div><h3 class="disp h3" id="daily">今日の伸び</h3>
           <div class="gtiles">
@@ -1925,8 +1925,8 @@ def wiki_fish():
 <script src="assets/wiki.js" defer></script>'''
 
 
-WIKI_PAGES = [("wiki.html", "技 完全解説｜灯原", "技のすべて。10の道・130の技の効き目と要るLv・技点・気力・待ち時間、奥義の試練、今日の務め、灯魚図鑑。", wiki_index())]
-WIKI_PAGES += [(f"wiki-{p['id']}.html", f"{p['name']}｜技 Wiki｜灯原", f"{p['name']}の13の技（{'・'.join(n['name'] for n in p['nodes'][:5])}…）の効き目、要るLv・技点、技の木、育つこと、奥義の試練。", wiki_path(i))
+WIKI_PAGES = [("wiki.html", "技 完全解説｜灯原", "技のすべて。10の道・130の技の効き目と要るLv・技の種・気力・待ち時間、奥義の試練、今日の務め、灯魚図鑑。", wiki_index())]
+WIKI_PAGES += [(f"wiki-{p['id']}.html", f"{p['name']}｜技 Wiki｜灯原", f"{p['name']}の13の技（{'・'.join(n['name'] for n in p['nodes'][:5])}…）の効き目、要るLv・技の種、技の木、育つこと、奥義の試練。", wiki_path(i))
                for i, p in enumerate(HW["paths"])]
 WIKI_PAGES += [("wiki-hiuo.html", "灯魚図鑑｜灯魚 Wiki｜灯原", f"灯魚{len(HW['fish'])}種の珍しさ・大きさ・水辺・手がかり。", wiki_fish())]
 
@@ -2879,7 +2879,7 @@ def wiki_build():
         for i, p in enumerate(HW["paths"])]}
     js = _wj.dumps(data, ensure_ascii=False).replace("</", "<\\/")
     tabs = "".join(f'<button type="button" class="bd-tab" data-p="{i}" style="--c:{_PCOL[i]}"><span class="ws-k">{p["k"]}</span><span class="bd-tn">{p["name"]}</span><small class="dot" data-sum="{i}">Lv25</small></button>' for i, p in enumerate(HW["paths"]))
-    hero = _wiki_hero("技の組み立て", "道の Lv を決めて技を選ぶと、使う技点と覚える条件をその場で計算します。組み立てはリンクにして、そのまま Discord に貼れます。", "#F2B544", '<span aria-hidden="true">›</span><span>技の組み立て</span>', CH_ICONS["hiwaza"], "SKILL BUILDER")
+    hero = _wiki_hero("技の組み立て", "道の Lv を決めて技を選ぶと、使う技の種と覚える条件をその場で計算します。組み立てはリンクにして、そのまま Discord に貼れます。", "#F2B544", '<span aria-hidden="true">›</span><span>技の組み立て</span>', CH_ICONS["hiwaza"], "SKILL BUILDER")
     return hero + f'''
 <section class="stratum s-deep wk">
   <div class="edge"></div>
@@ -2890,7 +2890,7 @@ def wiki_build():
       <div class="bd-tabs" role="tablist" aria-label="道">{tabs}</div>
       <div class="bd-top">
         <label class="bd-lv"><span>Lv</span><input type="range" min="1" max="50" value="25" data-lv aria-label="道の Lv"><b class="dot" data-lvn>25</b></label>
-        <div class="bd-pts"><span>技点</span><b class="dot" data-used>0</b><span>/</span><b class="dot" data-have>25</b><em data-left>残り 25</em></div>
+        <div class="bd-pts"><span>技の種</span><b class="dot" data-used>0</b><span>/</span><b class="dot" data-have>25</b><em data-left>残り 25</em></div>
         <label class="bd-trial"><input type="checkbox" data-trial checked> 奥義の試練を終えた</label>
       </div>
       <div class="bd-bar"><i data-barfill></i></div>
@@ -2914,7 +2914,7 @@ def wiki_build():
 <script src="assets/build.js" defer></script>'''
 
 
-WIKI_PAGES += [("wiki-build.html", "技の組み立て｜技 Wiki｜灯原", "技の組み立てシミュレーター。道の Lv と技を選ぶと、技点と覚える条件を計算。組み立てはリンクで共有できます。", wiki_build())]
+WIKI_PAGES += [("wiki-build.html", "技の組み立て｜技 Wiki｜灯原", "技の組み立てシミュレーター。道の Lv と技を選ぶと、技の種と覚える条件を計算。組み立てはリンクで共有できます。", wiki_build())]
 
 
 # ───────────────────────── 支える（寄付） ─────────────────────────

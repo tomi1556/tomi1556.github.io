@@ -1,4 +1,4 @@
-/* 灯技の組み立て：道の Lv と技を選ぶと、技点と条件を計算する。組み立ては URL の # に入る。 */
+/* 灯技の組み立て：道の Lv と技を選ぶと、技の種と条件を計算する。組み立ては URL の # に入る。 */
 (function () {
   'use strict';
   var root = document.querySelector('[data-builder]');
@@ -64,7 +64,7 @@
     if (n.t === 4 && top3(i) < D.capNeeds) return '三の段の技を ' + D.capNeeds + ' つ覚える（いま ' + top3(i) + '）';
     if (n.t === 4 && r === 0 && !st.trial) return '奥義の試練「' + p.trial + '」を果たす';
     if (st.lv[i] < n.req[r]) return 'Lv' + n.req[r] + ' で覚えられる';
-    if (st.lv[i] - used(i) < n.cost[r]) return '技点が ' + n.cost[r] + ' 要る（残り ' + (st.lv[i] - used(i)) + '）';
+    if (st.lv[i] - used(i) < n.cost[r]) return '技の種が ' + n.cost[r] + ' 要る（残り ' + (st.lv[i] - used(i)) + '）';
     return null;
   }
   /** 外したときに、つながっている技も外す。 */
@@ -79,7 +79,7 @@
       });
     }
   }
-  /** Lv を下げたとき：その Lv では届かない段を外し、技点が足りなければ上の段から外す。 */
+  /** Lv を下げたとき：その Lv では届かない段を外し、技の種が足りなければ上の段から外す。 */
   function fix(i) {
     var p = D.paths[i];
     p.nodes.forEach(function (n, j) { while (st.rk[i][j] > 0 && n.req[st.rk[i][j] - 1] > st.lv[i]) st.rk[i][j]--; });
@@ -157,7 +157,7 @@
       var list = p.nodes.map(function (n, j) { return [n, st.rk[i][j]]; }).filter(function (x) { return x[1] > 0; });
       if (!list.length) return;
       any = true;
-      h += '<div class="bd-sp" style="--c:' + p.c + '"><p class="bd-sh"><span class="ws-k">' + p.k + '</span><b>' + p.name + '</b><small class="dot">Lv' + st.lv[i] + '・技点 ' + used(i) + '/' + st.lv[i] + '</small></p><ul>' +
+      h += '<div class="bd-sp" style="--c:' + p.c + '"><p class="bd-sh"><span class="ws-k">' + p.k + '</span><b>' + p.name + '</b><small class="dot">Lv' + st.lv[i] + '・技の種 ' + used(i) + '/' + st.lv[i] + '</small></p><ul>' +
         list.map(function (x) { return '<li><b>' + x[0].name + (x[0].eff.length > 1 ? ' ' + ROMAN[x[1]] : '') + '</b><span>' + x[0].eff[x[1] - 1] + '</span></li>'; }).join('') + '</ul></div>';
     });
     $('[data-summary]').innerHTML = any ? h : '<p class="mu">まだ何も選んでいません。上の技の木から選んでください。</p>';
