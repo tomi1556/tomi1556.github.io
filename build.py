@@ -3067,7 +3067,7 @@ support = f'''<div class="hero sp-hero">
     <ul class="vtiers">
       <li style="--c:#FFFFFF">{ic("heart", "#FFFFFF", 64)}<b class="disp">灯の芽</b><span class="dot">100円から</span><small>名前に白い ❤</small></li>
       <li style="--c:#F2B544">{ic("heart", "#F2B544", 64)}<b class="disp">灯明</b><span class="dot">500円から</span><small>名前に灯色の ❤</small></li>
-      <li style="--c:#FFE178">{ic("heart", "#FFE178", 64)}<b class="disp">大灯籠</b><span class="dot">1000円から</span><small>名前に金の ❤✦</small></li>
+      <li style="--c:#FFE178">{ic("heart", "#FFE178", 64)}<b class="disp">大灯籠</b><span class="dot">1000円から</span><small>名前に太い金の ❤</small></li>
     </ul>
     <p class="mu" style="margin-top:12px;font-size:15px">どの段も：支え手ロール・支え手の壁。<b>シーズンの終わりまで</b>（壁の名前はずっと残る）。</p>
     {steps([("phone", "#F29BB8", "PayPay で送金リンクを作る", "「送る」→ 金額 → リンクをコピー"), ("chat", "#8EA2FF", "Discord の「寄付する」に貼る", "MCID・金額・リンク"), ("heart", "#F2B544", "運営が受け取って ❤", "たいてい1日以内・DM でお知らせ")])}
