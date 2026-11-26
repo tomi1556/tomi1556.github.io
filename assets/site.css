@@ -2194,3 +2194,24 @@ a.vc:hover .vc-go,a.vc:focus-visible .vc-go{transform:translateX(3px) rotate(45d
 .sato-rank li:nth-child(1)>b{color:#FFE066}.sato-rank li:nth-child(2)>b{color:#D6DCE6}.sato-rank li:nth-child(3)>b{color:#E9A15A}
 .sato-rank .sr-name{font-size:18px;color:#fff}.sato-rank .sr-score{font-size:20px;color:#FFE3A3}
 .sato-rank small{grid-column:2/4;color:var(--mu);font-size:13px}
+
+/* 証の殿堂（実績 Wiki・サーバーから自動） */
+.akh{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:18px;margin:14px 0 8px}
+.akh-box{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:16px 18px}
+.akh-box .h3{margin:0 0 8px}
+.akh-sub{font-size:13px;margin:-4px 0 8px}
+.akh ul,.akh ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.akh-month li{padding:6px 10px;border-left:3px solid #8FC3E8;background:rgba(143,195,232,.08);border-radius:6px}
+.akh-n{margin:10px 0 0;font-size:14px}
+.akh-top li{display:grid;grid-template-columns:28px 32px 1fr auto;gap:10px;align-items:center;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.akh-top li .face{border-radius:4px;image-rendering:pixelated}
+.akh-no{color:#F2B544;text-align:right}
+.akh-who b{display:block}
+.akh-who small{display:block;color:var(--mu,#aab);font-size:12px}
+.akh-shelves{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.akh-shelf{font-size:11px;padding:1px 6px;border-radius:999px;border:1px solid var(--c);color:var(--c)}
+.akh-pt{text-align:right;color:#BAAAFF}
+.akh-pt small{display:block;font-size:11px;color:var(--mu,#aab)}
+.akh-first li,.akh-rare li{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
+.akh-first .mu,.akh-rare .mu{font-size:13px}
+.akh-t{font-style:normal;color:var(--c);font-size:11px;letter-spacing:-1px}

@@ -105,7 +105,7 @@
    "frag": 6
   }
  ],
- "total": 48800,
+ "total": 60300,
  "defs": [
   {
    "id": "lantern_1",
@@ -5602,22 +5602,22 @@
    "id": "sato_takumi",
    "cat": 5,
    "tier": 4,
-   "name": "匠",
+   "name": "棟梁",
    "icon": "SMITHING_TABLE",
    "desc": [
-    "里の職で匠になる。"
+    "里の職で棟梁になる。"
    ],
    "goal": "1回",
    "stage": 1,
    "stages": 1,
    "prev": null,
-   "title": "匠",
+   "title": "棟梁",
    "tint": null,
    "trail": null,
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "職の経験を積むと「匠の試し」が出る。合格すると匠。"
+   "tip": "職の経験を積むと「棟梁の試し」が出る。合格すると棟梁。"
   },
   {
    "id": "fest_1",
@@ -11966,6 +11966,3305 @@
    "hint": null
   },
   {
+   "id": "naoshi_1",
+   "cat": 0,
+   "tier": 4,
+   "name": "はじめての灯し直し",
+   "icon": "NETHER_STAR",
+   "desc": [
+    "灯し直しをする。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 4,
+   "prev": null,
+   "title": "灯し直し",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "naoshi_3",
+   "cat": 0,
+   "tier": 5,
+   "name": "三度の灯",
+   "icon": "NETHER_STAR",
+   "desc": [
+    "灯し直しを3回する。"
+   ],
+   "goal": "3回",
+   "stage": 2,
+   "stages": 4,
+   "prev": "naoshi_1",
+   "title": "三度の灯",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hidakara_6",
+   "cat": 0,
+   "tier": 5,
+   "name": "灯宝の主",
+   "icon": "BEACON",
+   "desc": [
+    "灯宝を6つすべて手に入れる。"
+   ],
+   "goal": "6種",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": "灯宝の主",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_k_1",
+   "cat": 2,
+   "tier": 1,
+   "name": "主への一歩",
+   "icon": "ZOMBIE_HEAD",
+   "desc": [
+    "ボスを1体倒す。"
+   ],
+   "goal": "1体",
+   "stage": 1,
+   "stages": 5,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/boss のボス。章ごとに順に開く。組でも、ひとりでも数える。"
+  },
+  {
+   "id": "bs_k_10",
+   "cat": 2,
+   "tier": 2,
+   "name": "主を討つ者",
+   "icon": "ZOMBIE_HEAD",
+   "desc": [
+    "ボスを10回倒す。"
+   ],
+   "goal": "10体",
+   "stage": 2,
+   "stages": 5,
+   "prev": "bs_k_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/boss のボス。章ごとに順に開く。組でも、ひとりでも数える。"
+  },
+  {
+   "id": "bs_k_50",
+   "cat": 2,
+   "tier": 3,
+   "name": "主狩り",
+   "icon": "SKELETON_SKULL",
+   "desc": [
+    "ボスを50回倒す。"
+   ],
+   "goal": "50体",
+   "stage": 3,
+   "stages": 5,
+   "prev": "bs_k_10",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/boss のボス。章ごとに順に開く。組でも、ひとりでも数える。"
+  },
+  {
+   "id": "bs_k_150",
+   "cat": 2,
+   "tier": 4,
+   "name": "百五十の主",
+   "icon": "WITHER_SKELETON_SKULL",
+   "desc": [
+    "ボスを150回倒す。"
+   ],
+   "goal": "150体",
+   "stage": 4,
+   "stages": 5,
+   "prev": "bs_k_50",
+   "title": "主狩り",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/boss のボス。章ごとに順に開く。組でも、ひとりでも数える。"
+  },
+  {
+   "id": "bs_k_500",
+   "cat": 2,
+   "tier": 5,
+   "name": "主を払う者",
+   "icon": "DRAGON_HEAD",
+   "desc": [
+    "ボスを500回倒す。"
+   ],
+   "goal": "500体",
+   "stage": 5,
+   "stages": 5,
+   "prev": "bs_k_150",
+   "title": "主を払う者",
+   "tint": null,
+   "trail": "灰燼",
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/boss のボス。章ごとに順に開く。組でも、ひとりでも数える。"
+  },
+  {
+   "id": "bs_kinds_5",
+   "cat": 2,
+   "tier": 2,
+   "name": "五つの主",
+   "icon": "SPIDER_EYE",
+   "desc": [
+    "5種類のボスを倒す。"
+   ],
+   "goal": "5種",
+   "stage": 1,
+   "stages": 4,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/boss のボスを、種類ちがいで倒すと増える。"
+  },
+  {
+   "id": "bs_kinds_10",
+   "cat": 2,
+   "tier": 3,
+   "name": "十の主",
+   "icon": "FERMENTED_SPIDER_EYE",
+   "desc": [
+    "10種類のボスを倒す。"
+   ],
+   "goal": "10種",
+   "stage": 2,
+   "stages": 4,
+   "prev": "bs_kinds_5",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/boss のボスを、種類ちがいで倒すと増える。"
+  },
+  {
+   "id": "bs_kinds_20",
+   "cat": 2,
+   "tier": 4,
+   "name": "二十の主",
+   "icon": "BLAZE_ROD",
+   "desc": [
+    "20種類のボスを倒す。"
+   ],
+   "goal": "20種",
+   "stage": 3,
+   "stages": 4,
+   "prev": "bs_kinds_10",
+   "title": "主を知る者",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/boss のボスを、種類ちがいで倒すと増える。"
+  },
+  {
+   "id": "bs_kinds_25",
+   "cat": 2,
+   "tier": 5,
+   "name": "すべての主",
+   "icon": "NETHER_STAR",
+   "desc": [
+    "25種類のボスを倒す。"
+   ],
+   "goal": "25種",
+   "stage": 4,
+   "stages": 4,
+   "prev": "bs_kinds_20",
+   "title": "万主の討ち手",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/boss のボスを、種類ちがいで倒すと増える。"
+  },
+  {
+   "id": "bs_lord_1",
+   "cat": 2,
+   "tier": 3,
+   "name": "章の主を越えて",
+   "icon": "GOLDEN_HELMET",
+   "desc": [
+    "章の主を1体倒す。"
+   ],
+   "goal": "1体",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_lord_3",
+   "cat": 2,
+   "tier": 4,
+   "name": "三つの章の主",
+   "icon": "GOLDEN_HELMET",
+   "desc": [
+    "3つの章の主を倒す。"
+   ],
+   "goal": "3体",
+   "stage": 2,
+   "stages": 3,
+   "prev": "bs_lord_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_lord_5",
+   "cat": 2,
+   "tier": 5,
+   "name": "五つの章の主",
+   "icon": "NETHERITE_HELMET",
+   "desc": [
+    "5つの章の主をすべて倒す。"
+   ],
+   "goal": "5体",
+   "stage": 3,
+   "stages": 3,
+   "prev": "bs_lord_3",
+   "title": "章を越えし者",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_final",
+   "cat": 2,
+   "tier": 5,
+   "name": "深淵の果て",
+   "icon": "SCULK_SHRIEKER",
+   "desc": [
+    "最後のボスを倒す。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": "深淵の果て",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_hard_1",
+   "cat": 2,
+   "tier": 3,
+   "name": "むずかしい主",
+   "icon": "REDSTONE",
+   "desc": [
+    "ボスを「むずかしい」で倒す。"
+   ],
+   "goal": "1体",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "一度倒したボスは「むずかしい」でも挑める。"
+  },
+  {
+   "id": "bs_hard_25",
+   "cat": 2,
+   "tier": 4,
+   "name": "むずかしいの常連",
+   "icon": "REDSTONE_BLOCK",
+   "desc": [
+    "ボスを「むずかしい」で25回倒す。"
+   ],
+   "goal": "25体",
+   "stage": 2,
+   "stages": 3,
+   "prev": "bs_hard_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "一度倒したボスは「むずかしい」でも挑める。"
+  },
+  {
+   "id": "bs_hard_100",
+   "cat": 2,
+   "tier": 5,
+   "name": "鬼の主狩り",
+   "icon": "CRYING_OBSIDIAN",
+   "desc": [
+    "ボスを「むずかしい」で100回倒す。"
+   ],
+   "goal": "100体",
+   "stage": 3,
+   "stages": 3,
+   "prev": "bs_hard_25",
+   "title": "鬼の主狩り",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "一度倒したボスは「むずかしい」でも挑める。"
+  },
+  {
+   "id": "bs_hardk_10",
+   "cat": 2,
+   "tier": 4,
+   "name": "十の★",
+   "icon": "MAGMA_CREAM",
+   "desc": [
+    "10種類のボスを「むずかしい」で倒す。"
+   ],
+   "goal": "10種",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": "★の討ち手",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_solo_1",
+   "cat": 2,
+   "tier": 2,
+   "name": "ひとりで主に挑む",
+   "icon": "IRON_SWORD",
+   "desc": [
+    "ボスをひとりで倒す。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_solo_25",
+   "cat": 2,
+   "tier": 4,
+   "name": "ひとり討ち",
+   "icon": "NETHERITE_SWORD",
+   "desc": [
+    "ボスをひとりで25回倒す。"
+   ],
+   "goal": "25回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "bs_solo_1",
+   "title": "ひとり討ち",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_party_10",
+   "cat": 2,
+   "tier": 2,
+   "name": "組で討つ",
+   "icon": "WHITE_BANNER",
+   "desc": [
+    "組でボスを10回倒す。"
+   ],
+   "goal": "10回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_party_50",
+   "cat": 2,
+   "tier": 3,
+   "name": "息の合う組",
+   "icon": "WHITE_BANNER",
+   "desc": [
+    "組でボスを50回倒す。"
+   ],
+   "goal": "50回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "bs_party_10",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_p4_10",
+   "cat": 2,
+   "tier": 3,
+   "name": "四人の灯",
+   "icon": "BELL",
+   "desc": [
+    "4人以上の組で、ボスを10回倒す。"
+   ],
+   "goal": "10回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_first",
+   "cat": 2,
+   "tier": 4,
+   "name": "主の一番乗り",
+   "icon": "SPYGLASS",
+   "desc": [
+    "どれかのボスを、灯原でだれより先に倒す。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": "先陣",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_fast_1",
+   "cat": 2,
+   "tier": 3,
+   "name": "速討ち",
+   "icon": "CLOCK",
+   "desc": [
+    "ボスを90秒以内に倒す。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "bs_fast_20",
+   "cat": 2,
+   "tier": 4,
+   "name": "疾風の討ち手",
+   "icon": "CLOCK",
+   "desc": [
+    "ボスを90秒以内に20回倒す。"
+   ],
+   "goal": "20回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "bs_fast_1",
+   "title": "疾風",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "cs_won_1",
+   "cat": 6,
+   "tier": 1,
+   "name": "はじめての当たり",
+   "icon": "GOLD_NUGGET",
+   "desc": [
+    "カジノで合わせて1,000コイン勝つ。"
+   ],
+   "goal": "1,000コイン",
+   "stage": 1,
+   "stages": 4,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "カジノのコインは灯銭とは別。勝って受け取ったコインを合わせて数える。"
+  },
+  {
+   "id": "cs_won_2",
+   "cat": 6,
+   "tier": 2,
+   "name": "勝ち運",
+   "icon": "GOLD_INGOT",
+   "desc": [
+    "カジノで合わせて20,000コイン勝つ。"
+   ],
+   "goal": "20,000コイン",
+   "stage": 2,
+   "stages": 4,
+   "prev": "cs_won_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "カジノのコインは灯銭とは別。勝って受け取ったコインを合わせて数える。"
+  },
+  {
+   "id": "cs_won_3",
+   "cat": 6,
+   "tier": 3,
+   "name": "大きな勝ち運",
+   "icon": "GOLD_BLOCK",
+   "desc": [
+    "カジノで合わせて200,000コイン勝つ。"
+   ],
+   "goal": "200,000コイン",
+   "stage": 3,
+   "stages": 4,
+   "prev": "cs_won_2",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "カジノのコインは灯銭とは別。勝って受け取ったコインを合わせて数える。"
+  },
+  {
+   "id": "cs_won_4",
+   "cat": 6,
+   "tier": 4,
+   "name": "勝ち運の主",
+   "icon": "RAW_GOLD_BLOCK",
+   "desc": [
+    "カジノで合わせて1,000,000コイン勝つ。"
+   ],
+   "goal": "1,000,000コイン",
+   "stage": 4,
+   "stages": 4,
+   "prev": "cs_won_3",
+   "title": "勝ち運の主",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "カジノのコインは灯銭とは別。勝って受け取ったコインを合わせて数える。"
+  },
+  {
+   "id": "cs_jp_1",
+   "cat": 6,
+   "tier": 3,
+   "name": "灯籠三つ",
+   "icon": "LANTERN",
+   "desc": [
+    "スロットで大当たり（灯籠3つ）を出す。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "cs_jp_5",
+   "cat": 6,
+   "tier": 4,
+   "name": "灯籠は知っている",
+   "icon": "SOUL_LANTERN",
+   "desc": [
+    "スロットで大当たりを5回出す。"
+   ],
+   "goal": "5回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "cs_jp_1",
+   "title": "灯籠に愛された者",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "cs_lot_1",
+   "cat": 6,
+   "tier": 3,
+   "name": "宝くじの当たり",
+   "icon": "PAPER",
+   "desc": [
+    "宝くじに当たる。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "cs_lot_3",
+   "cat": 6,
+   "tier": 5,
+   "name": "三度の宝くじ",
+   "icon": "MAP",
+   "desc": [
+    "宝くじに3回当たる。"
+   ],
+   "goal": "3回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "cs_lot_1",
+   "title": "福の主",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "cs_top_1",
+   "cat": 6,
+   "tier": 3,
+   "name": "週の勝ち頭",
+   "icon": "GOLDEN_APPLE",
+   "desc": [
+    "カジノの週の勝ち頭（3位まで）に入る。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "cs_top_10",
+   "cat": 6,
+   "tier": 4,
+   "name": "勝ち頭の常連",
+   "icon": "ENCHANTED_GOLDEN_APPLE",
+   "desc": [
+    "カジノの週の勝ち頭に10回入る。"
+   ],
+   "goal": "10回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "cs_top_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "cs_prize_3",
+   "cat": 6,
+   "tier": 2,
+   "name": "景品集め",
+   "icon": "NAME_TAG",
+   "desc": [
+    "カジノの景品所で称号を3つ手に入れる。"
+   ],
+   "goal": "3種",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "cs_prize_10",
+   "cat": 6,
+   "tier": 3,
+   "name": "景品所の常連",
+   "icon": "NAME_TAG",
+   "desc": [
+    "カジノの景品所で称号を10手に入れる。"
+   ],
+   "goal": "10種",
+   "stage": 2,
+   "stages": 2,
+   "prev": "cs_prize_3",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hg_path",
+   "cat": 5,
+   "tier": 1,
+   "name": "はじめの道を越えて",
+   "icon": "OAK_SIGN",
+   "desc": [
+    "今週のことの「はじめの道」をぜんぶ越える。"
+   ],
+   "goal": "1",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "sh_done",
+   "cat": 5,
+   "tier": 1,
+   "name": "旅の支度",
+   "icon": "BUNDLE",
+   "desc": [
+    "はじめの支度を終える（遊び方・好きなこと・目当て）。"
+   ],
+   "goal": "1",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hg_pt_1",
+   "cat": 5,
+   "tier": 1,
+   "name": "週の点",
+   "icon": "PAPER",
+   "desc": [
+    "今週のことの点を、合わせて300ためる。"
+   ],
+   "goal": "300",
+   "stage": 1,
+   "stages": 4,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/higoyomi の「今週のこと」の点。ふだんの遊びで入る。"
+  },
+  {
+   "id": "hg_pt_2",
+   "cat": 5,
+   "tier": 2,
+   "name": "週を重ねて",
+   "icon": "BOOK",
+   "desc": [
+    "今週のことの点を、合わせて3,000ためる。"
+   ],
+   "goal": "3,000",
+   "stage": 2,
+   "stages": 4,
+   "prev": "hg_pt_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/higoyomi の「今週のこと」の点。ふだんの遊びで入る。"
+  },
+  {
+   "id": "hg_pt_3",
+   "cat": 5,
+   "tier": 3,
+   "name": "暦をめくる人",
+   "icon": "WRITABLE_BOOK",
+   "desc": [
+    "今週のことの点を、合わせて12,000ためる。"
+   ],
+   "goal": "12,000",
+   "stage": 3,
+   "stages": 4,
+   "prev": "hg_pt_2",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/higoyomi の「今週のこと」の点。ふだんの遊びで入る。"
+  },
+  {
+   "id": "hg_pt_4",
+   "cat": 5,
+   "tier": 4,
+   "name": "灯暦の人",
+   "icon": "ENCHANTED_BOOK",
+   "desc": [
+    "今週のことの点を、合わせて40,000ためる。"
+   ],
+   "goal": "40,000",
+   "stage": 4,
+   "stages": 4,
+   "prev": "hg_pt_3",
+   "title": "灯暦の人",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/higoyomi の「今週のこと」の点。ふだんの遊びで入る。"
+  },
+  {
+   "id": "hg_sea_1",
+   "cat": 5,
+   "tier": 2,
+   "name": "季の称号",
+   "icon": "SUNFLOWER",
+   "desc": [
+    "季の称号を受け取る。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hg_sea_4",
+   "cat": 5,
+   "tier": 3,
+   "name": "四つの季",
+   "icon": "SUNFLOWER",
+   "desc": [
+    "季の称号を4回受け取る。"
+   ],
+   "goal": "4回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "hg_sea_1",
+   "title": "四季の人",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hg_ichi_1",
+   "cat": 5,
+   "tier": 5,
+   "name": "季の一番灯",
+   "icon": "BEACON",
+   "desc": [
+    "季でいちばん点を集める（一番灯）。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hg_arm_1",
+   "cat": 5,
+   "tier": 2,
+   "name": "腕比べの三人",
+   "icon": "IRON_INGOT",
+   "desc": [
+    "腕比べで3位までに入る。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hg_arm_10",
+   "cat": 5,
+   "tier": 3,
+   "name": "腕比べの顔",
+   "icon": "GOLD_INGOT",
+   "desc": [
+    "腕比べで3位までに10回入る。"
+   ],
+   "goal": "10回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "hg_arm_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hg_win_1",
+   "cat": 5,
+   "tier": 3,
+   "name": "腕比べの一番",
+   "icon": "DIAMOND",
+   "desc": [
+    "腕比べで1位になる。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hg_win_10",
+   "cat": 5,
+   "tier": 4,
+   "name": "腕自慢",
+   "icon": "NETHERITE_INGOT",
+   "desc": [
+    "腕比べで10回1位になる。"
+   ],
+   "goal": "10回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "hg_win_1",
+   "title": "腕自慢",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hg_men_1",
+   "cat": 5,
+   "tier": 2,
+   "name": "手を引く",
+   "icon": "TORCH",
+   "desc": [
+    "新しい人を1人、はじめの道で導く。"
+   ],
+   "goal": "1人",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "はじめの道の途中の人のそばで、その人が道を1つ越えると導いたことになる。"
+  },
+  {
+   "id": "hg_men_5",
+   "cat": 5,
+   "tier": 3,
+   "name": "道しるべの人",
+   "icon": "LANTERN",
+   "desc": [
+    "新しい人を5人導く。"
+   ],
+   "goal": "5人",
+   "stage": 2,
+   "stages": 3,
+   "prev": "hg_men_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "はじめの道の途中の人のそばで、その人が道を1つ越えると導いたことになる。"
+  },
+  {
+   "id": "hg_men_15",
+   "cat": 5,
+   "tier": 4,
+   "name": "灯の師",
+   "icon": "SEA_LANTERN",
+   "desc": [
+    "新しい人を15人導く。"
+   ],
+   "goal": "15人",
+   "stage": 3,
+   "stages": 3,
+   "prev": "hg_men_5",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "はじめの道の途中の人のそばで、その人が道を1つ越えると導いたことになる。"
+  },
+  {
+   "id": "st_iori",
+   "cat": 5,
+   "tier": 1,
+   "name": "庵を結ぶ",
+   "icon": "CAMPFIRE",
+   "desc": [
+    "ひとりで庵を開く。"
+   ],
+   "goal": "1",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_grade_1",
+   "cat": 5,
+   "tier": 2,
+   "name": "村になる",
+   "icon": "HAY_BLOCK",
+   "desc": [
+    "自分の里が村になる。"
+   ],
+   "goal": "1段",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_grade_2",
+   "cat": 5,
+   "tier": 3,
+   "name": "町になる",
+   "icon": "BELL",
+   "desc": [
+    "自分の里が町になる。"
+   ],
+   "goal": "2段",
+   "stage": 2,
+   "stages": 2,
+   "prev": "st_grade_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_raid_1",
+   "cat": 5,
+   "tier": 2,
+   "name": "夜襲を退ける",
+   "icon": "SHIELD",
+   "desc": [
+    "里の夜襲を守りきる。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "朱月の夜、里の人が土地にいると夜襲が来る。3つの波を越えれば守りきり。"
+  },
+  {
+   "id": "st_raid_10",
+   "cat": 5,
+   "tier": 3,
+   "name": "里の盾",
+   "icon": "SHIELD",
+   "desc": [
+    "里の夜襲を10回守りきる。"
+   ],
+   "goal": "10回",
+   "stage": 2,
+   "stages": 3,
+   "prev": "st_raid_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "朱月の夜、里の人が土地にいると夜襲が来る。3つの波を越えれば守りきり。"
+  },
+  {
+   "id": "st_raid_50",
+   "cat": 5,
+   "tier": 4,
+   "name": "里の守り手",
+   "icon": "SHIELD",
+   "desc": [
+    "里の夜襲を50回守りきる。"
+   ],
+   "goal": "50回",
+   "stage": 3,
+   "stages": 3,
+   "prev": "st_raid_10",
+   "title": "里の守り手",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "朱月の夜、里の人が土地にいると夜襲が来る。3つの波を越えれば守りきり。"
+  },
+  {
+   "id": "st_rk_50",
+   "cat": 5,
+   "tier": 2,
+   "name": "夜襲払い",
+   "icon": "STONE_SWORD",
+   "desc": [
+    "里の夜襲で敵を50体倒す。"
+   ],
+   "goal": "50体",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_rk_500",
+   "cat": 5,
+   "tier": 3,
+   "name": "夜襲斬り",
+   "icon": "IRON_SWORD",
+   "desc": [
+    "里の夜襲で敵を500体倒す。"
+   ],
+   "goal": "500体",
+   "stage": 2,
+   "stages": 3,
+   "prev": "st_rk_50",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_rk_2000",
+   "cat": 5,
+   "tier": 4,
+   "name": "夜襲の鬼",
+   "icon": "DIAMOND_SWORD",
+   "desc": [
+    "里の夜襲で敵を2,000体倒す。"
+   ],
+   "goal": "2,000体",
+   "stage": 3,
+   "stages": 3,
+   "prev": "st_rk_500",
+   "title": "夜襲の鬼",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_rbig",
+   "cat": 5,
+   "tier": 3,
+   "name": "五人の守り",
+   "icon": "WHITE_BANNER",
+   "desc": [
+    "5人以上で、里の夜襲を守りきる。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_help_1",
+   "cat": 5,
+   "tier": 2,
+   "name": "助太刀",
+   "icon": "GOLDEN_SWORD",
+   "desc": [
+    "ほかの里の夜襲に助太刀する。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/sato sukedachi <里> で、夜襲の里へ渡れる（街道・縁・運び手）。"
+  },
+  {
+   "id": "st_help_10",
+   "cat": 5,
+   "tier": 3,
+   "name": "頼れる助っ人",
+   "icon": "GOLDEN_SWORD",
+   "desc": [
+    "ほかの里の夜襲に10回助太刀する。"
+   ],
+   "goal": "10回",
+   "stage": 2,
+   "stages": 3,
+   "prev": "st_help_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/sato sukedachi <里> で、夜襲の里へ渡れる（街道・縁・運び手）。"
+  },
+  {
+   "id": "st_help_30",
+   "cat": 5,
+   "tier": 4,
+   "name": "流れの剣",
+   "icon": "NETHERITE_SWORD",
+   "desc": [
+    "ほかの里の夜襲に30回助太刀する。"
+   ],
+   "goal": "30回",
+   "stage": 3,
+   "stages": 3,
+   "prev": "st_help_10",
+   "title": "流れの剣",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/sato sukedachi <里> で、夜襲の里へ渡れる（街道・縁・運び手）。"
+  },
+  {
+   "id": "st_cargo_1",
+   "cat": 5,
+   "tier": 1,
+   "name": "荷を運ぶ",
+   "icon": "CHEST",
+   "desc": [
+    "ほかの里の旅の依頼に荷を納める。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "ほかの里の掲示板の「旅の依頼」に品を納める。"
+  },
+  {
+   "id": "st_cargo_25",
+   "cat": 5,
+   "tier": 2,
+   "name": "荷の道",
+   "icon": "CHEST_MINECART",
+   "desc": [
+    "ほかの里へ25回荷を納める。"
+   ],
+   "goal": "25回",
+   "stage": 2,
+   "stages": 3,
+   "prev": "st_cargo_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "ほかの里の掲示板の「旅の依頼」に品を納める。"
+  },
+  {
+   "id": "st_cargo_100",
+   "cat": 5,
+   "tier": 3,
+   "name": "運び手の鑑",
+   "icon": "BARREL",
+   "desc": [
+    "ほかの里へ100回荷を納める。"
+   ],
+   "goal": "100回",
+   "stage": 3,
+   "stages": 3,
+   "prev": "st_cargo_25",
+   "title": "運び手の鑑",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "ほかの里の掲示板の「旅の依頼」に品を納める。"
+  },
+  {
+   "id": "st_cargo_n",
+   "cat": 5,
+   "tier": 3,
+   "name": "山ほどの荷",
+   "icon": "MINECART",
+   "desc": [
+    "ほかの里へ合わせて5,000個の品を納める。"
+   ],
+   "goal": "5,000個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_fest_1",
+   "cat": 5,
+   "tier": 2,
+   "name": "里祭の夜",
+   "icon": "FIREWORK_ROCKET",
+   "desc": [
+    "自分の里の里祭に居合わせる。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_fest_5",
+   "cat": 5,
+   "tier": 3,
+   "name": "祭の里",
+   "icon": "FIREWORK_STAR",
+   "desc": [
+    "自分の里の里祭を5回迎える。"
+   ],
+   "goal": "5回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "st_fest_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_host_1",
+   "cat": 5,
+   "tier": 3,
+   "name": "祭を開く",
+   "icon": "JUKEBOX",
+   "desc": [
+    "里長として、里祭を開く。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "町より上の里の里長が、30日に1回、灯銭箱の500銭で開ける。"
+  },
+  {
+   "id": "st_host_6",
+   "cat": 5,
+   "tier": 4,
+   "name": "祭の里長",
+   "icon": "JUKEBOX",
+   "desc": [
+    "里長として、里祭を6回開く。"
+   ],
+   "goal": "6回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "st_host_1",
+   "title": "祭の里長",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "町より上の里の里長が、30日に1回、灯銭箱の500銭で開ける。"
+  },
+  {
+   "id": "st_job_1",
+   "cat": 5,
+   "tier": 1,
+   "name": "一人前",
+   "icon": "WOODEN_PICKAXE",
+   "desc": [
+    "里の職で「一人前」になる。"
+   ],
+   "goal": "1段",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_job_2",
+   "cat": 5,
+   "tier": 2,
+   "name": "熟練",
+   "icon": "IRON_PICKAXE",
+   "desc": [
+    "里の職で「熟練」になる。"
+   ],
+   "goal": "2段",
+   "stage": 2,
+   "stages": 3,
+   "prev": "st_job_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_job_3",
+   "cat": 5,
+   "tier": 3,
+   "name": "名人",
+   "icon": "DIAMOND_PICKAXE",
+   "desc": [
+    "里の職で「名人」になる。"
+   ],
+   "goal": "3段",
+   "stage": 3,
+   "stages": 3,
+   "prev": "st_job_2",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_jobs_m2",
+   "cat": 5,
+   "tier": 4,
+   "name": "二つの道の名人",
+   "icon": "SMITHING_TABLE",
+   "desc": [
+    "2つの職で「名人」になる。"
+   ],
+   "goal": "2種",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_jobs_t2",
+   "cat": 5,
+   "tier": 5,
+   "name": "二道の棟梁",
+   "icon": "SMITHING_TABLE",
+   "desc": [
+    "2つの職で「棟梁」になる。"
+   ],
+   "goal": "2種",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": "二道の棟梁",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "st_jobs_t5",
+   "cat": 5,
+   "tier": 5,
+   "name": "五道の棟梁",
+   "icon": "BEACON",
+   "desc": [
+    "5つの職すべてで「棟梁」になる。"
+   ],
+   "goal": "5種",
+   "stage": 2,
+   "stages": 2,
+   "prev": "st_jobs_t2",
+   "title": "五道の棟梁",
+   "tint": {
+    "name": "黄金",
+    "rgb": [
+     255,
+     220,
+     96
+    ]
+   },
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "en_f_1",
+   "cat": 5,
+   "tier": 1,
+   "name": "縁を結ぶ",
+   "icon": "STRING",
+   "desc": [
+    "だれかと縁を結ぶ。"
+   ],
+   "goal": "1人",
+   "stage": 1,
+   "stages": 4,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/nakama で縁を結ぶ。相手も受けると結ばれる。"
+  },
+  {
+   "id": "en_f_5",
+   "cat": 5,
+   "tier": 2,
+   "name": "五つの縁",
+   "icon": "LEAD",
+   "desc": [
+    "5人と縁を結ぶ。"
+   ],
+   "goal": "5人",
+   "stage": 2,
+   "stages": 4,
+   "prev": "en_f_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/nakama で縁を結ぶ。相手も受けると結ばれる。"
+  },
+  {
+   "id": "en_f_15",
+   "cat": 5,
+   "tier": 3,
+   "name": "縁の人",
+   "icon": "LEAD",
+   "desc": [
+    "15人と縁を結ぶ。"
+   ],
+   "goal": "15人",
+   "stage": 3,
+   "stages": 4,
+   "prev": "en_f_5",
+   "title": "縁の人",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/nakama で縁を結ぶ。相手も受けると結ばれる。"
+  },
+  {
+   "id": "en_f_30",
+   "cat": 5,
+   "tier": 4,
+   "name": "縁の輪",
+   "icon": "LEAD",
+   "desc": [
+    "30人と縁を結ぶ。"
+   ],
+   "goal": "30人",
+   "stage": 4,
+   "stages": 4,
+   "prev": "en_f_15",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/nakama で縁を結ぶ。相手も受けると結ばれる。"
+  },
+  {
+   "id": "en_m_10",
+   "cat": 5,
+   "tier": 1,
+   "name": "筆まめ",
+   "icon": "PAPER",
+   "desc": [
+    "手紙を10通送る。"
+   ],
+   "goal": "10回",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "en_m_100",
+   "cat": 5,
+   "tier": 2,
+   "name": "便りの人",
+   "icon": "WRITABLE_BOOK",
+   "desc": [
+    "手紙を100通送る。"
+   ],
+   "goal": "100回",
+   "stage": 2,
+   "stages": 3,
+   "prev": "en_m_10",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "en_m_500",
+   "cat": 5,
+   "tier": 3,
+   "name": "文の灯",
+   "icon": "WRITTEN_BOOK",
+   "desc": [
+    "手紙を500通送る。"
+   ],
+   "goal": "500回",
+   "stage": 3,
+   "stages": 3,
+   "prev": "en_m_100",
+   "title": "文の灯",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "en_p_10",
+   "cat": 5,
+   "tier": 2,
+   "name": "小包の人",
+   "icon": "BUNDLE",
+   "desc": [
+    "品を入れた小包を10回送る。"
+   ],
+   "goal": "10回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "mo_g_6",
+   "cat": 5,
+   "tier": 1,
+   "name": "月の目当て",
+   "icon": "CLOCK",
+   "desc": [
+    "月の実績の目当てを、合わせて6つ果たす。"
+   ],
+   "goal": "6個",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/akashi tsuki の「月の実績」。毎月かわる6つで、その月に増えた分を数える。"
+  },
+  {
+   "id": "mo_g_30",
+   "cat": 5,
+   "tier": 2,
+   "name": "月をかさねて",
+   "icon": "CLOCK",
+   "desc": [
+    "月の実績の目当てを、合わせて30果たす。"
+   ],
+   "goal": "30個",
+   "stage": 2,
+   "stages": 3,
+   "prev": "mo_g_6",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/akashi tsuki の「月の実績」。毎月かわる6つで、その月に増えた分を数える。"
+  },
+  {
+   "id": "mo_g_100",
+   "cat": 5,
+   "tier": 3,
+   "name": "百の目当て",
+   "icon": "CLOCK",
+   "desc": [
+    "月の実績の目当てを、合わせて100果たす。"
+   ],
+   "goal": "100個",
+   "stage": 3,
+   "stages": 3,
+   "prev": "mo_g_30",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/akashi tsuki の「月の実績」。毎月かわる6つで、その月に増えた分を数える。"
+  },
+  {
+   "id": "mo_a_1",
+   "cat": 5,
+   "tier": 2,
+   "name": "その月の灯",
+   "icon": "RECOVERY_COMPASS",
+   "desc": [
+    "ひと月のうちに、月の実績を6つそろえる。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 4,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/akashi tsuki の6つを、同じ月のうちにそろえる。"
+  },
+  {
+   "id": "mo_a_3",
+   "cat": 5,
+   "tier": 3,
+   "name": "三つの月",
+   "icon": "RECOVERY_COMPASS",
+   "desc": [
+    "月の実績を3か月そろえる。"
+   ],
+   "goal": "3回",
+   "stage": 2,
+   "stages": 4,
+   "prev": "mo_a_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/akashi tsuki の6つを、同じ月のうちにそろえる。"
+  },
+  {
+   "id": "mo_a_6",
+   "cat": 5,
+   "tier": 4,
+   "name": "半年の灯",
+   "icon": "RECOVERY_COMPASS",
+   "desc": [
+    "月の実績を6か月そろえる。"
+   ],
+   "goal": "6回",
+   "stage": 3,
+   "stages": 4,
+   "prev": "mo_a_3",
+   "title": "半年の灯",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/akashi tsuki の6つを、同じ月のうちにそろえる。"
+  },
+  {
+   "id": "mo_a_12",
+   "cat": 5,
+   "tier": 5,
+   "name": "十二の月の灯",
+   "icon": "RECOVERY_COMPASS",
+   "desc": [
+    "月の実績を12か月そろえる。"
+   ],
+   "goal": "12回",
+   "stage": 4,
+   "stages": 4,
+   "prev": "mo_a_6",
+   "title": "十二月の灯",
+   "tint": null,
+   "trail": "暁",
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/akashi tsuki の6つを、同じ月のうちにそろえる。"
+  },
+  {
+   "id": "tg_n_10",
+   "cat": 1,
+   "tier": 1,
+   "name": "ふたりの夜",
+   "icon": "CAMPFIRE",
+   "desc": [
+    "夜明けに、近くにだれかがいる夜を10回越える。"
+   ],
+   "goal": "10夜",
+   "stage": 1,
+   "stages": 4,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "夜明けのとき、32ブロック以内にほかの人がいれば数える。"
+  },
+  {
+   "id": "tg_n_100",
+   "cat": 1,
+   "tier": 2,
+   "name": "夜を分かつ",
+   "icon": "CAMPFIRE",
+   "desc": [
+    "だれかと近くで、夜を100回越える。"
+   ],
+   "goal": "100夜",
+   "stage": 2,
+   "stages": 4,
+   "prev": "tg_n_10",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "夜明けのとき、32ブロック以内にほかの人がいれば数える。"
+  },
+  {
+   "id": "tg_n_500",
+   "cat": 1,
+   "tier": 3,
+   "name": "夜の連れ",
+   "icon": "SOUL_CAMPFIRE",
+   "desc": [
+    "だれかと近くで、夜を500回越える。"
+   ],
+   "goal": "500夜",
+   "stage": 3,
+   "stages": 4,
+   "prev": "tg_n_100",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "夜明けのとき、32ブロック以内にほかの人がいれば数える。"
+  },
+  {
+   "id": "tg_n_1500",
+   "cat": 1,
+   "tier": 4,
+   "name": "夜を分かつ者",
+   "icon": "SOUL_CAMPFIRE",
+   "desc": [
+    "だれかと近くで、夜を1,500回越える。"
+   ],
+   "goal": "1,500夜",
+   "stage": 4,
+   "stages": 4,
+   "prev": "tg_n_500",
+   "title": "夜を分かつ者",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "夜明けのとき、32ブロック以内にほかの人がいれば数える。"
+  },
+  {
+   "id": "tg_b_5",
+   "cat": 1,
+   "tier": 2,
+   "name": "朱月の連れ",
+   "icon": "RED_CANDLE",
+   "desc": [
+    "だれかと近くで、朱月の夜を5回越える。"
+   ],
+   "goal": "5夜",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "tg_b_30",
+   "cat": 1,
+   "tier": 3,
+   "name": "朱月の背中",
+   "icon": "RED_CANDLE",
+   "desc": [
+    "だれかと近くで、朱月の夜を30回越える。"
+   ],
+   "goal": "30夜",
+   "stage": 2,
+   "stages": 2,
+   "prev": "tg_b_5",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "tg_g_10",
+   "cat": 1,
+   "tier": 2,
+   "name": "四人の夜",
+   "icon": "BELL",
+   "desc": [
+    "4人以上で近くに集まって、夜を10回越える。"
+   ],
+   "goal": "10夜",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "夜明けのとき、32ブロック以内に自分のほか3人以上いれば数える。"
+  },
+  {
+   "id": "tg_g_100",
+   "cat": 1,
+   "tier": 3,
+   "name": "灯の輪の夜",
+   "icon": "BELL",
+   "desc": [
+    "4人以上で近くに集まって、夜を100回越える。"
+   ],
+   "goal": "100夜",
+   "stage": 2,
+   "stages": 2,
+   "prev": "tg_g_10",
+   "title": "灯の輪",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "夜明けのとき、32ブロック以内に自分のほか3人以上いれば数える。"
+  },
+  {
+   "id": "nh_5",
+   "cat": 0,
+   "tier": 5,
+   "name": "五度の灯",
+   "icon": "NETHER_STAR",
+   "desc": [
+    "灯し直しを5回する。"
+   ],
+   "goal": "5回",
+   "stage": 3,
+   "stages": 4,
+   "prev": "naoshi_3",
+   "title": "五度の灯",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "nh_10",
+   "cat": 0,
+   "tier": 5,
+   "name": "十度の灯",
+   "icon": "NETHER_STAR",
+   "desc": [
+    "灯し直しを10回する。"
+   ],
+   "goal": "10回",
+   "stage": 4,
+   "stages": 4,
+   "prev": "nh_5",
+   "title": "十度の灯",
+   "tint": {
+    "name": "天の川",
+    "rgb": [
+     186,
+     170,
+     255
+    ]
+   },
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "nh_hk_1",
+   "cat": 0,
+   "tier": 3,
+   "name": "はじめての灯宝",
+   "icon": "GLOW_ITEM_FRAME",
+   "desc": [
+    "灯宝をひとつ手に入れる。"
+   ],
+   "goal": "1種",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "nh_hk_3",
+   "cat": 0,
+   "tier": 4,
+   "name": "三つの灯宝",
+   "icon": "GLOW_ITEM_FRAME",
+   "desc": [
+    "灯宝を3つ手に入れる。"
+   ],
+   "goal": "3種",
+   "stage": 2,
+   "stages": 2,
+   "prev": "nh_hk_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "nh_lv_6",
+   "cat": 0,
+   "tier": 4,
+   "name": "灯宝を磨く",
+   "icon": "SMITHING_TABLE",
+   "desc": [
+    "灯宝を合わせて6段磨く。"
+   ],
+   "goal": "6段",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "灯宝を6つそろえると、熾で磨ける（1つ3段まで）。"
+  },
+  {
+   "id": "nh_lv_18",
+   "cat": 0,
+   "tier": 5,
+   "name": "磨き抜かれた灯",
+   "icon": "ANVIL",
+   "desc": [
+    "6つの灯宝すべてを、3段まで磨く。"
+   ],
+   "goal": "18段",
+   "stage": 2,
+   "stages": 2,
+   "prev": "nh_lv_6",
+   "title": "磨き抜かれた灯",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "灯宝を6つそろえると、熾で磨ける（1つ3段まで）。"
+  },
+  {
+   "id": "vx_fall",
+   "cat": 3,
+   "tier": 2,
+   "name": "落ちて学ぶ",
+   "icon": "FEATHER",
+   "desc": [
+    "落ちた高さが、合わせて1kmに届く。"
+   ],
+   "goal": "1.0km",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_cart_1",
+   "cat": 3,
+   "tier": 2,
+   "name": "線路の旅",
+   "icon": "MINECART",
+   "desc": [
+    "トロッコで10km進む。"
+   ],
+   "goal": "10.0km",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_cart_2",
+   "cat": 3,
+   "tier": 3,
+   "name": "線路の主",
+   "icon": "MINECART",
+   "desc": [
+    "トロッコで100km進む。"
+   ],
+   "goal": "100.0km",
+   "stage": 2,
+   "stages": 2,
+   "prev": "vx_cart_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_run_1",
+   "cat": 3,
+   "tier": 2,
+   "name": "駆ける",
+   "icon": "LEATHER_BOOTS",
+   "desc": [
+    "走って50km進む。"
+   ],
+   "goal": "50.0km",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_run_2",
+   "cat": 3,
+   "tier": 3,
+   "name": "韋駄天",
+   "icon": "GOLDEN_BOOTS",
+   "desc": [
+    "走って500km進む。"
+   ],
+   "goal": "500.0km",
+   "stage": 2,
+   "stages": 2,
+   "prev": "vx_run_1",
+   "title": "韋駄天",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_sneak",
+   "cat": 3,
+   "tier": 2,
+   "name": "忍び足",
+   "icon": "CHAINMAIL_BOOTS",
+   "desc": [
+    "しゃがんで1km進む。"
+   ],
+   "goal": "1.0km",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_water",
+   "cat": 3,
+   "tier": 2,
+   "name": "水の上を",
+   "icon": "LILY_PAD",
+   "desc": [
+    "水の上を2km進む。"
+   ],
+   "goal": "2.0km",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_strider",
+   "cat": 3,
+   "tier": 3,
+   "name": "溶岩の舟",
+   "icon": "WARPED_FUNGUS_ON_A_STICK",
+   "desc": [
+    "ストライダーに乗って1km進む。"
+   ],
+   "goal": "1.0km",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": null,
+   "cat": 3,
+   "tier": 2,
+   "name": null,
+   "icon": null,
+   "desc": null,
+   "goal": null,
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": true,
+   "hint": "ぶうぶう。"
+  },
+  {
+   "id": "vx_campfire",
+   "cat": 4,
+   "tier": 1,
+   "name": "焚き火づくり",
+   "icon": "CAMPFIRE",
+   "desc": [
+    "焚き火を16個作る。"
+   ],
+   "goal": "16個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_candle",
+   "cat": 4,
+   "tier": 2,
+   "name": "ろうそく職人",
+   "icon": "CANDLE",
+   "desc": [
+    "ろうそくを64本作る。"
+   ],
+   "goal": "64本",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_clock",
+   "cat": 4,
+   "tier": 2,
+   "name": "時を刻む",
+   "icon": "CLOCK",
+   "desc": [
+    "時計を8個作る。"
+   ],
+   "goal": "8個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_compass",
+   "cat": 4,
+   "tier": 2,
+   "name": "道をさがす",
+   "icon": "COMPASS",
+   "desc": [
+    "コンパスを8個作る。"
+   ],
+   "goal": "8個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_spyglass",
+   "cat": 4,
+   "tier": 2,
+   "name": "遠くを見る",
+   "icon": "SPYGLASS",
+   "desc": [
+    "望遠鏡を作る。"
+   ],
+   "goal": "1個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_recovery",
+   "cat": 4,
+   "tier": 3,
+   "name": "倒れた場所へ",
+   "icon": "RECOVERY_COMPASS",
+   "desc": [
+    "リカバリーコンパスを作る。"
+   ],
+   "goal": "1個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_lodestone",
+   "cat": 4,
+   "tier": 3,
+   "name": "磁石の道",
+   "icon": "LODESTONE",
+   "desc": [
+    "ロードストーンを作る。"
+   ],
+   "goal": "1個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_anchor",
+   "cat": 4,
+   "tier": 3,
+   "name": "獄炎の錨",
+   "icon": "RESPAWN_ANCHOR",
+   "desc": [
+    "リスポーンアンカーを作る。"
+   ],
+   "goal": "1個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_conduit",
+   "cat": 4,
+   "tier": 4,
+   "name": "海の灯",
+   "icon": "CONDUIT",
+   "desc": [
+    "コンジットを作る。"
+   ],
+   "goal": "1個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_crafter",
+   "cat": 4,
+   "tier": 2,
+   "name": "からくり作業台",
+   "icon": "CRAFTER",
+   "desc": [
+    "自動作業台を4台作る。"
+   ],
+   "goal": "4個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_bulb",
+   "cat": 4,
+   "tier": 2,
+   "name": "銅の灯",
+   "icon": "COPPER_BULB",
+   "desc": [
+    "銅の電球を16個作る。"
+   ],
+   "goal": "16個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_copper",
+   "cat": 4,
+   "tier": 2,
+   "name": "銅掘り",
+   "icon": "RAW_COPPER",
+   "desc": [
+    "銅の鉱石を500個掘る。"
+   ],
+   "goal": "500個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_gold",
+   "cat": 4,
+   "tier": 3,
+   "name": "金掘り",
+   "icon": "RAW_GOLD",
+   "desc": [
+    "金の鉱石を500個掘る。"
+   ],
+   "goal": "500個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_glow",
+   "cat": 4,
+   "tier": 2,
+   "name": "光る石",
+   "icon": "GLOWSTONE",
+   "desc": [
+    "グロウストーンを256個掘る。"
+   ],
+   "goal": "256個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_sculk",
+   "cat": 4,
+   "tier": 2,
+   "name": "深みの苔",
+   "icon": "SCULK",
+   "desc": [
+    "スカルクを500個掘る。"
+   ],
+   "goal": "500個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_pumpkin",
+   "cat": 4,
+   "tier": 1,
+   "name": "かぼちゃ畑",
+   "icon": "PUMPKIN",
+   "desc": [
+    "かぼちゃを200個とる。"
+   ],
+   "goal": "200個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_melon",
+   "cat": 4,
+   "tier": 1,
+   "name": "すいか畑",
+   "icon": "MELON",
+   "desc": [
+    "すいかを200個とる。"
+   ],
+   "goal": "200個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_cocoa",
+   "cat": 4,
+   "tier": 2,
+   "name": "カカオの森",
+   "icon": "COCOA_BEANS",
+   "desc": [
+    "カカオを300回とる。"
+   ],
+   "goal": "300回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_kelp",
+   "cat": 4,
+   "tier": 2,
+   "name": "海の畑",
+   "icon": "KELP",
+   "desc": [
+    "昆布を1,000本刈る。"
+   ],
+   "goal": "1,000本",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_cleanarmor",
+   "cat": 4,
+   "tier": 2,
+   "name": "洗いもの",
+   "icon": "LEATHER_CHESTPLATE",
+   "desc": [
+    "大釜で革の防具や旗を10回洗う。"
+   ],
+   "goal": "10回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_cauldron",
+   "cat": 4,
+   "tier": 1,
+   "name": "大釜に水",
+   "icon": "CAULDRON",
+   "desc": [
+    "大釜を20回満たす。"
+   ],
+   "goal": "20回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_blast",
+   "cat": 4,
+   "tier": 1,
+   "name": "溶鉱炉の番",
+   "icon": "BLAST_FURNACE",
+   "desc": [
+    "溶鉱炉を100回使う。"
+   ],
+   "goal": "100回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_smoker",
+   "cat": 4,
+   "tier": 1,
+   "name": "燻製の番",
+   "icon": "SMOKER",
+   "desc": [
+    "燻製器を100回使う。"
+   ],
+   "goal": "100回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_lectern",
+   "cat": 4,
+   "tier": 1,
+   "name": "書見台",
+   "icon": "LECTERN",
+   "desc": [
+    "書見台を30回使う。"
+   ],
+   "goal": "30回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_hopper",
+   "cat": 4,
+   "tier": 2,
+   "name": "からくり見回り",
+   "icon": "HOPPER",
+   "desc": [
+    "ホッパー・ドロッパー・ディスペンサーを合わせて100回のぞく。"
+   ],
+   "goal": "100回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_apple",
+   "cat": 5,
+   "tier": 1,
+   "name": "りんご好き",
+   "icon": "APPLE",
+   "desc": [
+    "りんごを100個食べる。"
+   ],
+   "goal": "100回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_potato",
+   "cat": 5,
+   "tier": 1,
+   "name": "ほくほく",
+   "icon": "BAKED_POTATO",
+   "desc": [
+    "ベイクドポテトを200個食べる。"
+   ],
+   "goal": "200回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_salmon",
+   "cat": 5,
+   "tier": 1,
+   "name": "焼き鮭",
+   "icon": "COOKED_SALMON",
+   "desc": [
+    "焼き魚を150匹食べる。"
+   ],
+   "goal": "150回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_cookie",
+   "cat": 5,
+   "tier": 1,
+   "name": "おやつの時間",
+   "icon": "COOKIE",
+   "desc": [
+    "クッキーを100枚食べる。"
+   ],
+   "goal": "100回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_soup",
+   "cat": 5,
+   "tier": 1,
+   "name": "汁ものの日",
+   "icon": "MUSHROOM_STEW",
+   "desc": [
+    "シチューやスープを30杯食べる。"
+   ],
+   "goal": "30回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": null,
+   "cat": 5,
+   "tier": 2,
+   "name": null,
+   "icon": null,
+   "desc": null,
+   "goal": null,
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": true,
+   "hint": "なにが入っているかは、食べてのお楽しみ。"
+  },
+  {
+   "id": "vx_glowberry",
+   "cat": 5,
+   "tier": 2,
+   "name": "光る実",
+   "icon": "GLOW_BERRIES",
+   "desc": [
+    "光るベリーを100個食べる。"
+   ],
+   "goal": "100回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_bucket",
+   "cat": 5,
+   "tier": 2,
+   "name": "水くみ",
+   "icon": "WATER_BUCKET",
+   "desc": [
+    "水入りバケツを500回使う。"
+   ],
+   "goal": "500回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_lava",
+   "cat": 5,
+   "tier": 2,
+   "name": "溶岩を運ぶ",
+   "icon": "LAVA_BUCKET",
+   "desc": [
+    "溶岩入りバケツを100回使う。"
+   ],
+   "goal": "100回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_spyuse",
+   "cat": 5,
+   "tier": 1,
+   "name": "見張り",
+   "icon": "SPYGLASS",
+   "desc": [
+    "望遠鏡を100回のぞく。"
+   ],
+   "goal": "100回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_brush",
+   "cat": 5,
+   "tier": 2,
+   "name": "掘り出し物",
+   "icon": "BRUSH",
+   "desc": [
+    "ブラシを100回使う。"
+   ],
+   "goal": "100回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_campuse",
+   "cat": 5,
+   "tier": 1,
+   "name": "焚き火で焼く",
+   "icon": "SOUL_CAMPFIRE",
+   "desc": [
+    "焚き火で50回ものを焼く。"
+   ],
+   "goal": "50回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": null,
+   "cat": 5,
+   "tier": 2,
+   "name": null,
+   "icon": null,
+   "desc": null,
+   "goal": null,
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": true,
+   "hint": "開けると、なにかが動く箱。"
+  },
+  {
+   "id": null,
+   "cat": 5,
+   "tier": 2,
+   "name": null,
+   "icon": null,
+   "desc": null,
+   "goal": null,
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": true,
+   "hint": "村に入ると、空気が重くなる。"
+  },
+  {
+   "id": "vx_tune",
+   "cat": 5,
+   "tier": 1,
+   "name": "音合わせ",
+   "icon": "NOTE_BLOCK",
+   "desc": [
+    "音ブロックの音を100回合わせる。"
+   ],
+   "goal": "100回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "vx_pickup",
+   "cat": 5,
+   "tier": 2,
+   "name": "拾いもの",
+   "icon": "HOPPER_MINECART",
+   "desc": [
+    "ダイヤを500個拾う。"
+   ],
+   "goal": "500個",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
    "id": "count_10",
    "cat": 7,
    "tier": 1,
@@ -12114,7 +15413,7 @@
    "desc": [
     "ほかの実績を、ひとつ残らず得る。"
    ],
-   "goal": "603個",
+   "goal": "765個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -12134,7 +15433,7 @@
    "desc": [
     "灯の章の実績を、すべて得る。"
    ],
-   "goal": "52個",
+   "goal": "61個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -12154,7 +15453,7 @@
    "desc": [
     "夜の章の実績を、すべて得る。"
    ],
-   "goal": "45個",
+   "goal": "53個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -12174,7 +15473,7 @@
    "desc": [
     "狩の章の実績を、すべて得る。"
    ],
-   "goal": "99個",
+   "goal": "124個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -12194,7 +15493,7 @@
    "desc": [
     "旅の章の実績を、すべて得る。"
    ],
-   "goal": "56個",
+   "goal": "65個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -12214,7 +15513,7 @@
    "desc": [
     "匠の章の実績を、すべて得る。"
    ],
-   "goal": "205個",
+   "goal": "230個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -12234,7 +15533,7 @@
    "desc": [
     "暮の章の実績を、すべて得る。"
    ],
-   "goal": "104個",
+   "goal": "178個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -12254,7 +15553,7 @@
    "desc": [
     "祭の章の実績を、すべて得る。"
    ],
-   "goal": "25個",
+   "goal": "37個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -12329,11 +15628,11 @@
    "name": "灯見習い",
    "mc": "7",
    "need": 0,
-   "trail": null,
-   "tint": null
+   "tint": null,
+   "trail": null
   },
   {
-   "name": "灯守",
+   "name": "灯の番",
    "mc": "f",
    "need": 650,
    "trail": "灯の粉",
@@ -12343,8 +15642,8 @@
    "name": "灯師",
    "mc": "e",
    "need": 2200,
-   "trail": null,
-   "tint": null
+   "tint": null,
+   "trail": null
   },
   {
    "name": "灯匠",
@@ -12357,8 +15656,8 @@
    "name": "灯司",
    "mc": "a",
    "need": 7500,
-   "trail": null,
-   "tint": null
+   "tint": null,
+   "trail": null
   },
   {
    "name": "夜番",
@@ -12371,8 +15670,8 @@
    "name": "夜渡り",
    "mc": "3",
    "need": 16300,
-   "trail": null,
-   "tint": null
+   "tint": null,
+   "trail": null
   },
   {
    "name": "宵の主",
@@ -12390,7 +15689,7 @@
   },
   {
    "name": "灯原の伝説",
-   "mc": "6l",
+   "mc": "6",
    "need": 37450,
    "trail": "天の川",
    "tint": {
@@ -12406,7 +15705,7 @@
  "trails": [
   {
    "name": "灯の粉",
-   "how": "位「灯守」"
+   "how": "位「灯の番」"
   },
   {
    "name": "蛍",
@@ -12422,7 +15721,7 @@
   },
   {
    "name": "暁",
-   "how": "位「暁の灯」"
+   "how": "実績「十二の月の灯」"
   },
   {
    "name": "天の川",
@@ -12438,7 +15737,7 @@
   },
   {
    "name": "灰燼",
-   "how": "実績「灯喰いの天敵」"
+   "how": "実績「主を払う者」"
   },
   {
    "name": "燐光",
@@ -12500,8 +15799,8 @@
  "titles": [
   {
    "id": "rank1",
-   "t": "灯守",
-   "how": "位「灯守」"
+   "t": "灯の番",
+   "how": "位「灯の番」"
   },
   {
    "id": "rank2",
@@ -12734,6 +16033,61 @@
    "how": "実績「灯魚図鑑 完成」"
   },
   {
+   "id": "isg_all",
+   "t": "釣り場の主",
+   "how": "実績「釣り場帳 完成」"
+  },
+  {
+   "id": "isl_50",
+   "t": "焔を釣る者",
+   "how": "実績「焔を釣る者」"
+  },
+  {
+   "id": "isv_50",
+   "t": "虚空の主",
+   "how": "実績「虚空の主」"
+  },
+  {
+   "id": "iss_100000",
+   "t": "鱗長者",
+   "how": "実績「鱗長者」"
+  },
+  {
+   "id": "isf_100",
+   "t": "大物師",
+   "how": "実績「大物師」"
+  },
+  {
+   "id": "iso_100",
+   "t": "港の顔役",
+   "how": "実績「港の顔役」"
+  },
+  {
+   "id": "isgear_50",
+   "t": "名人",
+   "how": "実績「名人の道具」"
+  },
+  {
+   "id": "ism_all",
+   "t": "灯原の網元",
+   "how": "実績「すべての水を極めた」"
+  },
+  {
+   "id": "isn_10",
+   "t": "ヌシ釣り",
+   "how": "実績「ヌシを知る者」"
+  },
+  {
+   "id": "isn_all",
+   "t": "ヌシの上に立つ者",
+   "how": "実績「ヌシ二十三」"
+  },
+  {
+   "id": "isr_6",
+   "t": "釣りの名手",
+   "how": "実績「釣りの名手」"
+  },
+  {
    "id": "play_500",
    "t": "灯原の重鎮",
    "how": "実績「灯原の重鎮」"
@@ -12795,8 +16149,8 @@
   },
   {
    "id": "sato_takumi",
-   "t": "匠",
-   "how": "実績「匠」"
+   "t": "棟梁",
+   "how": "実績「棟梁」"
   },
   {
    "id": "fest_60",
@@ -13374,6 +16728,191 @@
    "how": "実績「六芸に通ず」"
   },
   {
+   "id": "naoshi_1",
+   "t": "灯し直し",
+   "how": "実績「はじめての灯し直し」"
+  },
+  {
+   "id": "naoshi_3",
+   "t": "三度の灯",
+   "how": "実績「三度の灯」"
+  },
+  {
+   "id": "hidakara_6",
+   "t": "灯宝の主",
+   "how": "実績「灯宝の主」"
+  },
+  {
+   "id": "bs_k_150",
+   "t": "主狩り",
+   "how": "実績「百五十の主」"
+  },
+  {
+   "id": "bs_k_500",
+   "t": "主を払う者",
+   "how": "実績「主を払う者」"
+  },
+  {
+   "id": "bs_kinds_20",
+   "t": "主を知る者",
+   "how": "実績「二十の主」"
+  },
+  {
+   "id": "bs_kinds_25",
+   "t": "万主の討ち手",
+   "how": "実績「すべての主」"
+  },
+  {
+   "id": "bs_lord_5",
+   "t": "章を越えし者",
+   "how": "実績「五つの章の主」"
+  },
+  {
+   "id": "bs_final",
+   "t": "深淵の果て",
+   "how": "実績「深淵の果て」"
+  },
+  {
+   "id": "bs_hard_100",
+   "t": "鬼の主狩り",
+   "how": "実績「鬼の主狩り」"
+  },
+  {
+   "id": "bs_hardk_10",
+   "t": "★の討ち手",
+   "how": "実績「十の★」"
+  },
+  {
+   "id": "bs_solo_25",
+   "t": "ひとり討ち",
+   "how": "実績「ひとり討ち」"
+  },
+  {
+   "id": "bs_first",
+   "t": "先陣",
+   "how": "実績「主の一番乗り」"
+  },
+  {
+   "id": "bs_fast_20",
+   "t": "疾風",
+   "how": "実績「疾風の討ち手」"
+  },
+  {
+   "id": "cs_won_4",
+   "t": "勝ち運の主",
+   "how": "実績「勝ち運の主」"
+  },
+  {
+   "id": "cs_jp_5",
+   "t": "灯籠に愛された者",
+   "how": "実績「灯籠は知っている」"
+  },
+  {
+   "id": "cs_lot_3",
+   "t": "福の主",
+   "how": "実績「三度の宝くじ」"
+  },
+  {
+   "id": "hg_pt_4",
+   "t": "灯暦の人",
+   "how": "実績「灯暦の人」"
+  },
+  {
+   "id": "hg_sea_4",
+   "t": "四季の人",
+   "how": "実績「四つの季」"
+  },
+  {
+   "id": "hg_win_10",
+   "t": "腕自慢",
+   "how": "実績「腕自慢」"
+  },
+  {
+   "id": "st_raid_50",
+   "t": "里の守り手",
+   "how": "実績「里の守り手」"
+  },
+  {
+   "id": "st_rk_2000",
+   "t": "夜襲の鬼",
+   "how": "実績「夜襲の鬼」"
+  },
+  {
+   "id": "st_help_30",
+   "t": "流れの剣",
+   "how": "実績「流れの剣」"
+  },
+  {
+   "id": "st_cargo_100",
+   "t": "運び手の鑑",
+   "how": "実績「運び手の鑑」"
+  },
+  {
+   "id": "st_host_6",
+   "t": "祭の里長",
+   "how": "実績「祭の里長」"
+  },
+  {
+   "id": "st_jobs_t2",
+   "t": "二道の棟梁",
+   "how": "実績「二道の棟梁」"
+  },
+  {
+   "id": "st_jobs_t5",
+   "t": "五道の棟梁",
+   "how": "実績「五道の棟梁」"
+  },
+  {
+   "id": "en_f_15",
+   "t": "縁の人",
+   "how": "実績「縁の人」"
+  },
+  {
+   "id": "en_m_500",
+   "t": "文の灯",
+   "how": "実績「文の灯」"
+  },
+  {
+   "id": "mo_a_6",
+   "t": "半年の灯",
+   "how": "実績「半年の灯」"
+  },
+  {
+   "id": "mo_a_12",
+   "t": "十二月の灯",
+   "how": "実績「十二の月の灯」"
+  },
+  {
+   "id": "tg_n_1500",
+   "t": "夜を分かつ者",
+   "how": "実績「夜を分かつ者」"
+  },
+  {
+   "id": "tg_g_100",
+   "t": "灯の輪",
+   "how": "実績「灯の輪の夜」"
+  },
+  {
+   "id": "nh_5",
+   "t": "五度の灯",
+   "how": "実績「五度の灯」"
+  },
+  {
+   "id": "nh_10",
+   "t": "十度の灯",
+   "how": "実績「十度の灯」"
+  },
+  {
+   "id": "nh_lv_18",
+   "t": "磨き抜かれた灯",
+   "how": "実績「磨き抜かれた灯」"
+  },
+  {
+   "id": "vx_run_2",
+   "t": "韋駄天",
+   "how": "実績「韋駄天」"
+  },
+  {
    "id": "count_250",
    "t": "実績の蔵",
    "how": "実績「実績の蔵」"
@@ -13437,61 +16976,6 @@
    "id": "first_30",
    "t": "道を拓く者",
    "how": "実績「道を拓く者」"
-  },
-  {
-   "id": "isg_all",
-   "t": "釣り場の主",
-   "how": "実績「釣り場帳 完成」"
-  },
-  {
-   "id": "isl_50",
-   "t": "焔を釣る者",
-   "how": "実績「焔を釣る者」"
-  },
-  {
-   "id": "isv_50",
-   "t": "虚空の主",
-   "how": "実績「虚空の主」"
-  },
-  {
-   "id": "iss_100000",
-   "t": "鱗長者",
-   "how": "実績「鱗長者」"
-  },
-  {
-   "id": "isf_100",
-   "t": "大物師",
-   "how": "実績「大物師」"
-  },
-  {
-   "id": "iso_100",
-   "t": "港の顔役",
-   "how": "実績「港の顔役」"
-  },
-  {
-   "id": "isgear_50",
-   "t": "名人",
-   "how": "実績「名人の道具」"
-  },
-  {
-   "id": "ism_all",
-   "t": "灯原の網元",
-   "how": "実績「すべての水を極めた」"
-  },
-  {
-   "id": "isn_10",
-   "t": "ヌシ釣り",
-   "how": "実績「ヌシを知る者」"
-  },
-  {
-   "id": "isn_all",
-   "t": "ヌシの上に立つ者",
-   "how": "実績「ヌシ二十三」"
-  },
-  {
-   "id": "isr_6",
-   "t": "釣りの名手",
-   "how": "実績「釣りの名手」"
   },
   {
    "id": "e:hajime",
@@ -13657,6 +17141,51 @@
    "id": "e:matsurinushi",
    "t": "祭の主",
    "how": "絵巻「祭の主」"
+  },
+  {
+   "id": "e:tabidachi",
+   "t": "旅立ちの人",
+   "how": "絵巻「旅立ちの絵巻」"
+  },
+  {
+   "id": "e:nushimichi",
+   "t": "主への道",
+   "how": "絵巻「主への道」"
+  },
+  {
+   "id": "e:satomori",
+   "t": "里守",
+   "how": "絵巻「里守の絵巻」"
+  },
+  {
+   "id": "e:enmusubi",
+   "t": "縁を結ぶ者",
+   "how": "絵巻「縁の絵巻」"
+  },
+  {
+   "id": "e:tsukiyomi",
+   "t": "月を数える人",
+   "how": "絵巻「月の絵巻」"
+  },
+  {
+   "id": "e:dougu",
+   "t": "道具の匠",
+   "how": "絵巻「道具の絵巻」"
+  },
+  {
+   "id": "e:shudo",
+   "t": "主の道を極めし者",
+   "how": "絵巻「主の道の極み」"
+  },
+  {
+   "id": "e:satohashira",
+   "t": "里の柱石",
+   "how": "絵巻「里の柱石」"
+  },
+  {
+   "id": "e:hitsugi",
+   "t": "灯をつぐ者",
+   "how": "絵巻「灯をつぐ者」"
   }
  ],
  "emaki": [
@@ -14300,6 +17829,151 @@
    ],
    "title": "祭の主",
    "trail": "花火の尾"
+  },
+  {
+   "id": "tabidachi",
+   "name": "旅立ちの絵巻",
+   "depth": 0,
+   "desc": "支度をして、道を越え、縁を結ぶ。",
+   "icon": "BUNDLE",
+   "points": 50,
+   "ids": [
+    "sh_done",
+    "hg_path",
+    "en_f_1",
+    "mo_g_6",
+    "st_job_1"
+   ],
+   "title": "旅立ちの人"
+  },
+  {
+   "id": "nushimichi",
+   "name": "主への道",
+   "depth": 0,
+   "desc": "はじめてのボスから、組での討伐まで。",
+   "icon": "ZOMBIE_HEAD",
+   "points": 50,
+   "ids": [
+    "bs_k_1",
+    "bs_solo_1",
+    "bs_kinds_5",
+    "bs_party_10"
+   ],
+   "title": "主への道"
+  },
+  {
+   "id": "satomori",
+   "name": "里守の絵巻",
+   "depth": 1,
+   "desc": "夜襲を退け、助け、運び、祭を迎える。",
+   "icon": "SHIELD",
+   "points": 120,
+   "ids": [
+    "st_raid_1",
+    "st_rk_50",
+    "st_help_1",
+    "st_cargo_25",
+    "st_fest_1",
+    "st_job_2"
+   ],
+   "title": "里守"
+  },
+  {
+   "id": "enmusubi",
+   "name": "縁の絵巻",
+   "depth": 1,
+   "desc": "縁を結び、便りを出し、夜を分かつ。",
+   "icon": "LEAD",
+   "points": 120,
+   "ids": [
+    "en_f_5",
+    "en_m_100",
+    "en_p_10",
+    "tg_n_100",
+    "tg_b_5",
+    "tg_g_10"
+   ],
+   "title": "縁を結ぶ者"
+  },
+  {
+   "id": "tsukiyomi",
+   "name": "月の絵巻",
+   "depth": 1,
+   "desc": "毎月の6つを、月をまたいで。",
+   "icon": "RECOVERY_COMPASS",
+   "points": 120,
+   "ids": [
+    "mo_a_1",
+    "mo_g_30",
+    "mo_a_3"
+   ],
+   "title": "月を数える人"
+  },
+  {
+   "id": "dougu",
+   "name": "道具の絵巻",
+   "depth": 1,
+   "desc": "時・道・遠く・倒れた場所を知る道具。",
+   "icon": "SPYGLASS",
+   "points": 120,
+   "ids": [
+    "vx_clock",
+    "vx_compass",
+    "vx_spyglass",
+    "vx_recovery",
+    "vx_lodestone",
+    "vx_crafter"
+   ],
+   "title": "道具の匠"
+  },
+  {
+   "id": "shudo",
+   "name": "主の道の極み",
+   "depth": 2,
+   "desc": "すべての章の主と、むずかしいの★、最後のボス。",
+   "icon": "NETHERITE_HELMET",
+   "points": 300,
+   "ids": [
+    "bs_kinds_20",
+    "bs_lord_5",
+    "bs_hard_25",
+    "bs_hardk_10",
+    "bs_final"
+   ],
+   "title": "主の道を極めし者"
+  },
+  {
+   "id": "satohashira",
+   "name": "里の柱石",
+   "depth": 2,
+   "desc": "里を都に、職を名人に、夜襲を守り続ける。",
+   "icon": "BELL",
+   "points": 300,
+   "ids": [
+    "st_raid_50",
+    "st_help_30",
+    "st_host_6",
+    "st_jobs_m2",
+    "st_cargo_100",
+    "sato_miyako"
+   ],
+   "title": "里の柱石"
+  },
+  {
+   "id": "hitsugi",
+   "name": "灯をつぐ者",
+   "depth": 2,
+   "desc": "灯し直して、灯宝を集め、磨く。",
+   "icon": "NETHER_STAR",
+   "points": 300,
+   "ids": [
+    "naoshi_1",
+    "naoshi_3",
+    "nh_hk_3",
+    "nh_lv_6",
+    "hidakara_6"
+   ],
+   "title": "灯をつぐ者"
   }
  ],
  "depthStep": 400

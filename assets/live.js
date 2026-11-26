@@ -70,4 +70,37 @@
       wc.innerHTML = h.length ? h.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') : '<li class="mu">まだ書きとめた出来事はありません。</li>';
     }
   });
+
+  // ── 証の殿堂（実績）──
+  var hall = document.getElementById('ak-hall');
+  if (hall) get('data/live/akashi.json', function (d) {
+    var TC = ['', '#55FF55', '#55FFFF', '#FF55FF', '#FFAA00', '#FF5555'];
+    var TN = ['', '易', '並', '難', '極', '伝'];
+    function tier(t) { return '<i class="akh-t" style="--c:' + TC[t] + '">' + '◆'.repeat(t) + '</i>'; }
+    var m = d.month;
+    if (m) {
+      var mh = document.getElementById('ak-month-h');
+      if (mh) mh.textContent = m.name + 'の実績';
+      var ml = document.getElementById('ak-month');
+      if (ml) ml.innerHTML = (m.goals || []).map(function (g) { return '<li>' + esc(g) + '</li>'; }).join('');
+      var mn = document.getElementById('ak-month-n');
+      if (mn) mn.innerHTML = '6つそろえた人 <b class="dot">' + Number(m.complete || 0) + '</b> 人';
+    }
+    var top = document.getElementById('ak-top');
+    if (top && (d.top || []).length) top.innerHTML = d.top.map(function (p, i) {
+      var sh = (p.shelf || []).map(function (x) { return '<span class="akh-shelf" style="--c:' + TC[x.tier] + '">' + esc(x.name) + '</span>'; }).join('');
+      return '<li><b class="dot akh-no">' + (i + 1) + '</b><img class="face" src="https://mc-heads.net/avatar/' + encodeURIComponent(p.name) + '/32" alt="" width="32" height="32" loading="lazy">'
+        + '<span class="akh-who"><b>' + esc(p.name) + '</b><small>' + esc(p.rank) + (p.title ? ' ・ ' + esc(p.title) : '') + '</small>' + (sh ? '<span class="akh-shelves">' + sh + '</span>' : '') + '</span>'
+        + '<span class="akh-pt dot">' + Number(p.points || 0).toLocaleString() + '<small>点 ・ ' + esc(p.done) + '個</small></span></li>';
+    }).join('');
+    var fi = document.getElementById('ak-first');
+    if (fi && (d.firsts || []).length) fi.innerHTML = d.firsts.slice(0, 20).map(function (f) {
+      return '<li>' + tier(f.tier) + '<b>' + esc(f.name) + '</b><span class="mu">' + esc(f.who) + ' ・ ' + esc(f.at) + '</span></li>';
+    }).join('');
+    var ra = document.getElementById('ak-rare');
+    if (ra && (d.rare || []).length) ra.innerHTML = d.rare.map(function (r) {
+      return '<li>' + tier(r.tier) + '<b>' + esc(r.name) + '</b><span class="mu">' + esc(r.cat) + ' ・ ' + Number(r.holders) + '人（' + esc(r.pct) + '）</span></li>';
+    }).join('');
+    Array.prototype.forEach.call(hall.querySelectorAll('img.face'), function (img) { img.onerror = function () { img.onerror = null; img.style.visibility = 'hidden'; }; });
+  });
 })();
