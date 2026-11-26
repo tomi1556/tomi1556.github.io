@@ -56,6 +56,14 @@
           + '<div class="sato-tags">' + badges + '</div>' + chron + '</article>';
       }).join('');
     }
+    var rk = document.getElementById('sato-rank');
+    if (rk && (d.ranking || []).length) {
+      rk.innerHTML = d.ranking.slice(0, 10).map(function (r, i) {
+        return '<li><b class="dot">' + (i + 1) + '</b><span class="sr-name">' + esc(r.name) + '</span><span class="sr-score dot">' + Number(r.score || 0).toLocaleString() + '</span><small>' + esc(r.detail) + '</small></li>';
+      }).join('');
+    }
+    var mt = document.getElementById('sato-monthtop');
+    if (mt && d.monthTop) mt.innerHTML = '先月いちばんの里：<b>' + esc(d.monthTop) + '</b>';
     var wc = document.getElementById('world-chron');
     if (wc) {
       var h = (d.history || []).slice(-40).reverse();

@@ -2596,6 +2596,16 @@ def _sato_sec():
   </div>
 </section>
 
+<section class="stratum s-dusk" id="yoru">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">朱月の夜襲と、里どうしのつながり。</h2>
+    <p class="lead">朱月の夜、民が土地にいる里には、灯喰いと夜の敵の群れが土地の縁から来ます（3波・庵は1波）。建物は壊れませんが、灯籠は喰われます。守りきると里の力と灯銭。</p>
+    {cards([("warn", "#E0453A", "夜襲", "朱月の夜・ひと晩1回・民がいるときだけ"), ("people", "#6FD39A", "助太刀", "/sato sukedachi 里の名前・街道の里と縁の人はすぐ渡れる"), ("star", "#F29BB8", "里祭", "町より上・月に1回・夜祭を呼んで花火"), ("trophy", "#F2B544", "里の番付", "週ごと・月いちばんの里の民に称号「灯の里」"), ("path", "#5AAAFF", "里の荷", "ほかの里の旅の依頼に納めると、自分の里にも力"), ("lantern", "#E9C46A", "光の柱", "格が上がるほど高く。夜に遠くから里が分かる")], cols=3)}
+    <p class="note"><b>いまの番付と里の年代記は</b> <a href="satos.html">里の一覧</a> で見られます。</p>
+  </div>
+</section>
+
 <section class="stratum s-rock" id="yashiki">
   <div class="edge"></div>
   <div class="wrap">
@@ -3313,6 +3323,10 @@ _WORDS = [
     ]),
     ("里", "#E9824A", "仲間と暮らし", "ひとりでも遊べて、仲間がいるともっと楽しい。", [
         ("里", "さと", "3人で開く、仲間の土地。灯りで土地を広げ、集落から都へ育てます。", "guide-sato.html"),
+        ("夜襲", "よしゅう", "朱月の夜、灯喰いと夜の敵の群れが里を襲う（3波）。民が土地にいるときだけ来る。守りきると里の力と灯銭。", "satos.html"),
+        ("助太刀", "すけだち", "ほかの里の夜襲を手伝うこと。/sato sukedachi 里の名前。街道でつないだ里の民と、民の縁の人はすぐ渡れる。", "satos.html"),
+        ("里祭", "さとまつり", "町より上の里が、月に1回、夜祭を呼んで開く祭り。里灯の上に花火が上がる。", "satos.html"),
+        ("里の番付", "さとのばんづけ", "週ごとの里どうしの番付。月にいちばんの里の民は称号「灯の里」。", "satos.html"),
         ("庵", "いおり", "ひとりで開ける、小さな里の芽。礎はいらない。民が3人になったら「里開き」へ進めます。", "satos.html"),
         ("里の灯銭箱", "さとのともしぜにばこ", "民が灯銭を入れておく箱。蔵の品が足りない週は、ここから里の維持費を払います。", "guide-sato.html"),
         ("光の柱", "ひかりのはしら", "里灯の上に立つ光。格が上がるほど高くなり、夜に遠くから里が分かります。", "guide-sato.html"),
@@ -3377,7 +3391,15 @@ def _satos_static():
 
 _SATOS = _satos_static()
 satos_page = sub_hero("satos.html", "里の一覧", "灯原のいまの里。サーバーから自動で届くので、いつでも最新です。座標は出しません（行き方は、ゲームの「里を探す」から）。",
-                      [("list", "里"), ("chronicle", "灯原の年代記")]) + f'''
+                      [("rank", "里の番付"), ("list", "里"), ("chronicle", "灯原の年代記")]) + f'''
+<section class="stratum s-stone" id="rank">
+  <div class="wrap narrow">
+    <h2 class="disp h2">里の番付（先週）</h2>
+    <p class="mu">点＝里の力の伸び ＋ 夜襲を守りきる 300 ＋ 助太刀 150 ＋ ほかの里へ運んだ荷の 1/4 ＋ 建物 50。月にいちばんの里の民は、称号「灯の里」。</p>
+    <ol class="sato-rank" id="sato-rank"><li class="mu">週が変わると、ここに出ます。</li></ol>
+    <p class="mu" id="sato-monthtop"></p>
+  </div>
+</section>
 <section class="stratum s-deep" id="list">
   <div class="wrap">
     <p class="find-n mu" id="sato-meta">{len(_SATOS.get("satos", []))} の里</p>
