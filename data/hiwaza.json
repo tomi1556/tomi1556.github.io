@@ -3868,147 +3868,450 @@
    "path": 2,
    "goal": 30,
    "xp": 250,
-   "text": "鉱石を30個掘る"
+   "text": "鉱石を30個掘る",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "ore64",
+   "path": 2,
+   "goal": 64,
+   "xp": 420,
+   "text": "鉱石を64個掘る",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
   },
   {
    "id": "stone300",
    "path": 2,
    "goal": 300,
    "xp": 200,
-   "text": "石を300個掘る"
+   "text": "石を300個掘る",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "stone800",
+   "path": 2,
+   "goal": 800,
+   "xp": 380,
+   "text": "石を800個掘る",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
   },
   {
    "id": "log64",
    "path": 3,
    "goal": 64,
    "xp": 220,
-   "text": "幹を64本切る"
+   "text": "幹を64本切る",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "log160",
+   "path": 3,
+   "goal": 160,
+   "xp": 400,
+   "text": "幹を160本切る",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
   },
   {
    "id": "tree5",
    "path": 3,
    "goal": 5,
    "xp": 200,
-   "text": "木を5本まるごと倒す"
+   "text": "木を5本まるごと倒す",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "tree12",
+   "path": 3,
+   "goal": 12,
+   "xp": 380,
+   "text": "木を12本まるごと倒す",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
   },
   {
    "id": "crop120",
    "path": 4,
    "goal": 120,
    "xp": 220,
-   "text": "実った作物を120株収穫する"
+   "text": "実った作物を120株収穫する",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "crop300",
+   "path": 4,
+   "goal": 300,
+   "xp": 400,
+   "text": "実った作物を300株収穫する",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
+  },
+  {
+   "id": "bonemeal24",
+   "path": 4,
+   "goal": 24,
+   "xp": 200,
+   "text": "骨粉を24回使う",
+   "minLv": 0,
+   "maxLv": -1,
+   "need": null
   },
   {
    "id": "fish10",
    "path": 5,
    "goal": 10,
    "xp": 200,
-   "text": "魚を10匹釣る"
+   "text": "魚を10匹釣る",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "fish25",
+   "path": 5,
+   "goal": 25,
+   "xp": 380,
+   "text": "魚を25匹釣る",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
+  },
+  {
+   "id": "hiuoany4",
+   "path": 5,
+   "goal": 4,
+   "xp": 260,
+   "text": "灯魚を4匹釣る",
+   "minLv": 0,
+   "maxLv": -1,
+   "need": "fish"
   },
   {
    "id": "hiuo3",
    "path": 5,
    "goal": 3,
-   "xp": 260,
-   "text": "珍以上の灯魚を3匹釣る"
+   "xp": 320,
+   "text": "珍以上の灯魚を3匹釣る",
+   "minLv": 20,
+   "maxLv": -1,
+   "need": "hiuo"
   },
   {
    "id": "craft40",
    "path": 6,
    "goal": 40,
    "xp": 180,
-   "text": "ものを40回作る"
+   "text": "ものを40回作る",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "craft100",
+   "path": 6,
+   "goal": 100,
+   "xp": 360,
+   "text": "ものを100回作る",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
   },
   {
    "id": "smelt32",
    "path": 6,
    "goal": 32,
    "xp": 180,
-   "text": "かまどから32個取り出す"
+   "text": "かまどから32個取り出す",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "smelt96",
+   "path": 6,
+   "goal": 96,
+   "xp": 360,
+   "text": "かまどから96個取り出す",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
+  },
+  {
+   "id": "anvil3",
+   "path": 6,
+   "goal": 3,
+   "xp": 220,
+   "text": "金床を3回使う",
+   "minLv": 0,
+   "maxLv": -1,
+   "need": "anvil"
+  },
+  {
+   "id": "smith2",
+   "path": 6,
+   "goal": 2,
+   "xp": 240,
+   "text": "鍛冶台を2回使う",
+   "minLv": 0,
+   "maxLv": -1,
+   "need": "smith"
   },
   {
    "id": "walk2000",
    "path": 7,
    "goal": 2000,
    "xp": 240,
-   "text": "2,000ブロック旅をする"
+   "text": "2,000ブロック旅をする",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "walk5000",
+   "path": 7,
+   "goal": 5000,
+   "xp": 420,
+   "text": "5,000ブロック旅をする",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
   },
   {
    "id": "biome1",
    "path": 7,
    "goal": 1,
    "xp": 260,
-   "text": "はじめてのバイオームを訪れる"
+   "text": "はじめてのバイオームを訪れる",
+   "minLv": 0,
+   "maxLv": -1,
+   "need": null
+  },
+  {
+   "id": "trade8",
+   "path": 7,
+   "goal": 8,
+   "xp": 220,
+   "text": "村人と8回取引する",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "trade20",
+   "path": 7,
+   "goal": 20,
+   "xp": 380,
+   "text": "村人と20回取引する",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
   },
   {
    "id": "breed6",
    "path": 8,
    "goal": 6,
    "xp": 220,
-   "text": "動物を6回殖やす"
+   "text": "動物を6回殖やす",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "breed15",
+   "path": 8,
+   "goal": 15,
+   "xp": 400,
+   "text": "動物を15回殖やす",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
   },
   {
    "id": "shear8",
    "path": 8,
    "goal": 8,
    "xp": 180,
-   "text": "羊の毛を8回刈る"
+   "text": "羊の毛を8回刈る",
+   "minLv": 0,
+   "maxLv": -1,
+   "need": "shear"
   },
   {
    "id": "enchant3",
    "path": 9,
    "goal": 3,
    "xp": 240,
-   "text": "3回付呪する"
+   "text": "3回付呪する",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "enchant8",
+   "path": 9,
+   "goal": 8,
+   "xp": 420,
+   "text": "8回付呪する",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
   },
   {
    "id": "brew6",
    "path": 9,
    "goal": 6,
    "xp": 220,
-   "text": "薬を6本醸造する"
+   "text": "薬を6本醸造する",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": "brew"
   },
   {
-   "id": "dawn1",
-   "path": 1,
-   "goal": 1,
-   "xp": 260,
-   "text": "夜を越えて夜明けを迎える"
-  },
-  {
-   "id": "dark10",
-   "path": 1,
-   "goal": 10,
-   "xp": 200,
-   "text": "夜の闇の中で10分過ごす"
-  },
-  {
-   "id": "lantern2",
-   "path": 0,
-   "goal": 2,
-   "xp": 240,
-   "text": "灯籠を2基置く"
-  },
-  {
-   "id": "relight1",
-   "path": 0,
-   "goal": 1,
-   "xp": 260,
-   "text": "消えた灯籠を灯し直す"
-  },
-  {
-   "id": "eater1",
-   "path": 0,
-   "goal": 1,
-   "xp": 300,
-   "text": "灯喰いを1体倒す"
+   "id": "brew15",
+   "path": 9,
+   "goal": 15,
+   "xp": 400,
+   "text": "薬を15本醸造する",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": "brew"
   },
   {
    "id": "active5",
    "path": 9,
    "goal": 5,
    "xp": 200,
-   "text": "使う技を5回使う"
+   "text": "使う技を5回使う",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "active12",
+   "path": 9,
+   "goal": 12,
+   "xp": 360,
+   "text": "使う技を12回使う",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
+  },
+  {
+   "id": "dawn1",
+   "path": 1,
+   "goal": 1,
+   "xp": 260,
+   "text": "夜を越えて夜明けを迎える",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "dawn2",
+   "path": 1,
+   "goal": 2,
+   "xp": 420,
+   "text": "夜明けを2回迎える",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
+  },
+  {
+   "id": "dark10",
+   "path": 1,
+   "goal": 10,
+   "xp": 200,
+   "text": "夜の闇の中で10分過ごす",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "dark25",
+   "path": 1,
+   "goal": 25,
+   "xp": 380,
+   "text": "夜の闇の中で25分過ごす",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
+  },
+  {
+   "id": "mob30",
+   "path": 1,
+   "goal": 30,
+   "xp": 220,
+   "text": "敵を30体倒す",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "mob80",
+   "path": 1,
+   "goal": 80,
+   "xp": 400,
+   "text": "敵を80体倒す",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
+  },
+  {
+   "id": "lantern2",
+   "path": 0,
+   "goal": 2,
+   "xp": 240,
+   "text": "灯籠を2基置く",
+   "minLv": 0,
+   "maxLv": -1,
+   "need": "lantern"
+  },
+  {
+   "id": "relight1",
+   "path": 0,
+   "goal": 1,
+   "xp": 260,
+   "text": "消えた灯籠を灯し直す",
+   "minLv": 0,
+   "maxLv": -1,
+   "need": "relight"
+  },
+  {
+   "id": "eater1",
+   "path": 0,
+   "goal": 1,
+   "xp": 300,
+   "text": "灯喰いを1体倒す",
+   "minLv": 0,
+   "maxLv": 29,
+   "need": null
+  },
+  {
+   "id": "eater3",
+   "path": 0,
+   "goal": 3,
+   "xp": 480,
+   "text": "灯喰いを3体倒す",
+   "minLv": 30,
+   "maxLv": -1,
+   "need": null
   }
  ],
  "rarity": [

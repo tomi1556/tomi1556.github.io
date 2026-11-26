@@ -105,7 +105,7 @@
    "frag": 6
   }
  ],
- "total": 60300,
+ "total": 62465,
  "defs": [
   {
    "id": "lantern_1",
@@ -13330,7 +13330,7 @@
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "/sato sukedachi <里> で、夜襲の里へ渡れる（街道・縁・運び手）。"
+   "tip": "/sato sukedachi <里> で、夜襲の里へ渡れる（街道・フレンド・運び手）。"
   },
   {
    "id": "st_help_10",
@@ -13351,7 +13351,7 @@
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "/sato sukedachi <里> で、夜襲の里へ渡れる（街道・縁・運び手）。"
+   "tip": "/sato sukedachi <里> で、夜襲の里へ渡れる（街道・フレンド・運び手）。"
   },
   {
    "id": "st_help_30",
@@ -13372,7 +13372,7 @@
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "/sato sukedachi <里> で、夜襲の里へ渡れる（街道・縁・運び手）。"
+   "tip": "/sato sukedachi <里> で、夜襲の里へ渡れる（街道・フレンド・運び手）。"
   },
   {
    "id": "st_cargo_1",
@@ -13670,10 +13670,10 @@
    "id": "en_f_1",
    "cat": 5,
    "tier": 1,
-   "name": "縁を結ぶ",
+   "name": "はじめてのフレンド",
    "icon": "STRING",
    "desc": [
-    "だれかと縁を結ぶ。"
+    "だれかとフレンドになる。"
    ],
    "goal": "1人",
    "stage": 1,
@@ -13685,16 +13685,16 @@
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "/nakama で縁を結ぶ。相手も受けると結ばれる。"
+   "tip": "/friend でフレンドを申し出る。相手も受けるとフレンドになる。"
   },
   {
    "id": "en_f_5",
    "cat": 5,
    "tier": 2,
-   "name": "五つの縁",
+   "name": "五人のフレンド",
    "icon": "LEAD",
    "desc": [
-    "5人と縁を結ぶ。"
+    "5人とフレンドになる。"
    ],
    "goal": "5人",
    "stage": 2,
@@ -13706,37 +13706,37 @@
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "/nakama で縁を結ぶ。相手も受けると結ばれる。"
+   "tip": "/friend でフレンドを申し出る。相手も受けるとフレンドになる。"
   },
   {
    "id": "en_f_15",
    "cat": 5,
    "tier": 3,
-   "name": "縁の人",
+   "name": "フレンドの輪",
    "icon": "LEAD",
    "desc": [
-    "15人と縁を結ぶ。"
+    "15人とフレンドになる。"
    ],
    "goal": "15人",
    "stage": 3,
    "stages": 4,
    "prev": "en_f_5",
-   "title": "縁の人",
+   "title": "フレンドの輪",
    "tint": null,
    "trail": null,
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "/nakama で縁を結ぶ。相手も受けると結ばれる。"
+   "tip": "/friend でフレンドを申し出る。相手も受けるとフレンドになる。"
   },
   {
    "id": "en_f_30",
    "cat": 5,
    "tier": 4,
-   "name": "縁の輪",
+   "name": "三十人のフレンド",
    "icon": "LEAD",
    "desc": [
-    "30人と縁を結ぶ。"
+    "30人とフレンドになる。"
    ],
    "goal": "30人",
    "stage": 4,
@@ -13748,7 +13748,7 @@
    "item": null,
    "hidden": false,
    "hint": null,
-   "tip": "/nakama で縁を結ぶ。相手も受けると結ばれる。"
+   "tip": "/friend でフレンドを申し出る。相手も受けるとフレンドになる。"
   },
   {
    "id": "en_m_10",
@@ -13826,6 +13826,522 @@
    "title": null,
    "tint": null,
    "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hs_g_1",
+   "cat": 5,
+   "tier": 1,
+   "name": "はじめての灯し星",
+   "icon": "NETHER_STAR",
+   "desc": [
+    "だれかに灯し星を贈る。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 5,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "しゃがんで素手で人を右クリック（/friend の「近くの人」でも）。同じ人には1日1回、会って贈る。"
+  },
+  {
+   "id": "hs_g_30",
+   "cat": 5,
+   "tier": 2,
+   "name": "星くばり",
+   "icon": "NETHER_STAR",
+   "desc": [
+    "灯し星を合わせて30こ贈る。"
+   ],
+   "goal": "30回",
+   "stage": 2,
+   "stages": 5,
+   "prev": "hs_g_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "しゃがんで素手で人を右クリック（/friend の「近くの人」でも）。同じ人には1日1回、会って贈る。"
+  },
+  {
+   "id": "hs_g_150",
+   "cat": 5,
+   "tier": 3,
+   "name": "星をまく人",
+   "icon": "NETHER_STAR",
+   "desc": [
+    "灯し星を合わせて150こ贈る。"
+   ],
+   "goal": "150回",
+   "stage": 3,
+   "stages": 5,
+   "prev": "hs_g_30",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "しゃがんで素手で人を右クリック（/friend の「近くの人」でも）。同じ人には1日1回、会って贈る。"
+  },
+  {
+   "id": "hs_g_500",
+   "cat": 5,
+   "tier": 4,
+   "name": "星の雨",
+   "icon": "NETHER_STAR",
+   "desc": [
+    "灯し星を合わせて500こ贈る。"
+   ],
+   "goal": "500回",
+   "stage": 4,
+   "stages": 5,
+   "prev": "hs_g_150",
+   "title": "星の雨",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "しゃがんで素手で人を右クリック（/friend の「近くの人」でも）。同じ人には1日1回、会って贈る。"
+  },
+  {
+   "id": "hs_g_1500",
+   "cat": 5,
+   "tier": 5,
+   "name": "天の川をかける人",
+   "icon": "NETHER_STAR",
+   "desc": [
+    "灯し星を合わせて1,500こ贈る。"
+   ],
+   "goal": "1,500回",
+   "stage": 5,
+   "stages": 5,
+   "prev": "hs_g_500",
+   "title": "星をかける人",
+   "tint": null,
+   "trail": "星屑",
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "しゃがんで素手で人を右クリック（/friend の「近くの人」でも）。同じ人には1日1回、会って贈る。"
+  },
+  {
+   "id": "hs_r_1",
+   "cat": 5,
+   "tier": 1,
+   "name": "星が届いた",
+   "icon": "GLOWSTONE_DUST",
+   "desc": [
+    "灯し星をもらう。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 5,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "人に会うと、灯し星をもらえることがある。"
+  },
+  {
+   "id": "hs_r_30",
+   "cat": 5,
+   "tier": 2,
+   "name": "星を集めて",
+   "icon": "GLOWSTONE_DUST",
+   "desc": [
+    "灯し星を合わせて30こもらう。"
+   ],
+   "goal": "30回",
+   "stage": 2,
+   "stages": 5,
+   "prev": "hs_r_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "人に会うと、灯し星をもらえることがある。"
+  },
+  {
+   "id": "hs_r_150",
+   "cat": 5,
+   "tier": 3,
+   "name": "星のふる人",
+   "icon": "GLOWSTONE",
+   "desc": [
+    "灯し星を合わせて150こもらう。"
+   ],
+   "goal": "150回",
+   "stage": 3,
+   "stages": 5,
+   "prev": "hs_r_30",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "人に会うと、灯し星をもらえることがある。"
+  },
+  {
+   "id": "hs_r_500",
+   "cat": 5,
+   "tier": 4,
+   "name": "星にかこまれて",
+   "icon": "GLOWSTONE",
+   "desc": [
+    "灯し星を合わせて500こもらう。"
+   ],
+   "goal": "500回",
+   "stage": 4,
+   "stages": 5,
+   "prev": "hs_r_150",
+   "title": "星の人",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "人に会うと、灯し星をもらえることがある。"
+  },
+  {
+   "id": "hs_r_1500",
+   "cat": 5,
+   "tier": 5,
+   "name": "灯原の一番星",
+   "icon": "BEACON",
+   "desc": [
+    "灯し星を合わせて1,500こもらう。"
+   ],
+   "goal": "1,500回",
+   "stage": 5,
+   "stages": 5,
+   "prev": "hs_r_500",
+   "title": "一番星",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "人に会うと、灯し星をもらえることがある。"
+  },
+  {
+   "id": "hs_gp_10",
+   "cat": 5,
+   "tier": 2,
+   "name": "十人に星を",
+   "icon": "PLAYER_HEAD",
+   "desc": [
+    "10人に灯し星を贈る。"
+   ],
+   "goal": "10人",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hs_gp_30",
+   "cat": 5,
+   "tier": 3,
+   "name": "三十人に星を",
+   "icon": "PLAYER_HEAD",
+   "desc": [
+    "30人に灯し星を贈る。"
+   ],
+   "goal": "30人",
+   "stage": 2,
+   "stages": 3,
+   "prev": "hs_gp_10",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hs_gp_100",
+   "cat": 5,
+   "tier": 4,
+   "name": "百人に星を",
+   "icon": "PLAYER_HEAD",
+   "desc": [
+    "100人に灯し星を贈る。"
+   ],
+   "goal": "100人",
+   "stage": 3,
+   "stages": 3,
+   "prev": "hs_gp_30",
+   "title": "出会いの灯",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hs_rp_10",
+   "cat": 5,
+   "tier": 2,
+   "name": "十人から星を",
+   "icon": "ARMOR_STAND",
+   "desc": [
+    "10人から灯し星をもらう。"
+   ],
+   "goal": "10人",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hs_rp_30",
+   "cat": 5,
+   "tier": 3,
+   "name": "三十人から星を",
+   "icon": "ARMOR_STAND",
+   "desc": [
+    "30人から灯し星をもらう。"
+   ],
+   "goal": "30人",
+   "stage": 2,
+   "stages": 3,
+   "prev": "hs_rp_10",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hs_rp_100",
+   "cat": 5,
+   "tier": 4,
+   "name": "百人から星を",
+   "icon": "ARMOR_STAND",
+   "desc": [
+    "100人から灯し星をもらう。"
+   ],
+   "goal": "100人",
+   "stage": 3,
+   "stages": 3,
+   "prev": "hs_rp_30",
+   "title": "皆に慕われる人",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "hs_one_10",
+   "cat": 5,
+   "tier": 2,
+   "name": "十日の星",
+   "icon": "AMETHYST_SHARD",
+   "desc": [
+    "同じ人に灯し星を10こ贈る。"
+   ],
+   "goal": "10回",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "同じ人に毎日1こずつ。10こごとに、ことほぎを1つ贈れる。"
+  },
+  {
+   "id": "hs_one_50",
+   "cat": 5,
+   "tier": 3,
+   "name": "五十日の星",
+   "icon": "AMETHYST_CLUSTER",
+   "desc": [
+    "同じ人に灯し星を50こ贈る。"
+   ],
+   "goal": "50回",
+   "stage": 2,
+   "stages": 3,
+   "prev": "hs_one_10",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "同じ人に毎日1こずつ。10こごとに、ことほぎを1つ贈れる。"
+  },
+  {
+   "id": "hs_one_200",
+   "cat": 5,
+   "tier": 4,
+   "name": "二百日の星",
+   "icon": "BUDDING_AMETHYST",
+   "desc": [
+    "同じ人に灯し星を200こ贈る。"
+   ],
+   "goal": "200回",
+   "stage": 3,
+   "stages": 3,
+   "prev": "hs_one_50",
+   "title": "星の結び",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "同じ人に毎日1こずつ。10こごとに、ことほぎを1つ贈れる。"
+  },
+  {
+   "id": "kt_g_1",
+   "cat": 5,
+   "tier": 2,
+   "name": "ことほぎを贈る",
+   "icon": "PINK_TULIP",
+   "desc": [
+    "ことほぎを贈る。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "同じ人に灯し星を10こ贈るごとに、その人へ1つ贈れる。"
+  },
+  {
+   "id": "kt_g_10",
+   "cat": 5,
+   "tier": 3,
+   "name": "言葉の灯",
+   "icon": "PEONY",
+   "desc": [
+    "ことほぎを10回贈る。"
+   ],
+   "goal": "10回",
+   "stage": 2,
+   "stages": 3,
+   "prev": "kt_g_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "同じ人に灯し星を10こ贈るごとに、その人へ1つ贈れる。"
+  },
+  {
+   "id": "kt_g_50",
+   "cat": 5,
+   "tier": 4,
+   "name": "ことほぎの人",
+   "icon": "PITCHER_PLANT",
+   "desc": [
+    "ことほぎを50回贈る。"
+   ],
+   "goal": "50回",
+   "stage": 3,
+   "stages": 3,
+   "prev": "kt_g_10",
+   "title": "ことほぎの人",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "同じ人に灯し星を10こ贈るごとに、その人へ1つ贈れる。"
+  },
+  {
+   "id": "kt_r_1",
+   "cat": 5,
+   "tier": 2,
+   "name": "ことほぎが届いた",
+   "icon": "PINK_PETALS",
+   "desc": [
+    "ことほぎをもらう。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "kt_r_10",
+   "cat": 5,
+   "tier": 3,
+   "name": "言葉に包まれて",
+   "icon": "PINK_PETALS",
+   "desc": [
+    "ことほぎを10回もらう。"
+   ],
+   "goal": "10回",
+   "stage": 2,
+   "stages": 3,
+   "prev": "kt_r_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "kt_r_50",
+   "cat": 5,
+   "tier": 4,
+   "name": "福の人",
+   "icon": "CHERRY_SAPLING",
+   "desc": [
+    "ことほぎを50回もらう。"
+   ],
+   "goal": "50回",
+   "stage": 3,
+   "stages": 3,
+   "prev": "kt_r_10",
+   "title": "福の人",
+   "tint": null,
+   "trail": "桜吹雪",
    "item": null,
    "hidden": false,
    "hint": null
@@ -15413,7 +15929,7 @@
    "desc": [
     "ほかの実績を、ひとつ残らず得る。"
    ],
-   "goal": "765個",
+   "goal": "790個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -15533,7 +16049,7 @@
    "desc": [
     "暮の章の実績を、すべて得る。"
    ],
-   "goal": "178個",
+   "goal": "203個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -15713,7 +16229,7 @@
   },
   {
    "name": "星屑",
-   "how": "位「夜番」"
+   "how": "実績「天の川をかける人」"
   },
   {
    "name": "魂火",
@@ -15729,7 +16245,7 @@
   },
   {
    "name": "桜吹雪",
-   "how": "実績「祭の勇者」"
+   "how": "実績「福の人」"
   },
   {
    "name": "電光",
@@ -16864,13 +17380,58 @@
   },
   {
    "id": "en_f_15",
-   "t": "縁の人",
-   "how": "実績「縁の人」"
+   "t": "フレンドの輪",
+   "how": "実績「フレンドの輪」"
   },
   {
    "id": "en_m_500",
    "t": "文の灯",
    "how": "実績「文の灯」"
+  },
+  {
+   "id": "hs_g_500",
+   "t": "星の雨",
+   "how": "実績「星の雨」"
+  },
+  {
+   "id": "hs_g_1500",
+   "t": "星をかける人",
+   "how": "実績「天の川をかける人」"
+  },
+  {
+   "id": "hs_r_500",
+   "t": "星の人",
+   "how": "実績「星にかこまれて」"
+  },
+  {
+   "id": "hs_r_1500",
+   "t": "一番星",
+   "how": "実績「灯原の一番星」"
+  },
+  {
+   "id": "hs_gp_100",
+   "t": "出会いの灯",
+   "how": "実績「百人に星を」"
+  },
+  {
+   "id": "hs_rp_100",
+   "t": "皆に慕われる人",
+   "how": "実績「百人から星を」"
+  },
+  {
+   "id": "hs_one_200",
+   "t": "星の結び",
+   "how": "実績「二百日の星」"
+  },
+  {
+   "id": "kt_g_50",
+   "t": "ことほぎの人",
+   "how": "実績「ことほぎの人」"
+  },
+  {
+   "id": "kt_r_50",
+   "t": "福の人",
+   "how": "実績「福の人」"
   },
   {
    "id": "mo_a_6",
@@ -17159,8 +17720,18 @@
   },
   {
    "id": "e:enmusubi",
-   "t": "縁を結ぶ者",
-   "how": "絵巻「縁の絵巻」"
+   "t": "つながりを結ぶ者",
+   "how": "絵巻「つながりの絵巻」"
+  },
+  {
+   "id": "e:hoshizora",
+   "t": "星空の人",
+   "how": "絵巻「星空の絵巻」"
+  },
+  {
+   "id": "e:ichibanboshi",
+   "t": "灯原の星座",
+   "how": "絵巻「一番星の絵巻」"
   },
   {
    "id": "e:tsukiyomi",
@@ -17834,7 +18405,7 @@
    "id": "tabidachi",
    "name": "旅立ちの絵巻",
    "depth": 0,
-   "desc": "支度をして、道を越え、縁を結ぶ。",
+   "desc": "支度をして、道を越え、フレンドをつくる。",
    "icon": "BUNDLE",
    "points": 50,
    "ids": [
@@ -17880,9 +18451,9 @@
   },
   {
    "id": "enmusubi",
-   "name": "縁の絵巻",
+   "name": "つながりの絵巻",
    "depth": 1,
-   "desc": "縁を結び、便りを出し、夜を分かつ。",
+   "desc": "フレンドをつくり、便りを出し、夜を分かつ。",
    "icon": "LEAD",
    "points": 120,
    "ids": [
@@ -17893,7 +18464,42 @@
     "tg_b_5",
     "tg_g_10"
    ],
-   "title": "縁を結ぶ者"
+   "title": "つながりを結ぶ者"
+  },
+  {
+   "id": "hoshizora",
+   "name": "星空の絵巻",
+   "depth": 1,
+   "desc": "会って、星を贈り、言葉を贈る。",
+   "icon": "NETHER_STAR",
+   "points": 120,
+   "ids": [
+    "hs_g_30",
+    "hs_r_30",
+    "hs_gp_10",
+    "hs_rp_10",
+    "hs_one_10",
+    "kt_g_1"
+   ],
+   "title": "星空の人"
+  },
+  {
+   "id": "ichibanboshi",
+   "name": "一番星の絵巻",
+   "depth": 2,
+   "desc": "たくさんの人と、長く。",
+   "icon": "BEACON",
+   "points": 300,
+   "ids": [
+    "hs_g_500",
+    "hs_r_500",
+    "hs_gp_100",
+    "hs_rp_100",
+    "hs_one_200",
+    "kt_g_50",
+    "kt_r_10"
+   ],
+   "title": "灯原の星座"
   },
   {
    "id": "tsukiyomi",
