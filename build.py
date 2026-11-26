@@ -63,7 +63,7 @@ def footer():
         ("はじめる", [("start.html#join", "入り方"), ("start.html#first", "最初の夜"), ("playstyle.html", "遊び方を選ぶ"), ("commands.html", "コマンド一覧"), ("words.html", "ことばの辞典"), ("start.html#faq", "よくある質問")]),
         ("遊び方", None),
         ("Wiki", [("wiki.html", "技 Wiki"), ("himon.html", "紋 Wiki"), ("akashi.html", "実績 Wiki"), ("hisato.html", "里 Wiki"), ("wiki-hiuo.html", "灯魚 Wiki（図鑑）")]),
-        ("灯原", [("events.html", "夜祭"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
+        ("灯原", [("events.html", "夜祭"), ("satos.html", "里の一覧"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
     ]
     cm = ""
     for h, items in cols:
@@ -98,6 +98,7 @@ RIDGE = {
     "support.html": dict(seed=6, cast=[("yuki", 9, True), ("hino", 12, False)], say=("yuki", "名前は、ちゃんと残すからね。")),
     "404.html": dict(seed=7, cast=[("hino", 12, True)], say=("hino", "あれ……こっちは闇の中だ。"), eaters=(40,)),
     "characters.html": dict(seed=8, cast=[("hino", 6, True), ("momo", 13, False), ("sora", 20, True), ("waka", 27, False), ("shino", 34, True), ("yuki", 41, False)], lamps=4),
+    "satos.html": dict(seed=13, cast=[("hino", 9, True), ("waka", 30, False)], say=("hino", "どの里にも、灯りの物語があるんだ。")),
     "words.html": dict(seed=12, cast=[("yuki", 9, True)], say=("yuki", "分からないことばは、ここで探してね。")),
     "commands.html": dict(seed=9, cast=[("hino", 9, True)], say=("hino", "/tomoshibi だけ覚えれば大丈夫。")),
     "wiki.html": dict(seed=10, cast=[("yuki", 9, True), ("waka", 36, False)], say=("yuki", "130の技、ぜんぶ書きとめたよ。")),
@@ -143,7 +144,7 @@ SPINED = {"index.html", "start.html", "rules.html", "events.html", "support.html
 
 
 def page(file, title, desc, body, hero_min=""):
-    cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki", "akashi")) else "start.html" if file in ("commands.html", "playstyle.html", "words.html") else "")
+    cur = file if file in dict(NAV) else ("guide.html" if file.startswith(("guide-", "wiki", "akashi")) else "start.html" if file in ("commands.html", "playstyle.html", "words.html") else "guide.html" if file == "satos.html" else "")
     body = _with_ridge(file, body)
     url = SITE + ("/" if file == "index.html" else "/" + file)
     is_top = file == "index.html"
@@ -2575,10 +2576,13 @@ def _sato_sec():
 <section class="stratum s-dusk" id="found">
   <div class="edge"></div>
   <div class="wrap">
-    <h2 class="disp h2">3人と、重い礎と、7日。</h2>
-    <p class="lead">里は、ひとりでもサブのアカウントでも開けないようにしてあります。来たばかりの人が開いて、すぐ消える里が並ばないように。開くまでの道のりそのものが、最初の共同作業です。</p>
+    <h2 class="disp h2">ひとりの庵から、3人の里へ。</h2>
+    <p class="lead"><b>庵（いおり）</b>は、自分の灯籠のそばで、ひとりで開ける小さな里の芽です（遊んだ時間1時間から・礎なし）。蔵・掲示板・日課・職が使え、土地は灯籠20基まで。民が3人になったら、里開きへ進みます。</p>
+    {cards([("lantern", "#E9C46A", "庵", "ひとりで開く・礎なし・民4人・土地20基"), ("people", "#6FD39A", "里開き", "民3人で進む・7日で礎を納める"), ("house", "#E9824A", "集落", "里のはじまり。ここから村・町・都へ")])}
+    <p class="lead" style="margin-top:28px">里開きには、3人と重い礎と7日が要ります。開くまでの道のりそのものが、最初の共同作業です。</p>
     {_hs_found_steps()}
-    <p class="note warn"><b>7日のうちに果たせなかったときは、解散します。</b>納めた礎は、納めた人それぞれに半分ずつ手紙で戻ります。正式な里を解散したときは、礎は戻りません。開いて消してをくり返しても、得をしないようにしてあります。</p>
+    <p class="note"><b>いまの里は</b> <a href="satos.html">里の一覧</a> で見られます（サーバーから自動で届きます）。</p>
+    <p class="note warn"><b>7日のうちに果たせなかったときは、解散します（庵から進んだ里は、庵に戻ります）。</b>納めた礎は、納めた人それぞれに半分ずつ手紙で戻ります。正式な里を解散したときは、礎は戻りません。開いて消してをくり返しても、得をしないようにしてあります。</p>
   </div>
 </section>
 
@@ -2970,7 +2974,8 @@ PAYPAY_ID = ""     # PayPay ID（アプリの「送る」→ ID で検索して�
 SUPPORT_CH = "#支援"  # 送ったあとに知らせてもらう Discord のチャンネル名
 
 try:
-    SUPPORTERS = _json.loads((pathlib.Path(__file__).parent / "data" / "supporters.json").read_text(encoding="utf-8"))
+    _live_sup = pathlib.Path(__file__).parent / "data" / "live" / "supporters.json"
+    SUPPORTERS = _json.loads((_live_sup if _live_sup.exists() else pathlib.Path(__file__).parent / "data" / "supporters.json").read_text(encoding="utf-8"))
 except (OSError, ValueError):
     SUPPORTERS = []
 
@@ -3122,9 +3127,10 @@ support = f'''<div class="hero sp-hero">
 <section class="stratum s-dusk" id="wall">
   <div class="edge"></div>
   <div class="wrap">
-    <div class="wall-h"><h2 class="disp h2">支え手の壁</h2><p class="wall-n"><b class="dot">{len([s for s in SUPPORTERS if str(s.get("mcid", "")).strip()])}</b><span>人の灯が、この夜を照らしています</span></p></div>
+    <div class="wall-h"><h2 class="disp h2">支え手の壁</h2><p class="wall-n"><b class="dot" id="live-wall-n">{len([s for s in SUPPORTERS if str(s.get("mcid", "")).strip()])}</b><span>人の灯が、この夜を照らしています</span></p></div>
     <p class="lead">灯原を支えてくれた人たちです。ここに並ぶ灯のひとつひとつが、サーバーの明日をつくっています。</p>
-    {_wall()}
+    <div id="live-wall" data-face="{_FACE}">{_wall()}</div>
+    <script src="assets/live.js" defer></script>
   </div>
 </section>
 
@@ -3307,6 +3313,9 @@ _WORDS = [
     ]),
     ("里", "#E9824A", "仲間と暮らし", "ひとりでも遊べて、仲間がいるともっと楽しい。", [
         ("里", "さと", "3人で開く、仲間の土地。灯りで土地を広げ、集落から都へ育てます。", "guide-sato.html"),
+        ("庵", "いおり", "ひとりで開ける、小さな里の芽。礎はいらない。民が3人になったら「里開き」へ進めます。", "satos.html"),
+        ("里の灯銭箱", "さとのともしぜにばこ", "民が灯銭を入れておく箱。蔵の品が足りない週は、ここから里の維持費を払います。", "guide-sato.html"),
+        ("光の柱", "ひかりのはしら", "里灯の上に立つ光。格が上がるほど高くなり、夜に遠くから里が分かります。", "guide-sato.html"),
         ("職", "しょく", "里で選ぶ5つの仕事。働くほど見習いから匠へ上がります。", "guide-shoku.html"),
         ("依頼", "いらい", "里に足りないものが届く、職の仕事。", "guide-shoku.html"),
         ("縁・組", "えん・くみ", "仲よくなった人とのつながり（縁）と、いっしょに動く仲間（組・12人まで）。", "guide-musubi.html"),
@@ -3354,6 +3363,36 @@ words = sub_hero("words.html", "ことばの辞典", "灯原だけのことば�
   </div>
 </section>
 <script src="assets/wiki.js" defer></script>'''
+
+
+# ───────────────────────── 里の一覧（サーバーが自動で書きかえる data/live/satos.json） ─────────────────────────
+def _satos_static():
+    p = pathlib.Path(__file__).parent / "data" / "live" / "satos.json"
+    try:
+        d = _json.loads(p.read_text(encoding="utf-8"))
+    except Exception:
+        d = {"satos": []}
+    return d
+
+
+_SATOS = _satos_static()
+satos_page = sub_hero("satos.html", "里の一覧", "灯原のいまの里。サーバーから自動で届くので、いつでも最新です。座標は出しません（行き方は、ゲームの「里を探す」から）。",
+                      [("list", "里"), ("chronicle", "灯原の年代記")]) + f'''
+<section class="stratum s-deep" id="list">
+  <div class="wrap">
+    <p class="find-n mu" id="sato-meta">{len(_SATOS.get("satos", []))} の里</p>
+    <div class="sato-grid" id="sato-grid"><p class="mu">読みこんでいます…</p></div>
+    <p class="note" style="margin-top:32px"><b>里に入りたいときは。</b>ゲームで <span class="kbd">/sato</span> →「里を探す」。ひとりなら「庵（いおり）を開く」から始められます。</p>
+  </div>
+</section>
+<section class="stratum s-dusk" id="chronicle">
+  <div class="edge"></div>
+  <div class="wrap narrow">
+    <h2 class="disp h2">灯原の年代記</h2>
+    <ul class="chron" id="world-chron"></ul>
+  </div>
+</section>
+<script src="assets/live.js" defer></script>'''
 
 
 # ───────────────────── 遊び方を選ぶ（みんなで・身内で・ひとりで） ─────────────────────
@@ -3434,6 +3473,7 @@ PAGES = [
     ("support.html", "支える｜灯原", "灯原を支える（寄付）。Discord から PayPay で、100円から（500円・1000円で ❤ の色が変わる）。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
     ("characters.html", "ひとびと｜灯原", "灯原の案内役、6人の旅人（ヒノ・モモ・ソラ・ワカ・シノ・ユキ）と、灯りを喰う灯喰い、夜の敵。予告編に出てくるドット絵の登場人物たち。", characters),
     ("words.html", "ことばの辞典｜灯原", "灯原だけのことばを、ひとことで。灯籠・光の道・格・細る灯・加護のかけら・技の種・紋のかけら・灯銭・鱗・鱗とり場・里・夜祭など。", words),
+    ("satos.html", "里の一覧｜灯原", "灯原のいまの里。格・民の数・土地・施設・名所・里の年代記。サーバーから自動で届きます。", satos_page),
     ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯原のメニュー（/menu）、灯籠と光の道（/tomoshibi）、里（/sato）、実績（/akashi）、技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),
 ]

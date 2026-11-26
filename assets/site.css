@@ -2166,3 +2166,25 @@ a.vc:hover .vc-go,a.vc:focus-visible .vc-go{transform:translateX(3px) rotate(45d
 .chs.n2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .cz-plan{width:100%;height:auto;display:block;margin:8px 0 18px}
 @media (max-width:720px){.chs.n2{grid-template-columns:1fr}}
+/* 里の一覧（live.js が data/live/satos.json から作る） */
+.sato-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;margin-top:18px}
+.sato-card{position:relative;background:#141a2c;border:2px solid rgba(255,255,255,.08);border-top:4px solid var(--c);padding:20px 20px 16px;box-shadow:4px 4px 0 rgba(0,0,0,.35)}
+.sato-top{display:flex;align-items:center;gap:12px}
+.sato-top h3{margin:0;font-size:24px;color:var(--c);text-shadow:0 0 14px color-mix(in srgb,var(--c) 40%,transparent)}
+.sato-grade{flex:none;font-size:13px;font-weight:700;padding:3px 8px;color:#14161B;background:#C9D0DC}
+.sato-grade.gi{background:#E9C46A}.sato-grade.g1{background:#6FD39A}.sato-grade.g2{background:#5AAAFF}.sato-grade.g3{background:#F2B544}
+.sato-motto{margin:10px 0 0;color:#cfd5e2;font-size:15px}
+.sato-nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:14px 0 10px}
+.sato-nums p{margin:0;background:rgba(0,0,0,.25);padding:8px 6px;text-align:center}
+.sato-nums b{display:block;font-size:24px;color:#fff;font-weight:400}
+.sato-nums span{font-size:12px;color:var(--mu)}
+.sato-row{margin:6px 0 0;font-size:14px;color:#dfe3ec}
+.sato-row span{color:var(--mu);margin-right:6px;font-size:13px}
+.sato-row .sep{margin:0 6px}
+.sato-tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.sato-tag{font-size:12px;padding:2px 8px;border:1px solid rgba(255,255,255,.18);color:#cfd5e2}
+.sato-tag.on{background:#6FD39A;color:#14161B;border-color:#6FD39A;font-weight:700}
+.sato-chron{margin-top:12px;font-size:14px}
+.sato-chron summary{cursor:pointer;color:var(--amber)}
+.chron{list-style:none;padding:0;margin:10px 0 0}
+.chron li{padding:6px 0;border-bottom:1px solid rgba(255,255,255,.07);color:#dfe3ec;font-size:14px}
