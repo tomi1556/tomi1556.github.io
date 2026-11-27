@@ -63,7 +63,7 @@ def footer():
         ("はじめる", [("start.html#join", "入り方"), ("start.html#first", "最初の夜"), ("playstyle.html", "遊び方を選ぶ"), ("commands.html", "コマンド一覧"), ("words.html", "ことばの辞典"), ("start.html#faq", "よくある質問")]),
         ("遊び方", None),
         ("Wiki", [("wiki.html", "技 Wiki"), ("himon.html", "紋 Wiki"), ("akashi.html", "実績 Wiki"), ("hisato.html", "里 Wiki"), ("wiki-hiuo.html", "灯魚 Wiki（図鑑）")]),
-        ("灯原", [("events.html", "夜祭"), ("satos.html", "里の一覧"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
+        ("灯原", [("events.html", "夜祭"), ("satos.html", "里の一覧"), ("patch.html", "更新のお知らせ"), ("characters.html", "ひとびと"), ("rules.html", "きまり"), ("support.html", "支える"), (DISCORD, "Discord")]),
     ]
     cm = ""
     for h, items in cols:
@@ -3443,6 +3443,11 @@ def _word_rows(rows, gi):
     return out
 
 
+PATCHES = _wj.loads((pathlib.Path(__file__).parent / "data" / "patches.json").read_text(encoding="utf-8"))
+patch = sub_hero("patch.html", "更新のお知らせ", "灯原の新しいこと・直したこと。新しい順です。", []) + '<section class="stratum s-deep" id="patch"><div class="wrap narrow">' + "".join(
+    f'<article class="pn"><p class="pn-d dot">{_E(x["date"])}</p><h2 class="disp h3">{_E(x["title"])}</h2><ul>' + "".join(f"<li>{_E(i)}</li>" for i in x["items"]) + "</ul></article>"
+    for x in PATCHES) + "</div></section>"
+
 words = sub_hero("words.html", "ことばの辞典", "灯原だけのことばを、ひとことで。分からないことばがあったら、ここで探してください。",
                  [(f"c{i}", g[2]) for i, g in enumerate(_WORDS)]) + f'''
 <section class="stratum s-deep" id="words">
@@ -3574,6 +3579,7 @@ PAGES = [
     ("support.html", "支える｜灯原", "灯原を支える（寄付）。Discord から PayPay で、100円から（500円・1000円で ❤ の色が変わる）。お礼は名前につく ❤ と「支え手の壁」への掲載だけで、強さには関わりません。", support),
     ("characters.html", "ひとびと｜灯原", "灯原の案内役、6人の旅人（ヒノ・モモ・ソラ・ワカ・シノ・ユキ）と、灯りを喰う灯喰い、夜の敵。予告編に出てくるドット絵の登場人物たち。", characters),
     ("words.html", "ことばの辞典｜灯原", "灯原だけのことばを、ひとことで。灯籠・光の道・格・細る灯・加護のかけら・技の種・紋のかけら・灯銭・鱗・鱗とり場・里・夜祭など。", words),
+    ("patch.html", "更新のお知らせ｜灯原", "灯原の新しいこと・直したこと（パッチノート）。", patch),
     ("satos.html", "里の一覧｜灯原", "灯原のいまの里。格・民の数・土地・施設・名所・里の年代記。サーバーから自動で届きます。", satos_page),
     ("commands.html", "コマンド一覧｜灯原", "灯原のすべてのコマンド。灯原のメニュー（/menu）、灯籠と光の道（/tomoshibi）、里（/sato）、実績（/akashi）、技（/waza）、夜祭（/yomatsuri）、長い夜（/tokoyo）。", commands),
     ("404.html", "ページが見つかりません｜灯原", "お探しのページは見つかりませんでした。", notfound),

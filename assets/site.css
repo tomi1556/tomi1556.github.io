@@ -2215,3 +2215,9 @@ a.vc:hover .vc-go,a.vc:focus-visible .vc-go{transform:translateX(3px) rotate(45d
 .akh-first li,.akh-rare li{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:baseline}
 .akh-first .mu,.akh-rare .mu{font-size:13px}
 .akh-t{font-style:normal;color:var(--c);font-size:11px;letter-spacing:-1px}
+
+/* 更新のお知らせ */
+.pn{border-left:3px solid var(--amber,#F2B544);padding:4px 0 4px 18px;margin:0 0 28px}
+.pn-d{margin:0;color:#F2B544;font-size:14px}
+.pn h2{margin:2px 0 8px}
+.pn ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
