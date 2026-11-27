@@ -49,7 +49,7 @@ def mokuji():
         ("灯原", [("events.html", "夜祭"), ("satos.html", "里の一覧"), ("characters.html", "ひとびと"), ("playstyle.html", "遊び方を選ぶ"), ("rules.html", "きまり"), ("support.html", "支える")]),
     ]
     cols = "".join(f'<div class="mk-g"><h2>{h}</h2><ul>' + "".join(f'<li><a href="{u}">{t}</a></li>' for u, t in items) + "</ul></div>" for h, items in groups)
-    return f'''<div class="mk" id="mokuji" hidden><div class="wrap mk-in"><div class="mk-top"><b>もくじ</b><button type="button" class="qs-btn" data-qs>ことばで探す（Ctrl K）</button><button type="button" class="mk-x" data-mk-x aria-label="とじる">×</button></div><div class="mk-cols">{cols}</div></div></div>'''
+    return f'''<div class="mk" id="mokuji" hidden><div class="wrap mk-in"><div class="mk-top"><b>もくじ</b><button type="button" class="mk-s" data-qs>ことばで探す</button><button type="button" class="mk-x" data-mk-x aria-label="とじる">×</button></div><div class="mk-cols">{cols}</div></div></div>'''
 
 
 def header(cur):
@@ -58,7 +58,6 @@ def header(cur):
 <header class="hdr"><div class="wrap hdr-in">
   <a href="index.html" class="logo">{LOGO}<span>灯原</span></a>
   <nav class="nav" aria-label="メイン">{links}</nav>
-  <button type="button" class="qs-btn" data-qs aria-label="サイト内を探す（Ctrl+K）"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="6" height="2"/><rect x="2" y="3" width="2" height="6"/><rect x="8" y="3" width="2" height="6"/><rect x="3" y="8" width="6" height="2"/><rect x="9" y="9" width="2" height="2"/><rect x="11" y="11" width="2" height="2"/><rect x="12" y="12" width="2" height="2"/></svg><span>探す</span><kbd class="dot">Ctrl K</kbd></button>
   <button type="button" class="qs-btn mk-btn" data-mk aria-expanded="false" aria-controls="mokuji"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="2"/><rect x="2" y="7" width="12" height="2"/><rect x="2" y="11" width="12" height="2"/></svg><span>もくじ</span></button>
   <a href="{DISCORD}" class="pbtn dbtn sm" target="_blank" rel="noopener">Discord に参加</a>
 </div>{mokuji()}</header>'''
@@ -409,6 +408,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div><div class="dusk" aria-hidden="true"></div>
   <div class="wrap hero-body" id="content">
     <a href="#season" class="chip fadein"><i></i><span>シーズン1「灯ノ海」</span><b data-season-short>{"開催中" if _SEASON_LIVE else "11月7日（土）18:00 開幕"}</b></a>
+    <a href="patch.html" class="chip chip-up fadein"><span>更新 {PATCHES[0]["ver"]}</span><b>{PATCHES[0]["title"]}</b></a>
     <span class="online" data-online><i></i>いま <b>0</b> 人が参加中</span>
     <h1 class="disp h1 reveal">灯りをつないで、<br>夜の果てまで。</h1>
     <p class="lead lead-hero fadein">夜が24分つづくサバイバルサーバー。灯籠を置いた場所だけが安全で、つなぐと道になります。Java版でも統合版でも、無料で同じ世界に入れます。</p>
@@ -421,7 +421,6 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <template id="tpl-cast"><span class="who">{fig("hino", True)}</span><span class="who foe">{eater()}</span></template>
 </div>
 {teaser()}
-{news_band()}
 
 <section class="stratum tex s-soil" id="facts">
   <div class="edge"></div>

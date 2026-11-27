@@ -2267,3 +2267,13 @@ body.mk-open{overflow:hidden}
 .qs-btn span,.mk-btn span,header nav a,header nav a *{white-space:nowrap}
 @media (max-width:1400px){.qs-btn:not(.mk-btn) span,.qs-btn:not(.mk-btn) kbd{display:none}}
 .nb{padding:14px 0 34px;position:relative;z-index:2}
+.logo span,.dbtn{white-space:nowrap}
+.mk{font-family:var(--body)}
+.mk-top b{font-family:var(--disp);font-weight:400;font-size:24px}
+.mk-g h2{font-family:var(--body);font-weight:700;font-size:13px;letter-spacing:.08em}
+.mk-g a{font-family:var(--body);font-weight:500;font-size:15px}
+.mk-s{min-height:44px;padding:6px 14px;background:none;border:2px solid rgba(233,238,246,.22);color:#D3D9E6;font:700 14px var(--body);cursor:pointer}
+.mk-s:hover{border-color:var(--amber);color:#fff}
+.chip-up{margin-left:8px}
+.chip-up b{color:var(--amber)}
+@media (max-width:640px){.chip-up{margin-left:0;margin-top:8px}}
