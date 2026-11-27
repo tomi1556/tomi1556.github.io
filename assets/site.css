@@ -2216,25 +2216,54 @@ a.vc:hover .vc-go,a.vc:focus-visible .vc-go{transform:translateX(3px) rotate(45d
 .akh-first .mu,.akh-rare .mu{font-size:13px}
 .akh-t{font-style:normal;color:var(--c);font-size:11px;letter-spacing:-1px}
 
-/* 更新のお知らせ */
-.pt-sum{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 14px}
-.pt-sum p{margin:0;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:12px 14px}
-.pt-sum b{display:block;font-size:28px;color:#F2B544;line-height:1.1}
-.pt-sum span{font-size:12px;color:#aab1c2}
-.pt-legend{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 26px;font-size:13px}
-.pt-tag{display:inline-block;flex:none;font-size:12px;font-weight:700;line-height:1;padding:5px 8px;border-radius:999px;border:1px solid currentColor;margin-right:10px}
-.pt-new{color:#6FD39A}.pt-chg{color:#5AAAFF}.pt-fix{color:#F29BB8}
-.pt-legend .pt-tag{margin-right:0}
-.pt-line{position:relative;padding-left:0}
-.pt{display:grid;grid-template-columns:92px 1fr;gap:18px;margin:0 0 18px;position:relative}
-.pt-v{text-align:right;padding-top:16px}
-.pt-v b{display:block;font-size:22px;color:#C9D0DC}
-.pt.big .pt-v b{font-size:30px;color:#F2B544}
-.pt-v small{display:block;font-size:11px;color:#8a92a5;margin-top:4px}
-.pt-c{background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);border-left:3px solid #6b7285;border-radius:12px;padding:16px 20px}
-.pt.big .pt-c{border-left-color:#F2B544;background:rgba(242,181,68,.05)}
-.pt-c h2{margin:0 0 4px}
-.pt-lead{margin:0 0 10px;color:#d8dbe3}
-.pt-c ul{list-style:none;margin:6px 0 0;padding:0;display:grid;gap:8px}
-.pt-c li{display:flex;align-items:flex-start;line-height:1.7}
-@media (max-width:640px){.pt-sum{grid-template-columns:repeat(2,1fr)}.pt{grid-template-columns:1fr;gap:6px}.pt-v{text-align:left;padding-top:0;display:flex;gap:10px;align-items:baseline}.pt-v small{margin:0}}
+/* 更新のお知らせ（ゲームの更新記録のように、平らに） */
+.pt-legend{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;margin:0 0 22px;font-size:14px;font-weight:700}
+.pt-legend span i{display:inline-block;width:10px;height:10px;margin-right:6px;background:currentColor;vertical-align:0}
+.pt-legend .mu{font-weight:400}
+.pt-new{color:#7DDC8F}.pt-chg{color:#6FB4FF}.pt-fix{color:#F2A0BE}
+.pt{border-top:2px solid rgba(233,238,246,.14);padding:22px 0 26px}
+.pt-h{display:grid;grid-template-columns:auto 1fr auto;gap:4px 16px;align-items:baseline}
+.pt-v{font-size:22px;color:#AEB5C2;min-width:3.2em}
+.pt.big .pt-v{font-size:34px;color:var(--amber,#F2B544)}
+.pt-h h2{margin:0;font-size:20px}
+.pt.big .pt-h h2{font-size:26px}
+.pt-h time{font-size:13px;color:#8C94A6}
+.pt-lead{margin:8px 0 0;color:var(--mu,#AEB5C2)}
+.pt-l{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:7px}
+.pt-l li{display:grid;grid-template-columns:5.2em 1fr;gap:10px;line-height:1.75;color:#E6E9EF}
+.pt-k{font-size:13px;font-weight:700;padding-left:16px;position:relative;line-height:1.75rem}
+.pt-k::before{content:"";position:absolute;left:0;top:.62em;width:10px;height:10px;background:currentColor}
+.pt-l li.pt-new .pt-k{color:#7DDC8F}.pt-l li.pt-chg .pt-k{color:#6FB4FF}.pt-l li.pt-fix .pt-k{color:#F2A0BE}
+@media (max-width:640px){.pt-h{grid-template-columns:auto 1fr}.pt-h time{grid-column:1/-1}.pt-l li{grid-template-columns:1fr;gap:0}}
+
+/* もくじ（ヘッダーから開く、すべてのページ） */
+.mk{position:fixed;inset:0;z-index:80;background:rgba(5,8,18,.94);overflow:auto;padding:24px 0 100px}
+.mk-in{max-width:1100px}
+.mk-top{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.mk-top b{font-size:22px;margin-right:auto}
+.mk-x{width:44px;height:44px;background:none;border:2px solid rgba(233,238,246,.3);color:#fff;font-size:22px;cursor:pointer}
+.mk-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:22px}
+.mk-g h2{font-size:14px;color:var(--amber,#F2B544);margin:0 0 8px;padding-bottom:6px;border-bottom:2px solid rgba(242,181,68,.35)}
+.mk-g ul{list-style:none;margin:0;padding:0}
+.mk-g a{display:block;padding:8px 2px;color:#E6E9EF;text-decoration:none;border-bottom:1px solid rgba(233,238,246,.07)}
+.mk-g a:hover{color:var(--amber,#F2B544)}
+body.mk-open{overflow:hidden}
+@media (max-width:760px){.mk-btn span{display:none}.mk-btn{padding:6px 10px}}
+
+/* トップのお知らせ帯とよく使うページ */
+.nb{background:#0E1424;border-top:2px solid rgba(242,181,68,.35);border-bottom:2px solid rgba(0,0,0,.4)}
+.nb-in{display:flex;flex-wrap:wrap;gap:10px 24px;align-items:center;padding-top:14px;padding-bottom:14px}
+.nb-new{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:baseline;color:#E6E9EF;text-decoration:none}
+.nb-k{font-size:12px;font-weight:700;background:var(--amber,#F2B544);color:#1a1206;padding:2px 8px}
+.nb-new b{color:var(--amber,#F2B544);font-size:20px}
+.nb-t{font-weight:700}
+.nb-new time{font-size:12px;color:#8C94A6}
+.nb-go{font-size:13px;color:var(--amber,#F2B544)}
+.nb-new:hover .nb-t{text-decoration:underline}
+.nb-links{display:flex;flex-wrap:wrap;gap:6px;margin-left:auto}
+.nb-links a{font-size:13px;color:#D3D9E6;text-decoration:none;border:2px solid rgba(233,238,246,.18);padding:5px 10px}
+.nb-links a:hover{border-color:var(--amber,#F2B544);color:#fff}
+@media (max-width:760px){.nb-links{margin-left:0}}
+.qs-btn span,.mk-btn span,header nav a,header nav a *{white-space:nowrap}
+@media (max-width:1400px){.qs-btn:not(.mk-btn) span,.qs-btn:not(.mk-btn) kbd{display:none}}
+.nb{padding:14px 0 34px;position:relative;z-index:2}

@@ -40,6 +40,18 @@ def icon(h):
     return '<svg class="ic" viewBox="0 0 16 16" aria-hidden="true">' + "".join(rects) + "</svg>"
 
 
+def mokuji():
+    """すべてのページへの入口（ヘッダーの「もくじ」で開く）。"""
+    groups = [
+        ("よく使う", [("start.html", "はじめての方へ"), ("words.html", "ことばの辞典"), ("commands.html", "コマンド一覧"), ("patch.html", "更新のお知らせ"), ("start.html#faq", "よくある質問")]),
+        ("遊び方", [("guide.html", "遊び方のはじめ")] + [(f"guide-{c['id']}.html", c["t"]) for c in CH]),
+        ("Wiki", [("wiki.html", "技 Wiki"), ("himon.html", "紋 Wiki"), ("akashi.html", "実績 Wiki"), ("hisato.html", "里 Wiki"), ("wiki-hiuo.html", "灯魚図鑑"), ("wiki-build.html", "技の組み立て")]),
+        ("灯原", [("events.html", "夜祭"), ("satos.html", "里の一覧"), ("characters.html", "ひとびと"), ("playstyle.html", "遊び方を選ぶ"), ("rules.html", "きまり"), ("support.html", "支える")]),
+    ]
+    cols = "".join(f'<div class="mk-g"><h2>{h}</h2><ul>' + "".join(f'<li><a href="{u}">{t}</a></li>' for u, t in items) + "</ul></div>" for h, items in groups)
+    return f'''<div class="mk" id="mokuji" hidden><div class="wrap mk-in"><div class="mk-top"><b>もくじ</b><button type="button" class="qs-btn" data-qs>ことばで探す（Ctrl K）</button><button type="button" class="mk-x" data-mk-x aria-label="とじる">×</button></div><div class="mk-cols">{cols}</div></div></div>'''
+
+
 def header(cur):
     links = "".join(f'<a href="{h}" class="nl"{" aria-current=\"page\"" if h == cur else ""}>{icon(h)}<span>{t}</span></a>' for h, t in NAV)
     return f'''<a href="#content" class="skip">本文へ進む</a>
@@ -47,8 +59,9 @@ def header(cur):
   <a href="index.html" class="logo">{LOGO}<span>灯原</span></a>
   <nav class="nav" aria-label="メイン">{links}</nav>
   <button type="button" class="qs-btn" data-qs aria-label="サイト内を探す（Ctrl+K）"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="3" y="2" width="6" height="2"/><rect x="2" y="3" width="2" height="6"/><rect x="8" y="3" width="2" height="6"/><rect x="3" y="8" width="6" height="2"/><rect x="9" y="9" width="2" height="2"/><rect x="11" y="11" width="2" height="2"/><rect x="12" y="12" width="2" height="2"/></svg><span>探す</span><kbd class="dot">Ctrl K</kbd></button>
+  <button type="button" class="qs-btn mk-btn" data-mk aria-expanded="false" aria-controls="mokuji"><svg viewBox="0 0 16 16" aria-hidden="true"><rect x="2" y="3" width="12" height="2"/><rect x="2" y="7" width="12" height="2"/><rect x="2" y="11" width="12" height="2"/></svg><span>もくじ</span></button>
   <a href="{DISCORD}" class="pbtn dbtn sm" target="_blank" rel="noopener">Discord に参加</a>
-</div></header>'''
+</div>{mokuji()}</header>'''
 
 
 # シーズンの開幕（作った日で、開催前・開催中の文を出し分ける。ブラウザでは site.js が時刻で切り替える）
@@ -379,6 +392,18 @@ def teaser():
 '''
 
 
+PATCHES = __import__("json").loads((pathlib.Path(__file__).parent / "data" / "patches.json").read_text(encoding="utf-8"))
+
+
+def news_band():
+    import html as _h
+    _E = _h.escape
+    x = PATCHES[0]
+    links = [("start.html", "はじめての方へ"), ("guide.html", "遊び方"), ("words.html", "ことばの辞典"), ("commands.html", "コマンド一覧"), ("wiki.html", "Wiki"), ("satos.html", "里の一覧")]
+    return f'''<section class="nb"><div class="wrap nb-in"><a class="nb-new" href="patch.html"><span class="nb-k">更新</span><b class="dot">{_E(x["ver"])}</b><span class="nb-t">{_E(x["title"])}</span><time class="dot">{_E(x["date"])}</time><span class="nb-go">更新のお知らせ →</span></a>
+<nav class="nb-links" aria-label="よく使うページ">{"".join(f'<a href="{u}">{t}</a>' for u, t in links)}</nav></div></section>'''
+
+
 index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <div class="bars" aria-hidden="true"><i></i><i></i></div>
   <div class="sky"></div><div class="stars" aria-hidden="true"></div><div class="moon" aria-hidden="true"></div><div class="dusk" aria-hidden="true"></div>
@@ -396,6 +421,7 @@ index = f'''<div class="hero hero-top" style="min-height:min(900px,100svh)">
   <template id="tpl-cast"><span class="who">{fig("hino", True)}</span><span class="who foe">{eater()}</span></template>
 </div>
 {teaser()}
+{news_band()}
 
 <section class="stratum tex s-soil" id="facts">
   <div class="edge"></div>
@@ -3443,23 +3469,18 @@ def _word_rows(rows, gi):
     return out
 
 
-PATCHES = _wj.loads((pathlib.Path(__file__).parent / "data" / "patches.json").read_text(encoding="utf-8"))
 _PN_TAG = {"新": ("新しく", "pt-new"), "改": ("変えた", "pt-chg"), "直": ("直した", "pt-fix")}
 
 
 def _patch_body():
-    n_new = sum(1 for x in PATCHES for t, _ in x["items"] if t == "新")
-    n_all = sum(len(x["items"]) for x in PATCHES)
-    head = f'''<div class="pt-sum"><p><b class="dot">{_E(PATCHES[0]["ver"])}</b><span>いまの版</span></p><p><b class="dot">{len(PATCHES)}</b><span>回の更新</span></p>
-<p><b class="dot">{n_new}</b><span>新しいこと</span></p><p><b class="dot">{n_all}</b><span>ぜんぶの項目</span></p></div>
-<p class="pt-legend">{"".join(f'<span class="pt-tag {c}">{t}</span>' for t, c in _PN_TAG.values())}<span class="mu">大きな更新は 1.x、手直しは 1.x.y</span></p>'''
     rows = []
     for x in PATCHES:
-        items = "".join(f'<li><span class="pt-tag {_PN_TAG[t][1]}">{_PN_TAG[t][0]}</span><span>{_E(i)}</span></li>' for t, i in x["items"])
+        items = "".join(f'<li class="{_PN_TAG[t][1]}"><span class="pt-k">{_PN_TAG[t][0]}</span><span>{_E(i)}</span></li>' for t, i in x["items"])
         lead = f'<p class="pt-lead">{_E(x["lead"])}</p>' if x.get("lead") else ""
-        rows.append(f'''<article class="pt{" big" if x.get("big") else ""}" id="v{_E(x["ver"])}"><div class="pt-v"><b class="dot">{_E(x["ver"])}</b><small class="dot">{_E(x["date"])}</small></div>
-<div class="pt-c"><h2 class="disp h3">{_E(x["title"])}</h2>{lead}<ul>{items}</ul></div></article>''')
-    return f'<section class="stratum s-deep" id="patch"><div class="wrap narrow">{head}<div class="pt-line">{"".join(rows)}</div></div></section>'
+        rows.append(f'''<article class="pt{" big" if x.get("big") else ""}" id="v{_E(x["ver"])}"><header class="pt-h"><b class="dot pt-v">{_E(x["ver"])}</b><h2 class="disp">{_E(x["title"])}</h2><time class="dot">{_E(x["date"])}</time></header>
+{lead}<ul class="pt-l">{items}</ul></article>''')
+    legend = "".join(f'<span class="{c}"><i></i>{t}</span>' for t, c in _PN_TAG.values())
+    return f'''<section class="stratum s-rock" id="patch"><div class="edge"></div><div class="wrap narrow"><p class="pt-legend">{legend}<span class="mu">大きな更新は 1.x、手直しは 1.x.y</span></p>{"".join(rows)}</div></section>'''
 
 
 patch = sub_hero("patch.html", "更新のお知らせ", "灯原の新しいこと・変えたこと・直したこと。新しい順です。", []) + _patch_body()

@@ -365,6 +365,19 @@
     }
     function close() { if (!box) return; box.hidden = true; document.body.classList.remove('qs-open'); if (last && last.focus) last.focus(); }
     $$('[data-qs]').forEach(function (b) { b.addEventListener('click', open); });
+    // もくじ：開く・閉じる（「ことばで探す」を押したら、もくじを閉じて検索へ）
+    var mk = $('#mokuji'), mkb = $('[data-mk]');
+    function mkSet(on) {
+      if (!mk) return;
+      mk.hidden = !on; document.body.classList.toggle('mk-open', on);
+      if (mkb) mkb.setAttribute('aria-expanded', on ? 'true' : 'false');
+    }
+    if (mkb) mkb.addEventListener('click', function () { mkSet(mk.hidden); });
+    $$('[data-mk-x]').forEach(function (b) { b.addEventListener('click', function () { mkSet(false); }); });
+    if (mk) {
+      mk.addEventListener('click', function (e) { if (e.target === mk || e.target.closest('a') || e.target.closest('[data-qs]')) mkSet(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !mk.hidden) mkSet(false); });
+    }
     document.addEventListener('keydown', function (e) {
       if ((e.ctrlKey || e.metaKey) && (e.key === 'k' || e.key === 'K')) { e.preventDefault(); if (box && !box.hidden) close(); else open(); }
     });
