@@ -105,7 +105,7 @@
    "frag": 6
   }
  ],
- "total": 62465,
+ "total": 62690,
  "defs": [
   {
    "id": "lantern_1",
@@ -12742,6 +12742,88 @@
    "hint": null
   },
   {
+   "id": "cs_games_3",
+   "cat": 6,
+   "tier": 2,
+   "name": "遊技卓の客",
+   "icon": "EMERALD",
+   "desc": [
+    "遊技卓の3つの遊びで勝つ。"
+   ],
+   "goal": "3種",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "カジノの遊技卓（会場の緑の台・/casino asobi）の宝箱・けずり札・灯喰い探し・灯籠あげ・塔のぼり・玉おとし・大小。"
+  },
+  {
+   "id": "cs_games_7",
+   "cat": 6,
+   "tier": 3,
+   "name": "遊技卓の主",
+   "icon": "EMERALD_BLOCK",
+   "desc": [
+    "遊技卓の7つの遊びすべてで勝つ。"
+   ],
+   "goal": "7種",
+   "stage": 2,
+   "stages": 2,
+   "prev": "cs_games_3",
+   "title": "遊技卓の主",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "カジノの遊技卓（会場の緑の台・/casino asobi）の宝箱・けずり札・灯喰い探し・灯籠あげ・塔のぼり・玉おとし・大小。"
+  },
+  {
+   "id": "cs_x20_1",
+   "cat": 6,
+   "tier": 3,
+   "name": "二十倍",
+   "icon": "FIRE_CHARGE",
+   "desc": [
+    "遊技卓で、賭けの20倍より大きく当てる。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 2,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
+   "id": "cs_x20_10",
+   "cat": 6,
+   "tier": 4,
+   "name": "倍の星",
+   "icon": "BLAZE_POWDER",
+   "desc": [
+    "遊技卓で、20倍より大きく10回当てる。"
+   ],
+   "goal": "10回",
+   "stage": 2,
+   "stages": 2,
+   "prev": "cs_x20_1",
+   "title": "倍の星",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
    "id": "cs_prize_3",
    "cat": 6,
    "tier": 2,
@@ -15929,7 +16011,7 @@
    "desc": [
     "ほかの実績を、ひとつ残らず得る。"
    ],
-   "goal": "790個",
+   "goal": "794個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -16069,7 +16151,7 @@
    "desc": [
     "祭の章の実績を、すべて得る。"
    ],
-   "goal": "37個",
+   "goal": "41個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -17327,6 +17409,16 @@
    "id": "cs_lot_3",
    "t": "福の主",
    "how": "実績「三度の宝くじ」"
+  },
+  {
+   "id": "cs_games_7",
+   "t": "遊技卓の主",
+   "how": "実績「遊技卓の主」"
+  },
+  {
+   "id": "cs_x20_10",
+   "t": "倍の星",
+   "how": "実績「倍の星」"
   },
   {
    "id": "hg_pt_4",
