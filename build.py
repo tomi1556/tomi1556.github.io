@@ -683,10 +683,10 @@ _guide_src = f'''
   <div class="edge"></div>
   <div class="wrap">
     <p class="depth">5</p>
-    <h2 class="disp h2">実績。795の、灯原だけの進捗。</h2>
+    <h2 class="disp h2">実績。802の、灯原だけの進捗。</h2>
     <p class="lead"><span class="kbd">/akashi</span> で開く。過ごしたことが、そのまま実績になります。</p>
-    {bars([("◆ 易", 96, "#55FF55", "その日のうちに・最初の夜を越える"), ("◆◆ 並", 226, "#55FFFF", "何日か・朱月の夜を越える"), ("◆◆◆ 難", 233, "#FF55FF", "腰を据えて・ウィザーを倒す"), ("◆◆◆◆ 極", 148, "#FFAA00", "何週間も・灯喰いから150回守る"), ("◆◆◆◆◆ 伝", 92, "#FF5555", "季節をまたいで・夜を500回")], unit="個")}
-    {cards([("trophy", "#F29BB8", "段になっている", "前の段を得ると次が出る。追跡で進み具合"), ("q", "#B46CFF", "秘められた実績 19個", "ヒントだけ。初達成の名前が残る"), ("gift", "#F2B544", "報酬は見た目中心", "称号291・足跡23・灯りの色18")])}
+    {bars([("◆ 易", 97, "#55FF55", "その日のうちに・最初の夜を越える"), ("◆◆ 並", 228, "#55FFFF", "何日か・朱月の夜を越える"), ("◆◆◆ 難", 236, "#FF55FF", "腰を据えて・ウィザーを倒す"), ("◆◆◆◆ 極", 148, "#FFAA00", "何週間も・灯喰いから150回守る"), ("◆◆◆◆◆ 伝", 93, "#FF5555", "季節をまたいで・夜を500回")], unit="個")}
+    {cards([("trophy", "#F29BB8", "段になっている", "前の段を得ると次が出る。追跡で進み具合"), ("q", "#B46CFF", "秘められた実績 19個", "ヒントだけ。初達成の名前が残る"), ("gift", "#F2B544", "報酬は見た目中心", "称号292・足跡23・灯りの色18")])}
     {cards([("clock", "#8FC3E8", "月の実績", "毎月かわる、みんな同じ6つ。そろえるとその月の称号"), ("people", "#F2B544", "人を見る", "しゃがんで素手で人を右クリック→「証を見る」。灯し星も贈れる"), ("star", "#FFE178", "証の殿堂", "番付・一番乗り・珍しい実績がサイトに自動で出る")])}
     <h3 class="disp vh3">実績の点で、位が上がる</h3>
     <div class="vtags">{"".join(f'<span class="vtag" style="border-color:{c}"><b style="color:{c}">{d}</b>{p}点</span>' for d, p, c in [("易", 10, "#55FF55"), ("並", 25, "#55FFFF"), ("難", 50, "#FF55FF"), ("極", 100, "#FFAA00"), ("伝", 250, "#FF5555")])}</div>
@@ -702,9 +702,9 @@ _guide_src = f'''
     <p class="depth">7</p>
     <h2 class="disp h2">名前つき灯籠、灯りの色、招待。</h2>
     {cards([("flag", "#C9D0DC", "名前つき灯籠と灯渡り", "名前をつけた灯籠へ、3秒で移動（二ノ灯から）"), ("house", "#C9D0DC", "帰る場所", "名前つき灯籠をひとつ決めておける"), ("people", "#C9D0DC", "仲間", "あなたの灯籠に名前をつけ、取り除ける")])}
-    <h3 class="disp vh3">灯りの色は17色（強さは変わらない）</h3>
+    <h3 class="disp vh3">灯りの色（強さは変わらない）</h3>
     {swatches([("#F2B544", "山吹", "最初から"), ("#F29BB8", "桜", "夜祭 5回"), ("#8FC3E8", "水縹", "夜祭 10回"), ("#8BD18F", "若竹", "夜祭 20回"), ("#C9D0DC", "白銀", "招待 1人"), ("#B79CF2", "藤", "招待 3人"), ("#F2A07A", "曙", "招待 5人"),
-               ("#FFF1C4", "はじまりの灯", "開幕の夜"), ("#FF7624", "篝火", "実績「夜を貫く光の道」"), ("#40D6A0", "翡翠", "実績「八徳の灯」"), ("#D62448", "紅", "実績「一年の灯守」"), ("#FF6ED2", "花火", "実績「祭神」"), ("#BAAAFF", "天の川", "灯原の伝説")])}
+               ("#FFF1C4", "はじまりの灯", "開幕の夜"), ("#FF7624", "篝火", "実績「夜を貫く光の道」"), ("#40D6A0", "翡翠", "実績「八徳の灯」"), ("#D62448", "紅", "実績「一年の灯守」"), ("#FF6ED2", "花火", "実績「祭神」"), ("#BAAAFF", "天の川", "灯原の伝説"), ("#FFD640", "金運", "カジノの景品所"), ("#FF8CBE", "福色", "カジノの景品所"), ("#6EFFAA", "幸運", "カジノの景品所")])}
     <h3 class="disp vh3">友達を呼ぶ</h3>
     {steps([("gift", "#F29BB8", "<span class=\"kbd\">/tomoshibi invite</span>", "自分の招待コード"), ("chat", "#8EA2FF", "アドレスとコードを伝える", f"<span class=\"kbd\">{ADDR}</span>"), ("ok", "#6FD39A", "7日以内に入力してもらう", "<span class=\"kbd\">/tomoshibi code コード</span>")])}
   </div>
@@ -778,8 +778,8 @@ CH = [
      "sum": "釣れる魚は、ぜんぶ灯魚。釣り場ごとに住む魚が変わり、極めるとヌシが出る。", "facts": ["327種", "23の釣り場", "23のヌシ"],
      "desc": "灯魚327種と釣り（/isaribi）。23の釣り場、釣り場を極めると出るヌシ、大物との勝負、釣り人の段、鱗とり場と鱗、いつ釣れるか。"},
     {"id": "akashi", "t": "実績", "c": "#F29BB8", "layer": 2, "sec": ["akashi"],
-     "sum": "この世界で過ごしたことが、そのまま実績になる。", "facts": ["795の実績", "位10段", "称号199種"],
-     "desc": "灯原だけの進捗「実績」795個。難度、段と秘められた実績、報酬、実績の点と位。"},
+     "sum": "この世界で過ごしたことが、そのまま実績になる。", "facts": ["802の実績", "位10段", "称号199種"],
+     "desc": "灯原だけの進捗「実績」802個。難度、段と秘められた実績、報酬、実績の点と位。"},
     {"id": "more", "t": "名前つき灯籠・色・招待", "c": "#C9D0DC", "layer": 2, "sec": ["more"],
      "sum": "名前をつけて行き来し、灯りの色を変え、友を呼ぶ。", "facts": ["灯渡り 3秒", "灯りの色 17色", "招待コード"],
      "desc": "名前つき灯籠と灯渡り、仲間、17の灯りの色の手に入れ方、友達の招待のしかた。"},
@@ -1275,6 +1275,25 @@ def _casino_sec():
   </div>
 </section>
 
+<section class="stratum s-stone" id="kai">
+  <div class="edge"></div>
+  <div class="wrap">
+    <h2 class="disp h2">会員の位と、今日の遊び。</h2>
+    <p class="lead">遊ぶほど、もらえるものが増えます。カジノの画面の左下に会員の位、右下に今日の遊び。</p>
+    <div class="tbl-wrap"><table><thead><tr><th>会員の位</th><th>賭けた合計</th><th>毎日のコイン</th><th>福引き</th><th>週の戻り</th></tr></thead><tbody>
+      <tr><th>灯客</th><td class="n">0</td><td class="n">500</td><td class="n">1日1回</td><td class="n">—</td></tr>
+      <tr><th>常連</th><td class="n">3万</td><td class="n">650</td><td class="n">1日1回</td><td class="n">2%</td></tr>
+      <tr><th>上客</th><td class="n">20万</td><td class="n">800</td><td class="n">1日2回</td><td class="n">3%</td></tr>
+      <tr><th>旦那</th><td class="n">100万</td><td class="n">1,000</td><td class="n">1日2回</td><td class="n">5%</td></tr>
+      <tr><th>大旦那</th><td class="n">500万</td><td class="n">1,250</td><td class="n">1日3回</td><td class="n">7%</td></tr>
+      <tr><th>灯原の豪客</th><td class="n">2,000万</td><td class="n">1,500</td><td class="n">1日3回</td><td class="n">10%</td></tr>
+    </tbody></table></div>
+    <p class="mu" style="margin-top:8px">週の戻り＝その週に負けた分の何%かが、月曜に戻ります。上客から、位の称号ももらえます。</p>
+    {cards([("book", "#F2B544", "今日の遊び", "毎日3つの目当て。果たすと 400〜800 コイン"), ("gift", "#F29BB8", "3つそろえる", "+1,500 コインと福引き券"), ("star", "#5BD4F0", "灯の大当たり", "遊技卓のどの賭けにも、積み立ての半分が当たる見こみ"), ("trophy", "#E9C46A", "倍の番付", "週でいちばん大きい倍。3位まで称号と 3万・1.5万・7,500")], cols=4)}
+    <p class="note">目当ての例：スロットを20回・遊技卓で3種類・×5より大きく当てる・灯籠あげを×2以上で降りる・塔のぼりで4階・灯魚レースに2回賭ける など（12種から毎日3つ）。</p>
+  </div>
+</section>
+
 <section class="stratum s-rock" id="wheel">
   <div class="edge"></div>
   <div class="wrap">
@@ -1305,7 +1324,7 @@ def _casino_sec():
   <div class="edge"></div>
   <div class="wrap">
     <h2 class="disp h2">福引きと景品所。</h2>
-    {cards([("gift", "#F2B544", "毎日の福引き", "1日1回無料。100〜20,000コイン"), ("lantern", "#F2B544", "灯籠の上限 +1", "最大 +20。1万〜8万コイン"), ("chest", "#F2B544", "市場の札の枠 +1", "1万コイン"), ("house", "#F2B544", "里・みんなの目標に奉納", "10枚で1"), ("fire", "#F2B544", "ふるまい花火", "まわりのみんなにお祝い"), ("star", "#F2B544", "称号", "遊び人・勝負好き・勝負師・大勝負師")])}
+    {cards([("gift", "#F2B544", "毎日の福引き", "1日1〜3回無料（会員の位で）。100〜20,000コイン"), ("star", "#F29BB8", "カジノだけのよそおい 8つ", "金貨の足あと・黄金の輪・大当たりの登場 など。2万〜10万"), ("lantern", "#FFD640", "灯りの色 3つ", "金運・福色・幸運。5万〜15万"), ("trophy", "#F2B544", "高い称号", "灯の大旦那 100万・黄金の手 300万・幸運の化身 800万"), ("chest", "#F2B544", "福引き券・大花火", "500・5,000"), ("lantern", "#F2B544", "灯籠の上限 +1", "最大 +20。1万〜8万コイン"), ("chest", "#F2B544", "市場の札の枠 +1", "1万コイン"), ("house", "#F2B544", "里・みんなの目標に奉納", "10枚で1"), ("fire", "#F2B544", "ふるまい花火", "まわりのみんなにお祝い"), ("star", "#F2B544", "称号", "遊び人・勝負好き・勝負師・大勝負師")])}
     <h3 class="disp vh3">よくある質問</h3>
     {more("コインはどこで見られる？", "<p><span class=\"kbd\">/casino coin</span> で残り、<span class=\"kbd\">/casino screen</span> で画面。会場の上のバーにも出ます。</p>")}
     {more("会場がない／遠い", "<p><span class=\"kbd\">/casino</span> で、いちばん近い会場へ移動します。ボスの闘技場からは移動できません。</p>")}
@@ -1320,7 +1339,7 @@ def _body(k):
     if c["id"] == "akashi":
         b = "\n".join(_clean(_SEC[s]) for s in c["sec"])
         i = b.rfind("\n  </div>\n</section>")
-        return b[:i] + '\n    <a href="akashi.html" class="wiki-band ak-band" style="margin-top:44px"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">795の実績を、ひとつずつ</b><span>目標・報酬・段の道・秘められた実績の手がかり。名前や報酬で探せます。</span></span><span class="wb-go">実績 Wiki へ<i></i></span></a>' + b[i:]
+        return b[:i] + '\n    <a href="akashi.html" class="wiki-band ak-band" style="margin-top:44px"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">802の実績を、ひとつずつ</b><span>目標・報酬・段の道・秘められた実績の手がかり。名前や報酬で探せます。</span></span><span class="wb-go">実績 Wiki へ<i></i></span></a>' + b[i:]
     if c["id"] == "hiwaza":
         return _hiwaza_sec()
     if c["id"] == "fish":
@@ -1436,7 +1455,7 @@ def _guide_index():
     {layers}
     <div class="wk-bands">
     <a href="wiki.html" class="wiki-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">技 Wiki</b><span>130の技の効き目・要る Lv・技の種・待ち時間、技の木、奥義の試練、務め、灯魚図鑑、技の組み立て。</span></span><span class="wb-go">開く<i></i></span></a>
-    <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">実績 Wiki</b><span>795の実績の目標と報酬、段の道、10の位、称号・灯りの色・足跡の手に入れ方。</span></span><span class="wb-go">開く<i></i></span></a>
+    <a href="akashi.html" class="wiki-band ak-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">実績 Wiki</b><span>802の実績の目標と報酬、段の道、10の位、称号・灯りの色・足跡の手に入れ方。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="himon.html" class="wiki-band hm-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">紋 Wiki</b><span>{len(HM["defs"])}の紋の段・効き目・刻めるもの、紋書の引き方、刻み方と重ね方。</span></span><span class="wb-go">開く<i></i></span></a>
     <a href="hisato.html" class="wiki-band hs-band"><span class="wb-k dot">WIKI</span><span class="wb-b"><b class="disp">里 Wiki</b><span>4つの格、5つの職のバフと日課・週課、位と棟梁の試し、施設の素材、礎、ずるの防ぎ方。</span></span><span class="wb-go">開く<i></i></span></a>
     </div>
@@ -3510,7 +3529,7 @@ _PS = [
          ("小さな拠点は狙われない", "灯籠が3基より少ない灯籠のつながりと、地下や高い塔の灯籠は狙われません。"),
          ("自分の灯籠を5基つなぐ", "ひとりでも二ノ灯になり、名前つき灯籠どうしを行き来できます。"),
          ("技を育てる", f"{_K('/waza')}。遊んだ道の Lv が上がり、毎日3つの「今日の務め」もあります。"),
-         ("図鑑と実績を埋める", "灯魚は327種、実績は795個あります。"),
+         ("図鑑と実績を埋める", "灯魚は327種、実績は802個あります。"),
      ],
      "cmds": [("/waza", "技"), ("/isaribi", "釣り"), ("/akashi", "実績"), ("/yomatsuri out", "夜祭を見送る")],
      "note": "迷ったら画面の下を見てください。灯りの外では、いちばん近い灯りの方角が出ます。"},
@@ -3546,7 +3565,7 @@ guide = _guide_index()
 PAGES = [
     ("index.html", "灯原｜夜が24分つづく、灯りをつなぐマインクラフトサーバー", "灯籠を置いた場所だけが安全。灯りをつないで道をつくり、灯りを喰いに来る夜から守る。Java版・統合版対応、参加無料のサバイバルサーバー「灯原」。シーズン1「灯ノ海」開催中（2026年11月7日開幕）。", index),
     ("start.html", "はじめる｜灯原", "灯原への入り方を機種別に。Java版、スマホ、Windows、Switch・PS・Xbox。最初の夜の過ごし方と、よくある質問。", start),
-    ("guide.html", "遊び方｜灯原", f"灯原のしくみを{len(CH)}の章で。灯籠と光の道、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、8つの加護、10の道・130の技「技」、327種の灯魚と釣り、{len(HM['defs'])}の特別な付呪「紋」、795の進捗「実績」、名前つき灯籠と灯りの色、仲間と開く里と5つの職「里」、仲間。", guide),
+    ("guide.html", "遊び方｜灯原", f"灯原のしくみを{len(CH)}の章で。灯籠と光の道、昼4分・夜24分の長い夜、灯りを消しに来る灯喰い、8つの加護、10の道・130の技「技」、327種の灯魚と釣り、{len(HM['defs'])}の特別な付呪「紋」、802の進捗「実績」、名前つき灯籠と灯りの色、仲間と開く里と5つの職「里」、仲間。", guide),
 ] + [(f"guide-{c['id']}.html", f"{c['t']}｜遊び方｜灯原", c['desc'], chapter_page(k)) for k, c in enumerate(CH)] + [
     ("events.html", "夜祭｜灯原", "毎週土曜21時。120秒の募集で人数がそろえば自動で始まる、週替わり6種のゲーム。灯籠リレー、闇かくれんぼ、建築早押し、夜明けまで、釣り大会、夜狩り。", events),
     ("playstyle.html", "遊び方を選ぶ｜灯原", "みんなで・身内で・ひとりで。3つの遊び方ごとのマニュアル。はじめの5つ、よく使うコマンド、コツ、気をつけること。", playstyle()),

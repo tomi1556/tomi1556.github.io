@@ -105,7 +105,7 @@
    "frag": 6
   }
  ],
- "total": 62690,
+ "total": 63150,
  "defs": [
   {
    "id": "lantern_1",
@@ -12824,6 +12824,152 @@
    "hint": null
   },
   {
+   "id": "cs_vip_2",
+   "cat": 6,
+   "tier": 2,
+   "name": "上客",
+   "icon": "GOLDEN_HELMET",
+   "desc": [
+    "カジノの会員の位が「上客」になる。"
+   ],
+   "goal": "2段",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "カジノで賭けた合計で上がる（常連 3万・上客 20万・旦那 100万・大旦那 500万・豪客 2,000万）。"
+  },
+  {
+   "id": "cs_vip_3",
+   "cat": 6,
+   "tier": 3,
+   "name": "旦那",
+   "icon": "GOLDEN_HELMET",
+   "desc": [
+    "カジノの会員の位が「旦那」になる。"
+   ],
+   "goal": "3段",
+   "stage": 2,
+   "stages": 3,
+   "prev": "cs_vip_2",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "カジノで賭けた合計で上がる（常連 3万・上客 20万・旦那 100万・大旦那 500万・豪客 2,000万）。"
+  },
+  {
+   "id": "cs_vip_5",
+   "cat": 6,
+   "tier": 5,
+   "name": "灯原の豪客",
+   "icon": "NETHERITE_HELMET",
+   "desc": [
+    "カジノの会員の位が「灯原の豪客」になる。"
+   ],
+   "goal": "5段",
+   "stage": 3,
+   "stages": 3,
+   "prev": "cs_vip_3",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "カジノで賭けた合計で上がる（常連 3万・上客 20万・旦那 100万・大旦那 500万・豪客 2,000万）。"
+  },
+  {
+   "id": "cs_days_1",
+   "cat": 6,
+   "tier": 1,
+   "name": "今日の遊び",
+   "icon": "WRITABLE_BOOK",
+   "desc": [
+    "カジノの「今日の遊び」を3つそろえる。"
+   ],
+   "goal": "1日",
+   "stage": 1,
+   "stages": 3,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/casino の「今日の遊び」の3つを、その日のうちに果たす。"
+  },
+  {
+   "id": "cs_days_7",
+   "cat": 6,
+   "tier": 2,
+   "name": "七日の遊び",
+   "icon": "WRITABLE_BOOK",
+   "desc": [
+    "カジノの「今日の遊び」を7日そろえる。"
+   ],
+   "goal": "7日",
+   "stage": 2,
+   "stages": 3,
+   "prev": "cs_days_1",
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/casino の「今日の遊び」の3つを、その日のうちに果たす。"
+  },
+  {
+   "id": "cs_days_30",
+   "cat": 6,
+   "tier": 3,
+   "name": "ひと月の遊び",
+   "icon": "WRITTEN_BOOK",
+   "desc": [
+    "カジノの「今日の遊び」を30日そろえる。"
+   ],
+   "goal": "30日",
+   "stage": 3,
+   "stages": 3,
+   "prev": "cs_days_7",
+   "title": "カジノの常連",
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null,
+   "tip": "/casino の「今日の遊び」の3つを、その日のうちに果たす。"
+  },
+  {
+   "id": "cs_mtop_1",
+   "cat": 6,
+   "tier": 3,
+   "name": "倍の名人",
+   "icon": "SPYGLASS",
+   "desc": [
+    "カジノの週の倍の番付で3位までに入る。"
+   ],
+   "goal": "1回",
+   "stage": 1,
+   "stages": 1,
+   "prev": null,
+   "title": null,
+   "tint": null,
+   "trail": null,
+   "item": null,
+   "hidden": false,
+   "hint": null
+  },
+  {
    "id": "cs_prize_3",
    "cat": 6,
    "tier": 2,
@@ -16011,7 +16157,7 @@
    "desc": [
     "ほかの実績を、ひとつ残らず得る。"
    ],
-   "goal": "794個",
+   "goal": "801個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -16151,7 +16297,7 @@
    "desc": [
     "祭の章の実績を、すべて得る。"
    ],
-   "goal": "41個",
+   "goal": "48個",
    "stage": 1,
    "stages": 1,
    "prev": null,
@@ -17419,6 +17565,11 @@
    "id": "cs_x20_10",
    "t": "倍の星",
    "how": "実績「倍の星」"
+  },
+  {
+   "id": "cs_days_30",
+   "t": "カジノの常連",
+   "how": "実績「ひと月の遊び」"
   },
   {
    "id": "hg_pt_4",
