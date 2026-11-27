@@ -3444,9 +3444,25 @@ def _word_rows(rows, gi):
 
 
 PATCHES = _wj.loads((pathlib.Path(__file__).parent / "data" / "patches.json").read_text(encoding="utf-8"))
-patch = sub_hero("patch.html", "更新のお知らせ", "灯原の新しいこと・直したこと。新しい順です。", []) + '<section class="stratum s-deep" id="patch"><div class="wrap narrow">' + "".join(
-    f'<article class="pn"><p class="pn-d dot">{_E(x["date"])}</p><h2 class="disp h3">{_E(x["title"])}</h2><ul>' + "".join(f"<li>{_E(i)}</li>" for i in x["items"]) + "</ul></article>"
-    for x in PATCHES) + "</div></section>"
+_PN_TAG = {"新": ("新しく", "pt-new"), "改": ("変えた", "pt-chg"), "直": ("直した", "pt-fix")}
+
+
+def _patch_body():
+    n_new = sum(1 for x in PATCHES for t, _ in x["items"] if t == "新")
+    n_all = sum(len(x["items"]) for x in PATCHES)
+    head = f'''<div class="pt-sum"><p><b class="dot">{_E(PATCHES[0]["ver"])}</b><span>いまの版</span></p><p><b class="dot">{len(PATCHES)}</b><span>回の更新</span></p>
+<p><b class="dot">{n_new}</b><span>新しいこと</span></p><p><b class="dot">{n_all}</b><span>ぜんぶの項目</span></p></div>
+<p class="pt-legend">{"".join(f'<span class="pt-tag {c}">{t}</span>' for t, c in _PN_TAG.values())}<span class="mu">大きな更新は 1.x、手直しは 1.x.y</span></p>'''
+    rows = []
+    for x in PATCHES:
+        items = "".join(f'<li><span class="pt-tag {_PN_TAG[t][1]}">{_PN_TAG[t][0]}</span><span>{_E(i)}</span></li>' for t, i in x["items"])
+        lead = f'<p class="pt-lead">{_E(x["lead"])}</p>' if x.get("lead") else ""
+        rows.append(f'''<article class="pt{" big" if x.get("big") else ""}" id="v{_E(x["ver"])}"><div class="pt-v"><b class="dot">{_E(x["ver"])}</b><small class="dot">{_E(x["date"])}</small></div>
+<div class="pt-c"><h2 class="disp h3">{_E(x["title"])}</h2>{lead}<ul>{items}</ul></div></article>''')
+    return f'<section class="stratum s-deep" id="patch"><div class="wrap narrow">{head}<div class="pt-line">{"".join(rows)}</div></div></section>'
+
+
+patch = sub_hero("patch.html", "更新のお知らせ", "灯原の新しいこと・変えたこと・直したこと。新しい順です。", []) + _patch_body()
 
 words = sub_hero("words.html", "ことばの辞典", "灯原だけのことばを、ひとことで。分からないことばがあったら、ここで探してください。",
                  [(f"c{i}", g[2]) for i, g in enumerate(_WORDS)]) + f'''
